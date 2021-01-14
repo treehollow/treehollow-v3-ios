@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftyAttributes
+//import SwiftyAttributes
 
 struct HoleDetailView: View {
     var body: some View {
