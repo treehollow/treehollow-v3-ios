@@ -16,10 +16,10 @@
 		0E3B2C4825AF01DB00DF632E /* HoleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B2C4725AF01DB00DF632E /* HoleContent.swift */; };
 		0E59D9B125ADB83C001DAF52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E59D9B025ADB83C001DAF52 /* AppDelegate.swift */; };
 		0E59D9B325ADB83C001DAF52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E59D9B225ADB83C001DAF52 /* SceneDelegate.swift */; };
-		0E59D9B525ADB83C001DAF52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E59D9B425ADB83C001DAF52 /* ViewController.swift */; };
 		0E59D9B825ADB83C001DAF52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E59D9B625ADB83C001DAF52 /* Main.storyboard */; };
 		0E59D9BA25ADB83E001DAF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E59D9B925ADB83E001DAF52 /* Assets.xcassets */; };
 		0E59D9BD25ADB83E001DAF52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E59D9BB25ADB83E001DAF52 /* LaunchScreen.storyboard */; };
+		0E6A7A4D25B086D700B42ED9 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6A7A4C25B086D700B42ED9 /* CustomScrollView.swift */; };
 		0EB7618925AF0E69004596BA /* HoleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7618825AF0E69004596BA /* HoleConfiguration.swift */; };
 		0EB7618C25AF1328004596BA /* HoleCommentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7618B25AF1328004596BA /* HoleCommentHeaderView.swift */; };
 		0EB7619025AF14B3004596BA /* HoleCommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7618F25AF14B3004596BA /* HoleCommentCardView.swift */; };
@@ -37,11 +37,11 @@
 		0E59D9AD25ADB83C001DAF52 /* THU-Hole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "THU-Hole.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E59D9B025ADB83C001DAF52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E59D9B225ADB83C001DAF52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0E59D9B425ADB83C001DAF52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0E59D9B725ADB83C001DAF52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E59D9B925ADB83E001DAF52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E59D9BC25ADB83E001DAF52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E59D9BE25ADB83E001DAF52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E6A7A4C25B086D700B42ED9 /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0EB7618825AF0E69004596BA /* HoleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleConfiguration.swift; sourceTree = "<group>"; };
 		0EB7618B25AF1328004596BA /* HoleCommentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleCommentHeaderView.swift; sourceTree = "<group>"; };
 		0EB7618F25AF14B3004596BA /* HoleCommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleCommentCardView.swift; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 			children = (
 				0E2F67F225ADFBF500CF1036 /* TextView.swift */,
 				0EB7619525AF25A3004596BA /* CustomWebView.swift */,
+				0E6A7A4C25B086D700B42ED9 /* CustomScrollView.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -137,7 +138,6 @@
 				0E59D9C525ADB98B001DAF52 /* View */,
 				0E59D9B025ADB83C001DAF52 /* AppDelegate.swift */,
 				0E59D9B225ADB83C001DAF52 /* SceneDelegate.swift */,
-				0E59D9B425ADB83C001DAF52 /* ViewController.swift */,
 				0E59D9B625ADB83C001DAF52 /* Main.storyboard */,
 				0E59D9B925ADB83E001DAF52 /* Assets.xcassets */,
 				0E59D9BB25ADB83E001DAF52 /* LaunchScreen.storyboard */,
@@ -230,7 +230,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E59D9B525ADB83C001DAF52 /* ViewController.swift in Sources */,
 				0EB7618925AF0E69004596BA /* HoleConfiguration.swift in Sources */,
 				0E3B2C4825AF01DB00DF632E /* HoleContent.swift in Sources */,
 				0E3B2C3825AEDA0A00DF632E /* HoleHeaderView.swift in Sources */,
@@ -244,6 +243,7 @@
 				0EB7619025AF14B3004596BA /* HoleCommentCardView.swift in Sources */,
 				0EB7619625AF25A3004596BA /* CustomWebView.swift in Sources */,
 				0E2F67F325ADFBF500CF1036 /* TextView.swift in Sources */,
+				0E6A7A4D25B086D700B42ED9 /* CustomScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
