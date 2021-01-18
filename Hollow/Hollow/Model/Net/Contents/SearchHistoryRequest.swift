@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct SearchHistoryRequest {
+/// The configuration parameter is the user token
+typealias SearchHistoryRequestConfiguration = String
+
+struct SearchHistoryRequestResult {
     enum RequestType: Int {
         case success = 0
     }
