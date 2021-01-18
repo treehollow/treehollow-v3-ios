@@ -2,7 +2,7 @@
 //  AboutView.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/1/17.
+//  Created on 2021/1/17.
 //
 
 import SwiftUI
