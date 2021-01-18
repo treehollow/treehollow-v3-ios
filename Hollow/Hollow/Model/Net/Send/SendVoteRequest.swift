@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct SendVoteRequestConfiguration {
+    var option: String
+    var postId: Int
+}
+
+typealias SendVoteRequestResult = SendVoteRequestResultType
+
+enum SendVoteRequestResultType: Int {
+    case success = 0
+}

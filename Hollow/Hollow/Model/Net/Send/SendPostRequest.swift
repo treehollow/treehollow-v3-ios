@@ -23,6 +23,8 @@ struct SendPostRequestConfiguration {
     }
 }
 
+typealias SendPostRequestResult = SendPostRequestResultType
+
 enum SendPostRequestResultType: Int {
     case success = 0
 }
