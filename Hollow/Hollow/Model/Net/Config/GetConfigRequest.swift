@@ -1,5 +1,5 @@
 //
-//  ConfigRequest.swift
+//  GetConfigRequest.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/1/18.
@@ -11,7 +11,7 @@ import Foundation
 // No configurations for config request as it takes no parameters.
 
 /// Result of requesting system config.
-struct ConfigRequestResult {
+struct GetConfigRequestResult {
     var name: String
     // FIXME: Int or String
     var reCAPTCHAV3Key: Int

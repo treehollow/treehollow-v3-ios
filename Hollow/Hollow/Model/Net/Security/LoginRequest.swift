@@ -13,6 +13,7 @@ struct LoginRequestConfiguration {
     var hashedPassword: String
     let deviceType = 2
     let deviceInfo = UIDevice.current.name
+    // TODO: Device token
 }
 
 struct LoginRequestResult {

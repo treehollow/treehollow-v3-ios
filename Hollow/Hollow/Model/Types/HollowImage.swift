@@ -2,13 +2,14 @@
 //  HollowImage.swift
 //  Hollow
 //
-//  Created on 2021/1/17.
+//  Created by liang2kl on 2021/1/17.
+//  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import UIKit
 
 /// Image wrapper for displaying in a hollow with support for placeholder.
-class HollowImage {
+struct HollowImage {
     /// Width and hight information to display a placeholder.
     var placeholder: (width: CGFloat, height: CGFloat)
     /// The image to display.
@@ -25,7 +26,7 @@ class HollowImage {
     /// - parameter image: The image to display.
     ///
     /// Call it right after the image has been fetched.
-    func setImage(_ image: UIImage) {
+    mutating func setImage(_ image: UIImage) {
         self.image = image
     }
 }

@@ -22,5 +22,6 @@ struct Comment {
     var text: String
     var timestamp: Int
     var type: CommentType
+    var imageURL: String?
     var imageMetadata: (width: Int, height: Int)?
 }

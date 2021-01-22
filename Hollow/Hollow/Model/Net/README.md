@@ -11,7 +11,7 @@
 - Each `XXXRequest` file might consist of some of the three  `struct` below and if necessary, some other types:
     - `XXXRequestConfiguration` - configuration for the request
     - `XXXRequestResult` - the result received from the server
-    - `XXXRequest` - performs the request tasks and provides APIs to the `ViewModel`
+    - `XXXRequest` - performs the request tasks and provides APIs to the `ViewModel`, **conforming to protocol `Request`**.
     
     Noted that for some request that only take one parameter for configuration, the `XXXRequestConfiguration` is not declared. And the type for some request that take the same configuration or result parameters with one other request is also not declared. Instead, they keep the same naming format using `typealias`.
 

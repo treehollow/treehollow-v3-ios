@@ -22,6 +22,7 @@ struct AccountCreationRequestConfiguration {
     var oldToken: String?
     /// Email valid code, optional, but one of `oldToken` and `validCode` must be present.
     var validCode: String?
+    // TODO: Device token
     
     /// See `AccountCreationConfiguration`
     ///

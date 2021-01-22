@@ -14,7 +14,7 @@ enum PostType: String {
     case vote = "vote"
 }
 
-enum PostPermissionType: String {
+enum PostPermissionType: String, CaseIterable {
     case report = "report"
     case fold = "fold"
     case setTag = "set_tag"
@@ -28,7 +28,16 @@ struct Post {
     
     struct Vote {
         var voted: Bool
-        var voteData: [(title: String, voteCount: Int)]
+        /// The option that the current user selected, `nil` if not voted.
+        var votedOption: String?
+        var voteData: [VoteData]
+        struct VoteData: Identifiable {
+            // Identifiable
+            var id: String { self.title }
+            
+            var title: String
+            var voteCount: Int
+        }
     }
     
     var attention: Bool
