@@ -10,7 +10,8 @@ import Defaults
 
 /// Store default's key here when firstly introduce it.
 extension Defaults.Keys {
-    /// Base URL for images, fetching on launch.
+    /// Store the keys for `Defaults` here, declaring them static const member of `Defaults.Keys`
     /// For example:
     /// `static let imageBaseURL = Key<String?>("image.base.url")`
+    /// Remember to register the initial value before any call to fetch the data.
 }
