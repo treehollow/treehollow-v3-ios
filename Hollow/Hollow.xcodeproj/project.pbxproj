@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */; };
 		0E28125125B7FC5600DCF78D /* View+layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28125025B7FC5600DCF78D /* View+layout.swift */; };
 		0E44BBCF25B8960F00B78B30 /* HollowVoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */; };
 		0E44BBD225B896BB00B78B30 /* HollowVoteContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedHTTPRequest.swift; sourceTree = "<group>"; };
 		0E28125025B7FC5600DCF78D /* View+layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+layout.swift"; sourceTree = "<group>"; };
 		0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContentView.swift; sourceTree = "<group>"; };
 		0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContentViewModel.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		0E7857A525B732380000C659 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				0E854A4A25B483A500E512F4 /* DeviceInformation.swift in Sources */,
 				0E854A2625B3FBF900E512F4 /* SettingsView.swift in Sources */,
 				0E78573E25B4EBBC0000C659 /* SendPostRequest.swift in Sources */,
+				000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */,
 				0E78579025B5EC3A0000C659 /* Request.swift in Sources */,
 				0E78577425B583350000C659 /* CustomScrollView.swift in Sources */,
 			);
