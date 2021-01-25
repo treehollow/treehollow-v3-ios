@@ -8,14 +8,19 @@
 
 import Foundation
 
-// No configurations for config request as it takes no parameters.
+/// config of GetConfig query
+struct GetConfigRequestConfiguration {
+    var APIRoot: String
+    //FIXME: get app version
+    //var appVersion: String
+}
 
 /// Result of requesting system config.
-struct GetConfigRequestResult {
+struct GetConfigRequestResult: Codable {
     var name: String
-    // FIXME: Int or String
-    var reCAPTCHAV3Key: Int
-    var reCAPTCHAV2Key: Int
+    var reCAPTCHAV3Key: String
+    var reCAPTCHAV2Key: String
+    var allowScreenShot: Bool
     var apiRoot: String
     var tosUrl: String
     var privacyUrl: String
@@ -26,5 +31,12 @@ struct GetConfigRequestResult {
     var sendableTags: [String]
     var imageBaseUrl: String
     var imageBaseUrlBak: String
+    var websocketUrl: String
     // FIXME: existing ios frontend version
+}
+
+/// Get Config Request
+class GetConfigRequest {
+    init(config: GetConfigRequestConfiguration) {
+    }
 }
