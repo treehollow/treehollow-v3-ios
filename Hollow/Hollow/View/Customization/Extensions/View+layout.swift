@@ -10,7 +10,7 @@ import SwiftUI
 
 extension View {
     func leading() -> some View {
-        return HStack {
+        return HStack(spacing: 0) {
             self
             Spacer()
         }
@@ -21,7 +21,7 @@ extension View {
     }
     
     func top() -> some View {
-        return VStack {
+        return VStack(spacing: 0) {
             self
             Spacer()
         }
