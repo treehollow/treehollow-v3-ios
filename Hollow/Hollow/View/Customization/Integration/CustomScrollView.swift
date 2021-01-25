@@ -10,12 +10,21 @@
 import SwiftUI
 
 struct CustomScrollView<Content>: View where Content: View {
-    let offset: Binding<CGFloat>
-    let atBottom: Binding<Bool>
-    let didScroll: () -> Void
-    let didEndScroll: () -> Void
-    let refresh: (inout Bool) -> Void
+    var offset: Binding<CGFloat?>
+    var atBottom: Binding<Bool?>
+    var didScroll: (() -> Void)?
+    var didEndScroll: (() -> Void)?
+    var refresh: ((inout Bool) -> Void)?
     let content: () -> Content
+    
+    init(offset: Binding<CGFloat?> = .constant(nil), atBottom: Binding<Bool?> = .constant(nil), didScroll: (() -> Void)? = nil, didEndScroll: (() -> Void)? = nil, refresh: ((inout Bool) -> Void)? = nil, content: @escaping () -> Content) {
+        self.offset = offset
+        self.atBottom = atBottom
+        self.didScroll = didScroll
+        self.didEndScroll = didEndScroll
+        self.refresh = refresh
+        self.content = content
+    }
     
     var body: some View {
         ScrollViewRepresentable(offset: offset, atBottom: atBottom, didScroll: didScroll, didEndScroll: didEndScroll, refresh: refresh, content: ScrollView { content() })
@@ -25,15 +34,15 @@ struct CustomScrollView<Content>: View where Content: View {
 fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentable where Content: View {
     typealias UIViewControllerType = ScrollViewUIHostingController<Content>
     
-    @Binding var offset: CGFloat
-    @Binding var atBottom: Bool
-    let didScroll: () -> Void
-    let didEndScroll: () -> Void
-    let refresh: (inout Bool) -> Void
+    @Binding var offset: CGFloat?
+    @Binding var atBottom: Bool?
+    let didScroll: (() -> Void)?
+    let didEndScroll: (() -> Void)?
+    let refresh: ((inout Bool) -> Void)?
     let content: Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ScrollViewRepresentable<Content>>) -> ScrollViewUIHostingController<Content> {
-        return ScrollViewUIHostingController(offset: self.$offset, atBottom: self.$atBottom, didScroll: didScroll, didEndScroll: didEndScroll, refresh: refresh, rootView: self.content)
+        return ScrollViewUIHostingController(offset: self.$offset, atBottom: self.$atBottom, didScroll: didScroll ?? {}, didEndScroll: didEndScroll ?? {}, refresh: refresh ?? {_ in}, rootView: self.content)
     }
     
     func updateUIViewController(_ uiViewController: ScrollViewUIHostingController<Content>, context: UIViewControllerRepresentableContext<ScrollViewRepresentable<Content>>) {
@@ -44,12 +53,13 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
 }
 
 fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Content>, UIScrollViewDelegate where Content: View {
-    var offset: Binding<CGFloat>
-    var atBottom: Binding<Bool>
-    let didScroll: () -> Void
-    let didEndScroll: () -> Void
-    let refresh: (inout Bool) -> Void
+    var offset: Binding<CGFloat?>
+    var atBottom: Binding<Bool?>
+    let didScroll: (() -> Void)?
+    let didEndScroll: (() -> Void)?
+    let refresh: ((inout Bool) -> Void)?
     private var isRefreshing: Bool = false {
+        // FIXME: Fix this when actually use it
         didSet { if !isRefreshing {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.scrollView?.refreshControl?.endRefreshing()
@@ -61,13 +71,13 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     var scrollView: UIScrollView? = nil
     private var isScrolling: Bool = false {
         didSet {
-            if isScrolling { didScroll() }
-            else { didEndScroll() }
+            if isScrolling { didScroll?() }
+            else { didEndScroll?() }
         }
     }
     private var didBeginDecelerating = false
     
-    init(offset: Binding<CGFloat>, atBottom: Binding<Bool>, didScroll: @escaping () -> Void, didEndScroll: @escaping () -> Void, refresh: @escaping (inout Bool) -> Void, rootView: Content) {
+    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, didScroll: @escaping () -> Void, didEndScroll: @escaping () -> Void, refresh: @escaping (inout Bool) -> Void, rootView: Content) {
         self.offset = offset
         self.atBottom = atBottom
         self.didScroll = didScroll
@@ -86,10 +96,14 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         
         self.scrollView = findUIScrollView(view: self.view)
         scrollView?.delegate = self
-        scrollView?.refreshControl = UIRefreshControl()
-        scrollView?.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
-        scrollView?.refreshControl?.isEnabled = true
-        scrollView?.refreshControl?.isHidden = false
+        if refresh != nil {
+            scrollView?.refreshControl = UIRefreshControl()
+            scrollView?.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+            scrollView?.refreshControl?.isEnabled = true
+            scrollView?.refreshControl?.isHidden = false
+        }
+//        scrollView?.backgroundColor = nil
+//        view.backgroundColor = nil
         
         super.viewDidAppear(animated)
     }
@@ -110,7 +124,7 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     
     @objc
     func refreshAction() {
-        refresh(&isRefreshing)
+        refresh?(&isRefreshing)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

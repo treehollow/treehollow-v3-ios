@@ -8,7 +8,10 @@
 
 import UIKit
 
-struct PostData {
+struct PostData: Identifiable {
+    // Identifiable protocol
+    var id: Int { return postId }
+    
     var attention: Bool
     var deleted: Bool
     var likeNumber: Int

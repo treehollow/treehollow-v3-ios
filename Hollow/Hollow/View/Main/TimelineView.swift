@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct TimelineView: View {
+    @ObservedObject var viewModel: TimelineViewModel = .init()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        CustomScrollView(refresh: { refresh in refresh = false }, content: {
+            VStack(spacing: 0) {
+                ForEach(0..<viewModel.posts.count) { index in
+                    HollowTimelineCardView(postData: $viewModel.posts[index], viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].postId, for: option)}))
+                        .padding(.horizontal)
+                        .padding(.bottom)
+                }
+            }
+        })
+//                ScrollView {
+//                    VStack(spacing: 0) {
+//                        ForEach(0..<viewModel.posts.count) { index in
+//                            HollowTimelineCardView(postData: $viewModel.posts[index], viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].postId, for: option)}))
+//                                .padding(.horizontal)
+//                                .padding(.bottom)
+//                        }
+//                    }
+//                }
+
     }
 }
 
