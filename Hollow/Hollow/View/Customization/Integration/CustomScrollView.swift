@@ -102,9 +102,10 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
             scrollView?.refreshControl?.isEnabled = true
             scrollView?.refreshControl?.isHidden = false
         }
-//        scrollView?.backgroundColor = nil
-//        view.backgroundColor = nil
-        
+        view.backgroundColor = nil
+        for subView in view.subviews {
+            subView.backgroundColor = nil
+        }
         super.viewDidAppear(animated)
     }
     

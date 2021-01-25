@@ -15,80 +15,85 @@ struct MainView: View {
             VStack {
                 HeaderView(page: $page)
                     .padding(.horizontal)
-                TabView(selection: $page) {
+                // TODO: Use TabView to indicate paging behaviours
+                // But we might not be able to do this if we use our `CustomScrollView` and I don't know why.
+                if page == .wander {
+                    Spacer()
                     Text("Placeholder: Wander")
                         .tag(Page.wander)
+                    Spacer()
+                }
+                if page == .timeline {
                     TimelineView()
                         .edgesIgnoringSafeArea(.bottom)
                         .tag(Page.timeline)
+                        .edgesIgnoringSafeArea(.bottom)
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .edgesIgnoringSafeArea(.bottom)
             }
         }
     }
-}
-
-struct HeaderView: View {
-    @Binding var page: MainView.Page
     
-    var body: some View {
-        HStack(spacing: 2) {
-            Group {
-                Button(action: {
-                    page = .wander
-                }) {
-                    Text(LocalizedStringKey("Wander"))
-                        .mainTabText(selected: page == .wander)
+    struct HeaderView: View {
+        @Binding var page: MainView.Page
+        
+        var body: some View {
+            HStack(spacing: 2) {
+                Group {
+                    Button(action: {
+                        page = .wander
+                    }) {
+                        Text(LocalizedStringKey("Wander"))
+                            .mainTabText(selected: page == .wander)
+                            .animation(.spring())
+                    }
+                    .disabled(page == .wander)
+                    Text("/")
+                        .mainTabText(selected: true)
+                        .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
                         .animation(.spring())
+                    Button(action: {
+                        page = .timeline
+                    }) {
+                        Text(LocalizedStringKey("Timeline"))
+                            .mainTabText(selected: page == .timeline)
+                            .animation(.spring())
+                        
+                    }
+                    .disabled(page == .timeline)
                 }
-                .disabled(page == .wander)
-                Text(LocalizedStringKey("/"))
-                    .mainTabText(selected: true)
-                    .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
-                    .animation(.spring())
-                Button(action: {
-                    page = .timeline
+                .layoutPriority(1)
+                Spacer()
+                Button(action:{
+                    // Navigate to search view
                 }) {
-                    Text(LocalizedStringKey("Timeline"))
-                        .mainTabText(selected: page == .timeline)
-                        .animation(.spring())
-                    
+                    HStack {
+                        Text("Search")
+                        Spacer(minLength: 20)
+                        Image(systemName: "magnifyingglass")
+                    }
+                    //                .fixedSize()
+                    .font(.system(size: 14))
+                    .foregroundColor(.mainSearchBarText)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 10)
+                    .background(Capsule().foregroundColor(.mainSearchBarBackground))
+                    .padding(.trailing, 5)
                 }
-                .disabled(page == .timeline)
-            }
-            .layoutPriority(1)
-            Spacer()
-            Button(action:{
-                // Navigate to search view
-            }) {
-                HStack {
-                    Text("Search")
-//                    Spacer(minLength: 20)
-                    Image(systemName: "magnifyingglass")
+                Button(action:{}) {
+                    // TODO: bell.badge
+                    Image(systemName: "bell")
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundColor(.mainBarButton)
+                        .padding(.horizontal, 5)
                 }
-                .fixedSize()
-                .font(.system(size: 12))
-                .foregroundColor(.mainSearchBarText)
-                .padding(.vertical, 4)
-                .padding(.horizontal, 8)
-                .background(Capsule().foregroundColor(.mainSearchBarBackground))
-                .padding(.trailing, 5)
+                Button(action:{}) {
+                    Image(systemName: "person")
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundColor(.mainBarButton)
+                        .padding(.horizontal, 5)
+                }
+                
             }
-            Button(action:{}) {
-                // TODO: bell.badge
-                Image(systemName: "bell")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.mainBarButton)
-                    .padding(.horizontal, 5)
-            }
-            Button(action:{}) {
-                Image(systemName: "person")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.mainBarButton)
-                    .padding(.horizontal, 5)
-            }
-
         }
     }
 }

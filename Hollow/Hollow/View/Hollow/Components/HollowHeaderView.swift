@@ -42,7 +42,7 @@ struct HollowHeaderView: View {
                             Text("\(postData.likeNumber)")
                             Image(systemName: starred ? "star.fill" : "star")
                         }
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: 16, weight: .medium))
                     }
                     .padding(5)
                 }
