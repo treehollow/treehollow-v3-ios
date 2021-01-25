@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import Defaults
 
 /// config of GetConfig query
 struct GetConfigRequestConfiguration {
-    var APIRoot: String
+    var apiRoot: String
     //FIXME: get app version
-    //var appVersion: String
+    var appVersion: String
 }
 
 /// Result of requesting system config.
@@ -37,6 +38,12 @@ struct GetConfigRequestResult: Codable {
 
 /// Get Config Request
 class GetConfigRequest {
+    var getConfigURL: String?
+    /// - parameter GetConfigRequestConfiguration
+    /// init a GetConfigRequest
     init(config: GetConfigRequestConfiguration) {
+        Defaults[.netRequestConst] = RequestCostant(apiroot: config.apiRoot, appVersion: config.appVersion)
+        let urlSuffix = Defaults[.netRequestConst]?.urlSuffix
+        getConfigURL = "\(config.apiRoot)/v3/config/get\(urlSuffix!)"
     }
 }

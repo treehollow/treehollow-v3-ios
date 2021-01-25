@@ -14,7 +14,8 @@ protocol Request {
     associatedtype Configuration
     /// Result type for the request, get directly from the server.
     associatedtype Result
-    /// Type for data that view models use (see`/ViewModel/Types`), can be the same as `Result`.
+    /// Type for data that view models use (see`/ViewModel/Types`), can be the same as `Result`
+    /// for async request it returns a publisher
     associatedtype ResultData
     /// Configuration for the request, set via initializer.
     var configuration: Configuration { get }
