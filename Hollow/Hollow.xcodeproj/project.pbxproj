@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */; };
 		0E28125125B7FC5600DCF78D /* View+layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28125025B7FC5600DCF78D /* View+layout.swift */; };
+		0E2FE97125BE799200DC1220 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FE97025BE799200DC1220 /* CustomColors.swift */; };
+		0E2FE97425BE807F00DC1220 /* CustomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FE97325BE807F00DC1220 /* CustomGradient.swift */; };
+		0E2FE97825BE847C00DC1220 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FE97725BE847C00DC1220 /* Spinner.swift */; };
+		0E2FE97C25BE880200DC1220 /* LinearGradient+vertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FE97B25BE880200DC1220 /* LinearGradient+vertical.swift */; };
 		0E44BBCF25B8960F00B78B30 /* HollowVoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */; };
 		0E44BBD225B896BB00B78B30 /* HollowVoteContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */; };
 		0E44BBD525B89FDB00B78B30 /* Color+uiColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBD425B89FDB00B78B30 /* Color+uiColor.swift */; };
@@ -43,6 +47,7 @@
 		0E7857A025B731280000C659 /* HollowCommentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78579F25B731280000C659 /* HollowCommentContentView.swift */; };
 		0E7857ED25B74B340000C659 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7857EC25B74B340000C659 /* Defaults */; };
 		0E7857F225B74BAD0000C659 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */; };
+		0E813A7325BF29E6000CCF35 /* HollowTimelineCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E813A7225BF29E6000CCF35 /* HollowTimelineCardViewModel.swift */; };
 		0E8549BF25B3F9AA00E512F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */; };
 		0E8549C125B3F9AA00E512F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549C025B3F9AA00E512F4 /* SceneDelegate.swift */; };
 		0E8549C525B3F9AB00E512F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8549C425B3F9AB00E512F4 /* Assets.xcassets */; };
@@ -73,7 +78,7 @@
 		0E854A2925B3FC0600E512F4 /* RegulationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A2825B3FC0500E512F4 /* RegulationView.swift */; };
 		0E854A2C25B3FC0F00E512F4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A2B25B3FC0F00E512F4 /* AboutView.swift */; };
 		0E854A3325B43B6C00E512F4 /* HollowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A3225B43B6B00E512F4 /* HollowImage.swift */; };
-		0E854A3625B4456A00E512F4 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A3525B4456A00E512F4 /* TextExtensions.swift */; };
+		0E854A3625B4456A00E512F4 /* CustomFontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A3525B4456A00E512F4 /* CustomFontStyles.swift */; };
 		0E854A3B25B471EB00E512F4 /* EmailCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A3A25B471EB00E512F4 /* EmailCheckRequest.swift */; };
 		0E854A4125B4771700E512F4 /* AccountCreationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A4025B4771700E512F4 /* AccountCreationRequest.swift */; };
 		0E854A4425B4819D00E512F4 /* ChangePasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A4325B4819D00E512F4 /* ChangePasswordRequest.swift */; };
@@ -81,13 +86,21 @@
 		0E854A5225B485DD00E512F4 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A5125B485DD00E512F4 /* SystemMessage.swift */; };
 		0E854A5625B4868F00E512F4 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A5525B4868F00E512F4 /* PostListRequest.swift */; };
 		0E854A5A25B48BF500E512F4 /* DeviceTerminationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A5925B48BF500E512F4 /* DeviceTerminationRequest.swift */; };
+		0E9F26BB25BE9B7300CA56DE /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26BA25BE9B7300CA56DE /* CustomFont.swift */; };
+		0E9F26BF25BE9D8800CA56DE /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26BE25BE9D8800CA56DE /* Int+string.swift */; };
+		0E9F26C325BEB25D00CA56DE /* HollowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */; };
+		0E9F26CA25BEBA9800CA56DE /* HollowHeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */; };
+		0E9F26D025BEC1E100CA56DE /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26CF25BEC1E100CA56DE /* TimelineViewModel.swift */; };
 		0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */; };
-		0EFF4AF625BE607800D240BC /* HollowTimelineCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF4AF525BE607800D240BC /* HollowTimelineCardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedHTTPRequest.swift; sourceTree = "<group>"; };
 		0E28125025B7FC5600DCF78D /* View+layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+layout.swift"; sourceTree = "<group>"; };
+		0E2FE97025BE799200DC1220 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		0E2FE97325BE807F00DC1220 /* CustomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradient.swift; sourceTree = "<group>"; };
+		0E2FE97725BE847C00DC1220 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		0E2FE97B25BE880200DC1220 /* LinearGradient+vertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinearGradient+vertical.swift"; sourceTree = "<group>"; };
 		0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContentView.swift; sourceTree = "<group>"; };
 		0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContentViewModel.swift; sourceTree = "<group>"; };
 		0E44BBD425B89FDB00B78B30 /* Color+uiColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+uiColor.swift"; sourceTree = "<group>"; };
@@ -124,6 +137,7 @@
 		0E78579525B6DC570000C659 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		0E78579F25B731280000C659 /* HollowCommentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentContentView.swift; sourceTree = "<group>"; };
 		0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
+		0E813A7225BF29E6000CCF35 /* HollowTimelineCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCardViewModel.swift; sourceTree = "<group>"; };
 		0E8549BB25B3F9AA00E512F4 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E8549C025B3F9AA00E512F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,7 +170,7 @@
 		0E854A2825B3FC0500E512F4 /* RegulationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegulationView.swift; sourceTree = "<group>"; };
 		0E854A2B25B3FC0F00E512F4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		0E854A3225B43B6B00E512F4 /* HollowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowImage.swift; sourceTree = "<group>"; };
-		0E854A3525B4456A00E512F4 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		0E854A3525B4456A00E512F4 /* CustomFontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontStyles.swift; sourceTree = "<group>"; };
 		0E854A3A25B471EB00E512F4 /* EmailCheckRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCheckRequest.swift; sourceTree = "<group>"; };
 		0E854A4025B4771700E512F4 /* AccountCreationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationRequest.swift; sourceTree = "<group>"; };
 		0E854A4325B4819D00E512F4 /* ChangePasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequest.swift; sourceTree = "<group>"; };
@@ -164,9 +178,13 @@
 		0E854A5125B485DD00E512F4 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
 		0E854A5525B4868F00E512F4 /* PostListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListRequest.swift; sourceTree = "<group>"; };
 		0E854A5925B48BF500E512F4 /* DeviceTerminationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTerminationRequest.swift; sourceTree = "<group>"; };
+		0E9F26BA25BE9B7300CA56DE /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		0E9F26BE25BE9D8800CA56DE /* Int+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+string.swift"; sourceTree = "<group>"; };
+		0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowHeaderView.swift; sourceTree = "<group>"; };
+		0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowHeaderMenu.swift; sourceTree = "<group>"; };
+		0E9F26CF25BEC1E100CA56DE /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 		0EFF4AE025BAA5F900D240BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowTextView.swift; sourceTree = "<group>"; };
-		0EFF4AF525BE607800D240BC /* HollowTimelineCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowTimelineCardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +202,7 @@
 		0E28124225B7F20E00DCF78D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				0E9F26CF25BEC1E100CA56DE /* TimelineViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -203,6 +222,7 @@
 			children = (
 				0E78579525B6DC570000C659 /* BackgroundView.swift */,
 				0E44BBE425BA82EB00B78B30 /* HollowImageView.swift */,
+				0E2FE97725BE847C00DC1220 /* Spinner.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -257,7 +277,7 @@
 		0E78578325B5D0C50000C659 /* Card */ = {
 			isa = PBXGroup;
 			children = (
-				0EFF4AF525BE607800D240BC /* HollowTimelineCardViewModel.swift */,
+				0E813A7225BF29E6000CCF35 /* HollowTimelineCardViewModel.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -384,6 +404,7 @@
 		0E8549D625B3FA1500E512F4 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
+				0E9F26C825BEBA8300CA56DE /* Components */,
 				0E8549F325B3FAAF00E512F4 /* Content */,
 				0E8549FB25B3FACB00E512F4 /* Card */,
 				0E854A0925B3FB2400E512F4 /* Detail */,
@@ -481,9 +502,14 @@
 		0E854A3125B43B5100E512F4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0E854A3525B4456A00E512F4 /* TextExtensions.swift */,
+				0E854A3525B4456A00E512F4 /* CustomFontStyles.swift */,
 				0E28125025B7FC5600DCF78D /* View+layout.swift */,
 				0E44BBD425B89FDB00B78B30 /* Color+uiColor.swift */,
+				0E2FE97025BE799200DC1220 /* CustomColors.swift */,
+				0E2FE97325BE807F00DC1220 /* CustomGradient.swift */,
+				0E2FE97B25BE880200DC1220 /* LinearGradient+vertical.swift */,
+				0E9F26BA25BE9B7300CA56DE /* CustomFont.swift */,
+				0E9F26BE25BE9D8800CA56DE /* Int+string.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -546,6 +572,15 @@
 				0E78573925B4EAFB0000C659 /* SearchHistoryRequest.swift */,
 			);
 			path = Contents;
+			sourceTree = "<group>";
+		};
+		0E9F26C825BEBA8300CA56DE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */,
+				0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,7 +670,9 @@
 				0E78574525B4F0330000C659 /* SendVoteRequest.swift in Sources */,
 				0E854A2225B3FBEE00E512F4 /* AccountInfoView.swift in Sources */,
 				0E78578C25B5D8E80000C659 /* GetConfigRequest.swift in Sources */,
+				0E2FE97125BE799200DC1220 /* CustomColors.swift in Sources */,
 				0E854A1F25B3FB9200E512F4 /* HollowCommentInputPreviewView.swift in Sources */,
+				0E9F26C325BEB25D00CA56DE /* HollowHeaderView.swift in Sources */,
 				0E8549E825B3FA7A00E512F4 /* SearchView.swift in Sources */,
 				0E8549F925B3FAC800E512F4 /* HollowCiteContentView.swift in Sources */,
 				0E44BBD525B89FDB00B78B30 /* Color+uiColor.swift in Sources */,
@@ -643,6 +680,8 @@
 				0E8549DF25B3FA5A00E512F4 /* MainView.swift in Sources */,
 				0E44BBE125BA803600B78B30 /* CommentData.swift in Sources */,
 				0E44BBD225B896BB00B78B30 /* HollowVoteContentViewModel.swift in Sources */,
+				0E9F26CA25BEBA9800CA56DE /* HollowHeaderMenu.swift in Sources */,
+				0E2FE97825BE847C00DC1220 /* Spinner.swift in Sources */,
 				0E78576025B5444B0000C659 /* ParticipatedPostsRequest.swift in Sources */,
 				0E78574B25B4F0E40000C659 /* EditAttentionRequest.swift in Sources */,
 				0E7857A025B731280000C659 /* HollowCommentContentView.swift in Sources */,
@@ -651,12 +690,14 @@
 				0E78575525B535130000C659 /* ReportCommentRequest.swift in Sources */,
 				0E78572525B498000000C659 /* Post.swift in Sources */,
 				0E854A4125B4771700E512F4 /* AccountCreationRequest.swift in Sources */,
+				0E9F26BB25BE9B7300CA56DE /* CustomFont.swift in Sources */,
 				0E854A1825B3FB6B00E512F4 /* HollowInputPreviewView.swift in Sources */,
 				0E854A0B25B3FB3300E512F4 /* HollowDetailView.swift in Sources */,
 				0E854A5625B4868F00E512F4 /* PostListRequest.swift in Sources */,
 				0E28125125B7FC5600DCF78D /* View+layout.swift in Sources */,
 				0E78578025B58CF60000C659 /* LoginRequest.swift in Sources */,
 				0E78576B25B54BB60000C659 /* AttentionListSearchRequest.swift in Sources */,
+				0E2FE97425BE807F00DC1220 /* CustomGradient.swift in Sources */,
 				0E44BBED25BA9DA500B78B30 /* SetPushRequest.swift in Sources */,
 				0E854A3325B43B6C00E512F4 /* HollowImage.swift in Sources */,
 				0E854A1125B3FB4B00E512F4 /* HollowInputView.swift in Sources */,
@@ -671,8 +712,9 @@
 				0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */,
 				0E78575225B532CA0000C659 /* ReportPostRequest.swift in Sources */,
 				0E8549C125B3F9AA00E512F4 /* SceneDelegate.swift in Sources */,
+				0E813A7325BF29E6000CCF35 /* HollowTimelineCardViewModel.swift in Sources */,
 				0E78572D25B4DAB20000C659 /* Comment.swift in Sources */,
-				0E854A3625B4456A00E512F4 /* TextExtensions.swift in Sources */,
+				0E854A3625B4456A00E512F4 /* CustomFontStyles.swift in Sources */,
 				0E78575D25B543FC0000C659 /* RandomListRequest.swift in Sources */,
 				0E78576325B544A50000C659 /* PublishedPostsMessageRequest.swift in Sources */,
 				0E854A0425B3FAFF00E512F4 /* HollowSearchCardView.swift in Sources */,
@@ -682,12 +724,14 @@
 				0E854A2925B3FC0600E512F4 /* RegulationView.swift in Sources */,
 				0E854A1525B3FB5700E512F4 /* HollowVoteInputView.swift in Sources */,
 				0E44BBE525BA82EB00B78B30 /* HollowImageView.swift in Sources */,
-				0EFF4AF625BE607800D240BC /* HollowTimelineCardViewModel.swift in Sources */,
 				0E854A0725B3FB1000E512F4 /* HollowFavouritesCardView.swift in Sources */,
 				0E854A1C25B3FB8200E512F4 /* HollowCommentInputView.swift in Sources */,
 				0E8549E225B3FA6200E512F4 /* WanderView.swift in Sources */,
 				0E78572825B4985C0000C659 /* PostDetailRequest.swift in Sources */,
 				0E44BBCF25B8960F00B78B30 /* HollowVoteContentView.swift in Sources */,
+				0E2FE97C25BE880200DC1220 /* LinearGradient+vertical.swift in Sources */,
+				0E9F26D025BEC1E100CA56DE /* TimelineViewModel.swift in Sources */,
+				0E9F26BF25BE9D8800CA56DE /* Int+string.swift in Sources */,
 				0E8549E525B3FA7100E512F4 /* TimelineView.swift in Sources */,
 				0E44BBE825BA840000B78B30 /* HollowContentViewModel.swift in Sources */,
 				0E78573025B4DCCE0000C659 /* SearchRequest.swift in Sources */,
@@ -765,7 +809,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -820,7 +864,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -840,7 +884,7 @@
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -862,7 +906,7 @@
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

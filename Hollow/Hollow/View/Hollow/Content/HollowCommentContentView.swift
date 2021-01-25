@@ -39,6 +39,7 @@ struct HollowCommentContentView: View {
                         .lineLimit(compact ? compactLineLimit : nil)
                 }
             }
+            .foregroundColor(.hollowContentText)
             if let padding = contentVerticalPadding {
                 Spacer(minLength: padding)
                     .fixedSize()
