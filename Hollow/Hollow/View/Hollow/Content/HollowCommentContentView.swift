@@ -25,6 +25,7 @@ struct HollowCommentContentView: View {
                     Text(commentData.name)
                         .bold()
                         .hollowComment()
+                        .minimumScaleFactor(0.75)
                         .allowsTightening(true)
                         .lineLimit(compact ? compactLineLimit : nil)
                         .leading()

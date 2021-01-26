@@ -30,7 +30,7 @@ struct HollowHeaderView: View {
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                         .hollowPostId()
                         .foregroundColor(.hollowContentText)
-                    Text("6分钟前")    // Placeholder here
+                    Text("6分钟前")    // FIXME: Placeholder here
                         .hollowPostTime()
                         .foregroundColor(Color.gray)
                 }

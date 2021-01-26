@@ -46,7 +46,9 @@ extension MainView {
             HStack(spacing: 2) {
                 Group {
                     Button(action: {
-                        page = .wander
+                        withAnimation {
+                            page = .wander
+                        }
                     }) {
                         Text(LocalizedStringKey("Wander"))
                             .mainTabText(selected: page == .wander)
@@ -58,7 +60,9 @@ extension MainView {
                         .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
                         .animation(.spring())
                     Button(action: {
-                        page = .timeline
+                        withAnimation {
+                            page = .timeline
+                        }
                     }) {
                         Text(LocalizedStringKey("Timeline"))
                             .mainTabText(selected: page == .timeline)
