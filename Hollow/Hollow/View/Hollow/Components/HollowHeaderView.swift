@@ -2,7 +2,7 @@
 //  HollowHeaderView.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/1/25.
+//  Created by liang2kl on 2021/1/25.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
@@ -10,52 +10,48 @@ import SwiftUI
 
 // TODO: Actions
 struct HollowHeaderView: View {
+    @ObservedObject var viewModel: HollowHeader
     @Binding var postData: PostData
-    // FIXME: Remove this line and implement the logic in the view model!
-    @State var starred = false
+    var compact: Bool
+    private var starred: Bool? { postData.attention }
     
     var body: some View {
-        HStack(alignment: .top) {
-            Image("test")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 37, height: 37)
-                .clipShape(Circle())
-            VStack(alignment: .leading, spacing: 2) {
-                Text("#\(postData.postId.string)")
-                    .hollowPostId()
-                    .foregroundColor(.hollowContentText)
-                Text("6分钟前")    // Placeholder here
-                    .hollowPostTime()
-                    .foregroundColor(Color.gray)
+        HStack(alignment: .center) {
+            HStack(alignment: .top) {
+                // FIXME: Random avatar
+                Image("test")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 37, height: 37)
+                    .clipShape(Circle())
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("#\(postData.postId.string)")
+                        .fontWeight(.medium)
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .hollowPostId()
+                        .foregroundColor(.hollowContentText)
+                    Text("6分钟前")    // Placeholder here
+                        .hollowPostTime()
+                        .foregroundColor(Color.gray)
+                }
             }
             Spacer()
-            HStack(spacing: nil) {
-                Group {
-                    Button(action: {
-                        withAnimation {
-                            // TODO: Tapic feedback
-                            starred.toggle()
-                        }
-                    }) {
-                        HStack(spacing: 3) {
-                            Text("\(postData.likeNumber)")
-                            Image(systemName: starred ? "star.fill" : "star")
-                        }
-                        .font(.system(size: 16, weight: .medium))
-                    }
-                    .padding(5)
+            
+            if !compact {
+                // If `postData.attention` is nil, it means that the changed state of attention is submitting
+                if let _ = postData.attention {
+                    HollowStarButton(attention: $postData.attention, likeNumber: $postData.likeNumber, starHandler: viewModel.starHandler)
+                } else {
+                    Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }
-                .foregroundColor(starred ? .hollowCardStarSelected : .hollowCardStarUnselected)
+                
                 Menu(content: {
                     HollowHeaderMenu()
-                }
-                , label: {
+                }, label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.hollowCardStarUnselected)
                         .padding(5)
-                }
-                )
+                })
             }
         }
     }
@@ -74,6 +70,7 @@ struct HollowHeaderView_Previews: PreviewProvider {
     ])
     
     static var previews: some View {
-        HollowHeaderView(postData: .constant(postData))
+        HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: .constant(postData), compact: false)
+            .background(Color.background)
     }
 }

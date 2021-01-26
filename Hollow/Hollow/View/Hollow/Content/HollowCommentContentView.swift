@@ -25,18 +25,28 @@ struct HollowCommentContentView: View {
                     .bold()
                     .hollowComment()
                     .allowsTightening(true)
-                    .lineLimit(compactLineLimit)
+                    .lineLimit(compact ? compactLineLimit : nil)
                     .leading()
                     .frame(width: nameLabelWidth)
                     .fixedSize()
-                VStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
                     if commentData.type == .image && !compact {
                         HollowImageView(hollowImage: $commentData.image)
+                            .cornerRadius(4)
+                            .padding(.bottom, 10)
+                            .frame(maxHeight: 300)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     Text(commentData.text)
                         .hollowComment()
                         .leading()
                         .lineLimit(compact ? compactLineLimit : nil)
+                        .layoutPriority(1)
+                }
+                if commentData.type == .image && compact {
+                    Image(systemName: "photo")
+                        .font(.system(size: 15))
+                        .layoutPriority(1)
                 }
             }
             .foregroundColor(.hollowContentText)
@@ -52,11 +62,15 @@ struct HollowCommentContentView: View {
             }
         }
         .font(.plain)
+        // Why do we need to put this here?
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
 struct HollowCommentContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowCommentContentView(commentData: .constant(.init(commentId: 10000, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: [], text: "林老师的课真的是非常棒的，人也很好，回复学生的问题很尽心尽责", type: .text, image: nil)), compact: true)
+        HollowCommentContentView(commentData: .constant(testComments[0]), compact: false)
+        HollowDetailView(postData: .constant(testPostData), presentedIndex: .constant(-1))
+        HollowCommentContentView(commentData: .constant(testComments[3]), compact: false)
     }
 }

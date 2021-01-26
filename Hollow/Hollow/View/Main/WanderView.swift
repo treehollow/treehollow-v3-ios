@@ -6,10 +6,20 @@
 //
 
 import SwiftUI
+import WaterfallGrid
 
 struct WanderView: View {
+    @ObservedObject var viewModel: Wander = .init()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            WaterfallGrid((0..<viewModel.posts.count), id: \.self) { index in
+                HollowWanderCardView(postData: $viewModel.posts[index])
+            }
+            .gridStyle(columns: 2, spacing: 15, animation: nil)
+            .padding(.horizontal, 15)
+            .background(Color.background)
+        }
     }
 }
 

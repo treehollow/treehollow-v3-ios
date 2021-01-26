@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HollowVoteContentView: View {
     @Binding var vote: Post.Vote
-    @ObservedObject var viewModel: HollowVoteContentViewModel
+    @ObservedObject var viewModel: HollowVoteContent
     
     @State private var selectedButNotFinishIndex: Int = -1
     
@@ -58,7 +58,7 @@ struct HollowVoteContentView: View {
                 }
                 // Show spinner when submitting vote option
                 if !voted && selectedButNotFinish {
-                    Spinner(color: .hollowContentText, desiredWidth: 16)
+                    Spinner(color: .hollowContentText, desiredWidth: 14)
                         .layoutPriority(1)
                 }
             }

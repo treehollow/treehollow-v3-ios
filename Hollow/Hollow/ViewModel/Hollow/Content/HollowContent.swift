@@ -1,5 +1,5 @@
 //
-//  HollowContentViewModel.swift
+//  HollowContent.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/1/22.
@@ -8,7 +8,7 @@
 
 import Combine
 
-class HollowContentViewModel: ObservableObject {
+class HollowContent: ObservableObject {
     var voteHandler: (String) -> Void
     
     init(voteHandler: @escaping (String) -> Void) {

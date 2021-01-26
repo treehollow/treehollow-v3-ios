@@ -8,13 +8,69 @@
 import SwiftUI
 
 struct HollowDetailView: View {
+    @Binding var postData: PostData
+    @Binding var presentedIndex: Int
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        // FIXME: Handlers
+        ZStack {
+            Color.hollowDetailBackground.edgesIgnoringSafeArea(.all)
+            VStack(spacing: 0) {
+                // Header
+                VStack {
+                    HStack {
+                        Button(action:{
+                            // Navigate back
+                            presentedIndex = -1
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.hollowContentText)
+                                .font(.system(size: 20, weight: .medium))
+                        }
+                        .padding(.trailing, 5)
+                        HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postData, compact: false)
+                    }
+                    .padding(.horizontal)
+                    Divider()
+                }
+                // Contents
+                CustomScrollView {
+                    VStack(spacing: 13) {
+                        Spacer(minLength: 5)
+                            .fixedSize()
+                        HollowContentView(postData: $postData, compact: false, voteHandler: {_ in})
+                        CommentView(comments: $postData.comments)
+                    }
+                    .padding(.horizontal)
+                    .background(Color.hollowDetailBackground)
+                }
+                .edgesIgnoringSafeArea(.bottom)
+            }
+
+        }
+    }
+}
+
+extension HollowDetailView {
+    private struct CommentView: View {
+        @Binding var comments: [CommentData]
+        var body: some View {
+            VStack {
+                (Text("\(comments.count) ") + Text(LocalizedStringKey("Comments")))
+                    .fontWeight(.heavy)
+                    .leading()
+                    .padding(.top)
+                    .padding(.bottom, 5)
+                ForEach(comments) { comment in
+                    HollowCommentContentView(commentData: .constant(comment), compact: false)
+                }
+            }
+        }
     }
 }
 
 struct HollowDetailView_Previews: PreviewProvider {
+
     static var previews: some View {
-        HollowDetailView()
+        return HollowDetailView(postData: .constant(testPostData), presentedIndex: .constant(-1)).colorScheme(.dark)
     }
 }

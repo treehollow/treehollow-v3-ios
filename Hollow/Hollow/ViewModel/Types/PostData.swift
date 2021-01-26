@@ -12,7 +12,8 @@ struct PostData: Identifiable {
     // Identifiable protocol
     var id: Int { return postId }
     
-    var attention: Bool
+    /// Set it to `nil` when the user has tapped on the button but the request has not finished.
+    var attention: Bool?
     var deleted: Bool
     var likeNumber: Int
     var permissions: [PostPermissionType]

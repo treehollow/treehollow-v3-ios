@@ -18,22 +18,27 @@ struct MainView: View {
                 // TODO: Use TabView to indicate paging behaviours
                 // But we might not be able to do this if we use our `CustomScrollView` and I don't know why.
                 if page == .wander {
-                    Spacer()
-                    Text("Placeholder: Wander")
-                        .tag(Page.wander)
-                    Spacer()
+                    WanderView()
                 }
                 if page == .timeline {
                     TimelineView()
                         .edgesIgnoringSafeArea(.bottom)
                         .tag(Page.timeline)
-                        .edgesIgnoringSafeArea(.bottom)
                 }
             }
         }
     }
     
-    struct HeaderView: View {
+    enum Page: Int, Identifiable {
+        var id: Int { return rawValue }
+        
+        case wander
+        case timeline
+    }
+}
+
+extension MainView {
+    private struct HeaderView: View {
         @Binding var page: MainView.Page
         
         var body: some View {
@@ -68,15 +73,15 @@ struct MainView: View {
                 }) {
                     HStack {
                         Text("Search")
-                        Spacer(minLength: 20)
+                        Spacer()
                         Image(systemName: "magnifyingglass")
                     }
-                    //                .fixedSize()
                     .font(.system(size: 14))
                     .foregroundColor(.mainSearchBarText)
                     .padding(.vertical, 4)
                     .padding(.horizontal, 10)
                     .background(Capsule().foregroundColor(.mainSearchBarBackground))
+                    .overlay(Capsule().stroke(style: .init(lineWidth: 0.7)).foregroundColor(.mainSearchBarStroke))
                     .padding(.trailing, 5)
                 }
                 Button(action:{}) {
@@ -98,18 +103,8 @@ struct MainView: View {
     }
 }
 
-extension MainView {
-    enum Page: Int, Identifiable {
-        var id: Int { return rawValue }
-        
-        case wander
-        case timeline
-    }
-}
-
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .colorScheme(.dark)
     }
 }

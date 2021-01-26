@@ -15,13 +15,16 @@
 		0E2FE97825BE847C00DC1220 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FE97725BE847C00DC1220 /* Spinner.swift */; };
 		0E2FE97C25BE880200DC1220 /* LinearGradient+vertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FE97B25BE880200DC1220 /* LinearGradient+vertical.swift */; };
 		0E44BBCF25B8960F00B78B30 /* HollowVoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */; };
-		0E44BBD225B896BB00B78B30 /* HollowVoteContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */; };
+		0E44BBD225B896BB00B78B30 /* HollowVoteContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBD125B896BB00B78B30 /* HollowVoteContent.swift */; };
 		0E44BBD525B89FDB00B78B30 /* Color+uiColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBD425B89FDB00B78B30 /* Color+uiColor.swift */; };
 		0E44BBDE25BA7F4400B78B30 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBDD25BA7F4400B78B30 /* PostData.swift */; };
 		0E44BBE125BA803600B78B30 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBE025BA803600B78B30 /* CommentData.swift */; };
 		0E44BBE525BA82EB00B78B30 /* HollowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBE425BA82EB00B78B30 /* HollowImageView.swift */; };
-		0E44BBE825BA840000B78B30 /* HollowContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBE725BA840000B78B30 /* HollowContentViewModel.swift */; };
+		0E44BBE825BA840000B78B30 /* HollowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBE725BA840000B78B30 /* HollowContent.swift */; };
 		0E44BBED25BA9DA500B78B30 /* SetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44BBEC25BA9DA500B78B30 /* SetPushRequest.swift */; };
+		0E56901325BFFF57003C70D6 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E56901225BFFF57003C70D6 /* WaterfallGrid */; };
+		0E56901625C001E8003C70D6 /* HollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E56901525C001E8003C70D6 /* HollowButton.swift */; };
+		0E56901F25C006A7003C70D6 /* Wander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E56901E25C006A7003C70D6 /* Wander.swift */; };
 		0E78572525B498000000C659 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78572425B498000000C659 /* Post.swift */; };
 		0E78572825B4985C0000C659 /* PostDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78572725B4985C0000C659 /* PostDetailRequest.swift */; };
 		0E78572D25B4DAB20000C659 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78572C25B4DAB20000C659 /* Comment.swift */; };
@@ -47,7 +50,7 @@
 		0E7857A025B731280000C659 /* HollowCommentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78579F25B731280000C659 /* HollowCommentContentView.swift */; };
 		0E7857ED25B74B340000C659 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7857EC25B74B340000C659 /* Defaults */; };
 		0E7857F225B74BAD0000C659 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */; };
-		0E813A7325BF29E6000CCF35 /* HollowTimelineCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E813A7225BF29E6000CCF35 /* HollowTimelineCardViewModel.swift */; };
+		0E813A7325BF29E6000CCF35 /* HollowTimelineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */; };
 		0E8549BF25B3F9AA00E512F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */; };
 		0E8549C125B3F9AA00E512F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549C025B3F9AA00E512F4 /* SceneDelegate.swift */; };
 		0E8549C525B3F9AB00E512F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8549C425B3F9AB00E512F4 /* Assets.xcassets */; };
@@ -90,8 +93,12 @@
 		0E9F26BF25BE9D8800CA56DE /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26BE25BE9D8800CA56DE /* Int+string.swift */; };
 		0E9F26C325BEB25D00CA56DE /* HollowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */; };
 		0E9F26CA25BEBA9800CA56DE /* HollowHeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */; };
-		0E9F26D025BEC1E100CA56DE /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26CF25BEC1E100CA56DE /* TimelineViewModel.swift */; };
+		0E9F26D025BEC1E100CA56DE /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26CF25BEC1E100CA56DE /* Timeline.swift */; };
 		0EBB370925BF44440060A62A /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB370825BF44440060A62A /* CustomScrollView.swift */; };
+		0EBB371C25BFB3E20060A62A /* HollowHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB371B25BFB3E20060A62A /* HollowHeader.swift */; };
+		0EBB371F25BFBB260060A62A /* HollowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB371E25BFBB260060A62A /* HollowContentView.swift */; };
+		0EBB372525BFD9BD0060A62A /* TestPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB372425BFD9BD0060A62A /* TestPostData.swift */; };
+		0EBB372A25BFDA840060A62A /* TestCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB372925BFDA840060A62A /* TestCommentData.swift */; };
 		0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,14 +111,16 @@
 		0E2FE97725BE847C00DC1220 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		0E2FE97B25BE880200DC1220 /* LinearGradient+vertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinearGradient+vertical.swift"; sourceTree = "<group>"; };
 		0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContentView.swift; sourceTree = "<group>"; };
-		0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContentViewModel.swift; sourceTree = "<group>"; };
+		0E44BBD125B896BB00B78B30 /* HollowVoteContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVoteContent.swift; sourceTree = "<group>"; };
 		0E44BBD425B89FDB00B78B30 /* Color+uiColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+uiColor.swift"; sourceTree = "<group>"; };
 		0E44BBDB25B9E7BF00B78B30 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E44BBDD25BA7F4400B78B30 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		0E44BBE025BA803600B78B30 /* CommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentData.swift; sourceTree = "<group>"; };
 		0E44BBE425BA82EB00B78B30 /* HollowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowImageView.swift; sourceTree = "<group>"; };
-		0E44BBE725BA840000B78B30 /* HollowContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowContentViewModel.swift; sourceTree = "<group>"; };
+		0E44BBE725BA840000B78B30 /* HollowContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowContent.swift; sourceTree = "<group>"; };
 		0E44BBEC25BA9DA500B78B30 /* SetPushRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPushRequest.swift; sourceTree = "<group>"; };
+		0E56901525C001E8003C70D6 /* HollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowButton.swift; sourceTree = "<group>"; };
+		0E56901E25C006A7003C70D6 /* Wander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wander.swift; sourceTree = "<group>"; };
 		0E78572425B498000000C659 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0E78572725B4985C0000C659 /* PostDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailRequest.swift; sourceTree = "<group>"; };
 		0E78572C25B4DAB20000C659 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -138,7 +147,7 @@
 		0E78579525B6DC570000C659 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		0E78579F25B731280000C659 /* HollowCommentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentContentView.swift; sourceTree = "<group>"; };
 		0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
-		0E813A7225BF29E6000CCF35 /* HollowTimelineCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCardViewModel.swift; sourceTree = "<group>"; };
+		0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCard.swift; sourceTree = "<group>"; };
 		0E8549BB25B3F9AA00E512F4 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E8549C025B3F9AA00E512F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,8 +192,12 @@
 		0E9F26BE25BE9D8800CA56DE /* Int+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+string.swift"; sourceTree = "<group>"; };
 		0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowHeaderView.swift; sourceTree = "<group>"; };
 		0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowHeaderMenu.swift; sourceTree = "<group>"; };
-		0E9F26CF25BEC1E100CA56DE /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
+		0E9F26CF25BEC1E100CA56DE /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		0EBB370825BF44440060A62A /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		0EBB371B25BFB3E20060A62A /* HollowHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowHeader.swift; sourceTree = "<group>"; };
+		0EBB371E25BFBB260060A62A /* HollowContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowContentView.swift; sourceTree = "<group>"; };
+		0EBB372425BFD9BD0060A62A /* TestPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPostData.swift; sourceTree = "<group>"; };
+		0EBB372925BFDA840060A62A /* TestCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCommentData.swift; sourceTree = "<group>"; };
 		0EFF4AE025BAA5F900D240BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7857ED25B74B340000C659 /* Defaults in Frameworks */,
+				0E56901325BFFF57003C70D6 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +218,8 @@
 		0E28124225B7F20E00DCF78D /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0E9F26CF25BEC1E100CA56DE /* TimelineViewModel.swift */,
+				0E9F26CF25BEC1E100CA56DE /* Timeline.swift */,
+				0E56901E25C006A7003C70D6 /* Wander.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -223,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				0E78579525B6DC570000C659 /* BackgroundView.swift */,
-				0E44BBE425BA82EB00B78B30 /* HollowImageView.swift */,
 				0E2FE97725BE847C00DC1220 /* Spinner.swift */,
 			);
 			path = Component;
@@ -270,6 +284,7 @@
 		0E78578225B58F9E0000C659 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
+				0EBB371625BFB3C70060A62A /* Components */,
 				0E78579825B725DA0000C659 /* Content */,
 				0E78578325B5D0C50000C659 /* Card */,
 			);
@@ -279,7 +294,7 @@
 		0E78578325B5D0C50000C659 /* Card */ = {
 			isa = PBXGroup;
 			children = (
-				0E813A7225BF29E6000CCF35 /* HollowTimelineCardViewModel.swift */,
+				0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -304,8 +319,8 @@
 		0E78579825B725DA0000C659 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				0E44BBD125B896BB00B78B30 /* HollowVoteContentViewModel.swift */,
-				0E44BBE725BA840000B78B30 /* HollowContentViewModel.swift */,
+				0E44BBD125B896BB00B78B30 /* HollowVoteContent.swift */,
+				0E44BBE725BA840000B78B30 /* HollowContent.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -329,6 +344,7 @@
 		0E8549B225B3F9AA00E512F4 = {
 			isa = PBXGroup;
 			children = (
+				0EBB372225BFD99E0060A62A /* TestData */,
 				0E8549BD25B3F9AA00E512F4 /* Hollow */,
 				0E8549BC25B3F9AA00E512F4 /* Products */,
 			);
@@ -433,6 +449,8 @@
 				0E78579F25B731280000C659 /* HollowCommentContentView.swift */,
 				0E44BBCE25B8960F00B78B30 /* HollowVoteContentView.swift */,
 				0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */,
+				0EBB371E25BFBB260060A62A /* HollowContentView.swift */,
+				0E44BBE425BA82EB00B78B30 /* HollowImageView.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -582,8 +600,26 @@
 			children = (
 				0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */,
 				0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */,
+				0E56901525C001E8003C70D6 /* HollowButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		0EBB371625BFB3C70060A62A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0EBB371B25BFB3E20060A62A /* HollowHeader.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0EBB372225BFD99E0060A62A /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				0EBB372425BFD9BD0060A62A /* TestPostData.swift */,
+				0EBB372925BFDA840060A62A /* TestCommentData.swift */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -604,6 +640,7 @@
 			name = Hollow;
 			packageProductDependencies = (
 				0E7857EC25B74B340000C659 /* Defaults */,
+				0E56901225BFFF57003C70D6 /* WaterfallGrid */,
 			);
 			productName = Hollow;
 			productReference = 0E8549BB25B3F9AA00E512F4 /* Hollow.app */;
@@ -635,6 +672,7 @@
 			mainGroup = 0E8549B225B3F9AA00E512F4;
 			packageReferences = (
 				0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */,
+				0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 			);
 			productRefGroup = 0E8549BC25B3F9AA00E512F4 /* Products */;
 			projectDirPath = "";
@@ -673,17 +711,20 @@
 				0E78574525B4F0330000C659 /* SendVoteRequest.swift in Sources */,
 				0E854A2225B3FBEE00E512F4 /* AccountInfoView.swift in Sources */,
 				0E78578C25B5D8E80000C659 /* GetConfigRequest.swift in Sources */,
+				0EBB372525BFD9BD0060A62A /* TestPostData.swift in Sources */,
 				009FDD6125BDAB5D003E3443 /* RequestConstant.swift in Sources */,
 				0E2FE97125BE799200DC1220 /* CustomColors.swift in Sources */,
 				0E854A1F25B3FB9200E512F4 /* HollowCommentInputPreviewView.swift in Sources */,
+				0E56901625C001E8003C70D6 /* HollowButton.swift in Sources */,
 				0E9F26C325BEB25D00CA56DE /* HollowHeaderView.swift in Sources */,
 				0E8549E825B3FA7A00E512F4 /* SearchView.swift in Sources */,
 				0E8549F925B3FAC800E512F4 /* HollowCiteContentView.swift in Sources */,
 				0E44BBD525B89FDB00B78B30 /* Color+uiColor.swift in Sources */,
 				0E854A5A25B48BF500E512F4 /* DeviceTerminationRequest.swift in Sources */,
 				0E8549DF25B3FA5A00E512F4 /* MainView.swift in Sources */,
+				0EBB371C25BFB3E20060A62A /* HollowHeader.swift in Sources */,
 				0E44BBE125BA803600B78B30 /* CommentData.swift in Sources */,
-				0E44BBD225B896BB00B78B30 /* HollowVoteContentViewModel.swift in Sources */,
+				0E44BBD225B896BB00B78B30 /* HollowVoteContent.swift in Sources */,
 				0E9F26CA25BEBA9800CA56DE /* HollowHeaderMenu.swift in Sources */,
 				0E2FE97825BE847C00DC1220 /* Spinner.swift in Sources */,
 				0E78576025B5444B0000C659 /* ParticipatedPostsRequest.swift in Sources */,
@@ -716,7 +757,9 @@
 				0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */,
 				0E78575225B532CA0000C659 /* ReportPostRequest.swift in Sources */,
 				0E8549C125B3F9AA00E512F4 /* SceneDelegate.swift in Sources */,
-				0E813A7325BF29E6000CCF35 /* HollowTimelineCardViewModel.swift in Sources */,
+				0E56901F25C006A7003C70D6 /* Wander.swift in Sources */,
+				0EBB372A25BFDA840060A62A /* TestCommentData.swift in Sources */,
+				0E813A7325BF29E6000CCF35 /* HollowTimelineCard.swift in Sources */,
 				0E78572D25B4DAB20000C659 /* Comment.swift in Sources */,
 				0E854A3625B4456A00E512F4 /* CustomFontStyles.swift in Sources */,
 				0E78575D25B543FC0000C659 /* RandomListRequest.swift in Sources */,
@@ -727,6 +770,7 @@
 				0E8549D925B3FA4100E512F4 /* LoginView.swift in Sources */,
 				0E854A2925B3FC0600E512F4 /* RegulationView.swift in Sources */,
 				0E854A1525B3FB5700E512F4 /* HollowVoteInputView.swift in Sources */,
+				0EBB371F25BFBB260060A62A /* HollowContentView.swift in Sources */,
 				0E44BBE525BA82EB00B78B30 /* HollowImageView.swift in Sources */,
 				0E854A0725B3FB1000E512F4 /* HollowFavouritesCardView.swift in Sources */,
 				0E854A1C25B3FB8200E512F4 /* HollowCommentInputView.swift in Sources */,
@@ -734,11 +778,11 @@
 				0E78572825B4985C0000C659 /* PostDetailRequest.swift in Sources */,
 				0E44BBCF25B8960F00B78B30 /* HollowVoteContentView.swift in Sources */,
 				0E2FE97C25BE880200DC1220 /* LinearGradient+vertical.swift in Sources */,
-				0E9F26D025BEC1E100CA56DE /* TimelineViewModel.swift in Sources */,
+				0E9F26D025BEC1E100CA56DE /* Timeline.swift in Sources */,
 				0E9F26BF25BE9D8800CA56DE /* Int+string.swift in Sources */,
 				0E8549E525B3FA7100E512F4 /* TimelineView.swift in Sources */,
 				0EBB370925BF44440060A62A /* CustomScrollView.swift in Sources */,
-				0E44BBE825BA840000B78B30 /* HollowContentViewModel.swift in Sources */,
+				0E44BBE825BA840000B78B30 /* HollowContent.swift in Sources */,
 				0E78573025B4DCCE0000C659 /* SearchRequest.swift in Sources */,
 				0E854A4A25B483A500E512F4 /* DeviceInformation.swift in Sources */,
 				0E854A2625B3FBF900E512F4 /* SettingsView.swift in Sources */,
@@ -946,6 +990,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Defaults.git";
@@ -957,6 +1009,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E56901225BFFF57003C70D6 /* WaterfallGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
+			productName = WaterfallGrid;
+		};
 		0E7857EC25B74B340000C659 /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */;

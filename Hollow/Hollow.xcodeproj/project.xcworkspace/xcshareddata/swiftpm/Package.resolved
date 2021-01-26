@@ -9,6 +9,15 @@
           "revision": "d98119fee49c893fae553103a8659ffe003b6cfe",
           "version": "4.1.0"
         }
+      },
+      {
+        "package": "WaterfallGrid",
+        "repositoryURL": "https://github.com/paololeonardi/WaterfallGrid.git",
+        "state": {
+          "branch": null,
+          "revision": "f4254179edd6679ff4033997ed1744a1e1d18b08",
+          "version": "1.0.0"
+        }
       }
     ]
   },

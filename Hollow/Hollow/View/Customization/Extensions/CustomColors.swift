@@ -7,32 +7,47 @@
 //
 
 import SwiftUI
+import Defaults
+
+enum ColorSet: String, Codable {
+    case thu = "thu"
+    case pku = "pku"
+    case other = "other"
+}
 
 /// Color extension for customized colors.
-// TODO: Adapt PKU and Other
 extension Color {
     
-    static let hollowContentVoteGradient1 = Color("hollow.content.vote.gradient.1.thu")
+    fileprivate static func customColor(prefix: String) -> Color {
+        let colorSet = Defaults[.uiColorSet] ?? .thu
+        return Color(prefix + "." + colorSet.rawValue)
+    }
     
-    static let hollowContentVoteGradient2 = Color("hollow.content.vote.gradient.2.thu")
+    static let hollowContentVoteGradient1 = customColor(prefix: "hollow.content.vote.gradient.1")
     
-    static let hollowContentText = Color("hollow.content.text.thu")
+    static let hollowContentVoteGradient2 = customColor(prefix: "hollow.content.vote.gradient.2")
     
-    static let background = Color("background.thu")
+    static let hollowContentText = customColor(prefix: "hollow.content.text")
     
-    static let hollowCardBackground = Color("hollow.card.background.thu")
+    static let background = customColor(prefix: "background")
     
-    static let hollowCardStarUnselected = Color("hollow.card.star.unselected")
+    static let hollowCardBackground = customColor(prefix: "hollow.card.background")
     
-    static let hollowCardStarSelected = Color("hollow.card.star.selected")
+    static let hollowCardStarUnselected = customColor(prefix: "hollow.card.star.unselected")
+    
+    static let hollowCardStarSelected = customColor(prefix: "hollow.card.star.selected")
 
-    static let mainPageUnselected = Color("main.page.unselected")
+    static let mainPageUnselected = customColor(prefix: "main.page.unselected")
     
     static let mainPageSelected = hollowContentText
     
-    static let mainSearchBarBackground = Color("main.searchbar.background")
+    static let mainSearchBarBackground = customColor(prefix: "main.searchbar.background")
     
     static let mainSearchBarText = mainPageUnselected
     
+    static let mainSearchBarStroke = customColor(prefix: "main.searchbar.stroke")
+    
     static let mainBarButton = mainPageSelected
+    
+    static let hollowDetailBackground = hollowCardBackground
 }

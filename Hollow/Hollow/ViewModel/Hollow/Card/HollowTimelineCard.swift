@@ -1,15 +1,14 @@
 //
-//  HollowVoteContentViewModel.swift
+//  HollowTimelineCard.swift
 //  Hollow
 //
-//  Created by liang2kl on 2021/1/21.
+//  Created by 梁业升 on 2021/1/25.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import Combine
-import Foundation
 
-class HollowVoteContentViewModel: ObservableObject {
+class HollowTimelineCard: ObservableObject {
     var voteHandler: (String) -> Void
     
     init(voteHandler: @escaping (String) -> Void) {

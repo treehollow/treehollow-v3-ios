@@ -16,4 +16,6 @@ import Defaults
 extension Defaults.Keys {
     /// Request API Constants
     static let netRequestConst = Key<RequestCostant?>("net.RequestCostant")
+    /// Global color set to use
+    static let uiColorSet = Key<ColorSet?>("ui.color.set")
 }
