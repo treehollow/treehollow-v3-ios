@@ -9,20 +9,21 @@ import SwiftUI
 
 struct MainView: View {
     @State private var page: Page = .timeline
+    @State private var isSearching = false
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
+            // FIXME: Bottom safe area
             VStack {
-                HeaderView(page: $page)
+                HeaderView(page: $page, isSearching: $isSearching)
                     .padding(.horizontal)
-                // TODO: Use TabView to indicate paging behaviours
-                // But we might not be able to do this if we use our `CustomScrollView` and I don't know why.
-                if page == .wander {
+                // We use our modified TabView to avoid default background color when using
+                // `CustomScrollView` in `TabView`, but be careful that this trick could fail in
+                // future updates.
+                CustomTabView(selection: $page) {
                     WanderView()
-                }
-                if page == .timeline {
+                        .tag(Page.wander)
                     TimelineView()
-                        .edgesIgnoringSafeArea(.bottom)
                         .tag(Page.timeline)
                 }
             }
@@ -40,7 +41,7 @@ struct MainView: View {
 extension MainView {
     private struct HeaderView: View {
         @Binding var page: MainView.Page
-        
+        @Binding var isSearching: Bool
         var body: some View {
             HStack(spacing: 2) {
                 Group {
@@ -70,6 +71,7 @@ extension MainView {
                 Spacer()
                 Button(action:{
                     // Navigate to search view
+                    isSearching = true
                 }) {
                     HStack {
                         Text("Search")

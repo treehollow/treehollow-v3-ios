@@ -36,7 +36,7 @@ struct HollowTimelineCardView: View {
     private struct CommentView: View {
         @Binding var comments: [CommentData]
         /// Max comments to be displayed in the timeline card.
-        private let maxCommentCount = 3
+        @State private var maxCommentCount = 3
         var body: some View {
             VStack(spacing: 0) {
                 // The comment number might change if auto update, so use Identifiable protocol on `CommentData`.
@@ -45,10 +45,20 @@ struct HollowTimelineCardView: View {
                 }
                 if comments.count > maxCommentCount {
                     // FIXME: How to localize this stuff??
-                    Text("还有 \(comments.count - maxCommentCount) 条评论")
-                        .hollowComment()
-                        .foregroundColor(.gray)
+                    Button(action:{
+                        withAnimation {
+                            maxCommentCount += 10
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 15))
+                            Text("还有 \(comments.count - maxCommentCount) 条评论")
+                                .hollowComment()
+                        }
+                        .foregroundColor(.uiColor(.secondaryLabel))
                         .padding(.top)
+                    }
                 }
             }
         }

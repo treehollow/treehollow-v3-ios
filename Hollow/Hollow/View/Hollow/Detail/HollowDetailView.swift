@@ -38,6 +38,7 @@ struct HollowDetailView: View {
                         Spacer(minLength: 5)
                             .fixedSize()
                         HollowContentView(postData: $postData, compact: false, voteHandler: {_ in})
+                            .fixedSize(horizontal: false, vertical: true)
                         CommentView(comments: $postData.comments)
                     }
                     .padding(.horizontal)

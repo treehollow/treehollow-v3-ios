@@ -45,13 +45,13 @@ struct HollowHeaderView: View {
                     Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }
                 
-                Menu(content: {
-                    HollowHeaderMenu()
-                }, label: {
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(.hollowCardStarUnselected)
-                        .padding(5)
-                })
+//                Menu(content: {
+//                    HollowHeaderMenu()
+//                }, label: {
+//                    Image(systemName: "ellipsis")
+//                        .foregroundColor(.hollowCardStarUnselected)
+//                        .padding(5)
+//                })
             }
         }
     }

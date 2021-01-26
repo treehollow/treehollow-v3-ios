@@ -13,6 +13,6 @@ class Wander: ObservableObject {
     init() {
         // FOR DEBUG
 //        self.posts = Array.init(repeating: testPostData, count: 10)
-        self.posts = testPosts
+        self.posts = testPosts + testPosts + testPosts
     }
 }

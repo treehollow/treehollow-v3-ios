@@ -20,34 +20,45 @@ struct HollowCommentContentView: View {
                 Spacer(minLength: padding)
                     .fixedSize()
             }
-            HStack(alignment: .top) {
-                Text(commentData.name)
-                    .bold()
-                    .hollowComment()
-                    .allowsTightening(true)
-                    .lineLimit(compact ? compactLineLimit : nil)
-                    .leading()
-                    .frame(width: nameLabelWidth)
-                    .fixedSize()
-                VStack(alignment: .leading, spacing: 0) {
-                    if commentData.type == .image && !compact {
-                        HollowImageView(hollowImage: $commentData.image)
-                            .cornerRadius(4)
-                            .padding(.bottom, 10)
-                            .frame(maxHeight: 300)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    Text(commentData.text)
+            HStack {
+                HStack(alignment: .top) {
+                    Text(commentData.name)
+                        .bold()
                         .hollowComment()
+                        .allowsTightening(true)
+                        .lineLimit(compact ? compactLineLimit : nil)
+                        .leading()
+                        .frame(width: nameLabelWidth)
+                        .fixedSize()
+                    VStack(alignment: .leading, spacing: 0) {
+                        if commentData.type == .image && !compact {
+                            HollowImageView(hollowImage: $commentData.image)
+                                .cornerRadius(4)
+                                .padding(.bottom, 10)
+                                .frame(maxHeight: 300)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        Group {
+                            if commentData.text != "" {
+                                Text(commentData.text)
+                                    .hollowComment()
+                            } else if commentData.type == .image && compact {
+                                (Text("[") + Text(LocalizedStringKey("Photo")) + Text("]"))
+                                    .hollowContent()
+                                    .foregroundColor(.uiColor(.secondaryLabel))
+                            }
+                        }
                         .leading()
                         .lineLimit(compact ? compactLineLimit : nil)
                         .layoutPriority(1)
+                    }
                 }
                 if commentData.type == .image && compact {
                     Image(systemName: "photo")
                         .font(.system(size: 15))
                         .layoutPriority(1)
                 }
+                
             }
             .foregroundColor(.hollowContentText)
             if let padding = contentVerticalPadding {

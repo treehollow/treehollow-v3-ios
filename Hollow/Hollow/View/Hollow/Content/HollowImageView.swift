@@ -10,38 +10,28 @@ import SwiftUI
 
 struct HollowImageView: View {
     @Binding var hollowImage: HollowImage?
+    @State private var flash = false
     var body: some View {
-        rawImageView()
-    }
-    func rawImageView() -> AnyView {
-        if let hollowImage = self.hollowImage {
-            if let image = hollowImage.image {
-                return AnyView(
+        Group {
+            if let hollowImage = self.hollowImage {
+                if let image = hollowImage.image {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .animation(.default)
-                )
-            } else {
-                return AnyView(
-                    ImagePlaceholderView(placeholder: hollowImage.placeholder)
-                        .animation(.default)
-                )
+                } else {
+                    Rectangle()
+                        .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))
+                        .aspectRatio(hollowImage.placeholder.width / hollowImage.placeholder.height, contentMode: .fit)
+                        .onAppear {
+                            withAnimation(Animation.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                                flash.toggle()
+                            }
+                        }
+                }
             }
         }
-        return AnyView(EmptyView())
     }
-    
-    private struct ImagePlaceholderView: View {
-        var placeholder: (width: CGFloat, height: CGFloat)
-        var body: some View {
-            // TODO: Add visual effects
-            return Rectangle()
-                .foregroundColor(Color(UIColor.systemGray5))
-                .aspectRatio(placeholder.width / placeholder.height, contentMode: .fit)
-        }
-    }
-    
 }
 
 struct HollowImageView_Previews: PreviewProvider {

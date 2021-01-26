@@ -18,6 +18,7 @@ struct TimelineView: View {
                     HollowTimelineCardView(postData: $viewModel.posts[index], viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].postId, for: option)}))
                         .padding(.horizontal)
                         .padding(.bottom)
+                        .background(Color.background)
                         .onTapGesture {
                             detailPresentedIndex = index
                         }
