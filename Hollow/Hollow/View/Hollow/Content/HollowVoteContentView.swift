@@ -68,12 +68,12 @@ struct HollowVoteContentView: View {
             .padding(10)
             .padding(.horizontal, 8)
             .background(
-                LinearGradient.vertical(gradient: selected ? .hollowContentVoteGradient : .clear)
+                LinearGradient.vertical(gradient: selected ? .hollowContentVote : .clear)
             )
             .overlay(
                 Group {
                     if !selected {
-                        LinearGradient.vertical(gradient: .hollowContentVoteGradient)
+                        LinearGradient.vertical(gradient: .hollowContentVote)
                             .clipShape(Capsule().stroke(style: .init(lineWidth: 3)))
                     }
                 }

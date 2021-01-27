@@ -9,10 +9,16 @@
 import SwiftUI
 
 extension Gradient {
+    
     static var clear: Gradient {
         return Gradient(colors: [.clear, .clear])
     }
-    static var hollowContentVoteGradient: Gradient {
+    
+    static var hollowContentVote: Gradient {
         return Gradient(colors: [.hollowContentVoteGradient1, .hollowContentVoteGradient2])
+    }
+    
+    static var button: Gradient {
+        return Gradient(colors: [.buttonGradient1, .buttonGradient2])
     }
 }

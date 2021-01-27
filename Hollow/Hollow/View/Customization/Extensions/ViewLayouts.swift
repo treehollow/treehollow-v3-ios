@@ -30,4 +30,12 @@ extension View {
     func fixedSizedTop() -> some View {
         return self.top().fixedSize()
     }
+    
+    func horizontalCenter() -> some View {
+        return HStack(spacing: 0) {
+            Spacer()
+            self
+            Spacer()
+        }
+    }
 }

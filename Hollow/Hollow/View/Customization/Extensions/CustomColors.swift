@@ -19,35 +19,45 @@ enum ColorSet: String, Codable {
 extension Color {
     
     fileprivate static func customColor(prefix: String) -> Color {
-        let colorSet = Defaults[.uiColorSet] ?? .thu
+        let colorSet =  Defaults[.uiColorSet] ?? .other
         return Color(prefix + "." + colorSet.rawValue)
     }
     
-    static let hollowContentVoteGradient1 = customColor(prefix: "hollow.content.vote.gradient.1")
+    static var hollowContentVoteGradient1: Color { customColor(prefix: "hollow.content.vote.gradient.1") }
     
-    static let hollowContentVoteGradient2 = customColor(prefix: "hollow.content.vote.gradient.2")
+    static var hollowContentVoteGradient2: Color { customColor(prefix: "hollow.content.vote.gradient.2") }
     
-    static let hollowContentText = customColor(prefix: "hollow.content.text")
+    static var hollowContentText: Color { customColor(prefix: "hollow.content.text") }
     
-    static let background = customColor(prefix: "background")
+    static var background: Color { customColor(prefix: "background") }
     
-    static let hollowCardBackground = customColor(prefix: "hollow.card.background")
+    static var hollowCardBackground: Color { customColor(prefix: "hollow.card.background") }
     
-    static let hollowCardStarUnselected = customColor(prefix: "hollow.card.star.unselected")
+    static var hollowCardStarUnselected: Color { customColor(prefix: "hollow.card.star.unselected") }
     
-    static let hollowCardStarSelected = customColor(prefix: "hollow.card.star.selected")
+    static var hollowCardStarSelected: Color { customColor(prefix: "hollow.card.star.selected") }
 
-    static let mainPageUnselected = customColor(prefix: "main.page.unselected")
+    static var mainPageUnselected: Color { customColor(prefix: "main.page.unselected") }
     
-    static let mainPageSelected = hollowContentText
+    static var mainPageSelected: Color { hollowContentText }
     
-    static let mainSearchBarBackground = customColor(prefix: "main.searchbar.background")
+    static var mainSearchBarBackground: Color { Color("main.searchbar.background") }
     
-    static let mainSearchBarText = mainPageUnselected
+    static var mainSearchBarText: Color { mainPageUnselected }
     
-    static let mainSearchBarStroke = customColor(prefix: "main.searchbar.stroke")
+    static var mainSearchBarStroke: Color { Color("main.searchbar.stroke") }
     
-    static let mainBarButton = mainPageSelected
+    static var mainBarButton: Color { mainPageSelected }
     
-    static let hollowDetailBackground = hollowCardBackground
+    static var hollowDetailBackground: Color { hollowCardBackground }
+    
+    static var buttonGradient1: Color { customColor(prefix: "button.gradient.1") }
+    
+    static var buttonGradient2: Color { customColor(prefix: "button.gradient.2") }
+
+    static var plainButton: Color { hollowContentText }
+    
+    static var searchFill: Color { customColor(prefix: "search.fill") }
+    
+    static var searchButtonBackground: Color { Color("search.button.background") }
 }

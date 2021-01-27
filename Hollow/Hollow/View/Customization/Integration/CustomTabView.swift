@@ -13,14 +13,19 @@ import Foundation
 struct CustomTabView<Content, HashableValue>: View where Content: View, HashableValue: Hashable {
     var selection: Binding<HashableValue>
     let content: () -> Content
+    var ignoreSafeAreaEdges: Edge.Set
     
-    init(selection: Binding<HashableValue>, @ViewBuilder content: @escaping () -> Content) {
+    init(selection: Binding<HashableValue>, ignoreSafeAreaEdges: Edge.Set = .init(), @ViewBuilder content: @escaping () -> Content) {
         self.selection = selection
         self.content = content
+        self.ignoreSafeAreaEdges = ignoreSafeAreaEdges
     }
     
     var body: some View {
-        TabViewRepresentable(content: TabView(selection: selection) { content() }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)))
+        TabViewRepresentable(content:
+                                TabView(selection: selection) { content() }
+                                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                                .edgesIgnoringSafeArea(ignoreSafeAreaEdges))
     }
 }
 

@@ -11,6 +11,9 @@ import SwiftUI
 struct HollowImageView: View {
     @Binding var hollowImage: HollowImage?
     @State private var flash = false
+    @State private var showSavePhotoAlert = false
+    @State private var savePhotoError: String? = nil
+    
     var body: some View {
         Group {
             if let hollowImage = self.hollowImage {
@@ -19,6 +22,24 @@ struct HollowImageView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .animation(.default)
+                        .contentShape(RoundedRectangle(cornerRadius: 4))
+                        .contextMenu(ContextMenu(menuItems: {
+                            Button(action:{
+                                ImageSaver(finishHandler: { error in
+                                    showSavePhotoAlert = true
+                                    savePhotoError = error?.localizedDescription
+                                }).writeToPhotoAlbum(image: image)
+                            }) {
+                                Label(LocalizedStringKey("Save to Library"), systemImage: "square.and.arrow.down")
+                            }
+                        }))
+                        .alert(isPresented: $showSavePhotoAlert, content: {
+                            if let error = savePhotoError {
+                                return Alert(title: Text(error), message: Text(LocalizedStringKey("Please report this error.")))
+                            } else {
+                                return Alert(title: Text("Successfully saved to library."))
+                            }
+                        })
                 } else {
                     Rectangle()
                         .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))

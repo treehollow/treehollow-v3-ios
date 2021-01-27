@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @State private var page: Page = .timeline
-    @State private var isSearching = false
+    @State private var isSearching = true
+    
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
@@ -20,14 +21,22 @@ struct MainView: View {
                 // We use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`, but be careful that this trick could fail in
                 // future updates.
-                CustomTabView(selection: $page) {
+                CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
                     WanderView()
                         .tag(Page.wander)
                     TimelineView()
                         .tag(Page.timeline)
                 }
             }
+            .edgesIgnoringSafeArea(.bottom)
         }
+        .overlay(
+            Group {
+                if isSearching {
+                    SearchView(presented: $isSearching)
+                }
+            }
+        )
     }
     
     enum Page: Int, Identifiable {
@@ -75,7 +84,9 @@ extension MainView {
                 Spacer()
                 Button(action:{
                     // Navigate to search view
-                    isSearching = true
+                    withAnimation(.searchViewTransition) {
+                        isSearching = true
+                    }
                 }) {
                     HStack {
                         Text("Search")
@@ -105,6 +116,7 @@ extension MainView {
                 }
                 
             }
+
         }
     }
 }
