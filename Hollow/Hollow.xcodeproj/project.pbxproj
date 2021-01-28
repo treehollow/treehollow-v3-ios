@@ -54,6 +54,7 @@
 		0E7857ED25B74B340000C659 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7857EC25B74B340000C659 /* Defaults */; };
 		0E7857F225B74BAD0000C659 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */; };
 		0E7F5F9B25C2E5B600D3826C /* ReCAPTCHAWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5F9A25C2E5B600D3826C /* ReCAPTCHAWebView.swift */; };
+		0E7F5F9E25C3169700D3826C /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5F9D25C3169700D3826C /* Register.swift */; };
 		0E813A7325BF29E6000CCF35 /* HollowTimelineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */; };
 		0E8549BF25B3F9AA00E512F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */; };
 		0E8549C125B3F9AA00E512F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549C025B3F9AA00E512F4 /* SceneDelegate.swift */; };
@@ -160,6 +161,7 @@
 		0E78579F25B731280000C659 /* HollowCommentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentContentView.swift; sourceTree = "<group>"; };
 		0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		0E7F5F9A25C2E5B600D3826C /* ReCAPTCHAWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReCAPTCHAWebView.swift; sourceTree = "<group>"; };
+		0E7F5F9D25C3169700D3826C /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCard.swift; sourceTree = "<group>"; };
 		0E8549BB25B3F9AA00E512F4 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE68E7F25C2AB87004F163B /* Login.swift */,
+				0E7F5F9D25C3169700D3826C /* Register.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				0E78578025B58CF60000C659 /* LoginRequest.swift in Sources */,
 				0E78576B25B54BB60000C659 /* AttentionListSearchRequest.swift in Sources */,
 				0E2FE97425BE807F00DC1220 /* CustomGradient.swift in Sources */,
+				0E7F5F9E25C3169700D3826C /* Register.swift in Sources */,
 				0E09EB2525C13A4D00F0A11F /* Blur.swift in Sources */,
 				0E44BBED25BA9DA500B78B30 /* SetPushRequest.swift in Sources */,
 				0E854A3325B43B6C00E512F4 /* HollowImage.swift in Sources */,

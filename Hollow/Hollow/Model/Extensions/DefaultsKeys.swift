@@ -18,4 +18,6 @@ extension Defaults.Keys {
     static let netRequestConst = Key<RequestConstant?>("net.RequestCostant")
     /// Global color set to use
     static let hollowType = Key<HollowType?>("config.hollow.type")
+    /// Hollow config
+    static let hollowConfig = Key<GetConfigRequestResult?>("net.hollow.config")
 }
