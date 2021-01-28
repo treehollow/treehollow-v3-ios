@@ -12,15 +12,22 @@ import Networking
 
 /// config of GetConfig query
 struct GetConfigRequestConfiguration {
-    enum hollowName{
-        case thuhole
-        case pkuhollow
-        case custom
+    enum hollowName {
+        case thuhole,pkuhollow,custom
     }
     /// hollow list
     var hollowName: hollowName
-    /// Other hollow
+    /// custom hollow config
     var customAPIRoot: String?
+    /// configAPIRoot
+    var configUrl: String{
+        switch self.hollowName {
+        case .thuhole:
+            return "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
+        case .pkuhollow: return ""
+        case .custom: return self.customAPIRoot!
+        }
+    }
 }
 
 /// Result of requesting system config. as following
@@ -49,18 +56,11 @@ struct GetConfigRequestResult: Codable {
 
 /// Get Config Request
 class GetConfigRequest{//: Request {
-    var configURL: String
-    required init(configuration: GetConfigRequestConfiguration) {
+    /// published var that UI used
+    @Published var getConfigResult: GetConfigRequestResult?
+    required init(configuration: GetConfigRequestConfiguration){
         /// chose config url
-        switch configuration.hollowName {
-        case .thuhole:
-            configURL = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
-        case .pkuhollow:
-            configURL = ""
-        case .custom:
-            configURL = configuration.customAPIRoot!
-        }
-        let task = URLSession.shared.dataTask(with: URL(string: configURL)!) { data, response, error in
+        let task = URLSession.shared.dataTask(with: URL(string: configuration.configUrl)!) { data, response, error in
             if let error = error {
                 //self.handleClientError(error)
                 /// FIXME: handle error
@@ -83,8 +83,8 @@ class GetConfigRequest{//: Request {
                 let jsonDecoder = JSONDecoder()
                 /// convert Snake Case
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                let getConfigResult: GetConfigRequestResult = try! jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
-                debugPrint(getConfigResult)
+                self.getConfigResult = try! jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
+                debugPrint(self.getConfigResult!)
                 /// getConfigResult stores content
             }
         }
