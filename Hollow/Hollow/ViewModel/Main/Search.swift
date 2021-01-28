@@ -10,8 +10,4 @@ import Combine
 import Foundation
 
 class Search: ObservableObject {
-    @Published var searchText: String = ""
-    @Published var startDate: Date = .init()
-    @Published var endDate: Date = .init()
-    @Published var selectsPartialSearch = false
 }

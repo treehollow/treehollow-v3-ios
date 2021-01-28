@@ -9,19 +9,16 @@
 import SwiftUI
 import Defaults
 
-enum ColorSet: String, Codable {
-    case thu = "thu"
-    case pku = "pku"
-    case other = "other"
-}
+typealias ColorSet = HollowType
 
 /// Color extension for customized colors.
 extension Color {
     
-    fileprivate static func customColor(prefix: String) -> Color {
-        let colorSet =  Defaults[.uiColorSet] ?? .thu
-        return Color(prefix + "." + colorSet.rawValue)
+    static func customColor(prefix: String, colorSet: ColorSet? = nil) -> Color {
+        let colorSet = colorSet ?? (Defaults[.hollowType] ?? .thu)
+        return Color(prefix + "." + colorSet.description)
     }
+    
     
     static var hollowContentVoteGradient1: Color { customColor(prefix: "hollow.content.vote.gradient.1") }
     
@@ -60,4 +57,7 @@ extension Color {
     static var searchFill: Color { customColor(prefix: "search.fill") }
     
     static var searchButtonBackground: Color { Color("search.button.background") }
+    
+    static var loginBackgroundPrimary: Color { Color("login.background.primary") }
+    
 }

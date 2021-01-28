@@ -14,6 +14,10 @@ struct SearchView: View {
     @State private var isSearching = false
     @State private var startPickerPresented = false
     @State private var endPickerPresented = false
+    @State var searchText: String = ""
+    @State var startDate: Date = .init()
+    @State var endDate: Date = .init()
+    @State var selectsPartialSearch = false
     private let transitionAnimation = Animation.searchViewTransition
     var body: some View {
         VStack {
@@ -31,7 +35,7 @@ struct SearchView: View {
                 Spacer()
                 MyButton(action: {}, gradient: .vertical(gradient: .button), transitionAnimation: transitionAnimation) {
                     Text(LocalizedStringKey("Search"))
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.system(size: 12, weight: .semibold))
                         .foregroundColor(.white)
                 }
                 .animation(.none)
@@ -42,7 +46,7 @@ struct SearchView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
-                        TextField(LocalizedStringKey("Search content or tags"), text: $viewModel.searchText, onEditingChanged: { _ in
+                        TextField(LocalizedStringKey("Search content or tags"), text: $searchText, onEditingChanged: { _ in
                             // Toggle `isSearching`
                         }, onCommit: {
                             // Perform search action
@@ -71,7 +75,7 @@ struct SearchView: View {
                 .animation(.none)
                 .leading()
                 if showsAdvancedOptions {
-                    AdvancedOptionsView(startPickerPresented: $startPickerPresented, endPickerPresented: $endPickerPresented, startDate: $viewModel.startDate, endDate: $viewModel.endDate, selectsPartialSearch: $viewModel.selectsPartialSearch)
+                    AdvancedOptionsView(startPickerPresented: $startPickerPresented, endPickerPresented: $endPickerPresented, startDate: $startDate, endDate: $endDate, selectsPartialSearch: $selectsPartialSearch)
                         .padding()
                         .horizontalCenter()
                         .animation(.searchViewTransition)
@@ -113,7 +117,7 @@ extension SearchView {
             Text(isStart ? LocalizedStringKey("Choose the start date") : LocalizedStringKey("Choose the end date"))
                 .bold()
                 .padding(.bottom)
-            DatePicker("", selection: isStart ? $viewModel.startDate : $viewModel.endDate, displayedComponents: .date)
+            DatePicker("", selection: isStart ? $startDate : $endDate, displayedComponents: .date)
                 .datePickerStyle(WheelDatePickerStyle())
                 .horizontalCenter()
                 .labelsHidden()
@@ -167,9 +171,9 @@ extension SearchView {
                     .fontWeight(.semibold)
                     .leading()
                     .padding(.bottom, 5)
-                rangeButton(text: LocalizedStringKey("Partial search"), description: LocalizedStringKey("Hollows only"), selected: selectsPartialSearch)
+                rangeButton(text: LocalizedStringKey("Partial"), description: LocalizedStringKey("Hollows only"), selected: selectsPartialSearch, isPartial: true)
                     .padding(.bottom, 5)
-                rangeButton(text: LocalizedStringKey("Global search"), description: LocalizedStringKey("Hollows and comments"), selected: !selectsPartialSearch)
+                rangeButton(text: LocalizedStringKey("Global"), description: LocalizedStringKey("Hollows and comments"), selected: !selectsPartialSearch, isPartial: false)
             }
         }
         
@@ -189,10 +193,10 @@ extension SearchView {
             .animation(.none)
         }
         
-        private func rangeButton(text: LocalizedStringKey, description: LocalizedStringKey, selected: Bool) -> some View {
+        private func rangeButton(text: LocalizedStringKey, description: LocalizedStringKey, selected: Bool, isPartial: Bool) -> some View {
             return Button(action: {
                 withAnimation {
-                    selectsPartialSearch.toggle()
+                    selectsPartialSearch = isPartial
                 }
             }) {
                 HStack {

@@ -11,7 +11,7 @@ import SwiftUI
 struct MyButton<Content>: View where Content: View {
     var action: () -> Void
     var gradient: LinearGradient
-    var transitionAnimation = Animation.easeInOut
+    var transitionAnimation: Animation? = nil
     var content: () -> Content
     var body: some View {
         Button(action: action) {

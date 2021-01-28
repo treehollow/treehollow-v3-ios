@@ -1,4 +1,4 @@
-# /ViewModel/Types
+# /Model/Data
 
 ## Contents
 This folder contains files that defines what types that ViewModels directly use, generating from the results (see `/Model/Net`).
