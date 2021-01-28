@@ -34,11 +34,7 @@ struct HollowImageView: View {
                             }
                         }))
                         .alert(isPresented: $showSavePhotoAlert, content: {
-                            if let error = savePhotoError {
-                                return Alert(title: Text(error), message: Text(LocalizedStringKey("Please report this error.")))
-                            } else {
-                                return Alert(title: Text("Successfully saved to library."))
-                            }
+                            return Alert(title: Text(savePhotoError?.description ?? NSLocalizedString("Successfully saved to library", comment: "")))
                         })
                 } else {
                     Rectangle()

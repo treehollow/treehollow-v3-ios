@@ -19,7 +19,7 @@ enum ColorSet: String, Codable {
 extension Color {
     
     fileprivate static func customColor(prefix: String) -> Color {
-        let colorSet =  Defaults[.uiColorSet] ?? .other
+        let colorSet =  Defaults[.uiColorSet] ?? .thu
         return Color(prefix + "." + colorSet.rawValue)
     }
     

@@ -57,19 +57,19 @@ fileprivate class TabViewUIHostingController<Content>: UIHostingController<Conte
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         if ready { return } // avoid running more than once
         ready = true
         view.backgroundColor = nil
         setHostingScrollViews(for: view)
-        super.viewDidAppear(animated)
     }
     
     private func setHostingScrollViews(for view: UIView) {
-        // FIXME: WARNING: This code could fail after system update!
+        // WARNING: This code could fail after system update!
         guard let HostingScrollView: AnyClass = NSClassFromString("SwiftUI.HostingScrollView") else { return }
         for subView in view.subviews {
             if subView.isKind(of: HostingScrollView) {
-                print(view, "\n")
                 view.backgroundColor = nil
             }
             setHostingScrollViews(for: subView)

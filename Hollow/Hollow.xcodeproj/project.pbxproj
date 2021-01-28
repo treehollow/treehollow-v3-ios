@@ -102,6 +102,8 @@
 		0EBB372A25BFDA840060A62A /* TestCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB372925BFDA840060A62A /* TestCommentData.swift */; };
 		0EF16D3625C0565A00B63833 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3525C0565A00B63833 /* CustomTabView.swift */; };
 		0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3C25C0760900B63833 /* ImageSaver.swift */; };
+		0EFCFCFA25C1B0D40091EC04 /* View+divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCFCF925C1B0D40091EC04 /* View+divider.swift */; };
+		0EFCFD0025C24E130091EC04 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCFCFF25C24E130091EC04 /* Search.swift */; };
 		0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */; };
 /* End PBXBuildFile section */
 
@@ -204,6 +206,8 @@
 		0EBB372925BFDA840060A62A /* TestCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCommentData.swift; sourceTree = "<group>"; };
 		0EF16D3525C0565A00B63833 /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		0EF16D3C25C0760900B63833 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		0EFCFCF925C1B0D40091EC04 /* View+divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+divider.swift"; sourceTree = "<group>"; };
+		0EFCFCFF25C24E130091EC04 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		0EFF4AE025BAA5F900D240BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +230,7 @@
 			children = (
 				0E9F26CF25BEC1E100CA56DE /* Timeline.swift */,
 				0E56901E25C006A7003C70D6 /* Wander.swift */,
+				0EFCFCFF25C24E130091EC04 /* Search.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -539,6 +544,7 @@
 				0E9F26BA25BE9B7300CA56DE /* CustomFont.swift */,
 				0E9F26BE25BE9D8800CA56DE /* Int+string.swift */,
 				0EA59D4525C165610070649B /* CustomAnimations.swift */,
+				0EFCFCF925C1B0D40091EC04 /* View+divider.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -725,6 +731,7 @@
 				0E2FE97125BE799200DC1220 /* CustomColors.swift in Sources */,
 				0E854A1F25B3FB9200E512F4 /* HollowCommentInputPreviewView.swift in Sources */,
 				0E56901625C001E8003C70D6 /* HollowButton.swift in Sources */,
+				0EFCFD0025C24E130091EC04 /* Search.swift in Sources */,
 				0E9F26C325BEB25D00CA56DE /* HollowHeaderView.swift in Sources */,
 				0E8549E825B3FA7A00E512F4 /* SearchView.swift in Sources */,
 				0E8549F925B3FAC800E512F4 /* HollowCiteContentView.swift in Sources */,
@@ -744,6 +751,7 @@
 				0E78575525B535130000C659 /* ReportCommentRequest.swift in Sources */,
 				0E78572525B498000000C659 /* Post.swift in Sources */,
 				0E854A4125B4771700E512F4 /* AccountCreationRequest.swift in Sources */,
+				0EFCFCFA25C1B0D40091EC04 /* View+divider.swift in Sources */,
 				0E9F26BB25BE9B7300CA56DE /* CustomFont.swift in Sources */,
 				0E854A1825B3FB6B00E512F4 /* HollowInputPreviewView.swift in Sources */,
 				0E854A0B25B3FB3300E512F4 /* HollowDetailView.swift in Sources */,
@@ -952,7 +960,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Hollow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -974,7 +982,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Hollow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var page: Page = .timeline
-    @State private var isSearching = false
+    @State private var isSearching = true
     
     var body: some View {
         ZStack {
