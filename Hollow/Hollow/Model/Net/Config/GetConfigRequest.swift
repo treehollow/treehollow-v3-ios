@@ -12,21 +12,28 @@ import Networking
 
 /// config of GetConfig query
 struct GetConfigRequestConfiguration {
-    enum hollowName {
-        case thuhole,pkuhollow,custom
+    enum hollowName: String {
+        case thuhole, pkuhollow, custom
     }
     /// hollow list
     var hollowName: hollowName
     /// custom hollow config
     var customAPIRoot: String?
     /// configAPIRoot
-    var configUrl: String{
+    var configUrl: String {
         switch self.hollowName {
         case .thuhole:
             return "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
         case .pkuhollow: return ""
         case .custom: return self.customAPIRoot!
         }
+    }
+    
+    init?(hollowName: hollowName, customAPIRoot: String?) {
+        // If using custom config without valid APIRoot, return nil
+        if hollowName == .custom && customAPIRoot == nil { return nil }
+        self.hollowName = hollowName
+        self.customAPIRoot = customAPIRoot
     }
 }
 
@@ -51,41 +58,58 @@ struct GetConfigRequestResult: Codable {
     var imgBaseUrlBak: String
     var websocketUrl: String
     var iosFrontendVersion: String
-    // FIXME: existing ios frontend version
 }
 
 /// Get Config Request
-class GetConfigRequest{//: Request {
-    /// published var that UI used
-    @Published var getConfigResult: GetConfigRequestResult?
-    required init(configuration: GetConfigRequestConfiguration){
-        /// chose config url
+struct GetConfigRequest: Request {
+    typealias Configuration = GetConfigRequestConfiguration
+    typealias Result = GetConfigRequestResult
+    typealias ResultData = Result   // same as the result
+
+    var configuration: GetConfigRequestConfiguration
+    var resultHandler: (GetConfigRequestResult) -> Void
+    
+    init(configuration: GetConfigRequestConfiguration, resultHandler: @escaping (GetConfigRequestResult) -> Void) {
+        self.configuration = configuration
+        self.resultHandler = resultHandler
+        // Not performing request here, let the view model initiate
+        // the request using `performRequest` instead.
+    }
+    
+    func performRequest() {
+        // TODO: chose config url
         let task = URLSession.shared.dataTask(with: URL(string: configuration.configUrl)!) { data, response, error in
             if let error = error {
-                //self.handleClientError(error)
-                /// FIXME: handle error
+                // Can this be implemented into `Request`?
+//                 self.handleClientError(error)
+                // FIXME: handle error
                 debugPrint(error)
                 return
-                }
+            }
             guard let httpResponse = response as? HTTPURLResponse,
-                    (200...299).contains(httpResponse.statusCode) else {
-                //self.handleServerError(response)
-                /// FIXME : handle server error
-                debugPrint(response!)
+                  (200...299).contains(httpResponse.statusCode) else {
+                // self.handleServerError(response)
+                // FIXME : handle server error
+                debugPrint(response!)   // Why `!` here? What if it's nil?
                 return
-                }
+            }
             if let mimeType = httpResponse.mimeType, mimeType == "text/plain",
-                let data = data,
-                let string = String(data: data, encoding: .utf8) {
-                ///-----BEGIN TREEHOLLOW CONFIG-----
-                ///-----END TREEHOLLOW CONFIG-----
-                let apiInfo = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")[0].data(using: .utf8)!
+               let data = data,
+               let string = String(data: data, encoding: .utf8) {
+                // -----BEGIN TREEHOLLOW CONFIG-----
+                // -----END TREEHOLLOW CONFIG-----
+                let apiInfo = string
+                    .components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")[1]
+                    .components(separatedBy: "-----END TREEHOLLOW CONFIG-----")[0]
+                    .data(using: .utf8)!
                 let jsonDecoder = JSONDecoder()
-                /// convert Snake Case
+                // convert Snake Case
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                self.getConfigResult = try! jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
-                debugPrint(self.getConfigResult!)
-                /// getConfigResult stores content
+                // TODO: Handle error
+                let result = try! jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
+                debugPrint(result)
+                // Call the callback
+                self.resultHandler(result)
             }
         }
         task.resume()

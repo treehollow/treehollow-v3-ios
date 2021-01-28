@@ -237,16 +237,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		0E44BBDA25B9E7B300B78B30 /* Types */ = {
-			isa = PBXGroup;
-			children = (
-				0E44BBDB25B9E7BF00B78B30 /* README.md */,
-				0E44BBDD25BA7F4400B78B30 /* PostData.swift */,
-				0E44BBE025BA803600B78B30 /* CommentData.swift */,
-			);
-			path = Types;
-			sourceTree = "<group>";
-		};
 		0E44BBE325BA82C600B78B30 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,7 +269,6 @@
 		0E78577225B582FE0000C659 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0E44BBDA25B9E7B300B78B30 /* Types */,
 				0E28124225B7F20E00DCF78D /* Main */,
 				0E78578225B58F9E0000C659 /* Hollow */,
 				0E78577725B5894F0000C659 /* Login */,
@@ -324,6 +313,9 @@
 		0E78579325B6DC1F0000C659 /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				0E44BBDB25B9E7BF00B78B30 /* README.md */,
+				0E44BBE025BA803600B78B30 /* CommentData.swift */,
+				0E44BBDD25BA7F4400B78B30 /* PostData.swift */,
 				0E854A3225B43B6B00E512F4 /* HollowImage.swift */,
 			);
 			path = Types;

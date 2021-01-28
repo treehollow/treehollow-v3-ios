@@ -14,14 +14,16 @@ protocol Request {
     associatedtype Configuration
     /// Result type for the request, get directly from the server.
     associatedtype Result
-    /// Type for data that view models use (see`/ViewModel/Types`), can be the same as `Result`
-    /// ~~for async request it returns a publisher~~
-    /// It is the type for the associated `Output` type of the publisher.
+    /// Type for data that view models use (see`/ViewModel/Types`).
+    /// For example, for `Timeline`, `ResultData = [PostData]`
     associatedtype ResultData
     /// Configuration for the request, set via initializer.
     var configuration: Configuration { get }
+    /// Handler to call after finish fetching data.
+    var resultHandler: (ResultData) -> Void { get }
     /// - parameter configuration: Configuration for the request.
-    init(configuration: Configuration)
-    
-    // TODO: API for returning a publisher
+    /// - parameter resultHandler: Handler for handling the data that the request returns.
+    init(configuration: Configuration, resultHandler: @escaping (ResultData) -> Void)
+    /// Perform request and fetch the data, not initiating by the request itself.
+    func performRequest()
 }

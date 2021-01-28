@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Data wrapper representing a single post.
 struct PostData: Identifiable {
     // Identifiable protocol
     var id: Int { return postId }

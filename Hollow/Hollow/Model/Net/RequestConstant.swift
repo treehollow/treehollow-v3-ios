@@ -10,14 +10,15 @@ import Foundation
 import Defaults
 
 /// Request Constant helper class
-class RequestCostant: Codable {
+struct RequestConstant: Codable {
     var apiRoot: String?
     var urlSuffix: String?
     /// - parameter apiroot: apiroot .
     /// - parameter appVersion: appversion like 1.2.3
-    init(apiroot: String, appVersion: String) {
+    init(apiroot: String) {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         self.apiRoot = apiroot
-        /// `device=2` for IOS
+        // `device=2` for iOS
         self.urlSuffix = "?v=v\(appVersion)&device=2"
     }
 }
