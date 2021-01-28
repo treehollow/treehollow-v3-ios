@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Networking",
+        "repositoryURL": "https://github.com/3lvis/Networking",
+        "state": {
+          "branch": null,
+          "revision": "dde4d21fcc774d988da1f842bc4582ce7f9593c2",
+          "version": "5.1.0"
+        }
+      },
+      {
         "package": "WaterfallGrid",
         "repositoryURL": "https://github.com/paololeonardi/WaterfallGrid.git",
         "state": {

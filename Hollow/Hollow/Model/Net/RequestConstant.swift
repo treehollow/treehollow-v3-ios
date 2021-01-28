@@ -10,7 +10,7 @@ import Foundation
 import Defaults
 
 /// Request Constant helper class
-class RequestCostant: Encodable,Decodable {
+class RequestCostant: Codable {
     var apiRoot: String?
     var urlSuffix: String?
     /// - parameter apiroot: apiroot .
