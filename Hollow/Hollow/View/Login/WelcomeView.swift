@@ -9,7 +9,7 @@ import SwiftUI
 import Defaults
 
 struct WelcomeView: View {
-    @ObservedObject var viewModel: Login = .init()
+    @ObservedObject var viewModel: Welcome = .init()
     @State private var selection: Int? = nil
     var body: some View {
         NavigationView {

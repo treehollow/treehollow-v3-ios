@@ -24,7 +24,7 @@ struct ReCAPTCHAWebView: UIViewRepresentable {
         // FIXME: Load url in defaults
         webView.load(URLRequest(url: URL(string: "https://id.thuhole.com/recaptcha/")!))
         webView.navigationDelegate = context.coordinator
-//        webView.redire
+        
         return webView
     }
     
@@ -48,6 +48,7 @@ struct ReCAPTCHAWebView: UIViewRepresentable {
                 if let urlString = navigationAction.request.url?.absoluteString, let range = urlString.range(of: "recaptcha_token=") {
                     let key = urlString[range.upperBound...]
                     parent.successHandler(String(key))
+                    webView.stopLoading()
                 }
             }
             decisionHandler(.allow)

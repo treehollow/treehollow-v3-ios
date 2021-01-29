@@ -17,13 +17,16 @@ protocol Request {
     /// Type for data that view models use (see`/ViewModel/Types`).
     /// For example, for `Timeline`, `ResultData = [PostData]`
     associatedtype ResultData
+    /// Request error comforming to `RequestError` protocol
+    associatedtype Error: RequestError
     /// Configuration for the request, set via initializer.
     var configuration: Configuration { get }
-    /// Handler to call after finish fetching data.
-    var resultHandler: (ResultData) -> Void { get }
     /// - parameter configuration: Configuration for the request.
-    /// - parameter resultHandler: Handler for handling the data that the request returns.
-    init(configuration: Configuration, resultHandler: @escaping (ResultData) -> Void)
-    /// Perform request and fetch the data, not initiating by the request itself.
-    func performRequest()
+    init(configuration: Configuration)
+    /// Perform request and fetch the data.
+    func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
+}
+
+protocol RequestError: Error {
+    var description: String { get }
 }

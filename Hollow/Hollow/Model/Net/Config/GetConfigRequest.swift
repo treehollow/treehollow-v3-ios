@@ -12,27 +12,24 @@ import Networking
 
 /// config of GetConfig query
 struct GetConfigRequestConfiguration {
-    enum hollowName: String {
-        case thuhole, pkuhollow, custom
-    }
     /// hollow list
-    var hollowName: hollowName
+    var hollowType: HollowType
     /// custom hollow config
     var customAPIRoot: String?
     /// configAPIRoot
     var configUrl: String {
-        switch self.hollowName {
-        case .thuhole:
+        switch self.hollowType {
+        case .thu:
             return "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
-        case .pkuhollow: return ""
-        case .custom: return self.customAPIRoot!
+        case .pku: return ""
+        case .other: return self.customAPIRoot!
         }
     }
     
-    init?(hollowName: hollowName, customAPIRoot: String?) {
+    init?(hollowType: HollowType, customAPIRoot: String?) {
         // If using custom config without valid APIRoot, return nil
-        if hollowName == .custom && customAPIRoot == nil { return nil }
-        self.hollowName = hollowName
+        if hollowType == .other && customAPIRoot == nil { return nil }
+        self.hollowType = hollowType
         self.customAPIRoot = customAPIRoot
     }
 }
@@ -65,25 +62,38 @@ struct GetConfigRequest: Request {
     typealias Configuration = GetConfigRequestConfiguration
     typealias Result = GetConfigRequestResult
     typealias ResultData = Result   // same as the result
-
-    var configuration: GetConfigRequestConfiguration
-    var resultHandler: (GetConfigRequestResult) -> Void
+    typealias Error = GetConfigRequestError
     
-    init(configuration: GetConfigRequestConfiguration, resultHandler: @escaping (GetConfigRequestResult) -> Void) {
+    enum GetConfigRequestError: RequestError {
+        case serverError
+        case decodeFailed
+        case incorrectFormat
+        case other(description: String)
+        
+        var description: String {
+            switch self {
+            case .serverError: return "Server error"
+            case .decodeFailed: return "Decode failed"
+            case .incorrectFormat: return "Incorrect config format"
+            case .other(let description): return description
+            }
+        }
+    }
+    
+    var configuration: GetConfigRequestConfiguration
+    
+    init(configuration: GetConfigRequestConfiguration) {
         self.configuration = configuration
-        self.resultHandler = resultHandler
         // Not performing request here, let the view model initiate
         // the request using `performRequest` instead.
     }
     
-    func performRequest() {
+    func performRequest(completion: @escaping (ResultData?, GetConfigRequestError?) -> Void) {
         // TODO: chose config url
         let task = URLSession.shared.dataTask(with: URL(string: configuration.configUrl)!) { data, response, error in
             if let error = error {
-                // Can this be implemented into `Request`?
-//                 self.handleClientError(error)
-                // FIXME: handle error
                 debugPrint(error)
+                completion(nil, .other(description: error.localizedDescription))
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
@@ -91,26 +101,39 @@ struct GetConfigRequest: Request {
                 // self.handleServerError(response)
                 // FIXME : handle server error
                 debugPrint(response!)   // Why `!` here? What if it's nil?
+                completion(nil, GetConfigRequestError.serverError)
                 return
             }
-            if let mimeType = httpResponse.mimeType, mimeType == "text/plain",
-               let data = data,
-               let string = String(data: data, encoding: .utf8) {
-                // -----BEGIN TREEHOLLOW CONFIG-----
-                // -----END TREEHOLLOW CONFIG-----
-                let apiInfo = string
-                    .components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")[1]
-                    .components(separatedBy: "-----END TREEHOLLOW CONFIG-----")[0]
-                    .data(using: .utf8)!
-                let jsonDecoder = JSONDecoder()
-                // convert Snake Case
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                // TODO: Handle error
-                let result = try! jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
-                debugPrint(result)
-                // Call the callback
-                self.resultHandler(result)
+            guard let mimeType = httpResponse.mimeType, mimeType == "text/plain",
+                  let data = data,
+                  let string = String(data: data, encoding: .utf8) else {
+                completion(nil, .incorrectFormat)
+                return
             }
+            // -----BEGIN TREEHOLLOW CONFIG-----
+            // -----END TREEHOLLOW CONFIG-----
+            let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
+            if components1.count == 2 {
+                let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")
+                if component2.count == 1, let apiInfo = component2[0].data(using: .utf8) {
+                    // match the format, then process it
+                    let jsonDecoder = JSONDecoder()
+                    // convert Snake Case
+                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    do {
+                        let result = try jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
+                        debugPrint(result)
+                        // Call the callback
+                        completion(result, nil)
+                    } catch {
+                        completion(nil, .decodeFailed)
+                    }
+                    return
+                }
+                
+            }
+            // Cannot match the format
+            completion(nil, .incorrectFormat)
         }
         task.resume()
     }
