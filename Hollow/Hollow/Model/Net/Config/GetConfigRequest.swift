@@ -98,7 +98,6 @@ struct GetConfigRequest: Request {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                debugPrint(error)
                 completion(nil, .other(description: error.localizedDescription))
                 return
             }
@@ -119,14 +118,13 @@ struct GetConfigRequest: Request {
             let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
             if components1.count == 2 {
                 let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")
-                if component2.count == 1, let apiInfo = component2[0].data(using: .utf8) {
+                if component2.count >= 1, let apiInfo = component2[0].data(using: .utf8) {
                     // finally match the format, then process it
                     let jsonDecoder = JSONDecoder()
                     // convert Snake Case
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
                         let result = try jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
-                        debugPrint(result)
                         // Call the callback
                         completion(result, nil)
                     } catch {

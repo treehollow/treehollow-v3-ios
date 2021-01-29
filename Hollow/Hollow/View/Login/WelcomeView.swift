@@ -10,7 +10,6 @@ import Defaults
 
 struct WelcomeView: View {
     @ObservedObject var viewModel: Welcome = .init()
-    @State private var selection: Int? = nil
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -25,51 +24,68 @@ struct WelcomeView: View {
                         .padding(.top, 70)
                         .padding(.bottom, 20)
                     NavigationLink(
-                        destination: Text(selection?.string ?? ""),
-                        tag: 1,
-                        selection: $selection) {
+                        destination: Text(viewModel.hollowSelection?.string ?? ""),
+                        tag: HollowType.thu.rawValue,
+                        selection: $viewModel.hollowSelection) {
                         MyButton(action: {
                             Defaults[.hollowType] = .thu
-                            selection = 1
+                            // Set to nil before request to avoid conflict
+                            Defaults[.hollowConfig] = nil
+                            viewModel.requestConfig(hollowType: .thu)
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
                             Text("T大树洞")
                                 .selectHollowButton()
                         }
                         }
                     NavigationLink(
-                        destination: Text(selection?.string ?? ""),
-                        tag: 2,
-                        selection: $selection) {
+                        destination: Text(viewModel.hollowSelection?.string ?? ""),
+                        tag: HollowType.pku.rawValue,
+                        selection: $viewModel.hollowSelection) {
                         MyButton(action: {
                             Defaults[.hollowType] = .pku
-                            selection = 2
+                            // Set to nil before request to avoid conflict
+                            Defaults[.hollowConfig] = nil
+                            viewModel.requestConfig(hollowType: .pku)
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
-                            Text("未名树洞")
-                                .selectHollowButton()
+                            HStack(spacing: 0) {
+                                Text("未名树洞")
+                                    .selectHollowButton()
+                            }
                         }
                         }
 
                     NavigationLink(
-                        destination: Text(selection?.string ?? ""),
-                        tag: 3,
-                        selection: $selection) {
+                        destination: Text(viewModel.hollowSelection?.string ?? ""),
+                        tag: HollowType.other.rawValue,
+                        selection: $viewModel.hollowSelection) {
                         MyButton(action: {
                             Defaults[.hollowType] = .other
-                            selection = 3
+                            viewModel.hollowSelection = HollowType.other.rawValue
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
                             Text(LocalizedStringKey("Others"))
                                 .selectHollowButton()
                         }
                         }
                     Spacer()
+                    if viewModel.isLoadingConfig {
+                        Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
+                            .padding()
+                    }
                     Text(LocalizedStringKey("Email authentication is required"))
                         .font(.footnote)
                         .padding(.vertical, 5)
                         .layoutPriority(1)
                 }
             }
+            // Disable the buttons when loading congif
+            .disabled(viewModel.isLoadingConfig)
             .background(Color("background.other").edgesIgnoringSafeArea(.all))
             .navigationTitle(LocalizedStringKey("Welcome"))
+            // Show alert on receiving error
+            .alert(isPresented: .constant(viewModel.errorMessage != nil)) {
+                // We should restore the error message after presenting the alert
+                Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
+            }
         }
     }
     

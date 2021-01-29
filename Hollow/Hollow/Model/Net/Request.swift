@@ -15,11 +15,11 @@ protocol Request {
     /// Result type for the request, get directly from the server.
     associatedtype Result
     /// Type for data that view models use (see`/ViewModel/Types`).
-    /// For example, for `Timeline`, `ResultData = [PostData]`
     associatedtype ResultData
     /// Request error comforming to `RequestError` protocol
     associatedtype Error: RequestError
     /// Configuration for the request, set via initializer.
+    
     var configuration: Configuration { get }
     /// - parameter configuration: Configuration for the request.
     init(configuration: Configuration)

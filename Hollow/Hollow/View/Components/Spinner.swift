@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct Spinner: View {
+    
     @State var progress: Double = 0.6
     @State var isLoading = false
     var color: Color

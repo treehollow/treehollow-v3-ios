@@ -11,7 +11,9 @@ import Foundation
 enum HollowType: Int, Hashable, Identifiable, Codable {
     var id: Int { rawValue }
     
-    case thu, pku, other
+    case thu = 1
+    case pku = 2
+    case other = 3
     var description: String {
         switch self {
         case .thu: return "thu"
