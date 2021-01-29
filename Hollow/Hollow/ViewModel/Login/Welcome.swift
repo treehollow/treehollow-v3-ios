@@ -21,13 +21,13 @@ class Welcome: ObservableObject {
         request.performRequest { result, error in
             if let error = error {
                 debugPrint(error.description)
-                switch error {
-                // TODO: do something
-                case .decodeFailed:
-                    break
-                case .serverError:
-                    break
-                }
+//                switch error {
+//                // TODO: do something
+//                case .decodeFailed:
+//                    break
+//                case .serverError:
+//                    break
+//                }
                 return
             } else {
                 self.config = result!
