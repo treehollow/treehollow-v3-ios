@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Networking
 
 /// Configurations for email check
 struct EmailCheckRequestConfiguration {
@@ -21,6 +22,8 @@ struct EmailCheckRequestConfiguration {
     var oldToken: String?
     /// Info of `reCAPTCHA`, optional
     var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
+    /// constant used for http request
+    var requestConst: GetConfigRequestResult
 }
 
 /// Result of email checking.
@@ -45,3 +48,17 @@ struct EmailCheckRequestResult {
     /// Error message, if error occured.
     var message: String?
 }
+//
+//class EmailCheckRequest: Request{
+//    typealias Configuration = EmailCheckRequestConfiguration
+//    typealias Result = EmailCheckRequestResult
+//    typealias ResultData = Result
+//    typealias Error = EmailCheckRequestError
+//    enum EmailCheckRequestError: RequestError{
+//    }
+//    var configuration: EmailCheckRequestConfiguration
+//    required init(configuration: EmailCheckRequestConfiguration) {
+//        self.configuration = configuration
+//    }
+//
+//}

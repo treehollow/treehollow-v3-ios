@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */; };
-		009FDD6125BDAB5D003E3443 /* RequestConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FDD6025BDAB5D003E3443 /* RequestConstant.swift */; };
 		00FEE00F25C19D4E00BB3403 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 00FEE00E25C19D4E00BB3403 /* Networking */; };
 		0E09EB2525C13A4D00F0A11F /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2425C13A4D00F0A11F /* Blur.swift */; };
 		0E09EB2E25C1412E00F0A11F /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2D25C1412E00F0A11F /* MyButton.swift */; };
@@ -115,7 +114,6 @@
 
 /* Begin PBXFileReference section */
 		000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedHTTPRequest.swift; sourceTree = "<group>"; };
-		009FDD6025BDAB5D003E3443 /* RequestConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConstant.swift; sourceTree = "<group>"; };
 		0E09EB2425C13A4D00F0A11F /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0E09EB2D25C1412E00F0A11F /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		0E28125025B7FC5600DCF78D /* ViewLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayouts.swift; sourceTree = "<group>"; };
@@ -582,7 +580,6 @@
 			isa = PBXGroup;
 			children = (
 				0E78578F25B5EC3A0000C659 /* Request.swift */,
-				009FDD6025BDAB5D003E3443 /* RequestConstant.swift */,
 				0E78578A25B5D8A60000C659 /* Config */,
 				0E854A4F25B4857700E512F4 /* Security */,
 				0E854A5025B485AA00E512F4 /* Contents */,
@@ -746,7 +743,6 @@
 				0E854A2225B3FBEE00E512F4 /* AccountInfoView.swift in Sources */,
 				0E78578C25B5D8E80000C659 /* GetConfigRequest.swift in Sources */,
 				0EBB372525BFD9BD0060A62A /* TestPostData.swift in Sources */,
-				009FDD6125BDAB5D003E3443 /* RequestConstant.swift in Sources */,
 				0E2FE97125BE799200DC1220 /* CustomColors.swift in Sources */,
 				0E854A1F25B3FB9200E512F4 /* HollowCommentInputPreviewView.swift in Sources */,
 				0E56901625C001E8003C70D6 /* HollowButton.swift in Sources */,
@@ -981,6 +977,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Hollow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1003,6 +1000,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Hollow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Defaults
-import Networking
 
 /// config of GetConfig query
 struct GetConfigRequestConfiguration {
@@ -55,6 +53,7 @@ struct GetConfigRequestResult: Codable {
     var imgBaseUrlBak: String
     var websocketUrl: String
     var iosFrontendVersion: String
+    var urlSuffix: String?
 }
 
 /// Get Config Request
@@ -119,13 +118,16 @@ struct GetConfigRequest: Request {
             let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
             if components1.count == 2 {
                 let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")
-                if component2.count == 1, let apiInfo = component2[0].data(using: .utf8) {
+                if component2.count >= 1, let apiInfo = component2[0].data(using: .utf8) {
                     // finally match the format, then process it
                     let jsonDecoder = JSONDecoder()
                     // convert Snake Case
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
-                        let result = try jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
+                        var result = try jsonDecoder.decode(GetConfigRequestResult.self, from: apiInfo)
+                        // Add urlSuffix for using
+                        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                        result.urlSuffix = "?v=v\(appVersion)&device=2"
                         debugPrint(result)
                         // Call the callback
                         completion(result, nil)

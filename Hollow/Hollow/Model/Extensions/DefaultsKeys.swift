@@ -14,8 +14,6 @@ import Defaults
 /// `static let imageBaseURL = Key<String?>("image.base.url")`
 /// Remember to register the initial value before any call to fetch the data.
 extension Defaults.Keys {
-    /// Request API Constants
-    static let netRequestConst = Key<RequestConstant?>("net.RequestCostant")
     /// Global color set to use
     static let hollowType = Key<HollowType?>("config.hollow.type")
     /// Hollow config
