@@ -68,6 +68,7 @@ struct GetConfigRequest: Request {
         case serverError
         case decodeFailed
         case incorrectFormat
+        case invalidConfigUrl
         case other(description: String)
         
         var description: String {
@@ -75,6 +76,7 @@ struct GetConfigRequest: Request {
             case .serverError: return "Server error"
             case .decodeFailed: return "Decode failed"
             case .incorrectFormat: return "Incorrect config format"
+            case .invalidConfigUrl: return "Invalid config url"
             case .other(let description): return description
             }
         }
@@ -89,34 +91,36 @@ struct GetConfigRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultData?, GetConfigRequestError?) -> Void) {
-        // TODO: chose config url
-        let task = URLSession.shared.dataTask(with: URL(string: configuration.configUrl)!) { data, response, error in
+        guard let url = URL(string: configuration.configUrl) else {
+            completion(nil, .invalidConfigUrl)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 debugPrint(error)
                 completion(nil, .other(description: error.localizedDescription))
                 return
             }
+            
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                // self.handleServerError(response)
-                // FIXME : handle server error
-                debugPrint(response!)   // Why `!` here? What if it's nil?
                 completion(nil, GetConfigRequestError.serverError)
                 return
             }
+            
             guard let mimeType = httpResponse.mimeType, mimeType == "text/plain",
                   let data = data,
                   let string = String(data: data, encoding: .utf8) else {
                 completion(nil, .incorrectFormat)
                 return
             }
-            // -----BEGIN TREEHOLLOW CONFIG-----
-            // -----END TREEHOLLOW CONFIG-----
+            
             let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
             if components1.count == 2 {
                 let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")
                 if component2.count == 1, let apiInfo = component2[0].data(using: .utf8) {
-                    // match the format, then process it
+                    // finally match the format, then process it
                     let jsonDecoder = JSONDecoder()
                     // convert Snake Case
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -132,6 +136,7 @@ struct GetConfigRequest: Request {
                 }
                 
             }
+            
             // Cannot match the format
             completion(nil, .incorrectFormat)
         }
