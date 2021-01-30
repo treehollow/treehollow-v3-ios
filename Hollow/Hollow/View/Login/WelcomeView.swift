@@ -35,8 +35,7 @@ struct WelcomeView: View {
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
                             Text("T大树洞")
                                 .selectHollowButton()
-                        }
-                        }
+                        }}
                     NavigationLink(
                         destination: Text(viewModel.hollowSelection?.string ?? ""),
                         tag: HollowType.pku.rawValue,
@@ -47,12 +46,9 @@ struct WelcomeView: View {
                             Defaults[.hollowConfig] = nil
                             viewModel.requestConfig(hollowType: .pku)
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
-                            HStack(spacing: 0) {
-                                Text("未名树洞")
-                                    .selectHollowButton()
-                            }
-                        }
-                        }
+                            Text("未名树洞")
+                                .selectHollowButton()
+                        }}
 
                     NavigationLink(
                         destination: Text(viewModel.hollowSelection?.string ?? ""),
@@ -64,8 +60,7 @@ struct WelcomeView: View {
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
                             Text(LocalizedStringKey("Others"))
                                 .selectHollowButton()
-                        }
-                        }
+                        }}
                     Spacer()
                     if viewModel.isLoadingConfig {
                         Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
@@ -77,7 +72,7 @@ struct WelcomeView: View {
                         .layoutPriority(1)
                 }
             }
-            // Disable the buttons when loading congif
+            // Disable the buttons when loading config
             .disabled(viewModel.isLoadingConfig)
             .background(Color("background.other").edgesIgnoringSafeArea(.all))
             .navigationTitle(LocalizedStringKey("Welcome"))

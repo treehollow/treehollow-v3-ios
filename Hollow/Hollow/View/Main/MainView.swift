@@ -14,7 +14,6 @@ struct MainView: View {
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
-            // FIXME: Bottom safe area
             VStack {
                 HeaderView(page: $page, isSearching: $isSearching)
                     .padding(.horizontal)

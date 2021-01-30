@@ -38,8 +38,8 @@ extension RegisterView {
                     Image(systemName: "xmark")
                         .foregroundColor(.plainButton)
                         .padding(.bottom)
-                        .leading()
                 }
+                .leading()
                 ReCAPTCHAWebView(onFinishLoading: {
                     withAnimation {
                         pageLoadingFinish = true
