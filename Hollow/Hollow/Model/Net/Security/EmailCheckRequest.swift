@@ -80,6 +80,7 @@ struct EmailCheckRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultData?, EmailCheckRequestError?) -> Void) {
+        // manually assigned parameter. better if it can be initialized automatically
         let parameters = ["email" : self.configuration.email]
         let urlPath = self.configuration.hollowConfig.apiRoot + "/v3/security/login/check_email" + self.configuration.hollowConfig.urlSuffix!
         // URL must be leagle !
