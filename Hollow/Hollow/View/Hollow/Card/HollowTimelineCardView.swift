@@ -68,7 +68,7 @@ struct HollowTimelineCardView: View {
 struct HollowTimelineCardView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
-            HollowTimelineCardView(postData: .constant(testPosts[0]), viewModel: .init(voteHandler: {string in print(string)}))
+            HollowTimelineCardView(postData: .constant(testPosts[1]), viewModel: .init(voteHandler: {string in print(string)}))
                 .padding()
                 .background(Color.background)
             HollowTimelineCardView(postData: .constant(testPosts[1]), viewModel: .init(voteHandler: {string in print(string)}))

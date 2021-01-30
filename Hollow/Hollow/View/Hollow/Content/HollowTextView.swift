@@ -7,22 +7,72 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct HollowTextView: View {
     @Binding var text: String
     var compactLineLimit: Int? = nil
     var body: some View {
-        Text(text)
-            .hollowContent()
-            .leading()
-            .foregroundColor(.hollowContentText)
+        Markdown(Document(stringLiteral: text))
             .lineLimit(compactLineLimit)
     }
 }
 
 struct HollowTextView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowTextView(text: .constant("带带，XS👴L，2021年害🈶️冥🐷斗士🉑️害彳亍，👼👼宁❤美🍜，美🍜爱宁🐴，84坏94👄，8👀👀宁美👨早⑨8配和我萌种🌹家√线？我👀宁⑨④太⑨站不⑦来，④⭕＋🇩🇪🐶东西，宁美👨，选个戏子当粽子🚮的🍜＋。墙🍅好东西批爆，⑨④🍚📃宁这样🇩🇪傻🐶出去丢种🌹＋脸，举报三连8送🐢vans了"),
-                       compactLineLimit: 6)
+        ScrollView {
+            HollowTextView(text: .constant(
+                """
+*italics* or _italics_
+**bold** or __bold__
+~~Linethrough~~Strikethroughs.
+`code`
+
+# Header 1
+> quote
+>> quoteor
+
+Header 1
+====
+
+## Header 2
+
+or
+
+Header 2
+---
+
+### Header 3
+#### Header 4
+##### Header 5 #####
+###### Header 6 ######
+
+    Indented code blocks (spaces or tabs)
+
+[Links](http://voyagetravelapps.com/)
+![Images](<Name of asset in bundle>)
+
+[Referenced Links][1]
+![Referenced Images][2]
+
+[1]: http://voyagetravelapps.com/
+[2]: <Name of asset in bundle>
+
+> Blockquotes
+
+- Bulleted
+- Lists
+    - Including indented lists
+        - Up to three levels
+- Neat!
+
+1. Ordered
+1. Lists
+    1. Including indented lists
+        - Up to three levels
+"""
+            ),
+            compactLineLimit: nil)
+        }
     }
 }

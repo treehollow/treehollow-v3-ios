@@ -49,9 +49,9 @@ struct WelcomeView: View {
                             Text("未名树洞")
                                 .selectHollowButton()
                         }}
-
+                    
                     NavigationLink(
-                        destination: Text(viewModel.hollowSelection?.string ?? ""),
+                        destination: CustomConfigConfigurationView(),
                         tag: HollowType.other.rawValue,
                         selection: $viewModel.hollowSelection) {
                         MyButton(action: {
@@ -66,7 +66,7 @@ struct WelcomeView: View {
                         Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
                             .padding()
                     }
-                    Text(LocalizedStringKey("Email authentication is required"))
+                    Text(LocalizedStringKey("Email verification is required"))
                         .font(.footnote)
                         .padding(.vertical, 5)
                         .layoutPriority(1)
@@ -81,6 +81,42 @@ struct WelcomeView: View {
                 // We should restore the error message after presenting the alert
                 Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
             }
+        }
+        .accentColor(.hollowContentText)
+    }
+    
+    struct CustomConfigConfigurationView: View {
+        @ObservedObject var viewModel: Welcome = .init()
+        @State var text: String = ""
+        
+        var body: some View {
+            VStack {
+                MyTextField<EmptyView>(text: $text, placeHolder: NSLocalizedString("URL for custom configuration", comment: ""), title: NSLocalizedString("Custom Configuration", comment: ""), content: nil)
+                    .padding()
+                    .navigationBarItems(
+                        trailing:
+                            Group {
+                                if viewModel.isLoadingConfig {
+                                    Spinner(color: .hollowContentText, desiredWidth: 20)
+                                } else {
+                                    Button(LocalizedStringKey("Next"), action: {
+                                        viewModel.requestConfig(hollowType: .other, customConfigURL: text)
+                                    })
+                                }
+                            }
+                    )
+                    .alert(isPresented: .constant(viewModel.errorMessage != nil)) {
+                        // We should restore the error message after presenting the alert
+                        Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
+                    }
+                NavigationLink(
+                    destination: CustomConfigConfigurationView(),
+                    tag: HollowType.other.rawValue,
+                    selection: $viewModel.hollowSelection, label: {})
+                Spacer()
+            }
+            .background(Color.background.edgesIgnoringSafeArea(.all))
+            .navigationTitle(LocalizedStringKey("Configuration"))
         }
     }
     
