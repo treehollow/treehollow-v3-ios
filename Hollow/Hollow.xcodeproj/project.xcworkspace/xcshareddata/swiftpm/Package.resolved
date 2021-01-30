@@ -2,21 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "eaf6e622dd41b07b251d8f01752eab31bc811493",
+          "version": "5.4.1"
+        }
+      },
+      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
           "branch": null,
           "revision": "d98119fee49c893fae553103a8659ffe003b6cfe",
           "version": "4.1.0"
-        }
-      },
-      {
-        "package": "Networking",
-        "repositoryURL": "https://github.com/3lvis/Networking",
-        "state": {
-          "branch": null,
-          "revision": "dde4d21fcc774d988da1f842bc4582ce7f9593c2",
-          "version": "5.1.0"
         }
       },
       {

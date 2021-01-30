@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */; };
-		00FEE00F25C19D4E00BB3403 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 00FEE00E25C19D4E00BB3403 /* Networking */; };
+		003920F325C54BB900883BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 003920F225C54BB900883BE9 /* Alamofire */; };
 		0E09EB2525C13A4D00F0A11F /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2425C13A4D00F0A11F /* Blur.swift */; };
 		0E09EB2E25C1412E00F0A11F /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2D25C1412E00F0A11F /* MyButton.swift */; };
 		0E28125125B7FC5600DCF78D /* ViewLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28125025B7FC5600DCF78D /* ViewLayouts.swift */; };
@@ -226,7 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00FEE00F25C19D4E00BB3403 /* Networking in Frameworks */,
+				003920F325C54BB900883BE9 /* Alamofire in Frameworks */,
 				0E7857ED25B74B340000C659 /* Defaults in Frameworks */,
 				0E56901325BFFF57003C70D6 /* WaterfallGrid in Frameworks */,
 			);
@@ -670,7 +670,7 @@
 			packageProductDependencies = (
 				0E7857EC25B74B340000C659 /* Defaults */,
 				0E56901225BFFF57003C70D6 /* WaterfallGrid */,
-				00FEE00E25C19D4E00BB3403 /* Networking */,
+				003920F225C54BB900883BE9 /* Alamofire */,
 			);
 			productName = Hollow;
 			productReference = 0E8549BB25B3F9AA00E512F4 /* Hollow.app */;
@@ -703,7 +703,7 @@
 			packageReferences = (
 				0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
-				00FEE00D25C19D4E00BB3403 /* XCRemoteSwiftPackageReference "Networking" */,
+				003920F125C54BB900883BE9 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 0E8549BC25B3F9AA00E512F4 /* Products */;
 			projectDirPath = "";
@@ -1032,12 +1032,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		00FEE00D25C19D4E00BB3403 /* XCRemoteSwiftPackageReference "Networking" */ = {
+		003920F125C54BB900883BE9 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/3lvis/Networking";
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.0;
+				minimumVersion = 5.4.1;
 			};
 		};
 		0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
@@ -1059,10 +1059,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		00FEE00E25C19D4E00BB3403 /* Networking */ = {
+		003920F225C54BB900883BE9 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 00FEE00D25C19D4E00BB3403 /* XCRemoteSwiftPackageReference "Networking" */;
-			productName = Networking;
+			package = 003920F125C54BB900883BE9 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		0E56901225BFFF57003C70D6 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;

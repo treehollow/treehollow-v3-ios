@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Networking
+import Alamofire
 
 /// Configurations for email check
 struct EmailCheckRequestConfiguration {
@@ -48,7 +48,7 @@ struct EmailCheckRequestResultData {
     /// The type of result received.
     var result: ResultType
     /// Error message, if error occured.
-    var massage: String?
+    //var massage: String?
 }
 
 /// Result of email checking.
@@ -58,7 +58,7 @@ struct EmailCheckRequestResult: Codable {
 }
 
 
-class EmailCheckRequest: Request {
+struct EmailCheckRequest: Request {
     
     typealias Configuration = EmailCheckRequestConfiguration
     typealias Result = EmailCheckRequestResult
@@ -75,52 +75,44 @@ class EmailCheckRequest: Request {
         }
     }
     var configuration: EmailCheckRequestConfiguration
-    required init(configuration: EmailCheckRequestConfiguration) {
+    init(configuration: EmailCheckRequestConfiguration) {
         self.configuration = configuration
     }
     
     func performRequest(completion: @escaping (ResultData?, EmailCheckRequestError?) -> Void) {
         let parameters = ["email" : self.configuration.email]
-        let urlPath = "/v3/security/login/check_email" + self.configuration.hollowConfig.urlSuffix!
+        let urlPath = self.configuration.hollowConfig.apiRoot + "/v3/security/login/check_email" + self.configuration.hollowConfig.urlSuffix!
         // URL must be leagle !
-        let networking = Networking(baseURL: self.configuration.hollowConfig.apiRoot)
-        networking.post(urlPath, parameters: parameters) { result in
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-            // Successfull post using `application/json` as `Content-Type`
-            switch result{
-            case .success(let response):
-                do {
-                    // FIXME: NOT TESTED YET
-                    let result = try jsonDecoder.decode(EmailCheckRequestResult.self, from: response.data)
-                    if result.code >= 0{
-                        // result code >= 0 valid!
-                        let resultData = EmailCheckRequestResultData(
-                            result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!, massage: nil)
-                        completion(resultData,nil)
+        AF.request(urlPath,
+                   method: .post,
+                   parameters: parameters,
+                   encoder: URLEncodedFormParameterEncoder.default)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseData{ response in
+                switch response.result {
+                case .success:
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    do {
+                        // FIXME: NOT TESTED YET
+                        let result = try jsonDecoder.decode(EmailCheckRequestResult.self, from: response.data!)
+                        if result.code >= 0{
+                            // result code >= 0 valid!
+                            let resultData = EmailCheckRequestResultData(
+                                result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!)
+                            completion(resultData,nil)
+                        }
+                        else{
+                            // invalid response
+                            completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
+                        }
+                    } catch {
+                        completion(nil,.decodeError)
+                        return
                     }
-                    else{
-                        // invalid response
-                        completion(nil,.other(description: result.msg ?? "error code from backend:x \(result.code)"))
-                    }
-                } catch {
-                    completion(nil,.decodeError)
-                    return
-                }
-            // If we need headers or response status code we can use the HTTPURLResponse for this.
-            //let headers = response.headers // [String: Any]
-            case .failure(let response):
-                // Non-optional error ✨
-                let errorCode = response.error.code
-                
-                // Our backend developer told us that they will send a json with some
-                // additional information on why the request failed, this will be a dictionary.
-                let errorResponse = String(data: response.data, encoding: .utf8) ?? ""// BOOM, no optionals here [String: Any]
-                let errormsg = String(errorCode) + ": " + errorResponse
-                completion(nil,.other(description: errormsg))
-            // We want to know the headers of the failed response.
-            //let headers = response.headers // [String: Any]
+                case let .failure(error):
+                    completion(nil,.other(description: error.errorDescription ?? "Unkown error when performing EmailCheck!"))                }
             }
-        }
     }
 }
