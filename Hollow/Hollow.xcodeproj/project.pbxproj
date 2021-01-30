@@ -110,7 +110,6 @@
 		0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3C25C0760900B63833 /* ImageSaver.swift */; };
 		0EF6493025C5449D00091D07 /* MyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6492F25C5449D00091D07 /* MyTextField.swift */; };
 		0EF6493325C547BE00091D07 /* CustomConfigConfigurationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6493225C547BE00091D07 /* CustomConfigConfigurationViewModel.swift */; };
-		0EF6493825C5569400091D07 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF6493725C5569400091D07 /* AttributedText */; };
 		0EFCFCFA25C1B0D40091EC04 /* View+divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCFCF925C1B0D40091EC04 /* View+divider.swift */; };
 		0EFCFD0025C24E130091EC04 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCFCFF25C24E130091EC04 /* Search.swift */; };
 		0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */; };
@@ -236,7 +235,6 @@
 				0E7857ED25B74B340000C659 /* Defaults in Frameworks */,
 				0E90545E25C596B100254EE5 /* MarkdownUI in Frameworks */,
 				0E56901325BFFF57003C70D6 /* WaterfallGrid in Frameworks */,
-				0EF6493825C5569400091D07 /* AttributedText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,7 +677,6 @@
 			packageProductDependencies = (
 				0E7857EC25B74B340000C659 /* Defaults */,
 				0E56901225BFFF57003C70D6 /* WaterfallGrid */,
-				0EF6493725C5569400091D07 /* AttributedText */,
 				0E90545B25C596B100254EE5 /* CommonMark */,
 				0E90545D25C596B100254EE5 /* MarkdownUI */,
 				003920F225C54BB900883BE9 /* Alamofire */,
@@ -715,7 +712,6 @@
 			packageReferences = (
 				0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
-				0EF6493625C5569400091D07 /* XCRemoteSwiftPackageReference "AttributedText" */,
 				0E90545A25C596B100254EE5 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				003920F125C54BB900883BE9 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
@@ -1079,14 +1075,6 @@
 				minimumVersion = 0.3.4;
 			};
 		};
-		0EF6493625C5569400091D07 /* XCRemoteSwiftPackageReference "AttributedText" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/AttributedText.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1114,11 +1102,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E90545A25C596B100254EE5 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
-		};
-		0EF6493725C5569400091D07 /* AttributedText */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0EF6493625C5569400091D07 /* XCRemoteSwiftPackageReference "AttributedText" */;
-			productName = AttributedText;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

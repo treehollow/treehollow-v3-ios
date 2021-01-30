@@ -64,10 +64,10 @@ struct EmailCheckRequest: Request {
     typealias Result = EmailCheckRequestResult
     typealias ResultData = EmailCheckRequestResultData
     typealias Error = EmailCheckRequestError
-    enum EmailCheckRequestError: RequestError{
+    enum EmailCheckRequestError: RequestError {
         case decodeError
         case other(description: String)
-        var description: String{
+        var description: String {
             switch self {
             case .decodeError: return "Decode failed"
             case .other(let description): return description
@@ -90,7 +90,7 @@ struct EmailCheckRequest: Request {
                    encoder: URLEncodedFormParameterEncoder.default)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
-            .responseData{ response in
+            .responseData { response in
                 switch response.result {
                 case .success:
                     let jsonDecoder = JSONDecoder()
@@ -98,13 +98,13 @@ struct EmailCheckRequest: Request {
                     do {
                         // FIXME: NOT TESTED YET
                         let result = try jsonDecoder.decode(EmailCheckRequestResult.self, from: response.data!)
-                        if result.code >= 0{
+                        if result.code >= 0 {
                             // result code >= 0 valid!
                             let resultData = EmailCheckRequestResultData(
                                 result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!)
                             completion(resultData,nil)
                         }
-                        else{
+                        else {
                             // invalid response
                             completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
                         }
@@ -113,7 +113,8 @@ struct EmailCheckRequest: Request {
                         return
                     }
                 case let .failure(error):
-                    completion(nil,.other(description: error.errorDescription ?? "Unkown error when performing EmailCheck!"))                }
+                    completion(nil,.other(description: error.errorDescription ?? "Unkown error when performing EmailCheck!"))
+                }
             }
     }
 }
