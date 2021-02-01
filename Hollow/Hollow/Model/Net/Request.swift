@@ -30,3 +30,15 @@ protocol Request {
 protocol RequestError: Error {
     var description: String { get }
 }
+
+/// DefaultRequestError for default request
+public enum DefaultRequestError: RequestError{
+    case decodeError
+    case other(description: String)
+    var description: String{
+        switch self {
+        case .decodeError: return "Decode failed"
+        case .other(let description): return description
+        }
+    }
+}

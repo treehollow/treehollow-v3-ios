@@ -63,23 +63,23 @@ struct EmailCheckRequest: Request {
     typealias Configuration = EmailCheckRequestConfiguration
     typealias Result = EmailCheckRequestResult
     typealias ResultData = EmailCheckRequestResultData
-    typealias Error = EmailCheckRequestError
-    enum EmailCheckRequestError: RequestError {
-        case decodeError
-        case other(description: String)
-        var description: String {
-            switch self {
-            case .decodeError: return "Decode failed"
-            case .other(let description): return description
-            }
-        }
-    }
+    typealias Error = DefaultRequestError
+//    enum EmailCheckRequestError: RequestError {
+//        case decodeError
+//        case other(description: String)
+//        var description: String {
+//            switch self {
+//            case .decodeError: return "Decode failed"
+//            case .other(let description): return description
+//            }
+//        }
+//    }
     var configuration: EmailCheckRequestConfiguration
     init(configuration: EmailCheckRequestConfiguration) {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (ResultData?, EmailCheckRequestError?) -> Void) {
+    func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
         // manually assigned parameter. better if it can be initialized automatically
         let parameters = ["email" : self.configuration.email]
         let urlPath = self.configuration.hollowConfig.apiRoot + "/v3/security/login/check_email" + self.configuration.hollowConfig.urlSuffix!
@@ -87,10 +87,10 @@ struct EmailCheckRequest: Request {
         AF.request(urlPath,
                    method: .post,
                    parameters: parameters,
-                   encoder: URLEncodedFormParameterEncoder.default)
-            .validate(statusCode: 200..<300)
-            .validate(contentType: ["application/json"])
-            .responseData { response in
+                   encoder: URLEncodedFormParameterEncoder.default).validate().responseJSON{ response in
+//            .validate(statusCode: 200..<300)
+//            .validate(contentType: ["application/json"])
+//            .responseData { response in
                 switch response.result {
                 case .success:
                     let jsonDecoder = JSONDecoder()
