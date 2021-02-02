@@ -6,8 +6,8 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
-import UIKit
 import Alamofire
+import UIKit
 
 struct LoginRequestConfiguration {
     var email: String
@@ -45,44 +45,51 @@ struct LoginRequest: Request {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (LoginRequestResultData?, DefaultRequestError?) -> Void) {
-        let parameters = ["email": self.configuration.email,
-                          "password_hashed":self.configuration.hashedPassword,
-                          "device_type": self.configuration.deviceType,
-                          "device_info": self.configuration.deviceInfo,
-                          "ios_device_token": self.configuration.deviceToken
-        ] as! [String : String]
-        let urlPath = self.configuration.hollowConfig.apiRoot + "/v3/security/login/login" + self.configuration.hollowConfig.urlSuffix!
-        AF.request(urlPath,
-                   method: .post,
-                   parameters: parameters,
-                   encoder: URLEncodedFormParameterEncoder.default)
-            .validate().responseJSON { response in
-                switch response.result {
-                case .success:
-                    let jsonDecoder = JSONDecoder()
-                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                    do {
-                        // FIXME: NOT TESTED YET
-                        let result = try jsonDecoder.decode(LoginRequestResult.self, from: response.data!)
-                        if result.code >= 0 {
-                            // result code >= 0 valid!
-                            let resultData = LoginRequestResultData(token: result.token, uuid: result.uuid)
-                            completion(resultData,nil)
-                        }
-                        else{
-                            // invalid response
-                            completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
-                        }
-                    } catch {
-                        completion(nil,.decodeError)
-                        return
+    func performRequest(completion: @escaping (LoginRequestResultData?, DefaultRequestError?) -> Void)
+    {
+        let parameters =
+            [
+                "email": self.configuration.email,
+                "password_hashed": self.configuration.hashedPassword,
+                "device_type": self.configuration.deviceType,
+                "device_info": self.configuration.deviceInfo,
+                "ios_device_token": self.configuration.deviceToken,
+            ] as! [String: String]
+        let urlPath =
+            self.configuration.hollowConfig.apiRoot + "v3/security/login/login" + self.configuration
+            .hollowConfig.urlSuffix!
+        AF.request(
+            urlPath,
+            method: .post,
+            parameters: parameters,
+            encoder: URLEncodedFormParameterEncoder.default
+        )
+        .validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                do {
+                    // FIXME: NOT TESTED YET
+                    let result = try jsonDecoder.decode(LoginRequestResult.self, from: response.data!)
+                    if result.code >= 0 {
+                        // result code >= 0 valid!
+                        let resultData = LoginRequestResultData(token: result.token, uuid: result.uuid)
+                        completion(resultData, nil)
+                    } else {
+                        // invalid response
+                        completion(
+                            nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
                     }
-                case .failure(let error):
-                    completion(nil,.other(description: error.errorDescription ?? "Unkown error when performing Login!"))
+                } catch {
+                    completion(nil, .decodeError)
+                    return
                 }
+            case .failure(let error):
+                completion(
+                    nil, .other(description: error.errorDescription ?? "Unkown error when performing Login!"))
             }
+        }
         
     }
 }
-

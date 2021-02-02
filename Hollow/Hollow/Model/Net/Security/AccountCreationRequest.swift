@@ -5,8 +5,8 @@
 //  Created on 2021/1/17.
 //
 
-import UIKit
 import Alamofire
+import UIKit
 
 /// Configuraions for creating an account.
 struct AccountCreationRequestConfiguration {
@@ -81,49 +81,59 @@ struct AccountCreationRequest: Request {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (AccountCreationRequestResultData?, DefaultRequestError?) -> Void){
-        var parameters = ["email" : self.configuration.email,
-                          "password_hashed": self.configuration.hashedPassword,
-                          "device_type": self.configuration.deviceType,
-                          "device_info": self.configuration.deviceInfo,
-                          "ios_device_token": self.configuration.deviceToken
-        ] as! [String : String]
+    func performRequest(
+        completion: @escaping (AccountCreationRequestResultData?, DefaultRequestError?) -> Void
+    ) {
+        var parameters =
+            [
+                "email": self.configuration.email,
+                "password_hashed": self.configuration.hashedPassword,
+                "device_type": self.configuration.deviceType,
+                "device_info": self.configuration.deviceInfo,
+                "ios_device_token": self.configuration.deviceToken,
+            ] as! [String: String]
         
         if let validCode = self.configuration.validCode {
             parameters["valid_code"] = validCode
         }
         
-        let urlPath = self.configuration.hollowConfig.apiRoot + "/v3/security/login/create_account" + self.configuration.hollowConfig.urlSuffix!
-        AF.request(urlPath,
-                   method: .post,
-                   parameters: parameters,
-                   encoder: URLEncodedFormParameterEncoder.default).validate().responseJSON { response in
-                    //            .validate(statusCode: 200..<300)
-                    //            .validate(contentType: ["application/json"])
-                    //            .responseData{ response in
-                    switch response.result {
-                    case .success:
-                        let jsonDecoder = JSONDecoder()
-                        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                        do {
-                            // FIXME: NOT TESTED YET
-                            let result = try jsonDecoder.decode(AccountCreationRequestResult.self, from: response.data!)
-                            if result.code >= 0 {
-                                // result code >= 0 valid!
-                                let resultData = AccountCreationRequestResultData(token: result.token, uuid: result.uuid)
-                                completion(resultData,nil)
-                            }
-                            else {
-                                // invalid response
-                                completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
-                            }
-                        } catch {
-                            completion(nil,.decodeError)
-                            return
-                        }
-                    case .failure(let error):
-                        completion(nil,.other(description: error.errorDescription ?? ""))
+        let urlPath =
+            self.configuration.hollowConfig.apiRoot + "v3/security/login/create_account" + self
+            .configuration.hollowConfig.urlSuffix!
+        AF.request(
+            urlPath,
+            method: .post,
+            parameters: parameters,
+            encoder: URLEncodedFormParameterEncoder.default
+        ).validate().responseJSON { response in
+            //            .validate(statusCode: 200..<300)
+            //            .validate(contentType: ["application/json"])
+            //            .responseData{ response in
+            switch response.result {
+            case .success:
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                do {
+                    // FIXME: NOT TESTED YET
+                    let result = try jsonDecoder.decode(
+                        AccountCreationRequestResult.self, from: response.data!)
+                    if result.code >= 0 {
+                        // result code >= 0 valid!
+                        let resultData = AccountCreationRequestResultData(
+                            token: result.token, uuid: result.uuid)
+                        completion(resultData, nil)
+                    } else {
+                        // invalid response
+                        completion(
+                            nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
                     }
-                   }
+                } catch {
+                    completion(nil, .decodeError)
+                    return
+                }
+            case .failure(let error):
+                completion(nil, .other(description: error.errorDescription ?? ""))
+            }
+        }
     }
 }

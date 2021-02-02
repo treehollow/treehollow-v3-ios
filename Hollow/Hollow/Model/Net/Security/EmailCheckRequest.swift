@@ -5,17 +5,17 @@
 //  Created on 2021/1/17.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 /// Configurations for email check
 struct EmailCheckRequestConfiguration {
     /// `reCAPTCHA` version
     //    NO USE!
-    //    enum ReCAPTCHAVersion: String {
-    //        case v2 = "v2"
-    //        case v3 = "v3"
-    //    }
+    enum ReCAPTCHAVersion: String {
+        case v2 = "v2"
+        case v3 = "v3"
+    }
     /// User's email to be checked, required
     var email: String
     /// User's old thuhole token, only needed for old user signup
@@ -23,7 +23,7 @@ struct EmailCheckRequestConfiguration {
     // var oldToken: String?
     /// Info of `reCAPTCHA`, optional
     // NO USE
-    //var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
+    var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
     /// constant used for http request
     var hollowConfig: GetConfigRequestResult
 }
@@ -57,23 +57,22 @@ struct EmailCheckRequestResult: Codable {
     var msg: String?
 }
 
-
 struct EmailCheckRequest: Request {
     
     typealias Configuration = EmailCheckRequestConfiguration
     typealias Result = EmailCheckRequestResult
     typealias ResultData = EmailCheckRequestResultData
     typealias Error = DefaultRequestError
-//    enum EmailCheckRequestError: RequestError {
-//        case decodeError
-//        case other(description: String)
-//        var description: String {
-//            switch self {
-//            case .decodeError: return "Decode failed"
-//            case .other(let description): return description
-//            }
-//        }
-//    }
+    //    enum EmailCheckRequestError: RequestError {
+    //        case decodeError
+    //        case other(description: String)
+    //        var description: String {
+    //            switch self {
+    //            case .decodeError: return "Decode failed"
+    //            case .other(let description): return description
+    //            }
+    //        }
+    //    }
     var configuration: EmailCheckRequestConfiguration
     init(configuration: EmailCheckRequestConfiguration) {
         self.configuration = configuration
@@ -81,40 +80,50 @@ struct EmailCheckRequest: Request {
     
     func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
         // manually assigned parameter. better if it can be initialized automatically
-        let parameters = ["email" : self.configuration.email]
-        let urlPath = self.configuration.hollowConfig.apiRoot + "/v3/security/login/check_email" + self.configuration.hollowConfig.urlSuffix!
+        var parameters = ["email": self.configuration.email]
+        if let reCAPTCHAInfo = self.configuration.reCAPTCHAInfo {
+            parameters["recaptcha_version"] = reCAPTCHAInfo.version.rawValue
+            parameters["recaptcha_token"] = reCAPTCHAInfo.token
+        }
+        let urlPath =
+            self.configuration.hollowConfig.apiRoot + "v3/security/login/check_email" + self.configuration
+            .hollowConfig.urlSuffix!
         // URL must be leagle !
-        AF.request(urlPath,
-                   method: .post,
-                   parameters: parameters,
-                   encoder: URLEncodedFormParameterEncoder.default).validate().responseJSON{ response in
-//            .validate(statusCode: 200..<300)
-//            .validate(contentType: ["application/json"])
-//            .responseData { response in
-                switch response.result {
-                case .success:
-                    let jsonDecoder = JSONDecoder()
-                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                    do {
-                        // FIXME: NOT TESTED YET
-                        let result = try jsonDecoder.decode(EmailCheckRequestResult.self, from: response.data!)
-                        if result.code >= 0 {
-                            // result code >= 0 valid!
-                            let resultData = EmailCheckRequestResultData(
-                                result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!)
-                            completion(resultData,nil)
-                        }
-                        else {
-                            // invalid response
-                            completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
-                        }
-                    } catch {
-                        completion(nil,.decodeError)
-                        return
+        AF.request(
+            urlPath,
+            method: .post,
+            parameters: parameters,
+            encoder: URLEncodedFormParameterEncoder.default
+        ).validate().responseJSON { response in
+            //            .validate(statusCode: 200..<300)
+            //            .validate(contentType: ["application/json"])
+            //            .responseData { response in
+            switch response.result {
+            case .success:
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                do {
+                    // FIXME: NOT TESTED YET
+                    let result = try jsonDecoder.decode(EmailCheckRequestResult.self, from: response.data!)
+                    if result.code >= 0 {
+                        // result code >= 0 valid!
+                        let resultData = EmailCheckRequestResultData(
+                            result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!)
+                        completion(resultData, nil)
+                    } else {
+                        // invalid response
+                        completion(
+                            nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
                     }
-                case let .failure(error):
-                    completion(nil,.other(description: error.errorDescription ?? "Unkown error when performing EmailCheck!"))
+                } catch {
+                    completion(nil, .decodeError)
+                    return
                 }
+            case let .failure(error):
+                completion(
+                    nil,
+                    .other(description: error.errorDescription ?? "Unkown error when performing EmailCheck!"))
             }
+        }
     }
 }

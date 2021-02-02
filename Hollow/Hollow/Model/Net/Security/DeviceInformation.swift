@@ -8,9 +8,9 @@
 import Foundation
 
 /// Information of a logged-in device.
-struct DeviceInformation {
+struct DeviceInformation: Codable {
     /// Device type.
-    enum DeviceType: Int {
+    enum DeviceType: Int,Codable {
         case web = 0
         case android = 1
         case ios = 2
