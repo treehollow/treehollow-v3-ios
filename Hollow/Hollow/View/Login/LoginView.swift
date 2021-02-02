@@ -14,33 +14,58 @@ struct LoginView: View {
     @State private var pageLoadingFinish = false
     @State private var confirmedPassword = ""
     
+    private var showsRegisterComponents: Bool {
+        viewModel.emailCheckType == .newUser ||
+            (viewModel.emailCheckType == .reCAPTCHANeeded && viewModel.reCAPTCHAToken != "")
+    }
+    
     var body: some View {
         VStack {
-            let configuration = Defaults[.hollowConfig]!
-            MyTextField(text: $viewModel.email, placeHolder: .emailAddressAllCapitalized, title: NSLocalizedString("Enter Your Email", comment: "")) {
-                return Menu(content: {
-                    ForEach(0..<configuration.emailSuffixes.count) { index in
-                        Button(configuration.emailSuffixes[index], action: {
-                            viewModel.emailSuffix = configuration.emailSuffixes[index]
+            ScrollView {
+                VStack(spacing: 20) {
+                    let configuration = Defaults[.hollowConfig]!
+                    MyTextField(text: $viewModel.email, placeHolder: NSLocalizedString("Enter your email", comment: ""), title: String.emailAddressLocalized.firstLetterUppercased) {
+                        return Menu(content: {
+                            ForEach(0..<configuration.emailSuffixes.count) { index in
+                                Button(configuration.emailSuffixes[index], action: {
+                                    viewModel.emailSuffix = configuration.emailSuffixes[index]
+                                })
+                            }
+                        }, label: {
+                            HStack {
+                                Text("@" + viewModel.emailSuffix)
+                                Image(systemName: "chevron.down")
+                                    .layoutPriority(1)
+                            }
+                            .lineLimit(1)
+                            .font(.system(size: 14))
                         })
                     }
-                }, label: {
-                    Text("@" + viewModel.emailSuffix).font(.system(size: 14))
-                })
+                    .padding(.top)
+                    
+                    if showsRegisterComponents {
+                        MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: String.emailVerificationCodeLocalized.capitalized)
+                        MyTextField<EmptyView>(text: $viewModel.originalPassword, title: String.passWordLocalized.capitalized, isSecureContent: true)
+                        MyTextField<EmptyView>(text: $confirmedPassword, title: String.confirmedPassWordLocalized.capitalized, isSecureContent: true)
+                            .textContentType(.password)
+                    }
+                }
             }
-            
-            if viewModel.emailCheckType == .newUser {
-                MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: .emailVerificationCodeAllCapitalized)
-                MyTextField<EmptyView>(text: $viewModel.originalPassword, title: .passWordCapitalized)
-                MyTextField<EmptyView>(text: $confirmedPassword, title: .confirmedPassWordCapitalized)
-            }
-            
+//            Spacer()
             MyButton(action: {
                 viewModel.checkEmail()
-            }, gradient: .vertical(gradient: .button)) {
-                Text(LocalizedStringKey("Continue"))
+            }, gradient: .vertical(gradient: .button),
+            transitionAnimation: .default,
+            cornerRadius: 12) {
+                Text(String.loginLocalized.capitalized)
+                    .fontWeight(.medium)
+                    .foregroundColor(.white)
+                    .padding(8)
+                    .horizontalCenter()
             }
         }
+        .padding(.horizontal)
+        .padding(.horizontal)
         .fullScreenCover(isPresented: $viewModel.reCAPTCHAPresented, content: {
             ReCAPTCHAPageView(presented: $viewModel.reCAPTCHAPresented, token: $viewModel.reCAPTCHAToken)
         })
@@ -48,6 +73,8 @@ struct LoginView: View {
             // We should restore the error message after presenting the alert
             Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
         }
+        .navigationTitle(String.loginLocalized.capitalized)
+        .background(Color.background.edgesIgnoringSafeArea(.all))
     }
 }
 

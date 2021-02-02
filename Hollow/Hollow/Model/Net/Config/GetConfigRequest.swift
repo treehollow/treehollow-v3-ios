@@ -72,10 +72,10 @@ struct GetConfigRequest: Request {
         
         var description: String {
             switch self {
-            case .serverError: return "Server error"
-            case .decodeFailed: return "Decode failed"
-            case .incorrectFormat: return "Incorrect config format"
-            case .invalidConfigUrl: return "Invalid config url"
+            case .serverError: return "Received error from the server."
+            case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
+            case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
+            case .invalidConfigUrl: return "The URL for the configuration is invalid."
             case .other(let description): return description
             }
         }

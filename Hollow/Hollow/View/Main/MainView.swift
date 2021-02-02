@@ -59,7 +59,7 @@ extension MainView {
                             page = .wander
                         }
                     }) {
-                        Text(String.wanderCapitalized)
+                        Text(String.wanderLocalized.capitalized)
                             .mainTabText(selected: page == .wander)
                             .animation(.spring())
                     }
@@ -73,7 +73,7 @@ extension MainView {
                             page = .timeline
                         }
                     }) {
-                        Text(String.timelineCapitalized)
+                        Text(String.timelineLocalized.capitalized)
                             .mainTabText(selected: page == .timeline)
                             .animation(.spring())
                         

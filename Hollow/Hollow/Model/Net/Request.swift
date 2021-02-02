@@ -28,6 +28,7 @@ protocol Request {
 }
 
 protocol RequestError: Error {
+    // TODO: Localization
     var description: String { get }
 }
 
@@ -37,7 +38,7 @@ public enum DefaultRequestError: RequestError {
     case other(description: String)
     var description: String {
         switch self {
-        case .decodeError: return "Decode failed"
+        case .decodeError: return "Fail to decode tree hollow configuration from the URL."
         case .other(let description): return description
         }
     }

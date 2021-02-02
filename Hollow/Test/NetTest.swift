@@ -6,6 +6,8 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
+#if DEBUG
+
 import Foundation
 
 struct NetTest {
@@ -25,3 +27,5 @@ struct NetTest {
         }
     }
 }
+
+#endif

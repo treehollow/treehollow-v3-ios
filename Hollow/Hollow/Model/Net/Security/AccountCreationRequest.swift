@@ -125,7 +125,7 @@ struct AccountCreationRequest: Request {
                     } else {
                         // invalid response
                         completion(
-                            nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
+                            nil, .other(description: result.msg ?? "Received error code from backend: \(result.code)"))
                     }
                 } catch {
                     completion(nil, .decodeError)

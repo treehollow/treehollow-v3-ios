@@ -27,22 +27,26 @@ class Login: ObservableObject {
     
     func checkEmail() {
         guard let config = Defaults[.hollowConfig] else { return }
+        guard email != "" else {
+            errorMessage = (title: String.invalidInputLocalized.capitalized, message: NSLocalizedString("Email cannot be empty.", comment: ""))
+            return
+        }
         let request = EmailCheckRequest(configuration: .init(email: email + "@" + emailSuffix, hollowConfig: config))
         request.performRequest(completion: { resultData, error in
             if let error = error {
                 debugPrint(error.description)
                 switch error {
                 case .decodeError:
-                    self.errorMessage = (title: .internalErrorAllCapitalized, message: error.description)
+                    self.errorMessage = (title: String.internalErrorLocalized.capitalized, message: error.description)
                 case .other:
-                    self.errorMessage = (title: .errorCapitalized, message: error.description)
+                    self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
                 }
                 return
             }
-            
+            debugPrint(resultData as Any)
             self.emailCheckType = resultData?.result
             
-            if self.emailCheckType == .newUser {
+            if self.emailCheckType == .reCAPTCHANeeded {
                 self.reCAPTCHAPresented = true
             }
         })

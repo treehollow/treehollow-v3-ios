@@ -269,6 +269,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		0E4690B425C9B49F003D62B1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0EBB372925BFDA840060A62A /* TestCommentData.swift */,
+				0EBB372425BFD9BD0060A62A /* TestPostData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		0E67193325C2C136002683B8 /* Types */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,8 +672,7 @@
 		0EBB372225BFD99E0060A62A /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				0EBB372425BFD9BD0060A62A /* TestPostData.swift */,
-				0EBB372925BFDA840060A62A /* TestCommentData.swift */,
+				0E4690B425C9B49F003D62B1 /* Data */,
 				004BE3E525C83EC200211F4E /* NetTest.swift */,
 			);
 			path = Test;

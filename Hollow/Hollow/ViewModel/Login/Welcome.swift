@@ -36,12 +36,12 @@ class Welcome: ObservableObject {
                 DispatchQueue.main.async {
                     switch error {
                     case .serverError, .other:
-                        self.errorMessage = (.errorCapitalized, error.description)
+                        self.errorMessage = (String.errorLocalized.capitalized, error.description)
                     default:
                         if hollowType == .other {
-                            self.errorMessage = (.errorCapitalized, error.description)
+                            self.errorMessage = (String.errorLocalized.capitalized, error.description)
                         } else {
-                            self.errorMessage = (.internalErrorAllCapitalized, error.description)
+                            self.errorMessage = (String.internalErrorLocalized.capitalized, error.description)
                         }
                     }
                 }

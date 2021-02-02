@@ -12,32 +12,45 @@ struct MyTextField<Content>: View where Content: View {
     @Binding var text: String
     var placeHolder: String? = nil
     var title: String?
+    var footer: String? = nil
+    var isSecureContent = false
     var content: (() -> Content)? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
             if let title = title {
-                Text(title)
-                    .font(.system(size: 15, weight: .medium))
+                Text(title.uppercased())
+                    .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.hollowContentText)
-                    // Align to the placeholder of the text field
-                    .padding(.horizontal, 4)
+                // Align to the placeholder of the text field
             }
             HStack(spacing: 0) {
-                TextField(placeHolder ?? "", text: $text)
-                    .labelsHidden()
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .font(.system(size: 15))
+                Group {
+                    if isSecureContent {
+                        SecureField(placeHolder ?? "", text: $text)
+                    } else {
+                        TextField(placeHolder ?? "", text: $text)
+                    }
+                }
+                .labelsHidden()
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
                 Spacer()
                 if let content = content {
                     content()
                 }
             }
             .padding(10)
-            .padding(.horizontal, 4)
+            .padding(.horizontal, 6)
             .background(Color.hollowCardBackground)
             .cornerRadius(10)
+            
+            if let footer = footer {
+                Text(footer)
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+            }
         }
     }
 }

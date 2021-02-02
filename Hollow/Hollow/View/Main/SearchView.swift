@@ -40,7 +40,7 @@ struct SearchView: View {
                 .animation(.none)
                 Spacer()
                 MyButton(action: {}, gradient: .vertical(gradient: .button), transitionAnimation: transitionAnimation) {
-                    Text(String.searchCapitalized)
+                    Text(String.searchLocalized.capitalized)
                         .font(.buttonText)
                         .foregroundColor(.white)
                 }
@@ -70,7 +70,7 @@ struct SearchView: View {
                 }
                 .padding(.vertical)
                 Button(action:{ withAnimation { showsAdvancedOptions.toggle() }}) {
-                    Text(String.advancedCapitalized)
+                    Text(String.advancedLocalized.capitalized)
                         .font(.system(size: 16, weight: .semibold))
                         .animation(transitionAnimation)
                     Image(systemName: "triangle.fill")
@@ -88,7 +88,7 @@ struct SearchView: View {
                         .animation(.searchViewTransition)
                 }
                 
-                Text(String.historyCapitalized)
+                Text(String.historyLocalized.capitalized)
                     .font(.system(size: 16, weight: .semibold))
                     .animation(transitionAnimation)
                     .leading()
@@ -155,7 +155,7 @@ extension SearchView {
         
         var body: some View {
             VStack {
-                Text(String.timeCapitalized)
+                Text(String.timeLocalized.capitalized)
                     .fontWeight(.semibold)
                     .leading()
                 HStack {
@@ -175,7 +175,7 @@ extension SearchView {
                 .padding(.bottom)
                 .padding(.bottom, 5)
                 
-                Text(String.rangeCapitalized)
+                Text(String.rangeLocalized.capitalized)
                     .fontWeight(.semibold)
                     .leading()
                     .padding(.bottom, 5)

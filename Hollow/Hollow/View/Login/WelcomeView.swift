@@ -21,7 +21,7 @@ struct WelcomeView: View {
                     .frame(maxHeight: 170)
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
-                    Text(LocalizedStringKey("Select Hollow of School"))
+                    Text(LocalizedStringKey("Select Hollow"))
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundColor(Color("hollow.content.text.other"))
                         .padding(.top, 70)
@@ -114,7 +114,7 @@ struct WelcomeView: View {
                         Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
                     }
                 NavigationLink(
-                    destination: CustomConfigConfigurationView(),
+                    destination: LoginView(),
                     tag: HollowType.other.rawValue,
                     selection: $viewModel.hollowSelection, label: {})
                 Spacer()

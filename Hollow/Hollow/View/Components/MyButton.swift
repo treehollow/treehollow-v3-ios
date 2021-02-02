@@ -12,6 +12,7 @@ struct MyButton<Content>: View where Content: View {
     var action: () -> Void
     var gradient: LinearGradient
     var transitionAnimation: Animation? = nil
+    var cornerRadius: CGFloat = 6
     var content: () -> Content
     var body: some View {
         Button(action: action) {
@@ -19,7 +20,7 @@ struct MyButton<Content>: View where Content: View {
                 .padding(.horizontal, 13)
                 .padding(.vertical, 7)
                 .background(gradient)
-                .cornerRadius(6)
+                .cornerRadius(cornerRadius)
                 .animation(transitionAnimation)
         }
     }
