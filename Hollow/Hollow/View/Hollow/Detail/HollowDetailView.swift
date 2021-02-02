@@ -22,9 +22,9 @@ struct HollowDetailView: View {
                             // Navigate back
                             presentedIndex = -1
                         }) {
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.hollowContentText)
-                                .font(.system(size: 20, weight: .medium))
+                            Image(systemName: "xmark")
+                                .imageButton()
+                                .padding(.trailing, 5)
                         }
                         .padding(.trailing, 5)
                         HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postData, compact: false)

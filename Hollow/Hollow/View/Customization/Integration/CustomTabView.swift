@@ -9,7 +9,7 @@
 import SwiftUI
 import Foundation
 
-/// An ugly but **working** workaround to set the background color of `CustomScrollView` in `TabView` to `nil`
+/// An ugly but working workaround to set the background color of `CustomScrollView` inside `TabView` to `nil`
 struct CustomTabView<Content, HashableValue>: View where Content: View, HashableValue: Hashable {
     var selection: Binding<HashableValue>
     let content: () -> Content
@@ -66,6 +66,7 @@ fileprivate class TabViewUIHostingController<Content>: UIHostingController<Conte
     }
     
     private func setHostingScrollViews(for view: UIView) {
+        // Set the background of the views which contain the scroll view.
         // WARNING: This code could fail after system update!
         guard let HostingScrollView: AnyClass = NSClassFromString("SwiftUI.HostingScrollView") else { return }
         for subView in view.subviews {

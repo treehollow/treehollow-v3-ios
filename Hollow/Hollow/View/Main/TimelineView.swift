@@ -8,12 +8,39 @@
 import SwiftUI
 
 struct TimelineView: View {
+    @Binding var isSearching: Bool
     @ObservedObject var viewModel: Timeline = .init()
     @State private var detailPresentedIndex = -1
+    
+    @State private var offset: CGFloat? = 0
     var body: some View {
         // TODO: Show refresh button
-        CustomScrollView(refresh: { refresh in refresh = false }, content: {
+        CustomScrollView(offset: $offset, refresh: { refresh in refresh = false }, content: {
             VStack(spacing: 0) {
+                Button(action:{
+                    // Navigate to search view
+                    withAnimation(.searchViewTransition) {
+                        isSearching = true
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                        Spacer()
+                    }
+                    .foregroundColor(.mainSearchBarText)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 15)
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundColor(.mainSearchBarBackground))
+
+                }
+                .padding(.horizontal)
+                .padding(.bottom)
+                .padding(.top, 2)
+                .background(Color.background)
+
+                // FIXME: Performance issue with large number of posts.
+                // Workaround: lazy load / hide previous cards
                 ForEach(0..<viewModel.posts.count) { index in
                     HollowTimelineCardView(postData: $viewModel.posts[index], viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].postId, for: option)}))
                         .padding(.horizontal)
@@ -29,6 +56,7 @@ struct TimelineView: View {
                 }
             }
         })
+
     }
 }
 

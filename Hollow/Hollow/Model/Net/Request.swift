@@ -18,8 +18,8 @@ protocol Request {
     associatedtype ResultData
     /// Request error comforming to `RequestError` protocol
     associatedtype Error: RequestError
-    /// Configuration for the request, set via initializer.
     
+    /// Configuration for the request, set via initializer.
     var configuration: Configuration { get }
     /// - parameter configuration: Configuration for the request.
     init(configuration: Configuration)
@@ -32,10 +32,10 @@ protocol RequestError: Error {
 }
 
 /// DefaultRequestError for default request
-public enum DefaultRequestError: RequestError{
+public enum DefaultRequestError: RequestError {
     case decodeError
     case other(description: String)
-    var description: String{
+    var description: String {
         switch self {
         case .decodeError: return "Decode failed"
         case .other(let description): return description

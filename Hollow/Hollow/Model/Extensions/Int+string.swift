@@ -9,6 +9,7 @@
 import Foundation
 
 extension Int {
+    /// Use int_variable.string to get string representation of integers
     var string: String {
         return String(self)
     }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct HollowCommentContentView: View {
     @Binding var commentData: CommentData
@@ -41,8 +42,8 @@ struct HollowCommentContentView: View {
                         }
                         Group {
                             if commentData.text != "" {
-                                Text(commentData.text)
-                                    .hollowComment()
+                                Markdown(Document(stringLiteral: commentData.text))
+                                    .markdownStyle(.init(font: .system(size: 16), foregroundColor: .init(compact ? .hollowContentText : .primary)))
                             } else if commentData.type == .image && compact {
                                 (Text("[") + Text(LocalizedStringKey("Photo")) + Text("]"))
                                     .hollowContent()
@@ -61,7 +62,7 @@ struct HollowCommentContentView: View {
                 }
                 
             }
-            .foregroundColor(.hollowContentText)
+            .foregroundColor(compact ? .hollowContentText : .primary)
             if let padding = contentVerticalPadding {
                 Spacer(minLength: padding)
                     .fixedSize()

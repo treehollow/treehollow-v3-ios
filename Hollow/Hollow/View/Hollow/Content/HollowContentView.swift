@@ -22,6 +22,9 @@ struct HollowContentView: View {
         }
         
         HollowTextView(text: $postData.text, compactLineLimit: compact ? 6 : nil)
+            .markdownStyle(.init(font: .system(.body)))
+            // Disable URL actions in compact style
+            .disabled(compact)
         
         if postData.type == .vote {
             HollowVoteContentView(vote: Binding($postData.vote)!, viewModel: .init(voteHandler: voteHandler))

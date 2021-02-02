@@ -13,9 +13,18 @@ import Defaults
 /// For example:
 /// `static let imageBaseURL = Key<String?>("image.base.url")`
 /// Remember to register the initial value before any call to fetch the data.
+
+// MARK: - Model
 extension Defaults.Keys {
-    /// Global color set to use
+    /// Hollow type
     static let hollowType = Key<HollowType?>("config.hollow.type")
     /// Hollow config
     static let hollowConfig = Key<GetConfigRequestResult?>("net.hollow.config")
+}
+
+
+// MARK: - View
+extension Defaults.Keys {
+    /// Whether the user uses advanced search in `SearchView`
+    static let searchViewShowsAdvanced = Key<Bool>("search.shows.advanced", default: false)
 }

@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct SearchView: View {
     @Binding var presented: Bool
     @ObservedObject var viewModel: Search = .init()
-    @State private var showsAdvancedOptions = false
+    // TODO: Add other options in Defaults
+    @State private var showsAdvancedOptions = Defaults[.searchViewShowsAdvanced] {
+        didSet { Defaults[.searchViewShowsAdvanced] = showsAdvancedOptions }
+    }
     @State private var isSearching = false
     @State private var startPickerPresented = false
     @State private var endPickerPresented = false
     @State var searchText: String = ""
+    // TODO: Time constrains
     @State var startDate: Date = .init()
     @State var endDate: Date = .init()
     @State var selectsPartialSearch = false
@@ -28,18 +33,20 @@ struct SearchView: View {
                     }
                 }) {
                     Image(systemName: "xmark")
-                        .foregroundColor(.plainButton)
+                        .imageButton()
                         .animation(transitionAnimation)
+                        .padding(.trailing)
                 }
                 .animation(.none)
                 Spacer()
                 MyButton(action: {}, gradient: .vertical(gradient: .button), transitionAnimation: transitionAnimation) {
-                    Text(LocalizedStringKey("Search"))
-                        .font(.system(size: 12, weight: .semibold))
+                    Text(String.searchCapitalized)
+                        .font(.buttonText)
                         .foregroundColor(.white)
                 }
                 .animation(.none)
             }
+            .topBar()
             // Group for additional padding
             Group {
                 VStack(spacing: 0) {
@@ -63,7 +70,7 @@ struct SearchView: View {
                 }
                 .padding(.vertical)
                 Button(action:{ withAnimation { showsAdvancedOptions.toggle() }}) {
-                    Text(LocalizedStringKey("Advanced"))
+                    Text(String.advancedCapitalized)
                         .font(.system(size: 16, weight: .semibold))
                         .animation(transitionAnimation)
                     Image(systemName: "triangle.fill")
@@ -81,7 +88,7 @@ struct SearchView: View {
                         .animation(.searchViewTransition)
                 }
                 
-                Text(LocalizedStringKey("History"))
+                Text(String.historyCapitalized)
                     .font(.system(size: 16, weight: .semibold))
                     .animation(transitionAnimation)
                     .leading()
@@ -125,6 +132,7 @@ extension SearchView {
         .background(
             Blur(style: .systemUltraThinMaterial)
                 .edgesIgnoringSafeArea(.all)
+                // Dismiss the view when the user tap outside the picker
                 .onTapGesture {
                     withAnimation {
                         if isStart { startPickerPresented = false }
@@ -147,7 +155,7 @@ extension SearchView {
         
         var body: some View {
             VStack {
-                Text(LocalizedStringKey("Time"))
+                Text(String.timeCapitalized)
                     .fontWeight(.semibold)
                     .leading()
                 HStack {
@@ -167,7 +175,7 @@ extension SearchView {
                 .padding(.bottom)
                 .padding(.bottom, 5)
                 
-                Text(LocalizedStringKey("Range"))
+                Text(String.rangeCapitalized)
                     .fontWeight(.semibold)
                     .leading()
                     .padding(.bottom, 5)

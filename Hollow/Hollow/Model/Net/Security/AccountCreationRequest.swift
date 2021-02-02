@@ -45,11 +45,11 @@ struct AccountCreationRequestResultData {
     ///
     /// Please init with `AccountCreationRequestResult.ResultType(rawValue: Int)`, and should
     /// show error with `nil`, which means receiving negative code.
-//    enum ResultType: Int {
-//        case success = 0
-//    }
-//    /// The type of result received.
-//    var code: ResultType
+    //    enum ResultType: Int {
+    //        case success = 0
+    //    }
+    //    /// The type of result received.
+    //    var code: ResultType
     /// Access token.
     var token: String
     /// Device UUID
@@ -74,16 +74,6 @@ struct AccountCreationRequest: Request {
     typealias Result = AccountCreationRequestResult
     typealias ResultData = AccountCreationRequestResultData
     typealias Error = DefaultRequestError
-//    enum AccountCreationRequestError: RequestError{
-//        case decodeError
-//        case other(description: String)
-//        var description: String{
-//            switch self {
-//            case .decodeError: return "Decode failed"
-//            case .other(let description): return description
-//            }
-//        }
-//    }
     
     var configuration: AccountCreationRequestConfiguration
     
@@ -107,33 +97,33 @@ struct AccountCreationRequest: Request {
         AF.request(urlPath,
                    method: .post,
                    parameters: parameters,
-                   encoder: URLEncodedFormParameterEncoder.default).validate().responseJSON{ response in
-//            .validate(statusCode: 200..<300)
-//            .validate(contentType: ["application/json"])
-//            .responseData{ response in
-                switch response.result{
-                case .success:
-                    let jsonDecoder = JSONDecoder()
-                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                    do {
-                        // FIXME: NOT TESTED YET
-                        let result = try jsonDecoder.decode(AccountCreationRequestResult.self, from: response.data!)
-                        if result.code >= 0{
-                            // result code >= 0 valid!
-                            let resultData = AccountCreationRequestResultData(token: result.token, uuid: result.uuid)
-                            completion(resultData,nil)
+                   encoder: URLEncodedFormParameterEncoder.default).validate().responseJSON { response in
+                    //            .validate(statusCode: 200..<300)
+                    //            .validate(contentType: ["application/json"])
+                    //            .responseData{ response in
+                    switch response.result {
+                    case .success:
+                        let jsonDecoder = JSONDecoder()
+                        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                        do {
+                            // FIXME: NOT TESTED YET
+                            let result = try jsonDecoder.decode(AccountCreationRequestResult.self, from: response.data!)
+                            if result.code >= 0 {
+                                // result code >= 0 valid!
+                                let resultData = AccountCreationRequestResultData(token: result.token, uuid: result.uuid)
+                                completion(resultData,nil)
+                            }
+                            else {
+                                // invalid response
+                                completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
+                            }
+                        } catch {
+                            completion(nil,.decodeError)
+                            return
                         }
-                        else{
-                            // invalid response
-                            completion(nil,.other(description: result.msg ?? "error code from backend: \(result.code)"))
-                        }
-                    } catch {
-                        completion(nil,.decodeError)
-                        return
+                    case .failure(let error):
+                        completion(nil,.other(description: error.errorDescription ?? ""))
                     }
-                case .failure(let error):
-                    completion(nil,.other(description: error.errorDescription ?? ""))
-                }
-            }
+                   }
     }
 }

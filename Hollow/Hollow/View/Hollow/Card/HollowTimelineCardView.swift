@@ -45,20 +45,11 @@ struct HollowTimelineCardView: View {
                 }
                 if comments.count > maxCommentCount {
                     // FIXME: How to localize this stuff??
-                    Button(action:{
-                        withAnimation {
-                            maxCommentCount += 10
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "chevron.down")
-                                .font(.system(size: 15))
-                            Text("还有 \(comments.count - maxCommentCount) 条评论")
-                                .hollowComment()
-                        }
-                        .foregroundColor(.uiColor(.secondaryLabel))
-                        .padding(.top)
-                    }
+                    Text("还有 \(comments.count - maxCommentCount) 条评论")
+                        .hollowComment()
+
+                    .foregroundColor(.uiColor(.secondaryLabel))
+                    .padding(.top)
                 }
             }
         }

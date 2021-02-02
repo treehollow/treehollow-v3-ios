@@ -34,7 +34,7 @@ struct EmailCheckRequestResultData {
     ///
     /// Please init with `EmailCheckRequest.ResultType(rawValue: Int)`, and should
     /// show error with `nil`, which means receiving negative code.
-    enum ResultType: Int {
+    enum ResultType: Int, Equatable {
         /// Old user, shuold input password to login.
         case oldUser = 0
         /// New user, should check email for valid code and create password to sign up.

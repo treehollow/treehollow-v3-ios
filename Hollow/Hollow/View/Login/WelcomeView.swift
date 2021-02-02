@@ -8,6 +8,9 @@
 import SwiftUI
 import Defaults
 
+/// View for selecting configuration of the hollow.
+///
+/// Color set for this view is fixed to `other`.
 struct WelcomeView: View {
     @ObservedObject var viewModel: Welcome = .init()
     var body: some View {
@@ -24,7 +27,7 @@ struct WelcomeView: View {
                         .padding(.top, 70)
                         .padding(.bottom, 20)
                     NavigationLink(
-                        destination: Text(viewModel.hollowSelection?.string ?? ""),
+                        destination: LoginView(),
                         tag: HollowType.thu.rawValue,
                         selection: $viewModel.hollowSelection) {
                         MyButton(action: {
@@ -33,11 +36,12 @@ struct WelcomeView: View {
                             Defaults[.hollowConfig] = nil
                             viewModel.requestConfig(hollowType: .thu)
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
+                            // We are not localizing this
                             Text("T大树洞")
                                 .selectHollowButton()
                         }}
                     NavigationLink(
-                        destination: Text(viewModel.hollowSelection?.string ?? ""),
+                        destination: LoginView(),
                         tag: HollowType.pku.rawValue,
                         selection: $viewModel.hollowSelection) {
                         MyButton(action: {
@@ -115,6 +119,7 @@ struct WelcomeView: View {
                     selection: $viewModel.hollowSelection, label: {})
                 Spacer()
             }
+            .padding()
             .background(Color.background.edgesIgnoringSafeArea(.all))
             .navigationTitle(LocalizedStringKey("Configuration"))
         }
@@ -144,7 +149,7 @@ extension View {
         return self
             .foregroundColor(Color("hollow.content.text.other"))
             .padding(.vertical, 5)
-            .font(.system(size: 14, weight: .medium))
+            .font(.system(size: 15, weight: .medium))
             .frame(width: 150)
     }
 }

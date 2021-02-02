@@ -27,7 +27,7 @@ extension Text {
     func mainTabText(selected: Bool) -> some View {
         return self
             .fontWeight(.heavy)
-            .font(.system(size: selected ? 20 : 16))
+            .font(.system(size: selected ? 22 : 18))
             .foregroundColor(selected ? .mainPageSelected : .mainPageUnselected)
     }
 }

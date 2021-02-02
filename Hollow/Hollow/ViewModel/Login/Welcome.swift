@@ -36,17 +36,19 @@ class Welcome: ObservableObject {
                 DispatchQueue.main.async {
                     switch error {
                     case .serverError, .other:
-                        self.errorMessage = (NSLocalizedString("Error", comment: ""), error.description)
+                        self.errorMessage = (.errorCapitalized, error.description)
                     default:
                         if hollowType == .other {
-                            self.errorMessage = (NSLocalizedString("Error", comment: ""), error.description)
+                            self.errorMessage = (.errorCapitalized, error.description)
                         } else {
-                            self.errorMessage = (NSLocalizedString("Internal Error", comment: ""), error.description)
+                            self.errorMessage = (.internalErrorAllCapitalized, error.description)
                         }
                     }
                 }
                 return
             }
+            
+            // Save to Defaults
             Defaults[.hollowConfig] = result!
             DispatchQueue.main.async {
                 withAnimation {

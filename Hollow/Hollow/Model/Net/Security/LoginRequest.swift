@@ -57,15 +57,15 @@ struct LoginRequest: Request {
                    method: .post,
                    parameters: parameters,
                    encoder: URLEncodedFormParameterEncoder.default)
-            .validate().responseJSON{ response in
-                switch response.result{
+            .validate().responseJSON { response in
+                switch response.result {
                 case .success:
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
                         // FIXME: NOT TESTED YET
                         let result = try jsonDecoder.decode(LoginRequestResult.self, from: response.data!)
-                        if result.code >= 0{
+                        if result.code >= 0 {
                             // result code >= 0 valid!
                             let resultData = LoginRequestResultData(token: result.token, uuid: result.uuid)
                             completion(resultData,nil)

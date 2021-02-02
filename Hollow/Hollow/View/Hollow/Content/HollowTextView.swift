@@ -15,6 +15,7 @@ struct HollowTextView: View {
     var body: some View {
         Markdown(Document(stringLiteral: text))
             .lineLimit(compactLineLimit)
+        // TODO: Handle URL actions
     }
 }
 

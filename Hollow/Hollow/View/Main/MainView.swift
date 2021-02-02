@@ -9,21 +9,22 @@ import SwiftUI
 
 struct MainView: View {
     @State private var page: Page = .timeline
-    @State private var isSearching = true
+    @State private var isSearching = false
     
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack(spacing: 12) {
                 HeaderView(page: $page, isSearching: $isSearching)
                     .padding(.horizontal)
+                    .padding(.top, 10)
                 // We use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`, but be careful that this trick could fail in
                 // future updates.
                 CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
                     WanderView()
                         .tag(Page.wander)
-                    TimelineView()
+                    TimelineView(isSearching: $isSearching)
                         .tag(Page.timeline)
                 }
             }
@@ -58,7 +59,7 @@ extension MainView {
                             page = .wander
                         }
                     }) {
-                        Text(LocalizedStringKey("Wander"))
+                        Text(String.wanderCapitalized)
                             .mainTabText(selected: page == .wander)
                             .animation(.spring())
                     }
@@ -72,7 +73,7 @@ extension MainView {
                             page = .timeline
                         }
                     }) {
-                        Text(LocalizedStringKey("Timeline"))
+                        Text(String.timelineCapitalized)
                             .mainTabText(selected: page == .timeline)
                             .animation(.spring())
                         
@@ -81,39 +82,23 @@ extension MainView {
                 }
                 .layoutPriority(1)
                 Spacer()
-                Button(action:{
-                    // Navigate to search view
-                    withAnimation(.searchViewTransition) {
-                        isSearching = true
+                Group {
+                    Button(action:{}) {
+                        Image(systemName: "flame")
+                            .padding(.horizontal, 10)
                     }
-                }) {
-                    HStack {
-                        Text("Search")
-                        Spacer()
-                        Image(systemName: "magnifyingglass")
+                    Button(action:{}) {
+                        // TODO: bell.badge
+                        Image(systemName: "bell")
+                            .padding(.horizontal, 7)
                     }
-                    .font(.system(size: 14))
-                    .foregroundColor(.mainSearchBarText)
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 10)
-                    .background(Capsule().foregroundColor(.mainSearchBarBackground))
-                    .overlay(Capsule().stroke(style: .init(lineWidth: 0.7)).foregroundColor(.mainSearchBarStroke))
-                    .padding(.trailing, 5)
+                    Button(action:{}) {
+                        Image(systemName: "person")
+                            .padding(.leading, 7)
+                    }
                 }
-                Button(action:{}) {
-                    // TODO: bell.badge
-                    Image(systemName: "bell")
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundColor(.mainBarButton)
-                        .padding(.horizontal, 5)
-                }
-                Button(action:{}) {
-                    Image(systemName: "person")
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundColor(.mainBarButton)
-                        .padding(.horizontal, 5)
-                }
-                
+                .font(.system(size: 20, weight: .medium))
+                .foregroundColor(.mainBarButton)
             }
 
         }
@@ -123,5 +108,6 @@ extension MainView {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+//            .colorScheme(.dark)
     }
 }

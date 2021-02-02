@@ -90,12 +90,23 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setScrollView()
+    }
+        
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setScrollView()
+    }
+    
+    private func setScrollView() {
         if ready { return } // avoid running more than once
         ready = true
         
         self.scrollView = findUIScrollView(view: self.view)
         scrollView?.delegate = self
+        scrollView?.scrollsToTop = true
         if refresh != nil {
             scrollView?.refreshControl = UIRefreshControl()
             scrollView?.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
@@ -106,7 +117,6 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         for subView in view.subviews {
             subView.backgroundColor = nil
         }
-        super.viewDidAppear(animated)
     }
     
     func findUIScrollView(view: UIView?) -> UIScrollView? {
@@ -149,4 +159,5 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         isScrolling = false
     }
+    
 }

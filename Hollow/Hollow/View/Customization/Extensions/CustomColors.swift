@@ -38,7 +38,7 @@ extension Color {
     
     static var mainPageSelected: Color { hollowContentText }
     
-    static var mainSearchBarBackground: Color { Color("main.searchbar.background") }
+    static var mainSearchBarBackground: Color = hollowCardBackground
     
     static var mainSearchBarText: Color { mainPageUnselected }
     
