@@ -597,13 +597,13 @@
 		0E854A3825B4715700E512F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0EFF4AE025BAA5F900D240BC /* README.md */,
+				0EBE49EB25CA73070027F439 /* Constants.swift */,
 				0E67193325C2C136002683B8 /* Types */,
 				0E7857F025B74B950000C659 /* Extensions */,
 				0E7857A525B732380000C659 /* Utilities */,
 				0E78579325B6DC1F0000C659 /* Data */,
 				0E854A3925B4715F00E512F4 /* Net */,
-				0EFF4AE025BAA5F900D240BC /* README.md */,
-				0EBE49EB25CA73070027F439 /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

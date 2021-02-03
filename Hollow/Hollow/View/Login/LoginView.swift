@@ -112,13 +112,11 @@ struct LoginView: View {
             }, gradient: .vertical(gradient: .button),
             transitionAnimation: .default,
             cornerRadius: 12) {
-                HStack {
-                    Text(buttonText)
-                        .fontWeight(.medium)
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .horizontalCenter()
-                }
+                Text(buttonText)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding(8)
+                    .horizontalCenter()
             }
             .disabled(disableButton)
             
@@ -203,16 +201,11 @@ extension LoginView {
         @ObservedObject var viewModel: Login
         
         //    private var passwordValidate: Bool { Constants.Register.passwordRegex.firstMatch(in: viewModel.originalPassword, range: NSRange(viewModel.originalPassword)!) != nil }
-        private var passwordValid: Bool { true }
+        private var passwordValid: Bool { viewModel.originalPassword.count >= 8 && !viewModel.originalPassword.contains(" ") }
         private var confirmedPasswordValid: Bool { viewModel.confirmedPassword == viewModel.originalPassword }
 
         private let passwordRequirements: String =
-            NSLocalizedString("Requirements", comment: "") + ":\n" +
-            NSLocalizedString("at least one digit;", comment: "") + "\n" +
-            NSLocalizedString("at least one lowercase character;", comment: "") + "\n" +
-            NSLocalizedString("at least one uppercase character;", comment: "") + "\n" +
-            NSLocalizedString("at least one special character;", comment: "") + "\n" +
-            NSLocalizedString("at least 8 characters in length, but no more than 32.", comment: "")
+            NSLocalizedString("The password should contains at least 8 characters without blank spaces.", comment: "")
 
         var body: some View {
             // Verification code text field

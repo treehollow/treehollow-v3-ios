@@ -18,7 +18,11 @@ struct WelcomeView: View {
             VStack(spacing: 0) {
                 PrimaryBackgroundShape()
                     .edgesIgnoringSafeArea(.all)
-                    .frame(maxHeight: 170)
+                    
+                    // FIXME: This code should be fixed if we are to support iPad or landscape mode.
+                    // Using GeometryReader will have some very strange behaviours on `LoginView`,
+                    // so we don't use here unless we have figured it out.
+                    .frame(maxHeight: UIScreen.main.bounds.height * 0.22)
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
                     Text(LocalizedStringKey("Select Hollow"))

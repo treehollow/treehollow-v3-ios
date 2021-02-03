@@ -71,7 +71,7 @@ struct LoginRequest: Request {
                     let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!
-                        let resultData = ResultData(token: result.token, uuid: result.uuid)
+                        let resultData = ResultData(token: result.token!, uuid: result.uuid!)
                         completion(resultData, nil)
                     } else {
                         // invalid response
