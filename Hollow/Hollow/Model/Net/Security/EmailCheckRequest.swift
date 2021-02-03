@@ -63,17 +63,9 @@ struct EmailCheckRequest: Request {
     typealias Result = EmailCheckRequestResult
     typealias ResultData = EmailCheckRequestResultData
     typealias Error = DefaultRequestError
-    //    enum EmailCheckRequestError: RequestError {
-    //        case decodeError
-    //        case other(description: String)
-    //        var description: String {
-    //            switch self {
-    //            case .decodeError: return "Decode failed"
-    //            case .other(let description): return description
-    //            }
-    //        }
-    //    }
+
     var configuration: EmailCheckRequestConfiguration
+    
     init(configuration: EmailCheckRequestConfiguration) {
         self.configuration = configuration
     }

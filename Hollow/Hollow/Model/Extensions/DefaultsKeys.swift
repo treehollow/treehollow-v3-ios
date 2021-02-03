@@ -7,6 +7,7 @@
 //
 
 import Defaults
+import Foundation
 
 /// Store default's key here when firstly introduce it.
 /// Store the keys for `Defaults` here, declaring them static const member of `Defaults.Keys`
@@ -19,7 +20,11 @@ extension Defaults.Keys {
     /// Hollow type
     static let hollowType = Key<HollowType?>("config.hollow.type")
     /// Hollow config
-    static let hollowConfig = Key<GetConfigRequestResult?>("net.hollow.config")
+    static let hollowConfig = Key<HollowConfig?>("net.hollow.config")
+    /// APN devide token
+    static let deviceToken = Key<Data?>("user.device.token")
+    /// User access token
+    static let accessToken = Key<String?>("user.access.token")
 }
 
 

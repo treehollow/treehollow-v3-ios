@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import Defaults
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Set the devide token to nil to avoid using invalid token.
+        Defaults[.deviceToken] = nil
+        // Register for APN
+//        UIApplication.shared.register
+        UIApplication.shared.registerForRemoteNotifications()
         return true
     }
 
@@ -30,7 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Save to defaults
+        Defaults[.deviceToken] = deviceToken
+//        print(String(data: deviceToken, encoding: .utf8))
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failt ro register remote notification: \(error.localizedDescription)")
+    }
 
 }
 

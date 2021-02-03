@@ -10,7 +10,7 @@
 		000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */; };
 		003920F325C54BB900883BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 003920F225C54BB900883BE9 /* Alamofire */; };
 		004BE3E625C83EC200211F4E /* NetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004BE3E525C83EC200211F4E /* NetTest.swift */; };
-		008C729C25CAA2390092AAB8 /* StringSHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C729B25CAA2390092AAB8 /* StringSHA256.swift */; };
+		008C729C25CAA2390092AAB8 /* String+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C729B25CAA2390092AAB8 /* String+SHA256.swift */; };
 		0E09EB2525C13A4D00F0A11F /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2425C13A4D00F0A11F /* Blur.swift */; };
 		0E09EB2E25C1412E00F0A11F /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2D25C1412E00F0A11F /* MyButton.swift */; };
 		0E28125125B7FC5600DCF78D /* ViewLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28125025B7FC5600DCF78D /* ViewLayouts.swift */; };
@@ -56,7 +56,7 @@
 		0E7857ED25B74B340000C659 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7857EC25B74B340000C659 /* Defaults */; };
 		0E7857F225B74BAD0000C659 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */; };
 		0E7F5F9B25C2E5B600D3826C /* ReCAPTCHAWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5F9A25C2E5B600D3826C /* ReCAPTCHAWebView.swift */; };
-		0E7F5F9E25C3169700D3826C /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5F9D25C3169700D3826C /* Login.swift */; };
+		0E7F5F9E25C3169700D3826C /* EmailCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5F9D25C3169700D3826C /* EmailCheck.swift */; };
 		0E813A7325BF29E6000CCF35 /* HollowTimelineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */; };
 		0E8549BF25B3F9AA00E512F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */; };
 		0E8549C125B3F9AA00E512F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8549C025B3F9AA00E512F4 /* SceneDelegate.swift */; };
@@ -123,7 +123,7 @@
 /* Begin PBXFileReference section */
 		000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedHTTPRequest.swift; sourceTree = "<group>"; };
 		004BE3E525C83EC200211F4E /* NetTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTest.swift; sourceTree = "<group>"; };
-		008C729B25CAA2390092AAB8 /* StringSHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSHA256.swift; sourceTree = "<group>"; };
+		008C729B25CAA2390092AAB8 /* String+SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SHA256.swift"; sourceTree = "<group>"; };
 		0E09EB2425C13A4D00F0A11F /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0E09EB2D25C1412E00F0A11F /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		0E28125025B7FC5600DCF78D /* ViewLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayouts.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		0E78579F25B731280000C659 /* HollowCommentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentContentView.swift; sourceTree = "<group>"; };
 		0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		0E7F5F9A25C2E5B600D3826C /* ReCAPTCHAWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReCAPTCHAWebView.swift; sourceTree = "<group>"; };
-		0E7F5F9D25C3169700D3826C /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0E7F5F9D25C3169700D3826C /* EmailCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCheck.swift; sourceTree = "<group>"; };
 		0E813A7225BF29E6000CCF35 /* HollowTimelineCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCard.swift; sourceTree = "<group>"; };
 		0E8549BB25B3F9AA00E512F4 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8549BE25B3F9AA00E512F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -228,6 +228,7 @@
 		0EE68E7F25C2AB87004F163B /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0EF16D3525C0565A00B63833 /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		0EF16D3C25C0760900B63833 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		0EF49F3325CAC7FC00B6DAAB /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0EF6492F25C5449D00091D07 /* MyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextField.swift; sourceTree = "<group>"; };
 		0EFCFCF925C1B0D40091EC04 /* View+divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+divider.swift"; sourceTree = "<group>"; };
 		0EFCFCFF25C24E130091EC04 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -322,7 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE68E7F25C2AB87004F163B /* Welcome.swift */,
-				0E7F5F9D25C3169700D3826C /* Login.swift */,
+				0E7F5F9D25C3169700D3826C /* EmailCheck.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -389,7 +390,7 @@
 				0E9F26BE25BE9D8800CA56DE /* Int+string.swift */,
 				0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */,
 				0E4690AF25C99829003D62B1 /* Localization.swift */,
-				008C729B25CAA2390092AAB8 /* StringSHA256.swift */,
+				008C729B25CAA2390092AAB8 /* String+SHA256.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -414,6 +415,7 @@
 		0E8549BD25B3F9AA00E512F4 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
+				0EF49F3325CAC7FC00B6DAAB /* Hollow.entitlements */,
 				0E854A3825B4715700E512F4 /* Model */,
 				0E78577225B582FE0000C659 /* ViewModel */,
 				0E8549D325B3F9F200E512F4 /* View */,
@@ -810,7 +812,7 @@
 				0E78578025B58CF60000C659 /* LoginRequest.swift in Sources */,
 				0E78576B25B54BB60000C659 /* AttentionListSearchRequest.swift in Sources */,
 				0E2FE97425BE807F00DC1220 /* CustomGradient.swift in Sources */,
-				0E7F5F9E25C3169700D3826C /* Login.swift in Sources */,
+				0E7F5F9E25C3169700D3826C /* EmailCheck.swift in Sources */,
 				0E09EB2525C13A4D00F0A11F /* Blur.swift in Sources */,
 				0E44BBED25BA9DA500B78B30 /* SetPushRequest.swift in Sources */,
 				0E854A3325B43B6C00E512F4 /* HollowImage.swift in Sources */,
@@ -837,7 +839,7 @@
 				0E78573725B4E9B50000C659 /* SystemMessageRequest.swift in Sources */,
 				0E78574225B4ED9B0000C659 /* SendCommentRequest.swift in Sources */,
 				0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */,
-				008C729C25CAA2390092AAB8 /* StringSHA256.swift in Sources */,
+				008C729C25CAA2390092AAB8 /* String+SHA256.swift in Sources */,
 				0E8549D925B3FA4100E512F4 /* WelcomeView.swift in Sources */,
 				0E854A2925B3FC0600E512F4 /* RegulationView.swift in Sources */,
 				0EC0DD6925C952CB0035039C /* View+topBar.swift in Sources */,
@@ -1006,6 +1008,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
@@ -1029,6 +1032,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
