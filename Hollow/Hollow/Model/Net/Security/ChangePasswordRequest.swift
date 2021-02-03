@@ -13,11 +13,11 @@ struct ChangePasswordRequestConfiguration {
     /// User's email
     var email: String
     /// Previous hashed password
-    var oldHashedPassword: String
+    var oldPassword: String
     /// New hashed password
-    var newHashedPassword: String
+    var newPassword: String
     
-    var hollowConfig: GetConfigRequestResult
+    var hollowConfig: HollowConfig
 }
 
 /// Result of an changing password attempt.
@@ -47,8 +47,8 @@ struct ChangePasswordRequest: Request {
         let parameters =
             [
                 "email": self.configuration.email,
-                "old_password_hashed": self.configuration.oldHashedPassword,
-                "new_password_hashed": self.configuration.newHashedPassword,
+                "old_password_hashed": self.configuration.oldPassword.sha256().sha256(),
+                "new_password_hashed": self.configuration.newPassword.sha256().sha256(),
             ] as [String: String]
         let urlPath =
             self.configuration.hollowConfig.apiRoot + "v3/security/login/change_password" + self

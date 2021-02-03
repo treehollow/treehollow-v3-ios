@@ -11,7 +11,7 @@
 import Foundation
 
 struct NetTest {
-    var config: GetConfigRequestResult?
+    var config: HollowConfig?
     init() {
         // GetConfigRequestConfiguration
         GetConfigRequest(configuration: GetConfigRequestConfiguration(hollowType: .thu, customAPIRoot: nil)!).performRequest { result, error in

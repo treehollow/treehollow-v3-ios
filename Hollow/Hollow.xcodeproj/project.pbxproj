@@ -10,6 +10,7 @@
 		000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */; };
 		003920F325C54BB900883BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 003920F225C54BB900883BE9 /* Alamofire */; };
 		004BE3E625C83EC200211F4E /* NetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004BE3E525C83EC200211F4E /* NetTest.swift */; };
+		008C729C25CAA2390092AAB8 /* StringSHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C729B25CAA2390092AAB8 /* StringSHA256.swift */; };
 		0E09EB2525C13A4D00F0A11F /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2425C13A4D00F0A11F /* Blur.swift */; };
 		0E09EB2E25C1412E00F0A11F /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09EB2D25C1412E00F0A11F /* MyButton.swift */; };
 		0E28125125B7FC5600DCF78D /* ViewLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28125025B7FC5600DCF78D /* ViewLayouts.swift */; };
@@ -122,6 +123,7 @@
 /* Begin PBXFileReference section */
 		000ED6E325BD79CE001D334D /* CachedHTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedHTTPRequest.swift; sourceTree = "<group>"; };
 		004BE3E525C83EC200211F4E /* NetTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTest.swift; sourceTree = "<group>"; };
+		008C729B25CAA2390092AAB8 /* StringSHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSHA256.swift; sourceTree = "<group>"; };
 		0E09EB2425C13A4D00F0A11F /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0E09EB2D25C1412E00F0A11F /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		0E28125025B7FC5600DCF78D /* ViewLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayouts.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				0E9F26BE25BE9D8800CA56DE /* Int+string.swift */,
 				0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */,
 				0E4690AF25C99829003D62B1 /* Localization.swift */,
+				008C729B25CAA2390092AAB8 /* StringSHA256.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				0E78573725B4E9B50000C659 /* SystemMessageRequest.swift in Sources */,
 				0E78574225B4ED9B0000C659 /* SendCommentRequest.swift in Sources */,
 				0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */,
+				008C729C25CAA2390092AAB8 /* StringSHA256.swift in Sources */,
 				0E8549D925B3FA4100E512F4 /* WelcomeView.swift in Sources */,
 				0E854A2925B3FC0600E512F4 /* RegulationView.swift in Sources */,
 				0EC0DD6925C952CB0035039C /* View+topBar.swift in Sources */,
