@@ -25,7 +25,7 @@ struct EmailCheckRequestConfiguration {
     // NO USE
     var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
     /// constant used for http request
-    var hollowConfig: GetConfigRequestResult
+    var hollowConfig: HollowConfig
 }
 
 /// Result Data of EmailCheck
@@ -99,6 +99,7 @@ struct EmailCheckRequest: Request {
                         let resultData = EmailCheckRequestResultData(
                             result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!)
                         completion(resultData, nil)
+                        //debugPrint(response.response?.allHeaderFields)
                     } else {
                         // invalid response
                         completion(

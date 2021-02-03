@@ -11,13 +11,13 @@ import UIKit
 
 struct LoginRequestConfiguration {
     var email: String
-    var hashedPassword: String
+    var password: String
     let deviceType = 2
     let deviceInfo = UIDevice.current.name
     // TODO: Device token
     var deviceToken: String
     
-    var hollowConfig: GetConfigRequestResult
+    var hollowConfig: HollowConfig
 }
 
 struct LoginRequestResult: Codable {
@@ -50,7 +50,7 @@ struct LoginRequest: Request {
         let parameters =
             [
                 "email": self.configuration.email,
-                "password_hashed": self.configuration.hashedPassword,
+                "password_hashed": self.configuration.password.sha256().sha256(),
                 "device_type": self.configuration.deviceType,
                 "device_info": self.configuration.deviceInfo,
                 "ios_device_token": self.configuration.deviceToken,

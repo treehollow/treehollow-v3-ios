@@ -19,7 +19,7 @@ extension Defaults.Keys {
     /// Hollow type
     static let hollowType = Key<HollowType?>("config.hollow.type")
     /// Hollow config
-    static let hollowConfig = Key<GetConfigRequestResult?>("net.hollow.config")
+    static let hollowConfig = Key<HollowConfig?>("net.hollow.config")
 }
 
 

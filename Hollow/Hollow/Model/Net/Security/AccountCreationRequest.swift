@@ -7,13 +7,14 @@
 
 import Alamofire
 import UIKit
+import Foundation
 
 /// Configuraions for creating an account.
 struct AccountCreationRequestConfiguration {
     /// User's email.
     var email: String
-    /// sha256 of user's password.
-    var hashedPassword: String
+    /// store passwd
+    var password: String
     /// Device type, 2 for iOS.
     let deviceType = 2
     /// Device name.
@@ -27,7 +28,7 @@ struct AccountCreationRequestConfiguration {
     var deviceToken: String
     /// See `AccountCreationConfiguration`
     ///
-    var hollowConfig: GetConfigRequestResult
+    var hollowConfig: HollowConfig
     //    /// Returns nil when both `oldToken` and `validCode` are `nil`.
     //    init?(email: String, hashedPassword: String, oldToken: String?, validCode: String?) {
     //        // Check for invalid configuration
@@ -87,7 +88,7 @@ struct AccountCreationRequest: Request {
         var parameters =
             [
                 "email": self.configuration.email,
-                "password_hashed": self.configuration.hashedPassword,
+                "password_hashed": self.configuration.password.sha256().sha256(),
                 "device_type": self.configuration.deviceType,
                 "device_info": self.configuration.deviceInfo,
                 "ios_device_token": self.configuration.deviceToken,
