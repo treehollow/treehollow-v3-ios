@@ -18,13 +18,27 @@ class Welcome: ObservableObject {
     @Published var errorMessage: (title: String, message: String)? = nil
     
     func requestConfig(hollowType: HollowType, customConfigURL: String? = nil) {
-        if hollowType == .other && (customConfigURL == "" || customConfigURL == nil) {
-            errorMessage = (NSLocalizedString("Please input URL for your custom configuration", comment: ""), "")
-            return
+        
+        // Validate the parameters
+        if hollowType == .other {
+            if customConfigURL == "" || customConfigURL == nil {
+                errorMessage = (NSLocalizedString("Please input URL for your custom configuration", comment: ""), "")
+                return
+            }
+            if customConfigURL == Constants.HollowConfig.thuConfigURL {
+                errorMessage = (NSLocalizedString("You are using configuration for", comment: "") + " T大树洞. " + NSLocalizedString("Please choose the corresponding entry in 'Select Hollow'.", comment: ""), "")
+                return
+            }
+            if customConfigURL == Constants.HollowConfig.pkuConfigURL {
+                errorMessage = (NSLocalizedString("You are using configuration for", comment: "") + " 未名树洞. " + NSLocalizedString("Please choose the corresponding entry in 'Select Hollow'.", comment: ""), "")
+                return
+            }
         }
+        
         withAnimation {
             self.isLoadingConfig = true
         }
+        
         let request = GetConfigRequest(configuration: GetConfigRequestConfiguration(hollowType: hollowType, customAPIRoot: customConfigURL)!)
         
         request.performRequest { result, error in

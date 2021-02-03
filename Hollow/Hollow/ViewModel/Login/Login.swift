@@ -25,14 +25,19 @@ class Login: ObservableObject {
     
     @Published var errorMessage: (title: String, message: String)?
     
+    @Published var isLoading = false
+    
     func checkEmail() {
         guard let config = Defaults[.hollowConfig] else { return }
         guard email != "" else {
             errorMessage = (title: String.invalidInputLocalized.capitalized, message: NSLocalizedString("Email cannot be empty.", comment: ""))
             return
         }
+        isLoading = true
+        print("email: \(email + "@" + emailSuffix)")
         let request = EmailCheckRequest(configuration: .init(email: email + "@" + emailSuffix, hollowConfig: config))
         request.performRequest(completion: { resultData, error in
+            self.isLoading = false
             if let error = error {
                 debugPrint(error.description)
                 switch error {

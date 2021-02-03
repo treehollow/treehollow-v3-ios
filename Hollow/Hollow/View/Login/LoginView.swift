@@ -10,21 +10,61 @@ import Defaults
 
 struct LoginView: View {
     @ObservedObject var viewModel: Login = .init()
-    @State var reCAPTCHAToken: String = ""
-    @State private var pageLoadingFinish = false
     @State private var confirmedPassword = ""
     
-    private var showsRegisterComponents: Bool {
-        viewModel.emailCheckType == .newUser ||
-            (viewModel.emailCheckType == .reCAPTCHANeeded && viewModel.reCAPTCHAToken != "")
+    /// Determine when we should check user's email.
+    ///
+    /// This value is `true` when email check hasn't been performed yet,
+    /// or the return code is indicating `reCAPTCHANeeded`.
+    private var shouldCheckEmail: Bool { viewModel.emailCheckType == nil || viewModel.emailCheckType == .reCAPTCHANeeded }
+    
+    // TODO: Handle invalid code
+    /// Determine when we should present the reCAPTCHA verification interface.
+    ///
+    /// This value is `true` when we has checked that this email should register after a reCAPTCHA verification
+    /// and we don't have a token yet.
+    private var shouldShowReCAPTCHA: Bool { viewModel.emailCheckType == .reCAPTCHANeeded && viewModel.reCAPTCHAToken == "" }
+    
+    /// Determine when the user should register with verification code and password.
+    ///
+    /// This value is `true` only when the return code indicates `newUser`.
+    private var shouldRegister: Bool {
+        viewModel.emailCheckType == .newUser
     }
     
+    /// Determine when the user should enter the password to login.
+    ///
+    /// This value is `true` only when the return code indicates `oldUser`.
+    private var shouldLogin: Bool { viewModel.emailCheckType == .oldUser }
+    
+    private var buttonText: String {
+        if shouldCheckEmail { return String.continueLocalized.capitalized }
+        if shouldRegister { return String.registerLocalized.capitalized }
+        if shouldLogin { return String.loginLocalized.capitalized }
+        if shouldShowReCAPTCHA { return String.continueLocalized.capitalized }
+        return ""
+    }
+    
+    private var passwordValidate: Bool { Constants.Register.passwordRegex.firstMatch(in: viewModel.originalPassword, range: NSRange(viewModel.originalPassword)!) != nil }
+    
+    private let passwordRequirements: String =
+        NSLocalizedString("Requirements", comment: "") + ":\n" +
+        NSLocalizedString("at least one digit", comment: "") + "\n" +
+        NSLocalizedString("at least one lowercase character", comment: "") + "\n" +
+        NSLocalizedString("at least one uppercase character", comment: "") + "\n" +
+        NSLocalizedString("at least one special character", comment: "") + "\n" +
+        NSLocalizedString("at least 8 characters in length, but no more than 32", comment: "")
+
+    
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(spacing: 20) {
+        VStack(spacing: 0) {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 25) {
                     let configuration = Defaults[.hollowConfig]!
+                    
+                    // Enter email text field
                     MyTextField(text: $viewModel.email, placeHolder: NSLocalizedString("Enter your email", comment: ""), title: String.emailAddressLocalized.firstLetterUppercased) {
+                        // Accessory view for selecting email suffix
                         return Menu(content: {
                             ForEach(0..<configuration.emailSuffixes.count) { index in
                                 Button(configuration.emailSuffixes[index], action: {
@@ -43,37 +83,74 @@ struct LoginView: View {
                     }
                     .padding(.top)
                     
-                    if showsRegisterComponents {
-                        MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: String.emailVerificationCodeLocalized.capitalized)
-                        MyTextField<EmptyView>(text: $viewModel.originalPassword, title: String.passWordLocalized.capitalized, isSecureContent: true)
+                    if shouldRegister {
+                        // Verification code text field
+                        MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: String.emailVerificationCodeLocalized.capitalized, footer: NSLocalizedString("Please check your inbox.", comment: ""))
+                        
+                        // Password text field
+                        MyTextField(text: $viewModel.originalPassword, title: String.passWordLocalized.capitalized, footer: passwordRequirements, isSecureContent: true) {
+                            Group {
+                                if viewModel.originalPassword != "" && !passwordValidate {
+                                    Image(systemName: "xmark")
+                                        .foregroundColor(.red)
+                                } else if viewModel.originalPassword != "" {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.green)
+                                }
+                            }
+                            .font(.system(size: 15))
+                        }
+                        
+                        // Confirmed password text field
                         MyTextField<EmptyView>(text: $confirmedPassword, title: String.confirmedPassWordLocalized.capitalized, isSecureContent: true)
-                            .textContentType(.password)
                     }
+                    
                 }
             }
-//            Spacer()
+
             MyButton(action: {
-                viewModel.checkEmail()
+                if shouldCheckEmail { viewModel.checkEmail() }
+                if shouldRegister { viewModel.register() }
+                if shouldLogin { viewModel.login() }
             }, gradient: .vertical(gradient: .button),
             transitionAnimation: .default,
             cornerRadius: 12) {
-                Text(String.loginLocalized.capitalized)
-                    .fontWeight(.medium)
-                    .foregroundColor(.white)
-                    .padding(8)
-                    .horizontalCenter()
+                HStack {
+                    Text(buttonText)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .horizontalCenter()
+                    if viewModel.isLoading {
+                        Spinner(color: .white, desiredWidth: 20)
+                    }
+                }
             }
+            .disabled(viewModel.isLoading)
+            
         }
         .padding(.horizontal)
         .padding(.horizontal)
+        
+        // Present reCAPTCHA verification interface when needed
         .fullScreenCover(isPresented: $viewModel.reCAPTCHAPresented, content: {
-            ReCAPTCHAPageView(presented: $viewModel.reCAPTCHAPresented, token: $viewModel.reCAPTCHAToken)
+            ReCAPTCHAPageView(presented: $viewModel.reCAPTCHAPresented, successHandler: { token in
+                withAnimation {
+                    viewModel.reCAPTCHAPresented = false
+                    viewModel.reCAPTCHAToken = token
+                    // Check again with the token
+                    viewModel.checkEmail()
+                }
+            })
         })
+        
+        // Show alert if there's any error message provided
         .alert(isPresented: .constant(viewModel.errorMessage != nil)) {
             // We should restore the error message after presenting the alert
             Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
         }
-        .navigationTitle(String.loginLocalized.capitalized)
+        
+        .navigationTitle(Defaults[.hollowConfig]!.name)
         .background(Color.background.edgesIgnoringSafeArea(.all))
     }
 }
@@ -81,7 +158,7 @@ struct LoginView: View {
 extension LoginView {
     private struct ReCAPTCHAPageView: View {
         @Binding var presented: Bool
-        @Binding var token: String
+        let successHandler: (String) -> Void
         @State private var pageLoadingFinish = false
         
         var body: some View {
@@ -100,12 +177,7 @@ extension LoginView {
                     withAnimation {
                         pageLoadingFinish = true
                     }
-                }, successHandler: { token in
-                    withAnimation {
-                        self.token = token
-                        presented = false
-                    }
-                })
+                }, successHandler: successHandler)
                 .onAppear {
                     pageLoadingFinish = false
                 }

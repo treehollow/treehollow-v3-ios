@@ -62,7 +62,7 @@ struct WelcomeView: View {
                             Defaults[.hollowType] = .other
                             viewModel.hollowSelection = HollowType.other.rawValue
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
-                            Text(LocalizedStringKey("Others"))
+                            Text(String.othersLocalized.capitalized)
                                 .selectHollowButton()
                         }}
                     Spacer()
@@ -96,7 +96,6 @@ struct WelcomeView: View {
         var body: some View {
             VStack {
                 MyTextField<EmptyView>(text: $text, placeHolder: NSLocalizedString("URL for custom configuration", comment: ""), title: NSLocalizedString("Custom Configuration", comment: ""), content: nil)
-                    .padding()
                     .navigationBarItems(
                         trailing:
                             Group {
@@ -120,8 +119,9 @@ struct WelcomeView: View {
                 Spacer()
             }
             .padding()
+            .padding(.horizontal)
             .background(Color.background.edgesIgnoringSafeArea(.all))
-            .navigationTitle(LocalizedStringKey("Configuration"))
+            .navigationTitle(String.othersLocalized.capitalized)
         }
     }
     

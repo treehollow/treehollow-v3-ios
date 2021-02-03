@@ -107,13 +107,13 @@
 		0EBB371F25BFBB260060A62A /* HollowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB371E25BFBB260060A62A /* HollowContentView.swift */; };
 		0EBB372525BFD9BD0060A62A /* TestPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB372425BFD9BD0060A62A /* TestPostData.swift */; };
 		0EBB372A25BFDA840060A62A /* TestCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB372925BFDA840060A62A /* TestCommentData.swift */; };
+		0EBE49EC25CA73070027F439 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE49EB25CA73070027F439 /* Constants.swift */; };
 		0EC0DD6625C950760035039C /* Image+imageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0DD6525C950760035039C /* Image+imageButton.swift */; };
 		0EC0DD6925C952CB0035039C /* View+topBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0DD6825C952CB0035039C /* View+topBar.swift */; };
 		0EE68E8025C2AB87004F163B /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE68E7F25C2AB87004F163B /* Welcome.swift */; };
 		0EF16D3625C0565A00B63833 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3525C0565A00B63833 /* CustomTabView.swift */; };
 		0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3C25C0760900B63833 /* ImageSaver.swift */; };
 		0EF6493025C5449D00091D07 /* MyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6492F25C5449D00091D07 /* MyTextField.swift */; };
-		0EF6493325C547BE00091D07 /* CustomConfigConfigurationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6493225C547BE00091D07 /* CustomConfigConfigurationViewModel.swift */; };
 		0EFCFCFA25C1B0D40091EC04 /* View+divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCFCF925C1B0D40091EC04 /* View+divider.swift */; };
 		0EFCFD0025C24E130091EC04 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCFCFF25C24E130091EC04 /* Search.swift */; };
 		0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF4AF225BE5D3D00D240BC /* HollowTextView.swift */; };
@@ -220,13 +220,13 @@
 		0EBB371E25BFBB260060A62A /* HollowContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowContentView.swift; sourceTree = "<group>"; };
 		0EBB372425BFD9BD0060A62A /* TestPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPostData.swift; sourceTree = "<group>"; };
 		0EBB372925BFDA840060A62A /* TestCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCommentData.swift; sourceTree = "<group>"; };
+		0EBE49EB25CA73070027F439 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0EC0DD6525C950760035039C /* Image+imageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+imageButton.swift"; sourceTree = "<group>"; };
 		0EC0DD6825C952CB0035039C /* View+topBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+topBar.swift"; sourceTree = "<group>"; };
 		0EE68E7F25C2AB87004F163B /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0EF16D3525C0565A00B63833 /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		0EF16D3C25C0760900B63833 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		0EF6492F25C5449D00091D07 /* MyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextField.swift; sourceTree = "<group>"; };
-		0EF6493225C547BE00091D07 /* CustomConfigConfigurationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomConfigConfigurationViewModel.swift; sourceTree = "<group>"; };
 		0EFCFCF925C1B0D40091EC04 /* View+divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+divider.swift"; sourceTree = "<group>"; };
 		0EFCFCFF25C24E130091EC04 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		0EFF4AE025BAA5F900D240BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -321,7 +321,6 @@
 			children = (
 				0EE68E7F25C2AB87004F163B /* Welcome.swift */,
 				0E7F5F9D25C3169700D3826C /* Login.swift */,
-				0EF6493225C547BE00091D07 /* CustomConfigConfigurationViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -599,6 +598,7 @@
 				0E78579325B6DC1F0000C659 /* Data */,
 				0E854A3925B4715F00E512F4 /* Net */,
 				0EFF4AE025BAA5F900D240BC /* README.md */,
+				0EBE49EB25CA73070027F439 /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -789,7 +789,6 @@
 				0E44BBD225B896BB00B78B30 /* HollowVoteContent.swift in Sources */,
 				0E9F26CA25BEBA9800CA56DE /* HollowHeaderMenu.swift in Sources */,
 				0E2FE97825BE847C00DC1220 /* Spinner.swift in Sources */,
-				0EF6493325C547BE00091D07 /* CustomConfigConfigurationViewModel.swift in Sources */,
 				0E78576025B5444B0000C659 /* ParticipatedPostsRequest.swift in Sources */,
 				0E78574B25B4F0E40000C659 /* EditAttentionRequest.swift in Sources */,
 				0E7857A025B731280000C659 /* HollowCommentContentView.swift in Sources */,
@@ -860,6 +859,7 @@
 				0E78573025B4DCCE0000C659 /* SearchRequest.swift in Sources */,
 				0E854A4A25B483A500E512F4 /* DeviceInformation.swift in Sources */,
 				0E854A2625B3FBF900E512F4 /* SettingsView.swift in Sources */,
+				0EBE49EC25CA73070027F439 /* Constants.swift in Sources */,
 				0E78573E25B4EBBC0000C659 /* SendPostRequest.swift in Sources */,
 				000ED6E425BD79CE001D334D /* CachedHTTPRequest.swift in Sources */,
 				0EF6493025C5449D00091D07 /* MyTextField.swift in Sources */,

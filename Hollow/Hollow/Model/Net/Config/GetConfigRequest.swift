@@ -18,8 +18,8 @@ struct GetConfigRequestConfiguration {
     var configUrl: String {
         switch self.hollowType {
         case .thu:
-            return "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
-        case .pku: return ""
+            return Constants.HollowConfig.thuConfigURL
+        case .pku: return Constants.HollowConfig.pkuConfigURL
         case .other: return self.customAPIRoot!
         }
     }
