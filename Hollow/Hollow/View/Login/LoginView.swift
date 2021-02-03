@@ -49,6 +49,23 @@ struct LoginView: View {
     
     private var disableInteraction: Bool { viewModel.isLoading }
     
+    private var disableButton: Bool {
+        if viewModel.isLoading { return true }
+        if shouldCheckEmail {
+            return viewModel.email == ""
+        }
+        if shouldRegister {
+            return
+                viewModel.emailVerificationCode == "" ||
+                viewModel.confirmedPassword != viewModel.originalPassword ||
+                viewModel.confirmedPassword == ""
+        }
+        if shouldLogin {
+            return viewModel.loginPassword == ""
+        }
+        return true
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             ScrollView(showsIndicators: false) {
@@ -103,7 +120,7 @@ struct LoginView: View {
                         .horizontalCenter()
                 }
             }
-            .disabled(disableInteraction)
+            .disabled(disableButton)
             
         }
         .padding(.horizontal)
@@ -203,7 +220,7 @@ extension LoginView {
                 .keyboardType(.numberPad)
             
             // Password text field
-            MyTextField(text: $viewModel.originalPassword, title: String.passWordLocalized.capitalized, footer: passwordRequirements, isSecureContent: true) {
+            MyTextField(text: $viewModel.originalPassword, title: String.passwordLocalized.capitalized, footer: passwordRequirements, isSecureContent: true) {
                 Group {
                     if viewModel.originalPassword != "" && !passwordValid {
                         Image(systemName: "xmark")

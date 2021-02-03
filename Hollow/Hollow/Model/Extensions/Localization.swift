@@ -15,7 +15,6 @@ extension String {
     static let errorLocalized = NSLocalizedString("error", comment: "")
     static let emailAddressLocalized = NSLocalizedString("email address", comment: "")
     static let emailVerificationCodeLocalized = NSLocalizedString("email verification code", comment: "")
-    static let passWordLocalized = NSLocalizedString("password", comment: "")
     static let confirmedPassWordLocalized = NSLocalizedString("confirmed password", comment: "")
     static let wanderLocalized = NSLocalizedString("wander", comment: "")
     static let timelineLocalized = NSLocalizedString("timeline", comment: "")
