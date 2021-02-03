@@ -34,11 +34,11 @@ protocol RequestError: Error {
 
 /// DefaultRequestError for default request
 public enum DefaultRequestError: RequestError {
-    case decodeError
+    case decodeFailed
     case other(description: String)
     var description: String {
         switch self {
-        case .decodeError: return "Fail to decode tree hollow configuration from the URL."
+        case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
         case .other(let description): return description
         }
     }

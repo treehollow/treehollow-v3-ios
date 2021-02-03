@@ -37,7 +37,6 @@ struct GetConfigRequestConfiguration {
  {"name":"T大树洞","recaptcha_url":"https://id.thuhole.com/recaptcha/","allow_screenshot":true,"api_root":"https://dev-api.thuhole.com/","tos_url":"https://thuhole.com/tos.html","privacy_url":"https://thuhole.com/privacy.html","contact_email":"contact@thuhole.com","email_suffixes":["mails.tsingua.edu.cn"],"announcement":"这里是测试服","fold_tags":["性相关","政治相关","NSFW","刷屏","引战","未经证实的传闻","令人不适","重复内容","举报较多"],"reportable_tags":["性相关","政治相关","NSFW","刷屏","引战","未经证实的传闻","令人不适","重复内容"],"sendable_tags":["性相关","政治相关","NSFW","刷屏","引战","未经证实的传闻","令人不适"],"img_base_url":"https://dev-img.thuhole.com/","img_base_url_bak":"https://dev-img2.thuhole.com/","web_frontend_version":"v2.2.0","android_frontend_version":"v0.0.0","android_apk_download_url":"https://example.com/","ios_frontend_version":"v0.0.0","websocket_url":"https://dev-ws.thuhole.com/v3/ws"}
  */
 
-typealias HollowConfig = GetConfigRequestResult
 struct GetConfigRequestResult: Codable {
     var name: String
     var recaptchaUrl: String
@@ -55,10 +54,6 @@ struct GetConfigRequestResult: Codable {
     var imgBaseUrlBak: String
     var websocketUrl: String
     var iosFrontendVersion: String
-    var urlSuffix: String?
-    //var uuid: UUID?
-    // user token String
-    var token: String?
 }
 
 /// Get Config Request
@@ -108,7 +103,7 @@ struct GetConfigRequest: Request {
             
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                completion(nil, GetConfigRequestError.serverError)
+                completion(nil, Error.serverError)
                 return
             }
             
@@ -128,11 +123,7 @@ struct GetConfigRequest: Request {
                     // convert Snake Case
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
-                        var result = try jsonDecoder.decode(HollowConfig.self, from: apiInfo)
-                        // Add urlSuffix for using
-                        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-                        result.urlSuffix = "?v=v\(appVersion)&device=2"
-                        // debugPrint(result)
+                        let result = try jsonDecoder.decode(Result.self, from: apiInfo)
                         // Call the callback
                         completion(result, nil)
                     } catch {

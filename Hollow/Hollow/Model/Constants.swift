@@ -16,4 +16,8 @@ struct Constants {
     struct Register {
         static let passwordRegex = try! NSRegularExpression(pattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\\]).{8,32}$")
     }
+    struct URLConstant {
+        static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        static let urlSuffix = "?v=v\(appVersion)&device=2"
+    }
 }

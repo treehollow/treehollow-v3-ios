@@ -16,7 +16,7 @@ struct DeviceInformation: Codable {
         case ios = 2
     }
     /// UUID of the device.
-    var uuid: UUID
+    var deviceUuid: UUID
     /// Login date of the device.
     var loginDate: Date
     /// Device desciption.

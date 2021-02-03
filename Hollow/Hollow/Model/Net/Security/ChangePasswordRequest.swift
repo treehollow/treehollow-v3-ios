@@ -16,8 +16,7 @@ struct ChangePasswordRequestConfiguration {
     var oldPassword: String
     /// New hashed password
     var newPassword: String
-    
-    var hollowConfig: HollowConfig
+    var apiRoot: String
 }
 
 /// Result of an changing password attempt.
@@ -42,7 +41,7 @@ struct ChangePasswordRequest: Request {
     }
     
     func performRequest(
-        completion: @escaping (ChangePasswordRequestResult?, DefaultRequestError?) -> Void
+        completion: @escaping (ResultData?, Error?) -> Void
     ) {
         let parameters =
             [
@@ -51,8 +50,7 @@ struct ChangePasswordRequest: Request {
                 "new_password_hashed": self.configuration.newPassword.sha256().sha256(),
             ] as [String: String]
         let urlPath =
-            self.configuration.hollowConfig.apiRoot + "v3/security/login/change_password" + self
-            .configuration.hollowConfig.urlSuffix!
+            self.configuration.apiRoot + "v3/security/login/change_password" + Constants.URLConstant.urlSuffix
         AF.request(
             urlPath,
             method: .post,
@@ -66,8 +64,7 @@ struct ChangePasswordRequest: Request {
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     // FIXME: NOT TESTED YET
-                    let result = try jsonDecoder.decode(
-                        ChangePasswordRequestResult.self, from: response.data!)
+                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         completion(result, nil)
                     } else {
@@ -76,7 +73,7 @@ struct ChangePasswordRequest: Request {
                             nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
                     }
                 } catch {
-                    completion(nil, .decodeError)
+                    completion(nil, .decodeFailed)
                     return
                 }
             case .failure(let error):

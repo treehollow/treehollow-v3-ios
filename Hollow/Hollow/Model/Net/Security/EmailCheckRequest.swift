@@ -24,8 +24,8 @@ struct EmailCheckRequestConfiguration {
     /// Info of `reCAPTCHA`, optional
     // NO USE
     var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
-    /// constant used for http request
-    var hollowConfig: HollowConfig
+    
+    var apiRoot: String
 }
 
 /// Result Data of EmailCheck
@@ -86,8 +86,7 @@ struct EmailCheckRequest: Request {
             parameters["recaptcha_token"] = reCAPTCHAInfo.token
         }
         let urlPath =
-            self.configuration.hollowConfig.apiRoot + "v3/security/login/check_email" + self.configuration
-            .hollowConfig.urlSuffix!
+            self.configuration.apiRoot + "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
         // URL must be leagle !
         AF.request(
             urlPath,
@@ -95,20 +94,15 @@ struct EmailCheckRequest: Request {
             parameters: parameters,
             encoder: URLEncodedFormParameterEncoder.default
         ).validate().responseJSON { response in
-            //            .validate(statusCode: 200..<300)
-            //            .validate(contentType: ["application/json"])
-            //            .responseData { response in
             switch response.result {
             case .success:
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    // FIXME: NOT TESTED YET
-                    let result = try jsonDecoder.decode(EmailCheckRequestResult.self, from: response.data!)
+                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!
-                        let resultData = EmailCheckRequestResultData(
-                            result: EmailCheckRequestResultData.ResultType(rawValue: result.code)!)
+                        let resultData = ResultData(result: ResultData.ResultType(rawValue: result.code)!)
                         completion(resultData, nil)
                         //debugPrint(response.response?.allHeaderFields)
                     } else {
@@ -117,7 +111,7 @@ struct EmailCheckRequest: Request {
                             nil, .other(description: result.msg ?? "Received error code from backend: \(result.code)."))
                     }
                 } catch {
-                    completion(nil, .decodeError)
+                    completion(nil, .decodeFailed)
                     return
                 }
             case let .failure(error):

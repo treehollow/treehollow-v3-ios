@@ -28,16 +28,7 @@ struct AccountCreationRequestConfiguration {
     var deviceToken: String
     /// See `AccountCreationConfiguration`
     ///
-    var hollowConfig: HollowConfig
-    //    /// Returns nil when both `oldToken` and `validCode` are `nil`.
-    //    init?(email: String, hashedPassword: String, oldToken: String?, validCode: String?) {
-    //        // Check for invalid configuration
-    //        if oldToken == nil && validCode == nil { return nil }
-    //        self.email = email
-    //        self.hashedPassword = hashedPassword
-    //        //self.oldToken = oldToken
-    //        self.validCode = validCode
-    //    }
+    var apiRoot: String
 }
 
 /// Result of account creation attempt.
@@ -46,11 +37,11 @@ struct AccountCreationRequestResultData {
     ///
     /// Please init with `AccountCreationRequestResult.ResultType(rawValue: Int)`, and should
     /// show error with `nil`, which means receiving negative code.
-    //    enum ResultType: Int {
-    //        case success = 0
-    //    }
-    //    /// The type of result received.
-    //    var code: ResultType
+//        enum ResultType: Int {
+//            case success = 0
+//        }
+//        /// The type of result received.
+//    var code: ResultType
     /// Access token.
     var token: String
     /// Device UUID
@@ -63,9 +54,9 @@ struct AccountCreationRequestResult: Codable {
     /// The type of result received.
     var code: Int
     /// Access token.
-    var token: String
+    var token: String?
     /// Device UUID
-    var uuid: UUID
+    var uuid: UUID?
     /// Error mssage.
     var msg: String?
 }
@@ -83,7 +74,7 @@ struct AccountCreationRequest: Request {
     }
     
     func performRequest(
-        completion: @escaping (AccountCreationRequestResultData?, DefaultRequestError?) -> Void
+        completion: @escaping (ResultData?, Error?) -> Void
     ) {
         var parameters =
             [
@@ -99,29 +90,22 @@ struct AccountCreationRequest: Request {
         }
         
         let urlPath =
-            self.configuration.hollowConfig.apiRoot + "v3/security/login/create_account" + self
-            .configuration.hollowConfig.urlSuffix!
+            self.configuration.apiRoot + "v3/security/login/create_account" + Constants.URLConstant.urlSuffix
         AF.request(
             urlPath,
             method: .post,
             parameters: parameters,
             encoder: URLEncodedFormParameterEncoder.default
         ).validate().responseJSON { response in
-            //            .validate(statusCode: 200..<300)
-            //            .validate(contentType: ["application/json"])
-            //            .responseData{ response in
             switch response.result {
             case .success:
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    // FIXME: NOT TESTED YET
-                    let result = try jsonDecoder.decode(
-                        AccountCreationRequestResult.self, from: response.data!)
+                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!
-                        let resultData = AccountCreationRequestResultData(
-                            token: result.token, uuid: result.uuid)
+                        let resultData = ResultData(token: result.token!, uuid: result.uuid!)
                         completion(resultData, nil)
                     } else {
                         // invalid response
@@ -129,7 +113,7 @@ struct AccountCreationRequest: Request {
                             nil, .other(description: result.msg ?? "Received error code from backend: \(result.code)"))
                     }
                 } catch {
-                    completion(nil, .decodeError)
+                    completion(nil, .decodeFailed)
                     return
                 }
             case .failure(let error):

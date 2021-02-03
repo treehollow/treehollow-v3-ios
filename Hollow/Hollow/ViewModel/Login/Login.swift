@@ -35,13 +35,13 @@ class Login: ObservableObject {
         }
         isLoading = true
         print("email: \(email + "@" + emailSuffix)")
-        let request = EmailCheckRequest(configuration: .init(email: email + "@" + emailSuffix, hollowConfig: config))
+        let request = EmailCheckRequest(configuration: .init(email: email + "@" + emailSuffix, apiRoot: config.apiRoot))
         request.performRequest(completion: { resultData, error in
             self.isLoading = false
             if let error = error {
                 debugPrint(error.description)
                 switch error {
-                case .decodeError:
+                case .decodeFailed:
                     self.errorMessage = (title: String.internalErrorLocalized.capitalized, message: error.description)
                 case .other:
                     self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)

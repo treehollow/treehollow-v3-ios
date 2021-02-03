@@ -16,8 +16,7 @@ struct LoginRequestConfiguration {
     let deviceInfo = UIDevice.current.name
     // TODO: Device token
     var deviceToken: String
-    
-    var hollowConfig: HollowConfig
+    var apiRoot: String
 }
 
 struct LoginRequestResult: Codable {
@@ -45,7 +44,7 @@ struct LoginRequest: Request {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (LoginRequestResultData?, DefaultRequestError?) -> Void)
+    func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
     {
         let parameters =
             [
@@ -56,8 +55,7 @@ struct LoginRequest: Request {
                 "ios_device_token": self.configuration.deviceToken,
             ] as! [String: String]
         let urlPath =
-            self.configuration.hollowConfig.apiRoot + "v3/security/login/login" + self.configuration
-            .hollowConfig.urlSuffix!
+            self.configuration.apiRoot + "v3/security/login/login" + Constants.URLConstant.urlSuffix
         AF.request(
             urlPath,
             method: .post,
@@ -70,11 +68,10 @@ struct LoginRequest: Request {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    // FIXME: NOT TESTED YET
-                    let result = try jsonDecoder.decode(LoginRequestResult.self, from: response.data!)
+                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!
-                        let resultData = LoginRequestResultData(token: result.token, uuid: result.uuid)
+                        let resultData = ResultData(token: result.token, uuid: result.uuid)
                         completion(resultData, nil)
                     } else {
                         // invalid response
@@ -82,7 +79,7 @@ struct LoginRequest: Request {
                             nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
                     }
                 } catch {
-                    completion(nil, .decodeError)
+                    completion(nil, .decodeFailed)
                     return
                 }
             case .failure(let error):
