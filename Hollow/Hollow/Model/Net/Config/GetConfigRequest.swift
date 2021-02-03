@@ -94,8 +94,8 @@ struct GetConfigRequest: Request {
             completion(nil, .invalidConfigUrl)
             return
         }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
+        let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(nil, .other(description: error.localizedDescription))
                 return
@@ -127,7 +127,7 @@ struct GetConfigRequest: Request {
                         // Add urlSuffix for using
                         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                         result.urlSuffix = "?v=v\(appVersion)&device=2"
-                        debugPrint(result)
+                        // debugPrint(result)
                         // Call the callback
                         completion(result, nil)
                     } catch {
