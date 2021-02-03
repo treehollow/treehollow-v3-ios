@@ -38,6 +38,7 @@ struct LoginView: View {
     private var shouldLogin: Bool { viewModel.emailCheckType == .oldUser }
     
     private var buttonText: String {
+        if viewModel.isLoading { return String.loadingLocalized.capitalized + "..." }
         if shouldCheckEmail { return String.continueLocalized.capitalized }
         if shouldRegister { return String.registerLocalized.capitalized }
         if shouldLogin { return String.loginLocalized.capitalized }
@@ -121,9 +122,6 @@ struct LoginView: View {
                         .foregroundColor(.white)
                         .padding(8)
                         .horizontalCenter()
-                    if viewModel.isLoading {
-                        Spinner(color: .white, desiredWidth: 20)
-                    }
                 }
             }
             .disabled(viewModel.isLoading)

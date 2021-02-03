@@ -29,6 +29,7 @@ extension String {
     static let continueLocalized = NSLocalizedString("continue", comment: "")
     static let registerLocalized = NSLocalizedString("register", comment: "")
     static let othersLocalized = NSLocalizedString("others", comment: "")
+    static let loadingLocalized = NSLocalizedString("loading", comment: "")
 }
 
 extension String {

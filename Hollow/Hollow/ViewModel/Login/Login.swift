@@ -8,13 +8,14 @@
 
 import Combine
 import Foundation
+import SwiftUI
 import Defaults
 
 /// View model for `LoginView`
 class Login: ObservableObject {
     @Published var reCAPTCHAPresented = false
     @Published var reCAPTCHAToken: String = ""
-    @Published var email: String = ""
+    @Published var email: String = "" { didSet { restore() }}
     @Published var emailCheckType: EmailCheckRequestResultData.ResultType?
     // FIXME: There should be something in the model to validate the hollow config!
     // Set to "" first because `WelcomeView` will load the initializer of `LoginView`
@@ -35,7 +36,11 @@ class Login: ObservableObject {
         }
         isLoading = true
         print("email: \(email + "@" + emailSuffix)")
-        let request = EmailCheckRequest(configuration: .init(email: email + "@" + emailSuffix, hollowConfig: config))
+        var reCAPTCHAInfo: (String, EmailCheckRequestConfiguration.ReCAPTCHAVersion)? = nil
+        if reCAPTCHAToken != "" {
+            reCAPTCHAInfo = (reCAPTCHAToken, .v2)
+        }
+        let request = EmailCheckRequest(configuration: .init(email: email + "@" + emailSuffix, reCAPTCHAInfo: reCAPTCHAInfo, hollowConfig: config))
         request.performRequest(completion: { resultData, error in
             self.isLoading = false
             if let error = error {
@@ -49,10 +54,13 @@ class Login: ObservableObject {
                 return
             }
             debugPrint(resultData as Any)
-            self.emailCheckType = resultData?.result
             
-            if self.emailCheckType == .reCAPTCHANeeded {
-                self.reCAPTCHAPresented = true
+            withAnimation {
+                self.emailCheckType = resultData?.result
+                
+                if self.emailCheckType == .reCAPTCHANeeded {
+                    self.reCAPTCHAPresented = true
+                }
             }
         })
     }
@@ -63,5 +71,11 @@ class Login: ObservableObject {
     
     func login() {
         
+    }
+    
+    private func restore() {
+        self.reCAPTCHAToken = ""
+        self.emailCheckType = nil
+        self.emailVerificationCode = ""
     }
 }

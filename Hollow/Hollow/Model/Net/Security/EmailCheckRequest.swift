@@ -63,17 +63,9 @@ struct EmailCheckRequest: Request {
     typealias Result = EmailCheckRequestResult
     typealias ResultData = EmailCheckRequestResultData
     typealias Error = DefaultRequestError
-    //    enum EmailCheckRequestError: RequestError {
-    //        case decodeError
-    //        case other(description: String)
-    //        var description: String {
-    //            switch self {
-    //            case .decodeError: return "Decode failed"
-    //            case .other(let description): return description
-    //            }
-    //        }
-    //    }
+
     var configuration: EmailCheckRequestConfiguration
+    
     init(configuration: EmailCheckRequestConfiguration) {
         self.configuration = configuration
     }
@@ -88,16 +80,13 @@ struct EmailCheckRequest: Request {
         let urlPath =
             self.configuration.hollowConfig.apiRoot + "v3/security/login/check_email" + self.configuration
             .hollowConfig.urlSuffix!
-        // URL must be leagle !
+        
         AF.request(
             urlPath,
             method: .post,
             parameters: parameters,
             encoder: URLEncodedFormParameterEncoder.default
         ).validate().responseJSON { response in
-            //            .validate(statusCode: 200..<300)
-            //            .validate(contentType: ["application/json"])
-            //            .responseData { response in
             switch response.result {
             case .success:
                 let jsonDecoder = JSONDecoder()
