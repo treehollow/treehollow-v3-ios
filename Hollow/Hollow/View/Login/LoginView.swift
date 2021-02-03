@@ -208,11 +208,11 @@ extension LoginView {
 
         private let passwordRequirements: String =
             NSLocalizedString("Requirements", comment: "") + ":\n" +
-            NSLocalizedString("at least one digit", comment: "") + "\n" +
-            NSLocalizedString("at least one lowercase character", comment: "") + "\n" +
-            NSLocalizedString("at least one uppercase character", comment: "") + "\n" +
-            NSLocalizedString("at least one special character", comment: "") + "\n" +
-            NSLocalizedString("at least 8 characters in length, but no more than 32", comment: "")
+            NSLocalizedString("at least one digit;", comment: "") + "\n" +
+            NSLocalizedString("at least one lowercase character;", comment: "") + "\n" +
+            NSLocalizedString("at least one uppercase character;", comment: "") + "\n" +
+            NSLocalizedString("at least one special character;", comment: "") + "\n" +
+            NSLocalizedString("at least 8 characters in length, but no more than 32.", comment: "")
 
         var body: some View {
             // Verification code text field

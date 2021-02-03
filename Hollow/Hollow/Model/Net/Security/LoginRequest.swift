@@ -21,8 +21,8 @@ struct LoginRequestConfiguration {
 
 struct LoginRequestResult: Codable {
     var code: Int
-    var token: String
-    var uuid: UUID
+    var token: String?
+    var uuid: UUID?
     var msg: String?
 }
 
