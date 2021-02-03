@@ -10,7 +10,8 @@ import Defaults
 
 struct LoginView: View {
     @ObservedObject var viewModel: Login = .init()
-    @State private var confirmedPassword = ""
+    @State private var password = ""
+    @State private var fullScreenCover: Int = -1
     
     /// Determine when we should check user's email.
     ///
@@ -46,16 +47,7 @@ struct LoginView: View {
         return ""
     }
     
-    private var passwordValidate: Bool { Constants.Register.passwordRegex.firstMatch(in: viewModel.originalPassword, range: NSRange(viewModel.originalPassword)!) != nil }
-    
-    private let passwordRequirements: String =
-        NSLocalizedString("Requirements", comment: "") + ":\n" +
-        NSLocalizedString("at least one digit", comment: "") + "\n" +
-        NSLocalizedString("at least one lowercase character", comment: "") + "\n" +
-        NSLocalizedString("at least one uppercase character", comment: "") + "\n" +
-        NSLocalizedString("at least one special character", comment: "") + "\n" +
-        NSLocalizedString("at least 8 characters in length, but no more than 32", comment: "")
-
+    private var disableInteraction: Bool { viewModel.isLoading }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -85,28 +77,15 @@ struct LoginView: View {
                     .padding(.top)
                     
                     if shouldRegister {
-                        // Verification code text field
-                        MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: String.emailVerificationCodeLocalized.capitalized, footer: NSLocalizedString("Please check your inbox.", comment: ""))
-                        
-                        // Password text field
-                        MyTextField(text: $viewModel.originalPassword, title: String.passWordLocalized.capitalized, footer: passwordRequirements, isSecureContent: true) {
-                            Group {
-                                if viewModel.originalPassword != "" && !passwordValidate {
-                                    Image(systemName: "xmark")
-                                        .foregroundColor(.red)
-                                } else if viewModel.originalPassword != "" {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(.green)
-                                }
-                            }
-                            .font(.system(size: 15))
-                        }
-                        
-                        // Confirmed password text field
-                        MyTextField<EmptyView>(text: $confirmedPassword, title: String.confirmedPassWordLocalized.capitalized, isSecureContent: true)
+                        RegisterView(viewModel: viewModel)
+                    }
+                    
+                    if shouldLogin {
+                        MyTextField<EmptyView>(text: $viewModel.loginPassword, placeHolder: NSLocalizedString("Enter your password", comment: ""), title: String.passwordLocalized.capitalized, isSecureContent: true)
                     }
                     
                 }
+                .disabled(disableInteraction)
             }
 
             MyButton(action: {
@@ -124,22 +103,31 @@ struct LoginView: View {
                         .horizontalCenter()
                 }
             }
-            .disabled(viewModel.isLoading)
+            .disabled(disableInteraction)
             
         }
         .padding(.horizontal)
         .padding(.horizontal)
         
-        // Present reCAPTCHA verification interface when needed
-        .fullScreenCover(isPresented: $viewModel.reCAPTCHAPresented, content: {
-            ReCAPTCHAPageView(presented: $viewModel.reCAPTCHAPresented, successHandler: { token in
-                withAnimation {
-                    viewModel.reCAPTCHAPresented = false
-                    viewModel.reCAPTCHAToken = token
-                    // Check again with the token
-                    viewModel.checkEmail()
+        .fullScreenCover(isPresented: .constant(viewModel.fullScreenCoverIndex != -1), content: {
+            Group {
+                // Present reCAPTCHA verification interface when needed
+                if viewModel.fullScreenCoverIndex == 0 {
+                    ReCAPTCHAPageView(presentedIndex: $viewModel.fullScreenCoverIndex, successHandler: { token in
+                        withAnimation {
+                            viewModel.fullScreenCoverIndex = -1
+                            viewModel.reCAPTCHAToken = token
+                            // Check again with the token
+                            viewModel.checkEmail()
+                        }
+                    })
                 }
-            })
+                
+                // Present main view after successfully logging in
+                if viewModel.fullScreenCoverIndex == 1 {
+                    MainView()
+                }
+            }
         })
         
         // Show alert if there's any error message provided
@@ -155,7 +143,7 @@ struct LoginView: View {
 
 extension LoginView {
     private struct ReCAPTCHAPageView: View {
-        @Binding var presented: Bool
+        @Binding var presentedIndex: Int
         let successHandler: (String) -> Void
         @State private var pageLoadingFinish = false
         
@@ -163,7 +151,7 @@ extension LoginView {
             VStack {
                 Button(action: {
                     withAnimation {
-                        presented = false
+                        presentedIndex = -1
                     }
                 }) {
                     Image(systemName: "xmark")
@@ -191,6 +179,56 @@ extension LoginView {
                 }
             })
 
+        }
+    }
+    
+    private struct RegisterView: View {
+        @ObservedObject var viewModel: Login
+        
+        //    private var passwordValidate: Bool { Constants.Register.passwordRegex.firstMatch(in: viewModel.originalPassword, range: NSRange(viewModel.originalPassword)!) != nil }
+        private var passwordValid: Bool { true }
+        private var confirmedPasswordValid: Bool { viewModel.confirmedPassword == viewModel.originalPassword }
+
+        private let passwordRequirements: String =
+            NSLocalizedString("Requirements", comment: "") + ":\n" +
+            NSLocalizedString("at least one digit", comment: "") + "\n" +
+            NSLocalizedString("at least one lowercase character", comment: "") + "\n" +
+            NSLocalizedString("at least one uppercase character", comment: "") + "\n" +
+            NSLocalizedString("at least one special character", comment: "") + "\n" +
+            NSLocalizedString("at least 8 characters in length, but no more than 32", comment: "")
+
+        var body: some View {
+            // Verification code text field
+            MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: String.emailVerificationCodeLocalized.capitalized, footer: NSLocalizedString("Please check your inbox.", comment: ""))
+                .keyboardType(.numberPad)
+            
+            // Password text field
+            MyTextField(text: $viewModel.originalPassword, title: String.passWordLocalized.capitalized, footer: passwordRequirements, isSecureContent: true) {
+                Group {
+                    if viewModel.originalPassword != "" && !passwordValid {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.red)
+                    } else if viewModel.originalPassword != "" {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.green)
+                    }
+                }
+                .font(.system(size: 15))
+            }
+            
+            // Confirmed password text field
+            MyTextField(text: $viewModel.confirmedPassword, title: String.confirmedPassWordLocalized.capitalized, isSecureContent: true) {
+                Group {
+                    if viewModel.confirmedPassword != "" && !confirmedPasswordValid {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.red)
+                    } else if viewModel.confirmedPassword != "" {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.green)
+                    }
+                }
+                .font(.system(size: 15))
+            }
         }
     }
 }

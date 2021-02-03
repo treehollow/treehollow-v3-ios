@@ -51,10 +51,10 @@ struct LoginRequest: Request {
             [
                 "email": self.configuration.email,
                 "password_hashed": self.configuration.password.sha256().sha256(),
-                "device_type": self.configuration.deviceType,
+                "device_type": self.configuration.deviceType.string,
                 "device_info": self.configuration.deviceInfo,
                 "ios_device_token": self.configuration.deviceToken,
-            ] as! [String: String]
+            ]
         let urlPath =
             self.configuration.hollowConfig.apiRoot + "v3/security/login/login" + self.configuration
             .hollowConfig.urlSuffix!

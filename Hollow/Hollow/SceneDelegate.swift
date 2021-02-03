@@ -22,16 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Perform Net Test
         #if DEBUG
         _ = NetTest()
-        #endif
-        
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = WelcomeView()
         Defaults[.hollowConfig] = nil
+        Defaults[.accessToken] = nil
+        #endif
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            if Defaults[.accessToken] != nil {
+                window.rootViewController = UIHostingController(rootView: MainView())
+            } else {
+                window.rootViewController = UIHostingController(rootView: WelcomeView())
+            }
             self.window = window
             window.makeKeyAndVisible()
         }

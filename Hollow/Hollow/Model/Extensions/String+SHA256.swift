@@ -11,7 +11,7 @@ import CryptoKit
 
 extension String {
     /// calculate sha256
-    func sha256() -> String{
+    func sha256() -> String {
         if let stringData = self.data(using: String.Encoding.utf8) {
             let sha256String = SHA256.hash(data: stringData).compactMap {
                 String(format: "%02x", $0)

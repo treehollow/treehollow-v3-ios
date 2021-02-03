@@ -63,9 +63,9 @@ struct AccountCreationRequestResult: Codable {
     /// The type of result received.
     var code: Int
     /// Access token.
-    var token: String
+    var token: String?
     /// Device UUID
-    var uuid: UUID
+    var uuid: UUID?
     /// Error mssage.
     var msg: String?
 }
@@ -89,10 +89,10 @@ struct AccountCreationRequest: Request {
             [
                 "email": self.configuration.email,
                 "password_hashed": self.configuration.password.sha256().sha256(),
-                "device_type": self.configuration.deviceType,
+                "device_type": self.configuration.deviceType.string,
                 "device_info": self.configuration.deviceInfo,
                 "ios_device_token": self.configuration.deviceToken,
-            ] as! [String: String]
+            ]
         
         if let validCode = self.configuration.validCode {
             parameters["valid_code"] = validCode
@@ -121,7 +121,7 @@ struct AccountCreationRequest: Request {
                     if result.code >= 0 {
                         // result code >= 0 valid!
                         let resultData = AccountCreationRequestResultData(
-                            token: result.token, uuid: result.uuid)
+                            token: result.token!, uuid: result.uuid!)
                         completion(resultData, nil)
                     } else {
                         // invalid response
@@ -129,6 +129,7 @@ struct AccountCreationRequest: Request {
                             nil, .other(description: result.msg ?? "Received error code from backend: \(result.code)"))
                     }
                 } catch {
+                    print(error)
                     completion(nil, .decodeError)
                     return
                 }

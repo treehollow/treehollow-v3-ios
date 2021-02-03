@@ -32,11 +32,7 @@ struct GetConfigRequestConfiguration {
     }
 }
 
-/// Result of requesting system config. as following
-/*
- {"name":"T大树洞","recaptcha_url":"https://id.thuhole.com/recaptcha/","allow_screenshot":true,"api_root":"https://dev-api.thuhole.com/","tos_url":"https://thuhole.com/tos.html","privacy_url":"https://thuhole.com/privacy.html","contact_email":"contact@thuhole.com","email_suffixes":["mails.tsingua.edu.cn"],"announcement":"这里是测试服","fold_tags":["性相关","政治相关","NSFW","刷屏","引战","未经证实的传闻","令人不适","重复内容","举报较多"],"reportable_tags":["性相关","政治相关","NSFW","刷屏","引战","未经证实的传闻","令人不适","重复内容"],"sendable_tags":["性相关","政治相关","NSFW","刷屏","引战","未经证实的传闻","令人不适"],"img_base_url":"https://dev-img.thuhole.com/","img_base_url_bak":"https://dev-img2.thuhole.com/","web_frontend_version":"v2.2.0","android_frontend_version":"v0.0.0","android_apk_download_url":"https://example.com/","ios_frontend_version":"v0.0.0","websocket_url":"https://dev-ws.thuhole.com/v3/ws"}
- */
-
+/// Result of requesting system config.
 typealias HollowConfig = GetConfigRequestResult
 struct GetConfigRequestResult: Codable {
     var name: String
@@ -73,6 +69,7 @@ struct GetConfigRequest: Request {
         case decodeFailed
         case incorrectFormat
         case invalidConfigUrl
+        case invalidConfiguration
         case other(description: String)
         
         var description: String {
@@ -81,6 +78,7 @@ struct GetConfigRequest: Request {
             case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
             case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
             case .invalidConfigUrl: return "The URL for the configuration is invalid."
+            case .invalidConfiguration: return "The configuration is invalid."
             case .other(let description): return description
             }
         }
@@ -90,8 +88,6 @@ struct GetConfigRequest: Request {
     
     init(configuration: GetConfigRequestConfiguration) {
         self.configuration = configuration
-        // Not performing request here, let the view model initiate
-        // the request using `performRequest` instead.
     }
     
     func performRequest(completion: @escaping (ResultData?, GetConfigRequestError?) -> Void) {
@@ -132,9 +128,15 @@ struct GetConfigRequest: Request {
                         // Add urlSuffix for using
                         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                         result.urlSuffix = "?v=v\(appVersion)&device=2"
-                        // debugPrint(result)
-                        // Call the callback
-                        completion(result, nil)
+                        
+                        // Check if the config is valid
+                        if validateConfig(result) {
+                            // Call the callback
+                            completion(result, nil)
+                        } else {
+                            completion(nil, .invalidConfiguration)
+                        }
+                        
                     } catch {
                         completion(nil, .decodeFailed)
                     }
@@ -147,5 +149,14 @@ struct GetConfigRequest: Request {
             completion(nil, .incorrectFormat)
         }
         task.resume()
+    }
+    
+    private func validateConfig(_ config: GetConfigRequestResult) -> Bool {
+        return
+            config.apiRoot != "" &&
+            config.emailSuffixes.count > 0 &&
+            config.imgBaseUrl != "" &&
+            config.name != "" &&
+            config.recaptchaUrl != ""
     }
 }
