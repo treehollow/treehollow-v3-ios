@@ -50,6 +50,7 @@ struct MyTextField<Content>: View where Content: View {
                 Text(footer)
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
+                
             }
         }
     }

@@ -14,7 +14,7 @@ protocol Request {
     associatedtype Configuration
     /// Result type for the request, get directly from the server.
     associatedtype Result
-    /// Type for data that view models use (see`/ViewModel/Types`).
+    /// Type for data that view models use (see`/Model/Types`).
     associatedtype ResultData
     /// Request error comforming to `RequestError` protocol
     associatedtype Error: RequestError

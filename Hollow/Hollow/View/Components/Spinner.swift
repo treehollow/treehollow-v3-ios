@@ -10,12 +10,12 @@ import SwiftUI
 
 struct Spinner: View {
     
-    @State var progress: Double = 0.6
-    @State var isLoading = false
+    @State private var progress: Double = 0.6
+    @State private var isLoading = false
     var color: Color
     var desiredWidth: CGFloat
     var close: Bool = false
-    let strokeScaleFactor: CGFloat = 0.2
+    private let strokeScaleFactor: CGFloat = 0.2
     var body: some View {
         CircularPathProgressView(progress: $progress, color: color, lineWidth: desiredWidth * strokeScaleFactor)
             .rotationEffect(Angle(degrees: isLoading ? 0 : 360), anchor: .center)
@@ -47,7 +47,7 @@ struct Spinner: View {
                 .trim(from: 0, to: CGFloat(progress))
                 .rotation(.init(degrees: -90), anchor: .center)
                 .stroke(color, style: .init(lineWidth: lineWidth, lineCap: .round))
-                .animation(.spring())
+                .animation(.linear)
         }
     }
     

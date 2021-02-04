@@ -99,23 +99,29 @@ struct WelcomeView: View {
         
         var body: some View {
             VStack {
-                MyTextField<EmptyView>(text: $text, placeHolder: NSLocalizedString("URL for custom configuration", comment: ""), title: NSLocalizedString("Custom Configuration", comment: ""), content: nil)
-                    .navigationBarItems(
-                        trailing:
-                            Group {
-                                if viewModel.isLoadingConfig {
-                                    Spinner(color: .hollowContentText, desiredWidth: 20)
-                                } else {
-                                    Button(LocalizedStringKey("Next"), action: {
-                                        viewModel.requestConfig(hollowType: .other, customConfigURL: text)
-                                    })
-                                }
+                MyTextField<EmptyView>(
+                    text: $text,
+                    placeHolder: NSLocalizedString("URL for custom configuration", comment: ""),
+                    title: NSLocalizedString("Custom Configuration", comment: ""),
+                    footer: NSLocalizedString("Get the URL for the configuration from the treehollow website.", comment: "")
+                )
+                .keyboardType(.URL)
+                .navigationBarItems(
+                    trailing:
+                        Group {
+                            if viewModel.isLoadingConfig {
+                                Spinner(color: .hollowContentText, desiredWidth: ViewConstants.navigationBarSpinnerWidth)
+                            } else {
+                                Button(LocalizedStringKey("Next"), action: {
+                                    viewModel.requestConfig(hollowType: .other, customConfigURL: text)
+                                })
                             }
-                    )
-                    .alert(isPresented: .constant(viewModel.errorMessage != nil)) {
-                        // We should restore the error message after presenting the alert
-                        Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
-                    }
+                        }
+                )
+                
+                // Show alert if there's any error message provided
+                .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
+                
                 NavigationLink(
                     destination: LoginView(),
                     tag: HollowType.other.rawValue,

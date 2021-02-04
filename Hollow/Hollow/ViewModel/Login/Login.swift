@@ -15,12 +15,12 @@ import Defaults
 class Login: ObservableObject {
     @Published var fullScreenCoverIndex = -1
     @Published var reCAPTCHAToken: String = ""
-    @Published var email: String = "" { didSet { restore() }}
+    @Published var email: String = "" { didSet { if email != oldValue { restore() }}}
     @Published var emailCheckType: EmailCheckRequestResultData.ResultType?
     // FIXME: There should be something in the model to validate the hollow config!
     // Set to "" first because `WelcomeView` will load the initializer of `LoginView`
     // before we fetch the config.
-    @Published var emailSuffix: String = Defaults[.hollowConfig]?.emailSuffixes.first ?? "" { didSet { restore() }}
+    @Published var emailSuffix: String = Defaults[.hollowConfig]?.emailSuffixes.first ?? "" { didSet { if emailSuffix != oldValue { restore() }}}
     @Published var emailVerificationCode: String = ""
     @Published var originalPassword: String = ""
     @Published var confirmedPassword: String = ""
@@ -38,7 +38,9 @@ class Login: ObservableObject {
             errorMessage = (title: String.invalidInputLocalized.capitalized, message: NSLocalizedString("Email cannot be empty.", comment: ""))
             return
         }
-        isLoading = true
+        withAnimation {
+            isLoading = true
+        }
         print("email: \(email + "@" + emailSuffix)")
         var reCAPTCHAInfo: (String, EmailCheckRequestConfiguration.ReCAPTCHAVersion)? = nil
         if reCAPTCHAToken != "" {
@@ -46,7 +48,10 @@ class Login: ObservableObject {
         }
         let request = EmailCheckRequest(configuration: .init(email: fullEmail, reCAPTCHAInfo: reCAPTCHAInfo, apiRoot: config.apiRoot))
         request.performRequest(completion: { resultData, error in
-            self.isLoading = false
+            withAnimation {
+                self.isLoading = false
+            }
+            
             if let error = error {
                 self.handleError(error: error)
                 return
@@ -65,11 +70,16 @@ class Login: ObservableObject {
     
     func register() {
         guard let config = Defaults[.hollowConfig] else { return }
-        isLoading = true
+        withAnimation {
+            isLoading = true
+        }
 
         let request = AccountCreationRequest(configuration: .init(email: fullEmail, password: originalPassword, validCode: emailVerificationCode, deviceToken: "placeholder", apiRoot: config.apiRoot))
         request.performRequest(completion: { result, error in
-            self.isLoading = false
+            
+            withAnimation {
+                self.isLoading = false
+            }
 
             if let error = error {
                 self.handleError(error: error)
@@ -84,11 +94,15 @@ class Login: ObservableObject {
     
     func login() {
         guard let config = Defaults[.hollowConfig] else { return }
-        isLoading = true
+        withAnimation {
+            isLoading = true
+        }
 
         let request = LoginRequest(configuration: .init(email: fullEmail, password: loginPassword, deviceToken: "placeholder", apiRoot: config.apiRoot))
         request.performRequest(completion: { result, error in
-            self.isLoading = false
+            withAnimation {
+                self.isLoading = false
+            }
 
             if let error = error {
                 self.handleError(error: error)
