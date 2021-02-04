@@ -27,15 +27,23 @@ let testPostData2: PostData = .init(attention: true, deleted: false, likeNumber:
     .init(title: "不好", voteCount: 3)
 ]), comments: testComments)
 
-let testPostData3: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198433, replyNumber: 12, tag: "", text: testText3, type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test.3")), vote: .init(voted: true, votedOption: "", voteData: [
-    .init(title: "好", voteCount: -1),
-    .init(title: "不好", voteCount: -1)
-]), comments: testComments)
+let testPostData3: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198433, replyNumber: 12, tag: "", text: testText3, type: .image, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test.3")), vote: nil, comments: testComments)
+
+let testPostData4: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198433, replyNumber: 12, tag: "", text: testText3, type: .text, hollowImage: nil, vote: nil, comments: testComments)
 
 
 let testPosts = [
     testPostData,
     testPostData2,
-    testPostData3
+    testPostData3,
+    testPostData4
 ]
+
+
+let testPostDataWrapper: PostDataWrapper = .init(post: testPostData, citedPost: .init(postId: testPostData2.postId, text: testPostData2.text))
+let testPostDataWrapper2: PostDataWrapper = .init(post: testPostData2, citedPost: .init(postId: testPostData.postId, text: testPostData.text))
+let testPostDataWrapper3: PostDataWrapper = .init(post: testPostData3, citedPost: .init(postId: testPostData.postId, text: testPostData2.text))
+let testPostDataWrapper4: PostDataWrapper = .init(post: testPostData4, citedPost: .init(postId: testPostData.postId, text: testPostData2.text))
+
+let testPostWrappers = [testPostDataWrapper, testPostDataWrapper2, testPostDataWrapper3, testPostDataWrapper4]
 #endif

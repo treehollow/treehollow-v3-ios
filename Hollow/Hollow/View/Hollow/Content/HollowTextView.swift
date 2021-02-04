@@ -7,15 +7,16 @@
 //
 
 import SwiftUI
-import MarkdownUI
 
 struct HollowTextView: View {
     @Binding var text: String
     var compactLineLimit: Int? = nil
     var body: some View {
-        Markdown(Document(stringLiteral: text))
+        Text(text)
+            .hollowContent()
+            .leading()
+            .foregroundColor(.hollowContentText)
             .lineLimit(compactLineLimit)
-        // TODO: Handle URL actions
     }
 }
 

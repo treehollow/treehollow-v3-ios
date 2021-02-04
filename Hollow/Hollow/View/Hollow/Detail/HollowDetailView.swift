@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HollowDetailView: View {
-    @Binding var postData: PostData
+    @Binding var postDataWrapper: PostDataWrapper
     @Binding var presentedIndex: Int
     var body: some View {
         // FIXME: Handlers
@@ -27,7 +27,7 @@ struct HollowDetailView: View {
                                 .padding(.trailing, 5)
                         }
                         .padding(.trailing, 5)
-                        HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postData, compact: false)
+                        HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postDataWrapper.post, compact: false)
                     }
                     .padding(.horizontal)
                     Divider()
@@ -37,9 +37,9 @@ struct HollowDetailView: View {
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        HollowContentView(postData: $postData, compact: false, voteHandler: {_ in})
+                        HollowContentView(postDataWrapper: $postDataWrapper, compact: false, voteHandler: {_ in})
                             .fixedSize(horizontal: false, vertical: true)
-                        CommentView(comments: $postData.comments)
+                        CommentView(comments: $postDataWrapper.post.comments)
                     }
                     .padding(.horizontal)
                     .background(Color.hollowDetailBackground)
@@ -72,6 +72,6 @@ extension HollowDetailView {
 struct HollowDetailView_Previews: PreviewProvider {
 
     static var previews: some View {
-        return HollowDetailView(postData: .constant(testPostData), presentedIndex: .constant(-1)).colorScheme(.dark)
+        return HollowDetailView(postDataWrapper: .constant(testPostDataWrapper), presentedIndex: .constant(-1)).colorScheme(.dark)
     }
 }

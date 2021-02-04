@@ -9,12 +9,12 @@
 import SwiftUI
 
 class Timeline: ObservableObject {
-    @Published var posts: [PostData]
+    @Published var posts: [PostDataWrapper]
     
     init() {
         // FOR DEBUG
-//        self.posts = Array.init(repeating: testPostData, count: 10)
-        self.posts = testPosts + testPosts
+        self.posts = Array.init(repeating: testPostDataWrapper, count: 100) + Array.init(repeating: testPostDataWrapper3, count: 100)
+//        self.posts = testPostWrappers + testPostWrappers
     }
     
     func vote(postId: Int, for option: String) {

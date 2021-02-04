@@ -84,11 +84,9 @@ struct WelcomeView: View {
             .disabled(viewModel.isLoadingConfig)
             .background(Color("background.other").edgesIgnoringSafeArea(.all))
             .navigationTitle(LocalizedStringKey("Welcome"))
+            
             // Show alert on receiving error
-            .alert(isPresented: .constant(viewModel.errorMessage != nil)) {
-                // We should restore the error message after presenting the alert
-                Alert(title: Text(viewModel.errorMessage!.title), message: Text(viewModel.errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { viewModel.errorMessage = nil }))
-            }
+            .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         }
         .accentColor(.hollowContentText)
     }

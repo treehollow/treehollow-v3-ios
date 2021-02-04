@@ -2,14 +2,15 @@
 //  LoginSubViews.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/2/4.
+//  Created by liang2kl on 2021/2/4.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import SwiftUI
 import Defaults
 
-/// Private sub views of `LoginView`
+// Private sub views of `LoginView`, we put them here to
+// improve code hightlight and completion performance.
 extension LoginView {
     struct ReCAPTCHAPageView: View {
         @Binding var presentedIndex: Int
@@ -51,9 +52,14 @@ extension LoginView {
         @ObservedObject var viewModel: Login
         
         // The password is valid only if its length is no less than 8 and it contains no blank spaces.
-        private var passwordValid: Bool { viewModel.originalPassword.count >= 8 && !viewModel.originalPassword.contains(" ") }
+        private var passwordValid: Bool {
+            viewModel.originalPassword.count >= 8 &&
+                !viewModel.originalPassword.contains(" ")
+        }
         
-        private var confirmedPasswordValid: Bool { viewModel.confirmedPassword == viewModel.originalPassword }
+        private var confirmedPasswordValid: Bool {
+            viewModel.confirmedPassword == viewModel.originalPassword
+        }
         
         private let passwordRequirements: String =
             NSLocalizedString("The password should contains at least 8 characters without blank spaces.", comment: "")
@@ -78,14 +84,19 @@ extension LoginView {
             }
             
             // Confirmed password text field
-            MyTextField(text: $viewModel.confirmedPassword, title: String.confirmedPassWordLocalized.capitalized, isSecureContent: true) {
+            MyTextField(text: $viewModel.confirmedPassword,
+                        title: String.confirmedPassWordLocalized.capitalized,
+                        isSecureContent: true) {
                 Group {
-                    if viewModel.confirmedPassword != "" && !confirmedPasswordValid {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.red)
-                    } else if viewModel.confirmedPassword != "" {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.green)
+                    // Original password should be valid first.
+                    if passwordValid {
+                        if viewModel.confirmedPassword != "" && !confirmedPasswordValid {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.red)
+                        } else if viewModel.confirmedPassword != "" {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.green)
+                        }
                     }
                 }
                 .font(.system(size: 14))
@@ -100,14 +111,17 @@ extension LoginView {
             Group {
                 // Present reCAPTCHA verification interface when needed
                 if viewModel.fullScreenCoverIndex == 0 {
-                    ReCAPTCHAPageView(presentedIndex: $viewModel.fullScreenCoverIndex, successHandler: { token in
-                        withAnimation {
-                            viewModel.fullScreenCoverIndex = -1
-                            viewModel.reCAPTCHAToken = token
-                            // Check again with the token
-                            viewModel.checkEmail()
+                    ReCAPTCHAPageView(
+                        presentedIndex: $viewModel.fullScreenCoverIndex,
+                        successHandler: { token in
+                            withAnimation {
+                                viewModel.fullScreenCoverIndex = -1
+                                viewModel.reCAPTCHAToken = token
+                                // Check again with the token
+                                viewModel.checkEmail()
+                            }
                         }
-                    })
+                    )
                 }
                 
                 // Present main view after successfully logging in

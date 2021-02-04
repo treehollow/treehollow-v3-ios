@@ -12,7 +12,7 @@ class Wander: ObservableObject {
     @Published var posts: [PostData]
     init() {
         // FOR DEBUG
-//        self.posts = Array.init(repeating: testPostData, count: 10)
-        self.posts = testPosts + testPosts + testPosts
+        self.posts = Array.init(repeating: testPostData, count: 200)
+//        self.posts = testPosts + testPosts + testPosts
     }
 }

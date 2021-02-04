@@ -32,31 +32,34 @@ struct TimelineView: View {
                     .padding(.vertical, 6)
                     .padding(.horizontal, 15)
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(.mainSearchBarBackground))
-
+                    
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
                 .padding(.top, 2)
                 .background(Color.background)
-
+                
                 // FIXME: Performance issue with large number of posts.
                 // Workaround: lazy load / hide previous cards
-                ForEach(0..<viewModel.posts.count) { index in
-                    HollowTimelineCardView(postData: $viewModel.posts[index], viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].postId, for: option)}))
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                        .background(Color.background)
-                        .onTapGesture {
-                            detailPresentedIndex = index
-                        }
-                        // FIXME: Cannot present after presenting and dismissing menu!
-                        .fullScreenCover(isPresented: .constant(detailPresentedIndex == index), content: {
-                            HollowDetailView(postData: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
-                        })
+                
+                LazyVStack(spacing: 0) {
+                    ForEach(0..<viewModel.posts.count) { index in
+                        HollowTimelineCardView(postDataWrapper: $viewModel.posts[index], viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].post.postId, for: option)}))
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                            .background(Color.background)
+                            .onTapGesture {
+                                detailPresentedIndex = index
+                            }
+                            // FIXME: Cannot present after presenting and dismissing menu!
+                            .fullScreenCover(isPresented: .constant(detailPresentedIndex == index), content: {
+                                HollowDetailView(postDataWrapper: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
+                            })
+                    }
                 }
             }
         })
-
+        
     }
 }
 

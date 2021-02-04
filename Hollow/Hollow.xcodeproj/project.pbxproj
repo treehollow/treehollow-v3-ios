@@ -98,8 +98,8 @@
 		0E854A5225B485DD00E512F4 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A5125B485DD00E512F4 /* SystemMessage.swift */; };
 		0E854A5625B4868F00E512F4 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A5525B4868F00E512F4 /* PostListRequest.swift */; };
 		0E854A5A25B48BF500E512F4 /* DeviceTerminationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E854A5925B48BF500E512F4 /* DeviceTerminationRequest.swift */; };
-		0E90545C25C596B100254EE5 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 0E90545B25C596B100254EE5 /* CommonMark */; };
-		0E90545E25C596B100254EE5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E90545D25C596B100254EE5 /* MarkdownUI */; };
+		0E9C395E25CBAE9F006D669D /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C395D25CBAE9F006D669D /* Data+hexEncodedString.swift */; };
+		0E9C396525CC2905006D669D /* HollowVerticalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C396425CC2905006D669D /* HollowVerticalDivider.swift */; };
 		0E9F26BB25BE9B7300CA56DE /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26BA25BE9B7300CA56DE /* CustomFont.swift */; };
 		0E9F26BF25BE9D8800CA56DE /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26BE25BE9D8800CA56DE /* Int+string.swift */; };
 		0E9F26C325BEB25D00CA56DE /* HollowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */; };
@@ -218,6 +218,8 @@
 		0E854A5125B485DD00E512F4 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
 		0E854A5525B4868F00E512F4 /* PostListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListRequest.swift; sourceTree = "<group>"; };
 		0E854A5925B48BF500E512F4 /* DeviceTerminationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTerminationRequest.swift; sourceTree = "<group>"; };
+		0E9C395D25CBAE9F006D669D /* Data+hexEncodedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+hexEncodedString.swift"; sourceTree = "<group>"; };
+		0E9C396425CC2905006D669D /* HollowVerticalDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowVerticalDivider.swift; sourceTree = "<group>"; };
 		0E9F26BA25BE9B7300CA56DE /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		0E9F26BE25BE9D8800CA56DE /* Int+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+string.swift"; sourceTree = "<group>"; };
 		0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowHeaderView.swift; sourceTree = "<group>"; };
@@ -249,10 +251,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E90545C25C596B100254EE5 /* CommonMark in Frameworks */,
 				003920F325C54BB900883BE9 /* Alamofire in Frameworks */,
 				0E7857ED25B74B340000C659 /* Defaults in Frameworks */,
-				0E90545E25C596B100254EE5 /* MarkdownUI in Frameworks */,
 				0E56901325BFFF57003C70D6 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +408,7 @@
 				0E7857F125B74BAD0000C659 /* DefaultsKeys.swift */,
 				0E4690AF25C99829003D62B1 /* Localization.swift */,
 				008C729B25CAA2390092AAB8 /* String+SHA256.swift */,
+				0E9C395D25CBAE9F006D669D /* Data+hexEncodedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -674,6 +675,7 @@
 				0E9F26C225BEB25D00CA56DE /* HollowHeaderView.swift */,
 				0E9F26C925BEBA9800CA56DE /* HollowHeaderMenu.swift */,
 				0E56901525C001E8003C70D6 /* HollowButton.swift */,
+				0E9C396425CC2905006D669D /* HollowVerticalDivider.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -714,8 +716,6 @@
 			packageProductDependencies = (
 				0E7857EC25B74B340000C659 /* Defaults */,
 				0E56901225BFFF57003C70D6 /* WaterfallGrid */,
-				0E90545B25C596B100254EE5 /* CommonMark */,
-				0E90545D25C596B100254EE5 /* MarkdownUI */,
 				003920F225C54BB900883BE9 /* Alamofire */,
 			);
 			productName = Hollow;
@@ -749,7 +749,6 @@
 			packageReferences = (
 				0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E56901125BFFF57003C70D6 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
-				0E90545A25C596B100254EE5 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				003920F125C54BB900883BE9 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 0E8549BC25B3F9AA00E512F4 /* Products */;
@@ -840,6 +839,7 @@
 				0E7F5F9B25C2E5B600D3826C /* ReCAPTCHAWebView.swift in Sources */,
 				0E8549EE25B3FA9F00E512F4 /* FavouritesView.swift in Sources */,
 				0E8549FD25B3FAD900E512F4 /* HollowWanderCardView.swift in Sources */,
+				0E9C395E25CBAE9F006D669D /* Data+hexEncodedString.swift in Sources */,
 				0EFF4AF325BE5D3D00D240BC /* HollowTextView.swift in Sources */,
 				004BE3E625C83EC200211F4E /* NetTest.swift in Sources */,
 				0E78575225B532CA0000C659 /* ReportPostRequest.swift in Sources */,
@@ -868,6 +868,7 @@
 				0E4690B025C99829003D62B1 /* Localization.swift in Sources */,
 				0EA59D4625C165610070649B /* CustomAnimations.swift in Sources */,
 				0E78572825B4985C0000C659 /* PostDetailRequest.swift in Sources */,
+				0E9C396525CC2905006D669D /* HollowVerticalDivider.swift in Sources */,
 				0E44BBCF25B8960F00B78B30 /* HollowVoteContentView.swift in Sources */,
 				0EE68E8025C2AB87004F163B /* Welcome.swift in Sources */,
 				0E2FE97C25BE880200DC1220 /* LinearGradientExtensions.swift in Sources */,
@@ -1115,14 +1116,6 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		0E90545A25C596B100254EE5 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.4;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1140,16 +1133,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E7857EB25B74B340000C659 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
-		};
-		0E90545B25C596B100254EE5 /* CommonMark */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E90545A25C596B100254EE5 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
-			productName = CommonMark;
-		};
-		0E90545D25C596B100254EE5 /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E90545A25C596B100254EE5 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
-			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

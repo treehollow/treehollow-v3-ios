@@ -53,8 +53,6 @@ struct HollowImageView: View {
 
 struct HollowImageView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowDetailView(postData: .constant(testPostData), presentedIndex: .constant(-1))
-        HollowDetailView(postData: .constant(testPostData2), presentedIndex: .constant(-1))
         HollowImageView(hollowImage: .constant(.init(placeholder: (1760, 1152), image: UIImage(named: "test"))))
     }
 }

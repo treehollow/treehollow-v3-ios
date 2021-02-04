@@ -9,10 +9,11 @@
 #if DEBUG
 
 import Foundation
+import Defaults
 
 struct NetTest {
     init() {
-        // SHA256
+         SHA256
         let testSHA256 = "abcde"
         let testEmail = "testabc@tsinghua.edu.cn"
         let testToken = "ee2uyrsj5xg4i5uywn7qhin6o3zzat6"

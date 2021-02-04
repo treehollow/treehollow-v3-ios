@@ -30,3 +30,20 @@ struct PostData: Identifiable {
     var vote: Post.Vote?
     var comments: [CommentData]
 }
+
+struct CitedPostData: Identifiable {
+    // Identifiable protocol
+    var id: Int { postId }
+    
+    var postId: Int
+    var text: String
+}
+
+/// Wrapper to use when initializing a view for a post.
+struct PostDataWrapper: Identifiable {
+    // Identifiable protocol
+    var id: Int { post.id }
+    
+    var post: PostData
+    var citedPost: CitedPostData?
+}

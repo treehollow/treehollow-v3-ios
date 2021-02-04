@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HollowTimelineCardView: View {
-    @Binding var postData: PostData
+    @Binding var postDataWrapper: PostDataWrapper
     @ObservedObject var viewModel: HollowTimelineCard
     
     private let verticalSpacing: CGFloat = 10
@@ -16,11 +16,11 @@ struct HollowTimelineCardView: View {
     var body: some View {
         VStack(spacing: 15) {
             // TODO: Star actions
-            HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postData, compact: false)
-            HollowContentView(postData: $postData, compact: true, voteHandler: viewModel.voteHandler)
+            HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postDataWrapper.post, compact: false)
+            HollowContentView(postDataWrapper: $postDataWrapper, compact: true, voteHandler: viewModel.voteHandler)
             // Check if comments exist to avoid additional spacing
-            if postData.comments.count > 0 {
-                CommentView(comments: $postData.comments)
+            if postDataWrapper.post.comments.count > 0 {
+                CommentView(comments: $postDataWrapper.post.comments)
             }
         }
         .padding()
@@ -59,10 +59,10 @@ struct HollowTimelineCardView: View {
 struct HollowTimelineCardView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
-            HollowTimelineCardView(postData: .constant(testPosts[1]), viewModel: .init(voteHandler: {string in print(string)}))
+            HollowTimelineCardView(postDataWrapper: .constant(testPostWrappers[1]), viewModel: .init(voteHandler: {string in print(string)}))
                 .padding()
                 .background(Color.background)
-            HollowTimelineCardView(postData: .constant(testPosts[1]), viewModel: .init(voteHandler: {string in print(string)}))
+            HollowTimelineCardView(postDataWrapper: .constant(testPostWrappers[1]), viewModel: .init(voteHandler: {string in print(string)}))
                 .padding()
                 .background(Color.background)
                 .colorScheme(.dark)

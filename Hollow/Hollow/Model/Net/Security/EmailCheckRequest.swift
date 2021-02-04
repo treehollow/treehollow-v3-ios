@@ -18,11 +18,8 @@ struct EmailCheckRequestConfiguration {
     }
     /// User's email to be checked, required
     var email: String
-    /// User's old thuhole token, only needed for old user signup
-    /// using web frontend, optional
-    // var oldToken: String?
+
     /// Info of `reCAPTCHA`, optional
-    // NO USE
     var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
     
     var apiRoot: String
@@ -79,7 +76,7 @@ struct EmailCheckRequest: Request {
         }
         let urlPath =
             self.configuration.apiRoot + "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
-        // URL must be leagle !
+        // URL must be legal!
         AF.request(
             urlPath,
             method: .post,

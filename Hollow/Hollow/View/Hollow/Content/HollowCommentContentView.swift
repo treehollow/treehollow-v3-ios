@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import MarkdownUI
 
 struct HollowCommentContentView: View {
     @Binding var commentData: CommentData
@@ -42,8 +41,8 @@ struct HollowCommentContentView: View {
                         }
                         Group {
                             if commentData.text != "" {
-                                Markdown(Document(stringLiteral: commentData.text))
-                                    .markdownStyle(.init(font: .system(size: 16), foregroundColor: .init(compact ? .hollowContentText : .primary)))
+                                Text(commentData.text)
+                                    .hollowComment()
                             } else if commentData.type == .image && compact {
                                 (Text("[") + Text(LocalizedStringKey("Photo")) + Text("]"))
                                     .hollowContent()
@@ -83,7 +82,6 @@ struct HollowCommentContentView: View {
 struct HollowCommentContentView_Previews: PreviewProvider {
     static var previews: some View {
         HollowCommentContentView(commentData: .constant(testComments[0]), compact: false)
-        HollowDetailView(postData: .constant(testPostData), presentedIndex: .constant(-1))
         HollowCommentContentView(commentData: .constant(testComments[3]), compact: false)
     }
 }

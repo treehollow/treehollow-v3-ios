@@ -13,11 +13,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Set the devide token to nil to avoid using invalid token.
-        Defaults[.deviceToken] = nil
-        // Register for APN
-//        UIApplication.shared.register
-        UIApplication.shared.registerForRemoteNotifications()
+        // Request notification access
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { granted, error in
+
+            // If granted comes true you can enabled features based on authorization.
+            guard granted else { return }
+            
+            // Register for APN
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
         return true
     }
 
@@ -36,14 +43,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // Save to defaults
+        // Temporarily save the token in defaults. We are not using this
+        // default except registering or logging in for the first time.
         Defaults[.deviceToken] = deviceToken
-//        print(String(data: deviceToken, encoding: .utf8))
+        
+        // Try to send the token to the server, if we have a user token.
+        if let accessToken = Defaults[.accessToken] {
+            sendDeviceToken(deviceToken, withAccessToken: accessToken)
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failt ro register remote notification: \(error.localizedDescription)")
+        print("Fail ro register remote notification with error: \(error.localizedDescription)")
     }
 
+    private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
+        // TODO: Implementation
+    }
 }
 

@@ -11,7 +11,6 @@ import Defaults
 struct LoginView: View {
     @ObservedObject var viewModel: Login = .init()
     @State private var password = ""
-    @State private var fullScreenCover: Int = -1
     
     // Determine when we should check user's email.
     private var shouldCheckEmail: Bool { viewModel.emailCheckType == nil || viewModel.emailCheckType == .reCAPTCHANeeded }
@@ -88,11 +87,11 @@ struct LoginView: View {
         .padding(.horizontal)
         .padding(.bottom)
         
+        // Display spinner on navigation bar while loading.
         .navigationBarItems(trailing: Group {
             if viewModel.isLoading {
                 Spinner(color: .hollowContentText,
-                        desiredWidth: ViewConstants.navigationBarSpinnerWidth
-                )
+                        desiredWidth: ViewConstants.navigationBarSpinnerWidth)
             }
         })
         
