@@ -51,6 +51,7 @@ extension MainView {
     private struct HeaderView: View {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool
+        @State private var accountPresented = false
         var body: some View {
             HStack(spacing: 2) {
                 Group {
@@ -92,14 +93,19 @@ extension MainView {
                         Image(systemName: "bell")
                             .padding(.horizontal, 7)
                     }
-                    Button(action:{}) {
+                    Button(action:{
+                        accountPresented = true
+                    }) {
                         Image(systemName: "person")
                             .padding(.leading, 7)
                     }
                 }
-                .font(.system(size: 20, weight: .medium))
+                .font(.dynamic(size: 20, weight: .medium))
                 .foregroundColor(.mainBarButton)
             }
+            .fullScreenCover(isPresented: $accountPresented, content: {
+                AccountView(presented: $accountPresented)
+            })
 
         }
     }

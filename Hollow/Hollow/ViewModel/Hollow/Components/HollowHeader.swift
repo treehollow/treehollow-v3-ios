@@ -9,9 +9,8 @@
 import Foundation
 
 class HollowHeader: ObservableObject {
-    var starHandler: (Bool) -> Void
     
-    init(starHandler: @escaping (Bool) ->Void) {
-        self.starHandler = starHandler
+    func starPost(_ star: Bool) {
+        
     }
 }

@@ -30,11 +30,11 @@ struct HollowImageView: View {
                                     savePhotoError = error?.localizedDescription
                                 }).writeToPhotoAlbum(image: image)
                             }) {
-                                Label(LocalizedStringKey("Save to Library"), systemImage: "square.and.arrow.down")
+                                Label(LocalizedStringKey("Save to Photos"), systemImage: "square.and.arrow.down")
                             }
                         }))
                         .alert(isPresented: $showSavePhotoAlert, content: {
-                            return Alert(title: Text(savePhotoError?.description ?? NSLocalizedString("Successfully saved to library", comment: "")))
+                            return Alert(title: Text(savePhotoError?.description ?? NSLocalizedString("Successfully saved to Photos.", comment: "")))
                         })
                 } else {
                     Rectangle()

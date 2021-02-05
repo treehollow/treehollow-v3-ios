@@ -61,7 +61,7 @@ struct SearchView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     }
-                    .font(.system(size: 16))
+                    .font(.dynamic(size: 16))
                     .padding(.bottom, 5)
                     Rectangle()
                         .frame(height: 1)
@@ -71,12 +71,12 @@ struct SearchView: View {
                 .padding(.vertical)
                 Button(action:{ withAnimation { showsAdvancedOptions.toggle() }}) {
                     Text(String.advancedLocalized.capitalized)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.dynamic(size: 16, weight: .semibold))
                         .animation(transitionAnimation)
                     Image(systemName: "triangle.fill")
                         .rotationEffect(Angle(degrees: showsAdvancedOptions ? 180 : 90))
                         .animation(transitionAnimation)
-                        .font(.system(size: 10))
+                        .font(.dynamic(size: 10))
                 }
                 .foregroundColor(.plainButton)
                 .animation(.none)
@@ -89,7 +89,7 @@ struct SearchView: View {
                 }
                 
                 Text(String.historyLocalized.capitalized)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.dynamic(size: 16, weight: .semibold))
                     .animation(transitionAnimation)
                     .leading()
                     .padding(.top)
@@ -191,7 +191,7 @@ extension SearchView {
                     .lineLimit(1)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .font(.system(size: 14))
+                    .font(.dynamic(size: 14))
                     .foregroundColor(.primary)
                     .background(Color.searchButtonBackground.opacity(colorScheme == .dark ? 0.2 : 0.6))
                     .blurBackground(style: colorScheme == .dark ? .systemUltraThinMaterialLight : .systemUltraThinMaterialDark)
@@ -209,11 +209,11 @@ extension SearchView {
             }) {
                 HStack {
                     Text(text)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.dynamic(size: 14, weight: .semibold))
                         .foregroundColor(.primary)
                     Spacer()
                     Text(description)
-                        .font(.system(size: 12))
+                        .font(.dynamic(size: 12))
                         .foregroundColor(.secondary)
                 }
                 .colorScheme(selected ? .dark : colorScheme)

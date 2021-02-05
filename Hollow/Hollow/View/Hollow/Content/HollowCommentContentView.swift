@@ -56,7 +56,7 @@ struct HollowCommentContentView: View {
                 }
                 if commentData.type == .image && compact {
                     Image(systemName: "photo")
-                        .font(.system(size: 15))
+                        .font(.dynamic(size: 15))
                         .layoutPriority(1)
                 }
                 

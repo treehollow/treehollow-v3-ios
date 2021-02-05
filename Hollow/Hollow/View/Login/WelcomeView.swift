@@ -26,7 +26,7 @@ struct WelcomeView: View {
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
                     Text(LocalizedStringKey("Select Hollow"))
-                        .font(.system(size: 22, weight: .semibold))
+                        .font(.dynamic(size: 22, weight: .semibold))
                         .foregroundColor(Color("hollow.content.text.other"))
                         .padding(.top, 70)
                         .padding(.bottom, 20)
@@ -157,7 +157,7 @@ extension View {
         return self
             .foregroundColor(Color("hollow.content.text.other"))
             .padding(.vertical, 5)
-            .font(.system(size: 15, weight: .medium))
+            .font(.dynamic(size: 15, weight: .medium))
             .frame(width: 150)
     }
 }

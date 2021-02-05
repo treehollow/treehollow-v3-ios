@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Request notification access
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options:[.badge, .alert, .sound]) { granted, error in
-
-            // If granted comes true you can enabled features based on authorization.
             guard granted else { return }
             
             // Register for APN

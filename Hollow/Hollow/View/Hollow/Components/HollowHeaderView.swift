@@ -10,7 +10,7 @@ import SwiftUI
 
 // TODO: Actions
 struct HollowHeaderView: View {
-    @ObservedObject var viewModel: HollowHeader
+    @ObservedObject var viewModel: HollowHeader = .init()
     @Binding var postData: PostData
     var compact: Bool
     private var starred: Bool? { postData.attention }
@@ -19,31 +19,37 @@ struct HollowHeaderView: View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
                 // FIXME: Random avatar
-                Image("test")
+                Image("test.avatar")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 37, height: 37)
+                    
+                    // Scale the avatar relative to the font scaling.
+                    .frame(width: 37.dynamic, height: 37.dynamic)
                     .clipShape(Circle())
                 VStack(alignment: .leading, spacing: 2) {
                     Text("#\(postData.postId.string)")
                         .fontWeight(.medium)
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .font(.dynamic(size: 16, weight: .semibold))
                         .hollowPostId()
                         .foregroundColor(.hollowContentText)
                     Text("6分钟前")    // FIXME: Placeholder here
                         .hollowPostTime()
                         .foregroundColor(Color.gray)
                 }
+                // lineLimit = 1 for dynamic font sizes.
+                .lineLimit(1)
             }
             Spacer()
             
             if !compact {
                 // If `postData.attention` is nil, it means that the changed state of attention is submitting
                 if let _ = postData.attention {
-                    HollowStarButton(attention: $postData.attention, likeNumber: $postData.likeNumber, starHandler: viewModel.starHandler)
+                    HollowStarButton(attention: $postData.attention, likeNumber: $postData.likeNumber, starHandler: viewModel.starPost)
                 } else {
                     Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }
+                
+                // FIXME: Cannot present full screen cover after presenting this menu
                 
 //                Menu(content: {
 //                    HollowHeaderMenu()
@@ -70,7 +76,7 @@ struct HollowHeaderView_Previews: PreviewProvider {
     ])
     
     static var previews: some View {
-        HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: .constant(postData), compact: false)
+        HollowHeaderView(postData: .constant(postData), compact: false)
             .background(Color.background)
     }
 }

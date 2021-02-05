@@ -9,7 +9,7 @@
 import SwiftUI
 import Defaults
 
-// Private sub views of `LoginView`, we put them here to
+// Sub views of `LoginView`, we put them here to
 // improve code hightlight and completion performance.
 extension LoginView {
     struct ReCAPTCHAPageView: View {
@@ -80,7 +80,7 @@ extension LoginView {
                             .foregroundColor(.green)
                     }
                 }
-                .font(.system(size: 14))
+                .font(.dynamic(size: 14))
             }
             
             // Confirmed password text field
@@ -99,7 +99,7 @@ extension LoginView {
                         }
                     }
                 }
-                .font(.system(size: 14))
+                .font(.dynamic(size: 14))
             }
         }
     }
@@ -154,7 +154,7 @@ extension LoginView {
                             .layoutPriority(1)
                     }
                     .lineLimit(1)
-                    .font(.system(size: 14))
+                    .font(.dynamic(size: 14))
                 })
             }
             .keyboardType(.emailAddress)

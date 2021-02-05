@@ -35,7 +35,7 @@ struct HollowButton: View {
                 Text("\(number.string)")
                 Image(systemName: systemImageName)
             }
-            .font(.system(size: 16, weight: .semibold, design: .rounded))
+            .font(.dynamic(size: 16, weight: .semibold, design: .rounded))
         }
         .padding(5)
     }

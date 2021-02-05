@@ -27,7 +27,7 @@ struct HollowDetailView: View {
                                 .padding(.trailing, 5)
                         }
                         .padding(.trailing, 5)
-                        HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postDataWrapper.post, compact: false)
+                        HollowHeaderView(postData: $postDataWrapper.post, compact: false)
                     }
                     .padding(.horizontal)
                     Divider()

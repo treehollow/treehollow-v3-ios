@@ -31,7 +31,7 @@ struct MyButton<Content>: View where Content: View {
 
 struct MyButton_Previews: PreviewProvider {
     static var previews: some View {
-        MyButton(action: {}, gradient: .vertical(gradient: .button), content: {Text("搜索").font(.system(size: 12, weight: .bold)).foregroundColor(.white)})
+        MyButton(action: {}, gradient: .vertical(gradient: .button), content: {Text("搜索").font(.dynamic(size: 12, weight: .bold)).foregroundColor(.white)})
             .colorScheme(.dark)
     }
 }

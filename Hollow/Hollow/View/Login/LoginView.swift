@@ -29,6 +29,7 @@ struct LoginView: View {
         return ""
     }
     
+    // Determine when to disable the interaction with the text fields
     private var disableInteraction: Bool { viewModel.isLoading }
     
     // Determine when to disable the button
@@ -38,7 +39,9 @@ struct LoginView: View {
         if shouldRegister { return
             viewModel.emailVerificationCode == "" ||
             viewModel.confirmedPassword != viewModel.originalPassword ||
-            viewModel.originalPassword == ""
+            // Invalid original password
+            viewModel.originalPassword.count < 8 ||
+            viewModel.originalPassword.contains(" ")
         }
         if shouldLogin { return viewModel.loginPassword == "" }
         return true

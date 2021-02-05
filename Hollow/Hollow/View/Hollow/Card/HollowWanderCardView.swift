@@ -12,7 +12,7 @@ struct HollowWanderCardView: View {
     var body: some View {
         // FIXME: Handlers
         VStack {
-            HollowHeaderView(viewModel: .init(starHandler: {_ in }), postData: $postData, compact: true)
+            HollowHeaderView(postData: $postData, compact: true)
             HollowTextView(text: $postData.text, compactLineLimit: 20)
             // TODO: Vote and cite
             HStack {

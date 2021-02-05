@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Wrapper for SwiftUI's ScrollView to receive delegate callbacks
 struct CustomScrollView<Content>: View where Content: View {
     var offset: Binding<CGFloat?>
     var atBottom: Binding<Bool?>

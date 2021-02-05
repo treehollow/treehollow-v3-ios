@@ -62,7 +62,7 @@ struct HollowVoteContentView: View {
                         .layoutPriority(1)
                 }
             }
-            .font(.system(size: 15))
+            .font(.dynamic(size: 15))
             .lineLimit(1)
             .foregroundColor(selected ? .white : .uiColor(.label))
             .padding(10)

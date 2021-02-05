@@ -2,7 +2,7 @@
 //  MyTextField.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/1/30.
+//  Created by liang2kl on 2021/1/30.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
@@ -20,9 +20,8 @@ struct MyTextField<Content>: View where Content: View {
         VStack(alignment: .leading) {
             if let title = title {
                 Text(title.uppercased())
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.dynamic(size: 14, weight: .medium))
                     .foregroundColor(.hollowContentText)
-                // Align to the placeholder of the text field
             }
             HStack(spacing: 0) {
                 Group {
@@ -35,7 +34,7 @@ struct MyTextField<Content>: View where Content: View {
                 .labelsHidden()
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
-                .font(.system(size: 16))
+                .font(.dynamic(size: 16))
                 Spacer()
                 if let content = content {
                     content()
@@ -48,7 +47,7 @@ struct MyTextField<Content>: View where Content: View {
             
             if let footer = footer {
                 Text(footer)
-                    .font(.system(size: 12))
+                    .font(.dynamic(size: 12))
                     .foregroundColor(.secondary)
                 
             }

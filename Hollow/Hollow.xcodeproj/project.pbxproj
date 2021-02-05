@@ -115,6 +115,8 @@
 		0EBE49EC25CA73070027F439 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE49EB25CA73070027F439 /* Constants.swift */; };
 		0EC0DD6625C950760035039C /* Image+imageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0DD6525C950760035039C /* Image+imageButton.swift */; };
 		0EC0DD6925C952CB0035039C /* View+topBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0DD6825C952CB0035039C /* View+topBar.swift */; };
+		0EC53FE525CD39090069BC16 /* Font+dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC53FE425CD39090069BC16 /* Font+dynamic.swift */; };
+		0EC53FE825CD3B760069BC16 /* CGFloat+dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC53FE725CD3B760069BC16 /* CGFloat+dynamic.swift */; };
 		0EE68E8025C2AB87004F163B /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE68E7F25C2AB87004F163B /* Welcome.swift */; };
 		0EF16D3625C0565A00B63833 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3525C0565A00B63833 /* CustomTabView.swift */; };
 		0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF16D3C25C0760900B63833 /* ImageSaver.swift */; };
@@ -235,6 +237,8 @@
 		0EBE49EB25CA73070027F439 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0EC0DD6525C950760035039C /* Image+imageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+imageButton.swift"; sourceTree = "<group>"; };
 		0EC0DD6825C952CB0035039C /* View+topBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+topBar.swift"; sourceTree = "<group>"; };
+		0EC53FE425CD39090069BC16 /* Font+dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+dynamic.swift"; sourceTree = "<group>"; };
+		0EC53FE725CD3B760069BC16 /* CGFloat+dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+dynamic.swift"; sourceTree = "<group>"; };
 		0EE68E7F25C2AB87004F163B /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0EF16D3525C0565A00B63833 /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		0EF16D3C25C0760900B63833 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
@@ -603,6 +607,8 @@
 				0EFCFCF925C1B0D40091EC04 /* View+makeDivider.swift */,
 				0EC0DD6525C950760035039C /* Image+imageButton.swift */,
 				0EC0DD6825C952CB0035039C /* View+topBar.swift */,
+				0EC53FE425CD39090069BC16 /* Font+dynamic.swift */,
+				0EC53FE725CD3B760069BC16 /* CGFloat+dynamic.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -834,6 +840,7 @@
 				0E854A5225B485DD00E512F4 /* SystemMessage.swift in Sources */,
 				0E78573A25B4EAFB0000C659 /* SearchHistoryRequest.swift in Sources */,
 				0E7857F225B74BAD0000C659 /* DefaultsKeys.swift in Sources */,
+				0EC53FE825CD3B760069BC16 /* CGFloat+dynamic.swift in Sources */,
 				0E3C34E225CB98DA00E8D9E3 /* ViewConstants.swift in Sources */,
 				0E854A0125B3FAE800E512F4 /* HollowTimelineCardView.swift in Sources */,
 				0E7F5F9B25C2E5B600D3826C /* ReCAPTCHAWebView.swift in Sources */,
@@ -856,6 +863,7 @@
 				0EF16D3D25C0760900B63833 /* ImageSaver.swift in Sources */,
 				008C729C25CAA2390092AAB8 /* String+SHA256.swift in Sources */,
 				0E8549D925B3FA4100E512F4 /* WelcomeView.swift in Sources */,
+				0EC53FE525CD39090069BC16 /* Font+dynamic.swift in Sources */,
 				0E854A2925B3FC0600E512F4 /* RegulationView.swift in Sources */,
 				0EC0DD6925C952CB0035039C /* View+topBar.swift in Sources */,
 				0E854A1525B3FB5700E512F4 /* HollowVoteInputView.swift in Sources */,
@@ -1039,6 +1047,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Hollow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1063,6 +1072,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Hollow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

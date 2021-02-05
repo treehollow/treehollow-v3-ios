@@ -16,7 +16,7 @@ struct HollowTimelineCardView: View {
     var body: some View {
         VStack(spacing: 15) {
             // TODO: Star actions
-            HollowHeaderView(viewModel: .init(starHandler: {_ in}), postData: $postDataWrapper.post, compact: false)
+            HollowHeaderView(postData: $postDataWrapper.post, compact: false)
             HollowContentView(postDataWrapper: $postDataWrapper, compact: true, voteHandler: viewModel.voteHandler)
             // Check if comments exist to avoid additional spacing
             if postDataWrapper.post.comments.count > 0 {
