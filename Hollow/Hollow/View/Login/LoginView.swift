@@ -62,11 +62,7 @@ struct LoginView: View {
                     
                     // Login text field
                     if shouldLogin {
-                        // TODO: 'Restore password'
-                        MyTextField<EmptyView>(text: $viewModel.loginPassword,
-                                               placeHolder: NSLocalizedString("Enter your password", comment: ""),
-                                               title: String.passwordLocalized.capitalized,
-                                               isSecureContent: true)
+                        LoginTextField(viewModel: viewModel)
                     }
                     
                 }

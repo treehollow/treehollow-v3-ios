@@ -29,13 +29,15 @@ struct HollowButton: View {
     var action: () -> Void
     var systemImageName: String
     
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: 3) {
                 Text("\(number.string)")
                 Image(systemName: systemImageName)
             }
-            .font(.dynamic(size: 16, weight: .semibold, design: .rounded))
+            .font(.system(size: body16, weight: .semibold, design: .rounded))
         }
         .padding(5)
     }

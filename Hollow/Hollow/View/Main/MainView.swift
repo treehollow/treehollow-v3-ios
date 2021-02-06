@@ -52,6 +52,11 @@ extension MainView {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool
         @State private var accountPresented = false
+        
+        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
+        @ScaledMetric(wrappedValue: 22, relativeTo: .body) var body22: CGFloat
+        @ScaledMetric(wrappedValue: 18, relativeTo: .body) var body18: CGFloat
+
         var body: some View {
             HStack(spacing: 2) {
                 Group {
@@ -60,13 +65,11 @@ extension MainView {
                             page = .wander
                         }
                     }) {
-                        Text(String.wanderLocalized.capitalized)
-                            .mainTabText(selected: page == .wander)
+                        mainTabText(text: String.wanderLocalized.capitalized, selected: page == .wander)
                             .animation(.spring())
                     }
                     .disabled(page == .wander)
-                    Text("/")
-                        .mainTabText(selected: true)
+                    mainTabText(text: "/", selected: true)
                         .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
                         .animation(.spring())
                     Button(action: {
@@ -74,8 +77,7 @@ extension MainView {
                             page = .timeline
                         }
                     }) {
-                        Text(String.timelineLocalized.capitalized)
-                            .mainTabText(selected: page == .timeline)
+                        mainTabText(text: String.timelineLocalized.capitalized, selected: page == .timeline)
                             .animation(.spring())
                         
                     }
@@ -100,13 +102,21 @@ extension MainView {
                             .padding(.leading, 7)
                     }
                 }
-                .font(.dynamic(size: 20, weight: .medium))
+                .font(.system(size: body20, weight: .medium))
                 .foregroundColor(.mainBarButton)
             }
             .fullScreenCover(isPresented: $accountPresented, content: {
                 AccountView(presented: $accountPresented)
             })
 
+        }
+        
+        private func mainTabText(text: String, selected: Bool) -> some View {
+            return Text(text)
+                .fontWeight(.heavy)
+                .font(.system(size: selected ? body22 : body18))
+                .foregroundColor(selected ? .mainPageSelected : .mainPageUnselected)
+                .lineLimit(1)
         }
     }
 }

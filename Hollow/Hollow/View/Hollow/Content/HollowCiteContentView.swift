@@ -12,6 +12,8 @@ struct HollowCiteContentView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
+    
     var body: some View {
         VStack(spacing: 7) {
             Text("#\(postData.postId.string)")
@@ -20,7 +22,7 @@ struct HollowCiteContentView: View {
             Text(postData.text)
                 .lineLimit(2)
         }
-        .font(.dynamic(size: 15))
+        .font(.system(size: body15))
         .padding(.horizontal, 12)
         .padding(.vertical, 11)
         .background(Color.background)

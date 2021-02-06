@@ -9,9 +9,9 @@
 import SwiftUI
 
 extension Image {
-    func imageButton() -> some View {
+    func imageButton(sizeFor20: CGFloat) -> some View {
         self
             .foregroundColor(.hollowContentText)
-            .font(.dynamic(size: 20, weight: .medium))
+            .font(.system(size: sizeFor20, weight: .medium))
     }
 }

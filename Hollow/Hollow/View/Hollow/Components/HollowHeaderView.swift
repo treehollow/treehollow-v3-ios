@@ -15,6 +15,10 @@ struct HollowHeaderView: View {
     var compact: Bool
     private var starred: Bool? { postData.attention }
     
+    @ScaledMetric(wrappedValue: 37, relativeTo: .body) var body37: CGFloat
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
+    @ScaledMetric(wrappedValue: 13, relativeTo: .body) var body13: CGFloat
+    
     var body: some View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
@@ -24,20 +28,18 @@ struct HollowHeaderView: View {
                     .aspectRatio(contentMode: .fill)
                     
                     // Scale the avatar relative to the font scaling.
-                    .frame(width: 37.dynamic, height: 37.dynamic)
+                    .frame(width: body37, height: body37)
                     .clipShape(Circle())
                 VStack(alignment: .leading, spacing: 2) {
                     Text("#\(postData.postId.string)")
                         .fontWeight(.medium)
-                        .font(.dynamic(size: 16, weight: .semibold))
-                        .hollowPostId()
+                        .font(.system(size: body16, weight: .semibold))
                         .foregroundColor(.hollowContentText)
                     Text("6分钟前")    // FIXME: Placeholder here
-                        .hollowPostTime()
+                        .font(.system(size: body13))
+                        .lineSpacing(2.5)
                         .foregroundColor(Color.gray)
                 }
-                // lineLimit = 1 for dynamic font sizes.
-                .lineLimit(1)
             }
             Spacer()
             

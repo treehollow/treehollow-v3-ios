@@ -16,11 +16,15 @@ struct MyTextField<Content>: View where Content: View {
     var isSecureContent = false
     var content: (() -> Content)? = nil
     
+    @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
+    @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
+
     var body: some View {
         VStack(alignment: .leading) {
             if let title = title {
                 Text(title.uppercased())
-                    .font(.dynamic(size: 14, weight: .medium))
+                    .font(.system(size: body14, weight: .medium))
                     .foregroundColor(.hollowContentText)
             }
             HStack(spacing: 0) {
@@ -34,7 +38,7 @@ struct MyTextField<Content>: View where Content: View {
                 .labelsHidden()
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
-                .font(.dynamic(size: 16))
+                .font(.system(size: body16))
                 Spacer()
                 if let content = content {
                     content()
@@ -47,9 +51,8 @@ struct MyTextField<Content>: View where Content: View {
             
             if let footer = footer {
                 Text(footer)
-                    .font(.dynamic(size: 12))
+                    .font(.system(size: body12))
                     .foregroundColor(.secondary)
-                
             }
         }
     }

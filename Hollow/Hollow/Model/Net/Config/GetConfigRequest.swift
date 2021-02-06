@@ -121,8 +121,12 @@ struct GetConfigRequest: Request {
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
                         let result = try jsonDecoder.decode(Result.self, from: apiInfo)
-                        // Call the callback
-                        completion(result, nil)
+                        if validateConfig(result) {
+                            // Call the callback
+                            completion(result, nil)
+                        } else {
+                            completion(nil, .invalidConfiguration)
+                        }
                     } catch {
                         completion(nil, .decodeFailed)
                     }

@@ -24,6 +24,12 @@ struct SearchView: View {
     @State var endDate: Date = .init()
     @State var selectsPartialSearch = false
     private let transitionAnimation = Animation.searchViewTransition
+    
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
+    @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
+    @ScaledMetric(wrappedValue: 13, relativeTo: .body) var body13: CGFloat
+    @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
+
     var body: some View {
         VStack {
             HStack {
@@ -33,7 +39,7 @@ struct SearchView: View {
                     }
                 }) {
                     Image(systemName: "xmark")
-                        .imageButton()
+                        .imageButton(sizeFor20: body20)
                         .animation(transitionAnimation)
                         .padding(.trailing)
                 }
@@ -41,7 +47,7 @@ struct SearchView: View {
                 Spacer()
                 MyButton(action: {}, gradient: .vertical(gradient: .button), transitionAnimation: transitionAnimation) {
                     Text(String.searchLocalized.capitalized)
-                        .font(.buttonText)
+                        .font(.system(size: body13, weight: .bold))
                         .foregroundColor(.white)
                 }
                 .animation(.none)
@@ -61,7 +67,7 @@ struct SearchView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     }
-                    .font(.dynamic(size: 16))
+                    .font(.system(size: body16))
                     .padding(.bottom, 5)
                     Rectangle()
                         .frame(height: 1)
@@ -71,12 +77,12 @@ struct SearchView: View {
                 .padding(.vertical)
                 Button(action:{ withAnimation { showsAdvancedOptions.toggle() }}) {
                     Text(String.advancedLocalized.capitalized)
-                        .font(.dynamic(size: 16, weight: .semibold))
+                        .font(.system(size: body16, weight: .semibold))
                         .animation(transitionAnimation)
                     Image(systemName: "triangle.fill")
                         .rotationEffect(Angle(degrees: showsAdvancedOptions ? 180 : 90))
                         .animation(transitionAnimation)
-                        .font(.dynamic(size: 10))
+                        .font(.system(size: body10))
                 }
                 .foregroundColor(.plainButton)
                 .animation(.none)
@@ -89,7 +95,7 @@ struct SearchView: View {
                 }
                 
                 Text(String.historyLocalized.capitalized)
-                    .font(.dynamic(size: 16, weight: .semibold))
+                    .font(.system(size: body16, weight: .semibold))
                     .animation(transitionAnimation)
                     .leading()
                     .padding(.top)
@@ -153,6 +159,9 @@ extension SearchView {
         
         @Environment(\.colorScheme) var colorScheme
         
+        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
+        @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
+        
         var body: some View {
             VStack {
                 Text(String.timeLocalized.capitalized)
@@ -191,7 +200,7 @@ extension SearchView {
                     .lineLimit(1)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .font(.dynamic(size: 14))
+                    .font(.system(size: body14))
                     .foregroundColor(.primary)
                     .background(Color.searchButtonBackground.opacity(colorScheme == .dark ? 0.2 : 0.6))
                     .blurBackground(style: colorScheme == .dark ? .systemUltraThinMaterialLight : .systemUltraThinMaterialDark)
@@ -209,11 +218,11 @@ extension SearchView {
             }) {
                 HStack {
                     Text(text)
-                        .font(.dynamic(size: 14, weight: .semibold))
+                        .font(.system(size: body14, weight: .semibold))
                         .foregroundColor(.primary)
                     Spacer()
                     Text(description)
-                        .font(.dynamic(size: 12))
+                        .font(.system(size: body12))
                         .foregroundColor(.secondary)
                 }
                 .colorScheme(selected ? .dark : colorScheme)

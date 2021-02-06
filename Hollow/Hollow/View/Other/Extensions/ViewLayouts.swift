@@ -38,4 +38,11 @@ extension View {
             Spacer()
         }
     }
+    
+    func trailing() -> some View {
+        return HStack(spacing: 0) {
+            Spacer()
+            self
+        }
+    }
 }

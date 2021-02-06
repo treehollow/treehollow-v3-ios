@@ -13,6 +13,10 @@ import Defaults
 /// Color set for this view is fixed to `other`.
 struct WelcomeView: View {
     @ObservedObject var viewModel: Welcome = .init()
+    
+    @ScaledMetric(wrappedValue: 22, relativeTo: .title) var title22: CGFloat
+    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
+
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -26,7 +30,7 @@ struct WelcomeView: View {
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
                     Text(LocalizedStringKey("Select Hollow"))
-                        .font(.dynamic(size: 22, weight: .semibold))
+                        .font(.system(size: title22, weight: .semibold))
                         .foregroundColor(Color("hollow.content.text.other"))
                         .padding(.top, 70)
                         .padding(.bottom, 20)
@@ -41,8 +45,7 @@ struct WelcomeView: View {
                             viewModel.requestConfig(hollowType: .thu)
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
                             // We are not localizing this
-                            Text("T大树洞")
-                                .selectHollowButton()
+                            selectHollowButton(text: "T大树洞")
                         }}
                     NavigationLink(
                         destination: LoginView(),
@@ -54,8 +57,7 @@ struct WelcomeView: View {
                             Defaults[.hollowConfig] = nil
                             viewModel.requestConfig(hollowType: .pku)
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
-                            Text("未名树洞")
-                                .selectHollowButton()
+                            selectHollowButton(text: "未名树洞")
                         }}
                     
                     NavigationLink(
@@ -66,8 +68,7 @@ struct WelcomeView: View {
                             Defaults[.hollowType] = .other
                             viewModel.hollowSelection = HollowType.other.rawValue
                         }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
-                            Text(String.othersLocalized.capitalized)
-                                .selectHollowButton()
+                            selectHollowButton(text: String.othersLocalized.capitalized)
                         }}
                     Spacer()
                     if viewModel.isLoadingConfig {
@@ -89,6 +90,14 @@ struct WelcomeView: View {
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         }
         .accentColor(.hollowContentText)
+    }
+    
+    func selectHollowButton(text: String) -> some View {
+        return Text(text)
+            .foregroundColor(Color("hollow.content.text.other"))
+            .padding(.vertical, 5)
+            .font(.system(size: body15, weight: .medium))
+            .frame(width: 150)
     }
     
     struct CustomConfigConfigurationView: View {
@@ -149,16 +158,6 @@ struct WelcomeView: View {
                 path.closeSubpath()
             }
         }
-    }
-}
-
-extension View {
-    fileprivate func selectHollowButton() -> some View {
-        return self
-            .foregroundColor(Color("hollow.content.text.other"))
-            .padding(.vertical, 5)
-            .font(.dynamic(size: 15, weight: .medium))
-            .frame(width: 150)
     }
 }
 

@@ -14,6 +14,10 @@ struct HollowCommentContentView: View {
     var contentVerticalPadding: CGFloat? = 10
     private let compactLineLimit = 3
     private let nameLabelWidth: CGFloat = 60
+    
+    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
+
     var body: some View {
         VStack(spacing: 0) {
             if let padding = contentVerticalPadding {
@@ -24,7 +28,6 @@ struct HollowCommentContentView: View {
                 HStack(alignment: .top) {
                     Text(commentData.name)
                         .bold()
-                        .hollowComment()
                         .minimumScaleFactor(0.75)
                         .allowsTightening(true)
                         .lineLimit(compact ? compactLineLimit : nil)
@@ -42,10 +45,8 @@ struct HollowCommentContentView: View {
                         Group {
                             if commentData.text != "" {
                                 Text(commentData.text)
-                                    .hollowComment()
                             } else if commentData.type == .image && compact {
                                 (Text("[") + Text(LocalizedStringKey("Photo")) + Text("]"))
-                                    .hollowContent()
                                     .foregroundColor(.uiColor(.secondaryLabel))
                             }
                         }
@@ -54,13 +55,16 @@ struct HollowCommentContentView: View {
                         .layoutPriority(1)
                     }
                 }
+
                 if commentData.type == .image && compact {
                     Image(systemName: "photo")
-                        .font(.dynamic(size: 15))
+                        .font(.system(size: body15))
                         .layoutPriority(1)
                 }
                 
             }
+            .font(.system(size: body15))
+            .lineSpacing(3)
             .foregroundColor(compact ? .hollowContentText : .primary)
             if let padding = contentVerticalPadding {
                 Spacer(minLength: padding)
@@ -73,7 +77,7 @@ struct HollowCommentContentView: View {
                 }
             }
         }
-        .font(.plain)
+        .font(.system(size: body16))
         // Why do we need to put this here?
         .fixedSize(horizontal: false, vertical: true)
     }

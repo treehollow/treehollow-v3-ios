@@ -10,6 +10,9 @@ import SwiftUI
 struct HollowDetailView: View {
     @Binding var postDataWrapper: PostDataWrapper
     @Binding var presentedIndex: Int
+    
+    @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
+
     var body: some View {
         // FIXME: Handlers
         ZStack {
@@ -23,7 +26,7 @@ struct HollowDetailView: View {
                             presentedIndex = -1
                         }) {
                             Image(systemName: "xmark")
-                                .imageButton()
+                                .imageButton(sizeFor20: body20)
                                 .padding(.trailing, 5)
                         }
                         .padding(.trailing, 5)

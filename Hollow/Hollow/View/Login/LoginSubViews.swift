@@ -17,6 +17,8 @@ extension LoginView {
         let successHandler: (String) -> Void
         @State private var pageLoadingFinish = false
         
+        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
+
         var body: some View {
             VStack {
                 Button(action: {
@@ -25,7 +27,7 @@ extension LoginView {
                     }
                 }) {
                     Image(systemName: "xmark")
-                        .imageButton()
+                        .imageButton(sizeFor20: body20)
                         .padding(.bottom)
                 }
                 .leading()
@@ -50,6 +52,8 @@ extension LoginView {
     
     struct RegisterTextFields: View {
         @ObservedObject var viewModel: Login
+        
+        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         
         // The password is valid only if its length is no less than 8 and it contains no blank spaces.
         private var passwordValid: Bool {
@@ -80,7 +84,7 @@ extension LoginView {
                             .foregroundColor(.green)
                     }
                 }
-                .font(.dynamic(size: 14))
+                .font(.system(size: body14))
             }
             
             // Confirmed password text field
@@ -99,7 +103,7 @@ extension LoginView {
                         }
                     }
                 }
-                .font(.dynamic(size: 14))
+                .font(.system(size: body14))
             }
         }
     }
@@ -136,6 +140,8 @@ extension LoginView {
         @ObservedObject var viewModel: Login
         private let configuration = Defaults[.hollowConfig]!
         
+        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
+
         var body: some View {
             MyTextField(text: $viewModel.email,
                         placeHolder: NSLocalizedString("Enter your email", comment: ""),
@@ -154,10 +160,53 @@ extension LoginView {
                             .layoutPriority(1)
                     }
                     .lineLimit(1)
-                    .font(.dynamic(size: 14))
+                    .font(.system(size: body14))
                 })
             }
             .keyboardType(.emailAddress)
+        }
+    }
+    
+    struct LoginTextField: View {
+        @ObservedObject var viewModel: Login
+        @State private var alertPresented = false
+        @State private var contactEmailURL: URL!
+        @Environment(\.openURL) var openURL
+        
+        @ScaledMetric(wrappedValue: 12, relativeTo: .footnote) var footnote12: CGFloat
+
+        var body: some View {
+            VStack(alignment: .leading) {
+                MyTextField<EmptyView>(text: $viewModel.loginPassword,
+                                       placeHolder: NSLocalizedString("Enter your password", comment: ""),
+                                       title: String.passwordLocalized.capitalized,
+                                       isSecureContent: true)
+                Button(action: {
+                    if let mailString = Defaults[.hollowConfig]?.contactEmail,
+                       let url = URL(string: "mailto:\(mailString)") {
+                        contactEmailURL = url
+                        alertPresented = true
+                    } else {
+                        viewModel.errorMessage = (
+                            title: String.errorLocalized.capitalized,
+                            message: NSLocalizedString("No contact email found in the treehollow configuration.", comment: "")
+                        )
+                    }
+                }) {
+                    Text("Forget password")
+                        .underline()
+                        .font(.system(size: footnote12))
+                        .foregroundColor(.secondary)
+                }
+            }
+            // FIXME: Cannot present alert
+            .alert(isPresented: $alertPresented) {
+                Alert(title: Text("Restore Password"),
+                      message: Text("Please send an email using current email address to the contact email to restore your password."),
+                      primaryButton: .default(Text("Send"), action:  { openURL(contactEmailURL) }),
+                      secondaryButton: .cancel()
+                )
+            }
         }
     }
 }
