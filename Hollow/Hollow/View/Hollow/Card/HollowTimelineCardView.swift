@@ -11,8 +11,6 @@ struct HollowTimelineCardView: View {
     @Binding var postDataWrapper: PostDataWrapper
     @ObservedObject var viewModel: HollowTimelineCard
     
-    private let verticalSpacing: CGFloat = 10
-    
     var body: some View {
         VStack(spacing: 15) {
             // TODO: Star actions
@@ -42,9 +40,8 @@ struct HollowTimelineCardView: View {
         
         var body: some View {
             VStack(spacing: 0) {
-                // The comment number might change if auto update, so use Identifiable protocol on `CommentData`.
-                ForEach(comments.prefix(maxCommentCount)) { comment in
-                    HollowCommentContentView(commentData: .constant(comment), compact: true, contentVerticalPadding: 10)
+                ForEach(comments.prefix(maxCommentCount).indices, id: \.self) { index in
+                    HollowCommentContentView(commentData: $comments[index], compact: true, contentVerticalPadding: 10)
                 }
                 if comments.count > maxCommentCount {
                     // FIXME: How to localize this stuff??

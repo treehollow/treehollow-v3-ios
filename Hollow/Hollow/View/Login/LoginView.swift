@@ -12,6 +12,8 @@ struct LoginView: View {
     @ObservedObject var viewModel: Login = .init()
     @State private var password = ""
     
+    @ScaledMetric(wrappedValue: ViewConstants.navigationBarSpinnerWidth) var spinnerWidth
+
     // Determine when we should check user's email.
     private var shouldCheckEmail: Bool { viewModel.emailCheckType == nil || viewModel.emailCheckType == .reCAPTCHANeeded }
     
@@ -90,7 +92,7 @@ struct LoginView: View {
         .navigationBarItems(trailing: Group {
             if viewModel.isLoading {
                 Spinner(color: .hollowContentText,
-                        desiredWidth: ViewConstants.navigationBarSpinnerWidth)
+                        desiredWidth: spinnerWidth)
             }
         })
         

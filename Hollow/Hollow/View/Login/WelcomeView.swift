@@ -90,6 +90,7 @@ struct WelcomeView: View {
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         }
         .accentColor(.hollowContentText)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     func selectHollowButton(text: String) -> some View {
@@ -104,6 +105,8 @@ struct WelcomeView: View {
         @ObservedObject var viewModel: Welcome = .init()
         @State var text: String = ""
         
+        @ScaledMetric(wrappedValue: ViewConstants.navigationBarSpinnerWidth) var spinnerWidth
+        
         var body: some View {
             VStack {
                 MyTextField<EmptyView>(
@@ -117,7 +120,7 @@ struct WelcomeView: View {
                     trailing:
                         Group {
                             if viewModel.isLoadingConfig {
-                                Spinner(color: .hollowContentText, desiredWidth: ViewConstants.navigationBarSpinnerWidth)
+                                Spinner(color: .hollowContentText, desiredWidth: spinnerWidth)
                             } else {
                                 Button(LocalizedStringKey("Next"), action: {
                                     viewModel.requestConfig(hollowType: .other, customConfigURL: text)

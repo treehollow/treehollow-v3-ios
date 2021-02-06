@@ -148,7 +148,7 @@ extension LoginView {
                         title: String.emailAddressLocalized.firstLetterUppercased) {
                 // Accessory view for selecting email suffix
                 Menu(content: {
-                    ForEach(0..<configuration.emailSuffixes.count) { index in
+                    ForEach(configuration.emailSuffixes.indices, id: \.self) { index in
                         Button(configuration.emailSuffixes[index], action: {
                             viewModel.emailSuffix = configuration.emailSuffixes[index]
                         })

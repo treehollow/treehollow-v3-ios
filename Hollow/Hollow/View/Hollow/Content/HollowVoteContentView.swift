@@ -17,7 +17,7 @@ struct HollowVoteContentView: View {
     var body: some View {
         VStack(spacing: 10) {
             // The count of the options will not change, so we just use the count here.
-            ForEach(0..<vote.voteData.count) { index in
+            ForEach(vote.voteData.indices, id: \.self) { index in
                 HStack {
                     Button(action: {
                         withAnimation(.default) {

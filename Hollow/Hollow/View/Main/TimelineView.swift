@@ -10,12 +10,12 @@ import SwiftUI
 struct TimelineView: View {
     @Binding var isSearching: Bool
     @ObservedObject var viewModel: Timeline = .init()
-    @State private var detailPresentedIndex = -1
+    @State private var detailPresentedIndex: Int?
     
     @State private var offset: CGFloat? = 0
     
     /// Maximum cards to be displayed none-lazily.
-    private let maxNoneLazyCards = 2
+    private let maxNoneLazyCards = 1
     
     var body: some View {
         // TODO: Show refresh button
@@ -53,15 +53,17 @@ struct TimelineView: View {
                 // None lazy views for the first `maxNoneLazyCards` cards
                 // to avoid being stuck when scrolling to top
                 VStack(spacing: 0) {
-                    ForEach(0..<min(maxNoneLazyCards, viewModel.posts.count)) { index in
+                    ForEach(0..<min(maxNoneLazyCards, viewModel.posts.count), id: \.self) { index in
                         cardView(at: index)
                     }
                 }
                 
                 // Lazily load cards after `maxNoneLazyCards`
-                LazyVStack(spacing: 0) {
-                    ForEach(min(maxNoneLazyCards, viewModel.posts.count)..<viewModel.posts.count) { index in
-                        cardView(at: index)
+                if maxNoneLazyCards < viewModel.posts.count {
+                    LazyVStack(spacing: 0) {
+                        ForEach(min(maxNoneLazyCards, viewModel.posts.count)..<viewModel.posts.count, id: \.self) { index in
+                            cardView(at: index)
+                        }
                     }
                 }
             }
@@ -80,7 +82,7 @@ struct TimelineView: View {
         .onTapGesture {
             detailPresentedIndex = index
         }
-        .fullScreenCover(isPresented: .constant(detailPresentedIndex == index), content: {
+        .sheet(item: $detailPresentedIndex, content: { index in
             HollowDetailView(postDataWrapper: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
         })
     }
@@ -90,4 +92,8 @@ struct TimelineView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
+}
+
+extension Int: Identifiable {
+    public var id: Int { self }
 }

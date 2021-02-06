@@ -9,9 +9,10 @@ import SwiftUI
 
 struct HollowDetailView: View {
     @Binding var postDataWrapper: PostDataWrapper
-    @Binding var presentedIndex: Int
+    @Binding var presentedIndex: Int?
     
     @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
+    @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
 
     var body: some View {
         // FIXME: Handlers
@@ -19,11 +20,11 @@ struct HollowDetailView: View {
             Color.hollowDetailBackground.edgesIgnoringSafeArea(.all)
             VStack(spacing: 0) {
                 // Header
-                VStack {
+                VStack(spacing: 0) {
                     HStack {
                         Button(action:{
                             // Navigate back
-                            presentedIndex = -1
+                            presentedIndex = nil
                         }) {
                             Image(systemName: "xmark")
                                 .imageButton(sizeFor20: body20)
@@ -33,6 +34,7 @@ struct HollowDetailView: View {
                         HollowHeaderView(postData: $postDataWrapper.post, compact: false)
                     }
                     .padding(.horizontal)
+                    .padding(.vertical, headerVerticalPadding)
                     Divider()
                 }
                 // Contents
@@ -64,8 +66,8 @@ extension HollowDetailView {
                     .leading()
                     .padding(.top)
                     .padding(.bottom, 5)
-                ForEach(comments) { comment in
-                    HollowCommentContentView(commentData: .constant(comment), compact: false)
+                ForEach(comments.indices, id: \.self) { index in
+                    HollowCommentContentView(commentData: $comments[index], compact: false)
                 }
             }
         }
