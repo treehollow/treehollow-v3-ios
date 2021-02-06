@@ -21,7 +21,7 @@ extension Defaults.Keys {
     static let hollowType = Key<HollowType?>("config.hollow.type")
     /// Hollow config
     static let hollowConfig = Key<HollowConfig?>("net.hollow.config")
-    /// APN devide token
+    /// APN device token
     static let deviceToken = Key<Data?>("user.device.token")
     /// User access token
     static let accessToken = Key<String?>("user.access.token")

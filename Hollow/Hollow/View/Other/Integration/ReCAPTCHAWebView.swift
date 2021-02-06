@@ -8,10 +8,12 @@
 
 import SwiftUI
 import WebKit
+import Defaults
 
 struct ReCAPTCHAWebView: UIViewRepresentable {
     typealias UIViewType = WKWebView
     var onFinishLoading: () -> Void
+    // TODO: Handler including parameter representing error.
     var successHandler: (String) -> Void
     
     func makeUIView(context: Context) -> WKWebView {
@@ -21,8 +23,7 @@ struct ReCAPTCHAWebView: UIViewRepresentable {
         configuration.defaultWebpagePreferences = preferences
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
-        // FIXME: Load url in defaults
-        webView.load(URLRequest(url: URL(string: "https://id.thuhole.com/recaptcha/")!))
+        webView.load(URLRequest(url: URL(string: Defaults[.hollowConfig]!.recaptchaUrl)!))
         webView.navigationDelegate = context.coordinator
         
         return webView
@@ -45,7 +46,8 @@ struct ReCAPTCHAWebView: UIViewRepresentable {
         
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             if navigationAction.navigationType == .other {
-                if let urlString = navigationAction.request.url?.absoluteString, let range = urlString.range(of: "recaptcha_token=") {
+                if let urlString = navigationAction.request.url?.absoluteString,
+                   let range = urlString.range(of: "recaptcha_token=") {
                     let key = urlString[range.upperBound...]
                     parent.successHandler(String(key))
                     webView.stopLoading()

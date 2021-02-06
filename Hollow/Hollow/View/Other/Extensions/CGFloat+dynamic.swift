@@ -18,6 +18,6 @@ extension CGFloat {
 extension Int {
     /// Dynamic font size for the value.
     var dynamic: CGFloat {
-        UIFontMetrics.default.scaledValue(for: CGFloat(self))
+        CGFloat(self).dynamic
     }
 }

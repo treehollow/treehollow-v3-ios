@@ -11,7 +11,8 @@ import SwiftUI
 extension Font {
     /// Apply a dynamic system font to adjust font size according to the setting.
     static func dynamic(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font {
-        // FIXME: Some text cannot be scaled immediately after changing the scaling.
+        // FIXME: The text cannot be scaled immediately after changing the scaling
+        // unless the view is redrawn.
         return Font.system(size: size.dynamic, weight: weight, design: design)
     }
 }
