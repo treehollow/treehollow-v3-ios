@@ -1,32 +1,24 @@
 //
-//  DeviceTerminationRequest.swift
+//  LogoutRequest.swift
 //  Hollow
 //
-//  Created on 2021/1/17.
+//  Created by aliceinhollow on 6/2/2021.
+//  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import Foundation
 import Alamofire
 
-/// The request parameter is the UUID of the device.
-struct DeviceTerminationRequestConfiguration {
-    var deviceUUID: UUID
+struct LogoutRequestConfiguration {
     var token: String
     var apiRoot: String
 }
 
-/// The only result is the code.
-//typealias DeviceTerminationRequestResult = DeviceTerminationRequestResultType
-
-/// Result type of device termination.
-///
-/// Please init with `DeviceTerminationRequestResultType(rawValue: Int)`, and should
-/// show error with `nil`, which means receiving negative code.
-struct DeviceTerminationRequestResult: Codable {
+struct LogoutRequestResult: Codable {
     var code: Int
 }
 
-struct DeviceTerminationRequestResultData {
+struct LogoutRequestResultData {
     enum ResultType: Int {
         case success = 0
     }
@@ -34,32 +26,29 @@ struct DeviceTerminationRequestResultData {
     var result: ResultType
 }
 
-struct DeviceTerminationRequest: Request {
-    
-    typealias Configuration = DeviceTerminationRequestConfiguration
-    typealias Result = DeviceTerminationRequestResult
-    typealias ResultData = DeviceTerminationRequestResultData
+/// logout request same as devicetermination
+struct LogoutRequest: Request {
+    typealias Configuration = LogoutRequestConfiguration
+    typealias Result = LogoutRequestResult
+    typealias ResultData = LogoutRequestResultData
     typealias Error = DefaultRequestError
     
-    var configuration: DeviceTerminationRequestConfiguration
+    var configuration: LogoutRequestConfiguration
     
-    init(configuration: DeviceTerminationRequestConfiguration) {
+    init(configuration: LogoutRequestConfiguration) {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (DeviceTerminationRequestResultData?, DefaultRequestError?) -> Void) {
+    func performRequest(completion: @escaping (LogoutRequestResultData?, DefaultRequestError?) -> Void) {
         let urlPath =
-            self.configuration.apiRoot + "v3/security/devices/terminate" + Constants.URLConstant.urlSuffix
+            self.configuration.apiRoot + "v3/security/logout" + Constants.URLConstant.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        let parameters = ["device_uuid": self.configuration.deviceUUID]
         AF.request(
             urlPath,
             method: .post,
-            parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default,
             headers: headers
         ).validate().responseJSON { response in
             switch response.result {
@@ -85,10 +74,13 @@ struct DeviceTerminationRequest: Request {
             case let .failure(error):
                 completion(
                     nil,
-                    .other(description: error.errorDescription ?? "Unkown error when performing DeviceTermination!"))
+                    .other(description: error.errorDescription ?? "Unkown error when performing Logout!"))
             }
             
         }
         
+    
     }
+    
 }
+
