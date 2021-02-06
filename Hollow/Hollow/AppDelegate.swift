@@ -1,0 +1,50 @@
+//
+//  AppDelegate.swift
+//  Hollow
+//
+//  Created by liang2kl on 2021/2/5.
+//  Copyright © 2021 treehollow. All rights reserved.
+//
+
+import UIKit
+import Defaults
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        #if DEBUG
+        Defaults[.accessToken] = nil
+        #endif
+        
+        // Request notification access
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { granted, error in
+            guard granted else { return }
+            
+            // Register for APN
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
+
+        return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Temporarily save the token in defaults. We are not using this
+        // default except registering or logging in for the first time.
+        Defaults[.deviceToken] = deviceToken
+        
+        // Try to send the token to the server, if we have a user token.
+        if let accessToken = Defaults[.accessToken] {
+            sendDeviceToken(deviceToken, withAccessToken: accessToken)
+        }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Fail ro register remote notification with error: \(error.localizedDescription)")
+    }
+
+    private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
+        // TODO: Implementation
+    }
+}
