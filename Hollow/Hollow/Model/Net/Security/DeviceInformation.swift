@@ -16,6 +16,7 @@ struct DeviceInformation: Codable {
         case ios = 2
     }
     /// UUID of the device.
+    // FIXME: convertFromSnakeCase
     var deviceUuid: UUID
     /// Login date of the device.
     var loginDate: Date

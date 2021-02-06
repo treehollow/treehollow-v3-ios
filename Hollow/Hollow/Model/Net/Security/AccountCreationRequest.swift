@@ -117,7 +117,7 @@ struct AccountCreationRequest: Request {
                     return
                 }
             case .failure(let error):
-                completion(nil, .other(description: error.errorDescription ?? ""))
+                completion(nil, .other(description: error.errorDescription ?? "Unkown error when performing AccountCreation!"))
             }
         }
     }

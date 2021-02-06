@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0096307125CED33400030069 /* LogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0096307025CED33400030069 /* LogoutRequest.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
 		0E415A7B25CD769F00351672 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7A25CD769F00351672 /* Preview Assets.xcassets */; };
@@ -126,6 +127,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0096307025CED33400030069 /* LogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRequest.swift; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
 		0E415A7725CD769F00351672 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				0E415A9B25CD771600351672 /* LoginRequest.swift */,
+				0096307025CED33400030069 /* LogoutRequest.swift */,
 				0E415A9C25CD771600351672 /* DeviceInformation.swift */,
 				0E415A9D25CD771600351672 /* EmailCheckRequest.swift */,
 				0E415A9E25CD771600351672 /* DeviceListRequest.swift */,
@@ -869,6 +872,7 @@
 				0E415B7F25CD772200351672 /* HollowHeader.swift in Sources */,
 				0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */,
 				0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */,
+				0096307125CED33400030069 /* LogoutRequest.swift in Sources */,
 				0E415B8025CD772200351672 /* Timeline.swift in Sources */,
 				0E415AC325CD771600351672 /* PostListRequest.swift in Sources */,
 				0E415B7725CD772200351672 /* MainView.swift in Sources */,

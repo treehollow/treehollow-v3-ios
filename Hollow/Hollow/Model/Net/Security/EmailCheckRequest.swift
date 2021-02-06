@@ -88,6 +88,7 @@ struct EmailCheckRequest: Request {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
+                    // FIXME: NOT TESTED!
                     let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!

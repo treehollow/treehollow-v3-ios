@@ -19,7 +19,7 @@ struct DeviceListRequestResultData {
         case success = 0
     }
     
-    var type: ResultType
+    var result: ResultType
     var devices: [DeviceInformation]
 }
 
@@ -62,7 +62,7 @@ struct DeviceListRequest: Request {
                     debugPrint(response)
                     let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
-                        let resultData = ResultData(type: ResultData.ResultType(rawValue: result.code)!, devices: result.data)
+                        let resultData = ResultData(result: ResultData.ResultType(rawValue: result.code)!, devices: result.data)
                         completion(resultData, nil)
                     } else {
                         // invalid response
