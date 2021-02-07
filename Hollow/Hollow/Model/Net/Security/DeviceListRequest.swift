@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 /// The configuration parameter is the user token.
 struct DeviceListRequestConfiguration {
@@ -15,24 +16,14 @@ struct DeviceListRequestConfiguration {
 }
 
 struct DeviceListRequestResultData {
-    enum ResultType: Int {
-        case success = 0
-    }
-    
-    var result: ResultType
-    var devices: [DeviceInformation]
-}
-
-struct DeviceListRequestResult: Codable {
-    var code: Int
-    var data: [DeviceInformation]
-    var msg: String?
+    var devices: [DeviceInformationType]
+    var thisDeviceUUID: UUID
 }
 
 struct DeviceListRequest: Request {
     
     typealias Configuration = DeviceListRequestConfiguration
-    typealias Result = DeviceListRequestResult
+    typealias Result = DeviceListRequestResultData
     typealias ResultData = DeviceListRequestResultData
     typealias Error = DefaultRequestError
     
@@ -56,18 +47,25 @@ struct DeviceListRequest: Request {
         ).validate().responseJSON { response in
             switch response.result {
             case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    debugPrint(response)
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        let resultData = ResultData(result: ResultData.ResultType(rawValue: result.code)!, devices: result.data)
+                    let result = try JSON.init(data: response.data!)
+                    //debugPrint(response)
+                    if result["code"].int! >= 0 {
+                        var deviceList = [DeviceInformationType]()
+                        for (_,subJson):(String, JSON) in result["data"] {
+                            let subResult = DeviceInformationType.init(
+                                deviceUUID: UUID.init(uuidString: subJson["device_uuid"].string!)!,
+                                loginDate: subJson["login_date"].string!.toDate(),
+                                deviceInfo: subJson["device_info"].string!,
+                                deviceType: DeviceInformationType.DeviceType.init(rawValue: subJson["device_type"].int!)!)
+                            deviceList.append(subResult)
+                        }
+                        let resultData = ResultData.init(devices: deviceList, thisDeviceUUID: UUID.init(uuidString: result["this_device"].string!)!)
                         completion(resultData, nil)
                     } else {
                         // invalid response
                         completion(nil,
-                                   .other(description: result.msg ?? "error code from backend: \(result.code)"))
+                                   .other(description: "error code from backend: \(result["code"].string!)"))
                     }
                 } catch {
                     completion(nil, .decodeFailed)

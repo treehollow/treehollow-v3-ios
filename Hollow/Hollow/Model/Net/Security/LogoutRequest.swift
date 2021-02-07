@@ -18,12 +18,9 @@ struct LogoutRequestResult: Codable {
     var code: Int
 }
 
-struct LogoutRequestResultData {
-    enum ResultType: Int {
+enum LogoutRequestResultData: Int {
         case success = 0
-    }
-    
-    var result: ResultType
+
 }
 
 /// logout request same as devicetermination
@@ -59,7 +56,7 @@ struct LogoutRequest: Request {
                     let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!
-                        let resultData = ResultData(result: ResultData.ResultType(rawValue: result.code)!)
+                        let resultData = ResultData.init(rawValue: result.code)
                         completion(resultData, nil)
                         //debugPrint(response.response?.allHeaderFields)
                     } else {
