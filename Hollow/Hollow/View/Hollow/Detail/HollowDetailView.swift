@@ -38,7 +38,7 @@ struct HollowDetailView: View {
                     Divider()
                 }
                 // Contents
-                CustomScrollView {
+                CustomScrollView { _ in
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()

@@ -12,7 +12,7 @@ struct WanderView: View {
     @ObservedObject var viewModel: Wander = .init()
     
     var body: some View {
-        CustomScrollView {
+        CustomScrollView { _ in
             WaterfallGrid((0..<viewModel.posts.count), id: \.self) { index in
                 HollowWanderCardView(postData: $viewModel.posts[index])
             }

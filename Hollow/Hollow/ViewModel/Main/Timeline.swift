@@ -20,4 +20,14 @@ class Timeline: ObservableObject {
     func vote(postId: Int, for option: String) {
         
     }
+    
+    func loadMorePosts() {
+        self.posts += testPostWrappers.shuffled()
+    }
+    
+    func refresh(_ isRefreshing: inout Bool) {
+        // FOR TESTING
+        self.posts = testPostWrappers.shuffled()
+        isRefreshing = false
+    }
 }
