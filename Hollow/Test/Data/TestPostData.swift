@@ -19,7 +19,8 @@ let testPostData: PostData = .init(attention: true, deleted: false, likeNumber: 
     .init(title: "不好", voteCount: 17)
 ]), comments: Array.init(repeating: testComments[0], count: 500))
 
-let testPostData2: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198432, replyNumber: 12, tag: "", text: testText2, type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test.2")), vote: .init(voted: true, votedOption: "好", voteData: [
+// Compressing raw image, simulating the real circumstances
+let testPostData2: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198432, replyNumber: 12, tag: "", text: testText2, type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(data: UIImage(named: "test.2")!.jpegData(compressionQuality: 0.5)!)!), vote: .init(voted: true, votedOption: "好", voteData: [
     .init(title: "好", voteCount: 62),
     .init(title: "不好", voteCount: 3)
 ]), comments: testComments)

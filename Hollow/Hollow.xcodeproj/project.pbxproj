@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0096307125CED33400030069 /* LogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0096307025CED33400030069 /* LogoutRequest.swift */; };
+		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
+		0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
 		0E415A7B25CD769F00351672 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7A25CD769F00351672 /* Preview Assets.xcassets */; };
@@ -247,6 +249,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */,
+				0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */,
 				0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */,
 				0E415B9625CD77C600351672 /* Defaults in Frameworks */,
 				0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */,
@@ -586,12 +590,12 @@
 		0E415B2625CD772200351672 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0E415B2725CD772200351672 /* FavouritesView.swift */,
-				0E415B2825CD772200351672 /* SearchView.swift */,
-				0E415B2925CD772200351672 /* TimelineView.swift */,
-				0E415B2A25CD772200351672 /* AccountView.swift */,
-				0E415B2B25CD772200351672 /* WanderView.swift */,
 				0E415B2C25CD772200351672 /* MainView.swift */,
+				0E415B2925CD772200351672 /* TimelineView.swift */,
+				0E415B2B25CD772200351672 /* WanderView.swift */,
+				0E415B2825CD772200351672 /* SearchView.swift */,
+				0E415B2725CD772200351672 /* FavouritesView.swift */,
+				0E415B2A25CD772200351672 /* AccountView.swift */,
 				0E415B2D25CD772200351672 /* MessageView.swift */,
 			);
 			path = Main;
@@ -719,6 +723,8 @@
 				0E415B9125CD775F00351672 /* WaterfallGrid */,
 				0E415B9525CD77C600351672 /* Defaults */,
 				0E4F032F25CE29D500F4B228 /* Alamofire */,
+				0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */,
+				0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -752,6 +758,7 @@
 				0E415B9025CD775F00351672 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 				0E415B9425CD77C600351672 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E4F032E25CE29D500F4B228 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -1081,6 +1088,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 		0E415B9025CD775F00351672 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid.git";
@@ -1108,6 +1123,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
 		0E415B9125CD775F00351672 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E415B9025CD775F00351672 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;

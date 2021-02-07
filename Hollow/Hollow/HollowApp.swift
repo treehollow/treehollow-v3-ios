@@ -16,11 +16,11 @@ struct HollowApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            if let _ = Defaults[.accessToken] {
+            if let _ = Defaults[.accessToken] {
                 MainView()
-//            } else {
-//                WelcomeView()
-//            }
+            } else {
+                WelcomeView()
+            }
         }
     }
 }

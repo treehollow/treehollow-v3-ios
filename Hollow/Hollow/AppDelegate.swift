@@ -8,6 +8,9 @@
 
 import UIKit
 import Defaults
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -26,6 +29,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
 
+
+        AppCenter.start(withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
+                        services:[Analytics.self,Crashes.self]
+        )
+        
         return true
     }
     

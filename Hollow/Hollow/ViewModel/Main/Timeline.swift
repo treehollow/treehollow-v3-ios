@@ -13,8 +13,8 @@ class Timeline: ObservableObject {
     
     init() {
         // FOR DEBUG
-//        self.posts = Array.init(repeating: testPostDataWrapper, count: 100) + Array.init(repeating: testPostDataWrapper3, count: 100)
-        self.posts = testPostWrappers + testPostWrappers
+        self.posts = Array.init(repeating: testPostDataWrapper2, count: 200)
+//        self.posts = testPostWrappers + testPostWrappers
     }
     
     func vote(postId: Int, for option: String) {

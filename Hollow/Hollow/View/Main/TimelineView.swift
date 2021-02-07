@@ -77,7 +77,6 @@ struct TimelineView: View {
                     VStack(spacing: 0) {
                         ForEach(0..<min(maxNoneLazyCards, viewModel.posts.count), id: \.self) { index in
                             cardView(at: index)
-                                .id(index)
                         }
                     }
                     
@@ -85,7 +84,6 @@ struct TimelineView: View {
                     LazyVStack(spacing: 0) {
                         ForEach(min(maxNoneLazyCards, viewModel.posts.count)..<viewModel.posts.count, id: \.self) { index in
                             cardView(at: index)
-                                .id(index)
                         }
                     }
                     
@@ -111,14 +109,13 @@ struct TimelineView: View {
                     guard let currentOffset = currentOffset else { return }
                     withAnimation(.spring(response: 0.05)) {
                         // Comensate the difference of the top and bottom padding.
-                        let paddingDifference = (body14 - 2) / 2
+                        let threshold = searchBarHeight - (body14 - 2) / 2
                         
                         // Perform scrolling actions
-                        if currentOffset > 0 && currentOffset <= (searchBarHeight - paddingDifference) / 2 {
+                        if currentOffset > 0 && currentOffset <= threshold {
                             proxy.scrollTo(-1, anchor: .top)
                         }
-                        if currentOffset > (searchBarHeight - paddingDifference) / 2 &&
-                            currentOffset < searchBarHeight {
+                        if currentOffset > threshold && currentOffset < searchBarHeight {
                             proxy.scrollTo(0, anchor: .top)
                         }
                         searchBarTrackingOffset = nil
@@ -142,6 +139,7 @@ struct TimelineView: View {
         .onTapGesture {
             detailPresentedIndex = index
         }
+        .id(index)
     }
 }
 
