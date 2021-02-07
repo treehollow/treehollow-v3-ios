@@ -260,6 +260,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E340F6F25CFEBFE002F0F0C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0E415A7325CD769B00351672 /* HollowApp.swift */,
+				0E415B9A25CD93C000351672 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
@@ -280,12 +289,11 @@
 		0E415A7225CD769B00351672 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
+				0E340F6F25CFEBFE002F0F0C /* App */,
 				0E4284BC25CE2A96008F134A /* Hollow.entitlements */,
 				0E415A8425CD771600351672 /* Model */,
 				0E415B3225CD772200351672 /* ViewModel */,
 				0E415AE825CD772200351672 /* View */,
-				0E415A7325CD769B00351672 /* HollowApp.swift */,
-				0E415B9A25CD93C000351672 /* AppDelegate.swift */,
 				0E415A7725CD769F00351672 /* Assets.xcassets */,
 				0E415A7C25CD769F00351672 /* Info.plist */,
 				0E415A7925CD769F00351672 /* Preview Content */,
@@ -439,8 +447,8 @@
 				0E415B0025CD772200351672 /* README.md */,
 				0E415AE925CD772200351672 /* ViewConstants.swift */,
 				0E415B2625CD772200351672 /* Main */,
-				0E415B0625CD772200351672 /* Hollow */,
 				0E415B2E25CD772200351672 /* Login */,
+				0E415B0625CD772200351672 /* Hollow */,
 				0E415B2125CD772200351672 /* Account */,
 				0E415B0125CD772200351672 /* Components */,
 				0E415B9D25CD988F00351672 /* Other */,

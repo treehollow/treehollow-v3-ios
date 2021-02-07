@@ -14,8 +14,8 @@ class Timeline: ObservableObject {
     init() {
         // FOR DEBUG
         #if DEBUG
-        self.posts = Array.init(repeating: testPostDataWrapperNoExtraComponents, count: 200)
-//        self.posts = testPostWrappers + testPostWrappers
+//        self.posts = Array.init(repeating: testPostDataWrapperNoExtraComponents, count: 200)
+        self.posts = testPostWrappers + testPostWrappers
         #else
         self.posts = []
         #endif
@@ -27,7 +27,7 @@ class Timeline: ObservableObject {
     
     func loadMorePosts() {
         #if DEBUG
-        self.posts += testPostWrappers.shuffled()
+//        self.posts += testPostWrappers.shuffled()
         #endif
     }
     

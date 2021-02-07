@@ -14,7 +14,7 @@ struct TimelineView: View {
     @State private var offset: CGFloat? = 0
     /// To track the offset when the user scroll to the middle of the searchbar.
     @State private var searchBarTrackingOffset: CGFloat?
-    @State private var scrolledToBottom: Bool = false
+    @State private var scrolledToBottom: Bool? = false
     @State private var scrollToIndex: Int = -1
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
@@ -36,7 +36,7 @@ struct TimelineView: View {
         // TODO: Show refresh button
         CustomScrollView(
             offset: $offset,
-            atBottom: Binding($scrolledToBottom),
+            atBottom: $scrolledToBottom,
             didScrollToBottom: viewModel.loadMorePosts,
             didEndScroll: { searchBarTrackingOffset = offset },
             refresh: viewModel.refresh,
@@ -69,9 +69,6 @@ struct TimelineView: View {
                     .background(Color.background)
                     .id(-1)
                     
-                    // FIXME: Performance issue with large number of posts.
-                    // Workaround: lazy load / hide previous cards
-                    
                     // None lazy views for the first `maxNoneLazyCards` cards
                     // to avoid being stuck when scrolling to top
                     VStack(spacing: 0) {
@@ -88,24 +85,18 @@ struct TimelineView: View {
                     }
                     
                     // TODO: Show retry button if failed.
-                    if scrolledToBottom {
-                        HStack {
-                            Text(String.loadingLocalized.capitalized)
-                                .font(.system(size: body16))
-                            Spinner(color: .hollowContentText, desiredWidth: body16)
-                        }
-                        .foregroundColor(.hollowContentText)
-                        .padding(.bottom)
+                    HStack {
+                        Text(String.loadingLocalized.capitalized)
+                            .font(.system(size: body16, weight: .medium))
+                        Spinner(color: .hollowContentText, desiredWidth: body16)
                     }
+                    .foregroundColor(.hollowContentText)
+                    .padding(.bottom)
                 }
                 
-                // Set the offset for the preference key when the value changes.
-                .preference(key: OffsetPreferenceKey.self, value: searchBarTrackingOffset)
-                
-                // Perform action when the value changes. Scroll to the top when
-                // the current position is in the top half of the search bar,
-                // and scroll to the first card if in the bottom half.
-                .onPreferenceChange(OffsetPreferenceKey.self) { currentOffset in
+                // Observe the change of the offset when the user finish scrolling,
+                // then decide when to scroll based on the offset value.
+                .onChange(of: searchBarTrackingOffset) { currentOffset in
                     guard let currentOffset = currentOffset else { return }
                     withAnimation(.spring(response: 0.05)) {
                         // Comensate the difference of the top and bottom padding.

@@ -31,11 +31,9 @@ struct MainView: View {
             .edgesIgnoringSafeArea(.bottom)
         }
         .overlay(
-            Group {
-                if isSearching {
-                    SearchView(presented: $isSearching)
-                }
-            }
+            Group { if isSearching {
+                SearchView(presented: $isSearching)
+            }}
         )
     }
     
@@ -60,11 +58,7 @@ extension MainView {
         var body: some View {
             HStack(spacing: 2) {
                 Group {
-                    Button(action: {
-                        withAnimation {
-                            page = .wander
-                        }
-                    }) {
+                    Button(action: { withAnimation { page = .wander }}) {
                         mainTabText(text: String.wanderLocalized.capitalized, selected: page == .wander)
                             .animation(.spring())
                     }
@@ -72,14 +66,9 @@ extension MainView {
                     mainTabText(text: "/", selected: true)
                         .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
                         .animation(.spring())
-                    Button(action: {
-                        withAnimation {
-                            page = .timeline
-                        }
-                    }) {
+                    Button(action: { withAnimation { page = .timeline }}) {
                         mainTabText(text: String.timelineLocalized.capitalized, selected: page == .timeline)
                             .animation(.spring())
-                        
                     }
                     .disabled(page == .timeline)
                 }
@@ -105,7 +94,7 @@ extension MainView {
                 .font(.system(size: body20, weight: .medium))
                 .foregroundColor(.mainBarButton)
             }
-            .fullScreenCover(isPresented: $accountPresented, content: {
+            .sheet(isPresented: $accountPresented, content: {
                 AccountView(presented: $accountPresented)
             })
 
