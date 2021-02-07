@@ -26,12 +26,8 @@ struct DeviceTerminationRequestResult: Codable {
     var code: Int
 }
 
-struct DeviceTerminationRequestResultData {
-    enum ResultType: Int {
-        case success = 0
-    }
-    
-    var result: ResultType
+enum DeviceTerminationRequestResultData: Int {
+    case success = 0
 }
 
 struct DeviceTerminationRequest: Request {
@@ -70,7 +66,7 @@ struct DeviceTerminationRequest: Request {
                     let result = try jsonDecoder.decode(Result.self, from: response.data!)
                     if result.code >= 0 {
                         // result code >= 0 valid!
-                        let resultData = ResultData(result: ResultData.ResultType(rawValue: result.code)!)
+                        let resultData = ResultData.init(rawValue: result.code)
                         completion(resultData, nil)
                         //debugPrint(response.response?.allHeaderFields)
                     } else {

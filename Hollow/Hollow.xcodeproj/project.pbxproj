@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370225CFFAC200961BBB /* GetPushRequest.swift */; };
+		0092370625D0007500961BBB /* PushNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370525D0007500961BBB /* PushNotificationType.swift */; };
+		0092370B25D00E5600961BBB /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0092370A25D00E5600961BBB /* SwiftyJSON */; };
+		0092370E25D01E2900961BBB /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370D25D01E2900961BBB /* String+Date.swift */; };
 		0096307125CED33400030069 /* LogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0096307025CED33400030069 /* LogoutRequest.swift */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
 		0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */; };
@@ -31,7 +35,7 @@
 		0E415ACA25CD771600351672 /* GetConfigRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9825CD771600351672 /* GetConfigRequest.swift */; };
 		0E415ACB25CD771600351672 /* SetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9925CD771600351672 /* SetPushRequest.swift */; };
 		0E415ACC25CD771600351672 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9B25CD771600351672 /* LoginRequest.swift */; };
-		0E415ACD25CD771600351672 /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9C25CD771600351672 /* DeviceInformation.swift */; };
+		0E415ACD25CD771600351672 /* DeviceInformationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9C25CD771600351672 /* DeviceInformationType.swift */; };
 		0E415ACE25CD771600351672 /* EmailCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9D25CD771600351672 /* EmailCheckRequest.swift */; };
 		0E415ACF25CD771600351672 /* DeviceListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9E25CD771600351672 /* DeviceListRequest.swift */; };
 		0E415AD025CD771600351672 /* DeviceTerminationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9F25CD771600351672 /* DeviceTerminationRequest.swift */; };
@@ -125,6 +129,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0092370225CFFAC200961BBB /* GetPushRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPushRequest.swift; sourceTree = "<group>"; };
+		0092370525D0007500961BBB /* PushNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationType.swift; sourceTree = "<group>"; };
+		0092370D25D01E2900961BBB /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		0096307025CED33400030069 /* LogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRequest.swift; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
@@ -149,7 +156,7 @@
 		0E415A9825CD771600351672 /* GetConfigRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetConfigRequest.swift; sourceTree = "<group>"; };
 		0E415A9925CD771600351672 /* SetPushRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPushRequest.swift; sourceTree = "<group>"; };
 		0E415A9B25CD771600351672 /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
-		0E415A9C25CD771600351672 /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
+		0E415A9C25CD771600351672 /* DeviceInformationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationType.swift; sourceTree = "<group>"; };
 		0E415A9D25CD771600351672 /* EmailCheckRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCheckRequest.swift; sourceTree = "<group>"; };
 		0E415A9E25CD771600351672 /* DeviceListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceListRequest.swift; sourceTree = "<group>"; };
 		0E415A9F25CD771600351672 /* DeviceTerminationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTerminationRequest.swift; sourceTree = "<group>"; };
@@ -249,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0092370B25D00E5600961BBB /* SwiftyJSON in Frameworks */,
 				0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */,
 				0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */,
 				0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */,
@@ -327,6 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				0E415A8725CD771600351672 /* HollowType.swift */,
+				0E415A9C25CD771600351672 /* DeviceInformationType.swift */,
+				0092370525D0007500961BBB /* PushNotificationType.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -370,6 +380,7 @@
 			children = (
 				0E415A9825CD771600351672 /* GetConfigRequest.swift */,
 				0E415A9925CD771600351672 /* SetPushRequest.swift */,
+				0092370225CFFAC200961BBB /* GetPushRequest.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -379,7 +390,6 @@
 			children = (
 				0E415A9B25CD771600351672 /* LoginRequest.swift */,
 				0096307025CED33400030069 /* LogoutRequest.swift */,
-				0E415A9C25CD771600351672 /* DeviceInformation.swift */,
 				0E415A9D25CD771600351672 /* EmailCheckRequest.swift */,
 				0E415A9E25CD771600351672 /* DeviceListRequest.swift */,
 				0E415A9F25CD771600351672 /* DeviceTerminationRequest.swift */,
@@ -417,6 +427,7 @@
 				0E415AAF25CD771600351672 /* Localization.swift */,
 				0E415AB025CD771600351672 /* DefaultsKeys.swift */,
 				0E415AB125CD771600351672 /* Int+string.swift */,
+				0092370D25D01E2900961BBB /* String+Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -733,6 +744,7 @@
 				0E4F032F25CE29D500F4B228 /* Alamofire */,
 				0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */,
 				0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */,
+				0092370A25D00E5600961BBB /* SwiftyJSON */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -767,6 +779,7 @@
 				0E415B9425CD77C600351672 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E4F032E25CE29D500F4B228 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				0092370925D00E5600961BBB /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -803,12 +816,15 @@
 				0E415B4525CD772200351672 /* ReCAPTCHAWebView.swift in Sources */,
 				0E415B5B25CD772200351672 /* HollowTimelineCardView.swift in Sources */,
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
+				0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */,
+				0092370E25D01E2900961BBB /* String+Date.swift in Sources */,
 				0E415AE225CD771600351672 /* CachedHTTPRequest.swift in Sources */,
 				0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */,
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
 				0E415B8325CD772200351672 /* Login.swift in Sources */,
 				0E415ACA25CD771600351672 /* GetConfigRequest.swift in Sources */,
+				0092370625D0007500961BBB /* PushNotificationType.swift in Sources */,
 				0E415ADF25CD771600351672 /* Int+string.swift in Sources */,
 				0E415ACF25CD771600351672 /* DeviceListRequest.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsView.swift in Sources */,
@@ -857,7 +873,7 @@
 				0E415AE325CD771600351672 /* HollowImage.swift in Sources */,
 				0E415ABD25CD771600351672 /* PostDetailRequest.swift in Sources */,
 				0E415B6A25CD772200351672 /* HollowHeaderMenu.swift in Sources */,
-				0E415ACD25CD771600351672 /* DeviceInformation.swift in Sources */,
+				0E415ACD25CD771600351672 /* DeviceInformationType.swift in Sources */,
 				0E415B7925CD772200351672 /* LoginView.swift in Sources */,
 				0E415B6025CD772200351672 /* HollowInputPreviewView.swift in Sources */,
 				0E415AC025CD771600351672 /* SearchHistoryRequest.swift in Sources */,
@@ -1096,6 +1112,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0092370925D00E5600961BBB /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
@@ -1131,6 +1155,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0092370A25D00E5600961BBB /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0092370925D00E5600961BBB /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
