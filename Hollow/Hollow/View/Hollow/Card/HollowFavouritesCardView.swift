@@ -13,8 +13,10 @@ struct HollowFavouritesCardView: View {
     }
 }
 
+#if DEBUG
 struct HollowFavouritesCardView_Previews: PreviewProvider {
     static var previews: some View {
         HollowFavouritesCardView()
     }
 }
+#endif

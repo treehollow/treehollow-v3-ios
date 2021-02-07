@@ -16,8 +16,10 @@ struct HollowVerticalDivider: View {
     }
 }
 
+#if DEBUG
 struct HollowVerticalDivider_Previews: PreviewProvider {
     static var previews: some View {
         HollowVerticalDivider()
     }
 }
+#endif

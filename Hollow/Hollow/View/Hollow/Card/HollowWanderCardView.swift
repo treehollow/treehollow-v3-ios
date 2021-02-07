@@ -33,8 +33,10 @@ struct HollowWanderCardView: View {
     }
 }
 
+#if DEBUG
 struct HollowWanderCardView_Previews: PreviewProvider {
     static var previews: some View {
         HollowWanderCardView(postData: .constant(testPostData)).frame(width: 200).padding().background(Color.background)
     }
 }
+#endif

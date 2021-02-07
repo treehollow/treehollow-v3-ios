@@ -65,6 +65,7 @@ struct HollowHeaderView: View {
     }
 }
 
+#if DEBUG
 struct HollowHeaderView_Previews: PreviewProvider {
     static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "", type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")), vote: .init(voted: true, votedOption: "Yes", voteData: [
         .init(title: "Yes", voteCount: 123),
@@ -82,3 +83,4 @@ struct HollowHeaderView_Previews: PreviewProvider {
             .background(Color.background)
     }
 }
+#endif

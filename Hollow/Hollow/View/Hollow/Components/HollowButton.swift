@@ -43,6 +43,7 @@ struct HollowButton: View {
     }
 }
 
+#if DEBUG
 struct HollowStarButton_Previews: PreviewProvider {
     static var previews: some View {
         HollowStarButton(attention: .constant(false), likeNumber: .constant(10), starHandler: {_ in})
@@ -50,3 +51,4 @@ struct HollowStarButton_Previews: PreviewProvider {
         HollowStarButton(attention: .constant(nil), likeNumber: .constant(10), starHandler: {_ in})
     }
 }
+#endif

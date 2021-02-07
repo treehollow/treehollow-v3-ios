@@ -13,8 +13,10 @@ struct HollowCommentInputPreviewView: View {
     }
 }
 
+#if DEBUG
 struct HollowCommentInputPreviewView_Previews: PreviewProvider {
     static var previews: some View {
         HollowCommentInputPreviewView()
     }
 }
+#endif

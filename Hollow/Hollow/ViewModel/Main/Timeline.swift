@@ -13,8 +13,12 @@ class Timeline: ObservableObject {
     
     init() {
         // FOR DEBUG
-        self.posts = Array.init(repeating: testPostDataWrapper2, count: 200)
+        #if DEBUG
+        self.posts = Array.init(repeating: testPostDataWrapperNoExtraComponents, count: 200)
 //        self.posts = testPostWrappers + testPostWrappers
+        #else
+        self.posts = []
+        #endif
     }
     
     func vote(postId: Int, for option: String) {
@@ -22,12 +26,16 @@ class Timeline: ObservableObject {
     }
     
     func loadMorePosts() {
+        #if DEBUG
         self.posts += testPostWrappers.shuffled()
+        #endif
     }
     
     func refresh(_ isRefreshing: inout Bool) {
         // FOR TESTING
+        #if DEBUG
         self.posts = testPostWrappers.shuffled()
+        #endif
         isRefreshing = false
     }
 }

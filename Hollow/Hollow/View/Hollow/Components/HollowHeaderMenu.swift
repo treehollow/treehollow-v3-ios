@@ -32,8 +32,10 @@ struct HollowHeaderMenu: View {
     }
 }
 
+#if DEBUG
 struct HollowHeaderMenu_Previews: PreviewProvider {
     static var previews: some View {
         HollowHeaderMenu()
     }
 }
+#endif

@@ -53,8 +53,10 @@ struct Spinner: View {
     
 }
 
+#if DEBUG
 struct Spinner_Previews: PreviewProvider {
     static var previews: some View {
         Spinner(color: .blue, desiredWidth: 45)
     }
 }
+#endif

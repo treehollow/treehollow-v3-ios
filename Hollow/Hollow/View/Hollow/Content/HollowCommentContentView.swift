@@ -83,9 +83,11 @@ struct HollowCommentContentView: View {
     }
 }
 
+#if DEBUG
 struct HollowCommentContentView_Previews: PreviewProvider {
     static var previews: some View {
         HollowCommentContentView(commentData: .constant(testComments[0]), compact: false)
         HollowCommentContentView(commentData: .constant(testComments[3]), compact: false)
     }
 }
+#endif

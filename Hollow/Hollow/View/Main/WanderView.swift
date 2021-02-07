@@ -23,8 +23,10 @@ struct WanderView: View {
     }
 }
 
+#if DEBUG
 struct WanderView_Previews: PreviewProvider {
     static var previews: some View {
         WanderView()
     }
 }
+#endif

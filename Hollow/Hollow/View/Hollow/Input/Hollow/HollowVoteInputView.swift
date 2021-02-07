@@ -13,8 +13,10 @@ struct HollowVoteInputView: View {
     }
 }
 
+#if DEBUG
 struct HollowVoteInputView_Previews: PreviewProvider {
     static var previews: some View {
         HollowVoteInputView()
     }
 }
+#endif

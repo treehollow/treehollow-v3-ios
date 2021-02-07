@@ -13,8 +13,10 @@ struct AccountInfoView: View {
     }
 }
 
+#if DEBUG
 struct AccountInfoView_Previews: PreviewProvider {
     static var previews: some View {
         AccountInfoView()
     }
 }
+#endif

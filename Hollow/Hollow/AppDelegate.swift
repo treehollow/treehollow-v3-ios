@@ -29,9 +29,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
 
-
-        AppCenter.start(withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
-                        services:[Analytics.self,Crashes.self]
+        // Start AppCenter services
+        AppCenter.start(
+            withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
+            services: [Analytics.self, Crashes.self]
         )
         
         return true

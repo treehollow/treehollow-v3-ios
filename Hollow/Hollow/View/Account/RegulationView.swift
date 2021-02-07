@@ -13,8 +13,10 @@ struct RegulationView: View {
     }
 }
 
+#if DEBUG
 struct RegulationView_Previews: PreviewProvider {
     static var previews: some View {
         RegulationView()
     }
 }
+#endif

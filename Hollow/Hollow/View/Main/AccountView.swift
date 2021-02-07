@@ -75,8 +75,10 @@ struct AccountView: View {
     }
 }
 
+#if DEBUG
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         AccountView(presented: .constant(true))
     }
 }
+#endif

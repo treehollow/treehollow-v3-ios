@@ -103,13 +103,13 @@ struct TimelineView: View {
                 .preference(key: OffsetPreferenceKey.self, value: searchBarTrackingOffset)
                 
                 // Perform action when the value changes. Scroll to the top when
-                // the current position is in the top part of the search bar,
+                // the current position is in the top half of the search bar,
                 // and scroll to the first card if in the bottom half.
                 .onPreferenceChange(OffsetPreferenceKey.self) { currentOffset in
                     guard let currentOffset = currentOffset else { return }
                     withAnimation(.spring(response: 0.05)) {
                         // Comensate the difference of the top and bottom padding.
-                        let threshold = searchBarHeight - (body14 - 2) / 2
+                        let threshold = (searchBarHeight - (body14 - 2)) / 2
                         
                         // Perform scrolling actions
                         if currentOffset > 0 && currentOffset <= threshold {
@@ -155,11 +155,13 @@ extension TimelineView {
     }
 }
 
+#if DEBUG
 struct TimelineView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
 }
+#endif
 
 extension Int: Identifiable {
     public var id: Int { self }

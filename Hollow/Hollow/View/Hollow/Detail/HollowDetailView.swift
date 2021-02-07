@@ -74,9 +74,10 @@ extension HollowDetailView {
     }
 }
 
+#if DEBUG
 struct HollowDetailView_Previews: PreviewProvider {
-
     static var previews: some View {
         return HollowDetailView(postDataWrapper: .constant(testPostDataWrapper), presentedIndex: .constant(-1)).colorScheme(.dark)
     }
 }
+#endif

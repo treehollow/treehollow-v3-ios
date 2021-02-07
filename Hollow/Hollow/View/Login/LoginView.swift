@@ -109,9 +109,10 @@ struct LoginView: View {
     }
 }
 
-
+#if DEBUG
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
+#endif

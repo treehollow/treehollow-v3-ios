@@ -24,6 +24,7 @@ struct HollowTextView: View {
     }
 }
 
+#if DEBUG
 struct HollowTextView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
@@ -82,3 +83,4 @@ Header 2
         }
     }
 }
+#endif

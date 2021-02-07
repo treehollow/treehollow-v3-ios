@@ -56,6 +56,7 @@ struct HollowTimelineCardView: View {
     }
 }
 
+#if DEBUG
 struct HollowTimelineCardView_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
@@ -69,4 +70,4 @@ struct HollowTimelineCardView_Previews: PreviewProvider {
         }
     }
 }
-
+#endif

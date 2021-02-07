@@ -34,6 +34,7 @@ struct HollowCiteContentView: View {
     }
 }
 
+#if DEBUG
 struct HollowCiteContentView_Previews: PreviewProvider {
     static var previews: some View {
         HollowCiteContentView(postData: .init(postId: testPostData.postId, text: testPostData.text))
@@ -41,3 +42,4 @@ struct HollowCiteContentView_Previews: PreviewProvider {
             .colorScheme(.dark)
     }
 }
+#endif

@@ -13,8 +13,10 @@ struct MessageView: View {
     }
 }
 
+#if DEBUG
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
         MessageView()
     }
 }
+#endif

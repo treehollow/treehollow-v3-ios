@@ -13,8 +13,10 @@ struct FavouritesView: View {
     }
 }
 
+#if DEBUG
 struct FavouritesView_Previews: PreviewProvider {
     static var previews: some View {
         FavouritesView()
     }
 }
+#endif
