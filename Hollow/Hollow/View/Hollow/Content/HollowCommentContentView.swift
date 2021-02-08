@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HollowCommentContentView: View {
-    @Binding var commentData: CommentData
+    var commentData: CommentData
     var compact: Bool
     var contentVerticalPadding: CGFloat? = 10
     private let compactLineLimit = 3
@@ -28,15 +28,15 @@ struct HollowCommentContentView: View {
                 HStack(alignment: .top) {
                     Text(commentData.name)
                         .bold()
-                        .minimumScaleFactor(0.75)
                         .allowsTightening(true)
-                        .lineLimit(compact ? compactLineLimit : nil)
+                        .minimumScaleFactor(0.3)
+                        .lineLimit(compact ? 2 : nil)
                         .leading()
                         .frame(width: nameLabelWidth)
                         .fixedSize()
                     VStack(alignment: .leading, spacing: 0) {
                         if commentData.type == .image && !compact {
-                            HollowImageView(hollowImage: $commentData.image)
+                            HollowImageView(hollowImage: commentData.image)
                                 .cornerRadius(4)
                                 .padding(.bottom, 10)
                                 .frame(maxHeight: 300)
@@ -49,6 +49,7 @@ struct HollowCommentContentView: View {
                                 (Text("[") + Text(LocalizedStringKey("Photo")) + Text("]"))
                                     .foregroundColor(.uiColor(.secondaryLabel))
                             }
+                            // TODO: Has replies indicator
                         }
                         .leading()
                         .lineLimit(compact ? compactLineLimit : nil)
@@ -86,8 +87,8 @@ struct HollowCommentContentView: View {
 #if DEBUG
 struct HollowCommentContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowCommentContentView(commentData: .constant(testComments[0]), compact: false)
-        HollowCommentContentView(commentData: .constant(testComments[3]), compact: false)
+        HollowCommentContentView(commentData: testComments[0], compact: false)
+        HollowCommentContentView(commentData: testComments[3], compact: false)
     }
 }
 #endif

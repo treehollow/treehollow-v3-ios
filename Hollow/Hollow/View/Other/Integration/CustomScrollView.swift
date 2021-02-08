@@ -16,7 +16,8 @@ struct CustomScrollView<Content>: View where Content: View {
     var didScrollToBottom: (() -> Void)? = nil
     var didScroll: (() -> Void)? = nil
     var didEndScroll: (() -> Void)? = nil
-    var refresh: ((inout Bool) -> Void)? = nil
+    // Handler to call when refreshing. Call the given parameter to stop the animating spinner.
+    var refresh: ((@escaping () -> Void) -> Void)? = nil
     let content: (ScrollViewProxy) -> Content
     
     var body: some View {
@@ -32,7 +33,7 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
     let didScroll: (() -> Void)?
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
-    let refresh: ((inout Bool) -> Void)?
+    let refresh: ((@escaping () -> Void) -> Void)?
     let content: Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ScrollViewRepresentable<Content>>) -> ScrollViewUIHostingController<Content> {
@@ -52,7 +53,7 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     let didScroll: (() -> Void)?
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
-    let refresh: ((inout Bool) -> Void)?
+    let refresh: ((@escaping () -> Void) -> Void)?
     private var isRefreshing: Bool = false {
         // FIXME: Fix this when actually use it
         didSet { if !isRefreshing {
@@ -70,7 +71,7 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         }
     }
     
-    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, didScroll: (() -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((inout Bool) -> Void)?, rootView: Content) {
+    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, didScroll: (() -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
         self.offset = offset
         self.atBottom = atBottom
         self.didScroll = didScroll
@@ -95,12 +96,12 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     }
     
     private func setScrollView() {
-        if ready { return } // avoid running more than once
+        if ready && scrollView != nil { return } // avoid running more than once
         ready = true
         
         self.scrollView = findUIScrollView(view: self.view)
         scrollView?.delegate = self
-        scrollView?.scrollsToTop = true
+
         if refresh != nil {
             scrollView?.refreshControl = UIRefreshControl()
             scrollView?.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
@@ -113,14 +114,14 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         }
     }
     
-    func findUIScrollView(view: UIView?) -> UIScrollView? {
-        if view?.isKind(of: UIScrollView.self) ?? false {
+    func findUIScrollView(view: UIView) -> UIScrollView? {
+        if view.isKind(of: UIScrollView.self) {
             return (view as? UIScrollView)
         }
         
-        for subview in view?.subviews ?? [] {
-            if let vc = findUIScrollView(view: subview) {
-                return vc
+        for subview in view.subviews {
+            if let sv = findUIScrollView(view: subview) {
+                return sv
             }
         }
         
@@ -129,7 +130,9 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     
     @objc
     func refreshAction() {
-        refresh?(&isRefreshing)
+        refresh? {
+            self.isRefreshing = false
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -140,7 +143,10 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         } else {
             atBottom.wrappedValue = false
         }
-        offset.wrappedValue = scrollView.contentOffset.y
+        
+        withAnimation {
+            offset.wrappedValue = scrollView.contentOffset.y
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

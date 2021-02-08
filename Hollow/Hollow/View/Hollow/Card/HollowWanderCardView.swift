@@ -12,14 +12,14 @@ struct HollowWanderCardView: View {
     var body: some View {
         // FIXME: Handlers
         VStack {
-            HollowHeaderView(postData: $postData, compact: true)
-            HollowTextView(text: $postData.text, compactLineLimit: 20)
+            HollowHeaderView(postData: postData, compact: true)
+            HollowTextView(text: postData.text, compactLineLimit: 20)
             // TODO: Vote and cite
             HStack {
-                HollowStarButton(attention: $postData.attention, likeNumber: $postData.likeNumber, starHandler: {_ in})
+                HollowStarButton(attention: postData.attention, likeNumber: postData.likeNumber, starHandler: {_ in})
                     .padding(.leading, 10)
                 Spacer()
-                HollowButton(number: .constant(postData.comments.count), action: {
+                HollowButton(number: postData.comments.count, action: {
                     // Show detail
                 }, systemImageName: "quote.bubble")
                 .foregroundColor(.hollowContentText)

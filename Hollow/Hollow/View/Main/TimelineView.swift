@@ -16,18 +16,13 @@ struct TimelineView: View {
     @State private var searchBarTrackingOffset: CGFloat?
     @State private var scrolledToBottom: Bool? = false
     @State private var scrollToIndex: Int = -1
+    @State private var searchBarSize: CGSize = .zero
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     
-    private var searchBarHeight: CGFloat {
-        return
-            body17 +    // font size
-            14 +        // inner padding
-            2 +         // top padding
-            body14 / 2  // bottom padding
-    }
+    private var searchBarHeight: CGFloat { searchBarSize.height }
     
     /// Maximum cards to be displayed none-lazily.
     private let maxNoneLazyCards = 2
@@ -60,14 +55,18 @@ struct TimelineView: View {
                         .padding(.horizontal, 15)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.mainSearchBarBackground)
+                                .foregroundColor(Color.mainSearchBarBackground.opacity(0.6))
                         )
                         
                     }
                     .padding(.horizontal)
                     .padding(.bottom, body14 / 2)
                     .background(Color.background)
+                    .modifier(GetSizeModifier(size: $searchBarSize))
                     .id(-1)
+                    
+                    // FIXME: Can we use postId as the id instead of the index?
+                    // Using index will apply an imperfect animation on the cards.
                     
                     // None lazy views for the first `maxNoneLazyCards` cards
                     // to avoid being stuck when scrolling to top
@@ -92,15 +91,17 @@ struct TimelineView: View {
                     }
                     .foregroundColor(.hollowContentText)
                     .padding(.bottom)
+                    .padding(.bottom)
+                    // TODO: Animation
+                    // FIXME: Should show spinner after the request is processing
                 }
                 
                 // Observe the change of the offset when the user finish scrolling,
-                // then decide when to scroll based on the offset value.
+                // then decide where to scroll based on the offset value.
                 .onChange(of: searchBarTrackingOffset) { currentOffset in
                     guard let currentOffset = currentOffset else { return }
                     withAnimation(.spring(response: 0.05)) {
-                        // Comensate the difference of the top and bottom padding.
-                        let threshold = (searchBarHeight - (body14 - 2)) / 2
+                        let threshold = searchBarHeight / 2
                         
                         // Perform scrolling actions
                         if currentOffset > 0 && currentOffset <= threshold {
@@ -130,6 +131,8 @@ struct TimelineView: View {
         .onTapGesture {
             detailPresentedIndex = index
         }
+//        .animation(.default)
+        // Id for ScrollViewProxy to use
         .id(index)
     }
 }

@@ -41,21 +41,22 @@ struct GetPushRequest: Request {
             method: .post,
             headers: headers
         ).validate().responseJSON { response in
-            switch response.result{
+            switch response.result {
             case .success:
                 do {
                     let result = try JSON(data: response.data!)
                     if result["code"].int! >= 0 {
                         // result code >= 0 valid!
                         let resultData = ResultData.init(
-                            pushSystemMsg: result["data"]["push_system_msg"].int! == 1 ? true : false,
-                            pushReplyMe: result["data"]["push_reply_me"].int! == 1 ? true : false,
-                            pushFavorited: result["data"]["push_favorited"].int! == 1 ? true : false)
+                            pushSystemMsg: result["data"]["push_system_msg"].bool!,
+                            pushReplyMe: result["data"]["push_reply_me"].bool!,
+                            pushFavorited: result["data"]["push_favorited"].bool!)
                         completion(resultData, nil)
                     } else {
                         // invalid response
                         completion(
-                            nil, .other(description: "Received error code from backend: \(result["code"].string!)."))
+                            nil, .other(description: "Received error code from backend: \(result["code"].string!).")
+                        )
                     }
                 } catch {
                     completion(nil, .decodeFailed)
@@ -64,7 +65,8 @@ struct GetPushRequest: Request {
             case let .failure(error):
                 completion(
                     nil,
-                    .other(description: error.errorDescription ?? "Unkown error when performing GetPushRequest!"))
+                    .other(description: error.errorDescription ?? "Unkown error when performing GetPushRequest!")
+                )
             }
         }
     }

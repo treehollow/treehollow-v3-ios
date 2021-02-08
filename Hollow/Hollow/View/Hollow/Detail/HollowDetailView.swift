@@ -11,9 +11,13 @@ struct HollowDetailView: View {
     @Binding var postDataWrapper: PostDataWrapper
     @Binding var presentedIndex: Int?
     
+    @State private var commentRect: CGRect = .zero
+    @State private var pos: CGFloat?
+    @State private var scrollViewOffset: CGFloat? = 0
+    
     @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
-
+    
     var body: some View {
         // FIXME: Handlers
         ZStack {
@@ -22,36 +26,42 @@ struct HollowDetailView: View {
                 // Header
                 VStack(spacing: 0) {
                     HStack {
-                        Button(action:{
-                            // Navigate back
-                            presentedIndex = nil
-                        }) {
+                        Button(action: { presentedIndex = nil }) {
                             Image(systemName: "xmark")
                                 .imageButton(sizeFor20: body20)
                                 .padding(.trailing, 5)
                         }
                         .padding(.trailing, 5)
-                        HollowHeaderView(postData: $postDataWrapper.post, compact: false)
+                        
+                        HollowHeaderView(
+                            postData: postDataWrapper.post,
+                            compact: false,
+                            // Show text on header when the text is not visible
+                            showContent: (scrollViewOffset ?? 0) > commentRect.minY
+                        )
                     }
                     .padding(.horizontal)
                     .padding(.vertical, headerVerticalPadding)
                     Divider()
                 }
                 // Contents
-                CustomScrollView { _ in
+                CustomScrollView(offset: $scrollViewOffset) { _ in
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        HollowContentView(postDataWrapper: $postDataWrapper, compact: false, voteHandler: {_ in})
+                        HollowContentView(postDataWrapper: postDataWrapper, compact: false, voteHandler: {_ in})
                             .fixedSize(horizontal: false, vertical: true)
                         CommentView(comments: $postDataWrapper.post.comments)
+                            // Get the frame of the comment view.
+                            .modifier(GetFrameModifier(frame: $commentRect, coordinateSpace: .named("detail.scrollview")))
                     }
                     .padding(.horizontal)
                     .background(Color.hollowDetailBackground)
+                    .coordinateSpace(name: "detail.scrollview")
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
-
+            
         }
     }
 }
@@ -66,8 +76,8 @@ extension HollowDetailView {
                     .leading()
                     .padding(.top)
                     .padding(.bottom, 5)
-                ForEach(comments.indices, id: \.self) { index in
-                    HollowCommentContentView(commentData: $comments[index], compact: false)
+                ForEach(comments) { commentData in
+                    HollowCommentContentView(commentData: commentData, compact: false)
                 }
             }
         }

@@ -5,6 +5,8 @@
 //  Created by liang2kl on 2021/2/4.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
+//  Reference: https://stackoverflow.com/questions/39075043/how-to-convert-data-to-hex-string-in-swift
+//
 
 import Foundation
 

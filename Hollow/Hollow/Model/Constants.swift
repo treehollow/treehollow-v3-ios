@@ -9,13 +9,16 @@
 import Foundation
 
 struct Constants {
+    struct Application {
+        static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    }
+    
     struct HollowConfig {
         static let thuConfigURL = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
         static let pkuConfigURL = ""
     }
 
     struct URLConstant {
-        static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        static let urlSuffix = "?v=v\(appVersion)&device=2"
+        static let urlSuffix = "?v=v\(Constants.Application.appVersion)&device=2"
     }
 }

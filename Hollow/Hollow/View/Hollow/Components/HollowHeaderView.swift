@@ -11,9 +11,12 @@ import SwiftUI
 // TODO: Actions
 struct HollowHeaderView: View {
     @ObservedObject var viewModel: HollowHeader = .init()
-    @Binding var postData: PostData
+    var postData: PostData
     var compact: Bool
+    var showContent = false
     private var starred: Bool? { postData.attention }
+    
+    @Namespace private var headerNamespace
     
     @ScaledMetric(wrappedValue: 37, relativeTo: .body) var body37: CGFloat
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
@@ -31,22 +34,33 @@ struct HollowHeaderView: View {
                     .frame(width: body37, height: body37)
                     .clipShape(Circle())
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("#\(postData.postId.string)")
-                        .fontWeight(.medium)
-                        .font(.system(size: body16, weight: .semibold))
-                        .foregroundColor(.hollowContentText)
-                    Text("6分钟前")    // FIXME: Placeholder here
-                        .font(.system(size: body13))
-                        .lineSpacing(2.5)
-                        .foregroundColor(Color.gray)
+                    HStack {
+                        Text("#\(postData.postId.string)")
+                            .fontWeight(.medium)
+                            .font(.system(size: body16, weight: .semibold))
+                            .foregroundColor(.hollowContentText)
+                        if showContent {
+                            // Time label
+                            secondaryText("6 min", fontWeight: .medium)
+                                .matchedGeometryEffect(id: "time.label", in: headerNamespace)
+                        }
+                    }
+                    if showContent {
+                        secondaryText(postData.text.removeLineBreak())
+                    } else {
+                        // Time label
+                        secondaryText("6 min", fontWeight: .medium)
+                            .matchedGeometryEffect(id: "time.label", in: headerNamespace)
+                    }
                 }
             }
+
             Spacer()
             
             if !compact {
                 // If `postData.attention` is nil, it means that the changed state of attention is submitting
                 if let _ = postData.attention {
-                    HollowStarButton(attention: $postData.attention, likeNumber: $postData.likeNumber, starHandler: viewModel.starPost)
+                    HollowStarButton(attention: postData.attention, likeNumber: postData.likeNumber, starHandler: viewModel.starPost)
                 } else {
                     Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }
@@ -63,11 +77,19 @@ struct HollowHeaderView: View {
             }
         }
     }
+    
+    func secondaryText(_ text: String, fontWeight: Font.Weight = .regular) -> some View {
+        Text(text)
+            .font(.system(size: body13, weight: fontWeight))
+            .lineSpacing(2.5)
+            .foregroundColor(Color.gray)
+            .lineLimit(1)
+    }
 }
 
 #if DEBUG
 struct HollowHeaderView_Previews: PreviewProvider {
-    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "", type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")), vote: .init(voted: true, votedOption: "Yes", voteData: [
+    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "asdasdsdsdadsdasdsdasdasdasdasdadsdasdasdsadds", type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")), vote: .init(voted: true, votedOption: "Yes", voteData: [
         .init(title: "Yes", voteCount: 123),
         .init(title: "No", voteCount: 24)
     ]), comments: [
@@ -79,7 +101,7 @@ struct HollowHeaderView_Previews: PreviewProvider {
     ])
     
     static var previews: some View {
-        HollowHeaderView(postData: .constant(postData), compact: false)
+        HollowHeaderView(postData: postData, compact: false)
             .background(Color.background)
     }
 }

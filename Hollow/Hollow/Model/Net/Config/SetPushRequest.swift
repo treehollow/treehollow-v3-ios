@@ -37,9 +37,9 @@ struct SetPushRequest: Request {
     func performRequest(completion: @escaping (SetPushRequestResultData?, DefaultRequestError?) -> Void) {
         let urlPath = self.configuration.apiRoot + "v3/config/set_push" + Constants.URLConstant.urlSuffix
         let parameters = [
-            "push_system_msg": self.configuration.type.pushSystemMsg ? 1 : 0,
-            "push_reply_me": self.configuration.type.pushReplyMe ? 1 : 0,
-            "push_favorited": self.configuration.type.pushFavorited ? 1 : 0,
+            "push_system_msg": self.configuration.type.pushSystemMsg.int,
+            "push_reply_me": self.configuration.type.pushReplyMe.int,
+            "push_favorited": self.configuration.type.pushFavorited.int,
         ]
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,

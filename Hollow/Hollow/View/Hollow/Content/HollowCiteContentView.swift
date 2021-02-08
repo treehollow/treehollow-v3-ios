@@ -19,7 +19,7 @@ struct HollowCiteContentView: View {
             Text("#\(postData.postId.string)")
                 .fontWeight(.semibold)
                 .leading()
-            Text(postData.text)
+            Text(postData.text.removeLineBreak())
                 .lineLimit(2)
         }
         .font(.system(size: body15))

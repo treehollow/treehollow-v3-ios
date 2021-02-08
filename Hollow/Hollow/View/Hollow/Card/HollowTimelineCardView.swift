@@ -14,8 +14,8 @@ struct HollowTimelineCardView: View {
     var body: some View {
         VStack(spacing: 15) {
             // TODO: Star actions
-            HollowHeaderView(postData: $postDataWrapper.post, compact: false)
-            HollowContentView(postDataWrapper: $postDataWrapper, compact: true, voteHandler: viewModel.voteHandler)
+            HollowHeaderView(postData: postDataWrapper.post, compact: false)
+            HollowContentView(postDataWrapper: postDataWrapper, compact: true, voteHandler: viewModel.voteHandler)
             // Check if comments exist to avoid additional spacing
             if postDataWrapper.post.comments.count > 0 {
                 CommentView(comments: $postDataWrapper.post.comments)
@@ -40,8 +40,8 @@ struct HollowTimelineCardView: View {
         
         var body: some View {
             VStack(spacing: 0) {
-                ForEach(comments.prefix(maxCommentCount).indices, id: \.self) { index in
-                    HollowCommentContentView(commentData: $comments[index], compact: true, contentVerticalPadding: 10)
+                ForEach(comments.prefix(maxCommentCount)) { commentData in
+                    HollowCommentContentView(commentData: commentData, compact: true, contentVerticalPadding: 10)
                 }
                 if comments.count > maxCommentCount {
                     // FIXME: How to localize this stuff??

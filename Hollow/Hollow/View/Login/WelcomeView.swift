@@ -14,6 +14,8 @@ import Defaults
 struct WelcomeView: View {
     @ObservedObject var viewModel: Welcome = .init()
     
+    @State var screenSize: CGSize = .zero
+    
     @ScaledMetric(wrappedValue: 22, relativeTo: .title) var title22: CGFloat
     @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
 
@@ -26,7 +28,7 @@ struct WelcomeView: View {
                     // FIXME: This code should be fixed if we are to support iPad or landscape mode.
                     // Using GeometryReader will have some very strange behaviours on `LoginView`,
                     // so we don't use here unless we have figured it out.
-                    .frame(maxHeight: UIScreen.main.bounds.height * 0.22)
+                    .frame(maxHeight: screenSize.height * 0.23)
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
                     Text(LocalizedStringKey("Select Hollow"))
@@ -91,6 +93,7 @@ struct WelcomeView: View {
         }
         .accentColor(.hollowContentText)
         .navigationViewStyle(StackNavigationViewStyle())
+        .modifier(GetSizeModifier(size: $screenSize))
     }
     
     func selectHollowButton(text: String) -> some View {

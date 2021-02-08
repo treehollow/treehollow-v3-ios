@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HollowImageView: View {
-    @Binding var hollowImage: HollowImage?
+    var hollowImage: HollowImage?
     @State private var flash = false
     @State private var showSavePhotoAlert = false
     @State private var savePhotoError: String? = nil
@@ -54,7 +54,7 @@ struct HollowImageView: View {
 #if DEBUG
 struct HollowImageView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowImageView(hollowImage: .constant(.init(placeholder: (1760, 1152), image: UIImage(named: "test"))))
+        HollowImageView(hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")))
     }
 }
 #endif

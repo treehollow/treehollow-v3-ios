@@ -31,11 +31,15 @@ class Timeline: ObservableObject {
         #endif
     }
     
-    func refresh(_ isRefreshing: inout Bool) {
+    func refresh(finshHandler: @escaping () -> Void) {
         // FOR TESTING
-        #if DEBUG
-        self.posts = testPostWrappers.shuffled()
-        #endif
-        isRefreshing = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            #if DEBUG
+            withAnimation {
+                self.posts = testPostWrappers.shuffled()
+            }
+            #endif
+            finshHandler()
+        }
     }
 }

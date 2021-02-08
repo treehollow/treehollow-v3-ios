@@ -50,7 +50,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Fail ro register remote notification with error: \(error.localizedDescription)")
+        print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
 
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {

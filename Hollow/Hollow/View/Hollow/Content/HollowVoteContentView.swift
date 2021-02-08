@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct HollowVoteContentView: View {
-    @Binding var vote: Post.Vote
-    @ObservedObject var viewModel: HollowVoteContent
+    var vote: Post.Vote
+    var voteHandler: (String) -> Void
     
     @State private var selectedButNotFinishIndex: Int = -1
     
@@ -22,10 +22,10 @@ struct HollowVoteContentView: View {
                     Button(action: {
                         withAnimation(.default) {
                             selectedButNotFinishIndex = index
-                            viewModel.voteHandler(vote.voteData[index].title)
+                            voteHandler(vote.voteData[index].title)
                         }
                     }) {
-                        VoteBarView(voteData: $vote.voteData[index], selectedButNotFinish: selectedButNotFinishIndex == index, selected: vote.votedOption == vote.voteData[index].title)
+                        VoteBarView(voteData: vote.voteData[index], selectedButNotFinish: selectedButNotFinishIndex == index, selected: vote.votedOption == vote.voteData[index].title)
                     }
                     // Disable the button when the user has voted
                     .disabled(vote.voteData[index].voteCount >= 0 || selectedButNotFinishIndex != -1)
@@ -36,7 +36,7 @@ struct HollowVoteContentView: View {
     
     // TODO: Vote proportion
     private struct VoteBarView: View {
-        @Binding var voteData: Post.Vote.VoteData
+        var voteData: Post.Vote.VoteData
         private var voted: Bool { voteData.voteCount >= 0 }
         var selectedButNotFinish: Bool
         var selected: Bool
@@ -109,7 +109,7 @@ struct HollowVoteContentView: View {
 #if DEBUG
 struct HollowVoteContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowVoteContentView(vote: .constant(.init(voted: false, votedOption: nil, voteData: [.init(title: "赞成", voteCount: -1), .init(title: "反对", voteCount: -1)])), viewModel: .init(voteHandler: { string in print("Selected option \(string)") }))
+        HollowVoteContentView(vote: .init(voted: false, votedOption: nil, voteData: [.init(title: "赞成", voteCount: -1), .init(title: "反对", voteCount: -1)]), voteHandler: { string in print("Selected option \(string)") })
             .background(Color.black)
             .colorScheme(.dark)
     }
