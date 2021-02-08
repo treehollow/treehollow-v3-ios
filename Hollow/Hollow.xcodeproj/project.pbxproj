@@ -59,7 +59,6 @@
 		0E415ADE25CD771600351672 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AB025CD771600351672 /* DefaultsKeys.swift */; };
 		0E415ADF25CD771600351672 /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AB125CD771600351672 /* Int+string.swift */; };
 		0E415AE125CD771600351672 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AB425CD771600351672 /* ImageSaver.swift */; };
-		0E415AE225CD771600351672 /* CachedHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AB525CD771600351672 /* CachedHTTPRequest.swift */; };
 		0E415AE325CD771600351672 /* HollowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AB725CD771600351672 /* HollowImage.swift */; };
 		0E415AE525CD771600351672 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AB925CD771600351672 /* CommentData.swift */; };
 		0E415AE625CD771600351672 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415ABA25CD771600351672 /* PostData.swift */; };
@@ -186,7 +185,6 @@
 		0E415AB125CD771600351672 /* Int+string.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+string.swift"; sourceTree = "<group>"; };
 		0E415AB225CD771600351672 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E415AB425CD771600351672 /* ImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
-		0E415AB525CD771600351672 /* CachedHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedHTTPRequest.swift; sourceTree = "<group>"; };
 		0E415AB725CD771600351672 /* HollowImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowImage.swift; sourceTree = "<group>"; };
 		0E415AB825CD771600351672 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E415AB925CD771600351672 /* CommentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentData.swift; sourceTree = "<group>"; };
@@ -446,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				0E415AB425CD771600351672 /* ImageSaver.swift */,
-				0E415AB525CD771600351672 /* CachedHTTPRequest.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -822,7 +819,6 @@
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
 				0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */,
 				0092370E25D01E2900961BBB /* String+Date.swift in Sources */,
-				0E415AE225CD771600351672 /* CachedHTTPRequest.swift in Sources */,
 				0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */,
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
