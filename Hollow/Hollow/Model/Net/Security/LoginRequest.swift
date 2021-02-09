@@ -75,16 +75,17 @@ struct LoginRequest: Request {
                         completion(resultData, nil)
                     } else {
                         // invalid response
-                        completion(
-                            nil, .other(description: result.msg ?? "error code from backend: \(result.code)"))
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result.code, description: result.msg)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case .failure(let error):
                 completion(
-                    nil, .other(description: error.errorDescription ?? "Unkown error when performing Login!"))
+                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
         }
         

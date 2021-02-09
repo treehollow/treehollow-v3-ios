@@ -34,7 +34,6 @@ struct DeviceListRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
-        print("TOKEN: \(configuration.token)")
         let urlPath =
             self.configuration.apiRoot + "v3/security/devices/list" + Constants.URLConstant.urlSuffix
         let headers: HTTPHeaders = [
@@ -65,18 +64,17 @@ struct DeviceListRequest: Request {
                         completion(resultData, nil)
                     } else {
                         // invalid response
-                        completion(nil,
-                                   .other(description: "error code from backend: \(result["code"].int!)"))
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result["code"].int!, description: result["msg"].string)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case .failure(let error):
                 completion(
-                    nil,
-                    .other(
-                        description: error.errorDescription ?? "Unkown error when performing DeviceListRequest!"))
+                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
         }
     }

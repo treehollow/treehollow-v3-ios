@@ -54,19 +54,16 @@ struct GetPushRequest: Request {
                         completion(resultData, nil)
                     } else {
                         // invalid response
-                        completion(
-                            nil, .other(description: "Received error code from backend: \(result["code"].string!).")
-                        )
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result["code"].int!, description: result["msg"].string)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case let .failure(error):
-                completion(
-                    nil,
-                    .other(description: error.errorDescription ?? "Unkown error when performing GetPushRequest!")
-                )
+                completion(nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
         }
     }
