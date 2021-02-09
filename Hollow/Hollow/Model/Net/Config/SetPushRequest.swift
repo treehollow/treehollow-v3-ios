@@ -17,6 +17,7 @@ struct SetPushRequestConfiguration {
 
 struct SetPushRequestResult: Codable {
     var code: Int
+    var msg: String?
 }
 enum SetPushRequestResultData: Int {
     case success = 0
@@ -65,17 +66,17 @@ struct SetPushRequest: Request {
                         //debugPrint(response.response?.allHeaderFields)
                     } else {
                         // invalid response
-                        completion(
-                            nil, .other(description: "Received error code from backend: \(result.code)."))
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result.code, description: result.msg)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case let .failure(error):
                 completion(
-                    nil,
-                    .other(description: error.errorDescription ?? "Unkown error when performing SetPushRequest!"))
+                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
         }
     }

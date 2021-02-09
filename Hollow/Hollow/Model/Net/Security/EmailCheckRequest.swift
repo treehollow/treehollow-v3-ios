@@ -97,17 +97,17 @@ struct EmailCheckRequest: Request {
                         //debugPrint(response.response?.allHeaderFields)
                     } else {
                         // invalid response
-                        completion(
-                            nil, .other(description: result.msg ?? "Received error code from backend: \(result.code)."))
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result.code, description: result.msg)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case let .failure(error):
                 completion(
-                    nil,
-                    .other(description: error.errorDescription ?? "Unkown error when performing EmailCheck!"))
+                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
         }
     }

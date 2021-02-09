@@ -42,7 +42,7 @@ struct DeviceListRequest: Request {
         ]
         AF.request(
             urlPath,
-            method: .post,
+            method: .get,
             headers: headers
         ).validate().responseJSON { response in
             switch response.result {
@@ -64,18 +64,17 @@ struct DeviceListRequest: Request {
                         completion(resultData, nil)
                     } else {
                         // invalid response
-                        completion(nil,
-                                   .other(description: "error code from backend: \(result["code"].string!)"))
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result["code"].int!, description: result["msg"].string)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case .failure(let error):
                 completion(
-                    nil,
-                    .other(
-                        description: error.errorDescription ?? "Unkown error when performing DeviceListRequest!"))
+                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
         }
     }

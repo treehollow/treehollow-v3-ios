@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00902FD825D285DF00FA14B0 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00902FD725D285DF00FA14B0 /* RequestError.swift */; };
 		0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370225CFFAC200961BBB /* GetPushRequest.swift */; };
 		0092370625D0007500961BBB /* PushNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370525D0007500961BBB /* PushNotificationType.swift */; };
 		0092370B25D00E5600961BBB /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0092370A25D00E5600961BBB /* SwiftyJSON */; };
@@ -131,6 +132,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00902FD725D285DF00FA14B0 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		0092370225CFFAC200961BBB /* GetPushRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPushRequest.swift; sourceTree = "<group>"; };
 		0092370525D0007500961BBB /* PushNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationType.swift; sourceTree = "<group>"; };
 		0092370D25D01E2900961BBB /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			children = (
 				0E415AA225CD771600351672 /* README.md */,
 				0E415AA725CD771600351672 /* Request.swift */,
+				00902FD725D285DF00FA14B0 /* RequestError.swift */,
 				0E415A9725CD771600351672 /* Config */,
 				0E415A9A25CD771600351672 /* Security */,
 				0E415A8925CD771600351672 /* Contents */,
@@ -821,6 +824,7 @@
 				0092370E25D01E2900961BBB /* String+Date.swift in Sources */,
 				0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */,
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
+				00902FD825D285DF00FA14B0 /* RequestError.swift in Sources */,
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
 				0E415B8325CD772200351672 /* Login.swift in Sources */,
 				0E415ACA25CD771600351672 /* GetConfigRequest.swift in Sources */,

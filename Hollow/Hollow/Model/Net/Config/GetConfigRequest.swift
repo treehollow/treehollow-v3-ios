@@ -53,32 +53,39 @@ struct GetConfigRequestResult: Codable {
     var iosFrontendVersion: String
 }
 
-/// Get Config Request
-struct GetConfigRequest: Request {
-    typealias Configuration = GetConfigRequestConfiguration
-    typealias Result = GetConfigRequestResult
-    typealias ResultData = Result   // same as the result
-    typealias Error = GetConfigRequestError
+/// GetConfigRequestError
+struct GetConfigRequestError: RequestError {
     
-    enum GetConfigRequestError: RequestError {
+    typealias ErrorType = GetConfigRequestErrorType
+    var errorType: GetConfigRequestErrorType
+    
+    enum GetConfigRequestErrorType {
         case serverError
         case decodeFailed
         case incorrectFormat
         case invalidConfigUrl
         case invalidConfiguration
         case other(description: String)
-        
-        var description: String {
-            switch self {
-            case .serverError: return "Received error from the server."
-            case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
-            case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
-            case .invalidConfigUrl: return "The URL for the configuration is invalid."
-            case .invalidConfiguration: return "The configuration is invalid."
-            case .other(let description): return description
-            }
+    }
+    
+    var description: String {
+        switch self.errorType {
+        case .serverError: return "Received error from the server."
+        case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
+        case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
+        case .invalidConfigUrl: return "The URL for the configuration is invalid."
+        case .invalidConfiguration: return "The configuration is invalid."
+        case .other(let description): return description
         }
     }
+}
+
+/// Get Config Request
+struct GetConfigRequest: Request {
+    typealias Configuration = GetConfigRequestConfiguration
+    typealias Result = GetConfigRequestResult
+    typealias ResultData = Result   // same as the result
+    typealias Error = GetConfigRequestError
     
     var configuration: GetConfigRequestConfiguration
     
@@ -88,26 +95,26 @@ struct GetConfigRequest: Request {
     
     func performRequest(completion: @escaping (ResultData?, GetConfigRequestError?) -> Void) {
         guard let url = URL(string: configuration.configUrl) else {
-            completion(nil, .invalidConfigUrl)
+            completion(nil, GetConfigRequestError(errorType: .invalidConfigUrl))
             return
         }
         let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
-                completion(nil, .other(description: error.localizedDescription))
+                completion(nil, GetConfigRequestError(errorType: .other(description: error.localizedDescription)))
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                completion(nil, Error.serverError)
+                completion(nil, GetConfigRequestError(errorType: .serverError))
                 return
             }
             
             guard let mimeType = httpResponse.mimeType, mimeType == "text/plain",
                   let data = data,
                   let string = String(data: data, encoding: .utf8) else {
-                completion(nil, .incorrectFormat)
+                completion(nil, GetConfigRequestError(errorType: .incorrectFormat))
                 return
             }
             
@@ -125,10 +132,10 @@ struct GetConfigRequest: Request {
                             // Call the callback
                             completion(result, nil)
                         } else {
-                            completion(nil, .invalidConfiguration)
+                            completion(nil,GetConfigRequestError(errorType: .invalidConfigUrl))
                         }
                     } catch {
-                        completion(nil, .decodeFailed)
+                        completion(nil, GetConfigRequestError(errorType: .decodeFailed))
                     }
                     return
                 }
@@ -136,7 +143,7 @@ struct GetConfigRequest: Request {
             }
             
             // Cannot match the format
-            completion(nil, .incorrectFormat)
+            completion(nil, GetConfigRequestError(errorType: .incorrectFormat))
         }
         task.resume()
     }

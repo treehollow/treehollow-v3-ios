@@ -26,20 +26,3 @@ protocol Request {
     /// Perform request and fetch the data.
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
 }
-
-protocol RequestError: Error {
-    // TODO: Localization
-    var description: String { get }
-}
-
-/// DefaultRequestError for default request
-public enum DefaultRequestError: RequestError {
-    case decodeFailed
-    case other(description: String)
-    var description: String {
-        switch self {
-        case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
-        case .other(let description): return description
-        }
-    }
-}

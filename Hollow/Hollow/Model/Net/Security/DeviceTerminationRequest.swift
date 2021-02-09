@@ -24,6 +24,7 @@ struct DeviceTerminationRequestConfiguration {
 /// show error with `nil`, which means receiving negative code.
 struct DeviceTerminationRequestResult: Codable {
     var code: Int
+    var msg: String?
 }
 
 enum DeviceTerminationRequestResultData: Int {
@@ -71,20 +72,18 @@ struct DeviceTerminationRequest: Request {
                         //debugPrint(response.response?.allHeaderFields)
                     } else {
                         // invalid response
-                        completion(
-                            nil, .other(description: "Received error code from backend: \(result.code)."))
+                        var error = DefaultRequestError()
+                        error.initbyCode(errorCode: result.code, description: result.msg)
+                        completion(nil, error)
                     }
                 } catch {
-                    completion(nil, .decodeFailed)
+                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
                     return
                 }
             case let .failure(error):
                 completion(
-                    nil,
-                    .other(description: error.errorDescription ?? "Unkown error when performing DeviceTermination!"))
+                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
             }
-            
         }
-        
     }
 }
