@@ -26,7 +26,7 @@ let testPostData2: PostData = .init(attention: true, deleted: false, likeNumber:
 
 let testPostData3: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198433, replyNumber: 12, tag: "", text: testText3, type: .image, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test.3")), vote: nil, comments: testComments)
 
-let testPostData4: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198433, replyNumber: 12, tag: "", text: testText3, type: .text, hollowImage: nil, vote: nil, comments: testComments)
+let testPostData4: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198434, replyNumber: 12, tag: "", text: testText3, type: .text, hollowImage: nil, vote: nil, comments: testComments)
 
 // Compressing raw image, simulating the real circumstances
 let testPostDataCompressedImage: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198432, replyNumber: 12, tag: "", text: testText2, type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(data: UIImage(named: "test.2")!.jpegData(compressionQuality: 0.5)!)!), vote: .init(voted: true, votedOption: "好", voteData: [
@@ -50,5 +50,5 @@ let testPostDataWrapper3: PostDataWrapper = .init(post: testPostData3, citedPost
 let testPostDataWrapper4: PostDataWrapper = .init(post: testPostData4, citedPost: .init(postId: testPostData.postId, text: testPostData2.text))
 let testPostDataWrapperNoExtraComponents: PostDataWrapper = .init(post: testPostDataNoExtraComponents, citedPost: .init(postId: testPostData.postId, text: testPostData2.text))
 
-let testPostWrappers = [testPostDataWrapper4, testPostDataWrapper, testPostDataWrapper2, testPostDataWrapper3]
+let testPostWrappers = [testPostDataWrapper, testPostDataWrapper2, testPostDataWrapper3, testPostDataWrapper4]
 #endif

@@ -1,5 +1,5 @@
 //
-//  GetSizeModifier.swift
+//  GetSize.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/2/8.
@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Known issues:
 /// - not working on stacks
-struct GetSizeModifier: ViewModifier {
+struct GetSize: ViewModifier {
     @Binding var size: CGSize
     
     func body(content: Content) -> some View {

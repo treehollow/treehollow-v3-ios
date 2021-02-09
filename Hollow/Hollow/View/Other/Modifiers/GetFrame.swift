@@ -1,5 +1,5 @@
 //
-//  GetFrameModifier.swift
+//  GetFrame.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/2/8.
@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// Get the frame of the view in given coordinate space.
-struct GetFrameModifier: ViewModifier {
+struct GetFrame: ViewModifier {
     @Binding var frame: CGRect
     var coordinateSpace: CoordinateSpace = .global
     func body(content: Content) -> some View {

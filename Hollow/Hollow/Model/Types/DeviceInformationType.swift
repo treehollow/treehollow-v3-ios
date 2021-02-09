@@ -16,10 +16,19 @@ import Foundation
  */
 struct DeviceInformationType: Codable {
     /// Device type.
-    enum DeviceType: Int,Codable {
+    enum DeviceType: Int, CustomStringConvertible , Codable {
         case web = 0
         case android = 1
         case ios = 2
+        
+        var description: String {
+            switch self {
+            // TODO: Localization
+            case .web: return "Web"
+            case .android: return "Android"
+            case .ios: return "iOS"
+            }
+        }
     }
     /// UUID of the device.
     // FIXME: convertFromSnakeCase

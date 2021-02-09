@@ -13,14 +13,13 @@ import Defaults
 struct HollowApp: App {
     // Receive delegate callbacks
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
     var body: some Scene {
         WindowGroup {
-//            if let _ = Defaults[.accessToken] {
+            if let _ = Defaults[.accessToken] {
                 MainView()
-//            } else {
-//                WelcomeView()
-//            }
+            } else {
+                WelcomeView()
+            }
         }
     }
 }

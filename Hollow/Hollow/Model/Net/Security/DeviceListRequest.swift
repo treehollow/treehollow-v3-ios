@@ -34,6 +34,7 @@ struct DeviceListRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
+        print("TOKEN: \(configuration.token)")
         let urlPath =
             self.configuration.apiRoot + "v3/security/devices/list" + Constants.URLConstant.urlSuffix
         let headers: HTTPHeaders = [
@@ -42,7 +43,7 @@ struct DeviceListRequest: Request {
         ]
         AF.request(
             urlPath,
-            method: .post,
+            method: .get,
             headers: headers
         ).validate().responseJSON { response in
             switch response.result {
@@ -55,7 +56,7 @@ struct DeviceListRequest: Request {
                         for (_,subJson):(String, JSON) in result["data"] {
                             let subResult = DeviceInformationType.init(
                                 deviceUUID: UUID.init(uuidString: subJson["device_uuid"].string!)!,
-                                loginDate: subJson["login_date"].string!.toDate(),
+                                loginDate: subJson["login_date"].string!.toDate()!,
                                 deviceInfo: subJson["device_info"].string!,
                                 deviceType: DeviceInformationType.DeviceType.init(rawValue: subJson["device_type"].int!)!)
                             deviceList.append(subResult)
@@ -65,7 +66,7 @@ struct DeviceListRequest: Request {
                     } else {
                         // invalid response
                         completion(nil,
-                                   .other(description: "error code from backend: \(result["code"].string!)"))
+                                   .other(description: "error code from backend: \(result["code"].int!)"))
                     }
                 } catch {
                     completion(nil, .decodeFailed)

@@ -12,7 +12,6 @@ struct HollowDetailView: View {
     @Binding var presentedIndex: Int?
     
     @State private var commentRect: CGRect = .zero
-    @State private var pos: CGFloat?
     @State private var scrollViewOffset: CGFloat? = 0
     
     @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
@@ -53,11 +52,11 @@ struct HollowDetailView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         CommentView(comments: $postDataWrapper.post.comments)
                             // Get the frame of the comment view.
-                            .modifier(GetFrameModifier(frame: $commentRect, coordinateSpace: .named("detail.scrollview")))
+                            .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
                     }
                     .padding(.horizontal)
                     .background(Color.hollowDetailBackground)
-                    .coordinateSpace(name: "detail.scrollview")
+                    .coordinateSpace(name: "detail.scrollview.content")
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }

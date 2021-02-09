@@ -11,4 +11,5 @@ import SwiftUI
 struct ViewConstants {
     static let listVStackSpacing: CGFloat = 25
     static let navigationBarSpinnerWidth: CGFloat = 17
+    static let plainButtonFontSize: CGFloat = 13
 }

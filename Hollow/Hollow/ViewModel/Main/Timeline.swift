@@ -15,7 +15,7 @@ class Timeline: ObservableObject {
         // FOR DEBUG
         #if DEBUG
 //        self.posts = Array.init(repeating: testPostDataWrapperNoExtraComponents, count: 200)
-        self.posts = testPostWrappers + testPostWrappers
+        self.posts = testPostWrappers
         #else
         self.posts = []
         #endif
@@ -33,13 +33,13 @@ class Timeline: ObservableObject {
     
     func refresh(finshHandler: @escaping () -> Void) {
         // FOR TESTING
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             #if DEBUG
             withAnimation {
                 self.posts = testPostWrappers.shuffled()
             }
             #endif
             finshHandler()
-        }
+//        }
     }
 }

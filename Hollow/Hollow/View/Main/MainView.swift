@@ -18,9 +18,9 @@ struct MainView: View {
                 HeaderView(page: $page, isSearching: $isSearching)
                     .padding(.horizontal)
                     .padding(.top, 10)
-                // We use our modified TabView to avoid default background color when using
-                // `CustomScrollView` in `TabView`, but be careful that this trick could fail in
-                // future updates.
+                
+                // Use our modified TabView to avoid default background color when using
+                // `CustomScrollView` in `TabView`
                 CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
                     WanderView()
                         .tag(Page.wander)

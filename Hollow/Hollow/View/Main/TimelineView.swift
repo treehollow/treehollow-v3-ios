@@ -62,11 +62,12 @@ struct TimelineView: View {
                     .padding(.horizontal)
                     .padding(.bottom, body14 / 2)
                     .background(Color.background)
-                    .modifier(GetSizeModifier(size: $searchBarSize))
+                    .modifier(GetSize(size: $searchBarSize))
                     .id(-1)
                     
                     // FIXME: Can we use postId as the id instead of the index?
-                    // Using index will apply an imperfect animation on the cards.
+                    // Using index will apply an imperfect animation on the cards
+                    // (directly update the card content rather than moving the whole card).
                     
                     // None lazy views for the first `maxNoneLazyCards` cards
                     // to avoid being stuck when scrolling to top
@@ -120,6 +121,7 @@ struct TimelineView: View {
     }
     
     private func cardView(at index: Int) -> some View {
+        // FIXME: Disable the card interaction when refreshing!
         HollowTimelineCardView(
             postDataWrapper: $viewModel.posts[index],
             viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].post.postId, for: option)})

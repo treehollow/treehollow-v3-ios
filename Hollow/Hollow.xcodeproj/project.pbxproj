@@ -16,8 +16,8 @@
 		0E004F3825D0239F00466FA5 /* Bool+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E004F3725D0239F00466FA5 /* Bool+int.swift */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
 		0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */; };
-		0E36F54025D0E02F001AE852 /* GetSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSizeModifier.swift */; };
-		0E36F54625D0F0FB001AE852 /* GetFrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrameModifier.swift */; };
+		0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSize.swift */; };
+		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
 		0E36F54B25D0F863001AE852 /* String+removeLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54A25D0F863001AE852 /* String+removeLineBreak.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
@@ -129,6 +129,9 @@
 		0E415B9625CD77C600351672 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9525CD77C600351672 /* Defaults */; };
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
+		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
+		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
+		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,8 +142,8 @@
 		0E004F3425D021D700466FA5 /* Int+bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+bool.swift"; sourceTree = "<group>"; };
 		0E004F3725D0239F00466FA5 /* Bool+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+int.swift"; sourceTree = "<group>"; };
 		0E36F53625D0322D001AE852 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		0E36F53F25D0E02F001AE852 /* GetSizeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSizeModifier.swift; sourceTree = "<group>"; };
-		0E36F54525D0F0FB001AE852 /* GetFrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrameModifier.swift; sourceTree = "<group>"; };
+		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
+		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
 		0E36F54A25D0F863001AE852 /* String+removeLineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+removeLineBreak.swift"; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
@@ -256,6 +259,9 @@
 		0E415B8B25CD773E00351672 /* TestPostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPostData.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
+		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
+		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
+		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,10 +311,10 @@
 			isa = PBXGroup;
 			children = (
 				0E340F6F25CFEBFE002F0F0C /* App */,
-				0E4284BC25CE2A96008F134A /* Hollow.entitlements */,
 				0E415A8425CD771600351672 /* Model */,
 				0E415B3225CD772200351672 /* ViewModel */,
 				0E415AE825CD772200351672 /* View */,
+				0E4284BC25CE2A96008F134A /* Hollow.entitlements */,
 				0E415A7725CD769F00351672 /* Assets.xcassets */,
 				0E415A7C25CD769F00351672 /* Info.plist */,
 				0E415A7925CD769F00351672 /* Preview Content */,
@@ -481,8 +487,9 @@
 			isa = PBXGroup;
 			children = (
 				0E415AEB25CD772200351672 /* ErrorAlert.swift */,
-				0E36F53F25D0E02F001AE852 /* GetSizeModifier.swift */,
-				0E36F54525D0F0FB001AE852 /* GetFrameModifier.swift */,
+				0E36F53F25D0E02F001AE852 /* GetSize.swift */,
+				0E36F54525D0F0FB001AE852 /* GetFrame.swift */,
+				0EDA263025D2465100B67292 /* LoadingIndicator.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -615,6 +622,7 @@
 				0E415B2325CD772200351672 /* AccountInfoView.swift */,
 				0E415B2425CD772200351672 /* SettingsView.swift */,
 				0E415B2525CD772200351672 /* RegulationView.swift */,
+				0EDA262625D22C8600B67292 /* DeviceListView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -649,6 +657,7 @@
 				0E415B3325CD772200351672 /* Hollow */,
 				0E415B3B25CD772200351672 /* Main */,
 				0E415B3F25CD772200351672 /* Login */,
+				0EDA262925D22C9800B67292 /* Account */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -723,6 +732,14 @@
 				0E415AEA25CD772200351672 /* Modifiers */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		0EDA262925D22C9800B67292 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -828,6 +845,7 @@
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
 				0E415B8325CD772200351672 /* Login.swift in Sources */,
 				0E415ACA25CD771600351672 /* GetConfigRequest.swift in Sources */,
+				0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */,
 				0092370625D0007500961BBB /* PushNotificationType.swift in Sources */,
 				0E415ADF25CD771600351672 /* Int+string.swift in Sources */,
 				0E415ACF25CD771600351672 /* DeviceListRequest.swift in Sources */,
@@ -853,7 +871,7 @@
 				0E415AD525CD771600351672 /* ReportCommentRequest.swift in Sources */,
 				0E415ABE25CD771600351672 /* PublishedPostsMessageRequest.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
-				0E36F54625D0F0FB001AE852 /* GetFrameModifier.swift in Sources */,
+				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				0E415B8E25CD773E00351672 /* TestPostData.swift in Sources */,
 				0E415B7425CD772200351672 /* TimelineView.swift in Sources */,
 				0E415AC725CD771600351672 /* RandomListRequest.swift in Sources */,
@@ -895,13 +913,14 @@
 				0E415B8025CD772200351672 /* Timeline.swift in Sources */,
 				0E415AC325CD771600351672 /* PostListRequest.swift in Sources */,
 				0E415B7725CD772200351672 /* MainView.swift in Sources */,
-				0E36F54025D0E02F001AE852 /* GetSizeModifier.swift in Sources */,
+				0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */,
 				0E004F3825D0239F00466FA5 /* Bool+int.swift in Sources */,
 				0E415AE625CD771600351672 /* PostData.swift in Sources */,
 				0E415AD925CD771600351672 /* SendCommentRequest.swift in Sources */,
 				0E415B4425CD772200351672 /* CustomTabView.swift in Sources */,
 				0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */,
 				0E415AD625CD771600351672 /* EditAttentionRequest.swift in Sources */,
+				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,
 				0E415B6825CD772200351672 /* HollowTextView.swift in Sources */,
 				0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */,
 				0E415ACB25CD771600351672 /* SetPushRequest.swift in Sources */,
@@ -922,6 +941,7 @@
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0E36F54B25D0F863001AE852 /* String+removeLineBreak.swift in Sources */,
 				0E415B8425CD772200351672 /* Welcome.swift in Sources */,
+				0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */,
 				0E415AC525CD771600351672 /* AttentionListRequest.swift in Sources */,
 				0E415ADB25CD771600351672 /* String+SHA256.swift in Sources */,
 			);

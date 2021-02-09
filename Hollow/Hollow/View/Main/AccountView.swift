@@ -14,7 +14,7 @@ struct AccountView: View {
             List {
                 Section(header: Text("account")) {
                     NavigationLink(
-                        destination: Text("Account"),
+                        destination: AccountInfoView(),
                         label: {
                             Label(LocalizedStringKey("Account"), systemImage: "person")
                         })
@@ -70,8 +70,8 @@ struct AccountView: View {
                 Image(systemName: "xmark")
                     .foregroundColor(.hollowContentText)
             })
-            .accentColor(.hollowContentText)
         }
+        .accentColor(.hollowContentText)
     }
 }
 

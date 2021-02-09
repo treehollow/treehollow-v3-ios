@@ -15,7 +15,7 @@ import AppCenterCrashes
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if DEBUG
-        Defaults[.accessToken] = nil
+//        Defaults[.accessToken] = nil
         #endif
         
         // Request notification access
@@ -29,11 +29,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
 
+        #if !DEBUG
         // Start AppCenter services
         AppCenter.start(
             withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
             services: [Analytics.self, Crashes.self]
         )
+        #endif
         
         return true
     }
@@ -50,6 +52,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        #if targetEnvironment(simulator)
+        Defaults[.deviceToken] = "placeholder".data(using: .utf8)
+        #endif
         print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
 

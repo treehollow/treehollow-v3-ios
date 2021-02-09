@@ -13,7 +13,7 @@ struct LoginRequestConfiguration {
     var email: String
     var password: String
     let deviceType = 2
-    let deviceInfo = UIDevice.current.name
+    let deviceInfo = UIDevice.current.name + ", iOS " + UIDevice.current.systemVersion
     // TODO: Device token
     var deviceToken: String
     var apiRoot: String
