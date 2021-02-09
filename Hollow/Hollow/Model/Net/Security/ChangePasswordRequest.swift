@@ -20,7 +20,7 @@ struct ChangePasswordRequestConfiguration {
 }
 
 /// Result of an changing password attempt.
-struct ChangePasswordRequestResult: Codable {
+struct ChangePasswordRequestResult: DefaultRequestResult {
     /// Result type of changing password.
     /// The type of result received.
     var code: Int
@@ -28,7 +28,7 @@ struct ChangePasswordRequestResult: Codable {
     var msg: String?
 }
 
-struct ChangePasswordRequest: Request {
+struct ChangePasswordRequest: DefaultRequest {
     typealias Configuration = ChangePasswordRequestConfiguration
     typealias Result = ChangePasswordRequestResult
     typealias ResultData = ChangePasswordRequestResult
@@ -40,47 +40,21 @@ struct ChangePasswordRequest: Request {
         self.configuration = configuration
     }
     
-    func performRequest(
-        completion: @escaping (ResultData?, Error?) -> Void
-    ) {
-        let parameters =
-            [
-                "email": self.configuration.email,
-                "old_password_hashed": self.configuration.oldPassword.sha256().sha256(),
-                "new_password_hashed": self.configuration.newPassword.sha256().sha256(),
-            ] as [String: String]
+    func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
+        let parameters = [
+            "email": self.configuration.email,
+            "old_password_hashed": self.configuration.oldPassword.sha256().sha256(),
+            "new_password_hashed": self.configuration.newPassword.sha256().sha256(),
+        ]
         let urlPath =
             self.configuration.apiRoot + "v3/security/login/change_password" + Constants.URLConstant.urlSuffix
-        AF.request(
-            urlPath,
-            method: .post,
+        
+        performRequest(
+            urlPath: urlPath,
             parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default
+            method: .post,
+            resultToResultData: { $0 },
+            completion: completion
         )
-        .validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    // FIXME: NOT TESTED YET
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        completion(result, nil)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case .failure(let error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
     }
 }

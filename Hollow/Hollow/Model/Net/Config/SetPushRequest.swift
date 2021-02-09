@@ -15,15 +15,16 @@ struct SetPushRequestConfiguration {
     var token: String
 }
 
-struct SetPushRequestResult: Codable {
+struct SetPushRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
 }
+
 enum SetPushRequestResultData: Int {
     case success = 0
 }
 
-struct SetPushRequest: Request {
+struct SetPushRequest: DefaultRequest {
     typealias Configuration = SetPushRequestConfiguration
     typealias Result = SetPushRequestResult
     typealias ResultData = SetPushRequestResultData
@@ -46,38 +47,15 @@ struct SetPushRequest: Request {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        AF.request(
-            urlPath,
-            method: .post,
+        performRequest(
+            urlPath: urlPath,
             parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default,
-            headers: headers
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        let resultData = ResultData.init(rawValue: result.code)
-                        completion(resultData, nil)
-                        //debugPrint(response.response?.allHeaderFields)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case let .failure(error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
+            headers: headers,
+            method: .post,
+            resultToResultData: { result in
+                ResultData.init(rawValue: result.code)
+            },
+            completion: completion
+        )
     }
 }

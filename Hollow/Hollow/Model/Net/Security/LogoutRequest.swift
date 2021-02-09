@@ -14,7 +14,7 @@ struct LogoutRequestConfiguration {
     var apiRoot: String
 }
 
-struct LogoutRequestResult: Codable {
+struct LogoutRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
 }
@@ -24,7 +24,7 @@ enum LogoutRequestResultData: Int {
 }
 
 /// logout request same as devicetermination
-struct LogoutRequest: Request {
+struct LogoutRequest: DefaultRequest {
     typealias Configuration = LogoutRequestConfiguration
     typealias Result = LogoutRequestResult
     typealias ResultData = LogoutRequestResultData
@@ -43,37 +43,16 @@ struct LogoutRequest: Request {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        AF.request(
-            urlPath,
+        // Empty parameter to satisfy generic type constrain.
+        let parameters: [String: Int] = [:]
+        performRequest(
+            urlPath: urlPath,
+            parameters: parameters,
+            headers: headers,
             method: .post,
-            headers: headers
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        let resultData = ResultData.init(rawValue: result.code)
-                        completion(resultData, nil)
-                        //debugPrint(response.response?.allHeaderFields)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case let .failure(error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
+            resultToResultData: { result in LogoutRequestResultData(rawValue: result.code) },
+            completion: completion
+        )
     }
 }
 

@@ -129,6 +129,7 @@
 		0E415B9625CD77C600351672 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9525CD77C600351672 /* Defaults */; };
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
+		0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78F0B825D2E0090080C09E /* DefaultRequest.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
@@ -259,6 +260,7 @@
 		0E415B8B25CD773E00351672 /* TestPostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPostData.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
+		0E78F0B825D2E0090080C09E /* DefaultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequest.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			children = (
 				0E415AA225CD771600351672 /* README.md */,
 				0E415AA725CD771600351672 /* Request.swift */,
+				0E78F0B825D2E0090080C09E /* DefaultRequest.swift */,
 				00902FD725D285DF00FA14B0 /* RequestError.swift */,
 				0E415A9725CD771600351672 /* Config */,
 				0E415A9A25CD771600351672 /* Security */,
@@ -892,6 +895,7 @@
 				0E415B7225CD772200351672 /* FavouritesView.swift in Sources */,
 				0E415B6F25CD772200351672 /* AccountInfoView.swift in Sources */,
 				0E415B7625CD772200351672 /* WanderView.swift in Sources */,
+				0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */,
 				0E415AE325CD771600351672 /* HollowImage.swift in Sources */,
 				0E415ABD25CD771600351672 /* PostDetailRequest.swift in Sources */,
 				0E415B6A25CD772200351672 /* HollowHeaderMenu.swift in Sources */,

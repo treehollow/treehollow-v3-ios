@@ -22,7 +22,7 @@ struct DeviceTerminationRequestConfiguration {
 ///
 /// Please init with `DeviceTerminationRequestResultType(rawValue: Int)`, and should
 /// show error with `nil`, which means receiving negative code.
-struct DeviceTerminationRequestResult: Codable {
+struct DeviceTerminationRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
 }
@@ -31,7 +31,7 @@ enum DeviceTerminationRequestResultData: Int {
     case success = 0
 }
 
-struct DeviceTerminationRequest: Request {
+struct DeviceTerminationRequest: DefaultRequest {
     
     typealias Configuration = DeviceTerminationRequestConfiguration
     typealias Result = DeviceTerminationRequestResult
@@ -52,38 +52,13 @@ struct DeviceTerminationRequest: Request {
             "Accept": "application/json"
         ]
         let parameters = ["device_uuid": self.configuration.deviceUUID]
-        AF.request(
-            urlPath,
-            method: .post,
+        performRequest(
+            urlPath: urlPath,
             parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default,
-            headers: headers
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        let resultData = ResultData.init(rawValue: result.code)
-                        completion(resultData, nil)
-                        //debugPrint(response.response?.allHeaderFields)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case let .failure(error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
+            headers: headers,
+            method: .post,
+            resultToResultData: { result in ResultData(rawValue: result.code)},
+            completion: completion
+        )
     }
 }

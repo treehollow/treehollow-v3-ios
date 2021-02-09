@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 /// Protocol for HTTP request types.
 protocol Request {
@@ -26,3 +27,4 @@ protocol Request {
     /// Perform request and fetch the data.
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
 }
+

@@ -36,6 +36,7 @@ struct GetPushRequest: Request {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
+        
         AF.request(
             urlPath,
             method: .post,
@@ -45,25 +46,33 @@ struct GetPushRequest: Request {
             case .success:
                 do {
                     let result = try JSON(data: response.data!)
-                    if result["code"].int! >= 0 {
+                    guard let code = result["code"].int else {
+                        completion(nil, .unknownBackend)
+                        return
+                    }
+                    if code >= 0 {
                         // result code >= 0 valid!
+                        guard let pushSystemMsg = result["data"]["push_system_msg"].bool,
+                              let pushReplyMe = result["data"]["push_reply_me"].bool,
+                              let pushFavorited = result["data"]["push_favorited"].bool else {
+                            completion(nil, .unknownBackend)
+                            return
+                        }
                         let resultData = ResultData.init(
-                            pushSystemMsg: result["data"]["push_system_msg"].bool!,
-                            pushReplyMe: result["data"]["push_reply_me"].bool!,
-                            pushFavorited: result["data"]["push_favorited"].bool!)
+                            pushSystemMsg: pushSystemMsg,
+                            pushReplyMe: pushReplyMe,
+                            pushFavorited: pushFavorited)
                         completion(resultData, nil)
                     } else {
                         // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result["code"].int!, description: result["msg"].string)
-                        completion(nil, error)
+                        completion(nil, .init(errorCode: code, description: result["msg"].string ?? "Unknown backend error."))
                     }
                 } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
+                    completion(nil, .decodeFailed)
                     return
                 }
             case let .failure(error):
-                completion(nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
+                completion(nil, .other(description: error.localizedDescription))
             }
         }
     }

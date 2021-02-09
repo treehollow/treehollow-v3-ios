@@ -49,12 +49,12 @@ struct EmailCheckRequestResultData {
 }
 
 /// Result of email checking.
-struct EmailCheckRequestResult: Codable {
+struct EmailCheckRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
 }
 
-struct EmailCheckRequest: Request {
+struct EmailCheckRequest: DefaultRequest {
     
     typealias Configuration = EmailCheckRequestConfiguration
     typealias Result = EmailCheckRequestResult
@@ -77,38 +77,16 @@ struct EmailCheckRequest: Request {
         let urlPath =
             self.configuration.apiRoot + "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
         // URL must be legal!
-        AF.request(
-            urlPath,
-            method: .post,
+        performRequest(
+            urlPath: urlPath,
             parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    // FIXME: NOT TESTED!
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        let resultData = ResultData(result: ResultData.ResultType(rawValue: result.code)!)
-                        completion(resultData, nil)
-                        //debugPrint(response.response?.allHeaderFields)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case let .failure(error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
+            headers: nil,
+            method: .post,
+            resultToResultData: { result in
+                guard let resultType = EmailCheckRequestResultData.ResultType.init(rawValue: result.code) else { return nil }
+                return EmailCheckRequestResultData(result: resultType)
+            },
+            completion: completion
+        )
     }
 }

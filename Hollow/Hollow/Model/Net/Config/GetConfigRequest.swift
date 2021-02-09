@@ -54,22 +54,16 @@ struct GetConfigRequestResult: Codable {
 }
 
 /// GetConfigRequestError
-struct GetConfigRequestError: RequestError {
-    
-    typealias ErrorType = GetConfigRequestErrorType
-    var errorType: GetConfigRequestErrorType
-    
-    enum GetConfigRequestErrorType {
-        case serverError
-        case decodeFailed
-        case incorrectFormat
-        case invalidConfigUrl
-        case invalidConfiguration
-        case other(description: String)
-    }
+enum GetConfigRequestError: RequestError {
+    case serverError
+    case decodeFailed
+    case incorrectFormat
+    case invalidConfigUrl
+    case invalidConfiguration
+    case other(description: String)
     
     var description: String {
-        switch self.errorType {
+        switch self {
         case .serverError: return "Received error from the server."
         case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
         case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
@@ -95,26 +89,26 @@ struct GetConfigRequest: Request {
     
     func performRequest(completion: @escaping (ResultData?, GetConfigRequestError?) -> Void) {
         guard let url = URL(string: configuration.configUrl) else {
-            completion(nil, GetConfigRequestError(errorType: .invalidConfigUrl))
+            completion(nil, .invalidConfigUrl)
             return
         }
         let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
-                completion(nil, GetConfigRequestError(errorType: .other(description: error.localizedDescription)))
+                completion(nil, .other(description: error.localizedDescription))
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                completion(nil, GetConfigRequestError(errorType: .serverError))
+                completion(nil, .serverError)
                 return
             }
             
             guard let mimeType = httpResponse.mimeType, mimeType == "text/plain",
                   let data = data,
                   let string = String(data: data, encoding: .utf8) else {
-                completion(nil, GetConfigRequestError(errorType: .incorrectFormat))
+                completion(nil, .incorrectFormat)
                 return
             }
             
@@ -132,10 +126,10 @@ struct GetConfigRequest: Request {
                             // Call the callback
                             completion(result, nil)
                         } else {
-                            completion(nil,GetConfigRequestError(errorType: .invalidConfigUrl))
+                            completion(nil, .invalidConfigUrl)
                         }
                     } catch {
-                        completion(nil, GetConfigRequestError(errorType: .decodeFailed))
+                        completion(nil, .decodeFailed)
                     }
                     return
                 }
@@ -143,7 +137,7 @@ struct GetConfigRequest: Request {
             }
             
             // Cannot match the format
-            completion(nil, GetConfigRequestError(errorType: .incorrectFormat))
+            completion(nil, .incorrectFormat)
         }
         task.resume()
     }

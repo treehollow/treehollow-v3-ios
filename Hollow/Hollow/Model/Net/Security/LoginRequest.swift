@@ -19,7 +19,7 @@ struct LoginRequestConfiguration {
     var apiRoot: String
 }
 
-struct LoginRequestResult: Codable {
+struct LoginRequestResult: DefaultRequestResult {
     var code: Int
     var token: String?
     var uuid: UUID?
@@ -31,7 +31,7 @@ struct LoginRequestResultData {
     var uuid: UUID
 }
 
-struct LoginRequest: Request {
+struct LoginRequest: DefaultRequest {
     
     typealias Configuration = LoginRequestConfiguration
     typealias Result = LoginRequestResult
@@ -56,38 +56,15 @@ struct LoginRequest: Request {
             ]
         let urlPath =
             self.configuration.apiRoot + "v3/security/login/login" + Constants.URLConstant.urlSuffix
-        AF.request(
-            urlPath,
-            method: .post,
+        performRequest(
+            urlPath: urlPath,
             parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default
+            method: .post,
+            resultToResultData: { result in
+                guard let token = result.token, let uuid = result.uuid else { return nil }
+                return LoginRequestResultData(token: token, uuid: uuid)
+            },
+            completion: completion
         )
-        .validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        let resultData = ResultData(token: result.token!, uuid: result.uuid!)
-                        completion(resultData, nil)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case .failure(let error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
-        
     }
 }

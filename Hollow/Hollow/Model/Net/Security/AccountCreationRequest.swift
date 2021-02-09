@@ -50,7 +50,7 @@ struct AccountCreationRequestResultData {
     //var message: String?
 }
 
-struct AccountCreationRequestResult: Codable {
+struct AccountCreationRequestResult: DefaultRequestResult {
     /// The type of result received.
     var code: Int
     /// Access token.
@@ -61,7 +61,7 @@ struct AccountCreationRequestResult: Codable {
     var msg: String?
 }
 
-struct AccountCreationRequest: Request {
+struct AccountCreationRequest: DefaultRequest {
     typealias Configuration = AccountCreationRequestConfiguration
     typealias Result = AccountCreationRequestResult
     typealias ResultData = AccountCreationRequestResultData
@@ -76,14 +76,13 @@ struct AccountCreationRequest: Request {
     func performRequest(
         completion: @escaping (ResultData?, Error?) -> Void
     ) {
-        var parameters =
-            [
-                "email": self.configuration.email,
-                "password_hashed": self.configuration.password.sha256().sha256(),
-                "device_type": self.configuration.deviceType.string,
-                "device_info": self.configuration.deviceInfo,
-                "ios_device_token": self.configuration.deviceToken,
-            ]
+        var parameters = [
+            "email": self.configuration.email,
+            "password_hashed": self.configuration.password.sha256().sha256(),
+            "device_type": self.configuration.deviceType.string,
+            "device_info": self.configuration.deviceInfo,
+            "ios_device_token": self.configuration.deviceToken,
+        ]
         
         if let validCode = self.configuration.validCode {
             parameters["valid_code"] = validCode
@@ -91,36 +90,15 @@ struct AccountCreationRequest: Request {
         
         let urlPath =
             self.configuration.apiRoot + "v3/security/login/create_account" + Constants.URLConstant.urlSuffix
-        AF.request(
-            urlPath,
-            method: .post,
+        performRequest(
+            urlPath: urlPath,
             parameters: parameters,
-            encoder: URLEncodedFormParameterEncoder.default
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        let resultData = ResultData(token: result.token!, uuid: result.uuid!)
-                        completion(resultData, nil)
-                    } else {
-                        // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
-                    }
-                } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
-                    return
-                }
-            case .failure(let error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
-        }
+            method: .post,
+            resultToResultData: { result in
+                guard let token = result.token, let uuid = result.uuid else { return nil }
+                return ResultData(token: token, uuid: uuid)
+            },
+            completion: completion
+        )
     }
 }

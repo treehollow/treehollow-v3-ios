@@ -49,33 +49,47 @@ struct DeviceListRequest: Request {
             case .success:
                 do {
                     let result = try JSON.init(data: response.data!)
-                    //debugPrint(response)
-                    if result["code"].int! >= 0 {
+                    guard let code = result["code"].int else {
+                        completion(nil, .unknownBackend)
+                        return
+                    }
+                    if code >= 0 {
                         var deviceList = [DeviceInformationType]()
-                        for (_,subJson):(String, JSON) in result["data"] {
-                            let subResult = DeviceInformationType.init(
-                                deviceUUID: UUID.init(uuidString: subJson["device_uuid"].string!)!,
-                                loginDate: subJson["login_date"].string!.toDate()!,
-                                deviceInfo: subJson["device_info"].string!,
-                                deviceType: DeviceInformationType.DeviceType.init(rawValue: subJson["device_type"].int!)!)
+                        for (_, subJson): (String, JSON) in result["data"] {
+                            guard let deviceUUIDString = subJson["device_uuid"].string,
+                                  let deviceUUID = UUID(uuidString: deviceUUIDString),
+                                  let loginDate = subJson["login_date"].string?.toDate(),
+                                  let deviceInfo = subJson["device_info"].string,
+                                  let deviceTypeRawValue = subJson["device_type"].int,
+                                  let deviceType = DeviceInformationType.DeviceType(rawValue: deviceTypeRawValue) else {
+                                completion(nil, .unknownBackend)
+                                return
+                            }
+                            let subResult = DeviceInformationType(
+                                deviceUUID: deviceUUID,
+                                loginDate: loginDate,
+                                deviceInfo: deviceInfo,
+                                deviceType: deviceType
+                            )
                             deviceList.append(subResult)
                         }
-                        let resultData = ResultData.init(devices: deviceList, thisDeviceUUID: UUID.init(uuidString: result["this_device"].string!)!)
+                        guard let thisDeviceUUIDString = result["this_device"].string,
+                              let thisDeviceUUID = UUID(uuidString: thisDeviceUUIDString) else {
+                            completion(nil, .unknownBackend)
+                            return
+                        }
+                        let resultData = ResultData(devices: deviceList, thisDeviceUUID: thisDeviceUUID)
                         completion(resultData, nil)
                     } else {
                         // invalid response
-                        var error = DefaultRequestError()
-                        error.initbyCode(errorCode: result["code"].int!, description: result["msg"].string)
-                        completion(nil, error)
+                        completion(nil, .init(errorCode: code, description: result["msg"].string ?? "Unknown backend error."))
                     }
                 } catch {
-                    completion(nil, DefaultRequestError(errorType: .decodeFailed))
+                    completion(nil, .decodeFailed)
                     return
                 }
             case .failure(let error):
-                completion(
-                    nil,DefaultRequestError(errorType: .other(description: error.localizedDescription)))
-            }
+                completion(nil, .other(description: error.localizedDescription))}
         }
     }
 }

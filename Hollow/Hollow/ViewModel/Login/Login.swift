@@ -176,7 +176,7 @@ class Login: ObservableObject {
     private func handleError(error: DefaultRequestError) {
         debugPrint(error.description)
         // TODO: Handle backend error after implementation
-        switch error.errorType {
+        switch error {
         case .decodeFailed:
             self.errorMessage = (title: String.internalErrorLocalized.capitalized, message: error.description)
         default:

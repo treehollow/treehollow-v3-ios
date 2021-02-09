@@ -48,7 +48,7 @@ class Welcome: ObservableObject {
             if let error = error {
                 debugPrint("Received error on loading config: \(error.description)")
                 DispatchQueue.main.async {
-                    switch error.errorType {
+                    switch error {
                     case .serverError, .other:
                         self.errorMessage = (String.errorLocalized.capitalized, error.description)
                     default:
