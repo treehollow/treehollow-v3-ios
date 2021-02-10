@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 
-/// The configuration parameter is the user token.
 struct DeviceListRequestConfiguration {
     var token: String
     var apiRoot: String
@@ -24,7 +23,7 @@ struct DeviceListRequestConfiguration {
  "this_device": "uuid"
  */
 struct DeviceListRequestResult: DefaultRequestResult {
-    struct DeviceListResult: Codable{
+    struct DeviceListResult: Codable {
         var deviceUuid: String
         var loginDate: String
         var deviceInfo: String
@@ -38,7 +37,7 @@ struct DeviceListRequestResult: DefaultRequestResult {
 
 struct DeviceListRequestResultData {
     var devices: [DeviceInformationType]
-    var thisDeviceUUID: UUID
+    var thisDeviceUUID: String
 }
 
 struct DeviceListRequest: DefaultRequest {
@@ -61,20 +60,19 @@ struct DeviceListRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        let parameters = ["": ""]
+        let parameters = [String : String]()
         performRequest(
             urlPath: urlPath,
             parameters: parameters,
             headers: headers,
             method: .get,
-            resultToResultData: {result in
-                guard let data = result.data,let thisDeviceUUIDString = result.thisDevice else {return nil}
-                let thisDeviceUUID = UUID.init(uuidString: thisDeviceUUIDString)
-                var devices = [] as [DeviceInformationType]
+            resultToResultData: { result in
+                guard let data = result.data, let thisDeviceUUIDString = result.thisDevice else { return nil }
+                var devices = [DeviceInformationType]()
                 for device in data {
                     devices.append(
                         DeviceInformationType(
-                            deviceUUID: UUID.init(uuidString: device.deviceUuid) ?? UUID(),
+                            deviceUUID: device.deviceUuid,
                             loginDate: device.loginDate.toDate() ?? Date(),
                             deviceInfo: device.deviceInfo,
                             deviceType: DeviceInformationType.DeviceType(
@@ -83,7 +81,7 @@ struct DeviceListRequest: DefaultRequest {
                     )
                 }
                 // use thisDeviceUUID! because UUID must be uuid
-                    return ResultData(devices: devices, thisDeviceUUID: thisDeviceUUID ?? UUID())
+                return ResultData(devices: devices, thisDeviceUUID: thisDeviceUUIDString)
             },
             completion: completion
         )

@@ -80,7 +80,6 @@ struct EmailCheckRequest: DefaultRequest {
         performRequest(
             urlPath: urlPath,
             parameters: parameters,
-            headers: nil,
             method: .post,
             resultToResultData: { result in
                 guard let resultType = EmailCheckRequestResultData.ResultType.init(rawValue: result.code) else { return nil }

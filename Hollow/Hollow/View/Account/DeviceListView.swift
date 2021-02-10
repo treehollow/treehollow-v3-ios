@@ -50,7 +50,7 @@ extension DeviceListView {
         var device: DeviceInformationType
         var isCurrentDevice: Bool
         var isLoggingout: Bool
-        var logoutAction: (UUID) -> Void
+        var logoutAction: (String) -> Void
         
 //        @State private var alertPresented = false
         

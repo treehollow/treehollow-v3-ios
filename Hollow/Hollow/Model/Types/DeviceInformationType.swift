@@ -28,13 +28,13 @@ struct DeviceInformationType: Codable {
             case .web: return "Web"
             case .android: return "Android"
             case .ios: return "iOS"
-            case .unknown: return "Unknown Device"
+            case .unknown: return "Unknown"
             }
         }
     }
     /// UUID of the device.
     // FIXME: convertFromSnakeCase
-    var deviceUUID: UUID
+    var deviceUUID: String
     /// Login date of the device.
     var loginDate: Date
     /// Device desciption.

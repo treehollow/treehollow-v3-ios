@@ -14,11 +14,11 @@ import Defaults
 class DeviceListStore: ObservableObject {
     @Published var deviceData: DeviceListRequestResultData
     @Published var isLoading: Bool = true
-    @Published var loggingoutUUID: UUID?
+    @Published var loggingoutUUID: String?
     @Published var errorMessage: (title: String, message: String)?
     
     init() {
-        deviceData = .init(devices: [], thisDeviceUUID: UUID())
+        deviceData = .init(devices: [], thisDeviceUUID: "")
         
         // Request data
         requestDeviceList(finishHandler: {})
@@ -55,7 +55,7 @@ class DeviceListStore: ObservableObject {
         })
     }
     
-    func logout(deviceUUID: UUID) {
+    func logout(deviceUUID: String) {
         let token = Defaults[.accessToken]!
         let apiRoot = Defaults[.hollowConfig]!.apiRoot
         let request = DeviceTerminationRequest(configuration: .init(deviceUUID: deviceUUID, token: token, apiRoot: apiRoot))

@@ -56,10 +56,9 @@ struct GetPushRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        let parameters = ["": ""]
         performRequest(
             urlPath: urlPath,
-            parameters: parameters,
+            parameters: [String : String](),
             headers: headers,
             method: .get,
             resultToResultData: { result in

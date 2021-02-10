@@ -10,7 +10,7 @@ import Alamofire
 
 /// The request parameter is the UUID of the device.
 struct DeviceTerminationRequestConfiguration {
-    var deviceUUID: UUID
+    var deviceUUID: String
     var token: String
     var apiRoot: String
 }

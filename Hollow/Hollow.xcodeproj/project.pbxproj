@@ -811,7 +811,6 @@
 				0E415B9425CD77C600351672 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E4F032E25CE29D500F4B228 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
-				0092370925D00E5600961BBB /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				0E78F0BB25D3975D0080C09E /* XCRemoteSwiftPackageReference "Lightbox" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
@@ -1155,14 +1154,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0092370925D00E5600961BBB /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
