@@ -20,6 +20,7 @@ struct DeviceInformationType: Codable {
         case web = 0
         case android = 1
         case ios = 2
+        case unknown = -1
         
         var description: String {
             switch self {
@@ -27,6 +28,7 @@ struct DeviceInformationType: Codable {
             case .web: return "Web"
             case .android: return "Android"
             case .ios: return "iOS"
+            case .unknown: return "Unknown Device"
             }
         }
     }

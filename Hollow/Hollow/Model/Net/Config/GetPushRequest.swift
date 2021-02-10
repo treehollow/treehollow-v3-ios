@@ -8,19 +8,39 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 struct GetPushRequestConfiguration {
     var apiRoot: String
     var token: String
 }
 
+/*
+ {
+ "code":0,
+ "data": {
+ "push_system_msg": 1,
+ "push_reply_me": 1,
+ "push_favorited": 0,
+ }
+ }
+ */
+struct GetPushRequestResult: DefaultRequestResult {
+    struct PushNotificationResult: Codable {
+        var pushSystemMsg: Int
+        var pushReplyMe: Int
+        var pushFavorited: Int
+    }
+    var code: Int
+    var msg: String?
+    var data: PushNotificationResult?
+}
+
 typealias GetPushRequestResultData = PushNotificationType
 
-struct GetPushRequest: Request {
-   
+struct GetPushRequest: DefaultRequest {
+    
     typealias Configuration = GetPushRequestConfiguration
-    typealias Result = GetPushRequestResultData
+    typealias Result = GetPushRequestResult
     typealias ResultData = GetPushRequestResultData
     typealias Error = DefaultRequestError
     var configuration: GetPushRequestConfiguration
@@ -36,45 +56,17 @@ struct GetPushRequest: Request {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        
-        AF.request(
-            urlPath,
-            method: .post,
-            headers: headers
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                do {
-                    let result = try JSON(data: response.data!)
-                    guard let code = result["code"].int else {
-                        completion(nil, .unknownBackend)
-                        return
-                    }
-                    if code >= 0 {
-                        // result code >= 0 valid!
-                        guard let pushSystemMsg = result["data"]["push_system_msg"].bool,
-                              let pushReplyMe = result["data"]["push_reply_me"].bool,
-                              let pushFavorited = result["data"]["push_favorited"].bool else {
-                            completion(nil, .unknownBackend)
-                            return
-                        }
-                        let resultData = ResultData.init(
-                            pushSystemMsg: pushSystemMsg,
-                            pushReplyMe: pushReplyMe,
-                            pushFavorited: pushFavorited)
-                        completion(resultData, nil)
-                    } else {
-                        // invalid response
-                        completion(nil, .init(errorCode: code, description: result["msg"].string ?? "Unknown backend error."))
-                    }
-                } catch {
-                    completion(nil, .decodeFailed)
-                    return
-                }
-            case let .failure(error):
-                completion(nil, .other(description: error.localizedDescription))
-            }
-        }
+        let parameters = ["": ""]
+        performRequest(
+            urlPath: urlPath,
+            parameters: parameters,
+            headers: headers,
+            method: .get,
+            resultToResultData: { result in
+                guard let data = result.data else {return nil}
+                return ResultData(pushSystemMsg: data.pushSystemMsg.bool, pushReplyMe: data.pushReplyMe.bool, pushFavorited: data.pushFavorited.bool)
+            },
+            completion: completion
+        )
     }
-    
 }
