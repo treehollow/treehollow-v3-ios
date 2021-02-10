@@ -41,13 +41,16 @@ class DeviceListStore: ObservableObject {
             }
             var sortedResult = result!
             var sortedDevices = result!.devices
+            // Sort the result by login date
             sortedDevices.sort(by: { $0.loginDate > $1.loginDate })
             // Put current device at 0
             if let currentDeviceIndex = sortedDevices.firstIndex(where: { $0.deviceUUID == result!.thisDeviceUUID }) {
                 sortedDevices.swapAt(0, currentDeviceIndex)
             }
             sortedResult.devices = sortedDevices
-            self.deviceData = sortedResult
+            withAnimation {
+                self.deviceData = sortedResult
+            }
             print(self.deviceData)
         })
     }
@@ -77,7 +80,9 @@ class DeviceListStore: ObservableObject {
             switch result {
             case .success:
                 let index = self.deviceData.devices.firstIndex(where: { $0.deviceUUID == deviceUUID })!
-                self.deviceData.devices.remove(at: index)
+                _ = withAnimation {
+                    self.deviceData.devices.remove(at: index)
+                }
             }
         })
     }

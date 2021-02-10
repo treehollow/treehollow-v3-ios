@@ -36,7 +36,7 @@ struct HollowCommentContentView: View {
                         .fixedSize()
                     VStack(alignment: .leading, spacing: 0) {
                         if commentData.type == .image && !compact {
-                            HollowImageView(hollowImage: commentData.image)
+                            HollowImageView(hollowImage: commentData.image, description: commentData.text)
                                 .cornerRadius(4)
                                 .padding(.bottom, 10)
                                 .frame(maxHeight: 300)

@@ -12,14 +12,18 @@ struct WanderView: View {
     @ObservedObject var viewModel: Wander = .init()
     
     var body: some View {
-        CustomScrollView { _ in
+        CustomScrollView { _ in Group {
             WaterfallGrid((0..<viewModel.posts.count), id: \.self) { index in
                 HollowWanderCardView(postData: $viewModel.posts[index])
             }
             .gridStyle(columns: 2, spacing: 10, animation: nil)
             .padding(.horizontal, 15)
             .background(Color.background)
-        }
+            
+            LoadingLabel()
+                .padding(.vertical)
+                .padding(.bottom)
+        }}
     }
 }
 

@@ -1,18 +1,46 @@
 # /Model/Net
 
-## Grouping Principle
+The requests to communicate with backend and return the data received.
 
-- The files are grouped by the API group that backend provides.
+## Design
 
-## Design and Naming Principle
+### Architecture
 
-- Each file with name `XXXRequest` represents a single request, otherwise represents the data for the naming content. For example, the file `DeviceListRequest.swift` describes the **request configuration**, **request result** and the **request** itself of requesting currently online devices, and `DeviceInformation.swift` describes the **information of the device**.
+A request is defined by four types:
+- configuration: the information needed to perform a request.
+- result: the result received from the server.
+- result data: the data returned to the callers.
+- error: possibile errors occured during the request.
 
-- Each `XXXRequest` file might consist of some of the three  `struct` below and if necessary, some other types:
-    - `XXXRequestConfiguration` - configuration for the request
-    - `XXXRequestResult` - the result received from the server
-    - `XXXRequest` - performs the request tasks and provides APIs to the `ViewModel`, **conforming to protocol `Request`**.
-    
-    Noted that for some request that only take one parameter for configuration, the `XXXRequestConfiguration` is not declared. And the type for some request that take the same configuration or result parameters with one other request is also not declared. Instead, they keep the same naming format using `typealias`.
+The requests are responsible for:
+1. receive configuration from the caller
+2. communicate with the server to fetch the result
+3. convert the result to the data
+4. return the data to the caller
 
-- Specifically, the nested enum `ResultType` inside `XXXRequestResult` represents the code that server returns, which can be helpful to identify what the error code means. Although a large proportion of them only indicates success with `0` and failure with negative code, we still declare them in case of API changes. For requests that themselves don't have a request result type, the enum is named `XXXRequestResultType`.
+### Data structure
+
+Two protocols are defined to provide a set of uniform, concise APIs:
+
+-  `protocol Request` - the request itself
+-  `protocol RequestError` - the possible error during the request
+
+To better reuse our code, some additional protocols and types are defined to implement default behaviours:
+
+- `protocol DefaultRequest` -  requests that share some same attributes, applied to almost all requests
+- `protocol DefaultRequestResult` - request result with `code` and `msg` constrains
+- `enum DefaultRequestError` - the default request error, covering common error cases
+
+Documentation for these protocols and types is available in the source code.
+
+> Use `enum` for error, and use `struct` or `enum` for other types.
+
+## Naming Principle
+
+- Each file should be named  `XXXRequest`, which represents a single request.
+
+- Each `XXXRequest` file might consist of some of the four  `struct` below, with following format:
+    - `XXXRequestConfiguration`
+    - `XXXRequestResult`
+    - `XXXRequestResultData`
+    - `XXXRequest`

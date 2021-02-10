@@ -15,13 +15,6 @@ struct DeviceTerminationRequestConfiguration {
     var apiRoot: String
 }
 
-/// The only result is the code.
-//typealias DeviceTerminationRequestResult = DeviceTerminationRequestResultType
-
-/// Result type of device termination.
-///
-/// Please init with `DeviceTerminationRequestResultType(rawValue: Int)`, and should
-/// show error with `nil`, which means receiving negative code.
 struct DeviceTerminationRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?

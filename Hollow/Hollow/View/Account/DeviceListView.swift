@@ -19,7 +19,9 @@ struct DeviceListView: View {
                         isCurrentDevice:
                             deviceListStore.deviceData.thisDeviceUUID ==
                             deviceListStore.deviceData.devices[index].deviceUUID,
-                        isLoggingout: deviceListStore.loggingoutUUID == deviceListStore.deviceData.devices[index].deviceUUID,
+                        isLoggingout:
+                            deviceListStore.loggingoutUUID ==
+                            deviceListStore.deviceData.devices[index].deviceUUID,
                         logoutAction: deviceListStore.logout
                     )
                     .padding(.horizontal)
@@ -33,7 +35,7 @@ struct DeviceListView: View {
         }
         .background(Color.background.ignoresSafeArea())
         .navigationTitle("Devices")
-        .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading, disableWhenLoading: false))
+        .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))
         .navigationBarItems(trailing: Button(action: {
             deviceListStore.requestDeviceList(finishHandler: {})
@@ -50,11 +52,13 @@ extension DeviceListView {
         var isLoggingout: Bool
         var logoutAction: (UUID) -> Void
         
+//        @State private var alertPresented = false
+        
         @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
         @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
-        @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
+        @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize
         
         var body: some View {
             VStack(alignment: .leading, spacing: body14) {
@@ -72,7 +76,6 @@ extension DeviceListView {
                                 Spinner(color: .white, desiredWidth: buttonFontSize)
                             } else {
                                 Text("Logout")
-                                    .fontWeight(.medium)
                                     .font(.system(size: buttonFontSize, weight: .bold))
                                     .foregroundColor(.white)
                             }
@@ -93,7 +96,17 @@ extension DeviceListView {
                         .top()
                 )
             )
-            .cornerRadius(body15)
+            .cornerRadius(15)
+            
+            // FIXME: Cannot present alert
+//            .alert(isPresented: $alertPresented, content: {
+//                Alert(
+//                    title: Text("Logout"),
+//                    message: Text("\(device.deviceInfo)"),
+//                    primaryButton: .cancel(),
+//                    secondaryButton: .destructive(Text("Logout"), action: { logoutAction(device.deviceUUID) })
+//                )
+//            })
         }
         
         private func headerText(_ text: String) -> some View {

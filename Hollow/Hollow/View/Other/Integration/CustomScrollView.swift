@@ -16,7 +16,9 @@ struct CustomScrollView<Content>: View where Content: View {
     var didScrollToBottom: (() -> Void)? = nil
     var didScroll: (() -> Void)? = nil
     var didEndScroll: (() -> Void)? = nil
-    // Handler to call when refreshing. Must call the given closure to stop the animating spinner when finished.
+    /// Handler to call when refreshing.
+    ///
+    /// Must call the given closure to stop the animating spinner when finished.
     var refresh: ((@escaping () -> Void) -> Void)? = nil
     let content: (ScrollViewProxy) -> Content
     

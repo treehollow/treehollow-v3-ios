@@ -64,7 +64,7 @@ struct TimelineView: View {
                     .background(Color.background)
                     .modifier(GetSize(size: $searchBarSize))
                     .id(-1)
-                    
+                                        
                     // FIXME: Can we use postId as the id instead of the index?
                     // Using index will apply an imperfect animation on the cards
                     // (directly update the card content rather than moving the whole card).
@@ -72,6 +72,11 @@ struct TimelineView: View {
                     // None lazy views for the first `maxNoneLazyCards` cards
                     // to avoid being stuck when scrolling to top
                     VStack(spacing: 0) {
+                        // Placeholder to fill the space when no posts are loaded
+                        if viewModel.posts.count == 0 {
+                            Spacer().horizontalCenter()
+                        }
+                        
                         ForEach(0..<min(maxNoneLazyCards, viewModel.posts.count), id: \.self) { index in
                             cardView(at: index)
                         }
@@ -84,17 +89,14 @@ struct TimelineView: View {
                         }
                     }
                     
-                    // TODO: Show retry button if failed.
-                    HStack {
-                        Text(String.loadingLocalized.capitalized)
-                            .font(.system(size: body16, weight: .medium))
-                        Spinner(color: .hollowContentText, desiredWidth: body16)
+                    if viewModel.posts.count != 0 {
+                        // TODO: Show retry button if failed.
+                        LoadingLabel()
+                            .padding(.bottom)
+                            .padding(.bottom)
+                        // TODO: Animation
+                        // FIXME: Should show spinner after the request start processing
                     }
-                    .foregroundColor(.hollowContentText)
-                    .padding(.bottom)
-                    .padding(.bottom)
-                    // TODO: Animation
-                    // FIXME: Should show spinner after the request is processing
                 }
                 
                 // Observe the change of the offset when the user finish scrolling,
@@ -106,18 +108,26 @@ struct TimelineView: View {
                         
                         // Perform scrolling actions
                         if currentOffset > 0 && currentOffset <= threshold {
+                            // Reveal the search bar
                             proxy.scrollTo(-1, anchor: .top)
                         }
                         if currentOffset > threshold && currentOffset < searchBarHeight {
+                            // Hide the search bar
                             proxy.scrollTo(0, anchor: .top)
                         }
                         searchBarTrackingOffset = nil
                     }
                 }
+
             })
             .sheet(item: $detailPresentedIndex, content: { index in
                 HollowDetailView(postDataWrapper: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
             })
+        
+            // Show loading indicator when no posts are loaded or refresh on top
+            // TODO: refresh on top logic
+            .modifier(LoadingIndicator(isLoading: viewModel.posts.count == 0))
+
     }
     
     private func cardView(at index: Int) -> some View {

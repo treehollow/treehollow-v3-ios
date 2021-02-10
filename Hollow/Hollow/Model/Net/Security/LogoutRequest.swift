@@ -43,11 +43,10 @@ struct LogoutRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        // Empty parameter to satisfy generic type constrain.
-        let parameters: [String: Int] = [:]
         performRequest(
             urlPath: urlPath,
-            parameters: parameters,
+            // Empty parameter to satisfy generic type constrain.
+            parameters: [String : Int](),
             headers: headers,
             method: .post,
             resultToResultData: { result in LogoutRequestResultData(rawValue: result.code) },

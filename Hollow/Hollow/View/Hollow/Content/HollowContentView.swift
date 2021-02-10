@@ -14,7 +14,7 @@ struct HollowContentView: View {
     var voteHandler: (String) -> Void
     var body: some View {
         if (postDataWrapper.post.type == .image || postDataWrapper.post.type == .vote) && postDataWrapper.post.hollowImage != nil {
-            HollowImageView(hollowImage: postDataWrapper.post.hollowImage)
+            HollowImageView(hollowImage: postDataWrapper.post.hollowImage, description: postDataWrapper.post.text)
                 .cornerRadius(4)
                 .frame(maxHeight: 500)
                 .fixedSize(horizontal: false, vertical: true)
@@ -29,6 +29,9 @@ struct HollowContentView: View {
             textView()
         } else {
             textView()
+                // Apply a transparent background to avoid
+                // offset when presenting context menu
+                .background(Color.clear)
                 .contextMenu(compact ? nil : ContextMenu(menuItems: {
                     Button("Copy full text", action: {
                         UIPasteboard.general.string = postDataWrapper.post.text

@@ -10,9 +10,11 @@ import SwiftUI
 
 struct HollowImageView: View {
     var hollowImage: HollowImage?
+    var description: String?
     @State private var flash = false
     @State private var showSavePhotoAlert = false
     @State private var savePhotoError: String? = nil
+    @State private var showImageViewer = false
     
     var body: some View {
         Group {
@@ -35,6 +37,13 @@ struct HollowImageView: View {
                         }))
                         .alert(isPresented: $showSavePhotoAlert, content: {
                             return Alert(title: Text(savePhotoError?.description ?? NSLocalizedString("Successfully saved to Photos.", comment: "")))
+                        })
+                        .onTapGesture {
+                            showImageViewer = true
+                        }
+                        .fullScreenCover(isPresented: $showImageViewer, content: {
+                            LightboxView(image: image, footnote: description)
+                                .ignoresSafeArea()
                         })
                 } else {
                     Rectangle()
