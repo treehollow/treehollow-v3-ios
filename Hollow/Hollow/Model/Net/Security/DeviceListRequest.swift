@@ -7,12 +7,33 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 /// The configuration parameter is the user token.
 struct DeviceListRequestConfiguration {
     var token: String
     var apiRoot: String
+}
+/*
+ "code":0,
+ "data": [{
+ "device_uuid": "2a6f855e-8f8d-4795-818b-50402dbcc60f",
+ "login_date": "1926-08-17",
+ "device_info": "HUAWEI P40, Android 11",
+ "device_type": 0(0 for Web, 1 for Android, 2 for iOS)
+ },..],
+ "this_device": "uuid"
+ */
+struct DeviceListRequestResult: DefaultRequestResult {
+    struct DeviceListResult: Codable{
+        var deviceUuid: String
+        var loginDate: String
+        var deviceInfo: String
+        var deviceType: Int
+    }
+    var code: Int
+    var msg: String?
+    var data: [DeviceListResult]?
+    var thisDevice: String?
 }
 
 struct DeviceListRequestResultData {
@@ -20,10 +41,10 @@ struct DeviceListRequestResultData {
     var thisDeviceUUID: UUID
 }
 
-struct DeviceListRequest: Request {
+struct DeviceListRequest: DefaultRequest {
     
     typealias Configuration = DeviceListRequestConfiguration
-    typealias Result = DeviceListRequestResultData
+    typealias Result = DeviceListRequestResult
     typealias ResultData = DeviceListRequestResultData
     typealias Error = DefaultRequestError
     
@@ -40,56 +61,31 @@ struct DeviceListRequest: Request {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        AF.request(
-            urlPath,
+        let parameters = ["": ""]
+        performRequest(
+            urlPath: urlPath,
+            parameters: parameters,
+            headers: headers,
             method: .get,
-            headers: headers
-        ).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                do {
-                    let result = try JSON.init(data: response.data!)
-                    guard let code = result["code"].int else {
-                        completion(nil, .unknownBackend)
-                        return
-                    }
-                    if code >= 0 {
-                        var deviceList = [DeviceInformationType]()
-                        for (_, subJson): (String, JSON) in result["data"] {
-                            guard let deviceUUIDString = subJson["device_uuid"].string,
-                                  let deviceUUID = UUID(uuidString: deviceUUIDString),
-                                  let loginDate = subJson["login_date"].string?.toDate(),
-                                  let deviceInfo = subJson["device_info"].string,
-                                  let deviceTypeRawValue = subJson["device_type"].int,
-                                  let deviceType = DeviceInformationType.DeviceType(rawValue: deviceTypeRawValue) else {
-                                completion(nil, .unknownBackend)
-                                return
-                            }
-                            let subResult = DeviceInformationType(
-                                deviceUUID: deviceUUID,
-                                loginDate: loginDate,
-                                deviceInfo: deviceInfo,
-                                deviceType: deviceType
-                            )
-                            deviceList.append(subResult)
-                        }
-                        guard let thisDeviceUUIDString = result["this_device"].string,
-                              let thisDeviceUUID = UUID(uuidString: thisDeviceUUIDString) else {
-                            completion(nil, .unknownBackend)
-                            return
-                        }
-                        let resultData = ResultData(devices: deviceList, thisDeviceUUID: thisDeviceUUID)
-                        completion(resultData, nil)
-                    } else {
-                        // invalid response
-                        completion(nil, .init(errorCode: code, description: result["msg"].string ?? "Unknown backend error."))
-                    }
-                } catch {
-                    completion(nil, .decodeFailed)
-                    return
+            resultToResultData: {result in
+                guard let data = result.data,let thisDeviceUUIDString = result.thisDevice else {return nil}
+                let thisDeviceUUID = UUID.init(uuidString: thisDeviceUUIDString)
+                var devices = [] as [DeviceInformationType]
+                for device in data {
+                    devices.append(
+                        DeviceInformationType(
+                            deviceUUID: UUID.init(uuidString: device.deviceUuid) ?? UUID(),
+                            loginDate: device.loginDate.toDate() ?? Date(),
+                            deviceInfo: device.deviceInfo,
+                            deviceType: DeviceInformationType.DeviceType(
+                                rawValue: device.deviceType) ?? DeviceInformationType.DeviceType.unknown
+                        )
+                    )
                 }
-            case .failure(let error):
-                completion(nil, .other(description: error.localizedDescription))}
-        }
+                // use thisDeviceUUID! because UUID must be uuid
+                    return ResultData(devices: devices, thisDeviceUUID: thisDeviceUUID ?? UUID())
+            },
+            completion: completion
+        )
     }
 }
