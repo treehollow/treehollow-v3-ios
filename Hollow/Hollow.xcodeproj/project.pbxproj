@@ -136,6 +136,7 @@
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
+		0EFA3DE125D3E4540003C76B /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DE025D3E4540003C76B /* ImageViewer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,6 +270,7 @@
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
+		0EFA3DE025D3E4540003C76B /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,6 +541,7 @@
 				0E415B0425CD772200351672 /* ExpandedButton.swift */,
 				0E415B0525CD772200351672 /* MyButton.swift */,
 				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
+				0EFA3DE025D3E4540003C76B /* ImageViewer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
 				0E415B6225CD772200351672 /* HollowVoteInputView.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
+				0EFA3DE125D3E4540003C76B /* ImageViewer.swift in Sources */,
 				0E415ADC25CD771600351672 /* Data+hexEncodedString.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0E36F54B25D0F863001AE852 /* String+removeLineBreak.swift in Sources */,

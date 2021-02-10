@@ -39,6 +39,15 @@ extension View {
         }
     }
     
+    func verticalCenter() -> some View {
+        return VStack(spacing: 0) {
+            Spacer()
+            self
+            Spacer()
+        }
+    }
+
+    
     func trailing() -> some View {
         return HStack(spacing: 0) {
             Spacer()

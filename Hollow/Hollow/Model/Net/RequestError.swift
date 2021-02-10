@@ -22,7 +22,7 @@ enum DefaultRequestError: RequestError {
     var description: String {
         switch self {
         case .tokenExpiredError: return "Token expired, please login again."
-        case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
+        case .decodeFailed: return "Fail to decode result from the response."
         case .unknown: return "Fail to initialize data. This is an internal error."
         case .unknownBackend: return "The backend returns data with unknown error. This is an internal error."
         case .other(let description): return description
