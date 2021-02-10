@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoadingIndicator: ViewModifier {
     var isLoading: Bool
-    var disableWhenLoading: Bool = true
+    var disableWhenLoading: Bool = false
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -22,17 +22,12 @@ struct LoadingIndicator: ViewModifier {
         content
             .overlay(
                 Group { if isLoading {
-                    HStack {
-                        Text(String.loadingLocalized.capitalized)
-                        Spinner(color: .primary, desiredWidth: fontSize)
-                    }
-                    .font(.system(size: fontSize, weight: .semibold))
+                    LoadingLabel()
                     .padding(.horizontal, body10)
                     .padding(.vertical, body5)
                     .background(Color.background)
                     .colorScheme(colorScheme == .dark ? .light : .dark)
                     .clipShape(Capsule())
-                    .transition(.move(edge: .top))
                     .padding(.top)
                     .top()
                 }}

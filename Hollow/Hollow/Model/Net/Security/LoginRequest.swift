@@ -13,7 +13,7 @@ struct LoginRequestConfiguration {
     var email: String
     var password: String
     let deviceType = 2
-    let deviceInfo = UIDevice.current.name + ", iOS " + UIDevice.current.systemVersion
+    let deviceInfo = Constants.Application.deviceInfo
     // TODO: Device token
     var deviceToken: String
     var apiRoot: String
@@ -44,10 +44,8 @@ struct LoginRequest: DefaultRequest {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
-    {
-        let parameters =
-            [
+    func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
+        let parameters = [
                 "email": self.configuration.email,
                 "password_hashed": self.configuration.password.sha256().sha256(),
                 "device_type": self.configuration.deviceType.string,

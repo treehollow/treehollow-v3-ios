@@ -20,12 +20,39 @@
         }
       },
       {
+        "package": "Cache",
+        "repositoryURL": "https://github.com/hyperoslo/Cache",
+        "state": {
+          "branch": "master",
+          "revision": "520b1afd229e25051878c65ce1e780628ea43b4d",
+          "version": null
+        }
+      },
+      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
           "branch": null,
           "revision": "d98119fee49c893fae553103a8659ffe003b6cfe",
           "version": "4.1.0"
+        }
+      },
+      {
+        "package": "Imaginary",
+        "repositoryURL": "https://github.com/hyperoslo/Imaginary",
+        "state": {
+          "branch": "master",
+          "revision": "5da646269754856f60ae463652858f64dfe4d4e5",
+          "version": null
+        }
+      },
+      {
+        "package": "Lightbox",
+        "repositoryURL": "https://github.com/hyperoslo/Lightbox.git",
+        "state": {
+          "branch": "master",
+          "revision": "a07de07adbdd89860af2abfd3435d99f09bd7bff",
+          "version": null
         }
       },
       {

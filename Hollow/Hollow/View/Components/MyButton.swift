@@ -12,7 +12,7 @@ struct MyButton<Content>: View where Content: View {
     var action: () -> Void
     var gradient: LinearGradient
     var transitionAnimation: Animation? = nil
-    var cornerRadius: CGFloat = 6
+    @ScaledMetric var cornerRadius: CGFloat = 8
     var content: () -> Content
     
     @Environment(\.isEnabled) var enabled

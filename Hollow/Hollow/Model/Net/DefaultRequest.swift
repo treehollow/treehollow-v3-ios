@@ -2,7 +2,7 @@
 //  DefaultRequest.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/2/9.
+//  Created by liang2kl on 2021/2/9.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
@@ -16,35 +16,55 @@ protocol DefaultRequestResult: Codable {
 
 /// Protocol for default requests.
 ///
-/// Associated type explained:
-/// - `Error == DefaultRequestError`.
-/// - `Result` should conform to `DefaultRequestResult`.
+/// The term `Default` means: normal and share some same attributes.
+/// The protocol can apply to almost all requests.
+///
+/// # Associated type explained
+/// - `Error == DefaultRequestError`
+/// - `Result` should conform to `DefaultRequestResult`
+/// - `Configuration` and `ResultData` can be any type
 protocol DefaultRequest: Request where Error == DefaultRequestError, Result: DefaultRequestResult {
+    
 }
 
 extension DefaultRequest {
     /// Default implementation of `performRequest`.
     /// - parameter urlPath: Path for HTTP request.
-    /// - parameter parameters: Paramenters for the request.
+    /// - parameter parameters: Paramenters for the request. Use an empty [String : String] dictionary when there are no parameters.
     /// - parameter headers: HTTP headers to be included.
     /// - parameter method: `.post` or `.get`.
     /// - parameter resultToResultData: Method to generate result data from result.
     /// - parameter completion: Handler to call to handle returned data.
-    func performRequest<Parameters: Encodable>(urlPath: String, parameters: [String : Parameters], headers: HTTPHeaders? = nil, method: HTTPMethod, resultToResultData: @escaping (Result) -> ResultData?, completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
+    internal func performRequest<Parameters: Encodable>(
+        urlPath: String,
+        parameters: [String : Parameters],
+        headers: HTTPHeaders? = nil,
+        method: HTTPMethod,
+        resultToResultData: @escaping (Result) -> ResultData?,
+        completion: @escaping (ResultData?, DefaultRequestError?) -> Void
+    ) {
         AF.request(
             urlPath,
             method: method,
-            parameters: parameters,
+            parameters: parameters.isEmpty ? nil : parameters,
             encoder: URLEncodedFormParameterEncoder.default,
             headers: headers
-        ).validate().responseJSON { response in
+        )
+        .validate()
+        .responseJSON { response in
             // TODO: print result in console.
             switch response.result {
             case .success:
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    let result = try jsonDecoder.decode(Result.self, from: response.data!)
+                    guard let data = response.data else {
+                        completion(nil, .unknown)
+                        return
+                    }
+                    let result = try jsonDecoder.decode(Result.self, from: data)
+                    print("Request result: \(result)")
+                    
                     if result.code >= 0 {
                         // result code >= 0 valid!
                         if let resultData = resultToResultData(result) {
@@ -52,14 +72,18 @@ extension DefaultRequest {
                         } else {
                             completion(nil, .unknown)
                         }
+                        
                     } else {
                         completion(nil, .init(errorCode: result.code, description: result.msg))
                     }
+                    
                 } catch {
                     completion(nil, .decodeFailed)
                     return
                 }
+                
             case let .failure(error):
+                print("Request error: \(error.errorDescription ?? "not documented")")
                 completion(nil, .other(description: error.localizedDescription))
             }
         }

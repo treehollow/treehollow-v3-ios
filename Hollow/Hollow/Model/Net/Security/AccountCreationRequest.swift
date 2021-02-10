@@ -17,8 +17,8 @@ struct AccountCreationRequestConfiguration {
     var password: String
     /// Device type, 2 for iOS.
     let deviceType = 2
-    /// Device name.
-    let deviceInfo: String = UIDevice.current.name
+    /// Device information.
+    let deviceInfo: String = Constants.Application.deviceInfo
     /// Old thuhole token (only needed for old users signing up using web frontend),
     /// optional, but one of `validCode` and `oldToken` must be present.
     // var oldToken: String?

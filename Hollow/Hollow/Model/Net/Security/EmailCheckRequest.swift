@@ -76,7 +76,7 @@ struct EmailCheckRequest: DefaultRequest {
         }
         let urlPath =
             self.configuration.apiRoot + "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
-        // URL must be legal!
+        
         performRequest(
             urlPath: urlPath,
             parameters: parameters,

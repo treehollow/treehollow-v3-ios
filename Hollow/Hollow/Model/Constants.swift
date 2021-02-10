@@ -7,10 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
+/// Shared constants.
+///
+/// The purpose of the nested structs is to provide namespaces.
 struct Constants {
     struct Application {
         static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        static let deviceInfo = UIDevice.current.name + ", iOS " + UIDevice.current.systemVersion
     }
     
     struct HollowConfig {

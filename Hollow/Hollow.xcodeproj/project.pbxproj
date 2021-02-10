@@ -130,9 +130,12 @@
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
 		0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78F0B825D2E0090080C09E /* DefaultRequest.swift */; };
+		0E78F0BD25D3975D0080C09E /* Lightbox in Frameworks */ = {isa = PBXBuildFile; productRef = 0E78F0BC25D3975D0080C09E /* Lightbox */; };
+		0E78F0C025D3977F0080C09E /* LightboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78F0BF25D3977F0080C09E /* LightboxView.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
+		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -261,9 +264,11 @@
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E78F0B825D2E0090080C09E /* DefaultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequest.swift; sourceTree = "<group>"; };
+		0E78F0BF25D3977F0080C09E /* LightboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightboxView.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0092370B25D00E5600961BBB /* SwiftyJSON in Frameworks */,
+				0E78F0BD25D3975D0080C09E /* Lightbox in Frameworks */,
 				0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */,
 				0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */,
 				0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */,
@@ -504,6 +510,7 @@
 				0E415AEF25CD772200351672 /* CustomScrollView.swift */,
 				0E415AEE25CD772200351672 /* ReCAPTCHAWebView.swift */,
 				0E415AF025CD772200351672 /* Blur.swift */,
+				0E78F0BF25D3977F0080C09E /* LightboxView.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -531,6 +538,7 @@
 				0E415B0325CD772200351672 /* MyTextField.swift */,
 				0E415B0425CD772200351672 /* ExpandedButton.swift */,
 				0E415B0525CD772200351672 /* MyButton.swift */,
+				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -768,6 +776,7 @@
 				0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */,
 				0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */,
 				0092370A25D00E5600961BBB /* SwiftyJSON */,
+				0E78F0BC25D3975D0080C09E /* Lightbox */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -803,6 +812,7 @@
 				0E4F032E25CE29D500F4B228 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				0092370925D00E5600961BBB /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				0E78F0BB25D3975D0080C09E /* XCRemoteSwiftPackageReference "Lightbox" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -833,6 +843,7 @@
 				0E415B6C25CD772200351672 /* HollowHeaderView.swift in Sources */,
 				0E415AD125CD771600351672 /* AccountCreationRequest.swift in Sources */,
 				0E004F3525D021D700466FA5 /* Int+bool.swift in Sources */,
+				0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */,
 				0E415B7825CD772200351672 /* MessageView.swift in Sources */,
 				0E415B5A25CD772200351672 /* MyButton.swift in Sources */,
 				0E415AC425CD771600351672 /* SystemMessageRequest.swift in Sources */,
@@ -879,6 +890,7 @@
 				0E415B7425CD772200351672 /* TimelineView.swift in Sources */,
 				0E415AC725CD771600351672 /* RandomListRequest.swift in Sources */,
 				0E415ADD25CD771600351672 /* Localization.swift in Sources */,
+				0E78F0C025D3977F0080C09E /* LightboxView.swift in Sources */,
 				0E415B8D25CD773E00351672 /* TestCommentData.swift in Sources */,
 				0E415AD825CD771600351672 /* SendPostRequest.swift in Sources */,
 				0E415AC825CD771600351672 /* ParticipatedPostsRequest.swift in Sources */,
@@ -1182,6 +1194,14 @@
 				minimumVersion = 5.4.1;
 			};
 		};
+		0E78F0BB25D3975D0080C09E /* XCRemoteSwiftPackageReference "Lightbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hyperoslo/Lightbox.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1214,6 +1234,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E4F032E25CE29D500F4B228 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		0E78F0BC25D3975D0080C09E /* Lightbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E78F0BB25D3975D0080C09E /* XCRemoteSwiftPackageReference "Lightbox" */;
+			productName = Lightbox;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
