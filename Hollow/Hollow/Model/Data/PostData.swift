@@ -20,14 +20,14 @@ struct PostData: Identifiable {
     var permissions: [PostPermissionType]
     var postId: Int
     var replyNumber: Int
-    var tag: String
+    var tag: String?
     var text: String
     var type: PostType
     /// Image wrapper for actual image.
     ///
     /// Set `nil` when there is no image to display, and set `hollowImage.image` to `nil` then the actual image is still loading.
     var hollowImage: HollowImage?
-    var vote: Post.Vote?
+    var vote: VoteData?
     var comments: [CommentData]
 }
 

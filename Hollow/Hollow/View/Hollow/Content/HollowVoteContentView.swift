@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HollowVoteContentView: View {
-    var vote: Post.Vote
+    var vote: VoteData
     var voteHandler: (String) -> Void
     
     @State private var selectedButNotFinishIndex: Int = -1
@@ -36,7 +36,7 @@ struct HollowVoteContentView: View {
     
     // TODO: Vote proportion
     private struct VoteBarView: View {
-        var voteData: Post.Vote.VoteData
+        var voteData: VoteData.VoteData
         private var voted: Bool { voteData.voteCount >= 0 }
         var selectedButNotFinish: Bool
         var selected: Bool
