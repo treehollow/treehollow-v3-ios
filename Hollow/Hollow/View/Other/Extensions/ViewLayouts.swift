@@ -54,4 +54,11 @@ extension View {
             self
         }
     }
+    
+    func bottom() -> some View {
+        return VStack(spacing: 0) {
+            Spacer()
+            self
+        }
+    }
 }

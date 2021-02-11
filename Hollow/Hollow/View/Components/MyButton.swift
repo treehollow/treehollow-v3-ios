@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MyButton<Content>: View where Content: View {
     var action: () -> Void
-    var gradient: LinearGradient
+    var gradient: LinearGradient = .vertical(gradient: .button)
     var transitionAnimation: Animation? = nil
     @ScaledMetric var cornerRadius: CGFloat = 8
     var content: () -> Content

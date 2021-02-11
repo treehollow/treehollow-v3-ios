@@ -161,6 +161,7 @@ extension LoginView {
                     }
                     .lineLimit(1)
                     .font(.system(size: body14))
+                    .foregroundColor(.hollowContentText)
                 })
             }
             .keyboardType(.emailAddress)

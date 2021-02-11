@@ -2,7 +2,7 @@
 //  DeviceListView.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/2/9.
+//  Created by liang2kl on 2021/2/9.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
@@ -71,15 +71,17 @@ extension DeviceListView {
                     // We won't allow the user to terminate the current
                     // device in device list.
                     if !isCurrentDevice {
-                        MyButton(action: { logoutAction(device.deviceUUID) }, gradient: .vertical(gradient: .button)) { Group {
-                            if isLoggingout {
-                                Spinner(color: .white, desiredWidth: buttonFontSize)
-                            } else {
-                                Text("Logout")
-                                    .font(.system(size: buttonFontSize, weight: .bold))
-                                    .foregroundColor(.white)
+                        MyButton(action: { logoutAction(device.deviceUUID) }, gradient: .vertical(gradient: .button)) {
+                            Group {
+                                if isLoggingout {
+                                    Text("Processing" + "...")
+                                } else {
+                                    Text("Logout")
+                                }
                             }
-                        }}
+                            .font(.system(size: buttonFontSize, weight: .bold))
+                            .foregroundColor(.white)
+                        }
                     }
                 }
             }

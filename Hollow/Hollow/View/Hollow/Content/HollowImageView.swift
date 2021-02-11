@@ -42,8 +42,7 @@ struct HollowImageView: View {
                             showImageViewer = true
                         }
                         .fullScreenCover(isPresented: $showImageViewer, content: {
-                            LightboxView(image: image, footnote: description)
-                                .ignoresSafeArea()
+                            ImageViewer(image: image, footnote: description, presented: $showImageViewer)
                         })
                 } else {
                     Rectangle()

@@ -27,4 +27,3 @@ protocol Request {
     /// Perform request and fetch the data.
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
 }
-

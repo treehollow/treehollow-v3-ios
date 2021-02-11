@@ -27,7 +27,13 @@ struct HollowTimelineCardView: View {
         .fixedSize(horizontal: false, vertical: true)
         .contentShape(RoundedRectangle(cornerRadius: 8))
         .contextMenu(ContextMenu(menuItems: {
-            HollowHeaderMenu()
+            Section {
+                Button(action: {
+
+                }) {
+                    Label("Report", systemImage: "exclamationmark")
+                }
+            }
         }))
     }
     

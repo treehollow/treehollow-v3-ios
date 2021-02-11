@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "Cache",
-        "repositoryURL": "https://github.com/hyperoslo/Cache",
-        "state": {
-          "branch": "master",
-          "revision": "520b1afd229e25051878c65ce1e780628ea43b4d",
-          "version": null
-        }
-      },
-      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
@@ -38,21 +29,12 @@
         }
       },
       {
-        "package": "Imaginary",
-        "repositoryURL": "https://github.com/hyperoslo/Imaginary",
+        "package": "ImageScrollView",
+        "repositoryURL": "https://github.com/huynguyencong/ImageScrollView.git",
         "state": {
-          "branch": "master",
-          "revision": "5da646269754856f60ae463652858f64dfe4d4e5",
-          "version": null
-        }
-      },
-      {
-        "package": "Lightbox",
-        "repositoryURL": "https://github.com/hyperoslo/Lightbox.git",
-        "state": {
-          "branch": "master",
-          "revision": "a07de07adbdd89860af2abfd3435d99f09bd7bff",
-          "version": null
+          "branch": null,
+          "revision": "4f6d01ac0ac56cf4b075c4e6134538ecbbd52af1",
+          "version": "1.9.2"
         }
       },
       {

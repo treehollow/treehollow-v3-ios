@@ -42,8 +42,6 @@ extension Color {
     
     static var mainSearchBarText: Color { mainPageUnselected }
     
-    static var mainSearchBarStroke: Color { Color("main.searchbar.stroke") }
-    
     static var mainBarButton: Color { mainPageSelected }
     
     static var hollowDetailBackground: Color { hollowCardBackground }

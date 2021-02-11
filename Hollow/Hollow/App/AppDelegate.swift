@@ -16,6 +16,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if DEBUG
 //        Defaults[.accessToken] = nil
+        Defaults[.hollowType] = .thu
         #endif
         
         // Request notification access

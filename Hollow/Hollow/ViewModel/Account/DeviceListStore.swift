@@ -2,7 +2,7 @@
 //  DeviceListStore.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/2/9.
+//  Created by liang2kl on 2021/2/9.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import Defaults
 
 class DeviceListStore: ObservableObject {
     @Published var deviceData: DeviceListRequestResultData
-    @Published var isLoading: Bool = true
+    @Published var isLoading: Bool = false
     @Published var loggingoutUUID: String?
     @Published var errorMessage: (title: String, message: String)?
     

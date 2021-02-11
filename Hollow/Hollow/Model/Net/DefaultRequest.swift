@@ -52,7 +52,7 @@ extension DefaultRequest {
         )
         .validate()
         .responseJSON { response in
-            // TODO: print result in console.
+            print("[Request] \(self)")
             switch response.result {
             case .success:
                 let jsonDecoder = JSONDecoder()
@@ -63,11 +63,12 @@ extension DefaultRequest {
                         return
                     }
                     let result = try jsonDecoder.decode(Result.self, from: data)
-                    print("Request result: \(result)")
+                    print("[Result] \(result)")
                     
                     if result.code >= 0 {
                         // result code >= 0 valid!
                         if let resultData = resultToResultData(result) {
+                            print("[Result Data] \(resultData)")
                             completion(resultData, nil)
                         } else {
                             completion(nil, .unknown)
@@ -83,7 +84,7 @@ extension DefaultRequest {
                 }
                 
             case let .failure(error):
-                print("Request error: \(error.errorDescription ?? "not documented")")
+                print("[Request Error]: \(error.errorDescription ?? "not documented")")
                 completion(nil, .other(description: error.localizedDescription))
             }
         }

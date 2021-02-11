@@ -80,7 +80,6 @@ struct DeviceListRequest: DefaultRequest {
                         )
                     )
                 }
-                // use thisDeviceUUID! because UUID must be uuid
                 return ResultData(devices: devices, thisDeviceUUID: thisDeviceUUIDString)
             },
             completion: completion
