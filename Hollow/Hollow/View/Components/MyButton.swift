@@ -8,11 +8,14 @@
 
 import SwiftUI
 
+fileprivate let defaultButtonRadius: CGFloat = 8
+fileprivate let defaultGradient: LinearGradient = .vertical(gradient: .button)
+
 struct MyButton<Content>: View where Content: View {
     var action: () -> Void
-    var gradient: LinearGradient = .vertical(gradient: .button)
+    var gradient: LinearGradient = defaultGradient
     var transitionAnimation: Animation? = nil
-    @ScaledMetric var cornerRadius: CGFloat = 8
+    @ScaledMetric var cornerRadius: CGFloat = defaultButtonRadius
     var content: () -> Content
     
     @Environment(\.isEnabled) var enabled
@@ -26,5 +29,15 @@ struct MyButton<Content>: View where Content: View {
                 .cornerRadius(cornerRadius)
                 .animation(transitionAnimation)
         }
+    }
+}
+
+extension View {
+    func defaultButtonStyle() -> some View {
+        return self
+            .padding(.horizontal, 13)
+            .padding(.vertical, 7)
+            .background(defaultGradient)
+            .cornerRadius(defaultButtonRadius)
     }
 }

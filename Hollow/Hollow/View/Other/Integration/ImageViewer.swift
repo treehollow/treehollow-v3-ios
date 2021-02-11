@@ -15,6 +15,7 @@ struct ImageViewer: View {
     
     @Binding var presented: Bool
     @State private var lineLimit: Int? = 1
+    @State private var scale: CGFloat = 0
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -22,35 +23,40 @@ struct ImageViewer: View {
     
     var body: some View {
         ZStack {
-            ImageViewerWrapper(image: image, presented: $presented)
+            ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale)
                 .ignoresSafeArea()
-            if let footnote = footnote {
-                Text(footnote)
-                    .font(.footnote)
-                    .padding(.horizontal)
-                    .padding(.top)
-                    .leading()
-                    .blurBackground()
-                    .lineLimit(lineLimit)
-                    .onTapGesture { withAnimation {
-                        lineLimit = lineLimit == nil ? 1 : nil
-                    }}
-                    .bottom()
-            }
-            Button(action: { presented = false }) {
-                Text("Done")
-                    .bold()
-                    .foregroundColor(.primary)
-                    .padding(.horizontal, 13)
-                    .padding(.vertical, 6)
-                    .blurBackground()
-                    .cornerRadius(8)
-            }
-            .padding(.horizontal)
+            VStack(spacing: 0) {
+                Button(action: { presented = false }) {
+                    Text("Done")
+                        .bold()
+                        .foregroundColor(.primary)
+                        .padding(.horizontal, 13)
+                        .padding(.vertical, 6)
+                        .blurBackground()
+                        .cornerRadius(8)
+                }
+                .padding(.horizontal)
+                .trailing()
+                
+                Spacer()
 
-            .top()
-            .trailing()
+                if let footnote = footnote {
+                    Text(footnote)
+                        .font(.footnote)
+                        .padding(.horizontal)
+                        .padding(.top)
+                        .leading()
+                        .blurBackground()
+                        .lineLimit(lineLimit)
+                        .onTapGesture { withAnimation(.spring(response: 0.4)) {
+                            lineLimit = lineLimit == nil ? 1 : nil
+                        }}
+                }
 
+            }
+            
+            // Hide the components when overlapping
+            .opacity(scale > 2 ? 0 : 1)
         }
 
         .blurBackground()
@@ -60,34 +66,46 @@ struct ImageViewer: View {
                 .scaledToFill()
                 .ignoresSafeArea()
         )
-
     }
 }
 
-struct ImageViewerWrapper: UIViewRepresentable {
+struct ImageScrollViewWrapper: UIViewRepresentable {
     var image: UIImage
     var presented: Binding<Bool>
+    var scale: Binding<CGFloat>
     func makeUIView(context: Context) -> ImageScrollView {
         let view = ImageScrollView()
         view.setup()
         view.display(image: image)
         view.maxScaleFromMinScale = 4
+        view.imageScrollViewDelegate = context.coordinator
         return view
     }
     
     func updateUIView(_ uiView: ImageScrollView, context: Context) {
-//        uiView.display(image: image)
+        
     }
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
     
-    class Coordinator: NSObject {
-        var parent: ImageViewerWrapper
-        init(_ parent: ImageViewerWrapper) {
+    class Coordinator: NSObject, ImageScrollViewDelegate {
+        var parent: ImageScrollViewWrapper
+        init(_ parent: ImageScrollViewWrapper) {
             self.parent = parent
         }
+        
+        func scrollViewDidZoom(_ scrollView: UIScrollView) {
+            withAnimation {
+                parent.scale.wrappedValue = scrollView.zoomScale / scrollView.minimumZoomScale
+            }
+        }
+        
+        func imageScrollViewDidChangeOrientation(imageScrollView: ImageScrollView) {
+            
+        }
+        
     }
     
 }

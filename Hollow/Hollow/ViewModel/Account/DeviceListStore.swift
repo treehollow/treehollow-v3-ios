@@ -21,17 +21,16 @@ class DeviceListStore: ObservableObject {
         deviceData = .init(devices: [], thisDeviceUUID: "")
         
         // Request data
-        requestDeviceList(finishHandler: {})
+        requestDeviceList()
     }
     
-    func requestDeviceList(finishHandler: @escaping () -> Void) {
+    func requestDeviceList() {
         let apiRoot = Defaults[.hollowConfig]!.apiRoot
         let request = DeviceListRequest(configuration: .init(token: Defaults[.accessToken]!, apiRoot: apiRoot))
         withAnimation {
             isLoading = true
         }
         request.performRequest(completion: { result, error in
-            finishHandler()
             withAnimation {
                 self.isLoading = false
             }

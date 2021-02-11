@@ -12,16 +12,16 @@ struct DeviceListView: View {
     @ObservedObject var deviceListStore = DeviceListStore()
     var body: some View {
         ScrollView {
-            VStack {
-                ForEach(deviceListStore.deviceData.devices.indices, id: \.self) { index in
+            VStack(spacing: 0) {
+                ForEach(deviceListStore.deviceData.devices, id: \.deviceUUID) { device in
                     DeviceCardView(
-                        device: deviceListStore.deviceData.devices[index],
+                        device: device,
                         isCurrentDevice:
                             deviceListStore.deviceData.thisDeviceUUID ==
-                            deviceListStore.deviceData.devices[index].deviceUUID,
+                            device.deviceUUID,
                         isLoggingout:
                             deviceListStore.loggingoutUUID ==
-                            deviceListStore.deviceData.devices[index].deviceUUID,
+                            device.deviceUUID,
                         logoutAction: deviceListStore.logout
                     )
                     .padding(.horizontal)
@@ -37,9 +37,7 @@ struct DeviceListView: View {
         .navigationTitle("Devices")
         .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))
-        .navigationBarItems(trailing: Button(action: {
-            deviceListStore.requestDeviceList(finishHandler: {})
-        }) {
+        .navigationBarItems(trailing: Button(action: deviceListStore.requestDeviceList) {
             Image(systemName: "arrow.clockwise")
         })
     }
@@ -111,15 +109,11 @@ extension DeviceListView {
 //            })
         }
         
-        private func headerText(_ text: String) -> some View {
-            Text(text.uppercased())
-                .font(.system(size: body15, weight: .semibold))
-                .foregroundColor(.hollowContentText)
-        }
-        
         private func section(header: String, content: String) -> some View {
             VStack(alignment: .leading, spacing: body5) {
-                headerText(header.uppercased())
+                Text(header.uppercased())
+                    .font(.system(size: body15, weight: .semibold))
+                    .foregroundColor(.hollowContentText)
                 Text(content)
                     .font(.system(.body, design: .monospaced))
             }
@@ -127,6 +121,7 @@ extension DeviceListView {
     }
 }
 
+#if DEBUG
 struct DeviceListView_Previews: PreviewProvider {
     static var previews: some View {
         DeviceListView()
@@ -134,3 +129,4 @@ struct DeviceListView_Previews: PreviewProvider {
         //            .colorScheme(.dark)
     }
 }
+#endif
