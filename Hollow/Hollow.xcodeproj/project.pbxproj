@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0050B9DE25D523B40035F556 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050B9DD25D523B40035F556 /* PostType.swift */; };
 		00902FD825D285DF00FA14B0 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00902FD725D285DF00FA14B0 /* RequestError.swift */; };
 		0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370225CFFAC200961BBB /* GetPushRequest.swift */; };
 		0092370625D0007500961BBB /* PushNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370525D0007500961BBB /* PushNotificationType.swift */; };
 		0092370E25D01E2900961BBB /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370D25D01E2900961BBB /* String+Date.swift */; };
 		0096307125CED33400030069 /* LogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0096307025CED33400030069 /* LogoutRequest.swift */; };
+		00BA551F25D5218600F44014 /* VoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA551E25D5218600F44014 /* VoteData.swift */; };
 		0E004F3525D021D700466FA5 /* Int+bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E004F3425D021D700466FA5 /* Int+bool.swift */; };
 		0E004F3825D0239F00466FA5 /* Bool+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E004F3725D0239F00466FA5 /* Bool+int.swift */; };
 		0E09B7A725D4D70600DC5615 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E09B7A625D4D70600DC5615 /* ImageScrollView */; };
@@ -36,7 +38,6 @@
 		0E415AC325CD771600351672 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9025CD771600351672 /* PostListRequest.swift */; };
 		0E415AC425CD771600351672 /* SystemMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9125CD771600351672 /* SystemMessageRequest.swift */; };
 		0E415AC525CD771600351672 /* AttentionListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9225CD771600351672 /* AttentionListRequest.swift */; };
-		0E415AC625CD771600351672 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9325CD771600351672 /* Post.swift */; };
 		0E415AC725CD771600351672 /* RandomListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9425CD771600351672 /* RandomListRequest.swift */; };
 		0E415AC825CD771600351672 /* ParticipatedPostsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9525CD771600351672 /* ParticipatedPostsRequest.swift */; };
 		0E415AC925CD771600351672 /* AttentionListSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A9625CD771600351672 /* AttentionListSearchRequest.swift */; };
@@ -138,11 +139,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0050B9DD25D523B40035F556 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		00902FD725D285DF00FA14B0 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		0092370225CFFAC200961BBB /* GetPushRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPushRequest.swift; sourceTree = "<group>"; };
 		0092370525D0007500961BBB /* PushNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationType.swift; sourceTree = "<group>"; };
 		0092370D25D01E2900961BBB /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		0096307025CED33400030069 /* LogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRequest.swift; sourceTree = "<group>"; };
+		00BA551E25D5218600F44014 /* VoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteData.swift; sourceTree = "<group>"; };
 		0E004F3425D021D700466FA5 /* Int+bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+bool.swift"; sourceTree = "<group>"; };
 		0E004F3725D0239F00466FA5 /* Bool+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+int.swift"; sourceTree = "<group>"; };
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
@@ -167,7 +170,6 @@
 		0E415A9025CD771600351672 /* PostListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequest.swift; sourceTree = "<group>"; };
 		0E415A9125CD771600351672 /* SystemMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemMessageRequest.swift; sourceTree = "<group>"; };
 		0E415A9225CD771600351672 /* AttentionListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionListRequest.swift; sourceTree = "<group>"; };
-		0E415A9325CD771600351672 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0E415A9425CD771600351672 /* RandomListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomListRequest.swift; sourceTree = "<group>"; };
 		0E415A9525CD771600351672 /* ParticipatedPostsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipatedPostsRequest.swift; sourceTree = "<group>"; };
 		0E415A9625CD771600351672 /* AttentionListSearchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionListSearchRequest.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				0E415A8725CD771600351672 /* HollowType.swift */,
 				0E415A9C25CD771600351672 /* DeviceInformationType.swift */,
 				0092370525D0007500961BBB /* PushNotificationType.swift */,
+				0050B9DD25D523B40035F556 /* PostType.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -379,16 +382,15 @@
 		0E415A8925CD771600351672 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
+				0E415A9025CD771600351672 /* PostListRequest.swift */,
 				0E415A8A25CD771600351672 /* PostDetailRequest.swift */,
 				0E415A8B25CD771600351672 /* PublishedPostsMessageRequest.swift */,
 				0E415A8C25CD771600351672 /* Comment.swift */,
 				0E415A8D25CD771600351672 /* SearchHistoryRequest.swift */,
 				0E415A8E25CD771600351672 /* SearchRequest.swift */,
 				0E415A8F25CD771600351672 /* SystemMessage.swift */,
-				0E415A9025CD771600351672 /* PostListRequest.swift */,
 				0E415A9125CD771600351672 /* SystemMessageRequest.swift */,
 				0E415A9225CD771600351672 /* AttentionListRequest.swift */,
-				0E415A9325CD771600351672 /* Post.swift */,
 				0E415A9425CD771600351672 /* RandomListRequest.swift */,
 				0E415A9525CD771600351672 /* ParticipatedPostsRequest.swift */,
 				0E415A9625CD771600351672 /* AttentionListSearchRequest.swift */,
@@ -471,6 +473,7 @@
 				0E415AB825CD771600351672 /* README.md */,
 				0E415AB925CD771600351672 /* CommentData.swift */,
 				0E415ABA25CD771600351672 /* PostData.swift */,
+				00BA551E25D5218600F44014 /* VoteData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -894,7 +897,6 @@
 				0E415ABF25CD771600351672 /* Comment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
 				0E415ACE25CD771600351672 /* EmailCheckRequest.swift in Sources */,
-				0E415AC625CD771600351672 /* Post.swift in Sources */,
 				0E415B4D25CD772200351672 /* LinearGradientExtensions.swift in Sources */,
 				0E415B4725CD772200351672 /* Blur.swift in Sources */,
 				0E415AC225CD771600351672 /* SystemMessage.swift in Sources */,
@@ -903,6 +905,7 @@
 				0E415B6F25CD772200351672 /* AccountInfoView.swift in Sources */,
 				0E415B7625CD772200351672 /* WanderView.swift in Sources */,
 				0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */,
+				00BA551F25D5218600F44014 /* VoteData.swift in Sources */,
 				0E415AE325CD771600351672 /* HollowImage.swift in Sources */,
 				0E415ABD25CD771600351672 /* PostDetailRequest.swift in Sources */,
 				0E415ACD25CD771600351672 /* DeviceInformationType.swift in Sources */,
@@ -948,6 +951,7 @@
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
 				0E415B6225CD772200351672 /* HollowVoteInputView.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
+				0050B9DE25D523B40035F556 /* PostType.swift in Sources */,
 				0E415ADC25CD771600351672 /* Data+hexEncodedString.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0E36F54B25D0F863001AE852 /* String+removeLineBreak.swift in Sources */,

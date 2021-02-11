@@ -14,6 +14,8 @@ struct HollowImage {
     var placeholder: (width: CGFloat, height: CGFloat)
     /// The image to display.
     var image: UIImage?
+    /// image url
+    var imageURL: String?
     
     /// - parameter placeholder: Placeholder metadata.
     /// - parameter image: The image to display, set it to `nil` when the image is still loading.
@@ -28,5 +30,11 @@ struct HollowImage {
     /// Call it right after the image has been fetched.
     mutating func setImage(_ image: UIImage) {
         self.image = image
+    }
+    
+    /// setImageURL
+    /// - Parameter imageURL: imageurl for image
+    mutating func setImageURL(_ imageURL: String) {
+        self.imageURL = imageURL
     }
 }
