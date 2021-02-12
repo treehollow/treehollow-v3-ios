@@ -17,10 +17,14 @@ struct TimelineView: View {
     @State private var scrolledToBottom: Bool? = false
     @State private var scrollToIndex: Int = -1
     @State private var searchBarSize: CGSize = .zero
+    @State private var showReload = false
+    @State private var showCreatePost = false
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
+    @ScaledMetric(wrappedValue: 35, relativeTo: .body) var body35: CGFloat
+    @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
     
     private var searchBarHeight: CGFloat { searchBarSize.height }
     
@@ -33,6 +37,7 @@ struct TimelineView: View {
             offset: $offset,
             atBottom: $scrolledToBottom,
             didScrollToBottom: viewModel.loadMorePosts,
+            didScroll: { direction in withAnimation { showReload = direction == .up }},
             didEndScroll: { searchBarTrackingOffset = offset },
             refresh: viewModel.refresh,
             content: { proxy in
@@ -41,7 +46,9 @@ struct TimelineView: View {
                         // FIXME: Ugly animation here
                         // Navigate to search view
                         withAnimation(.searchViewTransition) {
-                            isSearching = true
+//                            isSearching = true
+//                            detailPresentedIndex = -1
+                            showCreatePost = true
                         }
                     }) {
                         HStack {
@@ -118,12 +125,17 @@ struct TimelineView: View {
                         searchBarTrackingOffset = nil
                     }
                 }
-
+                
             })
+            
             .sheet(item: $detailPresentedIndex, content: { index in
                 HollowDetailView(postDataWrapper: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
             })
-        
+            
+            .fullScreenCover(isPresented: $showCreatePost) {
+                HollowInputView()
+            }
+            
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic
             .modifier(LoadingIndicator(isLoading: viewModel.posts.count == 0))

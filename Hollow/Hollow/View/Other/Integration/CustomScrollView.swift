@@ -11,10 +11,11 @@ import SwiftUI
 
 /// Wrapper for SwiftUI's ScrollView to receive delegate callbacks
 struct CustomScrollView<Content>: View where Content: View {
+    
     var offset: Binding<CGFloat?> = .constant(nil)
     var atBottom: Binding<Bool?> = .constant(nil)
     var didScrollToBottom: (() -> Void)? = nil
-    var didScroll: (() -> Void)? = nil
+    var didScroll: ((ScrollDirection) -> Void)? = nil
     var didEndScroll: (() -> Void)? = nil
     /// Handler to call when refreshing.
     ///
@@ -27,12 +28,14 @@ struct CustomScrollView<Content>: View where Content: View {
     }
 }
 
+enum ScrollDirection { case up, down }
+
 fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentable where Content: View {
     typealias UIViewControllerType = ScrollViewUIHostingController<Content>
     
     @Binding var offset: CGFloat?
     @Binding var atBottom: Bool?
-    let didScroll: (() -> Void)?
+    let didScroll: ((ScrollDirection) -> Void)?
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
     let refresh: ((@escaping () -> Void) -> Void)?
@@ -50,9 +53,10 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
 }
 
 fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Content>, UIScrollViewDelegate where Content: View {
+    
     var offset: Binding<CGFloat?>
     var atBottom: Binding<Bool?>
-    let didScroll: (() -> Void)?
+    let didScroll: ((ScrollDirection) -> Void)?
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
     let refresh: ((@escaping () -> Void) -> Void)?
@@ -66,14 +70,8 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     }
     var ready = false
     var scrollView: UIScrollView? = nil
-    private var isScrolling: Bool = false {
-        didSet {
-            if isScrolling { didScroll?() }
-            else { didEndScroll?() }
-        }
-    }
     
-    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, didScroll: (() -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
+    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, didScroll: ((ScrollDirection) -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
         self.offset = offset
         self.atBottom = atBottom
         self.didScroll = didScroll
@@ -138,7 +136,8 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        isScrolling = true
+        let direction: ScrollDirection = scrollView.panGestureRecognizer.translation(in: scrollView).y > 0 ? .up : .down
+        didScroll?(direction)
         if (scrollView.contentOffset.y + 1) >= (scrollView.contentSize.height - scrollView.frame.size.height) {
             atBottom.wrappedValue = true
             didScrollToBottom?()
@@ -155,12 +154,12 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         // Solution for detecting slow dragging: if the scroll view is not
         // decelerating, then the end of the dragging marks the end of the scrolling
         if !scrollView.isDecelerating {
-            isScrolling = false
+            didEndScroll?()
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        isScrolling = false
+        didEndScroll?()
     }
     
 }

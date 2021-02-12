@@ -1,5 +1,5 @@
 //
-//  String+CitedPostID.swift
+//  String+findCitedPostID.swift
 //  Hollow
 //
 //  Created by aliceinhollow on 12/2/2021.
@@ -12,9 +12,10 @@ extension String {
     /// find CitedPostID from a post text
     /// - Returns: Pid Int?
     func findCitedPostID() -> Int? {
-        let pidstrings = self.matches(regexString: #"#\d{1,7}"#)
-        if !pidstrings.isEmpty {
-            return Int(pidstrings[0])
+        let pidStrings = self.matches(regexString: #"#\d{1,7}"#)
+        if !pidStrings.isEmpty {
+            let postIdString = String(pidStrings[0].dropFirst())
+            return Int(postIdString)
         } else {
             return nil
         }
