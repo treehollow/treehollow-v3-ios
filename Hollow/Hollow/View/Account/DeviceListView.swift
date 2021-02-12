@@ -69,7 +69,10 @@ extension DeviceListView {
                     // We won't allow the user to terminate the current
                     // device in device list.
                     if !isCurrentDevice {
-                        MyButton(action: { logoutAction(device.deviceUUID) }, gradient: .vertical(gradient: .button)) {
+                        MyButton(
+                            action: { logoutAction(device.deviceUUID) },
+                            gradient: .vertical(gradient: .button),
+                            transitionAnimation: .default) {
                             Group {
                                 if isLoggingout {
                                     Text("Processing" + "...")

@@ -130,10 +130,10 @@
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
 		0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78F0B825D2E0090080C09E /* DefaultRequest.swift */; };
+		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
-		0EF0F5BB25D53912004C1CE2 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0F5BA25D53912004C1CE2 /* CustomTextEditor.swift */; };
 		0EF0F5C325D54F6C004C1CE2 /* KeyboardDismissBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0F5C225D54F6C004C1CE2 /* KeyboardDismissBar.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
 /* End PBXBuildFile section */
@@ -264,10 +264,10 @@
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E78F0B825D2E0090080C09E /* DefaultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequest.swift; sourceTree = "<group>"; };
+		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
-		0EF0F5BA25D53912004C1CE2 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTextEditor.swift; path = ../../../../../../../Downloads/CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EF0F5C225D54F6C004C1CE2 /* KeyboardDismissBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissBar.swift; sourceTree = "<group>"; };
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -518,10 +518,10 @@
 			children = (
 				0E415AED25CD772200351672 /* CustomTabView.swift */,
 				0E415AEF25CD772200351672 /* CustomScrollView.swift */,
+				0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */,
 				0E415AEE25CD772200351672 /* ReCAPTCHAWebView.swift */,
 				0E415AF025CD772200351672 /* Blur.swift */,
 				0E09B7A925D4D73100DC5615 /* ImageViewer.swift */,
-				0EF0F5BA25D53912004C1CE2 /* CustomTextEditor.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -862,6 +862,7 @@
 				0E415B5425CD772200351672 /* Image+imageButton.swift in Sources */,
 				0E415AE125CD771600351672 /* ImageSaver.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
+				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0E415B5D25CD772200351672 /* HollowFavouritesCardView.swift in Sources */,
 				0E415B7125CD772200351672 /* RegulationView.swift in Sources */,
 				0E415ADE25CD771600351672 /* DefaultsKeys.swift in Sources */,
@@ -925,7 +926,6 @@
 				0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */,
 				0E415AD625CD771600351672 /* EditAttentionRequest.swift in Sources */,
 				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,
-				0EF0F5BB25D53912004C1CE2 /* CustomTextEditor.swift in Sources */,
 				0E415B6825CD772200351672 /* HollowTextView.swift in Sources */,
 				0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */,
 				0E415ACB25CD771600351672 /* SetPushRequest.swift in Sources */,

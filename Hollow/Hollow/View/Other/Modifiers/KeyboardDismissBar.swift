@@ -15,8 +15,9 @@ struct KeyboardDismissBarModifier: ViewModifier {
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
             content
-            KeyboardDismissBar(keyboardPresented: $keyboardPresented)
-                .opacity(keyboardPresented ? 1 : 0)
+            if keyboardPresented {
+                KeyboardDismissBar(keyboardPresented: $keyboardPresented)
+            }
         }
     }
 }
@@ -24,9 +25,9 @@ struct KeyboardDismissBarModifier: ViewModifier {
 struct KeyboardDismissBar: View {
     @Binding var keyboardPresented: Bool
     var body: some View {
-        Button("Done", action: {
-            keyboardPresented = false
-        })
+        Button(action: { keyboardPresented = false }) {
+            Text("Done").fontWeight(.semibold)
+        }
         .trailing()
         .padding()
         .blurBackground()

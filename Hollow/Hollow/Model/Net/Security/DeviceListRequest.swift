@@ -35,7 +35,7 @@ struct DeviceListRequestResult: DefaultRequestResult {
     var thisDevice: String?
 }
 
-struct DeviceListRequestResultData {
+struct DeviceListRequestResultData: Codable {
     var devices: [DeviceInformationType]
     var thisDeviceUUID: String
 }

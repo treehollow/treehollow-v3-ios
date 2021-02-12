@@ -15,7 +15,7 @@ import Foundation
 /// `static let imageBaseURL = Key<String?>("image.base.url")`
 /// Remember to register the initial value before any call to fetch the data.
 
-// MARK: - Model
+// MARK: - Model Data
 extension Defaults.Keys {
     /// Hollow type
     static let hollowType = Key<HollowType?>("config.hollow.type")
@@ -28,8 +28,16 @@ extension Defaults.Keys {
 }
 
 
-// MARK: - View
+// MARK: - UI
 extension Defaults.Keys {
     /// Whether the user uses advanced search in `SearchView`
     static let searchViewShowsAdvanced = Key<Bool>("search.shows.advanced", default: false)
+}
+
+
+// MARK: - Cache
+// We store some result from the requests in the defaults to
+// cache the lastest results, but just for placeholder use.
+extension Defaults.Keys {
+    static let deviceListCache = Key<DeviceListRequestResultData?>("cache.device.list")
 }

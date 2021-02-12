@@ -51,6 +51,8 @@ struct HollowInputView: View {
                         .defaultButtonStyle()
                 })
                 Spacer()
+                
+                
             }
             .layoutPriority(0.9)
         }

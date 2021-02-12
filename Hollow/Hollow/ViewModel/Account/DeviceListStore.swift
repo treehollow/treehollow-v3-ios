@@ -18,7 +18,8 @@ class DeviceListStore: ObservableObject {
     @Published var errorMessage: (title: String, message: String)?
     
     init() {
-        deviceData = .init(devices: [], thisDeviceUUID: "")
+        // Load the latest cache as placeholder
+        deviceData = Defaults[.deviceListCache] ?? .init(devices: [], thisDeviceUUID: "")
         
         // Request data
         requestDeviceList()
@@ -50,7 +51,9 @@ class DeviceListStore: ObservableObject {
             withAnimation {
                 self.deviceData = sortedResult
             }
-            print(self.deviceData)
+            
+            // Store in Defaults for placeholder use
+            Defaults[.deviceListCache] = sortedResult
         })
     }
     
@@ -79,8 +82,9 @@ class DeviceListStore: ObservableObject {
             switch result {
             case .success:
                 let index = self.deviceData.devices.firstIndex(where: { $0.deviceUUID == deviceUUID })!
-                _ = withAnimation {
+                withAnimation {
                     self.deviceData.devices.remove(at: index)
+                    Defaults[.deviceListCache] = self.deviceData
                 }
             }
         })
