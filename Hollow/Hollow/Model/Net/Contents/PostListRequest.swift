@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import UIKit
 
 // TODO: Add documentation when HTTP doc updates
 
@@ -25,14 +24,11 @@ struct PostListRequestConfiguration {
 struct PostListRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
-    var data: [Post]
+    var data: [Post]?
 }
 
 /// ResultData for PostListRequest
-struct PostListRequestResultData {
-    var hasImage: Bool
-    var posts: [PostData]
-}
+typealias PostListRequestResultData = [PostDataWrapper]
 
 /// PostListRequest
 struct PostListRequest: DefaultRequest {
@@ -59,51 +55,42 @@ struct PostListRequest: DefaultRequest {
             headers: headers,
             method: .get,
             resultToResultData: {result in
-                var posts = [PostData]()
-                for post in result.data {
+                var postWrappers = [PostDataWrapper]()
+                for post in result.data! {
                     // process votes
                     var vote: VoteData? = nil
                     if let voteResult = post.vote {
                         vote = initVoteDataByVote(voteResult: voteResult)
                     }
+                    // process image
                     var image: HollowImage? = nil
                     if let imageURL = post.url, let imageMetaData = post.imageMetadata {
-                        image = HollowImage(placeholder: (width: CGFloat(imageMetaData.w), height: CGFloat(imageMetaData.h)), image: nil)
+                        image = HollowImage(placeholder: (width: imageMetaData.w, height: imageMetaData.h), image: nil)
                         image?.setImageURL(imageURL)
                     }
-                    posts.append(
-                        PostData(
-                            attention: post.attention,
-                            deleted: post.deleted,
-                            likeNumber: post.likenum,
-                            permissions: post.permissions,
-                            postId: post.pid,
-                            replyNumber: post.reply,
-                            tag: post.tag,
-                            text: post.text,
-                            type: post.type ?? .text,
-                            hollowImage: image,
-                            vote: vote,
-                            /// no comment here
-                            comments: [CommentData]()
-                        )
-                    )
+                    // process citedpost
+                    
+                    // process comments (<=3 per post)
+                    
+//                    postWrappers.append(
+//                        PostDataWrapper(post: PostData(
+//                            attention: post.attention,
+//                            deleted: post.deleted,
+//                            likeNumber: post.likenum,
+//                            permissions: post.permissions,
+//                            postId: post.pid,
+//                            replyNumber: post.reply,
+//                            tag: post.tag,
+//                            text: post.text,
+//                            // deprecated type
+//                            type: post.type ?? .text,
+//                            hollowImage: image,
+//                            vote: vote,
+//                            /// no comment here
+//                            comments: [CommentData]()
+//                        ), citedPost: CitedPostData(postId: 0, text: "testtext")))
                 }
-                if self.configuration.needImage {
-                    // need image
-                    completion(ResultData(hasImage: false, posts: posts),nil)
-                    // load image here
-                    for postData in posts {
-                        if let image = postData.hollowImage {
-                            // process image
-                        }
-                    }
-                    return ResultData(hasImage: true, posts: posts)
-                }
-                else {
-                    //don't need image
-                    return ResultData(hasImage: false, posts: posts)
-                }
+            return postWrappers
             },
             completion: completion)
     }

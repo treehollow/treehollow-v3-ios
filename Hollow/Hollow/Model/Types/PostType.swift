@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// Deprecated! Don't use this to judge type
 enum PostType: String, Codable {
@@ -28,8 +29,8 @@ enum PostPermissionType: String, Codable, CaseIterable {
 
 /// ImageMetadata
 struct ImageMetadata: Codable {
-    var w: Float
-    var h: Float
+    var w: CGFloat
+    var h: CGFloat
 }
 
 /// Post for request result, see `http-api doc`
