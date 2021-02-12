@@ -17,6 +17,7 @@ struct HollowApp: App {
         WindowGroup {
             if let _ = Defaults[.accessToken] {
                 MainView()
+//                HollowInputView()
             } else {
                 WelcomeView()
             }

@@ -16,6 +16,8 @@ struct ImageViewer: View {
     @Binding var presented: Bool
     @State private var lineLimit: Int? = 1
     @State private var scale: CGFloat = 0
+    @State private var showActionSheet = false
+    @State private var savePhotoMessage: (title: String, message: String)?
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -23,7 +25,7 @@ struct ImageViewer: View {
     
     var body: some View {
         ZStack {
-            ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale)
+            ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale, showActionSheet: $showActionSheet)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 Button(action: { presented = false }) {
@@ -48,7 +50,7 @@ struct ImageViewer: View {
                         .leading()
                         .blurBackground()
                         .lineLimit(lineLimit)
-                        .onTapGesture { withAnimation(.spring(response: 0.4)) {
+                        .onTapGesture { withAnimation {
                             lineLimit = lineLimit == nil ? 1 : nil
                         }}
                 }
@@ -59,13 +61,29 @@ struct ImageViewer: View {
             .opacity(scale > 2 ? 0 : 1)
         }
 
-        .blurBackground()
+        .blurBackground(style: .systemThinMaterialDark)
         .background(
             Image(uiImage: image)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
         )
+        
+        .actionSheet(isPresented: $showActionSheet) {
+            ActionSheet(title: Text("Image"), buttons: [
+                .cancel(),
+                .default(Text("Save to Photos"), action: {
+                    let saver = ImageSaver(finishHandler: { error in
+                        savePhotoMessage =
+                            (error?.localizedDescription ?? "Successfully saved to Photos", "")
+                    })
+                    saver.saveImage(image)
+                })
+            ])
+        }
+        
+        .modifier(ErrorAlert(errorMessage: $savePhotoMessage))
+
     }
 }
 
@@ -73,12 +91,16 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
     var image: UIImage
     var presented: Binding<Bool>
     var scale: Binding<CGFloat>
+    var showActionSheet: Binding<Bool>
     func makeUIView(context: Context) -> ImageScrollView {
         let view = ImageScrollView()
         view.setup()
         view.display(image: image)
         view.maxScaleFromMinScale = 4
         view.imageScrollViewDelegate = context.coordinator
+        view.addGestureRecognizer(
+            UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.onLongPresss))
+        )
         return view
     }
     
@@ -106,6 +128,9 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
             
         }
         
+        @objc func onLongPresss() {
+            parent.showActionSheet.wrappedValue = true
+        }
     }
     
 }

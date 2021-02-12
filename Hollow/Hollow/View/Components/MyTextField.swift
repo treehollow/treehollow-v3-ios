@@ -14,6 +14,7 @@ struct MyTextField<Content>: View where Content: View {
     var title: String?
     var footer: String? = nil
     var isSecureContent = false
+    var backgroundColor: Color = .hollowCardBackground
     var content: (() -> Content)? = nil
     
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
@@ -46,7 +47,7 @@ struct MyTextField<Content>: View where Content: View {
             }
             .padding(10)
             .padding(.horizontal, 6)
-            .background(Color.hollowCardBackground)
+            .background(backgroundColor)
             .cornerRadius(10)
             
             if let footer = footer {

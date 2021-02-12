@@ -30,7 +30,7 @@ struct HollowImageView: View {
                                 ImageSaver(finishHandler: { error in
                                     showSavePhotoAlert = true
                                     savePhotoError = error?.localizedDescription
-                                }).writeToPhotoAlbum(image: image)
+                                }).saveImage(image)
                             }) {
                                 Label(LocalizedStringKey("Save to Photos"), systemImage: "square.and.arrow.down")
                             }

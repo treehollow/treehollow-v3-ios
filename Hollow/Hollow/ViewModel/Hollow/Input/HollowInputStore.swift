@@ -14,6 +14,7 @@ import Defaults
 class HollowInputStore: ObservableObject {
     @Published var text: String = ""
     // FIXME: Remove this code in real tests
+    @Published var image: UIImage?
     #if targetEnvironment(simulator)
     @Published var availableTags: [String] = ["性相关", "政治相关", "令人不适"]
     #else
@@ -22,11 +23,33 @@ class HollowInputStore: ObservableObject {
     @Published var selectedTag: String?
     @Published var voteInformation: VoteInformation?
     
+    func newVote() {
+        self.voteInformation = .init(options: ["", "", ""])
+    }
 }
 
 extension HollowInputStore {
     struct VoteInformation {
         var options: [String]
-        var hasDuplicate: Bool { Set(options).count != options.count }
+        var hasDuplicate: Bool {
+            var optionsWithoutEmptyString = options
+            optionsWithoutEmptyString.removeAll(where: { $0 == "" })
+            return Set(optionsWithoutEmptyString).count != optionsWithoutEmptyString.count
+        }
+        var valid: Bool {
+            for option in options {
+                if option == "" { return false }
+            }
+            return !hasDuplicate
+        }
+        
+        func optionHasDuplicate(_ text: String) -> Bool {
+            guard text != "" else { return false }
+            var count: Int = 0
+            for option in options {
+                if text == option { count += 1}
+            }
+            return count > 1
+        }
     }
 }

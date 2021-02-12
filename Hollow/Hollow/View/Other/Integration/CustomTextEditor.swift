@@ -2,35 +2,22 @@
 //  CustomTextEditor.swift
 //  Hollow
 //
-//  Created by 梁业升 on 2021/2/7.
+//  Created by liang2kl on 2021/2/7.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import SwiftUI
 
-/// Helper modifier for wrapping `TextEditor` inside `TextEditorWrapper`.
-///
-/// Modify the `TextEditor` first, like applying `fixedSize()`, before applying this modifier.
-struct CustomTextEditorModifier: ViewModifier {
-    @Binding var text: String
-    @Binding var editing: Bool
-    func body(content: Content) -> some View {
-        TextEditorWrapper(text: $text, editing: $editing) { content }
-    }
-}
-
 /// Wrapper for text editor to access the internal `UITextView` and enjoy
 /// the full functionality of UIKit.
-///
-/// The content must contain `TextEditor`.
-struct TextEditorWrapper<Content>: View where Content: View {
+struct CustomTextEditor<Content>: View where Content: View {
     @Binding var text: String
     @Binding var editing: Bool
 
-    let content: () -> Content
+    let modifiers: (TextEditor) -> Content
     
     var body: some View {
-        TextEditorRepresentable(text: $text, editing: $editing, content: content())
+        TextEditorRepresentable(text: $text, editing: $editing, content: modifiers(TextEditor(text: $text)))
     }
 }
 
@@ -56,7 +43,6 @@ fileprivate struct TextEditorRepresentable<Content>: UIViewControllerRepresentab
 }
 
 fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Content>, UITextViewDelegate where Content: View {
-    var ready = false
     var text: Binding<String>
     var textViewEditing: Binding<Bool>
     var textView: UITextView?
@@ -71,17 +57,28 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        setUITextView()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if ready { return } // avoid running more than once
-        ready = true
+        setUITextView()
+    }
+    
+    func setUITextView() {
+        if textView != nil { return }
         
         textView = findUITextView(view: view)
         textView?.backgroundColor = nil
+        
+        // Once we set the delegate to `self`, some of the original functionality
+        // of SwiftUI's TextEditor will be lost (e.g. the @Binding text will not
+        // change). Thus we need to implement by ourselves (using delegate methods).
         textView?.delegate = self
-//        textView?.isEditable = false
-//        textView?.isScrollEnabled = false
     }
     
     private func findUITextView(view: UIView) -> UITextView? {
@@ -98,21 +95,13 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
     
     // MARK: - UITextViewDelegate
     func textViewDidChange(_ textView: UITextView) {
-        text.wrappedValue = textView.text
+        withAnimation {
+            text.wrappedValue = textView.text
+        }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textViewEditing.wrappedValue = true
+        withAnimation {
+            textViewEditing.wrappedValue = true
+        }
     }
-}
-
-func setImage(array: inout [PostData], image: UIImage, index: Int) {
-    array[index].hollowImage?.image = image
-}
-func testPerformRequest(completion: (String) -> Void) {
-    
-    var resultData: [PostData]
-    
-    resultData = [testPostData2]
-    
-    setImage(array: &resultData, image: .init(), index: 0)
 }

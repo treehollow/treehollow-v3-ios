@@ -131,6 +131,8 @@
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
 		0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78F0B825D2E0090080C09E /* DefaultRequest.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
+		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
+		0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
@@ -265,6 +267,8 @@
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E78F0B825D2E0090080C09E /* DefaultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequest.swift; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
+		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCapsuleButton.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -522,6 +526,7 @@
 				0E415AEE25CD772200351672 /* ReCAPTCHAWebView.swift */,
 				0E415AF025CD772200351672 /* Blur.swift */,
 				0E09B7A925D4D73100DC5615 /* ImageViewer.swift */,
+				0EC4B67E25D670070065BB82 /* ImagePicker.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 				0E415B0525CD772200351672 /* MyButton.swift */,
 				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
 				0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */,
+				0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -878,6 +884,7 @@
 				0E415ABE25CD771600351672 /* PublishedPostsMessageRequest.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
+				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
 				0E415B8E25CD773E00351672 /* TestPostData.swift in Sources */,
 				0E415B7425CD772200351672 /* TimelineView.swift in Sources */,
 				0E415AC725CD771600351672 /* RandomListRequest.swift in Sources */,
@@ -941,6 +948,7 @@
 				0E415AE525CD771600351672 /* CommentData.swift in Sources */,
 				0E415ABB25CD771600351672 /* Constants.swift in Sources */,
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
+				0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
 				0050B9DE25D523B40035F556 /* PostType.swift in Sources */,
 				0E415ADC25CD771600351672 /* Data+hexEncodedString.swift in Sources */,

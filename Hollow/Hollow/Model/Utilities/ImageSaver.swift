@@ -15,7 +15,7 @@ class ImageSaver: NSObject {
     
     var finishHandler: (Error?) -> Void
     
-    func writeToPhotoAlbum(image: UIImage) {
+    func saveImage(_ image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveError), nil)
     }
 

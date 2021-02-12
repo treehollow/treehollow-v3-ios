@@ -17,6 +17,7 @@ struct KeyboardDismissBarModifier: ViewModifier {
             content
             if keyboardPresented {
                 KeyboardDismissBar(keyboardPresented: $keyboardPresented)
+                    .layoutPriority(1)
             }
         }
     }
@@ -25,12 +26,12 @@ struct KeyboardDismissBarModifier: ViewModifier {
 struct KeyboardDismissBar: View {
     @Binding var keyboardPresented: Bool
     var body: some View {
-        Button(action: { keyboardPresented = false }) {
+        Button(action: { withAnimation { keyboardPresented = false }}) {
             Text("Done").fontWeight(.semibold)
         }
         .trailing()
         .padding()
-        .blurBackground()
+        .background(Color.uiColor(.systemBackground))
         .layoutPriority(1)
     }
 }
