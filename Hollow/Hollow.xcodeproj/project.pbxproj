@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0050B9DE25D523B40035F556 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050B9DD25D523B40035F556 /* PostType.swift */; };
+		005813A225D649C400F431E8 /* String+CitedPostID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005813A125D649C400F431E8 /* String+CitedPostID.swift */; };
 		00902FD825D285DF00FA14B0 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00902FD725D285DF00FA14B0 /* RequestError.swift */; };
 		0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370225CFFAC200961BBB /* GetPushRequest.swift */; };
 		0092370625D0007500961BBB /* PushNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370525D0007500961BBB /* PushNotificationType.swift */; };
@@ -142,6 +143,7 @@
 
 /* Begin PBXFileReference section */
 		0050B9DD25D523B40035F556 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
+		005813A125D649C400F431E8 /* String+CitedPostID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CitedPostID.swift"; sourceTree = "<group>"; };
 		00902FD725D285DF00FA14B0 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		0092370225CFFAC200961BBB /* GetPushRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPushRequest.swift; sourceTree = "<group>"; };
 		0092370525D0007500961BBB /* PushNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationType.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				0E004F3425D021D700466FA5 /* Int+bool.swift */,
 				0E004F3725D0239F00466FA5 /* Bool+int.swift */,
 				0E36F54A25D0F863001AE852 /* String+removeLineBreak.swift */,
+				005813A125D649C400F431E8 /* String+CitedPostID.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				0E415B7725CD772200351672 /* MainView.swift in Sources */,
 				0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */,
 				0E004F3825D0239F00466FA5 /* Bool+int.swift in Sources */,
+				005813A225D649C400F431E8 /* String+CitedPostID.swift in Sources */,
 				0E415AE625CD771600351672 /* PostData.swift in Sources */,
 				0E415AD925CD771600351672 /* SendCommentRequest.swift in Sources */,
 				0E415B4425CD772200351672 /* CustomTabView.swift in Sources */,
