@@ -39,7 +39,7 @@ struct SearchView: View {
                     }
                 }) {
                     Image(systemName: "xmark")
-                        .imageButton(sizeFor20: body20)
+                        .modifier(ImageButtonModifier())
                         .animation(transitionAnimation)
                         .padding(.trailing)
                 }

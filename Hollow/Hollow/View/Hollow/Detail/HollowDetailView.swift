@@ -14,7 +14,6 @@ struct HollowDetailView: View {
     @State private var commentRect: CGRect = .zero
     @State private var scrollViewOffset: CGFloat? = 0
     
-    @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     
     var body: some View {
@@ -27,7 +26,7 @@ struct HollowDetailView: View {
                     HStack {
                         Button(action: { presentedIndex = nil }) {
                             Image(systemName: "xmark")
-                                .imageButton(sizeFor20: body20)
+                                .modifier(ImageButtonModifier())
                                 .padding(.trailing, 5)
                         }
                         .padding(.trailing, 5)

@@ -13,7 +13,8 @@ extension String {
     /// - Returns: Pid Int?
     func findCitedPostID() -> Int? {
         let pidStrings = self.matches(regexString: #"#\d{1,7}"#)
-        if !pidStrings.isEmpty {
+        if pidStrings.count == 1 {
+            // Exactly one cited post
             let postIdString = String(pidStrings[0].dropFirst())
             return Int(postIdString)
         } else {

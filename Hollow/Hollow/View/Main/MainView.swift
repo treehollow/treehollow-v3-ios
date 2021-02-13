@@ -10,6 +10,14 @@ import SwiftUI
 struct MainView: View {
     @State private var page: Page = .timeline
     @State private var isSearching = false
+    @State private var showCreatePost = false
+    @State private var showRefresh = false
+    @State private var shouldReloadTimeline = false
+    
+    @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
+    @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
+
+    @Namespace var animation
     
     var body: some View {
         ZStack {
@@ -24,17 +32,49 @@ struct MainView: View {
                 CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
                     WanderView()
                         .tag(Page.wander)
-                    TimelineView(isSearching: $isSearching)
-                        .tag(Page.timeline)
+                    TimelineView(
+                        isSearching: $isSearching,
+                        showCreatePost: $showCreatePost,
+                        showReload: $showRefresh,
+                        shouldReload: $shouldReloadTimeline
+                    )
+                    .tag(Page.timeline)
                 }
+                .overlay(
+                    VStack {
+                        button(action: { withAnimation { showCreatePost = true }}, systemName: "plus")
+                            .matchedGeometryEffect(id: "add.post", in: animation)
+                        if showRefresh {
+                            button(action: { withAnimation { shouldReloadTimeline = true }}, systemName: "arrow.clockwise")
+                                .padding(.top, 5)
+                        }
+                    }
+                    .bottom()
+                    .trailing()
+                    .padding()
+                    .padding(5)
+                    .padding(.bottom, 5)
+                )
             }
             .edgesIgnoringSafeArea(.bottom)
         }
         .overlay(
-            Group { if isSearching {
-                SearchView(presented: $isSearching)
-            }}
+            Group {
+                if isSearching {
+                    SearchView(presented: $isSearching)
+                }
+                if showCreatePost {
+                    HollowInputView(presented: $showCreatePost)
+                        .matchedGeometryEffect(id: "add.post", in: animation)
+                }
+            }
         )
+//
+//        .fullScreenCover(isPresented: $showCreatePost) {
+//            HollowInputView(presented: $showCreatePost)
+//                .matchedGeometryEffect(id: "add.post", in: animation)
+//        }
+
     }
     
     enum Page: Int, Identifiable {
@@ -46,6 +86,19 @@ struct MainView: View {
 }
 
 extension MainView {
+    func button(action: @escaping () -> Void, systemName: String) -> some View {
+        Button(action: action) {
+            ZStack {
+                LinearGradient.vertical(gradient: .hollowContentVote)
+                Image(systemName: systemName)
+                    .font(.system(size: body30))
+                    .foregroundColor(.white)
+            }
+        }
+        .frame(width: body50, height: body50)
+        .clipShape(Circle())
+    }
+    
     private struct HeaderView: View {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool

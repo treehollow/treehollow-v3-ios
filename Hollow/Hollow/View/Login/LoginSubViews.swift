@@ -27,7 +27,7 @@ extension LoginView {
                     }
                 }) {
                     Image(systemName: "xmark")
-                        .imageButton(sizeFor20: body20)
+                        .modifier(ImageButtonModifier())
                         .padding(.bottom)
                 }
                 .leading()

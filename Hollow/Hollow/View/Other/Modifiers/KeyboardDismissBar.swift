@@ -9,24 +9,30 @@
 import SwiftUI
 
 struct KeyboardDismissBarModifier: ViewModifier {
-    @Binding var keyboardPresented: Bool
-    @State private var dismiss: Bool = false
+    @Binding var editing: Bool
+    @State private var keyboardOnScreen = false
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
             content
-            if keyboardPresented {
-                KeyboardDismissBar(keyboardPresented: $keyboardPresented)
+            if keyboardOnScreen && editing {
+                KeyboardDismissBar(editing: $editing)
                     .layoutPriority(1)
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            withAnimation { keyboardOnScreen = true }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            withAnimation { keyboardOnScreen = false }
         }
     }
 }
 
 struct KeyboardDismissBar: View {
-    @Binding var keyboardPresented: Bool
+    @Binding var editing: Bool
     var body: some View {
-        Button(action: { withAnimation { keyboardPresented = false }}) {
+        Button(action: { withAnimation { editing = false }}) {
             Text("Done").fontWeight(.semibold)
         }
         .trailing()
@@ -38,6 +44,6 @@ struct KeyboardDismissBar: View {
 
 struct KeyboardDismissBar_Previews: PreviewProvider {
     static var previews: some View {
-        KeyboardDismissBar(keyboardPresented: .constant(true))
+        KeyboardDismissBar(editing: .constant(true))
     }
 }

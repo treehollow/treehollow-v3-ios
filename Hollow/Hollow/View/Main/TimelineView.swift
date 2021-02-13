@@ -9,6 +9,10 @@ import SwiftUI
 
 struct TimelineView: View {
     @Binding var isSearching: Bool
+    @Binding var showCreatePost: Bool
+    @Binding var showReload: Bool
+    @Binding var shouldReload: Bool
+
     @ObservedObject var viewModel: Timeline = .init()
     @State private var detailPresentedIndex: Int?
     @State private var offset: CGFloat? = 0
@@ -17,14 +21,10 @@ struct TimelineView: View {
     @State private var scrolledToBottom: Bool? = false
     @State private var scrollToIndex: Int = -1
     @State private var searchBarSize: CGSize = .zero
-    @State private var showReload = false
-    @State private var showCreatePost = false
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
-    @ScaledMetric(wrappedValue: 35, relativeTo: .body) var body35: CGFloat
-    @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
     
     private var searchBarHeight: CGFloat { searchBarSize.height }
     
@@ -32,7 +32,6 @@ struct TimelineView: View {
     private let maxNoneLazyCards = 2
     
     var body: some View {
-        // TODO: Show refresh button
         CustomScrollView(
             offset: $offset,
             atBottom: $scrolledToBottom,
@@ -126,15 +125,21 @@ struct TimelineView: View {
                     }
                 }
                 
+                // Receive the notification of performing reload from the main view
+                .onChange(of: shouldReload) { _ in
+                    if shouldReload { withAnimation {
+                        proxy.scrollTo(-1, anchor: .top)
+                        viewModel.refresh(finshHandler: {})
+                        shouldReload = false
+                    }}
+                }
+                
             })
-            
+
+            // Present post detail
             .sheet(item: $detailPresentedIndex, content: { index in
                 HollowDetailView(postDataWrapper: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
             })
-            
-            .fullScreenCover(isPresented: $showCreatePost) {
-                HollowInputView()
-            }
             
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic

@@ -11,13 +11,11 @@ import SwiftUI
 struct BarButton: View {
     var action: () -> Void
     var systemImageName: String
-    
-    @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
 
     var body: some View {
         Button(action: action) {
             Image(systemName: systemImageName)
-                .imageButton(sizeFor20: body20)
+                .modifier(ImageButtonModifier())
         }
     }
 }
