@@ -29,6 +29,7 @@ struct LoginRequestResult: DefaultRequestResult {
 struct LoginRequestResultData {
     var token: String
     var uuid: UUID
+    var message: String?
 }
 
 struct LoginRequest: DefaultRequest {
@@ -60,7 +61,7 @@ struct LoginRequest: DefaultRequest {
             method: .post,
             resultToResultData: { result in
                 guard let token = result.token, let uuid = result.uuid else { return nil }
-                return LoginRequestResultData(token: token, uuid: uuid)
+                return LoginRequestResultData(token: token, uuid: uuid, message: result.msg)
             },
             completion: completion
         )
