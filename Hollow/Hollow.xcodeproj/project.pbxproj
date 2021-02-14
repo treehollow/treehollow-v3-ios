@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0050B9DE25D523B40035F556 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050B9DD25D523B40035F556 /* PostType.swift */; };
+		0050B9DE25D523B40035F556 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050B9DD25D523B40035F556 /* Post.swift */; };
 		005813A225D649C400F431E8 /* String+findCitedPostID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005813A125D649C400F431E8 /* String+findCitedPostID.swift */; };
 		00902FD825D285DF00FA14B0 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00902FD725D285DF00FA14B0 /* RequestError.swift */; };
 		0092370325CFFAC200961BBB /* GetPushRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092370225CFFAC200961BBB /* GetPushRequest.swift */; };
@@ -147,7 +147,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0050B9DD25D523B40035F556 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
+		0050B9DD25D523B40035F556 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		005813A125D649C400F431E8 /* String+findCitedPostID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+findCitedPostID.swift"; sourceTree = "<group>"; };
 		00902FD725D285DF00FA14B0 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		0092370225CFFAC200961BBB /* GetPushRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPushRequest.swift; sourceTree = "<group>"; };
@@ -382,7 +382,9 @@
 				0E415A8725CD771600351672 /* HollowType.swift */,
 				0E415A9C25CD771600351672 /* DeviceInformationType.swift */,
 				0092370525D0007500961BBB /* PushNotificationType.swift */,
-				0050B9DD25D523B40035F556 /* PostType.swift */,
+				0050B9DD25D523B40035F556 /* Post.swift */,
+				0E415A8C25CD771600351672 /* Comment.swift */,
+				0E415A8F25CD771600351672 /* SystemMessage.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -409,10 +411,8 @@
 				0E415A9025CD771600351672 /* PostListRequest.swift */,
 				0E415A8A25CD771600351672 /* PostDetailRequest.swift */,
 				0E415A8B25CD771600351672 /* PublishedPostsMessageRequest.swift */,
-				0E415A8C25CD771600351672 /* Comment.swift */,
 				0E415A8D25CD771600351672 /* SearchHistoryRequest.swift */,
 				0E415A8E25CD771600351672 /* SearchRequest.swift */,
-				0E415A8F25CD771600351672 /* SystemMessage.swift */,
 				0E415A9125CD771600351672 /* SystemMessageRequest.swift */,
 				0E415A9225CD771600351672 /* AttentionListRequest.swift */,
 				0E415A9425CD771600351672 /* RandomListRequest.swift */,
@@ -973,7 +973,7 @@
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
 				0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
-				0050B9DE25D523B40035F556 /* PostType.swift in Sources */,
+				0050B9DE25D523B40035F556 /* Post.swift in Sources */,
 				0E40F74B25D8CF5D003A2342 /* AvatarGenerator.swift in Sources */,
 				0E415ADC25CD771600351672 /* Data+hexEncodedString.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,

@@ -22,6 +22,7 @@ struct PostData: Identifiable {
     var replyNumber: Int
     var tag: String?
     var text: String
+    /// **will be deprecated**
     var type: PostType
     /// Image wrapper for actual image.
     ///

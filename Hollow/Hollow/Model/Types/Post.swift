@@ -1,5 +1,5 @@
 //
-//  PostType.swift
+//  Post.swift
 //  Hollow
 //
 //  Created by aliceinhollow on 11/2/2021.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/// Deprecated! Don't use this to judge type
+/// **Deprecated! Don't use this to judge type**
 enum PostType: String, Codable {
     case text = "text"
     case image = "image"
@@ -49,7 +49,7 @@ struct Post: Codable {
     var type: PostType?
     /// updateTimestamp
     var updatedAt: Int
-    /// `url` entry in backend API,imageURL
+    /// `url` entry in backend API,imageURL ,this name will be deprecated
     var url: String?
     var imageMetadata: ImageMetadata?
     var vote: Vote?

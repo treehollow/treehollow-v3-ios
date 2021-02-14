@@ -20,6 +20,7 @@ struct CommentData: Identifiable {
     var postId: Int
     var tags: [String]
     var text: String
+    /// **will be deprecated**
     var type: CommentType
     var image: HollowImage?
 }

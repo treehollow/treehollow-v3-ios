@@ -43,6 +43,6 @@ class AvatarStore<HashableValue>: ObservableObject where HashableValue: Hashable
 
 struct Avator_Previews: PreviewProvider {
     static var previews: some View {
-        Avator(store: AvatarStore(configuration: AvatarConfiguration(colors: [.white, .blue], resolution: 6), value: 120934))
+        Avatar(store: AvatarStore(configuration: AvatarConfiguration(colors: [.white, .blue], resolution: 6), value: 120934))
     }
 }

@@ -8,9 +8,12 @@
 import Foundation
 
 /// Data representation of a system message
-struct SystemMessage {
+struct SystemMessage: Codable {
+    /// message content
     var content: String
+    /// unix time stamp of this message
     var timestamp: Int
+    /// message title
     var title: String
 }
 
