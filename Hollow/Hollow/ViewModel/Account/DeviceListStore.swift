@@ -26,7 +26,7 @@ class DeviceListStore: ObservableObject {
     }
     
     func requestDeviceList() {
-        let apiRoot = Defaults[.hollowConfig]!.apiRoot
+        let apiRoot = Defaults[.hollowConfig]!.apiRootUrls
         let request = DeviceListRequest(configuration: .init(token: Defaults[.accessToken]!, apiRoot: apiRoot))
         withAnimation {
             isLoading = true
@@ -59,7 +59,7 @@ class DeviceListStore: ObservableObject {
     
     func logout(deviceUUID: String) {
         let token = Defaults[.accessToken]!
-        let apiRoot = Defaults[.hollowConfig]!.apiRoot
+        let apiRoot = Defaults[.hollowConfig]!.apiRootUrls
         let request = DeviceTerminationRequest(configuration: .init(deviceUUID: deviceUUID, token: token, apiRoot: apiRoot))
         
         withAnimation {

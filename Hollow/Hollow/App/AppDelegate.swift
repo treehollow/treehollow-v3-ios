@@ -61,4 +61,30 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
         // TODO: Implementation
     }
+    
+    private func fetchConfig() {
+        guard let hollowType = Defaults[.hollowType] else { return }
+        var configURL: String? {
+            switch hollowType {
+            case .thu: return Constants.HollowConfig.thuConfigURL
+            case .pku: return Constants.HollowConfig.pkuConfigURL
+            case .other:
+                return Defaults[.customConfigURL]
+            }
+        }
+        
+        guard let urlString = configURL else { return }
+        let request = GetConfigRequest(configuration: GetConfigRequestConfiguration(hollowType: hollowType, customAPIRoot: urlString)!)
+        
+        request.performRequest(completion: { result, error in
+            if let _ = error {
+                // TODO: Handle error
+                return
+            }
+            
+            if let result = result {
+                Defaults[.hollowConfig] = result
+            }
+        })
+    }
 }

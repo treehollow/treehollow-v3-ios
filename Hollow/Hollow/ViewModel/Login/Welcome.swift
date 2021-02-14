@@ -64,6 +64,9 @@ class Welcome: ObservableObject {
             
             // Save to Defaults
             Defaults[.hollowConfig] = result!
+            if hollowType == .other {
+                Defaults[.customConfigURL] = customConfigURL
+            }
             DispatchQueue.main.async {
                 withAnimation {
                     self.hollowSelection = hollowType.rawValue

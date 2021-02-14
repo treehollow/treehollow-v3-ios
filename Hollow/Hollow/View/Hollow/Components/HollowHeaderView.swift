@@ -27,8 +27,7 @@ struct HollowHeaderView: View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
                 let tintColor = ViewConstants.avatarTintColors[(postData.postId * 9) % ViewConstants.avatarTintColors.count]
-                Avatar(configuration: AvatarConfiguration(colors: [tintColor, .uiColor(.secondarySystemFill)], resolution: 5), value: postData.postId)
-                    
+                Avatar(configuration: AvatarConfiguration(colors: [tintColor, .background], resolution: 6), value: postData.postId)
                     // Scale the avatar relative to the font scaling.
                     .frame(width: body37, height: body37)
                     .clipShape(Circle())

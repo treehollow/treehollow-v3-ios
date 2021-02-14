@@ -38,7 +38,7 @@ struct GetConfigRequestResult: Codable {
     var name: String
     var recaptchaUrl: String
     var allowScreenshot: Bool
-    var apiRoot: [String]
+    var apiRootUrls: [String]
     var tosUrl: String
     var privacyUrl: String
     var contactEmail: String
@@ -47,11 +47,10 @@ struct GetConfigRequestResult: Codable {
     var foldTags: [String]
     var reportableTags: [String]
     var sendableTags: [String]
-    var imgBaseUrl: [String]
+    var imgBaseUrls: [String]
     // deprecated imgBaseUrlBak
     // var imgBaseUrlBak: String
     var websocketUrl: String
-    var iosFrontendVersion: String
 }
 
 /// GetConfigRequestError
@@ -113,6 +112,8 @@ struct GetConfigRequest: Request {
                 return
             }
             
+            print(string)
+            
             let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
             if components1.count == 2 {
                 let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")
@@ -130,6 +131,7 @@ struct GetConfigRequest: Request {
                             completion(nil, .invalidConfigUrl)
                         }
                     } catch {
+                        print("[GetConfigRequest] Decode failed with error: \(error.localizedDescription)")
                         completion(nil, .decodeFailed)
                     }
                     return
@@ -145,9 +147,9 @@ struct GetConfigRequest: Request {
     
     private func validateConfig(_ config: GetConfigRequestResult) -> Bool {
         return
-            config.apiRoot != [] &&
+            config.apiRootUrls != [] &&
             config.emailSuffixes.count > 0 &&
-            config.imgBaseUrl != [] &&
+            config.imgBaseUrls != [] &&
             config.name != "" &&
             config.recaptchaUrl != ""
     }

@@ -56,7 +56,7 @@ class Login: ObservableObject {
             configuration: .init(
                 email: fullEmail,
                 reCAPTCHAInfo: reCAPTCHAInfo,
-                apiRoot: config.apiRoot)
+                apiRoot: config.apiRootUrls)
         )
         
         request.performRequest(completion: { resultData, error in
@@ -102,7 +102,7 @@ class Login: ObservableObject {
                 password: originalPassword,
                 validCode: emailVerificationCode,
                 deviceToken: deviceTokenString,
-                apiRoot: config.apiRoot)
+                apiRoot: config.apiRootUrls)
         )
         
         request.performRequest(completion: { result, error in
@@ -140,7 +140,7 @@ class Login: ObservableObject {
                 email: fullEmail,
                 password: loginPassword,
                 deviceToken: deviceTokenString,
-                apiRoot: config.apiRoot)
+                apiRoot: config.apiRootUrls)
         )
         
         request.performRequest(completion: { result, error in

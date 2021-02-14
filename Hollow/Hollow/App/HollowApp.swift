@@ -15,12 +15,12 @@ struct HollowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            if let _ = Defaults[.accessToken] {
-                MainView()
+//            if let _ = Defaults[.accessToken] {
+//                MainView()
 //                HollowInputView()
-            } else {
+//            } else {
                 WelcomeView()
-            }
+//            }
         }
     }
 }
