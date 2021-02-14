@@ -42,10 +42,16 @@ struct MainView: View {
                 }
                 .overlay(
                     VStack {
-                        button(action: { withAnimation { showCreatePost = true }}, systemName: "plus")
-                            .matchedGeometryEffect(id: "add.post", in: animation)
+                        button(
+                            action: { withAnimation { showCreatePost = true }},
+                            systemName: "plus",
+                            matchedGeometryEffectID: "add.post"
+                        )
                         if showRefresh {
-                            button(action: { withAnimation { shouldReloadTimeline = true }}, systemName: "arrow.clockwise")
+                            button(
+                                action: { withAnimation { shouldReloadTimeline = true }},
+                                systemName: "arrow.clockwise"
+                            )
                                 .padding(.top, 5)
                         }
                     }
@@ -86,7 +92,7 @@ struct MainView: View {
 }
 
 extension MainView {
-    func button(action: @escaping () -> Void, systemName: String) -> some View {
+    func button(action: @escaping () -> Void, systemName: String, matchedGeometryEffectID: String = "") -> some View {
         Button(action: action) {
             ZStack {
                 LinearGradient.vertical(gradient: .hollowContentVote)
@@ -94,6 +100,10 @@ extension MainView {
                     .font(.system(size: body30))
                     .foregroundColor(.white)
             }
+            
+            // Apply inside the button will have a better animation (ugly code, though)
+            .matchedGeometryEffect(id: matchedGeometryEffectID, in: animation)
+
         }
         .frame(width: body50, height: body50)
         .clipShape(Circle())

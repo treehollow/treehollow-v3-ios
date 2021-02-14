@@ -36,10 +36,11 @@ struct HollowInputView: View {
     var voteValid: Bool {
         inputStore.voteInformation == nil || inputStore.voteInformation!.valid
     }
+    var textValid: Bool { inputStore.text.count <= 10000 }
     var contentValid: Bool {
-        guard voteValid else { return false }
-        if inputStore.text == "" { return hasImage }
-        return true
+        if !voteValid { return false }
+        if inputStore.text == "" { return hasImage && !hasVote }
+        return textValid
     }
     
     var body: some View {

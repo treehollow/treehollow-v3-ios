@@ -35,7 +35,7 @@ struct ImageCompressor {
             if let jpegData = image.resizeTo(scaleFactor: resizeFactor).jpegData(compressionQuality: 1) {
                 let base64Data = jpegData.base64EncodedData()
                 if base64Data.count <= dataCountThreshold {
-                    print("[ImageCompressor] Success to compress with resizing factor \(resizeFactor), the size is \(base64Data.count)")
+                    print("[ImageCompressor] Succeed to compress with resizing factor \(resizeFactor), the size is \(base64Data.count)")
                     return (jpegData, formatter.sizeDescription(forData: jpegData)!)
                 } else {
                     print("[ImageCompressor] Fail to compress with resizing factor \(resizeFactor), the size is \(base64Data.count)")
@@ -51,7 +51,7 @@ struct ImageCompressor {
         if let jpegData = image.jpegData(compressionQuality: quality) {
             let base64Data = jpegData.base64EncodedData()
             if base64Data.count <= dataCountThreshold {
-                print("[ImageCompressor] Success to compress with quality \(quality), the size is \(base64Data.count)")
+                print("[ImageCompressor] Succeed to compress with quality \(quality), the size is \(base64Data.count)")
                 return jpegData
             } else {
                 print("[ImageCompressor] Fail to compress with quality \(quality), the size is \(base64Data.count)")

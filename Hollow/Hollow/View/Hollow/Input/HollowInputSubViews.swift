@@ -46,6 +46,7 @@ extension HollowInputView {
                         .blurBackground()
                         .cornerRadius(8)
                         .bottom()
+                        .trailing()
                         .padding(body10)
                 )
                 .zIndex(1)
@@ -59,8 +60,8 @@ extension HollowInputView {
                         .fontWeight(.semibold)
                         .font(.footnote)
                 )
-        }
-    }}
+        }}
+    }
     
     var editorView: some View {
         CustomTextEditor(text: $inputStore.text, editing: $editorEditing) { $0 }
@@ -70,16 +71,27 @@ extension HollowInputView {
                 Text("Input text" + "...")
                     .foregroundColor(.uiColor(.systemFill))
             }})
-            .overlay(Group { if editorEditing {
-                MyButton(action: { editorEditing = false }) {
-                    Text("Done")
-                        .font(.system(size: buttonFontSize, weight: .bold))
-                        .foregroundColor(.white)
+            .overlay(
+                VStack(alignment: .trailing) {
+                    if editorEditing {
+                        MyButton(action: { editorEditing = false }) {
+                            Text("Done")
+                                .font(.system(size: buttonFontSize, weight: .bold))
+                                .foregroundColor(.white)
+                        }
+                    }
+                    if !textValid { HStack(spacing: 0) {
+                        Text("\(inputStore.text.count)")
+                            .font(.footnote)
+                            .foregroundColor(.red)
+                        Text(" / 10000")
+                            .font(.footnote)
+                    }}
                 }
                 .bottom()
                 .trailing()
-                .padding(.bottom)
-            }})
+                .padding(.bottom, editorEditing && !textValid ? 0 : nil)
+            )
     }
     
     var voteView: some View { Group {

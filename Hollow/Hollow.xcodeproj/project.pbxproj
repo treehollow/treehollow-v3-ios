@@ -29,6 +29,8 @@
 		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
 		0E36F54B25D0F863001AE852 /* String+removeLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54A25D0F863001AE852 /* String+removeLineBreak.swift */; };
 		0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */; };
+		0E40F74B25D8CF5D003A2342 /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74A25D8CF5D003A2342 /* AvatarGenerator.swift */; };
+		0E40F74E25D8D5EC003A2342 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74D25D8D5EC003A2342 /* Avatar.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
 		0E415A7B25CD769F00351672 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7A25CD769F00351672 /* Preview Assets.xcassets */; };
@@ -165,6 +167,8 @@
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
 		0E36F54A25D0F863001AE852 /* String+removeLineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+removeLineBreak.swift"; sourceTree = "<group>"; };
 		0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputSubViews.swift; sourceTree = "<group>"; };
+		0E40F74A25D8CF5D003A2342 /* AvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGenerator.swift; sourceTree = "<group>"; };
+		0E40F74D25D8D5EC003A2342 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
 		0E415A7725CD769F00351672 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -484,6 +488,7 @@
 			children = (
 				0E415AB425CD771600351672 /* ImageSaver.swift */,
 				0E2C1EE625D7A19500A296E9 /* ImageCompressor.swift */,
+				0E40F74A25D8CF5D003A2342 /* AvatarGenerator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -624,6 +629,7 @@
 				0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */,
 				0E415B1D25CD772200351672 /* HollowButton.swift */,
 				0E415B1E25CD772200351672 /* HollowHeaderView.swift */,
+				0E40F74D25D8D5EC003A2342 /* Avatar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -906,6 +912,7 @@
 				0E415AD825CD771600351672 /* SendPostRequest.swift in Sources */,
 				0E415AC825CD771600351672 /* ParticipatedPostsRequest.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
+				0E40F74E25D8D5EC003A2342 /* Avatar.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
 				0E415ABF25CD771600351672 /* Comment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
@@ -967,6 +974,7 @@
 				0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
 				0050B9DE25D523B40035F556 /* PostType.swift in Sources */,
+				0E40F74B25D8CF5D003A2342 /* AvatarGenerator.swift in Sources */,
 				0E415ADC25CD771600351672 /* Data+hexEncodedString.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0E36F54B25D0F863001AE852 /* String+removeLineBreak.swift in Sources */,
