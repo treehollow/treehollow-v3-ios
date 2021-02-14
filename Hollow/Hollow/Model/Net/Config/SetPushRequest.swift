@@ -11,7 +11,7 @@ import Alamofire
 
 struct SetPushRequestConfiguration {
     var type: PushNotificationType
-    var apiRoot: String
+    var apiRoot: [String]
     var token: String
 }
 
@@ -37,7 +37,7 @@ struct SetPushRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SetPushRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = self.configuration.apiRoot + "v3/config/set_push" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/config/set_push" + Constants.URLConstant.urlSuffix
         let parameters = [
             "push_system_msg": self.configuration.type.pushSystemMsg.int,
             "push_reply_me": self.configuration.type.pushReplyMe.int,
@@ -48,6 +48,7 @@ struct SetPushRequest: DefaultRequest {
             "Accept": "application/json"
         ]
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             headers: headers,

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 struct GetPushRequestConfiguration {
-    var apiRoot: String
+    var apiRoot: [String]
     var token: String
 }
 
@@ -50,13 +50,13 @@ struct GetPushRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (GetPushRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath =
-            self.configuration.apiRoot + "v3/security/get_push" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/get_push" + Constants.URLConstant.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: [String : String](),
             headers: headers,

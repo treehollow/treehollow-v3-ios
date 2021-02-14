@@ -11,7 +11,7 @@ import Alamofire
 
 struct LogoutRequestConfiguration {
     var token: String
-    var apiRoot: String
+    var apiRoot: [String]
 }
 
 struct LogoutRequestResult: DefaultRequestResult {
@@ -37,13 +37,13 @@ struct LogoutRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (LogoutRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath =
-            self.configuration.apiRoot + "v3/security/logout" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/logout" + Constants.URLConstant.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             // Empty parameter to satisfy generic type constrain.
             parameters: [String : Int](),

@@ -36,6 +36,7 @@ extension DefaultRequest {
     /// - parameter resultToResultData: Method to generate result data from result.
     /// - parameter completion: Handler to call to handle returned data.
     internal func performRequest<Parameters: Encodable>(
+        urlBase: [String],
         urlPath: String,
         parameters: [String : Parameters],
         headers: HTTPHeaders? = nil,
@@ -43,8 +44,11 @@ extension DefaultRequest {
         resultToResultData: @escaping (Result) -> ResultData?,
         completion: @escaping (ResultData?, DefaultRequestError?) -> Void
     ) {
+        // FIXME: need a auto switch alogorithm
+        let urlRoot = urlBase[0]
+        
         AF.request(
-            urlPath,
+            urlRoot + urlPath,
             method: method,
             parameters: parameters.isEmpty ? nil : parameters,
             encoder: URLEncodedFormParameterEncoder.default,

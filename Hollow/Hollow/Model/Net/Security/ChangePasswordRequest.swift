@@ -16,7 +16,7 @@ struct ChangePasswordRequestConfiguration {
     var oldPassword: String
     /// New hashed password
     var newPassword: String
-    var apiRoot: String
+    var apiRoot: [String]
 }
 
 /// Result of an changing password attempt.
@@ -46,10 +46,9 @@ struct ChangePasswordRequest: DefaultRequest {
             "old_password_hashed": self.configuration.oldPassword.sha256().sha256(),
             "new_password_hashed": self.configuration.newPassword.sha256().sha256(),
         ]
-        let urlPath =
-            self.configuration.apiRoot + "v3/security/login/change_password" + Constants.URLConstant.urlSuffix
-        
+        let urlPath = "v3/security/login/change_password" + Constants.URLConstant.urlSuffix
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             method: .post,

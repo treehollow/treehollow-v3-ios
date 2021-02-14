@@ -10,7 +10,7 @@ import Alamofire
 
 struct DeviceListRequestConfiguration {
     var token: String
-    var apiRoot: String
+    var apiRoot: [String]
 }
 /*
  "code":0,
@@ -54,14 +54,14 @@ struct DeviceListRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
-        let urlPath =
-            self.configuration.apiRoot + "v3/security/devices/list" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/devices/list" + Constants.URLConstant.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
         let parameters = [String : String]()
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             headers: headers,

@@ -22,7 +22,7 @@ struct EmailCheckRequestConfiguration {
     /// Info of `reCAPTCHA`, optional
     var reCAPTCHAInfo: (token: String, version: ReCAPTCHAVersion)?
     
-    var apiRoot: String
+    var apiRoot: [String]
 }
 
 /// Result Data of EmailCheck
@@ -74,10 +74,9 @@ struct EmailCheckRequest: DefaultRequest {
             parameters["recaptcha_version"] = reCAPTCHAInfo.version.rawValue
             parameters["recaptcha_token"] = reCAPTCHAInfo.token
         }
-        let urlPath =
-            self.configuration.apiRoot + "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
-        
+        let urlPath = "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             method: .post,
