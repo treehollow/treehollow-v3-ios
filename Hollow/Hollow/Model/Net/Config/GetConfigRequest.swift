@@ -38,7 +38,7 @@ struct GetConfigRequestResult: Codable {
     var name: String
     var recaptchaUrl: String
     var allowScreenshot: Bool
-    var apiRoot: String
+    var apiRoot: [String]
     var tosUrl: String
     var privacyUrl: String
     var contactEmail: String
@@ -47,8 +47,9 @@ struct GetConfigRequestResult: Codable {
     var foldTags: [String]
     var reportableTags: [String]
     var sendableTags: [String]
-    var imgBaseUrl: String
-    var imgBaseUrlBak: String
+    var imgBaseUrl: [String]
+    // deprecated imgBaseUrlBak
+    // var imgBaseUrlBak: String
     var websocketUrl: String
     var iosFrontendVersion: String
 }
@@ -144,9 +145,9 @@ struct GetConfigRequest: Request {
     
     private func validateConfig(_ config: GetConfigRequestResult) -> Bool {
         return
-            config.apiRoot != "" &&
+            config.apiRoot != [] &&
             config.emailSuffixes.count > 0 &&
-            config.imgBaseUrl != "" &&
+            config.imgBaseUrl != [] &&
             config.name != "" &&
             config.recaptchaUrl != ""
     }

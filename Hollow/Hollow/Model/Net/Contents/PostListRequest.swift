@@ -12,12 +12,11 @@ import Alamofire
 
 /// Configuration for PostListRequest
 struct PostListRequestConfiguration {
-    var apiRoot: String
+    var apiRoot: [String]
     var token: String
     var page: Int
     var needImage: Bool
-    var imageBaseURL: String
-    var imageBaseURLbak: String
+    var imageBaseURL: [String]
 }
 
 /// Result for PostListRequest
@@ -43,13 +42,14 @@ struct PostListRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (PostListRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = self.configuration.apiRoot + "v3/contents/post/list" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/post/list" + Constants.URLConstant.urlSuffix
         let parameters = [String: String]()
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             headers: headers,

@@ -28,7 +28,7 @@ struct AccountCreationRequestConfiguration {
     var deviceToken: String
     /// See `AccountCreationConfiguration`
     ///
-    var apiRoot: String
+    var apiRoot: [String]
 }
 
 /// Result of account creation attempt.
@@ -88,9 +88,9 @@ struct AccountCreationRequest: DefaultRequest {
             parameters["valid_code"] = validCode
         }
         
-        let urlPath =
-            self.configuration.apiRoot + "v3/security/login/create_account" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/login/create_account" + Constants.URLConstant.urlSuffix
         performRequest(
+            urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             method: .post,
