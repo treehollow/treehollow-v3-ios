@@ -21,7 +21,18 @@ struct SystemMessageRequestResult: DefaultRequestResult {
     var data: [SystemMessage]?
 }
 
-typealias SystemMessageRequestResultData = [SystemMessage]
+typealias SystemMessageRequestResultData = [SystemMessageRequestResultDataType]
+
+/// Type for SystemMessageRequestResultData
+struct SystemMessageRequestResultDataType {
+    /// message content
+    var content: String
+    /// unix time stamp of this message
+    var timestamp: Date
+    /// message title
+    var title: String
+}
+
 
 /// SystemMessageRequest same as default request
 struct SystemMessageRequest: DefaultRequest {
@@ -50,7 +61,12 @@ struct SystemMessageRequest: DefaultRequest {
             method: .get,
             resultToResultData: { result in
                 guard let data = result.data else {return nil}
-                return data
+                return data.map {
+                    SystemMessageRequestResultDataType(
+                        content: $0.content,
+                        timestamp: Date(timeIntervalSince1970: TimeInterval($0.timestamp)),
+                        title: $0.title)
+                }
             },
             completion: completion)
     }
