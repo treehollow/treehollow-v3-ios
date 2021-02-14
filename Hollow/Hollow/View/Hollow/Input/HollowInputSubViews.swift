@@ -7,12 +7,11 @@
 //
 
 import SwiftUI
+import AvatarX
 
 extension HollowInputView {
     var avatar: some View {
-        Image("test.avatar")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
+        Avatar(configuration: AvatarConfiguration(colors: [.background, .buttonGradient1], resolution: 5), value: 0)
             .frame(width: avatarWidth)
             .clipShape(Circle())
             .leading()

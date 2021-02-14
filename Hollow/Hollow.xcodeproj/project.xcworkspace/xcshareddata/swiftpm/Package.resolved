@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "AvatarX",
+        "repositoryURL": "https://github.com/liang2kl/AvatarX.git",
+        "state": {
+          "branch": "main",
+          "revision": "1f74efce1c9f5bde4f48d5f41a3a77d6777c035d",
+          "version": null
+        }
+      },
+      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
@@ -51,8 +60,8 @@
         "repositoryURL": "https://github.com/paololeonardi/WaterfallGrid.git",
         "state": {
           "branch": null,
-          "revision": "f4254179edd6679ff4033997ed1744a1e1d18b08",
-          "version": "1.0.0"
+          "revision": "944aa82832ed5a9eaaf50862cdd53e3c10ab55eb",
+          "version": "1.0.1"
         }
       }
     ]

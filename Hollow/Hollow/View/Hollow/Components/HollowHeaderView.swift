@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AvatarX
 
 // TODO: Actions
 struct HollowHeaderView: View {
@@ -25,10 +26,8 @@ struct HollowHeaderView: View {
     var body: some View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
-                // FIXME: Random avatar
-                Image("test.avatar")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                let tintColor = ViewConstants.avatarTintColors[(postData.postId * 9) % ViewConstants.avatarTintColors.count]
+                Avatar(configuration: AvatarConfiguration(colors: [tintColor, .uiColor(.secondarySystemFill)], resolution: 5), value: postData.postId)
                     
                     // Scale the avatar relative to the font scaling.
                     .frame(width: body37, height: body37)
