@@ -72,7 +72,7 @@ struct MainView: View {
                     SearchView(presented: $isSearching)
                 }
                 if showCreatePost {
-                    HollowInputView(presented: $showCreatePost)
+                    HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost))
                         .matchedGeometryEffect(id: "add.post", in: animation)
                 }
             }

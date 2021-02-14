@@ -35,10 +35,10 @@ extension DefaultRequest {
     /// - parameter method: `.post` or `.get`.
     /// - parameter resultToResultData: Method to generate result data from result.
     /// - parameter completion: Handler to call to handle returned data.
-    internal func performRequest<Parameters: Encodable>(
+    internal func performRequest(
         urlBase: [String],
         urlPath: String,
-        parameters: [String : Parameters],
+        parameters: [String : Any]? = nil,
         headers: HTTPHeaders? = nil,
         method: HTTPMethod,
         resultToResultData: @escaping (Result) -> ResultData?,
@@ -50,8 +50,8 @@ extension DefaultRequest {
         AF.request(
             urlRoot + urlPath,
             method: method,
-            parameters: parameters.isEmpty ? nil : parameters,
-            encoder: URLEncodedFormParameterEncoder.default,
+            parameters: parameters,
+            encoding: URLEncoding.default,
             headers: headers
         )
         .validate()
@@ -83,6 +83,7 @@ extension DefaultRequest {
                     }
                     
                 } catch {
+                    print(error)
                     completion(nil, .decodeFailed)
                     return
                 }

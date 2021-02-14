@@ -12,6 +12,8 @@ import SwiftUI
 import Defaults
 
 class HollowInputStore: ObservableObject {
+    var presented: Binding<Bool>
+    
     @Published var text: String = ""
     // FIXME: Remove this code in real tests
     @Published var image: UIImage?
@@ -23,16 +25,37 @@ class HollowInputStore: ObservableObject {
     #endif
     @Published var selectedTag: String?
     @Published var voteInformation: VoteInformation?
-    @Published var isLoading = false
+    @Published var sending = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var imageSizeInformation: String?
+    
+    init(presented: Binding<Bool>) {
+        self.presented = presented
+    }
     
     func newVote() {
         self.voteInformation = .init(options: ["", "", ""])
     }
     
     func sendPost() {
+        withAnimation { sending = true }
+        let request = SendPostRequest(configuration: .init(apiRoot: Defaults[.hollowConfig]!.apiRootUrls, token: Defaults[.accessToken]!, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: 1), voteData: voteInformation?.options))
         
+        request.performRequest(completion: { result, error in
+            DispatchQueue.main.async { withAnimation {
+                self.sending = false
+                
+                if let error = error {
+                    self.errorMessage = (title: "Error", message: error.description)
+                    return
+                }
+                
+                // TODO: Quit and show detail
+                
+                self.presented.wrappedValue = false
+            }}
+            
+        })
     }
     
     func compressImage() {

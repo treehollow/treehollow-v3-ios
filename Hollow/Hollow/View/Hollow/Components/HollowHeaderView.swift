@@ -27,10 +27,16 @@ struct HollowHeaderView: View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
                 let tintColor = ViewConstants.avatarTintColors[(postData.postId * 9) % ViewConstants.avatarTintColors.count]
-                Avatar(configuration: AvatarConfiguration(colors: [tintColor, .background], resolution: 6), value: postData.postId)
-                    // Scale the avatar relative to the font scaling.
-                    .frame(width: body37, height: body37)
-                    .clipShape(Circle())
+                AvatarWrapper(
+                    colors: [tintColor, .white],
+                    resolution: 6,
+                    padding: body37 * 0.1,
+                    value: postData.postId
+                )
+                // Scale the avatar relative to the font scaling.
+                .frame(width: body37, height: body37)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(lineWidth: 2).foregroundColor(tintColor))
                 VStack(alignment: .leading, spacing: 2) {
                     HStack {
                         Text("#\(postData.postId.string)")

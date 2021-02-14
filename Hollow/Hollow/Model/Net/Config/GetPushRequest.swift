@@ -58,7 +58,6 @@ struct GetPushRequest: DefaultRequest {
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
-            parameters: [String : String](),
             headers: headers,
             method: .get,
             resultToResultData: { result in

@@ -37,7 +37,6 @@ typealias HollowConfig = GetConfigRequestResult
 struct GetConfigRequestResult: Codable {
     var name: String
     var recaptchaUrl: String
-    var allowScreenshot: Bool
     var apiRootUrls: [String]
     var tosUrl: String
     var privacyUrl: String
@@ -131,7 +130,7 @@ struct GetConfigRequest: Request {
                             completion(nil, .invalidConfigUrl)
                         }
                     } catch {
-                        print("[GetConfigRequest] Decode failed with error: \(error.localizedDescription)")
+                        print("[GetConfigRequest] Decode failed with error: \(error)")
                         completion(nil, .decodeFailed)
                     }
                     return

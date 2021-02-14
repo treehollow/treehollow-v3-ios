@@ -7,14 +7,20 @@
 //
 
 import SwiftUI
-import AvatarX
 
 extension HollowInputView {
     var avatar: some View {
-        Avatar(configuration: AvatarConfiguration(colors: [.background, .buttonGradient1], resolution: 5), value: 0)
-            .frame(width: avatarWidth)
-            .clipShape(Circle())
-            .leading()
+        AvatarWrapper(
+            colors: [.buttonGradient1, .background],
+            resolution: 4,
+            padding: avatarWidth * 0.1,
+            // Boom! You've discover a hidden "bug"!
+            value: "liang2kl"
+        )
+        .frame(width: avatarWidth)
+        .clipShape(Circle())
+        .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.buttonGradient1))
+        .leading()
     }
     
     var imageView: some View { Group {
@@ -157,6 +163,12 @@ extension HollowInputView {
             
         }
         .layoutPriority(0.9)
+        
+        // Make the buttons feel disabled when sending data.
+        // This is implemented in `MyButton` to automatically update
+        // when the views are disabled, but here for convenience we
+        // just judge by `inputStore.sending`
+        .opacity(inputStore.sending ? 0.5 : 1)
     }
     
     var imageButton: some View {

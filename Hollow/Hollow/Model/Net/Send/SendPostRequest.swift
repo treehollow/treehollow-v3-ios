@@ -6,25 +6,63 @@
 //
 
 import Foundation
+import Alamofire
 
 struct SendPostRequestConfiguration {
+    var apiRoot: [String]
+    var token: String
     var text: String
-    var type: PostType
+    var tag: String?
     var imageData: Data?
     var voteData: [String]?
-    
-    init?(text: String, type: PostType, imageData: Data?, voteData: [String]?) {
-        if type == .image && imageData == nil { return nil }
-        if type == .vote && voteData == nil { return nil }
-        self.text = text
-        self.type = type
-        self.imageData = imageData
-        self.voteData = voteData
-    }
 }
 
-typealias SendPostRequestResult = SendPostRequestResultType
+struct SendPostRequestResult: DefaultRequestResult {
+    var code: Int
+    var msg: String?
+}
 
-enum SendPostRequestResultType: Int {
-    case success = 0
+typealias SendPostRequestResultData = SendPostRequestResult
+
+struct SendPostRequest: DefaultRequest {
+    typealias Configuration = SendPostRequestConfiguration
+    typealias Result = SendPostRequestResult
+    typealias ResultData = SendPostRequestResultData
+    typealias Error = DefaultRequestError
+
+    var configuration: SendPostRequestConfiguration
+    
+    init(configuration: SendPostRequestConfiguration) {
+        self.configuration = configuration
+    }
+    
+    func performRequest(completion: @escaping (SendPostRequestResultData?, DefaultRequestError?) -> Void) {
+        let urlPath = "v3/send/post" + Constants.URLConstant.urlSuffix
+        let hasImage = configuration.imageData != nil
+        
+        let headers: HTTPHeaders = [
+            "TOKEN": self.configuration.token,
+            "Accept": "application/json"
+        ]
+
+        var parameters: [String : Encodable] = [
+            "text" : configuration.text,
+            "type" : hasImage ? "image" : "text",
+        ]
+
+        if let imageData = configuration.imageData {
+            parameters["data"] = imageData.base64EncodedString()
+        }
+
+        if let voteData = configuration.voteData {
+            parameters["vote_options"] = voteData
+        }
+
+        if let tag = configuration.tag {
+            parameters["tag"] = tag
+        }
+        
+        performRequest(urlBase: configuration.apiRoot, urlPath: urlPath, parameters: parameters, headers: headers, method: .post, resultToResultData: { $0 }, completion: completion
+        )
+    }
 }

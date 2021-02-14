@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct HollowInputView: View {
-    @Binding var presented: Bool
-    
-    @ObservedObject var inputStore = HollowInputStore()
+    @ObservedObject var inputStore: HollowInputStore
     
     @State var editorEditing: Bool = false
     @State private var keyboardShown = false
@@ -46,10 +44,10 @@ struct HollowInputView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                BarButton(action: { withAnimation { presented = false }}, systemImageName: "xmark")
+                BarButton(action: { withAnimation { inputStore.presented.wrappedValue = false }}, systemImageName: "xmark")
                 Spacer()
                 MyButton(action: inputStore.sendPost) {
-                    Text("Send Post")
+                    Text(inputStore.sending ? "Sending" + "..." : "Send Post")
                         .modifier(MyButtonDefaultStyle())
                 }
                 .disabled(!contentValid)
@@ -82,19 +80,20 @@ struct HollowInputView: View {
             )
         }
         .accentColor(.hollowContentText)
+        .disabled(inputStore.sending)
     }
 }
 
 
 #if DEBUG
-struct HollowInputView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowInputView(presented: .constant(true))
-        //            .background(Color.hollowCardBackground)
-        //            .cornerRadius(12)
-        //            .padding()
-        //            .background(Color.background)
-        //            .colorScheme(.dark)
-    }
-}
+//struct HollowInputView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        HollowInputView(presented: .constant(true))
+//        //            .background(Color.hollowCardBackground)
+//        //            .cornerRadius(12)
+//        //            .padding()
+//        //            .background(Color.background)
+//        //            .colorScheme(.dark)
+//    }
+//}
 #endif

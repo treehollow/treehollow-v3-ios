@@ -52,11 +52,9 @@ struct SystemMessageRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        let parameters = [String: String]()
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
-            parameters: parameters,
             headers: headers,
             method: .get,
             resultToResultData: { result in

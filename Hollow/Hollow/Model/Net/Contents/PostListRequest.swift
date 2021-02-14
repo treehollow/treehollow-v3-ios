@@ -7,8 +7,7 @@
 
 import Foundation
 import Alamofire
-
-// TODO: Add documentation when HTTP doc updates
+import UIKit
 
 /// Configuration for PostListRequest
 struct PostListRequestConfiguration {
@@ -21,9 +20,27 @@ struct PostListRequestConfiguration {
 
 /// Result for PostListRequest
 struct PostListRequestResult: DefaultRequestResult {
+    struct Data: Codable {
+        struct ImageMetadata: Codable {
+            var w: CGFloat?
+            var h: CGFloat?
+        }
+        var attention: Bool
+        var deleted: Bool
+        var likenum: Int
+        var permissions: [PostPermissionType]
+        var pid: Int
+        var reply: Int
+        var tag: String?
+        var text: String
+        var timestamp: Int
+        var updatedAt: Int
+        var url: String?
+        var imageMetadata: ImageMetadata?
+    }
     var code: Int
     var msg: String?
-    var data: [Post]?
+    var data: [Data]?
 }
 
 /// ResultData for PostListRequest
@@ -43,10 +60,12 @@ struct PostListRequest: DefaultRequest {
     
     func performRequest(completion: @escaping (PostListRequestResultData?, DefaultRequestError?) -> Void) {
         let urlPath = "v3/contents/post/list" + Constants.URLConstant.urlSuffix
-        let parameters = [String: String]()
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
+        ]
+        let parameters: [String : String] = [
+            "page" : configuration.page.string
         ]
         performRequest(
             urlBase: self.configuration.apiRoot,
@@ -54,20 +73,16 @@ struct PostListRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .get,
-            resultToResultData: {result in
+            resultToResultData: { result in
                 var postWrappers = [PostDataWrapper]()
                 for post in result.data! {
                     // process votes
-                    var vote: VoteData? = nil
-                    if let voteResult = post.vote {
-                        vote = initVoteDataByVote(voteResult: voteResult)
-                    }
                     // process image
-                    var image: HollowImage? = nil
-                    if let imageURL = post.url, let imageMetaData = post.imageMetadata {
-                        image = HollowImage(placeholder: (width: imageMetaData.w, height: imageMetaData.h), image: nil)
-                        image?.setImageURL(imageURL)
-                    }
+//                    var image: HollowImage? = nil
+//                    if let imageURL = post.url, let imageMetaData = post.imageMetadata {
+//                        image = HollowImage(placeholder: (width: imageMetaData.w, height: imageMetaData.h), image: nil)
+//                        image?.setImageURL(imageURL)
+//                    }
                     // process citedpost
                     
                     // process comments (<=3 per post)

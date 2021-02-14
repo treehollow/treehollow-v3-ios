@@ -22,6 +22,7 @@
 		0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */; };
 		0E09B7BB25D52F4F00DC5615 /* HollowInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */; };
 		0E1DD7D325D94B52000D27BA /* AvatarX in Frameworks */ = {isa = PBXBuildFile; productRef = 0E1DD7D225D94B52000D27BA /* AvatarX */; };
+		0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */; };
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
 		0E2C1EE725D7A19500A296E9 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE625D7A19500A296E9 /* ImageCompressor.swift */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
@@ -159,6 +160,7 @@
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
 		0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputStore.swift; sourceTree = "<group>"; };
+		0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarWrapper.swift; sourceTree = "<group>"; };
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
 		0E2C1EE625D7A19500A296E9 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		0E36F53625D0322D001AE852 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
 				0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */,
 				0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */,
+				0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -899,6 +902,7 @@
 				0E415B7325CD772200351672 /* SearchView.swift in Sources */,
 				0E415AD525CD771600351672 /* ReportCommentRequest.swift in Sources */,
 				0E415ABE25CD771600351672 /* PublishedPostsMessageRequest.swift in Sources */,
+				0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
