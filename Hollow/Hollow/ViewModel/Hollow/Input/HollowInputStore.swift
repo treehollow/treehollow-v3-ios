@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 import Defaults
 
-class HollowInputStore: ObservableObject {
+class HollowInputStore: ObservableObject, AppModelEnvironment {
     var presented: Binding<Bool>
     
     @Published var text: String = ""
@@ -28,6 +28,7 @@ class HollowInputStore: ObservableObject {
     @Published var sending = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var imageSizeInformation: String?
+    @Published var state = AppModelState()
     
     init(presented: Binding<Bool>) {
         self.presented = presented
@@ -39,13 +40,13 @@ class HollowInputStore: ObservableObject {
     
     func sendPost() {
         withAnimation { sending = true }
-        let request = SendPostRequest(configuration: .init(apiRoot: Defaults[.hollowConfig]!.apiRootUrls, token: Defaults[.accessToken]!, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: 1), voteData: voteInformation?.options))
-        
+        let request = SendPostRequest(configuration: .init(apiRoot: Defaults[.hollowConfig]!.apiRootUrls, token: Defaults[.accessToken]!, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: ImageCompressor.resizingQuality), voteData: voteInformation?.options))
         request.performRequest(completion: { result, error in
             DispatchQueue.main.async { withAnimation {
                 self.sending = false
                 
                 if let error = error {
+                    if self.handleTokenExpireError(error) { return }
                     self.errorMessage = (title: "Error", message: error.description)
                     return
                 }

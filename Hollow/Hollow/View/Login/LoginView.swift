@@ -97,8 +97,18 @@ struct LoginView: View {
         })
         
         // Present full screen content when there is a need (reCAPTCHA verification / main interface).
-        .fullScreenCover(isPresented: .constant(viewModel.fullScreenCoverIndex != -1)) {
-            FullScreenCoverContent(viewModel: viewModel)
+        .fullScreenCover(isPresented: $viewModel.showsRecaptcha) {
+            ReCAPTCHAPageView(
+                presented: $viewModel.showsRecaptcha,
+                successHandler: { token in
+                    withAnimation {
+                        viewModel.showsRecaptcha = false
+                        viewModel.reCAPTCHAToken = token
+                        // Check again with the token
+                        viewModel.checkEmail()
+                    }
+                }
+            )
         }
         
         // Show alert if there's any error message provided
@@ -106,6 +116,9 @@ struct LoginView: View {
         
         .navigationTitle(Defaults[.hollowConfig]!.name)
         .background(Color.background.edgesIgnoringSafeArea(.all))
+        
+        // Take control of the app.
+        .modifier(AppModelBehaviour(state: viewModel.state))
     }
 }
 

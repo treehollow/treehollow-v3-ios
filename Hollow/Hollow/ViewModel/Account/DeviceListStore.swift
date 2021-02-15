@@ -11,12 +11,13 @@ import Combine
 import SwiftUI
 import Defaults
 
-class DeviceListStore: ObservableObject {
+class DeviceListStore: ObservableObject, AppModelEnvironment {
     @Published var deviceData: DeviceListRequestResultData
     @Published var isLoading: Bool = false
     @Published var loggingoutUUID: String?
     @Published var errorMessage: (title: String, message: String)?
-    
+    @Published var state = AppModelState()
+
     init() {
         // Load the latest cache as placeholder
         deviceData = Defaults[.deviceListCache] ?? .init(devices: [], thisDeviceUUID: "")
@@ -36,6 +37,8 @@ class DeviceListStore: ObservableObject {
                 self.isLoading = false
             }
             if let error = error {
+                if self.handleTokenExpireError(error) { return }
+                
                 self.errorMessage = (String.errorLocalized.capitalized, error.description)
                 return
             }
@@ -72,6 +75,8 @@ class DeviceListStore: ObservableObject {
                 self.loggingoutUUID = nil
             }
             if let error = error {
+                if self.handleTokenExpireError(error) { return }
+
                 self.errorMessage = (String.errorLocalized.capitalized, error.description)
                 return
             }

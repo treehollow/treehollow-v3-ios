@@ -16,7 +16,7 @@ struct MainView: View {
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
-
+    
     @Namespace var animation
     
     var body: some View {

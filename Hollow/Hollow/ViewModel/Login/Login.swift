@@ -12,8 +12,10 @@ import SwiftUI
 import Defaults
 
 /// View model for `LoginView`
-class Login: ObservableObject {
-    @Published var fullScreenCoverIndex = -1
+class Login: ObservableObject, AppModelEnvironment {
+    @Published var state = AppModelState()
+
+    @Published var showsRecaptcha = false
     @Published var reCAPTCHAToken: String = ""
     @Published var email: String = "" {
         didSet { if email != oldValue { restore() }}
@@ -73,7 +75,7 @@ class Login: ObservableObject {
                 self.emailCheckType = resultData?.result
                 
                 if self.emailCheckType == .reCAPTCHANeeded {
-                    self.fullScreenCoverIndex = 0
+                    self.showsRecaptcha = true
                 }
             }
         })
@@ -117,7 +119,7 @@ class Login: ObservableObject {
             if let result = result {
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
-                self.fullScreenCoverIndex = 1
+                self.state.shouldShowMainView = true
             }
         })
     }
@@ -156,7 +158,7 @@ class Login: ObservableObject {
             if let result = result {
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
-                self.fullScreenCoverIndex = 1
+                self.state.shouldShowMainView = true
             }
         })
     }

@@ -23,6 +23,9 @@
 		0E09B7BB25D52F4F00DC5615 /* HollowInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */; };
 		0E1DD7D325D94B52000D27BA /* AvatarX in Frameworks */ = {isa = PBXBuildFile; productRef = 0E1DD7D225D94B52000D27BA /* AvatarX */; };
 		0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */; };
+		0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */; };
+		0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */; };
+		0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */; };
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
 		0E2C1EE725D7A19500A296E9 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE625D7A19500A296E9 /* ImageCompressor.swift */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
@@ -136,6 +139,7 @@
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
 		0E78F0B925D2E0090080C09E /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78F0B825D2E0090080C09E /* DefaultRequest.swift */; };
+		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */; };
@@ -161,6 +165,9 @@
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
 		0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputStore.swift; sourceTree = "<group>"; };
 		0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarWrapper.swift; sourceTree = "<group>"; };
+		0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelBehaviour.swift; sourceTree = "<group>"; };
+		0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
 		0E2C1EE625D7A19500A296E9 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		0E36F53625D0322D001AE852 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -277,6 +284,7 @@
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E78F0B825D2E0090080C09E /* DefaultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequest.swift; sourceTree = "<group>"; };
+		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCapsuleButton.swift; sourceTree = "<group>"; };
@@ -317,6 +325,9 @@
 			isa = PBXGroup;
 			children = (
 				0E415A7325CD769B00351672 /* HollowApp.swift */,
+				0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */,
+				0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */,
+				0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */,
 				0E415B9A25CD93C000351672 /* AppDelegate.swift */,
 			);
 			path = App;
@@ -558,6 +569,7 @@
 				0E415AFB25CD772200351672 /* View+topBar.swift */,
 				0E415AFC25CD772200351672 /* CustomGradient.swift */,
 				0E415AFF25CD772200351672 /* View+makeDivider.swift */,
+				0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -879,6 +891,7 @@
 				0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */,
 				0092370625D0007500961BBB /* PushNotificationType.swift in Sources */,
 				0E415ADF25CD771600351672 /* Int+string.swift in Sources */,
+				0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */,
 				0E415ACF25CD771600351672 /* DeviceListRequest.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsView.swift in Sources */,
 				0E415ADA25CD771600351672 /* SendVoteRequest.swift in Sources */,
@@ -889,6 +902,7 @@
 				0E415AE125CD771600351672 /* ImageSaver.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
+				0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */,
 				0E415B5D25CD772200351672 /* HollowFavouritesCardView.swift in Sources */,
 				0E415B7125CD772200351672 /* RegulationView.swift in Sources */,
 				0E415ADE25CD771600351672 /* DefaultsKeys.swift in Sources */,
@@ -901,6 +915,7 @@
 				0E415B5C25CD772200351672 /* HollowWanderCardView.swift in Sources */,
 				0E415B7325CD772200351672 /* SearchView.swift in Sources */,
 				0E415AD525CD771600351672 /* ReportCommentRequest.swift in Sources */,
+				0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */,
 				0E415ABE25CD771600351672 /* PublishedPostsMessageRequest.swift in Sources */,
 				0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
@@ -916,6 +931,7 @@
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
 				0E415ABF25CD771600351672 /* Comment.swift in Sources */,
+				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
 				0E415ACE25CD771600351672 /* EmailCheckRequest.swift in Sources */,
 				0E415B4D25CD772200351672 /* LinearGradientExtensions.swift in Sources */,

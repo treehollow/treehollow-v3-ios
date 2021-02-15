@@ -13,7 +13,7 @@ import Defaults
 // improve code hightlight and completion performance.
 extension LoginView {
     struct ReCAPTCHAPageView: View {
-        @Binding var presentedIndex: Int
+        @Binding var presented: Bool
         let successHandler: (String) -> Void
         @State private var pageLoadingFinish = false
         
@@ -23,7 +23,7 @@ extension LoginView {
             VStack {
                 Button(action: {
                     withAnimation {
-                        presentedIndex = -1
+                        presented = false
                     }
                 }) {
                     Image(systemName: "xmark")
@@ -104,34 +104,6 @@ extension LoginView {
                     }
                 }
                 .font(.system(size: body14))
-            }
-        }
-    }
-    
-    struct FullScreenCoverContent: View {
-        @ObservedObject var viewModel: Login
-        
-        var body: some View {
-            Group {
-                // Present reCAPTCHA verification interface when needed
-                if viewModel.fullScreenCoverIndex == 0 {
-                    ReCAPTCHAPageView(
-                        presentedIndex: $viewModel.fullScreenCoverIndex,
-                        successHandler: { token in
-                            withAnimation {
-                                viewModel.fullScreenCoverIndex = -1
-                                viewModel.reCAPTCHAToken = token
-                                // Check again with the token
-                                viewModel.checkEmail()
-                            }
-                        }
-                    )
-                }
-                
-                // Present main view after successfully logging in
-                if viewModel.fullScreenCoverIndex == 1 {
-                    MainView()
-                }
             }
         }
     }

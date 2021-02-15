@@ -15,6 +15,7 @@ protocol RequestError: Error {
 enum DefaultRequestError: RequestError {
     case decodeFailed
     case tokenExpiredError
+    case fileTooLarge
     case unknown
     case unknownBackend
     case other(description: String)
@@ -25,6 +26,7 @@ enum DefaultRequestError: RequestError {
         case .decodeFailed: return "Fail to decode result from the response."
         case .unknown: return "Fail to initialize data. This is an internal error."
         case .unknownBackend: return "The backend returns data with unknown error. This is an internal error."
+        case .fileTooLarge: return "The uploaded file is too large and is refused by the server."
         case .other(let description): return description
         }
     }

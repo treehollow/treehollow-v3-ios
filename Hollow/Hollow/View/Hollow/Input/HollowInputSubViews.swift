@@ -18,6 +18,7 @@ extension HollowInputView {
             value: "liang2kl"
         )
         .frame(width: avatarWidth)
+        .fixedSize()
         .clipShape(Circle())
         .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.buttonGradient1))
         .leading()
@@ -114,7 +115,7 @@ extension HollowInputView {
                         backgroundColor: .background, content: {
                             Button(action: {
                                 if voteInfo.options.count == 2 {
-                                    showVoteAlert = true
+                                    showAlertIndex = .vote
                                     return
                                 }
                                 inputStore.voteInformation?.options.remove(at: index)
@@ -156,14 +157,15 @@ extension HollowInputView {
             
             imageButton
                 .matchedGeometryEffect(id: "select.photo", in: animation)
+                // Disable the button when compressing
+                .disabled(inputStore.image != nil)
                 .layoutPriority(1)
             
             voteButton
                 .layoutPriority(1)
-            
+
         }
-        .layoutPriority(0.9)
-        
+
         // Make the buttons feel disabled when sending data.
         // This is implemented in `MyButton` to automatically update
         // when the views are disabled, but here for convenience we

@@ -100,8 +100,8 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        withAnimation {
-            textViewEditing.wrappedValue = true
+        DispatchQueue.main.async {
+            withAnimation { self.textViewEditing.wrappedValue = true }
         }
     }
 }

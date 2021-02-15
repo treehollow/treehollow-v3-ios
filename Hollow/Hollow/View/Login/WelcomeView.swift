@@ -12,6 +12,8 @@ import Defaults
 ///
 /// Color set for this view is fixed to `other`.
 struct WelcomeView: View {
+    @EnvironmentObject var appModel: AppModel
+    
     @ObservedObject var viewModel: Welcome = .init()
     
     @ScaledMetric(wrappedValue: 22, relativeTo: .title) var title22: CGFloat
@@ -88,6 +90,7 @@ struct WelcomeView: View {
         }
         .accentColor(.hollowContentText)
         .navigationViewStyle(StackNavigationViewStyle())
+//        .onAppear { appModel.tokenExpired = false }
     }
     
     func selectHollowButton(text: String) -> some View {

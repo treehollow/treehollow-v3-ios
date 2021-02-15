@@ -14,6 +14,8 @@ struct TimelineView: View {
     @Binding var shouldReload: Bool
 
     @ObservedObject var viewModel: Timeline = .init()
+    @EnvironmentObject var appModel: AppModel
+    
     @State private var detailPresentedIndex: Int?
     @State private var offset: CGFloat? = 0
     /// To track the offset when the user scroll to the middle of the searchbar.

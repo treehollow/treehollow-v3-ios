@@ -79,18 +79,25 @@ extension DefaultRequest {
                         }
                         
                     } else {
-                        completion(nil, .init(errorCode: result.code, description: result.msg))
+                        let error = DefaultRequestError(errorCode: result.code, description: result.msg)
+                        completion(nil, error)
+                        print("[Request Error]: \(error)")
                     }
                     
                 } catch {
-                    print(error)
+                    print("[Request Error]: \(error)")
                     completion(nil, .decodeFailed)
                     return
                 }
                 
             case let .failure(error):
                 print("[Request Error]: \(error.errorDescription ?? "not documented")")
-                completion(nil, .other(description: error.localizedDescription))
+
+                if let errorCode = error.responseCode, errorCode == 413 {
+                    completion(nil, .fileTooLarge)
+                } else {
+                    completion(nil, .other(description: error.localizedDescription))
+                }
             }
         }
     }

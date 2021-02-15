@@ -14,8 +14,20 @@ struct ErrorAlert: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .alert(isPresented: .constant(errorMessage != nil)) {
-                // We should restore the error message after presenting the alert
-                Alert(title: Text(errorMessage!.title), message: Text(errorMessage!.message), dismissButton: .default(Text(LocalizedStringKey("OK")), action: { errorMessage = nil }))
+                ErrorAlert.alert(errorMessage: $errorMessage)!
             }
+    }
+    
+    static func alert(errorMessage: Binding<(title: String, message: String)?>) -> Alert? {
+        guard errorMessage.wrappedValue != nil else { return nil }
+        return Alert(
+            title: Text(errorMessage.wrappedValue!.title),
+            message: Text(errorMessage.wrappedValue!.message),
+            dismissButton: .default(
+                Text(LocalizedStringKey("OK")),
+                // We should restore the error message after presenting the alert
+                action: { errorMessage.wrappedValue = nil }
+            )
+        )
     }
 }

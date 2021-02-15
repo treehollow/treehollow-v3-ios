@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DeviceListView: View {
     @ObservedObject var deviceListStore = DeviceListStore()
+
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -40,6 +41,7 @@ struct DeviceListView: View {
         .navigationBarItems(trailing: Button(action: deviceListStore.requestDeviceList) {
             Image(systemName: "arrow.clockwise")
         })
+        .modifier(AppModelBehaviour(state: deviceListStore.state))
     }
 }
 
@@ -68,7 +70,7 @@ extension DeviceListView {
                     
                     // We won't allow the user to terminate the current
                     // device in device list.
-                    if !isCurrentDevice {
+//                    if !isCurrentDevice {
                         MyButton(
                             action: { logoutAction(device.deviceUUID) },
                             gradient: .vertical(gradient: .button),
@@ -83,7 +85,7 @@ extension DeviceListView {
                             .font(.system(size: buttonFontSize, weight: .bold))
                             .foregroundColor(.white)
                         }
-                    }
+//                    }
                 }
             }
             .padding()

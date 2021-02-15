@@ -51,6 +51,7 @@ struct SendPostRequest: DefaultRequest {
         ]
 
         if let imageData = configuration.imageData {
+            print(imageData.base64EncodedData().count)
             parameters["data"] = imageData.base64EncodedString()
         }
 
@@ -62,7 +63,14 @@ struct SendPostRequest: DefaultRequest {
             parameters["tag"] = tag
         }
         
-        performRequest(urlBase: configuration.apiRoot, urlPath: urlPath, parameters: parameters, headers: headers, method: .post, resultToResultData: { $0 }, completion: completion
+        performRequest(
+            urlBase: configuration.apiRoot,
+            urlPath: urlPath,
+            parameters: parameters,
+            headers: headers,
+            method: .post,
+            resultToResultData: { $0 },
+            completion: completion
         )
     }
 }

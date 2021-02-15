@@ -13,7 +13,7 @@ struct HollowInputView: View {
     @State var editorEditing: Bool = false
     @State private var keyboardShown = false
     @State var showImagePicker = false
-    @State var showVoteAlert = false
+    @State var showAlertIndex: AlertIndex?
     @State private var showImageDetail = false
     
     @ScaledMetric var avatarWidth: CGFloat = 37
@@ -71,19 +71,36 @@ struct HollowInputView: View {
         .background(Color.background.ignoresSafeArea())
         .modifier(ImagePickerModifier(presented: $showImagePicker, image: $inputStore.image))
         .onChange(of: inputStore.image) { _ in inputStore.compressImage() }
-        .alert(isPresented: $showVoteAlert) {
-            Alert(
-                title: Text("The number of the options must be no less than 2"),
-                message: Text("Do you want to remove all the options?"),
-                primaryButton: .cancel(),
-                secondaryButton: .default(Text("Yes"), action: { withAnimation { inputStore.voteInformation = nil }})
-            )
+        .onChange(of: inputStore.errorMessage?.title) { title in if title != nil { showAlertIndex = .error }}
+        .alert(item: $showAlertIndex) { index in
+            if index == .error {
+                return ErrorAlert.alert(errorMessage: $inputStore.errorMessage) ?? Alert(title: Text("Unknown error!"))
+            }
+            if index == .vote {
+                return Alert(
+                    title: Text("The number of the options must be no less than 2"),
+                    message: Text("Do you want to remove all the options?"),
+                    primaryButton: .cancel(),
+                    secondaryButton: .default(Text("Yes"), action: { withAnimation { inputStore.voteInformation = nil }})
+                )
+            }
+            
+            return Alert(title: Text("Unknown error!"))
         }
         .accentColor(.hollowContentText)
         .disabled(inputStore.sending)
+        .modifier(AppModelBehaviour(state: inputStore.state))
     }
 }
 
+extension HollowInputView {
+    enum AlertIndex: Int, Identifiable {
+        case error = 0
+        case vote = 1
+        
+        var id: Int { self.rawValue }
+    }
+}
 
 #if DEBUG
 //struct HollowInputView_Previews: PreviewProvider {

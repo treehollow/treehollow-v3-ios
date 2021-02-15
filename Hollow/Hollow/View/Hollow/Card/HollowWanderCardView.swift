@@ -9,10 +9,13 @@ import SwiftUI
 
 struct HollowWanderCardView: View {
     @Binding var postData: PostData
+    
+    @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
     var body: some View {
         // FIXME: Handlers
         VStack {
             HollowHeaderView(postData: postData, compact: true)
+                .padding(.bottom, body5)
             HollowTextView(text: postData.text, compactLineLimit: 20)
             // TODO: Vote and cite
             HStack {
@@ -25,7 +28,7 @@ struct HollowWanderCardView: View {
                 .foregroundColor(.hollowContentText)
                 .padding(.trailing, 10)
             }
-            .padding(.top, 5)
+            .padding(.top, body5)
         }
         .padding()
         .background(Color.hollowCardBackground)
