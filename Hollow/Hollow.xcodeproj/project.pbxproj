@@ -143,6 +143,8 @@
 		0E906D3225DCEADD0034053C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CFA25DCEADD0034053C /* ImageSaver.swift */; };
 		0E906D3925DCEBF20034053C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3825DCEBF20034053C /* Test.swift */; };
 		0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */; };
+		0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4825DD13590034053C /* HollowCommentInputStore.swift */; };
+		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */; };
@@ -291,6 +293,8 @@
 		0E906CFA25DCEADD0034053C /* ImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		0E906D3825DCEBF20034053C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigurationData.swift; sourceTree = "<group>"; };
+		0E906D4825DD13590034053C /* HollowCommentInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentInputStore.swift; sourceTree = "<group>"; };
+		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCapsuleButton.swift; sourceTree = "<group>"; };
@@ -323,6 +327,8 @@
 			isa = PBXGroup;
 			children = (
 				0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */,
+				0E906D4825DD13590034053C /* HollowCommentInputStore.swift */,
+				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -904,8 +910,10 @@
 				0E906CFC25DCEADD0034053C /* PublishedPostsMessageRequest.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
 				0E906D2425DCEADD0034053C /* PostData.swift in Sources */,
+				0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */,
 				0E906D1325DCEADD0034053C /* ReportCommentRequest.swift in Sources */,
 				0E906D1625DCEADD0034053C /* SendPostRequest.swift in Sources */,
+				0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */,
@@ -1152,9 +1160,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1176,9 +1184,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

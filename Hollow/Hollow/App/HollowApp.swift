@@ -14,7 +14,7 @@ struct HollowApp: App {
     // Receive delegate callbacks
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     
-    /// Singleton reflecting the actual state of the app.
+    // Singleton reflecting the actual state of the app.
     @StateObject var appModel = AppModel()
     
     var body: some Scene {

@@ -71,33 +71,18 @@ extension HollowInputView {
     
     var editorView: some View {
         CustomTextEditor(text: $inputStore.text, editing: $editorEditing) { $0 }
+            .overlayDoneButtonAndLimit(
+                editing: $editorEditing,
+                textCount: inputStore.text.count,
+                limit: 10000,
+                buttonFontSize: buttonFontSize
+            )
             .autocapitalization(.none)
             .disableAutocorrection(true)
             .overlay(Group { if inputStore.text == "" {
                 Text("Input text" + "...")
                     .foregroundColor(.uiColor(.systemFill))
             }})
-            .overlay(
-                VStack(alignment: .trailing) {
-                    if editorEditing {
-                        MyButton(action: { editorEditing = false }) {
-                            Text("Done")
-                                .font(.system(size: buttonFontSize, weight: .bold))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    if !textValid { HStack(spacing: 0) {
-                        Text("\(inputStore.text.count)")
-                            .font(.footnote)
-                            .foregroundColor(.red)
-                        Text(" / 10000")
-                            .font(.footnote)
-                    }}
-                }
-                .bottom()
-                .trailing()
-                .padding(.bottom, editorEditing && !textValid ? 0 : nil)
-            )
     }
     
     var voteView: some View { Group {
@@ -239,10 +224,44 @@ extension HollowInputView {
 
 }
 
-fileprivate extension View {
+extension View {
     func circularButton(width: CGFloat) -> some View {
         return self
             .frame(width: width, height: width)
             .clipShape(Circle())
+    }
+}
+
+extension CustomTextEditor {
+    func overlayDoneButtonAndLimit(
+        editing: Binding<Bool>,
+        textCount: Int,
+        limit: Int,
+        buttonFontSize: CGFloat) -> some View {
+        let textValid = textCount <= limit
+        return VStack {
+            self
+            HStack(alignment: .bottom) {
+                if !textValid { HStack(spacing: 0) {
+                    Text("\(textCount)")
+                        .font(.footnote)
+                        .foregroundColor(.red)
+                    Text(" / \(limit)")
+                        .font(.footnote)
+                }}
+                
+                if editing.wrappedValue {
+                    MyButton(action: { editing.wrappedValue = false }) {
+                        Text("Done")
+                            .font(.system(size: buttonFontSize, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+            .bottom()
+            .trailing()
+            .padding(.bottom, 5)
+            .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }

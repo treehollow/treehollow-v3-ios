@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 import Defaults
 
-class HollowInputStore: ObservableObject, AppModelEnvironment {
+class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStore {
     var presented: Binding<Bool>
     
     @Published var text: String = ""
@@ -53,25 +53,6 @@ class HollowInputStore: ObservableObject, AppModelEnvironment {
             }}
             
         })
-    }
-    
-    func compressImage() {
-        guard let image = image else { return }
-        withAnimation { compressedImage = nil }
-        DispatchQueue.global(qos: .background).async {
-            guard let result = ImageCompressor(dataCountThreshold: 512 * 1024, image: image).compress() else {
-                DispatchQueue.main.async { withAnimation {
-                    self.image = nil
-                    self.errorMessage = (title: "Image Too Large", message: "The image cannot be compressed. Please select another image.")
-                }}
-                return
-            }
-            DispatchQueue.main.async { withAnimation {
-                self.image = nil
-                self.compressedImage = UIImage(data: result.0)
-                self.imageSizeInformation = result.1
-            }}
-        }
     }
 }
 

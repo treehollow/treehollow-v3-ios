@@ -97,6 +97,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
             
             if let result = result {
+                // Update the config
                 Defaults[.hollowConfig] = result
             }
         })

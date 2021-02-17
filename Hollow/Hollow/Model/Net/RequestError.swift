@@ -17,7 +17,6 @@ enum DefaultRequestError: RequestError {
     case tokenExpiredError
     case fileTooLarge
     case unknown
-    case unknownBackend
     case other(description: String)
     
     var description: String {
@@ -25,7 +24,6 @@ enum DefaultRequestError: RequestError {
         case .tokenExpiredError: return "Token expired, please login again."
         case .decodeFailed: return "Fail to decode result from the response."
         case .unknown: return "Fail to initialize data. This is an internal error."
-        case .unknownBackend: return "The backend returns data with unknown error. This is an internal error."
         case .fileTooLarge: return "The uploaded file is too large and is refused by the server."
         case .other(let description): return description
         }

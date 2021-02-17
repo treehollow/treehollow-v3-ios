@@ -16,7 +16,7 @@ struct HollowInputView: View {
     @State var showAlertIndex: AlertIndex?
     
     @ScaledMetric var avatarWidth: CGFloat = 37
-    @ScaledMetric var vstackSpacing: CGFloat = 12
+    @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
     @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
     @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat

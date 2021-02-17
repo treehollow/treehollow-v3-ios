@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+/// View for the main interface.
 struct MainView: View {
+    /// Define `TabView` state.
     @State private var page: Page = .timeline
     @State private var isSearching = false
     @State private var showCreatePost = false
+    /// Whether to show the overlay refresh button.
+    ///
+    /// The value is determined by the current nested view.
     @State private var showRefresh = false
+    /// Whether the nested `TimelineView` should reload.
     @State private var shouldReloadTimeline = false
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
@@ -40,6 +46,8 @@ struct MainView: View {
                     )
                     .tag(Page.timeline)
                 }
+                
+                // Overlay circular buttons
                 .overlay(
                     VStack {
                         if !showCreatePost {
@@ -77,12 +85,6 @@ struct MainView: View {
                 }
             }
         )
-//
-//        .fullScreenCover(isPresented: $showCreatePost) {
-//            HollowInputView(presented: $showCreatePost)
-//                .matchedGeometryEffect(id: "add.post", in: animation)
-//        }
-
     }
     
     enum Page: Int, Identifiable {

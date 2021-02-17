@@ -19,9 +19,6 @@ struct AccountCreationRequestConfiguration {
     let deviceType = 2
     /// Device information.
     let deviceInfo: String = Constants.Application.deviceInfo
-    /// Old thuhole token (only needed for old users signing up using web frontend),
-    /// optional, but one of `validCode` and `oldToken` must be present.
-    // var oldToken: String?
     /// Email valid code, optional, but one of `oldToken` and `validCode` must be present.
     var validCode: String?
     // TODO: Device token for APNs
@@ -33,15 +30,6 @@ struct AccountCreationRequestConfiguration {
 
 /// Result of account creation attempt.
 struct AccountCreationRequestResultData {
-    /// Result type of account creation.
-    ///
-    /// Please init with `AccountCreationRequestResult.ResultType(rawValue: Int)`, and should
-    /// show error with `nil`, which means receiving negative code.
-//        enum ResultType: Int {
-//            case success = 0
-//        }
-//        /// The type of result received.
-//    var code: ResultType
     /// Access token.
     var token: String
     /// Device UUID

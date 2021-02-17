@@ -8,11 +8,18 @@
 
 import SwiftUI
 
+/// Namespace for shared constants used in views.
 struct ViewConstants {
+    /// Standard spacing for VStack in customized lists (e.g. login / register fields)
     static let listVStackSpacing: CGFloat = 25
+    /// Width for spinner shown as navigation item.
     static let navigationBarSpinnerWidth: CGFloat = 17
+    /// Font size for a bordered, small, textual button.
     static let plainButtonFontSize: CGFloat = 13
+    /// Colors to use in avatars.
     static let avatarTintColors: [Color] = [
         .yellow, .blue, .orange, .red, .green, .pink, .purple
     ]
+    
+    static let inputViewVStackSpacing: CGFloat = 12
 }

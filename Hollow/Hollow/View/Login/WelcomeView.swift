@@ -34,7 +34,7 @@ struct WelcomeView: View {
                         .padding(.top, 70)
                         .padding(.bottom, 20)
                     
-                    let buttonGradient = LinearGradient.vertical(gradient: Gradient(colors: [Color("hollow.card.background.other")]))
+                    let buttonGradient = LinearGradient.verticalSingleColor(color: Color("hollow.card.background.other"))
                     NavigationLink(
                         destination: LoginView(),
                         tag: HollowType.thu.rawValue,
