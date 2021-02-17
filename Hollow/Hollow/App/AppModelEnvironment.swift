@@ -12,10 +12,10 @@ import Defaults
 /// Protocol for a view model to internally define states of the app.
 ///
 /// Conform this protocol to the view model whose corresponding view is (and must be)
-/// modified by `.modifier(AppModelBehaviour(state: viewModel.state))`.
-/// Change the variables inside `state` will automatically update the app model.
+/// modified by `.modifier(AppModelBehaviour(appModelState: viewModel.appModelState))`.
+/// Change the variables inside `appModelState` will automatically update the app model.
 protocol AppModelEnvironment: ObservableObject {
-    var state: AppModelState { get set }
+    var appModelState: AppModelState { get set }
 }
 
 extension AppModelEnvironment {
@@ -27,7 +27,8 @@ extension AppModelEnvironment {
         switch error {
         case .tokenExpiredError:
             Defaults[.accessToken] = nil
-            state.shouldShowMainView = false
+            appModelState.shouldShowMainView = false
+            appModelState.tokenExpired = true
             return true
         default: return false
         }
@@ -39,4 +40,6 @@ struct AppModelState {
     var errorMessage: (title: String, message: String)?
     // It might be buggy
     var shouldShowMainView = Defaults[.accessToken] != nil
+    
+    var tokenExpired = false
 }

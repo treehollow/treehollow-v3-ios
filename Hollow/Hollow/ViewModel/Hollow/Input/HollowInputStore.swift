@@ -18,17 +18,13 @@ class HollowInputStore: ObservableObject, AppModelEnvironment {
     // FIXME: Remove this code in real tests
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
-    #if targetEnvironment(simulator)
-    @Published var availableTags: [String] = ["性相关", "政治相关", "令人不适"]
-    #else
     @Published var availableTags: [String] = Defaults[.hollowConfig]!.sendableTags
-    #endif
     @Published var selectedTag: String?
     @Published var voteInformation: VoteInformation?
     @Published var sending = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var imageSizeInformation: String?
-    @Published var state = AppModelState()
+    @Published var appModelState = AppModelState()
     
     init(presented: Binding<Bool>) {
         self.presented = presented
@@ -98,7 +94,7 @@ extension HollowInputStore {
             guard text != "" else { return false }
             var count: Int = 0
             for option in options {
-                if text == option { count += 1}
+                if text == option { count += 1 }
             }
             return count > 1
         }

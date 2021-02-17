@@ -23,13 +23,7 @@ struct LoadingIndicator: ViewModifier {
             .overlay(
                 Group { if isLoading {
                     LoadingLabel()
-                    .padding(.horizontal, body10)
-                    .padding(.vertical, body5)
-                    .background(Color.background)
-                    .colorScheme(colorScheme == .dark ? .light : .dark)
-                    .clipShape(Capsule())
-                    .padding(.top)
-                    .top()
+                        .modifier(IndicatorOverlay())
                 }}
             )
             .disabled(isLoading && disableWhenLoading)

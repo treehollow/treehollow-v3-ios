@@ -10,6 +10,8 @@ import Combine
 import Defaults
 
 class AppModel: ObservableObject {
-    @Published var errorMessage: (title: String, message: String)?
-    @Published var inMainView = Defaults[.accessToken] != nil
+    @Published var isInMainView = Defaults[.accessToken] != nil
+    
+    // Only for indicating expired state in `WelcomeView`
+    @Published var tokenExpired = false
 }

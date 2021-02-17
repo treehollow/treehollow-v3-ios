@@ -118,7 +118,7 @@ struct LoginView: View {
         .background(Color.background.edgesIgnoringSafeArea(.all))
         
         // Take control of the app.
-        .modifier(AppModelBehaviour(state: viewModel.state))
+        .modifier(AppModelBehaviour(state: viewModel.appModelState))
     }
 }
 

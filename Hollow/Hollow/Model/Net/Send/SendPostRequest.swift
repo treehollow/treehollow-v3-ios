@@ -52,7 +52,6 @@ struct SendPostRequest: DefaultRequest {
         ]
 
         if let imageData = configuration.imageData {
-            print(imageData.base64EncodedData().count)
             parameters["data"] = imageData.base64EncodedString()
         }
 

@@ -11,14 +11,12 @@ import Alamofire
 struct SendCommentRequestConfiguration {
     var apiRoot: [String]
     var token: String
+    
     var text: String
-    // deprecated
-    // var type: CommentType
     var imageData: Data?
     /// Id of the post to be commented
     var postId: Int
-    /// id of the comment this comment may reply to
-    var replyToCid: Int?
+    var replyCommentId: Int?
 }
 
 struct SendCommentRequestResult: DefaultRequestResult {
@@ -26,20 +24,19 @@ struct SendCommentRequestResult: DefaultRequestResult {
     var msg: String?
 }
 
-typealias SendCommentRequestResultData = SendCommentRequestResult
-
 struct SendCommentRequest: DefaultRequest {
     typealias Configuration = SendCommentRequestConfiguration
     typealias Result = SendCommentRequestResult
-    typealias ResultData = SendCommentRequestResultData
+    typealias ResultData = SendCommentRequestResult
     typealias Error = DefaultRequestError
+    
     var configuration: SendCommentRequestConfiguration
     
     init(configuration: SendCommentRequestConfiguration) {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (SendCommentRequestResultData?, DefaultRequestError?) -> Void) {
+    func performRequest(completion: @escaping (SendCommentRequestResult?, DefaultRequestError?) -> Void) {
         let urlPath = "v3/send/comment" + Constants.URLConstant.urlSuffix
         let hasImage = configuration.imageData != nil
         
@@ -50,27 +47,28 @@ struct SendCommentRequest: DefaultRequest {
 
         var parameters: [String : Encodable] = [
             "text" : configuration.text,
-            // type will be deprecated!
             "type" : hasImage ? "image" : "text",
-            "pid": configuration.postId
+            "pid" : configuration.postId,
+            "reply_to_cid" : configuration.replyCommentId
         ]
+        
+        // Optionals are not allowed.
+        if let imageData = configuration.imageData?.base64EncodedString() {
+            parameters["data"] = imageData
+        }
+        
+        if let replyToCommentId = configuration.replyCommentId {
+            parameters["reply_to_cid"] = replyToCommentId
+        }
 
-        if let imageData = configuration.imageData {
-            print(imageData.base64EncodedData().count)
-            parameters["data"] = imageData.base64EncodedString()
-        }
-        
-        if let replyToCid = self.configuration.replyToCid {
-            parameters["reply_to_cid"] = replyToCid
-        }
-        
-        performRequest(urlBase: self.configuration.apiRoot,
-                       urlPath: urlPath,
-                       parameters: parameters,
-                       headers: headers,
-                       method: .post,
-                       resultToResultData: { $0 },
-                       completion: completion)
+        performRequest(
+            urlBase: configuration.apiRoot,
+            urlPath: urlPath,
+            parameters: parameters,
+            headers: headers,
+            method: .post,
+            resultToResultData: { $0 },
+            completion: completion
+        )
     }
-    
 }

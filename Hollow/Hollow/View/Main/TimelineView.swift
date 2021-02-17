@@ -47,9 +47,7 @@ struct TimelineView: View {
                         // FIXME: Ugly animation here
                         // Navigate to search view
                         withAnimation(.searchViewTransition) {
-//                            isSearching = true
-//                            detailPresentedIndex = -1
-                            showCreatePost = true
+                            isSearching = true
                         }
                     }) {
                         HStack {

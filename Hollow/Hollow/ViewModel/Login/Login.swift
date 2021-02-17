@@ -13,7 +13,7 @@ import Defaults
 
 /// View model for `LoginView`
 class Login: ObservableObject, AppModelEnvironment {
-    @Published var state = AppModelState()
+    @Published var appModelState = AppModelState()
 
     @Published var showsRecaptcha = false
     @Published var reCAPTCHAToken: String = ""
@@ -119,7 +119,7 @@ class Login: ObservableObject, AppModelEnvironment {
             if let result = result {
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
-                self.state.shouldShowMainView = true
+                self.appModelState.shouldShowMainView = true
             }
         })
     }
@@ -158,7 +158,7 @@ class Login: ObservableObject, AppModelEnvironment {
             if let result = result {
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
-                self.state.shouldShowMainView = true
+                self.appModelState.shouldShowMainView = true
             }
         })
     }

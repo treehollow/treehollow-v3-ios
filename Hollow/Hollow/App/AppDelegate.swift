@@ -13,9 +13,12 @@ import AppCenterAnalytics
 import AppCenterCrashes
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if DEBUG
-//        Defaults[.accessToken] = nil
+        // Perform test in test environment.
+        // Add the modules you want to test in `options`.
+        Test.performTest(options: [.getConfig])
         #endif
         
         // Request notification access
@@ -37,6 +40,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         )
         #endif
         
+        // Fetch the lastest config
+        fetchConfig()
         return true
     }
     
@@ -58,8 +63,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
 
+    // MARK: - Tree Hollow Configuration
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
-        // TODO: Implementation
+        guard let config = Defaults[.hollowConfig] else { return }
+        let configuration = UpdateDeviceTokenRequestConfiguration(deviceToken: deviceToken, token: accessToken, apiRoot: config.apiRootUrls)
+        let request = UpdateDeviceTokenRequest(configuration: configuration)
+        
+        request.performRequest(completion: { result, error in
+            if let _ = error {
+                // TODO: Handle error
+            }
+        })
     }
     
     private func fetchConfig() {
