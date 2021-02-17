@@ -47,6 +47,7 @@ struct SendPostRequest: DefaultRequest {
 
         var parameters: [String : Encodable] = [
             "text" : configuration.text,
+            // type will be deprecated!
             "type" : hasImage ? "image" : "text",
         ]
 
