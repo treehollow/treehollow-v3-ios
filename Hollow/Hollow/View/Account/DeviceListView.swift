@@ -41,7 +41,7 @@ struct DeviceListView: View {
         .navigationBarItems(trailing: Button(action: deviceListStore.requestDeviceList) {
             Image(systemName: "arrow.clockwise")
         })
-        .modifier(AppModelBehaviour(state: deviceListStore.state))
+        .modifier(AppModelBehaviour(state: deviceListStore.appModelState))
     }
 }
 

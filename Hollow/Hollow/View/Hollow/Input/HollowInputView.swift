@@ -11,10 +11,9 @@ struct HollowInputView: View {
     @ObservedObject var inputStore: HollowInputStore
     
     @State var editorEditing: Bool = false
-    @State private var keyboardShown = false
+    @State var keyboardShown = false
     @State var showImagePicker = false
     @State var showAlertIndex: AlertIndex?
-    @State private var showImageDetail = false
     
     @ScaledMetric var avatarWidth: CGFloat = 37
     @ScaledMetric var vstackSpacing: CGFloat = 12
@@ -23,7 +22,6 @@ struct HollowInputView: View {
     @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
-
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     
     @Namespace var animation
@@ -73,10 +71,10 @@ struct HollowInputView: View {
         .onChange(of: inputStore.image) { _ in inputStore.compressImage() }
         .onChange(of: inputStore.errorMessage?.title) { title in if title != nil { showAlertIndex = .error }}
         .alert(item: $showAlertIndex) { index in
-            if index == .error {
+            switch index {
+            case .error:
                 return ErrorAlert.alert(errorMessage: $inputStore.errorMessage) ?? Alert(title: Text("Unknown error!"))
-            }
-            if index == .vote {
+            case .vote:
                 return Alert(
                     title: Text("The number of the options must be no less than 2"),
                     message: Text("Do you want to remove all the options?"),
@@ -84,12 +82,10 @@ struct HollowInputView: View {
                     secondaryButton: .default(Text("Yes"), action: { withAnimation { inputStore.voteInformation = nil }})
                 )
             }
-            
-            return Alert(title: Text("Unknown error!"))
         }
         .accentColor(.hollowContentText)
         .disabled(inputStore.sending)
-        .modifier(AppModelBehaviour(state: inputStore.state))
+        .modifier(AppModelBehaviour(state: inputStore.appModelState))
     }
 }
 

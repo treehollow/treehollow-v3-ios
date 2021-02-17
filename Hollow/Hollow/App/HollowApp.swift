@@ -12,16 +12,15 @@ import Defaults
 @main
 struct HollowApp: App {
     // Receive delegate callbacks
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     
     /// Singleton reflecting the actual state of the app.
-    @ObservedObject var appModel = AppModel()
+    @StateObject var appModel = AppModel()
     
     var body: some Scene {
         WindowGroup {
             Group {
-                // FIXME: Should use one var
-                if appModel.inMainView {
+                if appModel.isInMainView {
                     MainView()
                 } else {
                     WelcomeView()
@@ -29,7 +28,6 @@ struct HollowApp: App {
             }
             // inject the app model into the environment
             .environmentObject(appModel)
-//            .modifier(ErrorAlert(errorMessage: $appModel.errorMessage))
         }
     }
 }

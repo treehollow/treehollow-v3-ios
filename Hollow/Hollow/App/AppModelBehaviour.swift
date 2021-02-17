@@ -12,7 +12,7 @@ import Defaults
 /// Modifier for views that take control of the behaviour of the app
 /// using the model injected in the environment.
 ///
-/// Supply `state` (typically in the view model) to access **indirect**
+/// Supply `appModelState` (typically in the view model) to access **indirect**
 /// control of the environment object in the view model.
 struct AppModelBehaviour: ViewModifier {
     // Fetch the app model in the environment inside
@@ -27,15 +27,14 @@ struct AppModelBehaviour: ViewModifier {
             // will be called when the state variable is initialized. So
             // remember to provide a correct initial value.
             
-            // Handle global error message
-            .onChange(of: state.errorMessage?.message) { message in
-                guard message != nil else { return }
-                withAnimation { appModel.errorMessage = state.errorMessage }
-            }
-        
             // Handle entering main view
             .onChange(of: state.shouldShowMainView) { show in
-                withAnimation { appModel.inMainView = show }
+                withAnimation { appModel.isInMainView = show }
+            }
+        
+            // Handle expired state
+            .onChange(of: state.tokenExpired) { tokenExpired in
+                withAnimation { appModel.tokenExpired = tokenExpired }
             }
     }
 }

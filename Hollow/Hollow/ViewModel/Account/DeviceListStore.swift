@@ -16,7 +16,7 @@ class DeviceListStore: ObservableObject, AppModelEnvironment {
     @Published var isLoading: Bool = false
     @Published var loggingoutUUID: String?
     @Published var errorMessage: (title: String, message: String)?
-    @Published var state = AppModelState()
+    @Published var appModelState = AppModelState()
 
     init() {
         // Load the latest cache as placeholder

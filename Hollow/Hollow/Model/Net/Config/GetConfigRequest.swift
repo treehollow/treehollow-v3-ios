@@ -93,6 +93,8 @@ struct GetConfigRequest: Request {
         }
         let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         let task = session.dataTask(with: url) { data, response, error in
+            print("[Request] \(self)")
+
             if let error = error {
                 completion(nil, .other(description: error.localizedDescription))
                 return
@@ -111,8 +113,6 @@ struct GetConfigRequest: Request {
                 return
             }
             
-            print(string)
-            
             let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
             if components1.count == 2 {
                 let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")
@@ -123,6 +123,8 @@ struct GetConfigRequest: Request {
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
                         let result = try jsonDecoder.decode(Result.self, from: apiInfo)
+                        print("[Result] \(result)")
+                        
                         if validateConfig(result) {
                             // Call the callback
                             completion(result, nil)
@@ -130,7 +132,7 @@ struct GetConfigRequest: Request {
                             completion(nil, .invalidConfigUrl)
                         }
                     } catch {
-                        print("[GetConfigRequest] Decode failed with error: \(error)")
+                        print("[Request Error]: \(error)")
                         completion(nil, .decodeFailed)
                     }
                     return

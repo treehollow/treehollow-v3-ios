@@ -33,6 +33,8 @@ struct WelcomeView: View {
                         .foregroundColor(Color("hollow.content.text.other"))
                         .padding(.top, 70)
                         .padding(.bottom, 20)
+                    
+                    let buttonGradient = LinearGradient.vertical(gradient: Gradient(colors: [Color("hollow.card.background.other")]))
                     NavigationLink(
                         destination: LoginView(),
                         tag: HollowType.thu.rawValue,
@@ -42,7 +44,7 @@ struct WelcomeView: View {
                             // Set to nil before request to avoid conflict
                             Defaults[.hollowConfig] = nil
                             viewModel.requestConfig(hollowType: .thu)
-                        }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
+                        }, gradient: buttonGradient) {
                             // We are not localizing this
                             selectHollowButton(text: "T大树洞")
                         }}
@@ -55,7 +57,7 @@ struct WelcomeView: View {
                             // Set to nil before request to avoid conflict
                             Defaults[.hollowConfig] = nil
                             viewModel.requestConfig(hollowType: .pku)
-                        }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
+                        }, gradient: buttonGradient) {
                             selectHollowButton(text: "未名树洞")
                         }}
                     
@@ -66,7 +68,7 @@ struct WelcomeView: View {
                         MyButton(action: {
                             Defaults[.hollowType] = .other
                             viewModel.hollowSelection = HollowType.other.rawValue
-                        }, gradient: .vertical(gradient: .init(colors: [Color("hollow.card.background.other")]))) {
+                        }, gradient: buttonGradient) {
                             selectHollowButton(text: String.othersLocalized.capitalized)
                         }}
                     Spacer()
@@ -74,7 +76,9 @@ struct WelcomeView: View {
                         Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
                             .padding()
                     }
-                    Text(LocalizedStringKey("Email verification is required"))
+                    
+                    let footnote = appModel.tokenExpired ? "Your access token has expired. Please login again." : "Email verification is required"
+                    Text(footnote)
                         .font(.footnote)
                         .padding(.vertical, 5)
                         .layoutPriority(1)
@@ -90,7 +94,15 @@ struct WelcomeView: View {
         }
         .accentColor(.hollowContentText)
         .navigationViewStyle(StackNavigationViewStyle())
-//        .onAppear { appModel.tokenExpired = false }
+        
+        .onAppear {
+            // Don't use AppModelBehaviour modifier on this view.
+            if appModel.tokenExpired {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation { appModel.tokenExpired = false }
+                }
+            }
+        }
     }
     
     func selectHollowButton(text: String) -> some View {

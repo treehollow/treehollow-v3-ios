@@ -95,8 +95,8 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
     
     // MARK: - UITextViewDelegate
     func textViewDidChange(_ textView: UITextView) {
-        withAnimation {
-            text.wrappedValue = textView.text
+        DispatchQueue.main.async {
+            withAnimation { self.text.wrappedValue = textView.text }
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {

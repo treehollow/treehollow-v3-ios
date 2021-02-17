@@ -153,6 +153,7 @@ extension HollowInputView {
                     .modifier(MyButtonDefaultStyle())
                     .defaultButtonStyle()
             })
+            .fixedSize()
             Spacer()
             
             imageButton
@@ -160,11 +161,15 @@ extension HollowInputView {
                 // Disable the button when compressing
                 .disabled(inputStore.image != nil)
                 .layoutPriority(1)
+                .fixedSize()
             
             voteButton
                 .layoutPriority(1)
+                .fixedSize()
 
         }
+
+        .fixedSize(horizontal: false, vertical: true)
 
         // Make the buttons feel disabled when sending data.
         // This is implemented in `MyButton` to automatically update
