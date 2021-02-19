@@ -27,7 +27,13 @@ struct Comment: Codable {
     var timestamp: Int
     /// comment ID
     var replyTo: Int
-    var type: CommentType
+    // deprecated
+    var type: CommentType {
+        get {
+            if self.url != nil { return .image }
+            else { return .text }
+        }
+    }
     /// image url
     var url: String?
     var imageMetadata: ImageMetadata?

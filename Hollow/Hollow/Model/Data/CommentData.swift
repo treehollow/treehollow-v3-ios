@@ -21,6 +21,11 @@ struct CommentData: Identifiable {
     var tags: [String]
     var text: String
     /// **will be deprecated**
-    var type: CommentType
+    var type: CommentType {
+        get {
+            if self.image != nil { return .image}
+            else { return .text }
+        }
+    }
     var image: HollowImage?
 }
