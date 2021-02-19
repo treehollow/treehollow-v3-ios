@@ -62,7 +62,7 @@ struct HollowImageView: View {
 #if DEBUG
 struct HollowImageView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowImageView(hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")))
+        HollowImageView(hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test"), imageURL: ""))
     }
 }
 #endif

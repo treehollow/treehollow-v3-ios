@@ -93,7 +93,7 @@ struct HollowHeaderView: View {
 
 #if DEBUG
 struct HollowHeaderView_Previews: PreviewProvider {
-    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "asdasdsdsdadsdasdsdasdasdasdasdadsdasdasdsadds", hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")), vote: .init(votedOption: "Yes", voteData: [
+    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "asdasdsdsdadsdasdsdasdasdasdasdadsdasdasdsadds", hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test"), imageURL: ""), vote: .init(votedOption: "Yes", voteData: [
         .init(title: "Yes", voteCount: 123),
         .init(title: "No", voteCount: 24)
     ]), comments: [

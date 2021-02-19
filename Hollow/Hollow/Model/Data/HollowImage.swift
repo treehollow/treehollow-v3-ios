@@ -19,9 +19,10 @@ struct HollowImage {
     
     /// - parameter placeholder: Placeholder metadata.
     /// - parameter image: The image to display, set it to `nil` when the image is still loading.
-    init(placeholder: (width: CGFloat, height: CGFloat), image: UIImage?) {
+    init(placeholder: (width: CGFloat, height: CGFloat), image: UIImage?, imageURL: String?) {
         self.placeholder = placeholder
         self.image = image
+        self.imageURL = imageURL
     }
     
     /// Set the actual image to display.

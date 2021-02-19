@@ -21,7 +21,7 @@ struct Comment: Codable {
     var name: String
     var permissions: [PostPermissionType]
     var postId: Int
-    var tags: String?
+    var tags: [String]?
     var text: String?
     /// unix timestamp
     var timestamp: Int
