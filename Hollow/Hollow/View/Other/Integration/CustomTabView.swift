@@ -66,8 +66,17 @@ fileprivate class TabViewUIHostingController<Content>: UIHostingController<Conte
     }
     
     private func setHostingScrollViews(for view: UIView) {
+        let HostingScrollView: AnyClass? = NSClassFromString("SwiftUI.HostingScrollView")
         for subView in view.subviews {
             if subView.isKind(of: UIScrollView.self) {
+                
+                // Disable `scrollsToTop` on other scrollView
+                if let HostingScrollView = HostingScrollView,
+                   !subView.isKind(of: HostingScrollView) {
+                    (subView as! UIScrollView).scrollsToTop = false
+                }
+                
+                // Set the background of the wrapper view to nil
                 view.backgroundColor = nil
             }
             setHostingScrollViews(for: subView)

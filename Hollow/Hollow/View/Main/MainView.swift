@@ -32,6 +32,7 @@ struct MainView: View {
                 HeaderView(page: $page, isSearching: $isSearching)
                     .padding(.horizontal)
                     .padding(.top, 10)
+//                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 3 : 0)
                 
                 // Use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`
@@ -114,9 +115,13 @@ extension MainView {
         @Binding var isSearching: Bool
         @State private var accountPresented = false
         
-        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
-        @ScaledMetric(wrappedValue: 22, relativeTo: .body) var body22: CGFloat
-        @ScaledMetric(wrappedValue: 18, relativeTo: .body) var body18: CGFloat
+        // iPhone
+        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 22, relativeTo: .body) var iconSize: CGFloat
+        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 22 : 26, relativeTo: .body) var tabSelectedSize: CGFloat
+        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 18 : 20, relativeTo: .body) var tabUnselectedSize: CGFloat
+        
+
+        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
 
         var body: some View {
             HStack(spacing: 2) {
@@ -154,7 +159,7 @@ extension MainView {
                             .padding(.leading, 7)
                     }
                 }
-                .font(.system(size: body20, weight: .medium))
+                .font(.system(size: iconSize, weight: .medium))
                 .foregroundColor(.mainBarButton)
             }
             .sheet(isPresented: $accountPresented, content: {
@@ -166,7 +171,7 @@ extension MainView {
         private func mainTabText(text: String, selected: Bool) -> some View {
             return Text(text)
                 .fontWeight(.heavy)
-                .font(.system(size: selected ? body22 : body18))
+                .font(.system(size: selected ? tabSelectedSize : tabUnselectedSize))
                 .foregroundColor(selected ? .mainPageSelected : .mainPageUnselected)
                 .lineLimit(1)
         }

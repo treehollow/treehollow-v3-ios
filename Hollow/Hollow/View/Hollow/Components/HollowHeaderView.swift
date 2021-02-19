@@ -26,7 +26,7 @@ struct HollowHeaderView: View {
     var body: some View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
-                let tintColor = ViewConstants.avatarTintColors[(postData.postId * 9) % ViewConstants.avatarTintColors.count]
+                let tintColor = ViewConstants.avatarTintColors[postData.postId % ViewConstants.avatarTintColors.count]
                 AvatarWrapper(
                     colors: [tintColor, .white],
                     resolution: 6,
@@ -93,7 +93,7 @@ struct HollowHeaderView: View {
 
 #if DEBUG
 struct HollowHeaderView_Previews: PreviewProvider {
-    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "asdasdsdsdadsdasdsdasdasdasdasdadsdasdasdsadds", type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")), vote: .init(voted: true, votedOption: "Yes", voteData: [
+    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, tag: "", text: "asdasdsdsdadsdasdsdasdasdasdasdadsdasdasdsadds", type: .vote, hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test")), vote: .init(votedOption: "Yes", voteData: [
         .init(title: "Yes", voteCount: 123),
         .init(title: "No", voteCount: 24)
     ]), comments: [

@@ -14,7 +14,10 @@ class Wander: ObservableObject {
         // FOR DEBUG
         #if DEBUG
 //        self.posts = Array.init(repeating: testPostData, count: 200)
-        self.posts = testPosts + testPosts.shuffled() + testPosts.shuffled()
+        self.posts = []
+        for i in 0...50 {
+            self.posts.append(testPostWrapper(forPostId: 189201 + i).post)
+        }
         #else
         self.posts = []
         #endif

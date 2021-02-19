@@ -16,7 +16,7 @@ struct WanderView: View {
             WaterfallGrid((0..<viewModel.posts.count), id: \.self) { index in
                 HollowWanderCardView(postData: $viewModel.posts[index])
             }
-            .gridStyle(columns: 2, spacing: 10, animation: nil)
+            .gridStyle(columnsInPortrait: 2, columnsInLandscape: 3, spacing: 10, animation: nil)
             .padding(.horizontal, 15)
             .background(Color.background)
             

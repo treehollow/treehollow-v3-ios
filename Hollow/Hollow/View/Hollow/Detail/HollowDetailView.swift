@@ -12,6 +12,7 @@ struct HollowDetailView: View {
     @Binding var presentedIndex: Int?
     
     @State private var commentRect: CGRect = .zero
+    @State private var viewSize = CGSize()
     @State private var scrollViewOffset: CGFloat? = 0
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
@@ -49,7 +50,7 @@ struct HollowDetailView: View {
                             .fixedSize()
                         HollowContentView(postDataWrapper: postDataWrapper, compact: false, voteHandler: {_ in})
                             .fixedSize(horizontal: false, vertical: true)
-                        CommentView(comments: $postDataWrapper.post.comments)
+                        CommentView(comments: $postDataWrapper.post.comments, maxImageHeight: viewSize.height * 0.6)
                             // Get the frame of the comment view.
                             .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
                     }
@@ -61,12 +62,14 @@ struct HollowDetailView: View {
             }
             
         }
+        .modifier(GetSize(size: $viewSize))
     }
 }
 
 extension HollowDetailView {
     private struct CommentView: View {
         @Binding var comments: [CommentData]
+        var maxImageHeight: CGFloat?
         var body: some View {
             VStack {
                 (Text("\(comments.count) ") + Text(LocalizedStringKey("Comments")))
@@ -75,7 +78,7 @@ extension HollowDetailView {
                     .padding(.top)
                     .padding(.bottom, 5)
                 ForEach(comments) { commentData in
-                    HollowCommentContentView(commentData: commentData, compact: false)
+                    HollowCommentContentView(commentData: commentData, compact: false, maxImageHeight: maxImageHeight)
                 }
             }
         }

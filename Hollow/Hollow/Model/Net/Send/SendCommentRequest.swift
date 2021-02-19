@@ -49,7 +49,6 @@ struct SendCommentRequest: DefaultRequest {
             "text" : configuration.text,
             "type" : hasImage ? "image" : "text",
             "pid" : configuration.postId,
-            "reply_to_cid" : configuration.replyCommentId
         ]
         
         // Optionals are not allowed.

@@ -12,8 +12,11 @@ struct HollowCommentContentView: View {
     var commentData: CommentData
     var compact: Bool
     var contentVerticalPadding: CGFloat? = 10
+    var maxImageHeight: CGFloat?
     private let compactLineLimit = 3
     private let nameLabelWidth: CGFloat = 60
+    
+    @State private var screenSize = UIScreen.main.bounds.size
     
     @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
@@ -39,7 +42,7 @@ struct HollowCommentContentView: View {
                             HollowImageView(hollowImage: commentData.image, description: commentData.text)
                                 .cornerRadius(4)
                                 .padding(.bottom, 10)
-                                .frame(maxHeight: 300)
+                                .frame(maxHeight: maxImageHeight)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                         Group {

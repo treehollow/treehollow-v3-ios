@@ -33,6 +33,7 @@ struct DeviceListView: View {
                 // Placeholder
                 Spacer().horizontalCenter()
             }
+            .padding(.bottom)
         }
         .background(Color.background.ignoresSafeArea())
         .navigationTitle("Devices")

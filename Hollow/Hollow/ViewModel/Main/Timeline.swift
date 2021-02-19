@@ -15,7 +15,10 @@ class Timeline: ObservableObject {
         // FOR DEBUG
         #if DEBUG
 //        self.posts = Array.init(repeating: testPostDataWrapperNoExtraComponents, count: 200)
-        self.posts = testPostWrappers
+        self.posts = []
+        for i in 0...200 {
+            self.posts.append(testPostWrapper(forPostId: 189201 + i))
+        }
         #else
         self.posts = []
         #endif
@@ -36,7 +39,7 @@ class Timeline: ObservableObject {
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             #if DEBUG
             withAnimation {
-                self.posts = testPostWrappers.shuffled()
+                self.posts = self.posts.shuffled()
             }
             #endif
             finshHandler()

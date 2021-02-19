@@ -36,7 +36,7 @@ struct HollowVoteContentView: View {
     
     // TODO: Vote proportion
     private struct VoteBarView: View {
-        var voteData: VoteData.VoteData
+        var voteData: VoteData.Data
         private var voted: Bool { voteData.voteCount >= 0 }
         var selectedButNotFinish: Bool
         var selected: Bool
@@ -109,7 +109,7 @@ struct HollowVoteContentView: View {
 #if DEBUG
 struct HollowVoteContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HollowVoteContentView(vote: .init(voted: false, votedOption: nil, voteData: [.init(title: "赞成", voteCount: -1), .init(title: "反对", voteCount: -1)]), voteHandler: { string in print("Selected option \(string)") })
+        HollowVoteContentView(vote: .init(votedOption: nil, voteData: [.init(title: "赞成", voteCount: -1), .init(title: "反对", voteCount: -1)]), voteHandler: { string in print("Selected option \(string)") })
             .background(Color.black)
             .colorScheme(.dark)
     }

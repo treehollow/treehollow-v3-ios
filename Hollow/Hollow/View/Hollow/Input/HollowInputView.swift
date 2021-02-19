@@ -51,6 +51,7 @@ struct HollowInputView: View {
                 .disabled(!contentValid)
             }
             .padding(.horizontal)
+            .padding(.top, vstackSpacing)
             
             VStack(spacing: vstackSpacing) {
                 avatar
