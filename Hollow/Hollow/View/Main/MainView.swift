@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+/// View for the main interface.
 struct MainView: View {
+    /// Define `TabView` state.
     @State private var page: Page = .timeline
     @State private var isSearching = false
     @State private var showCreatePost = false
+    /// Whether to show the overlay refresh button.
+    ///
+    /// The value is determined by the current nested view.
     @State private var showRefresh = false
+    /// Whether the nested `TimelineView` should reload.
     @State private var shouldReloadTimeline = false
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
@@ -26,6 +32,7 @@ struct MainView: View {
                 HeaderView(page: $page, isSearching: $isSearching)
                     .padding(.horizontal)
                     .padding(.top, 10)
+//                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 3 : 0)
                 
                 // Use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`
@@ -40,6 +47,8 @@ struct MainView: View {
                     )
                     .tag(Page.timeline)
                 }
+                
+                // Overlay circular buttons
                 .overlay(
                     VStack {
                         if !showCreatePost {
@@ -77,12 +86,6 @@ struct MainView: View {
                 }
             }
         )
-//
-//        .fullScreenCover(isPresented: $showCreatePost) {
-//            HollowInputView(presented: $showCreatePost)
-//                .matchedGeometryEffect(id: "add.post", in: animation)
-//        }
-
     }
     
     enum Page: Int, Identifiable {
@@ -112,9 +115,13 @@ extension MainView {
         @Binding var isSearching: Bool
         @State private var accountPresented = false
         
-        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
-        @ScaledMetric(wrappedValue: 22, relativeTo: .body) var body22: CGFloat
-        @ScaledMetric(wrappedValue: 18, relativeTo: .body) var body18: CGFloat
+        // iPhone
+        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 22, relativeTo: .body) var iconSize: CGFloat
+        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 22 : 26, relativeTo: .body) var tabSelectedSize: CGFloat
+        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 18 : 20, relativeTo: .body) var tabUnselectedSize: CGFloat
+        
+
+        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
 
         var body: some View {
             HStack(spacing: 2) {
@@ -152,7 +159,7 @@ extension MainView {
                             .padding(.leading, 7)
                     }
                 }
-                .font(.system(size: body20, weight: .medium))
+                .font(.system(size: iconSize, weight: .medium))
                 .foregroundColor(.mainBarButton)
             }
             .sheet(isPresented: $accountPresented, content: {
@@ -164,7 +171,7 @@ extension MainView {
         private func mainTabText(text: String, selected: Bool) -> some View {
             return Text(text)
                 .fontWeight(.heavy)
-                .font(.system(size: selected ? body22 : body18))
+                .font(.system(size: selected ? tabSelectedSize : tabUnselectedSize))
                 .foregroundColor(selected ? .mainPageSelected : .mainPageUnselected)
                 .lineLimit(1)
         }

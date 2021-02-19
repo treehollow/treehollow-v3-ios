@@ -36,6 +36,10 @@ let testPostDataCompressedImage: PostData = .init(attention: true, deleted: fals
 
 let testPostDataNoExtraComponents: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198433, replyNumber: 12, tag: "", text: testText3,  hollowImage: nil, vote: nil, comments: testComments)
 
+let postDatas: [PostData] = [
+    
+]
+
 let testPosts = [
     testPostData,
     testPostData2,
@@ -43,6 +47,7 @@ let testPosts = [
     testPostData4
 ]
 
+let testTexts = [testText, testText2, testText3]
 
 let testPostDataWrapper: PostDataWrapper = .init(post: testPostData, citedPost: .init(postId: testPostData2.postId, text: testPostData2.text))
 let testPostDataWrapper2: PostDataWrapper = .init(post: testPostData2, citedPost: .init(postId: testPostData.postId, text: testPostData.text))
@@ -51,4 +56,9 @@ let testPostDataWrapper4: PostDataWrapper = .init(post: testPostData4, citedPost
 let testPostDataWrapperNoExtraComponents: PostDataWrapper = .init(post: testPostDataNoExtraComponents, citedPost: .init(postId: testPostData.postId, text: testPostData2.text))
 
 let testPostWrappers = [testPostDataWrapper, testPostDataWrapper2, testPostDataWrapper3, testPostDataWrapper4]
+
+func testPostWrapper(forPostId postId: Int) -> PostDataWrapper {
+    let citedPost = testPosts[postId % testPosts.count]
+    return PostDataWrapper(post: PostData(attention: postId % 2 == 0, deleted: false, likeNumber: postId / 200, permissions: [], postId: postId, replyNumber: postId / 200, tag: "", text: testTexts[postId % testTexts.count], type: .image, hollowImage: postId % 8 == 0 ? .init(placeholder: (1000, 600), image: UIImage(named: "test.compressed")) : nil, vote: (postId + 3) % 8 == 0 ? .init(votedOption: "好", voteData: [.init(title: "好", voteCount: 214), .init(title: "不好", voteCount: 17)]) : nil, comments: Array(testComments.prefix(postId % 6))), citedPost: (postId + 3) % 8 == 0 ? .init(postId: citedPost.postId, text: citedPost.text) : nil)
+}
 #endif

@@ -53,6 +53,7 @@ struct SendVoteRequest: DefaultRequest {
             headers: headers,
             method: .post,
             resultToResultData: { $0 },
-            completion: completion)
+            completion: completion
+        )
     }
 }

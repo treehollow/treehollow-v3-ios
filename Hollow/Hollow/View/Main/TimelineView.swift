@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WaterfallGrid
 
 struct TimelineView: View {
     @Binding var isSearching: Bool
@@ -69,8 +70,11 @@ struct TimelineView: View {
                     .padding(.bottom, body14 / 2)
                     .background(Color.background)
                     .modifier(GetSize(size: $searchBarSize))
-                    .id(-1)
-                                        
+                    .id(-2)
+                    
+                    Spacer().frame(height: body14 / 2)
+                        .id(-1)
+                    
                     // FIXME: Can we use postId as the id instead of the index?
                     // Using index will apply an imperfect animation on the cards
                     // (directly update the card content rather than moving the whole card).
@@ -115,11 +119,11 @@ struct TimelineView: View {
                         // Perform scrolling actions
                         if currentOffset > 0 && currentOffset <= threshold {
                             // Reveal the search bar
-                            proxy.scrollTo(-1, anchor: .top)
+                            proxy.scrollTo(-2, anchor: .top)
                         }
                         if currentOffset > threshold && currentOffset < searchBarHeight {
                             // Hide the search bar
-                            proxy.scrollTo(0, anchor: .top)
+                            proxy.scrollTo(-1, anchor: .top)
                         }
                         searchBarTrackingOffset = nil
                     }
@@ -153,7 +157,6 @@ struct TimelineView: View {
             postDataWrapper: $viewModel.posts[index],
             viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].post.postId, for: option)})
         )
-        .padding(.top, index == 0 ? body14 / 2 : 0)
         .padding(.horizontal)
         .padding(.bottom)
         .background(Color.background)

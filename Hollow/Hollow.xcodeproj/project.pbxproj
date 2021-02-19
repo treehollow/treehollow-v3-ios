@@ -82,10 +82,12 @@
 		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
 		0E415B8D25CD773E00351672 /* TestCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B8A25CD773E00351672 /* TestCommentData.swift */; };
 		0E415B8E25CD773E00351672 /* TestPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B8B25CD773E00351672 /* TestPostData.swift */; };
-		0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9125CD775F00351672 /* WaterfallGrid */; };
+		0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; platformFilter = maccatalyst; productRef = 0E415B9125CD775F00351672 /* WaterfallGrid */; };
 		0E415B9625CD77C600351672 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9525CD77C600351672 /* Defaults */; };
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
+		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
+		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
 		0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */; };
@@ -143,6 +145,8 @@
 		0E906D3225DCEADD0034053C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CFA25DCEADD0034053C /* ImageSaver.swift */; };
 		0E906D3925DCEBF20034053C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3825DCEBF20034053C /* Test.swift */; };
 		0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */; };
+		0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4825DD13590034053C /* HollowCommentInputStore.swift */; };
+		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */; };
@@ -231,6 +235,8 @@
 		0E415B8B25CD773E00351672 /* TestPostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPostData.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
+		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
+		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
 		0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailRequest.swift; sourceTree = "<group>"; };
@@ -291,6 +297,8 @@
 		0E906CFA25DCEADD0034053C /* ImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		0E906D3825DCEBF20034053C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigurationData.swift; sourceTree = "<group>"; };
+		0E906D4825DD13590034053C /* HollowCommentInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentInputStore.swift; sourceTree = "<group>"; };
+		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCapsuleButton.swift; sourceTree = "<group>"; };
@@ -323,6 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */,
+				0E906D4825DD13590034053C /* HollowCommentInputStore.swift */,
+				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -405,6 +415,7 @@
 				0E415AFE25CD772200351672 /* ImageButtonModifier.swift */,
 				0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */,
 				0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */,
+				0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -435,6 +446,7 @@
 				0E415AFC25CD772200351672 /* CustomGradient.swift */,
 				0E415AFF25CD772200351672 /* View+makeDivider.swift */,
 				0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */,
+				0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -904,8 +916,12 @@
 				0E906CFC25DCEADD0034053C /* PublishedPostsMessageRequest.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
 				0E906D2425DCEADD0034053C /* PostData.swift in Sources */,
+				0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */,
+				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
+				0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */,
 				0E906D1325DCEADD0034053C /* ReportCommentRequest.swift in Sources */,
 				0E906D1625DCEADD0034053C /* SendPostRequest.swift in Sources */,
+				0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */,
@@ -1152,9 +1168,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1176,9 +1192,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

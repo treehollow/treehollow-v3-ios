@@ -44,7 +44,7 @@ extension DefaultRequest {
         resultToResultData: @escaping (Result) -> ResultData?,
         completion: @escaping (ResultData?, DefaultRequestError?) -> Void
     ) {
-        // FIXME: need a auto switch alogorithm
+        // FIXME: need a auto switch algorithm
         let urlRoot = urlBase[0]
         
         AF.request(

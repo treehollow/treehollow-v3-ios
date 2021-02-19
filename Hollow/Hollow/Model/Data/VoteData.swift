@@ -10,11 +10,10 @@ import Foundation
 
 /// Vote Data Type
 struct VoteData {
-    var voted: Bool
     /// The option that the current user selected, `nil` if not voted.
     var votedOption: String?
-    var voteData: [VoteData]
-    struct VoteData: Identifiable {
+    var voteData: [Data]
+    struct Data: Identifiable {
         // Identifiable
         var id: String { self.title }
         
@@ -28,9 +27,9 @@ struct VoteData {
 /// - Parameter voteResult: Vote for converting
 /// - Returns: VoteData
 func initVoteDataByVote(voteResult: Vote) -> VoteData {
-    var voteData = [VoteData.VoteData]()
+    var voteData = [VoteData.Data]()
     for (voteOption, voteNum) in voteResult.voteData {
-        voteData.append(VoteData.VoteData(title: voteOption, voteCount: voteNum))
+        voteData.append(VoteData.Data(title: voteOption, voteCount: voteNum))
     }
-    return VoteData(voted: (voteResult.voted != ""), votedOption: voteResult.voted, voteData: voteData)
+    return VoteData(votedOption: voteResult.voted, voteData: voteData)
 }

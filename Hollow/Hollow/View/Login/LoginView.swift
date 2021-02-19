@@ -54,17 +54,17 @@ struct LoginView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: ViewConstants.listVStackSpacing) {
                     // Enter email text field
-                    EmailTextField(viewModel: viewModel)
+                    EmailTextField()
                         .padding(.top)
                     
                     // Text fields for entering register information
                     if shouldRegister {
-                        RegisterTextFields(viewModel: viewModel)
+                        RegisterTextFields()
                     }
                     
                     // Login text field
                     if shouldLogin {
-                        LoginTextField(viewModel: viewModel)
+                        LoginTextField()
                     }
                     
                 }
@@ -116,6 +116,8 @@ struct LoginView: View {
         
         .navigationTitle(Defaults[.hollowConfig]!.name)
         .background(Color.background.edgesIgnoringSafeArea(.all))
+        
+        .environmentObject(viewModel)
         
         // Take control of the app.
         .modifier(AppModelBehaviour(state: viewModel.appModelState))

@@ -12,11 +12,17 @@ struct HollowContentView: View {
     var postDataWrapper: PostDataWrapper
     var compact: Bool
     var voteHandler: (String) -> Void
+    // We get this value from the parent.
+    var maxImageHeight: CGFloat? = nil
+    
+    private var hasVote: Bool { postDataWrapper.post.vote != nil }
+    private var hasImage: Bool { postDataWrapper.post.hollowImage != nil }
+
     var body: some View {
-        if (postDataWrapper.post.type == .image || postDataWrapper.post.type == .vote) && postDataWrapper.post.hollowImage != nil {
+        if hasImage {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage, description: postDataWrapper.post.text)
                 .cornerRadius(4)
-                .frame(maxHeight: 500)
+                .frame(maxHeight: maxImageHeight)
                 .fixedSize(horizontal: false, vertical: true)
         }
         
@@ -39,7 +45,7 @@ struct HollowContentView: View {
                 }))
         }
                 
-        if postDataWrapper.post.type == .vote {
+        if hasVote {
             HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler)
         }
 

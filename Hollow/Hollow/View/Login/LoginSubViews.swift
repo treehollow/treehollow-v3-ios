@@ -51,8 +51,8 @@ extension LoginView {
     }
     
     struct RegisterTextFields: View {
-        @ObservedObject var viewModel: Login
-        
+        @EnvironmentObject var viewModel: Login
+
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         
         // The password is valid only if its length is no less than 8 and it contains no blank spaces.
@@ -109,7 +109,7 @@ extension LoginView {
     }
     
     struct EmailTextField: View {
-        @ObservedObject var viewModel: Login
+        @EnvironmentObject var viewModel: Login
         private let configuration = Defaults[.hollowConfig]!
         
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
@@ -141,7 +141,7 @@ extension LoginView {
     }
     
     struct LoginTextField: View {
-        @ObservedObject var viewModel: Login
+        @EnvironmentObject var viewModel: Login
         @State private var alertPresented = false
         @State private var contactEmailURL: URL!
         @Environment(\.openURL) var openURL

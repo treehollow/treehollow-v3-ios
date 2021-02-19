@@ -26,7 +26,7 @@ struct HollowHeaderView: View {
     var body: some View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
-                let tintColor = ViewConstants.avatarTintColors[(postData.postId * 9) % ViewConstants.avatarTintColors.count]
+                let tintColor = ViewConstants.avatarTintColors[postData.postId % ViewConstants.avatarTintColors.count]
                 AvatarWrapper(
                     colors: [tintColor, .white],
                     resolution: 6,

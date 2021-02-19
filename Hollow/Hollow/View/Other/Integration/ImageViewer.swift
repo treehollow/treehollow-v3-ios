@@ -18,10 +18,12 @@ struct ImageViewer: View {
     @State private var scale: CGFloat = 0
     @State private var showActionSheet = false
     @State private var savePhotoMessage: (title: String, message: String)?
+    @State private var safeAreaInsets: EdgeInsets = .init()
     
     @Environment(\.colorScheme) var colorScheme
     
     @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     
     var body: some View {
         ZStack {
@@ -30,7 +32,7 @@ struct ImageViewer: View {
             VStack(spacing: 0) {
                 Button(action: { presented = false }) {
                     Text("Done")
-                        .bold()
+                        .font(.system(size: body16, weight: .semibold))
                         .foregroundColor(.primary)
                         .padding(.horizontal, 13)
                         .padding(.vertical, 6)
@@ -47,6 +49,7 @@ struct ImageViewer: View {
                         .font(.footnote)
                         .padding(.horizontal)
                         .padding(.top)
+                        .conditionalPadding(safeAreaInsets: safeAreaInsets, bottom: nil)
                         .leading()
                         .blurBackground()
                         .lineLimit(lineLimit)
@@ -84,6 +87,7 @@ struct ImageViewer: View {
         
         .modifier(ErrorAlert(errorMessage: $savePhotoMessage))
 
+        .modifier(GetSafeAreaInsets(insets: $safeAreaInsets))
     }
 }
 

@@ -34,7 +34,7 @@ struct WelcomeView: View {
                         .padding(.top, 70)
                         .padding(.bottom, 20)
                     
-                    let buttonGradient = LinearGradient.vertical(gradient: Gradient(colors: [Color("hollow.card.background.other")]))
+                    let buttonGradient = LinearGradient.verticalSingleColor(color: Color("hollow.card.background.other"))
                     NavigationLink(
                         destination: LoginView(),
                         tag: HollowType.thu.rawValue,
@@ -76,12 +76,12 @@ struct WelcomeView: View {
                         Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
                             .padding()
                     }
-                    
-                    let footnote = appModel.tokenExpired ? "Your access token has expired. Please login again." : "Email verification is required"
-                    Text(footnote)
-                        .font(.footnote)
-                        .padding(.vertical, 5)
-                        .layoutPriority(1)
+                    if appModel.tokenExpired {
+                        Text("Your access token has expired. Please login again.")
+                            .font(.footnote)
+                            .padding(.vertical, 5)
+                            .layoutPriority(1)
+                    }
                 }
             }
             // Disable the buttons when loading config

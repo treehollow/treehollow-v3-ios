@@ -48,7 +48,9 @@ class DeviceListStore: ObservableObject, AppModelEnvironment {
             sortedDevices.sort(by: { $0.loginDate > $1.loginDate })
             // Put current device at 0
             if let currentDeviceIndex = sortedDevices.firstIndex(where: { $0.deviceUUID == result!.thisDeviceUUID }) {
-                sortedDevices.swapAt(0, currentDeviceIndex)
+                let currentDevice = sortedDevices[currentDeviceIndex]
+                sortedDevices.remove(at: currentDeviceIndex)
+                sortedDevices.insert(currentDevice, at: 0)
             }
             sortedResult.devices = sortedDevices
             withAnimation {
