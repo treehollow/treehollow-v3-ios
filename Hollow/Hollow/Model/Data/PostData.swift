@@ -22,8 +22,17 @@ struct PostData: Identifiable {
     var replyNumber: Int
     var tag: String?
     var text: String
-    /// **will be deprecated**
-    var type: PostType
+    /// **will be deprecated, don't use this to judge**
+    var type: PostType {
+        get {
+            if self.vote != nil {return .vote}
+            else if self.hollowImage != nil {return .image}
+            else {return .text}
+        }
+        set(newValue) {
+            // do nothing
+        }
+    }
     /// Image wrapper for actual image.
     ///
     /// Set `nil` when there is no image to display, and set `hollowImage.image` to `nil` then the actual image is still loading.

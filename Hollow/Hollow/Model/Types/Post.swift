@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 /// **Deprecated! Don't use this to judge type**
 enum PostType: String, Codable {
@@ -25,12 +24,6 @@ enum PostPermissionType: String, Codable, CaseIterable {
     case undeleteUnban = "undelete_unban"
     case deleteBan = "delete_ban"
     case unban = "unban"
-}
-
-/// ImageMetadata
-struct ImageMetadata: Codable {
-    var w: CGFloat
-    var h: CGFloat
 }
 
 /// Post for request result, see `http-api doc`
@@ -55,9 +48,4 @@ struct Post: Codable {
     var vote: Vote?
 }
 
-/// Vote for result
-struct Vote: Codable {
-    var voted: String
-    var voteData: [String: Int]
-}
 

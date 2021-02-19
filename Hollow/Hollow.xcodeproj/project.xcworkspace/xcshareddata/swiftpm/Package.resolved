@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "Cache",
+        "repositoryURL": "https://github.com/hyperoslo/Cache.git",
+        "state": {
+          "branch": null,
+          "revision": "c7f4d633049c3bd649a353bad36f6c17e9df085f",
+          "version": "6.0.0"
+        }
+      },
+      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
@@ -44,6 +53,15 @@
           "branch": null,
           "revision": "4f6d01ac0ac56cf4b075c4e6134538ecbbd52af1",
           "version": "1.9.2"
+        }
+      },
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "state": {
+          "branch": null,
+          "revision": "81dd1ce8401137637663046c7314e7c885bcc56d",
+          "version": "6.1.1"
         }
       },
       {

@@ -20,7 +20,7 @@ struct PostListRequestConfiguration {
 
 /// Result for PostListRequest
 struct PostListRequestResult: DefaultRequestResult {
-    struct Data: Codable {
+    struct PostsData: Codable {
         struct ImageMetadata: Codable {
             var w: CGFloat?
             var h: CGFloat?
@@ -37,10 +37,12 @@ struct PostListRequestResult: DefaultRequestResult {
         var updatedAt: Int
         var url: String?
         var imageMetadata: ImageMetadata?
+        var vote: Vote?
     }
     var code: Int
     var msg: String?
-    var data: [Data]?
+    var data: [PostsData]?
+    var comments: [Int: [Comment]]?
 }
 
 /// ResultData for PostListRequest
@@ -77,35 +79,72 @@ struct PostListRequest: DefaultRequest {
                 var postWrappers = [PostDataWrapper]()
                 for post in result.data! {
                     // process votes
-                    // process image
-//                    var image: HollowImage? = nil
-//                    if let imageURL = post.url, let imageMetaData = post.imageMetadata {
-//                        image = HollowImage(placeholder: (width: imageMetaData.w, height: imageMetaData.h), image: nil)
-//                        image?.setImageURL(imageURL)
-//                    }
-                    // process citedpost
+                    
+                    var votedata: VoteData? = nil
+                    
+                    if let vote = post.vote {
+                        votedata = vote.toVoteData()
+                    }
+                    
+                    // process imageMetadata
+                    
+                    var image: HollowImage? = nil
+                    
+                    if let imageURL = post.url, let imageMetaData = post.imageMetadata,
+                       let w = imageMetaData.w, let h = imageMetaData.h {
+                        image = HollowImage(placeholder: (width: w, height: h), image: nil, imageURL: imageURL)
+                    }
                     
                     // process comments (<=3 per post)
                     
-//                    postWrappers.append(
-//                        PostDataWrapper(post: PostData(
-//                            attention: post.attention,
-//                            deleted: post.deleted,
-//                            likeNumber: post.likenum,
-//                            permissions: post.permissions,
-//                            postId: post.pid,
-//                            replyNumber: post.reply,
-//                            tag: post.tag,
-//                            text: post.text,
-//                            // deprecated type
-//                            type: post.type ?? .text,
-//                            hollowImage: image,
-//                            vote: vote,
-//                            /// no comment here
-//                            comments: [CommentData]()
-//                        ), citedPost: CitedPostData(postId: 0, text: "testtext")))
+                    var commentData = [CommentData]()
+                    
+                    if let comments = result.comments, let commentofpost = comments[post.pid] {
+                        commentData = commentofpost.map{ $0.toCommentData() }
+                    }
+                    
+                    postWrappers.append(
+                        PostDataWrapper(
+                            post: PostData(
+                                attention: post.attention,
+                                deleted: post.deleted,
+                                likeNumber: post.likenum,
+                                permissions: post.permissions,
+                                postId: post.pid,
+                                replyNumber: post.reply,
+                                tag: post.tag,
+                                text: post.text,
+                                hollowImage: image,
+                                vote: votedata,
+                                comments: commentData
+                            ), citedPost: nil))
+                    
                 }
-            return postWrappers
+                // no citedPost and image here
+                completion(postWrappers,nil)
+                // process citedPost
+                
+                // TODO: fill in citedPost
+                
+                // start loading image
+                for (index,postWarp) in postWrappers.enumerated() {
+                    // image in post
+                    if let postimage = postWarp.post.hollowImage,let url = postimage.imageURL{
+                        downloadImage(
+                            urlBase: self.configuration.imageBaseURL,
+                            urlString: url,
+                            imageCompletionHandler: { image in
+                                if image != nil {
+                                    postWrappers[index].post.hollowImage?.setImage(image!)
+                                    completion(postWrappers,nil)
+                                } else {
+                                    // TODO: handle image fail
+                                }
+                            }
+                        )
+                    }
+                }
+                return postWrappers
             },
             completion: completion)
     }

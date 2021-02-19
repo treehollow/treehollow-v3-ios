@@ -21,15 +21,3 @@ struct VoteData {
         var voteCount: Int
     }
 }
-
-
-/// convert Vote to VoteData
-/// - Parameter voteResult: Vote for converting
-/// - Returns: VoteData
-func initVoteDataByVote(voteResult: Vote) -> VoteData {
-    var voteData = [VoteData.Data]()
-    for (voteOption, voteNum) in voteResult.voteData {
-        voteData.append(VoteData.Data(title: voteOption, voteCount: voteNum))
-    }
-    return VoteData(votedOption: voteResult.voted, voteData: voteData)
-}

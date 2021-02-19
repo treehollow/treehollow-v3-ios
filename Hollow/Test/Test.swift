@@ -53,7 +53,7 @@ struct Test {
                     text: "vote test",
                     tag: "",
                     imageData: UIImage(named: "test.2")!.jpegData(compressionQuality: 0.5)!,
-                    voteData: ["a","b","c"]
+                    voteData: ["c djanjas","a","b","c"]
                 )
             )
             sendPost.performTestRequest()

@@ -21,13 +21,19 @@ struct Comment: Codable {
     var name: String
     var permissions: [PostPermissionType]
     var postId: Int
-    var tags: String?
+    var tags: [String]?
     var text: String?
     /// unix timestamp
     var timestamp: Int
     /// comment ID
     var replyTo: Int
-    var type: CommentType
+    // deprecated
+    var type: CommentType {
+        get {
+            if self.url != nil { return .image }
+            else { return .text }
+        }
+    }
     /// image url
     var url: String?
     var imageMetadata: ImageMetadata?
