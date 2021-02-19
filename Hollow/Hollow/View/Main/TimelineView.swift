@@ -72,7 +72,7 @@ struct TimelineView: View {
                     .modifier(GetSize(size: $searchBarSize))
                     .id(-2)
                     
-                    Spacer().frame(height: body14 / 2)
+                    Color.background.frame(height: body14 / 2)
                         .id(-1)
                     
                     // FIXME: Can we use postId as the id instead of the index?

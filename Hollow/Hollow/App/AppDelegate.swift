@@ -16,9 +16,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if DEBUG
+        
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
         Test.performTest(options: [.getConfig])
+        
+        #else
+        
+        // Start AppCenter services
+        AppCenter.start(
+            withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
+            services: [Analytics.self, Crashes.self]
+        )
+        
         #endif
         
         // Request notification access
@@ -31,14 +41,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 application.registerForRemoteNotifications()
             }
         }
-
-        #if !DEBUG
-        // Start AppCenter services
-        AppCenter.start(
-            withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
-            services: [Analytics.self, Crashes.self]
-        )
-        #endif
         
         // Fetch the lastest config
         fetchConfig()

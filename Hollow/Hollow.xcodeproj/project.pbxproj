@@ -82,7 +82,7 @@
 		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
 		0E415B8D25CD773E00351672 /* TestCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B8A25CD773E00351672 /* TestCommentData.swift */; };
 		0E415B8E25CD773E00351672 /* TestPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B8B25CD773E00351672 /* TestPostData.swift */; };
-		0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; platformFilter = maccatalyst; productRef = 0E415B9125CD775F00351672 /* WaterfallGrid */; };
+		0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9125CD775F00351672 /* WaterfallGrid */; };
 		0E415B9625CD77C600351672 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9525CD77C600351672 /* Defaults */; };
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
@@ -147,9 +147,9 @@
 		0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */; };
 		0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4825DD13590034053C /* HollowCommentInputStore.swift */; };
 		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
+		0E927E2325DF975E0042F2EC /* View+customAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E927E2225DF975E0042F2EC /* View+customAlert.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
-		0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
@@ -299,9 +299,9 @@
 		0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigurationData.swift; sourceTree = "<group>"; };
 		0E906D4825DD13590034053C /* HollowCommentInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentInputStore.swift; sourceTree = "<group>"; };
 		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
+		0E927E2225DF975E0042F2EC /* View+customAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+customAlert.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCapsuleButton.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -447,6 +447,7 @@
 				0E415AFF25CD772200351672 /* View+makeDivider.swift */,
 				0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */,
 				0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */,
+				0E927E2225DF975E0042F2EC /* View+customAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -460,7 +461,6 @@
 				0E415B0525CD772200351672 /* MyButton.swift */,
 				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
 				0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */,
-				0EC4B68125D682B70065BB82 /* DrawerCapsuleButton.swift */,
 				0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */,
 			);
 			path = Components;
@@ -965,6 +965,7 @@
 				0E906D0A25DCEADD0034053C /* LogoutRequest.swift in Sources */,
 				0E415B4D25CD772200351672 /* LinearGradientExtensions.swift in Sources */,
 				0E415B4725CD772200351672 /* Blur.swift in Sources */,
+				0E927E2325DF975E0042F2EC /* View+customAlert.swift in Sources */,
 				0E906D2725DCEADD0034053C /* String+findCitedPostID.swift in Sources */,
 				0E906D1525DCEADD0034053C /* Request.swift in Sources */,
 				0E906D0525DCEADD0034053C /* DefaultRequest.swift in Sources */,
@@ -1018,7 +1019,6 @@
 				0E415B4225CD772200351672 /* ViewConstants.swift in Sources */,
 				0E415B5125CD772200351672 /* View+topBar.swift in Sources */,
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
-				0EC4B68225D682B70065BB82 /* DrawerCapsuleButton.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0E415B8425CD772200351672 /* Welcome.swift in Sources */,

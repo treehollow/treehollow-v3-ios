@@ -172,14 +172,17 @@ extension LoginView {
                         .foregroundColor(.secondary)
                 }
             }
-            // FIXME: Cannot present alert
-            .alert(isPresented: $alertPresented) {
-                Alert(title: Text("Restore Password"),
-                      message: Text("Please send an email using current email address to the contact email to restore your password."),
-                      primaryButton: .default(Text("Send"), action:  { openURL(contactEmailURL) }),
-                      secondaryButton: .cancel()
-                )
-            }
+            
+            .customAlert(
+                presented: $alertPresented,
+                title: "Restore Password",
+                message: "Please send an email using current email address to the contact email to restore your password.",
+                actions: [
+                    .init(text: "Send email", action: { openURL(contactEmailURL) }),
+                    .init(text: "Copy email address", action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
+                    .cancel
+                ]
+            )
         }
     }
 }

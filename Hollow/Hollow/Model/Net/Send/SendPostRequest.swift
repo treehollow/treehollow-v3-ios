@@ -59,7 +59,7 @@ struct SendPostRequest: DefaultRequest {
             parameters["vote_options"] = voteData
         }
 
-        if let tag = configuration.tag {
+        if let tag = configuration.tag, tag != "" {
             parameters["tag"] = tag
         }
         
