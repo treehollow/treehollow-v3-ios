@@ -22,6 +22,7 @@ struct Test {
         static let emailCheck = Options(rawValue: 1 << 5)
         static let sendPost = Options(rawValue: 1 << 6)
         static let sendComment = Options(rawValue: 1 << 7)
+        static let sendVoteData = Options(rawValue: 1 << 8)
     }
     
     static func performTest(options: Options = []) {
@@ -43,6 +44,19 @@ struct Test {
             )
             
             sendCommentRequest.performTestRequest()
+        }
+        if options.contains(.sendPost) {
+            let sendPost = SendPostRequest(
+                configuration: SendPostRequestConfiguration(
+                    apiRoot: testAPIRoots,
+                    token: testAccessToken,
+                    text: "vote test",
+                    tag: "",
+                    imageData: UIImage(named: "test.2")!.jpegData(compressionQuality: 0.5)!,
+                    voteData: ["a","b","c"]
+                )
+            )
+            sendPost.performTestRequest()
         }
     }
 }
