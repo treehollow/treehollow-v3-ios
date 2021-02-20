@@ -46,8 +46,8 @@ struct PostListRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        let parameters: [String : String] = [
-            "page" : configuration.page.string
+        let parameters: [String : Encodable] = [
+            "page" : configuration.page
         ]
         
         let resultToResultData: (PostListRequestResult) -> PostListRequestResultData? = { result in
@@ -59,8 +59,11 @@ struct PostListRequest: DefaultRequest {
                 
                 var commentData = [CommentData]()
                 
-                if let comments = result.comments, let commentsToPost = comments[post.pid.string], commentsToPost != nil {
-                    commentData = commentsToPost!.map{ $0.toCommentData() }
+                if let comments = result.comments, let commentsOfPost = comments[post.pid.string]{
+                    if let comments = commentsOfPost {
+                        commentData = comments.map{ $0.toCommentData()
+                        }
+                    }
                 }
                 
                 return PostDataWrapper(
@@ -84,7 +87,7 @@ struct PostListRequest: DefaultRequest {
                         urlString: url,
                         imageCompletionHandler: { image in
                             if let image = image {
-                                postWrappers[index].post.hollowImage?.setImage(image)
+                                postWrappers[index].post.hollowImage?.image = image
                                 completion(postWrappers, nil)
                             } else {
                                 // report image loading fail
