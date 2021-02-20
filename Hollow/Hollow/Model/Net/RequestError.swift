@@ -18,6 +18,7 @@ enum DefaultRequestError: RequestError {
     case fileTooLarge
     case unknown
     case imageLoadingFail(postID: Int)
+    case commentImageLoadingFail(postID: Int, commentID: Int)
     case other(description: String)
     
     var description: String {
@@ -26,7 +27,8 @@ enum DefaultRequestError: RequestError {
         case .decodeFailed: return "Fail to decode result from the response."
         case .unknown: return "Fail to initialize data. This is an internal error."
         case .fileTooLarge: return "The uploaded file is too large and is refused by the server."
-        case .imageLoadingFail(let pid): return "Fail Loading Image in post \(pid)"
+        case .imageLoadingFail(let postID): return "Fail Loading Image in post \(postID)"
+        case .commentImageLoadingFail(let postID,let commentID): return "Fail Loading Image in post \(postID) comment \(commentID)"
         case .other(let description): return description
         }
     }
