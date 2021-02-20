@@ -28,7 +28,7 @@ struct CustomAlert: ViewModifier {
         content
             .onChange(of: presented) { _ in
                 if presented {
-                    guard let topController = topViewController() else { return }
+                    guard let topController = IntegrationUtilities.topViewController() else { return }
                     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     for action in actions {
                         let alertAction = UIAlertAction(title: action.text, style: action.style, handler: { _ in action.action() })
@@ -48,14 +48,3 @@ struct CustomAlert: ViewModifier {
     }
 }
 
-fileprivate func topViewController() -> UIViewController? {
-    let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-
-    if var topController = keyWindow?.rootViewController {
-        while let presentedViewController = topController.presentedViewController {
-            topController = presentedViewController
-        }
-        return topController
-    }
-    return nil
-}

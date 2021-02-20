@@ -97,6 +97,8 @@
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
+		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
+		0E8BCFE725E0A4720056D809 /* IntegrationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */; };
 		0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */; };
 		0E906CFC25DCEADD0034053C /* PublishedPostsMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBC25DCEADC0034053C /* PublishedPostsMessageRequest.swift */; };
 		0E906CFD25DCEADD0034053C /* SearchHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */; };
@@ -251,6 +253,8 @@
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
+		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
+		0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationUtilities.swift; sourceTree = "<group>"; };
 		0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailRequest.swift; sourceTree = "<group>"; };
 		0E906CBC25DCEADC0034053C /* PublishedPostsMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishedPostsMessageRequest.swift; sourceTree = "<group>"; };
 		0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryRequest.swift; sourceTree = "<group>"; };
@@ -476,6 +480,7 @@
 				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
 				0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */,
 				0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */,
+				0E8BCFE225E095A90056D809 /* StyledAlert.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -658,11 +663,20 @@
 		0E415B9D25CD988F00351672 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				0E8BCFE525E0A45F0056D809 /* Utilities */,
 				0E415AF125CD772200351672 /* Extensions */,
 				0E415AEC25CD772200351672 /* Integration */,
 				0E415AEA25CD772200351672 /* Modifiers */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		0E8BCFE525E0A45F0056D809 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		0E906CB825DCEAC80034053C /* Model */ = {
@@ -921,6 +935,7 @@
 				0E906D2025DCEADD0034053C /* VoteData.swift in Sources */,
 				0E906D1E25DCEADD0034053C /* DeviceInformationType.swift in Sources */,
 				0EF0F5C325D54F6C004C1CE2 /* KeyboardDismissBar.swift in Sources */,
+				0E8BCFE725E0A4720056D809 /* IntegrationUtilities.swift in Sources */,
 				0E415B5A25CD772200351672 /* MyButton.swift in Sources */,
 				0E906D2325DCEADD0034053C /* CommentData.swift in Sources */,
 				0E415B4525CD772200351672 /* ReCAPTCHAWebView.swift in Sources */,
@@ -1019,6 +1034,7 @@
 				00EFC07125DFC71500536B52 /* Vote.swift in Sources */,
 				0E906D2C25DCEADD0034053C /* Int+string.swift in Sources */,
 				0E415B7F25CD772200351672 /* HollowHeader.swift in Sources */,
+				0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */,
 				0E906D0F25DCEADD0034053C /* AccountCreationRequest.swift in Sources */,
 				0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */,
 				0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */,
