@@ -1,5 +1,5 @@
 //
-//  Post.swift
+//  PostListRequest.swift
 //  Hollow
 //
 //  Created on 2021/1/17.
@@ -69,84 +69,94 @@ struct PostListRequest: DefaultRequest {
         let parameters: [String : String] = [
             "page" : configuration.page.string
         ]
+        
+        let resultToResultData: (PostListRequestResult) -> PostListRequestResultData? = { result in
+            var postWrappers = [PostDataWrapper]()
+            guard let resultData = result.data else { return nil }
+            for post in resultData {
+                // process votes
+                
+                var votedata: VoteData? = nil
+                
+                if let vote = post.vote {
+                    votedata = vote.toVoteData()
+                }
+                
+                // process imageMetadata
+                
+                var image: HollowImage? = nil
+                
+                if let imageURL = post.url, let imageMetaData = post.imageMetadata,
+                   let w = imageMetaData.w, let h = imageMetaData.h {
+                    image = HollowImage(placeholder: (width: w, height: h), image: nil, imageURL: imageURL)
+                }
+                
+                // process comments (<=3 per post)
+                
+                var commentData = [CommentData]()
+                
+                if let comments = result.comments, let commentToPost = comments[post.pid] {
+                    commentData = commentToPost.map{ $0.toCommentData() }
+                }
+                
+                postWrappers.append(
+                    PostDataWrapper(
+                        post: PostData(
+                            attention: post.attention,
+                            deleted: post.deleted,
+                            likeNumber: post.likenum,
+                            permissions: post.permissions,
+                            postId: post.pid,
+                            replyNumber: post.reply,
+                            tag: post.tag,
+                            text: post.text,
+                            hollowImage: image,
+                            vote: votedata,
+                            comments: commentData
+                        ),
+                        citedPost: nil
+                    )
+                )
+                
+            }
+            
+            // no citedPost and image here
+            completion(postWrappers,nil)
+            // process citedPost
+            
+            // TODO: fill in citedPost
+            
+            // start loading image
+            for index in postWrappers.indices {
+                // image in post
+                if let url = postWrappers[index].post.hollowImage?.imageURL {
+                    ImageDownloader.downloadImage(
+                        urlBase: self.configuration.imageBaseURL,
+                        urlString: url,
+                        imageCompletionHandler: { image in
+                            if let image = image {
+                                postWrappers[index].post.hollowImage?.setImage(image)
+                                completion(postWrappers, nil)
+                            } else {
+                                // TODO: handle image fail
+                            }
+                        }
+                    )
+                }
+            }
+            
+            return postWrappers
+        }
+        
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
             parameters: parameters,
             headers: headers,
             method: .get,
-            resultToResultData: { result in
-                var postWrappers = [PostDataWrapper]()
-                for post in result.data! {
-                    // process votes
-                    
-                    var votedata: VoteData? = nil
-                    
-                    if let vote = post.vote {
-                        votedata = vote.toVoteData()
-                    }
-                    
-                    // process imageMetadata
-                    
-                    var image: HollowImage? = nil
-                    
-                    if let imageURL = post.url, let imageMetaData = post.imageMetadata,
-                       let w = imageMetaData.w, let h = imageMetaData.h {
-                        image = HollowImage(placeholder: (width: w, height: h), image: nil, imageURL: imageURL)
-                    }
-                    
-                    // process comments (<=3 per post)
-                    
-                    var commentData = [CommentData]()
-                    
-                    if let comments = result.comments, let commentofpost = comments[post.pid] {
-                        commentData = commentofpost.map{ $0.toCommentData() }
-                    }
-                    
-                    postWrappers.append(
-                        PostDataWrapper(
-                            post: PostData(
-                                attention: post.attention,
-                                deleted: post.deleted,
-                                likeNumber: post.likenum,
-                                permissions: post.permissions,
-                                postId: post.pid,
-                                replyNumber: post.reply,
-                                tag: post.tag,
-                                text: post.text,
-                                hollowImage: image,
-                                vote: votedata,
-                                comments: commentData
-                            ), citedPost: nil))
-                    
-                }
-                // no citedPost and image here
-                completion(postWrappers,nil)
-                // process citedPost
-                
-                // TODO: fill in citedPost
-                
-                // start loading image
-                for (index,postWarp) in postWrappers.enumerated() {
-                    // image in post
-                    if let postimage = postWarp.post.hollowImage,let url = postimage.imageURL{
-                        downloadImage(
-                            urlBase: self.configuration.imageBaseURL,
-                            urlString: url,
-                            imageCompletionHandler: { image in
-                                if image != nil {
-                                    postWrappers[index].post.hollowImage?.setImage(image!)
-                                    completion(postWrappers,nil)
-                                } else {
-                                    // TODO: handle image fail
-                                }
-                            }
-                        )
-                    }
-                }
-                return postWrappers
-            },
-            completion: completion)
+            resultToResultData: resultToResultData,
+            completion: completion
+        )
     }
     
 }
