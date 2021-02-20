@@ -9,7 +9,7 @@
 import UIKit
 
 /// Data wrapper representing a single post.
-struct PostData: Identifiable {
+struct PostData: Identifiable, Codable {
     // Identifiable protocol
     var id: Int { return postId }
     
@@ -28,9 +28,6 @@ struct PostData: Identifiable {
             if self.vote != nil {return .vote}
             else if self.hollowImage != nil {return .image}
             else {return .text}
-        }
-        set(newValue) {
-            // do nothing
         }
     }
     /// Image wrapper for actual image.

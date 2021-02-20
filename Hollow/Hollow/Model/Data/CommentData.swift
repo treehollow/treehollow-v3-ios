@@ -9,7 +9,7 @@
 import UIKit
 
 /// Data wrapper representing a single comment.
-struct CommentData: Identifiable {
+struct CommentData: Identifiable, Codable {
     // Identifiable protocol
     var id: Int { commentId }
     
