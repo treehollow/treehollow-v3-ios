@@ -13,7 +13,8 @@ struct HollowInputView: View {
     @State var editorEditing: Bool = false
     @State var keyboardShown = false
     @State var showImagePicker = false
-    @State var showAlertIndex: AlertIndex?
+    @State var showErrorAlert = false
+    @State var showVoteOptionsAlert = false
     
     @ScaledMetric var avatarWidth: CGFloat = 37
     @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
@@ -70,32 +71,19 @@ struct HollowInputView: View {
         .background(Color.background.ignoresSafeArea())
         .modifier(ImagePickerModifier(presented: $showImagePicker, image: $inputStore.image))
         .onChange(of: inputStore.image) { _ in inputStore.compressImage() }
-        .onChange(of: inputStore.errorMessage?.title) { title in if title != nil { showAlertIndex = .error }}
-        .alert(item: $showAlertIndex) { index in
-            switch index {
-            case .error:
-                return ErrorAlert.alert(errorMessage: $inputStore.errorMessage) ?? Alert(title: Text("Unknown error!"))
-            case .vote:
-                return Alert(
-                    title: Text("The number of the options must be no less than 2"),
-                    message: Text("Do you want to remove all the options?"),
-                    primaryButton: .cancel(),
-                    secondaryButton: .default(Text("Yes"), action: { withAnimation { inputStore.voteInformation = nil }})
-                )
-            }
-        }
+        .styledAlert(
+            presented: $showVoteOptionsAlert,
+            title: "The number of the options must be no less than 2",
+            message: "Do you want to remove all the options?",
+            buttons: [
+                .init(text: "Yes", style: .hollow, action: { withAnimation { inputStore.voteInformation = nil }}),
+                .cancel
+            ]
+        )
+        .modifier(ErrorAlert(errorMessage: $inputStore.errorMessage))
         .accentColor(.hollowContentText)
         .disabled(inputStore.sending)
         .modifier(AppModelBehaviour(state: inputStore.appModelState))
-    }
-}
-
-extension HollowInputView {
-    enum AlertIndex: Int, Identifiable {
-        case error = 0
-        case vote = 1
-        
-        var id: Int { self.rawValue }
     }
 }
 

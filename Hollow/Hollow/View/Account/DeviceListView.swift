@@ -48,6 +48,8 @@ struct DeviceListView: View {
 
 extension DeviceListView {
     private struct DeviceCardView: View {
+        @State private var alertPresented: Bool = false
+
         var device: DeviceInformationType
         var isCurrentDevice: Bool
         var isLoggingout: Bool
@@ -73,7 +75,7 @@ extension DeviceListView {
                     // device in device list.
 //                    if !isCurrentDevice {
                         MyButton(
-                            action: { logoutAction(device.deviceUUID) },
+                            action: { alertPresented = true },
                             gradient: .vertical(gradient: .button),
                             transitionAnimation: .default) {
                             Group {
@@ -104,15 +106,10 @@ extension DeviceListView {
             )
             .cornerRadius(15)
             
-            // FIXME: Cannot present alert
-//            .alert(isPresented: $alertPresented, content: {
-//                Alert(
-//                    title: Text("Logout"),
-//                    message: Text("\(device.deviceInfo)"),
-//                    primaryButton: .cancel(),
-//                    secondaryButton: .destructive(Text("Logout"), action: { logoutAction(device.deviceUUID) })
-//                )
-//            })
+            .styledAlert(presented: $alertPresented, title: "Logout", message: "\(device.deviceInfo)", buttons: [
+                .init(text: "Logout", style: .destructive, action: { logoutAction(device.deviceUUID) }),
+                .cancel
+            ])
         }
         
         private func section(header: String, content: String) -> some View {

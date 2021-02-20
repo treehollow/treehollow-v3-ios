@@ -101,7 +101,7 @@ extension HollowInputView {
                             Button(action: {
                                 if voteInfo.options.count == 2 {
                                     hideKeyboard()
-                                    showAlertIndex = .vote
+                                    showVoteOptionsAlert = true
                                     return
                                 }
                                 inputStore.voteInformation?.options.remove(at: index)
