@@ -12,5 +12,6 @@ import Foundation
 
 let testAccessToken = "ee2uyrsj5xg4i5uywn7qhin6o3zzat6r"
 let testAPIRoots = ["https://dev-api.thuhole.com/", "https://dev-api-bak.thuhole.com/"]
+let testImgBaseURL = ["https://dev-img.thuhole.com/"]
 
 #endif

@@ -11,6 +11,6 @@ import UIKit
 
 /// ImageMetadata
 struct ImageMetadata: Codable {
-    var w: CGFloat
-    var h: CGFloat
+    var w: CGFloat?
+    var h: CGFloat?
 }

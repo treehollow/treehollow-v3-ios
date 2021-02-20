@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 006DF03625DF7FBA0005C2B5 /* Cache */; };
+		00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014E925E1054C004E416E /* Post+PostData.swift */; };
+		00B014ED25E1205A004E416E /* CommentCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014EC25E1205A004E416E /* CommentCache.swift */; };
 		00EFC06925DF922000536B52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00EFC06825DF922000536B52 /* Kingfisher */; };
 		00EFC06C25DF928500536B52 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC06B25DF928500536B52 /* ImageDownloader.swift */; };
 		00EFC07125DFC71500536B52 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07025DFC71500536B52 /* Vote.swift */; };
@@ -165,6 +167,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00B014E925E1054C004E416E /* Post+PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+PostData.swift"; sourceTree = "<group>"; };
+		00B014EC25E1205A004E416E /* CommentCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCache.swift; sourceTree = "<group>"; };
 		00EFC06B25DF928500536B52 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		00EFC07025DFC71500536B52 /* Vote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		00EFC07325DFC73800536B52 /* ImageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadata.swift; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 				0E906CF525DCEADC0034053C /* String+Date.swift */,
 				00EFC07625DFC77D00536B52 /* Vote+VoteData.swift */,
 				00EFC07925E00D7200536B52 /* Comment+CommentData.swift */,
+				00B014E925E1054C004E416E /* Post+PostData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -809,6 +814,7 @@
 				0E906CF925DCEADD0034053C /* ImageCompressor.swift */,
 				0E906CFA25DCEADD0034053C /* ImageSaver.swift */,
 				00EFC06B25DF928500536B52 /* ImageDownloader.swift */,
+				00B014EC25E1205A004E416E /* CommentCache.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -954,6 +960,7 @@
 				0E906D1C25DCEADD0034053C /* PushNotificationType.swift in Sources */,
 				0E415A7425CD769B00351672 /* HollowApp.swift in Sources */,
 				0E906D3125DCEADD0034053C /* ImageCompressor.swift in Sources */,
+				00B014ED25E1205A004E416E /* CommentCache.swift in Sources */,
 				0E415B6325CD772200351672 /* HollowCommentContentView.swift in Sources */,
 				0E906CFE25DCEADD0034053C /* SearchRequest.swift in Sources */,
 				0E415B8125CD772200351672 /* Wander.swift in Sources */,
@@ -969,6 +976,7 @@
 				0E906D3925DCEBF20034053C /* Test.swift in Sources */,
 				0E906D1B25DCEADD0034053C /* SystemMessage.swift in Sources */,
 				0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */,
+				00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E906D0325DCEADD0034053C /* ParticipatedPostsRequest.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,

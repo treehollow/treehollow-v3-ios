@@ -12,11 +12,14 @@ extension Vote {
     /// convert Vote to VoteData
     /// - Parameter self: Vote for converting
     /// - Returns: VoteData
-    func toVoteData() -> VoteData {
+    func toVoteData() -> VoteData? {
+        guard let vote = self.voteData, let voted = self.voted else {
+            return nil
+        }
             var voteData = [VoteData.Data]()
-            for (voteOption, voteNum) in self.voteData {
+            for (voteOption, voteNum) in vote {
                 voteData.append(VoteData.Data(title: voteOption, voteCount: voteNum))
             }
-            return VoteData(votedOption: self.voted, voteData: voteData)
+            return VoteData(votedOption: voted, voteData: voteData)
     }
 }

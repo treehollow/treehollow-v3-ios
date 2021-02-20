@@ -17,6 +17,7 @@ enum DefaultRequestError: RequestError {
     case tokenExpiredError
     case fileTooLarge
     case unknown
+    case imageLoadingFail(postID: Int)
     case other(description: String)
     
     var description: String {
@@ -25,6 +26,7 @@ enum DefaultRequestError: RequestError {
         case .decodeFailed: return "Fail to decode result from the response."
         case .unknown: return "Fail to initialize data. This is an internal error."
         case .fileTooLarge: return "The uploaded file is too large and is refused by the server."
+        case .imageLoadingFail(let pid): return "Fail Loading Image in post \(pid)"
         case .other(let description): return description
         }
     }

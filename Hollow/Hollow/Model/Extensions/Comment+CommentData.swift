@@ -13,11 +13,12 @@ extension Comment {
     /// - Returns: CommentData
     func toCommentData() -> CommentData {
         var image: HollowImage? = nil
-        if let imageMetadata = self.imageMetadata, let imageURL = self.url {
+        if let imageMetadata = self.imageMetadata, let imageURL = self.url,
+           let w = imageMetadata.w, let h = imageMetadata.h {
             image = HollowImage(
                 placeholder: (
-                    width: imageMetadata.w,
-                    height: imageMetadata.h
+                    width: w,
+                    height: h
                 ),
                 image: nil,
                 imageURL: imageURL)
@@ -27,7 +28,7 @@ extension Comment {
             deleted: self.deleted,
             name: self.name,
             permissions: self.permissions,
-            postId: self.postId,
+            postId: self.pid,
             tags: self.tags ?? [String](),
             text: self.text ?? "",
             image: image
