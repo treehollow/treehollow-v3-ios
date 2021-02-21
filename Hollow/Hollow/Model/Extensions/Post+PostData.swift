@@ -24,6 +24,7 @@ extension Post {
             permissions: self.permissions,
             postId: self.pid,
             replyNumber: self.reply,
+            timestamp: Date(timeIntervalSince1970: TimeInterval(self.timestamp)),
             tag: self.tag,
             text: self.text,
             hollowImage: image,
