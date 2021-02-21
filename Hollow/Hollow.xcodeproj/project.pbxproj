@@ -186,7 +186,6 @@
 		0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
 		0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailStore.swift; sourceTree = "<group>"; };
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
-		0E36F53625D0322D001AE852 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
 		0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputSubViews.swift; sourceTree = "<group>"; };
@@ -540,7 +539,6 @@
 				0E415B1725CD772200351672 /* HollowVoteContentView.swift */,
 				0E415B1825CD772200351672 /* HollowImageView.swift */,
 				0E415B1925CD772200351672 /* HollowTextView.swift */,
-				0E36F53625D0322D001AE852 /* README.md */,
 			);
 			path = Content;
 			sourceTree = "<group>";

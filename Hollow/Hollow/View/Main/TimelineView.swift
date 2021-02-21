@@ -79,23 +79,31 @@ struct TimelineView: View {
                     // Using index will apply an imperfect animation on the cards
                     // (directly update the card content rather than moving the whole card).
                     
+                    let nonLazyPostsCount = min(maxNoneLazyCards, viewModel.posts.count)
+
                     // None lazy views for the first `maxNoneLazyCards` cards
                     // to avoid being stuck when scrolling to top
                     VStack(spacing: 0) {
                         // Placeholder to fill the space when no posts are loaded
                         if viewModel.posts.count == 0 {
-                            Spacer().horizontalCenter()
+                            Color.background.verticalCenter().horizontalCenter()
                         }
                         
-                        ForEach(0..<min(maxNoneLazyCards, viewModel.posts.count), id: \.self) { index in
+                        let nonLazyPosts = viewModel.posts.prefix(nonLazyPostsCount)
+                        
+                        ForEach(Array(nonLazyPosts.enumerated()), id: \.element.id) { index, _ in
                             cardView(at: index)
                         }
                     }
                     
                     // Lazily load cards after `maxNoneLazyCards`
                     LazyVStack(spacing: 0) {
-                        ForEach(min(maxNoneLazyCards, viewModel.posts.count)..<viewModel.posts.count, id: \.self) { index in
-                            cardView(at: index)
+//                        ForEach(min(maxNoneLazyCards, viewModel.posts.count)..<viewModel.posts.count, id: \.self) { index in
+//                            cardView(at: index)
+//                        }
+                        let lazyPosts = viewModel.posts.suffix(viewModel.posts.count - nonLazyPostsCount)
+                        ForEach(Array(lazyPosts.enumerated()), id: \.element.id) { index, _ in
+                            cardView(at: index + nonLazyPostsCount)
                         }
                     }
                     
@@ -150,6 +158,7 @@ struct TimelineView: View {
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
             
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
+            .modifier(AppModelBehaviour(state: viewModel.appModelState))
     }
     
     private func cardView(at index: Int) -> some View {
@@ -164,6 +173,7 @@ struct TimelineView: View {
         .onTapGesture {
             detailPresentedIndex = index
         }
+        .disabled(viewModel.isLoading)
 //        .animation(.default)
         // Id for ScrollViewProxy to use
         .id(index)
