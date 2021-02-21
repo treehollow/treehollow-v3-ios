@@ -9,7 +9,7 @@
 import UIKit
 
 /// Data wrapper representing a single post.
-struct PostData: Identifiable {
+struct PostData: Identifiable, Codable {
     // Identifiable protocol
     var id: Int { return postId }
     
@@ -29,9 +29,6 @@ struct PostData: Identifiable {
             else if self.hollowImage != nil {return .image}
             else {return .text}
         }
-        set(newValue) {
-            // do nothing
-        }
     }
     /// Image wrapper for actual image.
     ///
@@ -41,13 +38,7 @@ struct PostData: Identifiable {
     var comments: [CommentData]
 }
 
-struct CitedPostData: Identifiable {
-    // Identifiable protocol
-    var id: Int { postId }
-    
-    var postId: Int
-    var text: String
-}
+typealias CitedPostData = PostData
 
 /// Wrapper to use when initializing a view for a post.
 struct PostDataWrapper: Identifiable {
@@ -55,5 +46,10 @@ struct PostDataWrapper: Identifiable {
     var id: Int { post.id }
     
     var post: PostData
-    var citedPost: CitedPostData?
+    var citedPostID: Int? {
+        get {
+            return self.post.text.findCitedPostID()
+        }
+    }
+    var citedPost: PostData?
 }

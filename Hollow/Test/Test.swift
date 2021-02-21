@@ -23,6 +23,7 @@ struct Test {
         static let sendPost = Options(rawValue: 1 << 6)
         static let sendComment = Options(rawValue: 1 << 7)
         static let sendVoteData = Options(rawValue: 1 << 8)
+        static let getPostList = Options(rawValue: 1 << 9)
     }
     
     static func performTest(options: Options = []) {
@@ -57,6 +58,10 @@ struct Test {
                 )
             )
             sendPost.performTestRequest()
+        }
+        if options.contains(.getPostList) {
+            let getPostList = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: testAPIRoots, token: testAccessToken, page: 1, imageBaseURL: testImgBaseURL))
+            getPostList.performTestRequest()
         }
     }
 }

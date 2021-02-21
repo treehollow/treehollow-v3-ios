@@ -14,35 +14,15 @@ struct PostListRequestConfiguration {
     var apiRoot: [String]
     var token: String
     var page: Int
-    var needImage: Bool
     var imageBaseURL: [String]
 }
 
 /// Result for PostListRequest
 struct PostListRequestResult: DefaultRequestResult {
-    struct PostsData: Codable {
-        struct ImageMetadata: Codable {
-            var w: CGFloat?
-            var h: CGFloat?
-        }
-        var attention: Bool
-        var deleted: Bool
-        var likenum: Int
-        var permissions: [PostPermissionType]
-        var pid: Int
-        var reply: Int
-        var tag: String?
-        var text: String
-        var timestamp: Int
-        var updatedAt: Int
-        var url: String?
-        var imageMetadata: ImageMetadata?
-        var vote: Vote?
-    }
     var code: Int
     var msg: String?
-    var data: [PostsData]?
-    var comments: [Int: [Comment]]?
+    var data: [Post]?
+    var comments: [String: [Comment]?]?
 }
 
 /// ResultData for PostListRequest
@@ -66,65 +46,52 @@ struct PostListRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
-        let parameters: [String : String] = [
-            "page" : configuration.page.string
+        let parameters: [String : Encodable] = [
+            "page" : configuration.page
         ]
         
         let resultToResultData: (PostListRequestResult) -> PostListRequestResultData? = { result in
-            var postWrappers = [PostDataWrapper]()
             guard let resultData = result.data else { return nil }
-            for post in resultData {
-                // process votes
+            var postWrappers = [PostDataWrapper]()
+            postWrappers = resultData.map{ post in
                 
-                var votedata: VoteData? = nil
-                
-                if let vote = post.vote {
-                    votedata = vote.toVoteData()
-                }
-                
-                // process imageMetadata
-                
-                var image: HollowImage? = nil
-                
-                if let imageURL = post.url, let imageMetaData = post.imageMetadata,
-                   let w = imageMetaData.w, let h = imageMetaData.h {
-                    image = HollowImage(placeholder: (width: w, height: h), image: nil, imageURL: imageURL)
-                }
-                
-                // process comments (<=3 per post)
+                // process comments of current post
                 
                 var commentData = [CommentData]()
-                
-                if let comments = result.comments, let commentToPost = comments[post.pid] {
-                    commentData = commentToPost.map{ $0.toCommentData() }
+                if let comments = result.comments, let commentsOfPost = comments[post.pid.string]{
+                    if let comments = commentsOfPost {
+                        commentData = comments.map{ $0.toCommentData() }
+                    }
                 }
                 
-                postWrappers.append(
-                    PostDataWrapper(
-                        post: PostData(
-                            attention: post.attention,
-                            deleted: post.deleted,
-                            likeNumber: post.likenum,
-                            permissions: post.permissions,
-                            postId: post.pid,
-                            replyNumber: post.reply,
-                            tag: post.tag,
-                            text: post.text,
-                            hollowImage: image,
-                            vote: votedata,
-                            comments: commentData
-                        ),
-                        citedPost: nil
-                    )
-                )
-                
+                return PostDataWrapper(post: post.toPostData(comments: commentData))
             }
             
-            // no citedPost and image here
+            // return no citedPost and image here
             completion(postWrappers,nil)
+            
             // process citedPost
             
-            // TODO: fill in citedPost
+            for index in postWrappers.indices {
+                if let citedPid = postWrappers[index].post.text.findCitedPostID() {
+                    let citedPostRequest =
+                        PostDetailRequest(configuration:
+                                            PostDetailRequestConfiguration(
+                                                apiRoot: configuration.apiRoot,
+                                                imageBaseURL: configuration.imageBaseURL,
+                                                token: configuration.token,
+                                                postId: citedPid,
+                                                includeComments: false,
+                                                includeCitedPost: false,
+                                                includeImage: false))
+                    citedPostRequest.performRequest { (postData, error) in
+                        if let postData = postData {
+                            postWrappers[index].citedPost = postData.post
+                            completion(postWrappers, nil)
+                        }
+                    }
+                }
+            }
             
             // start loading image
             for index in postWrappers.indices {
@@ -135,10 +102,11 @@ struct PostListRequest: DefaultRequest {
                         urlString: url,
                         imageCompletionHandler: { image in
                             if let image = image {
-                                postWrappers[index].post.hollowImage?.setImage(image)
+                                postWrappers[index].post.hollowImage?.image = image
                                 completion(postWrappers, nil)
                             } else {
-                                // TODO: handle image fail
+                                // report image loading fail
+                                completion(postWrappers,.imageLoadingFail(postID: postWrappers[index].post.id))
                             }
                         }
                     )

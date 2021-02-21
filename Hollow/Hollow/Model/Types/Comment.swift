@@ -20,7 +20,8 @@ struct Comment: Codable {
     var deleted: Bool
     var name: String
     var permissions: [PostPermissionType]
-    var postId: Int
+    /// postID
+    var pid: Int
     var tags: [String]?
     var text: String?
     /// unix timestamp

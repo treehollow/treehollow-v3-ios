@@ -9,11 +9,11 @@
 import Foundation
 
 /// Vote Data Type
-struct VoteData {
+struct VoteData: Codable {
     /// The option that the current user selected, `nil` if not voted.
     var votedOption: String?
     var voteData: [Data]
-    struct Data: Identifiable {
+    struct Data: Identifiable, Codable {
         // Identifiable
         var id: String { self.title }
         

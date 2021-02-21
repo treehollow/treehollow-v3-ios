@@ -18,9 +18,11 @@ struct ImageDownloader {
             imageCompletionHandler(nil)
             return
         }
-        let resource = ImageResource(downloadURL: url)
         
-        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
+        // use only urlPath as cachekey
+        let resource = ImageResource(downloadURL: url, cacheKey: urlString)
+        
+        KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
             switch result {
             case .success(let value):
                 imageCompletionHandler(value.image)
