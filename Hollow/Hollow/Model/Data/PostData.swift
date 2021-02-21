@@ -20,6 +20,7 @@ struct PostData: Identifiable, Codable {
     var permissions: [PostPermissionType]
     var postId: Int
     var replyNumber: Int
+    var timestamp: Date
     var tag: String?
     var text: String
     /// **will be deprecated, don't use this to judge**
@@ -46,6 +47,7 @@ struct PostDataWrapper: Identifiable {
     var id: Int { post.id }
     
     var post: PostData
+    /// use `citedPostID` to get citedPostID
     var citedPostID: Int? {
         get {
             return self.post.text.findCitedPostID()
