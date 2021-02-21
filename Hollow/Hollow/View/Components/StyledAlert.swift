@@ -15,7 +15,7 @@ extension View {
     }
 }
 
-struct StyledAlertModifier: ViewModifier {
+fileprivate struct StyledAlertModifier: ViewModifier {
     @Binding var presented: Bool
     var title: String
     var message: String?
@@ -26,11 +26,15 @@ struct StyledAlertModifier: ViewModifier {
             .onChange(of: presented) { _ in
                 guard let topVC = IntegrationUtilities.topViewController() else { return }
                 if presented {
+                    // Top controller will present out alert controller
                     let newVC = UIHostingController(rootView: StyledAlert(presented: $presented, title: title, message: message, buttons: buttons))
                     newVC.view.backgroundColor = nil
                     newVC.modalPresentationStyle = .overCurrentContext
                     newVC.modalTransitionStyle = .crossDissolve
                     topVC.present(newVC, animated: true)
+                } else {
+                    // Top view controller is our alert controller
+                    topVC.dismiss(animated: true)
                 }
             }
     }
@@ -66,10 +70,7 @@ struct StyledAlert: View {
                 let style = button.style
                 SwiftUI.Button(action: {
                     button.action()
-                    guard let topVC = IntegrationUtilities.topViewController() else { return }
-                    topVC.dismiss(animated: true, completion: {
-                        withAnimation { presented = false }
-                    })
+                    withAnimation { presented = false }
                 }) {
                     Text(button.text)
                         .font(.system(size: buttonText, weight: style.fontWeight))
@@ -87,12 +88,12 @@ struct StyledAlert: View {
         .background(Color.uiColor(.systemBackground))
         .cornerRadius(15)
         .padding()
-        .shadow(radius: 10)
-        .frame(maxWidth: 300)
+        .shadow(radius: 11)
+        .frame(maxWidth: 310)
         .scaleEffect(scale)
         .horizontalCenter()
         .verticalCenter()
-        .background(Color.primary.opacity(0.2).ignoresSafeArea())
+        .background(Color.black.opacity(0.2).ignoresSafeArea())
         .onAppear {
             withAnimation(.spring(response: 0.25)) {
                 scale = 1
@@ -107,20 +108,21 @@ struct StyledAlert: View {
         var action: Action
         
         static let cancel = Button(text: "Cancel", style: .cancel, action: {})
+        static let ok = Button(text: "OK", style: .cancel, action: {})
         
         struct Style {
             var accentColor: Color
             var backgroundColor: Color { accentColor.opacity(0.3) }
             var fontWeight: Font.Weight
             
-            static let `default` = Style(accentColor: .blue, fontWeight: .medium)
+            static let `default` = Style(accentColor: .hollowContentVoteGradient1, fontWeight: .medium)
             static let cancel = Style(accentColor: .secondary, fontWeight: .semibold)
             static let destructive = Style(accentColor: .red, fontWeight: .medium)
-            static let hollow = Style(accentColor: .hollowContentVoteGradient1, fontWeight: .medium)
         }
     }
 }
 
+#if DEBUG
 struct StyledAlert_Previews: PreviewProvider {
     static var previews: some View {
         StyledAlert(presented: .constant(true), title: "Restore Password", message: "Please send an email using current email address to the contact email to restore your password.", buttons: [
@@ -131,3 +133,4 @@ struct StyledAlert_Previews: PreviewProvider {
         .background(Color.background)
     }
 }
+#endif

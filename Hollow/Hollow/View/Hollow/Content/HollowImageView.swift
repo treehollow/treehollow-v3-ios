@@ -35,6 +35,12 @@ struct HollowImageView: View {
                                 Label(LocalizedStringKey("Save to Photos"), systemImage: "square.and.arrow.down")
                             }
                         }))
+                        .styledAlert(
+                            presented: $showSavePhotoAlert,
+                            title: savePhotoError?.description ?? NSLocalizedString("Successfully saved to Photos.", comment: ""),
+                            message: nil,
+                            buttons: [.ok]
+                        )
                         .alert(isPresented: $showSavePhotoAlert, content: {
                             return Alert(title: Text(savePhotoError?.description ?? NSLocalizedString("Successfully saved to Photos.", comment: "")))
                         })
