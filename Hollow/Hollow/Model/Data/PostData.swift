@@ -38,13 +38,7 @@ struct PostData: Identifiable, Codable {
     var comments: [CommentData]
 }
 
-struct CitedPostData: Identifiable {
-    // Identifiable protocol
-    var id: Int { postId }
-    
-    var postId: Int
-    var text: String
-}
+typealias CitedPostData = PostData
 
 /// Wrapper to use when initializing a view for a post.
 struct PostDataWrapper: Identifiable {
@@ -52,5 +46,10 @@ struct PostDataWrapper: Identifiable {
     var id: Int { post.id }
     
     var post: PostData
-    var citedPost: CitedPostData?
+    var citedPostID: Int? {
+        get {
+            return self.post.text.findCitedPostID()
+        }
+    }
+    var citedPost: PostData?
 }
