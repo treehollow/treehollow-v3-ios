@@ -76,7 +76,7 @@ struct HollowInputView: View {
             title: "The number of the options must be no less than 2",
             message: "Do you want to remove all the options?",
             buttons: [
-                .init(text: "Yes", style: .hollow, action: { withAnimation { inputStore.voteInformation = nil }}),
+                .init(text: "Yes", action: { withAnimation { inputStore.voteInformation = nil }}),
                 .cancel
             ]
         )

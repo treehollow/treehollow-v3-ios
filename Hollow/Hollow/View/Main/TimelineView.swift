@@ -39,7 +39,7 @@ struct TimelineView: View {
             offset: $offset,
             atBottom: $scrolledToBottom,
             didScrollToBottom: viewModel.loadMorePosts,
-            didScroll: { direction in withAnimation { showReload = direction == .up }},
+//            didScroll: { direction in withAnimation { showReload = direction == .up }},
             didEndScroll: { searchBarTrackingOffset = offset },
             refresh: viewModel.refresh,
             content: { proxy in
@@ -130,25 +130,26 @@ struct TimelineView: View {
                 }
                 
                 // Receive the notification of performing reload from the main view
-                .onChange(of: shouldReload) { _ in
-                    if shouldReload { withAnimation {
-                        proxy.scrollTo(-1, anchor: .top)
-                        viewModel.refresh(finshHandler: {})
-                        shouldReload = false
-                    }}
-                }
+//                .onChange(of: shouldReload) { _ in
+//                    if shouldReload { withAnimation {
+//                        proxy.scrollTo(-1, anchor: .top)
+//                        viewModel.refresh(finshHandler: {})
+//                        shouldReload = false
+//                    }}
+//                }
                 
             })
 
             // Present post detail
             .sheet(item: $detailPresentedIndex, content: { index in
-                HollowDetailView(postDataWrapper: $viewModel.posts[index], presentedIndex: $detailPresentedIndex)
+                HollowDetailView(store: .init(postDataWrapper: $viewModel.posts[index]), presentedIndex: $detailPresentedIndex)
             })
             
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic
-            .modifier(LoadingIndicator(isLoading: viewModel.posts.count == 0))
-
+            .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
+            
+            .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
     }
     
     private func cardView(at index: Int) -> some View {

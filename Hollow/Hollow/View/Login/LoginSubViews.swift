@@ -178,9 +178,9 @@ extension LoginView {
                 title: "Restore Password",
                 message: "Please send an email using current email address to the contact email to restore your password.",
                 buttons: [
-                    .init(text: "Send email", style: .hollow, action: { openURL(contactEmailURL) }),
-                    .init(text: "Copy email address", style: .hollow, action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
-                    .init(text: "Cancel", style: .cancel, action: {})
+                    .init(text: "Send email", action: { openURL(contactEmailURL) }),
+                    .init(text: "Copy email address", action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
+                    .cancel
                 ]
             )
             

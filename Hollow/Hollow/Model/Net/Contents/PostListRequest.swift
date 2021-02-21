@@ -75,15 +75,18 @@ struct PostListRequest: DefaultRequest {
             for index in postWrappers.indices {
                 if let citedPid = postWrappers[index].post.text.findCitedPostID() {
                     let citedPostRequest =
-                        PostDetailRequest(configuration:
-                                            PostDetailRequestConfiguration(
-                                                apiRoot: configuration.apiRoot,
-                                                imageBaseURL: configuration.imageBaseURL,
-                                                token: configuration.token,
-                                                postId: citedPid,
-                                                includeComments: false,
-                                                includeCitedPost: false,
-                                                includeImage: false))
+                        PostDetailRequest(
+                            configuration:
+                                PostDetailRequestConfiguration(
+                                    apiRoot: configuration.apiRoot,
+                                    imageBaseURL: configuration.imageBaseURL,
+                                    token: configuration.token,
+                                    postId: citedPid,
+                                    includeComments: false,
+                                    includeCitedPost: false,
+                                    includeImage: false
+                                )
+                        )
                     citedPostRequest.performRequest { (postData, error) in
                         if let postData = postData {
                             postWrappers[index].citedPost = postData.post

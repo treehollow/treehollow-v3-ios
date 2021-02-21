@@ -25,6 +25,7 @@
 		0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */; };
 		0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */; };
 		0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */; };
+		0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */; };
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
 		0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */; };
@@ -183,6 +184,7 @@
 		0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelBehaviour.swift; sourceTree = "<group>"; };
 		0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
+		0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailStore.swift; sourceTree = "<group>"; };
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
 		0E36F53625D0322D001AE852 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
@@ -357,6 +359,14 @@
 				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
 			);
 			path = Input;
+			sourceTree = "<group>";
+		};
+		0E294C0B25E256FE00A9875A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		0E340F6F25CFEBFE002F0F0C /* App */ = {
@@ -603,6 +613,7 @@
 		0E415B3325CD772200351672 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
+				0E294C0B25E256FE00A9875A /* Detail */,
 				0E09B7B925D52F3E00DC5615 /* Input */,
 				0E415B3425CD772200351672 /* Card */,
 				0E415B3925CD772200351672 /* Components */,
@@ -1006,6 +1017,7 @@
 				0E906D3025DCEADD0034053C /* Constants.swift in Sources */,
 				0E415B7425CD772200351672 /* TimelineView.swift in Sources */,
 				0E415B8D25CD773E00351672 /* TestCommentData.swift in Sources */,
+				0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
@@ -1220,9 +1232,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1244,9 +1256,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

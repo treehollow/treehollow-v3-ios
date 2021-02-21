@@ -18,7 +18,7 @@ struct HollowTimelineCardView: View {
             HollowContentView(postDataWrapper: postDataWrapper, compact: true, voteHandler: viewModel.voteHandler)
             // Check if comments exist to avoid additional spacing
             if postDataWrapper.post.comments.count > 0 {
-                CommentView(comments: $postDataWrapper.post.comments)
+                CommentView(postData: $postDataWrapper.post)
             }
         }
         .padding()
@@ -38,7 +38,7 @@ struct HollowTimelineCardView: View {
     }
     
     private struct CommentView: View {
-        @Binding var comments: [CommentData]
+        @Binding var postData: PostData
         /// Max comments to be displayed in the timeline card.
         @State private var maxCommentCount = 3
         
@@ -46,12 +46,12 @@ struct HollowTimelineCardView: View {
         
         var body: some View {
             VStack(spacing: 0) {
-                ForEach(comments.prefix(maxCommentCount)) { commentData in
+                ForEach(postData.comments.prefix(maxCommentCount)) { commentData in
                     HollowCommentContentView(commentData: commentData, compact: true, contentVerticalPadding: 10)
                 }
-                if comments.count > maxCommentCount {
+                if postData.replyNumber > maxCommentCount {
                     // FIXME: How to localize this stuff??
-                    Text("还有 \(comments.count - maxCommentCount) 条评论")
+                    Text("还有 \(postData.replyNumber - maxCommentCount) 条评论")
                         .font(.system(size: body15)).lineSpacing(3)
 
                     .foregroundColor(.uiColor(.secondaryLabel))
