@@ -25,6 +25,9 @@ struct MainView: View {
     
     @Namespace var animation
     
+    // Initialize time line view model here to avoid creating repeatedly
+    let timelineViewModel = Timeline()
+    
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
@@ -43,7 +46,8 @@ struct MainView: View {
                         isSearching: $isSearching,
                         showCreatePost: $showCreatePost,
                         showReload: $showRefresh,
-                        shouldReload: $shouldReloadTimeline
+                        shouldReload: $shouldReloadTimeline,
+                        viewModel: timelineViewModel
                     )
                     .tag(Page.timeline)
                 }

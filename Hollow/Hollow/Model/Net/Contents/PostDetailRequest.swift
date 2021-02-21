@@ -61,7 +61,7 @@ struct PostDetailRequest: DefaultRequest {
         
         let resultToResultData: (Result) -> ResultData? = { result in
             
-            var postWrapper: PostDataWrapper?
+            var postWrapper: PostDataWrapper
             
             if result.code == 1 {
                 // use cached result
@@ -72,26 +72,25 @@ struct PostDetailRequest: DefaultRequest {
                 )
             } else {
                 // get new result
-                if let post = result.post {
-                    let postData = post.toPostData(comments: [CommentData]() )
-                    // postdetail don't need cited post
-                    postWrapper = PostDataWrapper(post: postData, citedPost: nil)
-                    // return postWrapper without image, comment and cited post
-                    completion(postWrapper,nil)
-                    
-                    // cache without image, comment and cited post
-                    PostCache().updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
-                    // force unwrap postWrapper
-                    PostCache().updatePost(postId: configuration.postId, postdata: postWrapper!.post)
-                }
+                guard let post = result.post else { return nil }
+                let postData = post.toPostData(comments: [CommentData]() )
+                // postdetail don't need cited post
+                postWrapper = PostDataWrapper(post: postData, citedPost: nil)
+                // return postWrapper without image, comment and cited post
+                completion(postWrapper,nil)
+                
+                // cache without image, comment and cited post
+                PostCache().updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
+                // force unwrap postWrapper
+                PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
             }
             
             // load comments if needed
-            if configuration.includeComments && postWrapper!.post.comments.isEmpty {
+            if configuration.includeComments && postWrapper.post.comments.isEmpty {
                 if let comments = result.data {
-                    postWrapper!.post.comments = comments.map { $0.toCommentData() }
+                    postWrapper.post.comments = comments.map { $0.toCommentData() }
                     completion(postWrapper, nil)
-                    PostCache().updatePost(postId: configuration.postId, postdata: postWrapper!.post)
+                    PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
                 } else {
                     // no comment data, start a new request
                     let commentRequest =
@@ -100,23 +99,23 @@ struct PostDetailRequest: DefaultRequest {
                                                 apiRoot: configuration.apiRoot,
                                                 imageBaseURL: configuration.imageBaseURL,
                                                 token: configuration.token,
-                                                postId: postWrapper!.post.id,
+                                                postId: postWrapper.post.id,
                                                 includeComments: true,
                                                 includeCitedPost: false,
                                                 includeImage: false))
                     commentRequest.performRequest { (postData, error) in
                         if let comments = postData?.post.comments {
-                            postWrapper!.post.comments = comments
+                            postWrapper.post.comments = comments
                             completion(postWrapper, nil)
-                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper!.post)
+                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
                         }
                     }
                 }
             }
             
             // load citedPost if needed
-            if configuration.includeCitedPost && (postWrapper!.citedPost == nil) {
-                if let citedPid = postWrapper?.post.text.findCitedPostID() {
+            if configuration.includeCitedPost && (postWrapper.citedPost == nil) {
+                if let citedPid = postWrapper.post.text.findCitedPostID() {
                     let citedPostRequest =
                         PostDetailRequest(configuration:
                                             PostDetailRequestConfiguration(
@@ -129,9 +128,9 @@ struct PostDetailRequest: DefaultRequest {
                                                 includeImage: false))
                     citedPostRequest.performRequest { (postData, error) in
                         if let postData = postData {
-                            postWrapper!.citedPost = postData.post
+                            postWrapper.citedPost = postData.post
                             completion(postWrapper, nil)
-                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper!.post)
+                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
                         }
                     }
                 }
@@ -141,41 +140,40 @@ struct PostDetailRequest: DefaultRequest {
             if configuration.includeImage {
                 // load post image
                 
-                if let url = postWrapper?.post.hollowImage?.imageURL {
+                if let url = postWrapper.post.hollowImage?.imageURL {
                     ImageDownloader.downloadImage(urlBase: configuration.imageBaseURL, urlString: url, imageCompletionHandler: {image in
                         if let image = image {
-                            postWrapper?.post.hollowImage?.image = image
+                            postWrapper.post.hollowImage?.image = image
                             completion(postWrapper,nil)
-                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper!.post)
+                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
                         } else {
-                            completion(postWrapper,.imageLoadingFail(postID: (postWrapper?.post.postId)!))
+                            completion(postWrapper,.imageLoadingFail(postID: postWrapper.post.postId))
                         }
                     })
                 }
                 
                 // load comments image
                 
-                if let comments = postWrapper?.post.comments {
-                    for index in comments.indices {
-                        if let url = comments[index].image?.imageURL {
-                            ImageDownloader.downloadImage(
-                                urlBase: configuration.imageBaseURL,
-                                urlString: url,
-                                imageCompletionHandler: { image in
-                                    if let image = image {
-                                        postWrapper?.post.comments[index].image?.image = image
-                                        completion(postWrapper, nil)
-                                        PostCache().updatePost(postId: configuration.postId, postdata: postWrapper!.post)
-                                    } else {
-                                        // report image loading fail
-                                        completion(postWrapper,.commentImageLoadingFail(
-                                            postID: (postWrapper?.post.postId)!,
-                                            commentID: comments[index].commentId
-                                        ))
-                                    }
+                let comments = postWrapper.post.comments
+                for index in comments.indices {
+                    if let url = comments[index].image?.imageURL {
+                        ImageDownloader.downloadImage(
+                            urlBase: configuration.imageBaseURL,
+                            urlString: url,
+                            imageCompletionHandler: { image in
+                                if let image = image {
+                                    postWrapper.post.comments[index].image?.image = image
+                                    completion(postWrapper, nil)
+                                    PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
+                                } else {
+                                    // report image loading fail
+                                    completion(postWrapper,.commentImageLoadingFail(
+                                        postID: postWrapper.post.postId,
+                                        commentID: comments[index].commentId
+                                    ))
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
                 }
             }

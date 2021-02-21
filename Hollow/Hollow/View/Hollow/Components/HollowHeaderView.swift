@@ -38,6 +38,7 @@ struct HollowHeaderView: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(tintColor))
                 VStack(alignment: .leading, spacing: 2) {
+                    let timeLabelText = String(postData.timestamp.description.prefix(10))
                     HStack {
                         Text("#\(postData.postId.string)")
                             .fontWeight(.medium)
@@ -45,15 +46,19 @@ struct HollowHeaderView: View {
                             .foregroundColor(.hollowContentText)
                         if showContent {
                             // Time label
-                            secondaryText("6 min", fontWeight: .medium)
+                            secondaryText(timeLabelText, fontWeight: .medium)
                                 .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                         }
                     }
                     if showContent {
-                        secondaryText(postData.text.removeLineBreak())
+                        let postDescription =
+                            postData.text != "" ?
+                            postData.text.removeLineBreak() : "[" + "Image" + "]"
+                            
+                        secondaryText(postDescription)
                     } else {
                         // Time label
-                        secondaryText("6 min", fontWeight: .medium)
+                        secondaryText(timeLabelText, fontWeight: .medium)
                             .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                     }
                 }
@@ -69,15 +74,6 @@ struct HollowHeaderView: View {
                     Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }
                 
-                // FIXME: Cannot present full screen cover after presenting this menu
-                
-//                Menu(content: {
-//                    HollowHeaderMenu()
-//                }, label: {
-//                    Image(systemName: "ellipsis")
-//                        .foregroundColor(.hollowCardStarUnselected)
-//                        .padding(5)
-//                })
             }
         }
     }

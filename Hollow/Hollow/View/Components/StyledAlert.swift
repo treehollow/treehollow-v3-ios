@@ -29,7 +29,7 @@ fileprivate struct StyledAlertModifier: ViewModifier {
                     // Top controller will present out alert controller
                     let newVC = UIHostingController(rootView: StyledAlert(presented: $presented, title: title, message: message, buttons: buttons))
                     newVC.view.backgroundColor = nil
-                    newVC.modalPresentationStyle = .overCurrentContext
+                    newVC.modalPresentationStyle = .overFullScreen
                     newVC.modalTransitionStyle = .crossDissolve
                     topVC.present(newVC, animated: true)
                 } else {
@@ -74,7 +74,6 @@ struct StyledAlert: View {
                 }) {
                     Text(button.text)
                         .font(.system(size: buttonText, weight: style.fontWeight))
-//                        .fontWeight(style.fontWeight)
                         .foregroundColor(style.accentColor)
                         .horizontalCenter()
                         .padding(.vertical)

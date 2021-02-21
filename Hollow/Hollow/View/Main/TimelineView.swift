@@ -14,7 +14,7 @@ struct TimelineView: View {
     @Binding var showReload: Bool
     @Binding var shouldReload: Bool
 
-    @ObservedObject var viewModel: Timeline = .init()
+    @ObservedObject var viewModel: Timeline
     @EnvironmentObject var appModel: AppModel
     
     @State private var detailPresentedIndex: Int?
@@ -86,7 +86,7 @@ struct TimelineView: View {
                     VStack(spacing: 0) {
                         // Placeholder to fill the space when no posts are loaded
                         if viewModel.posts.count == 0 {
-                            Color.background.verticalCenter().horizontalCenter()
+                            Color.background
                         }
                         
                         let nonLazyPosts = viewModel.posts.prefix(nonLazyPostsCount)
@@ -102,19 +102,22 @@ struct TimelineView: View {
 //                            cardView(at: index)
 //                        }
                         let lazyPosts = viewModel.posts.suffix(viewModel.posts.count - nonLazyPostsCount)
+                        
                         ForEach(Array(lazyPosts.enumerated()), id: \.element.id) { index, _ in
                             cardView(at: index + nonLazyPostsCount)
                         }
+                        
+                        if viewModel.posts.count != 0 && !viewModel.noMorePosts {
+                            // TODO: Show retry button if failed.
+                            LoadingLabel()
+                                .padding(.bottom)
+                                .padding(.bottom)
+                            // TODO: Animation
+                            // FIXME: Should show spinner after the request start processing
+                        }
+
                     }
                     
-                    if viewModel.posts.count != 0 {
-                        // TODO: Show retry button if failed.
-                        LoadingLabel()
-                            .padding(.bottom)
-                            .padding(.bottom)
-                        // TODO: Animation
-                        // FIXME: Should show spinner after the request start processing
-                    }
                 }
                 
                 // Observe the change of the offset when the user finish scrolling,
@@ -138,13 +141,13 @@ struct TimelineView: View {
                 }
                 
                 // Receive the notification of performing reload from the main view
-//                .onChange(of: shouldReload) { _ in
-//                    if shouldReload { withAnimation {
-//                        proxy.scrollTo(-1, anchor: .top)
-//                        viewModel.refresh(finshHandler: {})
-//                        shouldReload = false
-//                    }}
-//                }
+                .onChange(of: shouldReload) { _ in
+                    if shouldReload { withAnimation {
+                        proxy.scrollTo(-1, anchor: .top)
+                        viewModel.refresh(finshHandler: {})
+                        shouldReload = false
+                    }}
+                }
                 
             })
 

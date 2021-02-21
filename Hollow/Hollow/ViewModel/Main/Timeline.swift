@@ -12,6 +12,7 @@ import Defaults
 class Timeline: ObservableObject, AppModelEnvironment {
     
     var page = 1
+    var noMorePosts = false
     @Published var posts: [PostDataWrapper]
     @Published var isLoading = false
     @Published var loadFinished = false
@@ -27,6 +28,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
     }
     
     private func requestPosts(at page: Int, handler: (() -> Void)? = nil) {
+        guard !self.noMorePosts else { return }
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let request = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: config.apiRootUrls, token: token, page: page, imageBaseURL: config.imgBaseUrls))
@@ -50,6 +52,8 @@ class Timeline: ObservableObject, AppModelEnvironment {
             
             if let postWrappers = postWrappers {
                 if postWrappers.isEmpty {
+                    self.noMorePosts = true
+                    self.page = 1
                     return
                 }
                 withAnimation {
@@ -60,19 +64,21 @@ class Timeline: ObservableObject, AppModelEnvironment {
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {
+        var posts = self.posts
         for newPost in newPosts {
             var found = false
-            for index in self.posts.indices {
-                if newPost.id == self.posts[index].id {
-                    self.posts[index] = newPost
+            for index in posts.indices {
+                if newPost.id == posts[index].id {
+                    posts[index] = newPost
                     found = true
                 }
             }
             if !found {
-                self.posts.append(newPost)
+                posts.append(newPost)
             }
         }
-        self.posts.sort(by: { $0.id > $1.id })
+        posts.sort(by: { $0.post.postId > $1.post.postId })
+        self.posts = posts
     }
     
     func vote(postId: Int, for option: String) {
@@ -87,6 +93,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
     
     func refresh(finshHandler: @escaping () -> Void) {
         page = 1
+        noMorePosts = false
         requestPosts(at: 1, handler: {
             self.posts = []
         })

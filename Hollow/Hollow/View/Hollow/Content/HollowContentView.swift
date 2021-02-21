@@ -31,20 +31,23 @@ struct HollowContentView: View {
         }
         
         // Enable the context menu for the text if it is in detail view.
-        if compact {
-            textView()
-        } else {
-            textView()
-                // Apply a transparent background to avoid
-                // offset when presenting context menu
-                .background(Color.clear)
-                .contextMenu(compact ? nil : ContextMenu(menuItems: {
-                    Button("Copy full text", action: {
-                        UIPasteboard.general.string = postDataWrapper.post.text
-                    })
-                }))
+        if postDataWrapper.post.text != "" {
+            if compact {
+                textView()
+            } else {
+                textView()
+                    // Apply a transparent background to avoid
+                    // offset when presenting context menu
+                    .background(Color.clear)
+                    .contextMenu(compact ? nil : ContextMenu(menuItems: {
+                        Button("Copy full text", action: {
+                            UIPasteboard.general.string = postDataWrapper.post.text
+                        })
+                    }))
+            }
+                    
         }
-                
+        
         if hasVote {
             HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler)
         }
