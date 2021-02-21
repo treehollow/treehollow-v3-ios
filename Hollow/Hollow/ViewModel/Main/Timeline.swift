@@ -7,21 +7,72 @@
 //
 
 import SwiftUI
+import Defaults
 
-class Timeline: ObservableObject {
+class Timeline: ObservableObject, AppModelEnvironment {
+    
+    var page = 1
     @Published var posts: [PostDataWrapper]
+    @Published var isLoading = false
+    @Published var loadFinished = false
+    @Published var errorMessage: (title: String, message: String)?
+    
+    @Published var appModelState = AppModelState()
+
     
     init() {
-        // FOR DEBUG
-        #if DEBUG
-//        self.posts = Array.init(repeating: testPostDataWrapperNoExtraComponents, count: 200)
         self.posts = []
-        for i in 0...200 {
-            self.posts.append(testPostWrapper(forPostId: 189201 + i))
+        self.page = 1
+        requestPosts(at: 1)
+    }
+    
+    private func requestPosts(at page: Int, handler: (() -> Void)? = nil) {
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let request = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: config.apiRootUrls, token: token, page: page, imageBaseURL: config.imgBaseUrls))
+        isLoading = true
+        request.performRequest(completion: { postWrappers, error in
+            self.isLoading = false
+            handler?()
+            if let error = error {
+                if self.handleTokenExpireError(error) { return }
+                
+                // TODO: Handle errors
+                switch error {
+                case .imageLoadingFail:
+                    break
+                default:
+                    self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
+                }
+                
+                return
+            }
+            
+            if let postWrappers = postWrappers {
+                if postWrappers.isEmpty {
+                    return
+                }
+                withAnimation {
+                    self.integratePosts(postWrappers)
+                }
+            }
+        })
+    }
+    
+    private func integratePosts(_ newPosts: [PostDataWrapper]) {
+        for newPost in newPosts {
+            var found = false
+            for index in self.posts.indices {
+                if newPost.id == self.posts[index].id {
+                    self.posts[index] = newPost
+                    found = true
+                }
+            }
+            if !found {
+                self.posts.append(newPost)
+            }
         }
-        #else
-        self.posts = []
-        #endif
+        self.posts.sort(by: { $0.id > $1.id })
     }
     
     func vote(postId: Int, for option: String) {
@@ -29,20 +80,16 @@ class Timeline: ObservableObject {
     }
     
     func loadMorePosts() {
-        #if DEBUG
-//        self.posts += testPostWrappers.shuffled()
-        #endif
+        guard !isLoading else { return }
+        self.page += 1
+        requestPosts(at: page)
     }
     
     func refresh(finshHandler: @escaping () -> Void) {
-        // FOR TESTING
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            #if DEBUG
-            withAnimation {
-                self.posts = self.posts.shuffled()
-            }
-            #endif
-            finshHandler()
-//        }
+        page = 1
+        requestPosts(at: 1, handler: {
+            self.posts = []
+        })
+        finshHandler()
     }
 }

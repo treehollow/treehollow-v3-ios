@@ -49,8 +49,9 @@ struct PostDetailRequest: DefaultRequest {
             "TOKEN": self.configuration.token,
             "Accept": "application/json"
         ]
+        
         var parameters: [String : Encodable] = [
-            "pid" : configuration.postId,
+            "pid" : configuration.postId.string,
             "include_comment" : configuration.includeComments
         ]
         
@@ -185,6 +186,7 @@ struct PostDetailRequest: DefaultRequest {
                        headers: headers,
                        method: .get,
                        resultToResultData: resultToResultData,
-                       completion: completion)
+                       completion: completion
+        )
     }
 }

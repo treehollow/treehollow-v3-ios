@@ -19,7 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
-        Test.performTest(options: [.getConfig,.getPostList])
+        Test.performTest(options: [])
         
         #else
         

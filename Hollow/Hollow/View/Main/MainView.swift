@@ -116,12 +116,9 @@ extension MainView {
         @State private var accountPresented = false
         
         // iPhone
-        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 20 : 22, relativeTo: .body) var iconSize: CGFloat
-        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 22 : 26, relativeTo: .body) var tabSelectedSize: CGFloat
-        @ScaledMetric(wrappedValue: UIDevice.current.userInterfaceIdiom == .phone ? 18 : 20, relativeTo: .body) var tabUnselectedSize: CGFloat
-        
-
-        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var iconSize: CGFloat
+        @ScaledMetric(wrappedValue: 22, relativeTo: .body) var tabSelectedSize: CGFloat
+        @ScaledMetric(wrappedValue: 18, relativeTo: .body) var tabUnselectedSize: CGFloat
 
         var body: some View {
             HStack(spacing: 2) {
