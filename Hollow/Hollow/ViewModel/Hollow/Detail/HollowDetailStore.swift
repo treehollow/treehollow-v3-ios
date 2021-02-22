@@ -10,30 +10,45 @@ import Combine
 import SwiftUI
 import Defaults
 
-class HollowDetailStore: ObservableObject {
-    @Published var postDataWrapper: Binding<PostDataWrapper>
+class HollowDetailStore: ObservableObject, AppModelEnvironment {
+    var bindingPostWrapper: Binding<PostDataWrapper>
+    @Published var postDataWrapper: PostDataWrapper
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
+    
+    @Published var appModelState = AppModelState()
+    
+    var postDataWrapperPublisher: AnyCancellable?
 
-    init(postDataWrapper: Binding<PostDataWrapper>) {
-        self.postDataWrapper = postDataWrapper
-        requestDetail()
+    init(bindingPostWrapper: Binding<PostDataWrapper>) {
+        self.postDataWrapper = bindingPostWrapper.wrappedValue
+        self.bindingPostWrapper = bindingPostWrapper
+        
+        // Subscribe the changes in post data in the detail store
+        // and update the upstream data source. This will be the
+        // source of truth when the detail view exists.
+        postDataWrapperPublisher =
+            $postDataWrapper.sink(receiveValue: { postDataWrapper in
+                self.bindingPostWrapper.wrappedValue = postDataWrapper
+            })
     }
     
     func requestDetail() {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
-        let request = PostDetailRequest(configuration: PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, postId: postDataWrapper.wrappedValue.post.postId, includeComments: true, includeCitedPost: true, includeImage: true))
+        let request = PostDetailRequest(configuration: PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, postId: postDataWrapper.post.postId, includeComments: postDataWrapper.citedPost == nil, includeCitedPost: false, includeImage: true))
         
         request.performRequest(completion: { postDataWrapper, error in
             if let error = error {
+                if self.handleTokenExpireError(error) { return }
                 self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
                 return
                 // Handle error
             }
             
-            if let postWrapper = postDataWrapper {
-                self.postDataWrapper.wrappedValue = postWrapper
+            if var postWrapper = postDataWrapper {
+                postWrapper.citedPost = self.postDataWrapper.citedPost
+                withAnimation { self.postDataWrapper = postWrapper }
             }
         })
     }

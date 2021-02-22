@@ -33,7 +33,7 @@ struct HollowDetailView: View {
                         .padding(.trailing, 5)
                         
                         HollowHeaderView(
-                            postData: store.postDataWrapper.wrappedValue.post,
+                            postData: store.postDataWrapper.post,
                             compact: false,
                             // Show text on header when the text is not visible
                             showContent: (scrollViewOffset ?? 0) > commentRect.minY
@@ -48,9 +48,9 @@ struct HollowDetailView: View {
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        HollowContentView(postDataWrapper: store.postDataWrapper.wrappedValue, compact: false, voteHandler: {_ in})
+                        HollowContentView(postDataWrapper: store.postDataWrapper, compact: false, voteHandler: {_ in})
                             .fixedSize(horizontal: false, vertical: true)
-                        CommentView(comments: store.postDataWrapper.post.comments, maxImageHeight: viewSize.height * 0.6)
+                        CommentView(postData: $store.postDataWrapper.post, maxImageHeight: viewSize.height * 0.6)
                             // Get the frame of the comment view.
                             .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
                     }
@@ -64,21 +64,22 @@ struct HollowDetailView: View {
         }
         .modifier(GetSize(size: $viewSize))
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
+        .modifier(AppModelBehaviour(state: store.appModelState))
     }
 }
 
 extension HollowDetailView {
     private struct CommentView: View {
-        @Binding var comments: [CommentData]
+        @Binding var postData: PostData
         var maxImageHeight: CGFloat?
         var body: some View {
             VStack {
-                (Text("\(comments.count) ") + Text(LocalizedStringKey("Comments")))
+                (Text("\(postData.replyNumber) ") + Text(LocalizedStringKey("Comments")))
                     .fontWeight(.heavy)
                     .leading()
                     .padding(.top)
                     .padding(.bottom, 5)
-                ForEach(comments) { commentData in
+                ForEach(postData.comments) { commentData in
                     HollowCommentContentView(commentData: commentData, compact: false, maxImageHeight: maxImageHeight)
                 }
             }
@@ -89,7 +90,7 @@ extension HollowDetailView {
 #if DEBUG
 struct HollowDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        return HollowDetailView(store: .init(postDataWrapper: .constant(testPostWrappers[0])), presentedIndex: .constant(-1)).colorScheme(.dark)
+        return HollowDetailView(store: .init(bindingPostWrapper: .constant(testPostWrappers[0])), presentedIndex: .constant(-1)).colorScheme(.dark)
     }
 }
 #endif

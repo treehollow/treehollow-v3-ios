@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct HollowCiteContentView: View {
-    var postData: CitedPostData
+    var placeholderPostId: Int
+    var postData: CitedPostData?
+    
+    var displayedText: String {
+        if let postData = self.postData {
+            return postData.text == "" ? "[" + "Image" + "]" : postData.text
+        }
+        return "Loading" + "..."
+    }
     
     @Environment(\.colorScheme) var colorScheme
     
     @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
     
     var body: some View {
-        VStack(spacing: 7) {
-            Text("#\(postData.postId.string)")
+        VStack(alignment: .leading, spacing: 7) {
+            
+            Text("#\(placeholderPostId.string)")
                 .fontWeight(.semibold)
                 .leading()
-            Text(postData.text.removeLineBreak())
-                .lineLimit(2)
+            
+            Text(displayedText)
+                .lineLimit(1)
         }
         .font(.system(size: body15))
         .padding(.horizontal, 12)
@@ -33,13 +43,3 @@ struct HollowCiteContentView: View {
         .cornerRadius(9)
     }
 }
-
-#if DEBUG
-struct HollowCiteContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowCiteContentView(postData: testPostData)
-            .background(Color.hollowCardBackground)
-            .colorScheme(.dark)
-    }
-}
-#endif

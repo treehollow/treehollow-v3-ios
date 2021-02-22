@@ -60,7 +60,7 @@ struct PostDetailRequest: DefaultRequest {
         }
         
         let resultToResultData: (Result) -> ResultData? = { result in
-            
+            print("DDDDD", result.post?.vote?.voteData)
             var postWrapper: PostDataWrapper
             
             if result.code == 1 {
@@ -86,7 +86,7 @@ struct PostDetailRequest: DefaultRequest {
             }
             
             // load comments if needed
-            if configuration.includeComments && postWrapper.post.comments.isEmpty {
+            if configuration.includeComments && postWrapper.post.comments.count < postWrapper.post.replyNumber {
                 if let comments = result.data {
                     postWrapper.post.comments = comments.map { $0.toCommentData() }
                     completion(postWrapper, nil)
@@ -181,6 +181,7 @@ struct PostDetailRequest: DefaultRequest {
         }
         performRequest(urlBase: configuration.apiRoot,
                        urlPath: urlPath,
+                       parameters: parameters,
                        headers: headers,
                        method: .get,
                        resultToResultData: resultToResultData,

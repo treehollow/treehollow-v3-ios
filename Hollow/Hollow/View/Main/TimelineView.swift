@@ -29,6 +29,7 @@ struct TimelineView: View {
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     
+    @State var detailStore: HollowDetailStore? = nil
     private var searchBarHeight: CGFloat { searchBarSize.height }
     
     /// Maximum cards to be displayed none-lazily.
@@ -91,20 +92,18 @@ struct TimelineView: View {
                         
                         let nonLazyPosts = viewModel.posts.prefix(nonLazyPostsCount)
                         
-                        ForEach(Array(nonLazyPosts.enumerated()), id: \.element.id) { index, _ in
+                        ForEach(nonLazyPosts.indices, id: \.id) { index in
                             cardView(at: index)
                         }
                     }
                     
                     // Lazily load cards after `maxNoneLazyCards`
                     LazyVStack(spacing: 0) {
-//                        ForEach(min(maxNoneLazyCards, viewModel.posts.count)..<viewModel.posts.count, id: \.self) { index in
-//                            cardView(at: index)
-//                        }
+
                         let lazyPosts = viewModel.posts.suffix(viewModel.posts.count - nonLazyPostsCount)
                         
-                        ForEach(Array(lazyPosts.enumerated()), id: \.element.id) { index, _ in
-                            cardView(at: index + nonLazyPostsCount)
+                        ForEach(lazyPosts.indices, id: \.id) { index in
+                            cardView(at: index)
                         }
                         
                         if viewModel.posts.count != 0 && !viewModel.noMorePosts {
@@ -152,9 +151,12 @@ struct TimelineView: View {
             })
 
             // Present post detail
-            .sheet(item: $detailPresentedIndex, content: { index in
-                HollowDetailView(store: .init(postDataWrapper: $viewModel.posts[index]), presentedIndex: $detailPresentedIndex)
-            })
+            .sheet(item: $detailPresentedIndex, content: { index in Group {
+                if let store = detailStore {
+                    // FIXME: Data binding
+                    HollowDetailView(store: store, presentedIndex: $detailPresentedIndex)
+                }
+            }})
             
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic
@@ -174,7 +176,11 @@ struct TimelineView: View {
         .padding(.bottom)
         .background(Color.background)
         .onTapGesture {
-            detailPresentedIndex = index
+            detailStore = HollowDetailStore(bindingPostWrapper: $viewModel.posts[index])
+            DispatchQueue.main.async {
+                detailPresentedIndex = index
+            }
+            detailStore!.requestDetail()
         }
         .disabled(viewModel.isLoading)
 //        .animation(.default)

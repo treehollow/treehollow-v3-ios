@@ -49,6 +49,8 @@ struct StyledAlert: View {
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) private var secondaryText: CGFloat
     @ScaledMetric(wrappedValue: 15, relativeTo: .body) private var buttonText: CGFloat
     
+    @Environment(\.colorScheme) private var colorScheme
+
     var title: String
     var message: String?
     var buttons: [Button]
@@ -84,7 +86,7 @@ struct StyledAlert: View {
         }
         .multilineTextAlignment(.center)
         .padding(spacing)
-        .background(Color.uiColor(.systemBackground))
+        .background(Color.uiColor(colorScheme == .light ? .systemBackground : .tertiarySystemBackground))
         .cornerRadius(15)
         .padding()
         .shadow(radius: 11)

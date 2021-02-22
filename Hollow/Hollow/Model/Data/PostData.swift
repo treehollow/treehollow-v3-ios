@@ -48,10 +48,6 @@ struct PostDataWrapper: Identifiable {
     
     var post: PostData
     /// use `citedPostID` to get citedPostID
-    var citedPostID: Int? {
-        get {
-            return self.post.text.findCitedPostID()
-        }
-    }
+    var citedPostID: Int? { self.post.text.findCitedPostID() }
     var citedPost: PostData?
 }

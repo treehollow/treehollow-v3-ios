@@ -26,8 +26,8 @@ struct HollowContentView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         
-        if let citedPost = postDataWrapper.citedPost {
-            HollowCiteContentView(postData: citedPost)
+        if let citedPid = postDataWrapper.citedPostID {
+            HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
         }
         
         // Enable the context menu for the text if it is in detail view.

@@ -44,7 +44,7 @@ struct ImageViewer: View {
                 
                 Spacer()
 
-                if let footnote = footnote {
+                if let footnote = self.footnote, footnote != "" {
                     Text(footnote)
                         .font(.footnote)
                         .padding(.horizontal)

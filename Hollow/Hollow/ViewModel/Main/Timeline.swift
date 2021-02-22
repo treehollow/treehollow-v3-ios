@@ -32,9 +32,13 @@ class Timeline: ObservableObject, AppModelEnvironment {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let request = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: config.apiRootUrls, token: token, page: page, imageBaseURL: config.imgBaseUrls))
-        isLoading = true
+        withAnimation {
+            isLoading = true
+        }
         request.performRequest(completion: { postWrappers, error in
-            self.isLoading = false
+            withAnimation {
+                self.isLoading = false
+            }
             handler?()
             if let error = error {
                 if self.handleTokenExpireError(error) { return }

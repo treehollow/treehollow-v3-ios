@@ -20,7 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
         Test.performTest(options: [])
-        
+//        Defaults[.accessToken] = testAccessToken
         #else
         
         // Start AppCenter services
