@@ -46,9 +46,7 @@ struct RandomListRequest: DefaultRequest {
             
             // return no citedPost and image here
             completion(postWrappers,nil)
-            // process citedPost
-            
-            // TODO: fill in citedPost
+            // no need for citedPost
             
             // start loading image
             for index in postWrappers.indices {

@@ -55,27 +55,26 @@ struct PostDetailRequest: DefaultRequest {
             "include_comment" : configuration.includeComments
         ]
         
-        if let oldupdated = PostCache().getTimestamp(postId: configuration.postId) {
+        if let oldupdated = PostCache().getTimestamp(postId: configuration.postId), PostCache().existPost(postId: configuration.postId) {
             parameters["old_updated_at"] = oldupdated
         }
         
         let resultToResultData: (Result) -> ResultData? = { result in
-            print("DDDDD", result.post?.vote?.voteData)
+            //print("DDDDD", result.post?.vote?.voteData)
             var postWrapper: PostDataWrapper
             
             if result.code == 1 {
                 // use cached result
                 // if return cache hit, then post must be in cache
-                postWrapper = PostDataWrapper(
-                    post: PostCache().getPost(postId: configuration.postId)!,
-                    citedPost: nil
-                )
+                guard let postCache = PostCache().getPost(postId: configuration.postId) else { return nil }
+                postWrapper = PostDataWrapper(post: postCache)
+                completion(postWrapper,nil)
             } else {
                 // get new result
                 guard let post = result.post else { return nil }
                 let postData = post.toPostData(comments: [CommentData]() )
                 // postdetail don't need cited post
-                postWrapper = PostDataWrapper(post: postData, citedPost: nil)
+                postWrapper = PostDataWrapper(post: postData)
                 // return postWrapper without image, comment and cited post
                 completion(postWrapper,nil)
                 

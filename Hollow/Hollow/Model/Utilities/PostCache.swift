@@ -60,4 +60,12 @@ struct PostCache {
     func updatePost(postId: Int, postdata: PostData) {
         try? postStorage?.setObject(postdata, forKey: postId)
     }
+    
+    /// Check post exist
+    /// - Parameter postId: postID
+    /// - Returns: true if exist
+    func existPost(postId: Int) -> Bool {
+        guard let exist = try? postStorage?.existsObject(forKey: postId) else { return false }
+        return exist
+    }
 }

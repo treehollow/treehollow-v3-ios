@@ -73,7 +73,7 @@ struct PostListRequest: DefaultRequest {
             // process citedPost
             
             for index in postWrappers.indices {
-                if let citedPid = postWrappers[index].post.text.findCitedPostID() {
+                if let citedPid = postWrappers[index].citedPostID {
                     let citedPostRequest =
                         PostDetailRequest(
                             configuration:
