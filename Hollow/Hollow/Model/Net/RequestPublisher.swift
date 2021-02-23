@@ -17,12 +17,12 @@ struct RequestPublisher<R>: Publisher where R: Request {
     let configuration: R.Configuration
     
     func receive<S>(subscriber: S) where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
-        let subsription = RequestSubsription(request: R(configuration: configuration), subscriber: subscriber)
+        let subsription = RequestSubscription(request: R(configuration: configuration), subscriber: subscriber)
         subscriber.receive(subscription: subsription)
     }
 }
 
-fileprivate class RequestSubsription<S: Subscriber, R: Request>: Subscription where S.Input == R.ResultData, S.Failure == R.Error {
+fileprivate class RequestSubscription<S: Subscriber, R: Request>: Subscription where S.Input == R.ResultData, S.Failure == R.Error {
     private let request: R
     private var subscriber: S?
     
