@@ -21,7 +21,7 @@ struct SendVoteRequestResult: DefaultRequestResult {
     var vote: Vote?
 }
 
-typealias SendVoteRequestResultData = SendVoteRequestResult
+typealias SendVoteRequestResultData = VoteData
 
 struct SendVoteRequest: DefaultRequest {
     typealias Configuration = SendVoteRequestConfiguration
@@ -53,7 +53,7 @@ struct SendVoteRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: { $0 },
+            resultToResultData: { $0.vote?.toVoteData() },
             completion: completion
         )
     }
