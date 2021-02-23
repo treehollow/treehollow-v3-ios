@@ -11,5 +11,6 @@ import Foundation
 /// Vote for result
 struct Vote: Codable {
     var voted: String?
+    var voteOptions: [String]?
     var voteData: [String: Int]?
 }
