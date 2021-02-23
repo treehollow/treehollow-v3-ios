@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 /// Protocol for HTTP request types.
 protocol Request {
@@ -26,4 +27,47 @@ protocol Request {
     init(configuration: Configuration)
     /// Perform request and fetch the data.
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void)
+}
+
+extension Request {
+    var publisher: RequestPublisher<Self> {
+        return RequestPublisher(configuration: configuration)
+    }
+    
+    /// Create a combined publisher for multiple requests which never fails.
+    /// - parameter requests: The requests to be performed asynchronously.
+    /// - parameter retries: Retry number for each request.
+    /// - returns: A merged published which never fails, where `Output == (request_index, optional_result_data)`.
+    ///
+    /// When error occurs in any request, the output is (index, nil), otherwise (index, output).
+    static func publisher(for requests: [Self], retries: Int = 0) -> AnyPublisher<(Int, ResultData?), Never>? {
+        guard requests.count > 0 else { return nil }
+        let pubilsher = requests[0].publisher
+            .retry(retries)
+            .nullablePublisher()
+            .map { (0, $0) }
+            .replaceError(with: (0, nil))
+            .eraseToAnyPublisher()
+        if requests.count == 1 { return pubilsher }
+        var anyPublisher: AnyPublisher<(Int, ResultData?), Never> = pubilsher
+        for index in 1..<requests.count {
+            anyPublisher = anyPublisher
+                .merge(with: requests[index].publisher
+                        .retry(retries)
+                        .nullablePublisher()
+                        .replaceError(with: nil)
+                        .map({ (index, $0) })
+                )
+                .eraseToAnyPublisher()
+        }
+        return anyPublisher
+    }
+}
+
+extension Publisher {
+    func nullablePublisher() -> AnyPublisher<Output?, Failure> {
+        return self
+            .map { Optional($0) }
+            .eraseToAnyPublisher()
+    }
 }

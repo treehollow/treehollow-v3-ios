@@ -60,7 +60,6 @@ struct PostDetailRequest: DefaultRequest {
         }
         
         let resultToResultData: (Result) -> ResultData? = { result in
-            print("DDDDD", result.post?.vote?.voteData)
             var postWrapper: PostDataWrapper
             
             if result.code == 1 {
@@ -77,7 +76,7 @@ struct PostDetailRequest: DefaultRequest {
                 // postdetail don't need cited post
                 postWrapper = PostDataWrapper(post: postData, citedPost: nil)
                 // return postWrapper without image, comment and cited post
-                completion(postWrapper,nil)
+                completion(postWrapper, nil)
                 
                 // cache without image, comment and cited post
                 PostCache().updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
@@ -114,7 +113,7 @@ struct PostDetailRequest: DefaultRequest {
             }
             
             // load citedPost if needed
-            if configuration.includeCitedPost && (postWrapper.citedPost == nil) {
+            if configuration.includeCitedPost && postWrapper.citedPost == nil && postWrapper.citedPostID != postWrapper.post.postId {
                 if let citedPid = postWrapper.post.text.findCitedPostID() {
                     let citedPostRequest =
                         PostDetailRequest(configuration:
@@ -127,6 +126,9 @@ struct PostDetailRequest: DefaultRequest {
                                                 includeCitedPost: false,
                                                 includeImage: false))
                     citedPostRequest.performRequest { (postData, error) in
+                        if let _ = error {
+                            return
+                        }
                         if let postData = postData {
                             postWrapper.citedPost = postData.post
                             completion(postWrapper, nil)
@@ -134,49 +136,9 @@ struct PostDetailRequest: DefaultRequest {
                         }
                     }
                 }
+                
             }
             
-            // load image if needed
-            if configuration.includeImage {
-                // load post image
-                
-                if let url = postWrapper.post.hollowImage?.imageURL {
-                    ImageDownloader.downloadImage(urlBase: configuration.imageBaseURL, urlString: url, imageCompletionHandler: {image in
-                        if let image = image {
-                            postWrapper.post.hollowImage?.image = image
-                            completion(postWrapper,nil)
-                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
-                        } else {
-                            completion(postWrapper,.imageLoadingFail(postID: postWrapper.post.postId))
-                        }
-                    })
-                }
-                
-                // load comments image
-                
-                let comments = postWrapper.post.comments
-                for index in comments.indices {
-                    if let url = comments[index].image?.imageURL {
-                        ImageDownloader.downloadImage(
-                            urlBase: configuration.imageBaseURL,
-                            urlString: url,
-                            imageCompletionHandler: { image in
-                                if let image = image {
-                                    postWrapper.post.comments[index].image?.image = image
-                                    completion(postWrapper, nil)
-                                    PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
-                                } else {
-                                    // report image loading fail
-                                    completion(postWrapper,.commentImageLoadingFail(
-                                        postID: postWrapper.post.postId,
-                                        commentID: comments[index].commentId
-                                    ))
-                                }
-                            }
-                        )
-                    }
-                }
-            }
             return postWrapper
         }
         performRequest(urlBase: configuration.apiRoot,

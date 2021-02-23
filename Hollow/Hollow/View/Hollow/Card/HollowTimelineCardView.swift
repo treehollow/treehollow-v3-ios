@@ -46,8 +46,8 @@ struct HollowTimelineCardView: View {
         
         var body: some View {
             VStack(spacing: 0) {
-                ForEach(postData.comments.prefix(maxCommentCount)) { commentData in
-                    HollowCommentContentView(commentData: commentData, compact: true, contentVerticalPadding: 10)
+                ForEach(postData.comments.indices.prefix(maxCommentCount), id: \.self) { index in
+                    HollowCommentContentView(commentData: $postData.comments[index], compact: true, contentVerticalPadding: 10)
                 }
                 if postData.replyNumber > maxCommentCount {
                     // FIXME: How to localize this stuff??

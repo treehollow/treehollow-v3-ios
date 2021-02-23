@@ -48,7 +48,7 @@ struct HollowDetailView: View {
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        HollowContentView(postDataWrapper: store.postDataWrapper, compact: false, voteHandler: {_ in})
+                        HollowContentView(postDataWrapper: store.postDataWrapper, compact: false, voteHandler: store.vote)
                             .fixedSize(horizontal: false, vertical: true)
                         CommentView(postData: $store.postDataWrapper.post, maxImageHeight: viewSize.height * 0.6)
                             // Get the frame of the comment view.
@@ -65,6 +65,7 @@ struct HollowDetailView: View {
         .modifier(GetSize(size: $viewSize))
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
+        .animation(.default)
     }
 }
 
@@ -79,8 +80,8 @@ extension HollowDetailView {
                     .leading()
                     .padding(.top)
                     .padding(.bottom, 5)
-                ForEach(postData.comments) { commentData in
-                    HollowCommentContentView(commentData: commentData, compact: false, maxImageHeight: maxImageHeight)
+                ForEach(postData.comments.indices, id: \.self) { index in
+                    HollowCommentContentView(commentData: $postData.comments[index], compact: false, maxImageHeight: maxImageHeight)
                 }
             }
         }

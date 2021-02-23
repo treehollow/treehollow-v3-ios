@@ -64,9 +64,11 @@ extension HollowInputStore {
             optionsWithoutEmptyString.removeAll(where: { $0 == "" })
             return Set(optionsWithoutEmptyString).count != optionsWithoutEmptyString.count
         }
+        
+        static let maxVoteOptionCharacters = 15
         var valid: Bool {
             for option in options {
-                if option == "" { return false }
+                if option == "" || option.count > VoteInformation.maxVoteOptionCharacters { return false }
             }
             return !hasDuplicate
         }

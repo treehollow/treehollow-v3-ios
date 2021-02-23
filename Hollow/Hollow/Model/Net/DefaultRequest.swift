@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 protocol DefaultRequestResult: Codable {
     var code: Int { get }
@@ -73,14 +74,19 @@ extension DefaultRequest {
                         if let resultData = resultToResultData(result) {
                             print("[Result Data] \(resultData)")
                             completion(resultData, nil)
+                            // The current request has finished successfully
+                            completion(nil, .loadingCompleted)
+                            return
                         } else {
                             completion(nil, .unknown)
+                            return
                         }
                         
                     } else {
                         let error = DefaultRequestError(errorCode: result.code, description: result.msg)
                         completion(nil, error)
                         print("[Request Error]: \(error)")
+                        return
                     }
                     
                 } catch {
@@ -94,8 +100,10 @@ extension DefaultRequest {
 
                 if let errorCode = error.responseCode, errorCode == 413 {
                     completion(nil, .fileTooLarge)
+                    return
                 } else {
                     completion(nil, .other(description: error.localizedDescription))
+                    return
                 }
             }
         }

@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct HollowContentView: View {
+    @State private var presentedIndex: Int?
+    @State private var detailStore: HollowDetailStore?
     var postDataWrapper: PostDataWrapper
     var compact: Bool
     var voteHandler: (String) -> Void
@@ -20,14 +22,28 @@ struct HollowContentView: View {
 
     var body: some View {
         if hasImage {
-            HollowImageView(hollowImage: postDataWrapper.post.hollowImage, description: postDataWrapper.post.text)
+            HollowImageView(hollowImage: postDataWrapper.post.hollowImage!, description: postDataWrapper.post.text)
                 .cornerRadius(4)
                 .frame(maxHeight: maxImageHeight)
                 .fixedSize(horizontal: false, vertical: true)
         }
         
         if let citedPid = postDataWrapper.citedPostID {
-            HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
+            if let citedPost = postDataWrapper.citedPost, !compact {
+                Button(action: {
+                    DispatchQueue.main.async {
+                        presentedIndex = 1
+                    }
+                }) {
+                    HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
+                }
+                .sheet(item: $presentedIndex) { _ in Group {
+                    // FIXME: Possibly initializing more than once.
+                    HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))), presentedIndex: $presentedIndex)
+                }}
+            } else {
+                HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
+            }
         }
         
         // Enable the context menu for the text if it is in detail view.
@@ -58,16 +74,3 @@ struct HollowContentView: View {
         HollowTextView(text: postDataWrapper.post.text, compactLineLimit: compact ? 6 : nil)
     }
 }
-
-#if DEBUG
-struct HollowContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView {
-            ForEach(testPostWrappers) { postDataWrapper in
-                HollowContentView(postDataWrapper: postDataWrapper, compact: false, voteHandler: {_ in})
-                    .background(Color.background)
-            }
-        }
-    }
-}
-#endif

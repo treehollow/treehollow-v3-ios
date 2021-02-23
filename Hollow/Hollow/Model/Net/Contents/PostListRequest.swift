@@ -66,56 +66,37 @@ struct PostListRequest: DefaultRequest {
                 
                 return PostDataWrapper(post: post.toPostData(comments: commentData))
             }
+//            
+//            // return no citedPost and image here
+//            completion(postWrappers,nil)
             
-            // return no citedPost and image here
-            completion(postWrappers,nil)
-            
-            // process citedPost
-            
-            for index in postWrappers.indices {
-                if let citedPid = postWrappers[index].post.text.findCitedPostID() {
-                    let citedPostRequest =
-                        PostDetailRequest(
-                            configuration:
-                                PostDetailRequestConfiguration(
-                                    apiRoot: configuration.apiRoot,
-                                    imageBaseURL: configuration.imageBaseURL,
-                                    token: configuration.token,
-                                    postId: citedPid,
-                                    includeComments: false,
-                                    includeCitedPost: false,
-                                    includeImage: false
-                                )
-                        )
-                    citedPostRequest.performRequest { (postData, error) in
-                        if let postData = postData {
-                            postWrappers[index].citedPost = postData.post
-                            completion(postWrappers, nil)
-                        }
-                    }
-                }
-            }
-            
-            // start loading image
-            for index in postWrappers.indices {
-                // image in post
-                if let url = postWrappers[index].post.hollowImage?.imageURL {
-                    ImageDownloader.downloadImage(
-                        urlBase: self.configuration.imageBaseURL,
-                        urlString: url,
-                        imageCompletionHandler: { image in
-                            if let image = image {
-                                postWrappers[index].post.hollowImage?.image = image
-                                completion(postWrappers, nil)
-                            } else {
-                                // report image loading fail
-                                completion(postWrappers,.imageLoadingFail(postID: postWrappers[index].post.id))
-                            }
-                        }
-                    )
-                }
-            }
-            
+//            // process citedPost
+//
+//            for index in postWrappers.indices {
+//                if let citedPid = postWrappers[index].post.text.findCitedPostID(),
+//                   citedPid != postWrappers[index].post.postId {
+//                    let citedPostRequest =
+//                        PostDetailRequest(
+//                            configuration:
+//                                PostDetailRequestConfiguration(
+//                                    apiRoot: configuration.apiRoot,
+//                                    imageBaseURL: configuration.imageBaseURL,
+//                                    token: configuration.token,
+//                                    postId: citedPid,
+//                                    includeComments: false,
+//                                    includeCitedPost: false,
+//                                    includeImage: false
+//                                )
+//                        )
+//                    citedPostRequest.performRequest { (postData, error) in
+//                        if let postData = postData {
+//                            postWrappers[index].citedPost = postData.post
+//                            completion(postWrappers, nil)
+//                        }
+//                    }
+//                }
+//            }
+
             return postWrappers
         }
         

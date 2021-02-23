@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HollowCommentContentView: View {
-    var commentData: CommentData
+    @Binding var commentData: CommentData
     var compact: Bool
     var contentVerticalPadding: CGFloat? = 10
     var maxImageHeight: CGFloat?
@@ -39,7 +39,7 @@ struct HollowCommentContentView: View {
                         .fixedSize()
                     VStack(alignment: .leading, spacing: 0) {
                         if commentData.type == .image && !compact {
-                            HollowImageView(hollowImage: commentData.image, description: commentData.text)
+                            HollowImageView(hollowImage: commentData.image!, description: commentData.text)
                                 .cornerRadius(4)
                                 .padding(.bottom, 10)
                                 .frame(maxHeight: maxImageHeight)
@@ -86,12 +86,3 @@ struct HollowCommentContentView: View {
         .fixedSize(horizontal: false, vertical: true)
     }
 }
-
-#if DEBUG
-struct HollowCommentContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowCommentContentView(commentData: testComments[0], compact: false)
-        HollowCommentContentView(commentData: testComments[3], compact: false)
-    }
-}
-#endif

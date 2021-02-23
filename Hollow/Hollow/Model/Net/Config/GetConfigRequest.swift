@@ -59,6 +59,7 @@ enum GetConfigRequestError: RequestError {
     case incorrectFormat
     case invalidConfigUrl
     case invalidConfiguration
+    case loadingCompleted
     case other(description: String)
     
     var description: String {
@@ -68,7 +69,15 @@ enum GetConfigRequestError: RequestError {
         case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
         case .invalidConfigUrl: return "The URL for the configuration is invalid."
         case .invalidConfiguration: return "The configuration is invalid."
+        case .loadingCompleted: return ""
         case .other(let description): return description
+        }
+    }
+    
+    func loadingCompleted() -> Bool {
+        switch self {
+        case .loadingCompleted: return true
+        default: return false
         }
     }
 }

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import Combine
 
 class Timeline: ObservableObject, AppModelEnvironment {
     
@@ -20,6 +21,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
     
     @Published var appModelState = AppModelState()
 
+    var cancellables = Set<AnyCancellable>()
     
     init() {
         self.posts = []
@@ -27,6 +29,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
         requestPosts(at: 1)
     }
     
+    // MARK: - Load Posts
     private func requestPosts(at page: Int, handler: (() -> Void)? = nil) {
         guard !self.noMorePosts else { return }
         let config = Defaults[.hollowConfig]!
@@ -35,36 +38,47 @@ class Timeline: ObservableObject, AppModelEnvironment {
         withAnimation {
             isLoading = true
         }
-        request.performRequest(completion: { postWrappers, error in
-            withAnimation {
-                self.isLoading = false
-            }
-            handler?()
-            if let error = error {
-                if self.handleTokenExpireError(error) { return }
-                
-                // TODO: Handle errors
-                switch error {
-                case .imageLoadingFail:
-                    break
-                default:
-                    self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
+
+        request.publisher
+            .sinkOnMainThread(
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        // Fetch images after loading all the posts.
+                        handler?()
+                        self.fetchImages()
+                        self.fetchCitedPosts()
+                    case .failure(let error):
+                        self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+                    }
+                }, receiveValue: { postWrappers in
+                    withAnimation { self.isLoading = false }
+                    if postWrappers.isEmpty {
+                        self.noMorePosts = true
+                        self.page = 1
+                        return
+                    }
+                    withAnimation {
+                        self.integratePosts(postWrappers)
+                    }
                 }
-                
-                return
-            }
-            
-            if let postWrappers = postWrappers {
-                if postWrappers.isEmpty {
-                    self.noMorePosts = true
-                    self.page = 1
-                    return
-                }
-                withAnimation {
-                    self.integratePosts(postWrappers)
-                }
-            }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func loadMorePosts() {
+        guard !isLoading else { return }
+        self.page += 1
+        requestPosts(at: page)
+    }
+    
+    func refresh(finshHandler: @escaping () -> Void) {
+        page = 1
+        noMorePosts = false
+        requestPosts(at: 1, handler: {
+            self.posts = []
         })
+        finshHandler()
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {
@@ -85,22 +99,96 @@ class Timeline: ObservableObject, AppModelEnvironment {
         self.posts = posts
     }
     
-    func vote(postId: Int, for option: String) {
+    // MARK: - Load Images
+    private func fetchImages() {
+        let postsWithNoImages: [PostData] = posts.compactMap {
+            guard let _ = $0.post.hollowImage?.imageURL,
+                  $0.post.hollowImage?.image == nil else { return nil }
+            return $0.post
+        }
+        let requests: [FetchImageRequest] = postsWithNoImages.compactMap {
+            guard let imageURL = $0.hollowImage?.imageURL,
+                  $0.hollowImage?.image == nil else { return nil }
+            let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]!.imgBaseUrls, urlString: imageURL)
+            return FetchImageRequest(configuration: configuration)
+        }
         
+        FetchImageRequest.publisher(for: requests, retries: 3)?
+            .sinkOnMainThread(
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished: break
+                    case .failure(let error): print(error)
+                    }
+                },
+                receiveValue: { index, image in
+                    print("index, \(index); postId: \(postsWithNoImages[index].postId)")
+                    if let image = image {
+                        self.assignImage(image, to: postsWithNoImages[index].postId)
+                    } else {
+                        // Fail to load the single image
+                    }
+                })
+            .store(in: &cancellables)
     }
     
-    func loadMorePosts() {
-        guard !isLoading else { return }
-        self.page += 1
-        requestPosts(at: page)
+    private func assignImage(_ image: UIImage, to postId: Int) {
+        // We use the postId rather than the index to
+        // identify which post to assign to.
+        guard let index = posts.firstIndex(where: { $0.post.postId == postId }) else { return }
+        self.posts[index].post.hollowImage?.image = image
     }
     
-    func refresh(finshHandler: @escaping () -> Void) {
-        page = 1
-        noMorePosts = false
-        requestPosts(at: 1, handler: {
-            self.posts = []
-        })
-        finshHandler()
+    // MARK: - Load Cited Posts
+    private func fetchCitedPosts() {
+        let postsWrapperWithCitation = posts.compactMap { $0.citedPostID == nil ? nil : $0 }
+        let citedPostId = postsWrapperWithCitation.compactMap { $0.citedPostID }
+        
+        let hollowConfig = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let requests: [PostDetailRequest] = citedPostId.map {
+            let configuration = PostDetailRequestConfiguration(apiRoot: hollowConfig.apiRootUrls, imageBaseURL: hollowConfig.imgBaseUrls, token: token, postId: $0, includeComments: false, includeCitedPost: false, includeImage: false)
+            return PostDetailRequest(configuration: configuration)
+        }
+        PostDetailRequest.publisher(for: requests)?
+            .sinkOnMainThread(receiveCompletion: { _ in
+                // TODO
+            }, receiveValue: { index, postData in
+                if let postData = postData {
+                    self.assignCitedPost(
+                        postData.post,
+                        to: postsWrapperWithCitation[index].post.postId
+                    )
+                } else {
+                    // Error
+                }
+            })
+            .store(in: &cancellables)
     }
+    
+    private func assignCitedPost(_ citedPost: PostData, to postId: Int) {
+        guard let index = posts.firstIndex(where: { $0.post.postId == postId }) else { return }
+        self.posts[index].citedPost = citedPost
+    }
+        
+    
+    func vote(postId: Int, for option: String) {
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postId))
+        
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
+                if let vote = result.vote,
+                   let index = self.posts.firstIndex(where: { $0.post.postId == postId }) {
+                    withAnimation {
+                        self.posts[index].post.vote = vote.toVoteData()
+                    }
+                }
+            })
+            .store(in: &cancellables)
+    }
+
 }

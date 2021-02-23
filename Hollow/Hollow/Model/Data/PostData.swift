@@ -23,14 +23,6 @@ struct PostData: Identifiable, Codable {
     var timestamp: Date
     var tag: String?
     var text: String
-    /// **will be deprecated, don't use this to judge**
-    var type: PostType {
-        get {
-            if self.vote != nil {return .vote}
-            else if self.hollowImage != nil {return .image}
-            else {return .text}
-        }
-    }
     /// Image wrapper for actual image.
     ///
     /// Set `nil` when there is no image to display, and set `hollowImage.image` to `nil` then the actual image is still loading.
@@ -48,6 +40,9 @@ struct PostDataWrapper: Identifiable {
     
     var post: PostData
     /// use `citedPostID` to get citedPostID
-    var citedPostID: Int? { self.post.text.findCitedPostID() }
+    var citedPostID: Int? {
+        let citedPid = self.post.text.findCitedPostID()
+        return citedPid == self.post.postId ? nil : citedPid
+    }
     var citedPost: PostData?
 }

@@ -18,16 +18,18 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     
     @Published var appModelState = AppModelState()
     
-    var postDataWrapperPublisher: AnyCancellable?
+    var publishPostDataWrapperPublisher: AnyCancellable?
+    var getPostDataCancellable: AnyCancellable?
 
     init(bindingPostWrapper: Binding<PostDataWrapper>) {
         self.postDataWrapper = bindingPostWrapper.wrappedValue
         self.bindingPostWrapper = bindingPostWrapper
+        requestDetail()
         
         // Subscribe the changes in post data in the detail store
         // and update the upstream data source. This will be the
         // source of truth when the detail view exists.
-        postDataWrapperPublisher =
+        publishPostDataWrapperPublisher =
             $postDataWrapper.sink(receiveValue: { postDataWrapper in
                 self.bindingPostWrapper.wrappedValue = postDataWrapper
             })
@@ -36,20 +38,36 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     func requestDetail() {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
-        let request = PostDetailRequest(configuration: PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, postId: postDataWrapper.post.postId, includeComments: postDataWrapper.citedPost == nil, includeCitedPost: false, includeImage: true))
+        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, postId: postDataWrapper.post.postId, includeComments: true, includeCitedPost: true, includeImage: true)
+        let request = PostDetailRequest(configuration: configuration)
         
-        request.performRequest(completion: { postDataWrapper, error in
-            if let error = error {
-                if self.handleTokenExpireError(error) { return }
-                self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
-                return
-                // Handle error
+        getPostDataCancellable = request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { postDataWrapper in
+                var finalWrapper = postDataWrapper
+                if let citedPost = self.postDataWrapper.citedPost {
+                    finalWrapper.citedPost = citedPost
+                }
+                if let hollowImage = self.postDataWrapper.post.hollowImage {
+                    finalWrapper.post.hollowImage = hollowImage
+                }
+                withAnimation { self.postDataWrapper = finalWrapper }
+            })
+    }
+    
+    func vote(for option: String) {
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postDataWrapper.post.postId))
+        
+        request.performRequest(completion: { result, error in
+            if let _ = error {
+                // TODO: Handle error
             }
             
-            if var postWrapper = postDataWrapper {
-                postWrapper.citedPost = self.postDataWrapper.citedPost
-                withAnimation { self.postDataWrapper = postWrapper }
-            }
+            // FIXME
+            self.requestDetail()
         })
     }
 }

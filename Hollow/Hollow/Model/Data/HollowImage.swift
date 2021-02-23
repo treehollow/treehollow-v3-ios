@@ -33,11 +33,13 @@ struct HollowImage: Codable{
     /// store image here
     var imageWrapper: ImageWrapper?
     /// image url
-    var imageURL: String?
+    var imageURL: String
+    
+    var loadingError: String?
     
     /// - parameter placeholder: Placeholder metadata.
     /// - parameter image: The image to display, set it to `nil` when the image is still loading.
-    init(placeholder: (width: CGFloat, height: CGFloat), image: UIImage?, imageURL: String?) {
+    init(placeholder: (width: CGFloat, height: CGFloat), image: UIImage?, imageURL: String) {
         self.placeholder = ImagePlaceHolderType(
             width: placeholder.width,
             height: placeholder.height

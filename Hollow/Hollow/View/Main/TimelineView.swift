@@ -180,7 +180,6 @@ struct TimelineView: View {
             DispatchQueue.main.async {
                 detailPresentedIndex = index
             }
-            detailStore!.requestDetail()
         }
         .disabled(viewModel.isLoading)
 //        .animation(.default)

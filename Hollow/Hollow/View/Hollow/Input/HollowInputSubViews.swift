@@ -106,7 +106,19 @@ extension HollowInputView {
                                 }
                                 inputStore.voteInformation?.options.remove(at: index)
                             }) {
-                                Image(systemName: "xmark.circle.fill")
+                                HStack {
+                                    HStack(spacing: 0) {
+                                        let maxCharacters = HollowInputStore.VoteInformation.maxVoteOptionCharacters
+                                        if voteInfo.options[index].count > maxCharacters {
+                                            Text("\(voteInfo.options[index].count)")
+                                                .font(.footnote)
+                                                .foregroundColor(.red)
+                                            Text(" / \(maxCharacters)")
+                                                .font(.footnote)
+                                        }
+                                    }
+                                    Image(systemName: "xmark.circle.fill")
+                                }
                             }
                             .accentColor(voteInfo.optionHasDuplicate(voteInfo.options[index]) ? .red : .hollowContentText)
                         }

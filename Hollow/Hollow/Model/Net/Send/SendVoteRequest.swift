@@ -18,6 +18,7 @@ struct SendVoteRequestConfiguration {
 struct SendVoteRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
+    var vote: Vote?
 }
 
 typealias SendVoteRequestResultData = SendVoteRequestResult

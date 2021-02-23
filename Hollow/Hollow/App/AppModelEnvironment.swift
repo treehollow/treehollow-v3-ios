@@ -33,6 +33,12 @@ extension AppModelEnvironment {
         default: return false
         }
     }
+    
+    func defaultErrorHandler(errorMessage: inout (title: String, message: String)?, error: DefaultRequestError) {
+        if handleTokenExpireError(error) { return }
+        errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
+    }
+
 }
 
 /// State definition reflecting the view model.

@@ -10,6 +10,7 @@ import Foundation
 
 protocol RequestError: Error {
     var description: String { get }
+    func loadingCompleted() -> Bool
 }
 
 enum DefaultRequestError: RequestError {
@@ -19,6 +20,9 @@ enum DefaultRequestError: RequestError {
     case unknown
     case imageLoadingFail(postID: Int)
     case commentImageLoadingFail(postID: Int, commentID: Int)
+    case noSuchPost
+    /// Indicating that current request has finished successfully.
+    case loadingCompleted
     case other(description: String)
     
     var description: String {
@@ -27,17 +31,26 @@ enum DefaultRequestError: RequestError {
         case .decodeFailed: return "Fail to decode result from the response."
         case .unknown: return "Fail to initialize data. This is an internal error."
         case .fileTooLarge: return "The uploaded file is too large and is refused by the server."
-        case .imageLoadingFail(let postID): return "Fail Loading Image in post \(postID)"
-        case .commentImageLoadingFail(let postID,let commentID): return "Fail Loading Image in post \(postID) comment \(commentID)"
+        case .imageLoadingFail(let postID): return "Fail to load image for post" + " #\(postID)."
+        case .commentImageLoadingFail(let postID, let commentID): return "Fail to load image for comment #\(commentID) in post #\(postID)."
+        case .noSuchPost: return "The post does not exist."
+        case .loadingCompleted: return ""
         case .other(let description): return description
         }
     }
     
+    func loadingCompleted() -> Bool {
+        switch self {
+        case .loadingCompleted: return true
+        default: return false
+        }
+    }
+    
     init(errorCode: Int, description: String?) {
-        if errorCode == -100 {
-            self = .tokenExpiredError
-        } else {
-            self = .other(description: description ?? "Unknown error!")
+        switch errorCode {
+        case -100: self = .tokenExpiredError
+        case -101: self = .noSuchPost
+        default: self = .other(description: description ?? "Request failed with no description for error code \(errorCode)")
         }
     }
 }
