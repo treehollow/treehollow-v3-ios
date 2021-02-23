@@ -10,15 +10,10 @@ import Alamofire
 
 struct PostDetailRequestConfiguration {
     var apiRoot: [String]
-    var imageBaseURL: [String]
     var token: String
     var postId: Int
     /// when don't need comments, only need main post, set `needComments` to false
     var includeComments: Bool
-    /// when dont't need cited post, set to false
-    var includeCitedPost: Bool
-    /// set true when need image
-    var includeImage: Bool
 }
 
 struct PostDetailRequestResult: DefaultRequestResult {
@@ -52,7 +47,7 @@ struct PostDetailRequest: DefaultRequest {
         
         var parameters: [String : Encodable] = [
             "pid" : configuration.postId.string,
-            "include_comment" : configuration.includeComments
+            "include_comment" : configuration.includeComments.int.string
         ]
         
         if let oldupdated = PostCache().getTimestamp(postId: configuration.postId), PostCache().existPost(postId: configuration.postId) {
@@ -60,7 +55,6 @@ struct PostDetailRequest: DefaultRequest {
         }
         
         let resultToResultData: (Result) -> ResultData? = { result in
-            //print("DDDDD", result.post?.vote?.voteData)
             var postWrapper: PostDataWrapper
             
             if result.code == 1 {
@@ -72,71 +66,19 @@ struct PostDetailRequest: DefaultRequest {
             } else {
                 // get new result
                 guard let post = result.post else { return nil }
-                let postData = post.toPostData(comments: [CommentData]() )
-                // postdetail don't need cited post
+                var comments = [CommentData]()
+                if let commentData = result.data {
+                    comments = commentData.compactMap({ $0.toCommentData() })
+                }
+                let postData = post.toPostData(comments: comments)
                 postWrapper = PostDataWrapper(post: postData)
-                // return postWrapper without image, comment and cited post
                 completion(postWrapper, nil)
                 
+                let postCache = PostCache()
                 // cache without image, comment and cited post
-                PostCache().updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
+                postCache.updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
                 // force unwrap postWrapper
-                PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
-            }
-            
-            // load comments if needed
-            if configuration.includeComments && postWrapper.post.comments.count < postWrapper.post.replyNumber {
-                if let comments = result.data {
-                    postWrapper.post.comments = comments.map { $0.toCommentData() }
-                    completion(postWrapper, nil)
-                    PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
-                } else {
-                    // no comment data, start a new request
-                    let commentRequest =
-                        PostDetailRequest(configuration:
-                                            PostDetailRequestConfiguration(
-                                                apiRoot: configuration.apiRoot,
-                                                imageBaseURL: configuration.imageBaseURL,
-                                                token: configuration.token,
-                                                postId: postWrapper.post.id,
-                                                includeComments: true,
-                                                includeCitedPost: false,
-                                                includeImage: false))
-                    commentRequest.performRequest { (postData, error) in
-                        if let comments = postData?.post.comments {
-                            postWrapper.post.comments = comments
-                            completion(postWrapper, nil)
-                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
-                        }
-                    }
-                }
-            }
-            
-            // load citedPost if needed
-            if configuration.includeCitedPost && postWrapper.citedPost == nil && postWrapper.citedPostID != postWrapper.post.postId {
-                if let citedPid = postWrapper.post.text.findCitedPostID() {
-                    let citedPostRequest =
-                        PostDetailRequest(configuration:
-                                            PostDetailRequestConfiguration(
-                                                apiRoot: configuration.apiRoot,
-                                                imageBaseURL: configuration.imageBaseURL,
-                                                token: configuration.token,
-                                                postId: citedPid,
-                                                includeComments: false,
-                                                includeCitedPost: false,
-                                                includeImage: false))
-                    citedPostRequest.performRequest { (postData, error) in
-                        if let _ = error {
-                            return
-                        }
-                        if let postData = postData {
-                            postWrapper.citedPost = postData.post
-                            completion(postWrapper, nil)
-                            PostCache().updatePost(postId: configuration.postId, postdata: postWrapper.post)
-                        }
-                    }
-                }
-                
+                postCache.updatePost(postId: configuration.postId, postdata: postWrapper.post)
             }
             
             return postWrapper

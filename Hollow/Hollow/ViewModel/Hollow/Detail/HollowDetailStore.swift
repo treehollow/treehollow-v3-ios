@@ -18,8 +18,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     
     @Published var appModelState = AppModelState()
     
-    var publishPostDataWrapperPublisher: AnyCancellable?
-    var getPostDataCancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
 
     init(bindingPostWrapper: Binding<PostDataWrapper>) {
         self.postDataWrapper = bindingPostWrapper.wrappedValue
@@ -29,23 +28,36 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         // Subscribe the changes in post data in the detail store
         // and update the upstream data source. This will be the
         // source of truth when the detail view exists.
-        publishPostDataWrapperPublisher =
-            $postDataWrapper.sink(receiveValue: { postDataWrapper in
-                self.bindingPostWrapper.wrappedValue = postDataWrapper
-            })
+        $postDataWrapper
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.wrappedValue, on: self.bindingPostWrapper)
+            .store(in: &cancellables)
     }
     
-    func requestDetail() {
+    // MARK: - Load Post Detail
+    private func requestDetail() {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
-        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, postId: postDataWrapper.post.postId, includeComments: true, includeCitedPost: true, includeImage: true)
+        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, includeComments: true)
         let request = PostDetailRequest(configuration: configuration)
         
-        getPostDataCancellable = request.publisher
-            .sinkOnMainThread(receiveError: { error in
-                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+        withAnimation { self.isLoading = true }
+        
+        request.publisher
+            .sinkOnMainThread(receiveCompletion: { completion in
+                withAnimation { self.isLoading = false }
+                switch completion {
+                case .finished:
+                    self.loadImages()
+                    self.loadCitedPost()
+                case .failure(let error):
+                    self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+                }
             }, receiveValue: { postDataWrapper in
+                withAnimation { self.isLoading = false }
                 var finalWrapper = postDataWrapper
+                // Preserve the asynchronous request result if there is any data,
+                // which is not likly to be modified during the request.
                 if let citedPost = self.postDataWrapper.citedPost {
                     finalWrapper.citedPost = citedPost
                 }
@@ -54,20 +66,98 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
                 }
                 withAnimation { self.postDataWrapper = finalWrapper }
             })
+            .store(in: &cancellables)
+        
+        loadPostImage()
+        loadCitedPost()
     }
     
+    private func loadPostImage() {
+        if let imageURL = postDataWrapper.post.hollowImage?.imageURL,
+           postDataWrapper.post.hollowImage?.image == nil {
+            let config = Defaults[.hollowConfig]!
+            let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.apiRootUrls, urlString: imageURL))
+
+            imageRequest.publisher
+                .retry(3)
+                .sinkOnMainThread(receiveError: { error in
+                    // TODO: Handle error
+                }, receiveValue: { image in
+                    withAnimation {
+                        self.postDataWrapper.post.hollowImage?.image = image
+                    }
+                })
+                .store(in: &cancellables)
+        }
+    }
+    
+    private func loadCitedPost() {
+        guard let citedPid = self.postDataWrapper.citedPostID,
+              postDataWrapper.citedPost == nil else { return }
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: citedPid, includeComments: false)
+        let request = PostDetailRequest(configuration: configuration)
+        
+        request.publisher
+            .receive(on: DispatchQueue.main)
+            .map({ $0.post })
+            .sink(receiveError: { error in
+                
+            }, receiveValue: { postData in
+                self.postDataWrapper.citedPost = postData
+            })
+            .store(in: &cancellables)
+    }
+    
+    // MARK: - Load Images in Comments
+    private func loadImages() {
+        let commentsWithNoImages: [CommentData] = postDataWrapper.post.comments
+            .compactMap {
+                guard let _ = $0.image?.imageURL,
+                      $0.image?.image == nil else { return nil }
+                return $0
+            }
+        let requests: [FetchImageRequest] = commentsWithNoImages.compactMap {
+            let imageURL = $0.image!.imageURL
+            let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]!.imgBaseUrls, urlString: imageURL)
+            return FetchImageRequest(configuration: configuration)
+        }
+        
+        FetchImageRequest.publisher(for: requests, retries: 3)?
+            .sinkOnMainThread(receiveCompletion: { completion in
+            switch completion {
+            case .finished: break
+            case .failure(let error): print(error)
+            }
+            }, receiveValue: { index, image in
+                if let image = image {
+                    self.assignImage(image, to: commentsWithNoImages[index].commentId)
+                } else {
+                    // Fail to load the single image
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    private func assignImage(_ image: UIImage, to commentId: Int) {
+        guard let index = postDataWrapper.post.comments.firstIndex(where: { $0.commentId == commentId }) else { return }
+        self.postDataWrapper.post.comments[index].image?.image = image
+    }
+    
+    // MARK: - Vote
     func vote(for option: String) {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postDataWrapper.post.postId))
         
-        request.performRequest(completion: { result, error in
-            if let _ = error {
-                // TODO: Handle error
-            }
-            
-            // FIXME
-            self.requestDetail()
-        })
+        request.publisher
+            .retry(2)
+            .sinkOnMainThread(receiveError: { error in
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
+                self.postDataWrapper.post.vote = result
+            })
+            .store(in: &cancellables)
     }
 }

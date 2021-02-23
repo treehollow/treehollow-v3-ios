@@ -26,6 +26,8 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     @Published var imageSizeInformation: String?
     @Published var appModelState = AppModelState()
     
+    var cancellables = Set<AnyCancellable>()
+    
     init(presented: Binding<Bool>) {
         self.presented = presented
     }
@@ -37,22 +39,16 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     func sendPost() {
         withAnimation { sending = true }
         let request = SendPostRequest(configuration: .init(apiRoot: Defaults[.hollowConfig]!.apiRootUrls, token: Defaults[.accessToken]!, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: ImageCompressor.resizingQuality), voteData: voteInformation?.options))
-        request.performRequest(completion: { result, error in
-            DispatchQueue.main.async { withAnimation {
+        
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
                 self.sending = false
-                
-                if let error = error {
-                    if self.handleTokenExpireError(error) { return }
-                    self.errorMessage = (title: "Error", message: error.description)
-                    return
-                }
-                
-                // TODO: Quit and show detail
-                
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
                 self.presented.wrappedValue = false
-            }}
-            
-        })
+                // TODO: Show detail or refresh
+            })
+            .store(in: &cancellables)
     }
 }
 

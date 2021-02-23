@@ -38,4 +38,12 @@ extension Publisher {
                 receiveValue: receiveValue
             )
     }
+    
+    /// Transform `Output` to optional.
+    func nullable() -> AnyPublisher<Output?, Failure> {
+        return self
+            .map { Optional($0) }
+            .eraseToAnyPublisher()
+    }
+
 }

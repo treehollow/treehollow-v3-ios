@@ -162,6 +162,7 @@
 		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
 		0E927E2325DF975E0042F2EC /* View+customAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E927E2225DF975E0042F2EC /* View+customAlert.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
+		0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4225E5392700904296 /* TimerPublisher.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
@@ -325,6 +326,7 @@
 		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
 		0E927E2225DF975E0042F2EC /* View+customAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+customAlert.swift"; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
+		0EAA1B4225E5392700904296 /* TimerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPublisher.swift; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
@@ -852,6 +854,7 @@
 				0E906CF925DCEADD0034053C /* ImageCompressor.swift */,
 				0E906CFA25DCEADD0034053C /* ImageSaver.swift */,
 				00B014EC25E1205A004E416E /* PostCache.swift */,
+				0EAA1B4225E5392700904296 /* TimerPublisher.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
+				0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
 				0E906D0A25DCEADD0034053C /* LogoutRequest.swift in Sources */,

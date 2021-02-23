@@ -45,7 +45,6 @@ class Timeline: ObservableObject, AppModelEnvironment {
                     switch completion {
                     case .finished:
                         // Fetch images after loading all the posts.
-                        handler?()
                         self.fetchImages()
                         self.fetchCitedPosts()
                     case .failure(let error):
@@ -59,6 +58,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
                         return
                     }
                     withAnimation {
+                        handler?()
                         self.integratePosts(postWrappers)
                     }
                 }
@@ -107,8 +107,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
             return $0.post
         }
         let requests: [FetchImageRequest] = postsWithNoImages.compactMap {
-            guard let imageURL = $0.hollowImage?.imageURL,
-                  $0.hollowImage?.image == nil else { return nil }
+            let imageURL = $0.hollowImage!.imageURL
             let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]!.imgBaseUrls, urlString: imageURL)
             return FetchImageRequest(configuration: configuration)
         }
@@ -122,7 +121,6 @@ class Timeline: ObservableObject, AppModelEnvironment {
                     }
                 },
                 receiveValue: { index, image in
-                    print("index, \(index); postId: \(postsWithNoImages[index].postId)")
                     if let image = image {
                         self.assignImage(image, to: postsWithNoImages[index].postId)
                     } else {
@@ -147,7 +145,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
         let hollowConfig = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let requests: [PostDetailRequest] = citedPostId.map {
-            let configuration = PostDetailRequestConfiguration(apiRoot: hollowConfig.apiRootUrls, imageBaseURL: hollowConfig.imgBaseUrls, token: token, postId: $0, includeComments: false, includeCitedPost: false, includeImage: false)
+            let configuration = PostDetailRequestConfiguration(apiRoot: hollowConfig.apiRootUrls, token: token, postId: $0, includeComments: false)
             return PostDetailRequest(configuration: configuration)
         }
         PostDetailRequest.publisher(for: requests)?
@@ -171,8 +169,9 @@ class Timeline: ObservableObject, AppModelEnvironment {
         self.posts[index].citedPost = citedPost
     }
         
-    
+    // MARK: - Handle vote action
     func vote(postId: Int, for option: String) {
+        // FIXME: Keep the version of vote in sync with detail view when the request is processing!
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postId))
@@ -180,11 +179,10 @@ class Timeline: ObservableObject, AppModelEnvironment {
         request.publisher
             .sinkOnMainThread(receiveError: { error in
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
-            }, receiveValue: { result in
-                if let vote = result.vote,
-                   let index = self.posts.firstIndex(where: { $0.post.postId == postId }) {
+            }, receiveValue: { vote in
+                if let index = self.posts.firstIndex(where: { $0.post.postId == postId }) {
                     withAnimation {
-                        self.posts[index].post.vote = vote.toVoteData()
+                        self.posts[index].post.vote = vote
                     }
                 }
             })

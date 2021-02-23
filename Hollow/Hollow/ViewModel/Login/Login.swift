@@ -38,6 +38,8 @@ class Login: ObservableObject, AppModelEnvironment {
     
     private var fullEmail: String { email + "@" + emailSuffix }
     
+    private var cancellables = Set<AnyCancellable>()
+    
     func checkEmail() {
         guard let config = Defaults[.hollowConfig] else { return }
         guard email != "" else {
@@ -61,24 +63,20 @@ class Login: ObservableObject, AppModelEnvironment {
                 apiRoot: config.apiRootUrls)
         )
         
-        request.performRequest(completion: { resultData, error in
-            withAnimation {
-                self.isLoading = false
-            }
-            
-            if let error = error {
-                self.handleError(error: error)
-                return
-            }
-            
-            withAnimation {
-                self.emailCheckType = resultData?.result
-                
-                if self.emailCheckType == .reCAPTCHANeeded {
-                    self.showsRecaptcha = true
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                withAnimation { self.isLoading = false }
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { resultData in
+                withAnimation {
+                    self.isLoading = false
+                    self.emailCheckType = resultData.result
+                    if self.emailCheckType == .reCAPTCHANeeded {
+                        self.showsRecaptcha = true
+                    }
                 }
-            }
-        })
+            })
+            .store(in: &cancellables)
     }
     
     func register() {
@@ -107,21 +105,17 @@ class Login: ObservableObject, AppModelEnvironment {
                 apiRoot: config.apiRootUrls)
         )
         
-        request.performRequest(completion: { result, error in
-            withAnimation {
-                self.isLoading = false
-            }
-
-            if let error = error {
-                self.handleError(error: error)
-                return
-            }
-            if let result = result {
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                withAnimation { self.isLoading = false }
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
+                withAnimation { self.isLoading = false }
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
                 self.appModelState.shouldShowMainView = true
-            }
-        })
+            })
+            .store(in: &cancellables)
     }
     
     func login() {
@@ -145,22 +139,17 @@ class Login: ObservableObject, AppModelEnvironment {
                 apiRoot: config.apiRootUrls)
         )
         
-        request.performRequest(completion: { result, error in
-            withAnimation {
-                self.isLoading = false
-            }
-
-            if let error = error {
-                self.handleError(error: error)
-                return
-            }
-            
-            if let result = result {
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                withAnimation { self.isLoading = false }
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
+                withAnimation { self.isLoading = false }
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
                 self.appModelState.shouldShowMainView = true
-            }
-        })
+            })
+            .store(in: &cancellables)
     }
     
     /// Restore the view model.
@@ -173,18 +162,6 @@ class Login: ObservableObject, AppModelEnvironment {
             self.originalPassword = ""
             self.confirmedPassword = ""
         }
-    }
-    
-    private func handleError(error: DefaultRequestError) {
-        debugPrint(error.description)
-        // TODO: Handle backend error after implementation
-        switch error {
-        case .decodeFailed:
-            self.errorMessage = (title: String.internalErrorLocalized.capitalized, message: error.description)
-        default:
-            self.errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
-        }
-        
     }
 }
 

@@ -43,11 +43,7 @@ struct RandomListRequest: DefaultRequest {
                     citedPost: nil
                 )
             }
-            
-            // return no citedPost and image here
-            completion(postWrappers,nil)
-            // no need for citedPost
-            
+
             return postWrappers
         }
         

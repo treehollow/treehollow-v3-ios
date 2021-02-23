@@ -34,11 +34,12 @@ extension AppModelEnvironment {
         }
     }
     
+    /// Error handler for default requests.
     func defaultErrorHandler(errorMessage: inout (title: String, message: String)?, error: DefaultRequestError) {
         if handleTokenExpireError(error) { return }
+        if error.loadingCompleted() { return }
         errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
     }
-
 }
 
 /// State definition reflecting the view model.

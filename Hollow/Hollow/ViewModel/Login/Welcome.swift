@@ -17,6 +17,8 @@ class Welcome: ObservableObject {
     @Published var isLoadingConfig = false
     @Published var errorMessage: (title: String, message: String)? = nil
     
+    var cancellables = Set<AnyCancellable>()
+    
     func requestConfig(hollowType: HollowType, customConfigURL: String? = nil) {
         
         // Validate the parameters
@@ -41,38 +43,25 @@ class Welcome: ObservableObject {
         
         let request = GetConfigRequest(configuration: GetConfigRequestConfiguration(hollowType: hollowType, customAPIRoot: customConfigURL)!)
         
-        request.performRequest { result, error in
-            DispatchQueue.main.async {
+        request.publisher
+            .sinkOnMainThread(receiveCompletion: { completion in
                 self.isLoadingConfig = false
-            }
-            if let error = error {
-                debugPrint("Received error on loading config: \(error.description)")
-                DispatchQueue.main.async {
-                    switch error {
-                    case .serverError, .other:
-                        self.errorMessage = (String.errorLocalized.capitalized, error.description)
-                    default:
-                        if hollowType == .other {
-                            self.errorMessage = (String.errorLocalized.capitalized, error.description)
-                        } else {
-                            self.errorMessage = (String.internalErrorLocalized.capitalized, error.description)
-                        }
-                    }
+                switch completion {
+                case .failure(let error):
+                    self.errorMessage = (String.errorLocalized.capitalized, error.description)
+                case .finished: break
                 }
-                return
-            }
-            
-            // Save to Defaults
-            Defaults[.hollowConfig] = result!
-            if hollowType == .other {
-                Defaults[.customConfigURL] = customConfigURL
-            }
-            DispatchQueue.main.async {
+            }, receiveValue: { result in
+                self.isLoadingConfig = false
+                Defaults[.hollowConfig] = result
+                if hollowType == .other {
+                    Defaults[.customConfigURL] = customConfigURL
+                }
                 withAnimation {
                     self.hollowSelection = hollowType.rawValue
                 }
-            }
-        }
+            })
+            .store(in: &cancellables)
         
     }
 }
