@@ -77,7 +77,6 @@ struct PostDetailRequest: DefaultRequest {
                 let postCache = PostCache()
                 // cache without image, comment and cited post
                 postCache.updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
-                // force unwrap postWrapper
                 postCache.updatePost(postId: configuration.postId, postdata: postWrapper.post)
             }
             
