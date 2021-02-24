@@ -60,7 +60,7 @@ struct Test {
             sendPost.performTestRequest()
         }
         if options.contains(.getPostList) {
-            let getPostList = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: testAPIRoots, token: testAccessToken, page: 1, imageBaseURL: testImgBaseURL))
+            let getPostList = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: testAPIRoots, token: testAccessToken, page: 1))
             getPostList.performTestRequest()
         }
     }

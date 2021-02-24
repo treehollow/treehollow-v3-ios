@@ -48,11 +48,18 @@ struct HollowDetailView: View {
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        HollowContentView(postDataWrapper: store.postDataWrapper, compact: false, voteHandler: store.vote)
+                        HollowContentView(
+                            postDataWrapper: store.postDataWrapper,
+                            options: [.displayVote, .displayImage, .displayCitedPost],
+                            voteHandler: store.vote
+                        )
                             .fixedSize(horizontal: false, vertical: true)
                         CommentView(postData: $store.postDataWrapper.post, maxImageHeight: viewSize.height * 0.6)
                             // Get the frame of the comment view.
                             .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
+                        if store.isLoading {
+                            LoadingLabel().leading()
+                        }
                     }
                     .padding(.horizontal)
                     .background(Color.hollowDetailBackground)

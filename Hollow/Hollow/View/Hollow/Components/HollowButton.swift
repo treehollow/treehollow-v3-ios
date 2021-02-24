@@ -38,8 +38,8 @@ struct HollowButton: View {
                 Image(systemName: systemImageName)
             }
             .font(.system(size: body16, weight: .semibold, design: .rounded))
+            .padding(5)
         }
-        .padding(5)
     }
 }
 

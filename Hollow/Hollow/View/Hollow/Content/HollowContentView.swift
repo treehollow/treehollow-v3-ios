@@ -12,24 +12,25 @@ struct HollowContentView: View {
     @State private var presentedIndex: Int?
     @State private var detailStore: HollowDetailStore?
     var postDataWrapper: PostDataWrapper
-    var compact: Bool
+    var options: DisplayOptions
     var voteHandler: (String) -> Void
     // We get this value from the parent.
     var maxImageHeight: CGFloat? = nil
+    var lineLimit: Int = 12
     
     private var hasVote: Bool { postDataWrapper.post.vote != nil }
     private var hasImage: Bool { postDataWrapper.post.hollowImage != nil }
 
     var body: some View {
-        if hasImage {
+        if hasImage && options.contains(.displayImage) {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage!, description: postDataWrapper.post.text)
                 .cornerRadius(4)
                 .frame(maxHeight: maxImageHeight)
                 .fixedSize(horizontal: false, vertical: true)
         }
         
-        if let citedPid = postDataWrapper.citedPostID {
-            if let citedPost = postDataWrapper.citedPost, !compact {
+        if let citedPid = postDataWrapper.citedPostID, options.contains(.displayCitedPost) {
+            if let citedPost = postDataWrapper.citedPost {
                 Button(action: {
                     DispatchQueue.main.async {
                         presentedIndex = 1
@@ -48,14 +49,14 @@ struct HollowContentView: View {
         
         // Enable the context menu for the text if it is in detail view.
         if postDataWrapper.post.text != "" {
-            if compact {
+            if options.contains(.compactText) {
                 textView()
             } else {
                 textView()
                     // Apply a transparent background to avoid
                     // offset when presenting context menu
                     .background(Color.clear)
-                    .contextMenu(compact ? nil : ContextMenu(menuItems: {
+                    .contextMenu(ContextMenu(menuItems: {
                         Button("Copy full text", action: {
                             UIPasteboard.general.string = postDataWrapper.post.text
                         })
@@ -65,12 +66,34 @@ struct HollowContentView: View {
         }
         
         if hasVote {
-            HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler)
+            HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler, allowVote: !options.contains(.disableVote))
         }
 
     }
     
     private func textView() -> some View {
-        HollowTextView(text: postDataWrapper.post.text, compactLineLimit: compact ? 6 : nil)
+        var text: String = postDataWrapper.post.text
+        if options.contains(.addTextForImage) && postDataWrapper.post.hollowImage != nil {
+            text += "[" + "Image" + "] "
+        }
+        if postDataWrapper.post.text == "" &&
+            postDataWrapper.post.hollowImage != nil &&
+            options.contains(.replaceForImageOnly) {
+            text = "[" + "Image" + "]"
+        }
+        return HollowTextView(text: text, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+    }
+}
+
+extension HollowContentView {
+    struct DisplayOptions: OptionSet {
+        let rawValue: Int
+        static let displayVote = DisplayOptions(rawValue: 1 << 1)
+        static let displayImage = DisplayOptions(rawValue: 1 << 2)
+        static let displayCitedPost = DisplayOptions(rawValue: 1 << 3)
+        static let compactText = DisplayOptions(rawValue: 1 << 4)
+        static let replaceForImageOnly = DisplayOptions(rawValue: 1 << 5)
+        static let addTextForImage = DisplayOptions(rawValue: 1 << 6)
+        static let disableVote = DisplayOptions(rawValue: 1 << 7)
     }
 }

@@ -14,7 +14,6 @@ struct PostListRequestConfiguration {
     var apiRoot: [String]
     var token: String
     var page: Int
-    var imageBaseURL: [String]
 }
 
 /// Result for PostListRequest
@@ -66,36 +65,6 @@ struct PostListRequest: DefaultRequest {
                 
                 return PostDataWrapper(post: post.toPostData(comments: commentData))
             }
-//            
-//            // return no citedPost and image here
-//            completion(postWrappers,nil)
-            
-//            // process citedPost
-//
-//            for index in postWrappers.indices {
-//                if let citedPid = postWrappers[index].post.text.findCitedPostID(),
-//                   citedPid != postWrappers[index].post.postId {
-//                    let citedPostRequest =
-//                        PostDetailRequest(
-//                            configuration:
-//                                PostDetailRequestConfiguration(
-//                                    apiRoot: configuration.apiRoot,
-//                                    imageBaseURL: configuration.imageBaseURL,
-//                                    token: configuration.token,
-//                                    postId: citedPid,
-//                                    includeComments: false,
-//                                    includeCitedPost: false,
-//                                    includeImage: false
-//                                )
-//                        )
-//                    citedPostRequest.performRequest { (postData, error) in
-//                        if let postData = postData {
-//                            postWrappers[index].citedPost = postData.post
-//                            completion(postWrappers, nil)
-//                        }
-//                    }
-//                }
-//            }
 
             return postWrappers
         }

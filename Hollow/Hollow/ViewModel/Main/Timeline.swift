@@ -16,7 +16,6 @@ class Timeline: ObservableObject, AppModelEnvironment {
     var noMorePosts = false
     @Published var posts: [PostDataWrapper]
     @Published var isLoading = false
-    @Published var loadFinished = false
     @Published var errorMessage: (title: String, message: String)?
     
     @Published var appModelState = AppModelState()
@@ -25,16 +24,15 @@ class Timeline: ObservableObject, AppModelEnvironment {
     
     init() {
         self.posts = []
-        self.page = 1
         requestPosts(at: 1)
     }
     
     // MARK: - Load Posts
-    private func requestPosts(at page: Int, handler: (() -> Void)? = nil) {
+    private func requestPosts(at page: Int, completion: (() -> Void)? = nil) {
         guard !self.noMorePosts else { return }
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
-        let request = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: config.apiRootUrls, token: token, page: page, imageBaseURL: config.imgBaseUrls))
+        let request = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: config.apiRootUrls, token: token, page: page))
         withAnimation {
             isLoading = true
         }
@@ -42,6 +40,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
         request.publisher
             .sinkOnMainThread(
                 receiveCompletion: { completion in
+                    withAnimation { self.isLoading = false }
                     switch completion {
                     case .finished:
                         // Fetch images after loading all the posts.
@@ -57,8 +56,8 @@ class Timeline: ObservableObject, AppModelEnvironment {
                         self.page = 1
                         return
                     }
+                    completion?()
                     withAnimation {
-                        handler?()
                         self.integratePosts(postWrappers)
                     }
                 }
@@ -74,11 +73,10 @@ class Timeline: ObservableObject, AppModelEnvironment {
     
     func refresh(finshHandler: @escaping () -> Void) {
         page = 1
-        noMorePosts = false
-        requestPosts(at: 1, handler: {
-            self.posts = []
-        })
-        finshHandler()
+        withAnimation {
+            noMorePosts = false
+        }
+        requestPosts(at: 1, completion: finshHandler)
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {
@@ -113,20 +111,13 @@ class Timeline: ObservableObject, AppModelEnvironment {
         }
         
         FetchImageRequest.publisher(for: requests, retries: 3)?
-            .sinkOnMainThread(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .finished: break
-                    case .failure(let error): print(error)
-                    }
-                },
-                receiveValue: { index, image in
-                    if let image = image {
-                        self.assignImage(image, to: postsWithNoImages[index].postId)
-                    } else {
-                        // Fail to load the single image
-                    }
-                })
+            .sinkOnMainThread(receiveValue: { index, output in
+                switch output {
+                case .failure: break // handle error
+                case .success(let image):
+                    self.assignImage(image, to: postsWithNoImages[index].postId)
+                }
+            })
             .store(in: &cancellables)
     }
     
@@ -149,16 +140,14 @@ class Timeline: ObservableObject, AppModelEnvironment {
             return PostDetailRequest(configuration: configuration)
         }
         PostDetailRequest.publisher(for: requests)?
-            .sinkOnMainThread(receiveCompletion: { _ in
-                // TODO
-            }, receiveValue: { index, postData in
-                if let postData = postData {
+            .sinkOnMainThread(receiveValue: { index, output in
+                switch output {
+                case .failure: break
+                case .success(let postData):
                     self.assignCitedPost(
                         postData.post,
                         to: postsWrapperWithCitation[index].post.postId
                     )
-                } else {
-                    // Error
                 }
             })
             .store(in: &cancellables)
