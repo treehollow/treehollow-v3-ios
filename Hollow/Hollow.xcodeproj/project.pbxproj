@@ -163,6 +163,8 @@
 		0E927E2325DF975E0042F2EC /* View+customAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E927E2225DF975E0042F2EC /* View+customAlert.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
 		0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4225E5392700904296 /* TimerPublisher.swift */; };
+		0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4625E6422E00904296 /* Request+publisher.swift */; };
+		0EAA1B4B25E6562B00904296 /* View+flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4A25E6562B00904296 /* View+flash.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
@@ -327,6 +329,8 @@
 		0E927E2225DF975E0042F2EC /* View+customAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+customAlert.swift"; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
 		0EAA1B4225E5392700904296 /* TimerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPublisher.swift; sourceTree = "<group>"; };
+		0EAA1B4625E6422E00904296 /* Request+publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+publisher.swift"; sourceTree = "<group>"; };
+		0EAA1B4A25E6562B00904296 /* View+flash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+flash.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 				0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */,
 				0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */,
 				0E927E2225DF975E0042F2EC /* View+customAlert.swift */,
+				0EAA1B4A25E6562B00904296 /* View+flash.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -728,6 +733,7 @@
 				0E906CDD25DCEADC0034053C /* RequestError.swift */,
 				0E906CC525DCEADC0034053C /* DefaultRequest.swift */,
 				0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */,
+				0EAA1B4625E6422E00904296 /* Request+publisher.swift */,
 				0E906CC625DCEADC0034053C /* Config */,
 				0E906CCA25DCEADC0034053C /* Security */,
 				0E906CBA25DCEADC0034053C /* Contents */,
@@ -990,6 +996,7 @@
 				0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */,
 				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
 				0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */,
+				0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */,
 				0E906D1325DCEADD0034053C /* ReportCommentRequest.swift in Sources */,
 				0E906D1625DCEADD0034053C /* SendPostRequest.swift in Sources */,
 				0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */,
@@ -1044,6 +1051,7 @@
 				0E415B4725CD772200351672 /* Blur.swift in Sources */,
 				0E927E2325DF975E0042F2EC /* View+customAlert.swift in Sources */,
 				0E906D2725DCEADD0034053C /* String+findCitedPostID.swift in Sources */,
+				0EAA1B4B25E6562B00904296 /* View+flash.swift in Sources */,
 				0E906D1525DCEADD0034053C /* Request.swift in Sources */,
 				0E906D0525DCEADD0034053C /* DefaultRequest.swift in Sources */,
 				0E906D1225DCEADD0034053C /* ReportPostRequest.swift in Sources */,

@@ -16,7 +16,14 @@ struct HollowWanderCardView: View {
         VStack {
             HollowHeaderView(postData: postData, compact: true)
                 .padding(.bottom, body5)
-            HollowTextView(text: postData.text, compactLineLimit: 20)
+            VStack {
+                HollowContentView(
+                    postDataWrapper: .init(post: postData, citedPost: nil),
+                    options: [.displayVote, .disableVote, .displayImage, .replaceForImageOnly, .compactText],
+                    voteHandler: { _ in },
+                    lineLimit: 20
+                )
+            }
             // TODO: Vote and cite
             HStack {
                 HollowStarButton(attention: postData.attention, likeNumber: postData.likeNumber, starHandler: {_ in})
@@ -35,11 +42,3 @@ struct HollowWanderCardView: View {
         .cornerRadius(20)
     }
 }
-
-#if DEBUG
-struct HollowWanderCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowWanderCardView(postData: .constant(testPostData)).frame(width: 200).padding().background(Color.background)
-    }
-}
-#endif

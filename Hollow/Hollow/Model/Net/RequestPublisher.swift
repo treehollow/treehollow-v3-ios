@@ -7,7 +7,6 @@
 //
 
 import Combine
-import SwiftUI
 
 struct RequestPublisher<R>: Publisher where R: Request {
     
@@ -41,8 +40,9 @@ fileprivate class RequestSubsription<S: Subscriber, R: Request>: Subscription wh
                 if error.loadingCompleted() {
                     // Send finish message
                     subscriber.receive(completion: .finished)
+                } else {
+                    subscriber.receive(completion: .failure(error))
                 }
-                subscriber.receive(completion: .failure(error))
             }
         })
     }

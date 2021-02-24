@@ -10,7 +10,6 @@ import WaterfallGrid
 
 struct TimelineView: View {
     @Binding var isSearching: Bool
-    @Binding var showCreatePost: Bool
     @Binding var showReload: Bool
     @Binding var shouldReload: Bool
 
@@ -40,7 +39,7 @@ struct TimelineView: View {
             offset: $offset,
             atBottom: $scrolledToBottom,
             didScrollToBottom: viewModel.loadMorePosts,
-//            didScroll: { direction in withAnimation { showReload = direction == .up }},
+            didScroll: { direction in withAnimation { showReload = direction == .up }},
             didEndScroll: { searchBarTrackingOffset = offset },
             refresh: viewModel.refresh,
             content: { proxy in
@@ -92,7 +91,7 @@ struct TimelineView: View {
                         
                         let nonLazyPosts = viewModel.posts.prefix(nonLazyPostsCount)
                         
-                        ForEach(nonLazyPosts.indices, id: \.id) { index in
+                        ForEach(Array(nonLazyPosts.enumerated()), id: \.element.id) { index, element in
                             cardView(at: index)
                         }
                     }
@@ -102,8 +101,8 @@ struct TimelineView: View {
 
                         let lazyPosts = viewModel.posts.suffix(viewModel.posts.count - nonLazyPostsCount)
                         
-                        ForEach(lazyPosts.indices, id: \.id) { index in
-                            cardView(at: index)
+                        ForEach(Array(lazyPosts.enumerated()), id: \.element.id) { index, element in
+                            cardView(at: index + nonLazyPostsCount)
                         }
                         
                         if viewModel.posts.count != 0 && !viewModel.noMorePosts {
@@ -153,7 +152,6 @@ struct TimelineView: View {
             // Present post detail
             .sheet(item: $detailPresentedIndex, content: { index in Group {
                 if let store = detailStore {
-                    // FIXME: Data binding
                     HollowDetailView(store: store, presentedIndex: $detailPresentedIndex)
                 }
             }})
@@ -182,7 +180,6 @@ struct TimelineView: View {
             }
         }
         .disabled(viewModel.isLoading)
-//        .animation(.default)
         // Id for ScrollViewProxy to use
         .id(index)
     }

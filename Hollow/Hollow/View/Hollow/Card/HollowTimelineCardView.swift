@@ -15,7 +15,11 @@ struct HollowTimelineCardView: View {
         VStack(spacing: 15) {
             // TODO: Star actions
             HollowHeaderView(postData: postDataWrapper.post, compact: false)
-            HollowContentView(postDataWrapper: postDataWrapper, compact: true, voteHandler: viewModel.voteHandler)
+            HollowContentView(
+                postDataWrapper: postDataWrapper,
+                options: [.compactText, .displayCitedPost, .displayImage, .displayVote],
+                voteHandler: viewModel.voteHandler
+            )
             // Check if comments exist to avoid additional spacing
             if postDataWrapper.post.comments.count > 0 {
                 CommentView(postData: $postDataWrapper.post)

@@ -18,14 +18,14 @@ extension Publisher {
     }
     
     /// Wrap `.sink` on main thread, while ignoring `Subscribers.Completion.finished`.
-    func sinkOnMainThread(receiveError: @escaping ((Self.Failure) -> Void), receiveValue: @escaping ((Self.Output) -> Void)) -> AnyCancellable {
+    func sinkOnMainThread(receiveError: @escaping ((Self.Failure) -> Void), receiveValue: @escaping (Self.Output) -> Void) -> AnyCancellable {
         return self
             .receive(on: DispatchQueue.main)
             .sink(receiveError: receiveError, receiveValue: receiveValue)
     }
     
     /// `.sink` ignoring `Subscribers.Completion.finished`.
-    func sink(receiveError: @escaping ((Self.Failure) -> Void), receiveValue: @escaping ((Self.Output) -> Void)) -> AnyCancellable {
+    func sink(receiveError: @escaping ((Self.Failure) -> Void), receiveValue: @escaping (Self.Output) -> Void) -> AnyCancellable {
         return self
             .sink(
                 receiveCompletion: { completion in
@@ -46,4 +46,22 @@ extension Publisher {
             .eraseToAnyPublisher()
     }
 
+}
+
+extension Publisher where Failure == Never {
+    
+    func sinkOnMainThread(receiveValue: @escaping (Self.Output) -> Void) -> AnyCancellable {
+        return self
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: receiveValue)
+    }
+    
+    func sinkOnMainThread(completion: @escaping () -> Void, receiveValue: @escaping (Self.Output) -> Void) -> AnyCancellable {
+        return self
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { _ in completion() },
+                receiveValue: receiveValue
+            )
+    }
 }

@@ -19,6 +19,8 @@ struct MainView: View {
     @State private var showRefresh = false
     /// Whether the nested `TimelineView` should reload.
     @State private var shouldReloadTimeline = false
+    /// Whether the nested `WanderView` should reload.
+    @State private var shouldReloadWander = false
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
@@ -27,7 +29,9 @@ struct MainView: View {
     
     // Initialize time line view model here to avoid creating repeatedly
     let timelineViewModel = Timeline()
-    
+    // Initialize wander view model here to avoid creating repeatedly
+    let wanderViewModel = Wander()
+
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
@@ -40,11 +44,15 @@ struct MainView: View {
                 // Use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`
                 CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
-                    WanderView()
+                    WanderView(
+                        showCreatePost: $showCreatePost,
+                        showReload: $showRefresh,
+                        shouldReload: $shouldReloadWander,
+                        viewModel: wanderViewModel
+                    )
                         .tag(Page.wander)
                     TimelineView(
                         isSearching: $isSearching,
-                        showCreatePost: $showCreatePost,
                         showReload: $showRefresh,
                         shouldReload: $shouldReloadTimeline,
                         viewModel: timelineViewModel
@@ -64,10 +72,15 @@ struct MainView: View {
                         }
                         if showRefresh {
                             button(
-                                action: { withAnimation { shouldReloadTimeline = true }},
+                                action: { withAnimation {
+                                        switch page {
+                                        case .timeline: shouldReloadTimeline = true
+                                        case .wander: shouldReloadWander = true
+                                        }
+                                }},
                                 systemName: "arrow.clockwise"
                             )
-                                .padding(.top, 5)
+                            .padding(.top, 5)
                         }
                     }
                     .bottom()

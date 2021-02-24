@@ -69,6 +69,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
             .store(in: &cancellables)
         
         loadPostImage()
+        loadImages()
         loadCitedPost()
     }
     
@@ -76,7 +77,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         if let imageURL = postDataWrapper.post.hollowImage?.imageURL,
            postDataWrapper.post.hollowImage?.image == nil {
             let config = Defaults[.hollowConfig]!
-            let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.apiRootUrls, urlString: imageURL))
+            let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.imgBaseUrls, urlString: imageURL))
 
             imageRequest.publisher
                 .retry(3)
@@ -100,12 +101,11 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         let request = PostDetailRequest(configuration: configuration)
         
         request.publisher
-            .receive(on: DispatchQueue.main)
             .map({ $0.post })
-            .sink(receiveError: { error in
+            .sinkOnMainThread(receiveError: { error in
                 
             }, receiveValue: { postData in
-                self.postDataWrapper.citedPost = postData
+                withAnimation { self.postDataWrapper.citedPost = postData }
             })
             .store(in: &cancellables)
     }
@@ -113,11 +113,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     // MARK: - Load Images in Comments
     private func loadImages() {
         let commentsWithNoImages: [CommentData] = postDataWrapper.post.comments
-            .compactMap {
-                guard let _ = $0.image?.imageURL,
-                      $0.image?.image == nil else { return nil }
-                return $0
-            }
+            .filter({ $0.image?.imageURL != nil && $0.image?.image == nil })
         let requests: [FetchImageRequest] = commentsWithNoImages.compactMap {
             let imageURL = $0.image!.imageURL
             let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]!.imgBaseUrls, urlString: imageURL)
@@ -125,16 +121,13 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         }
         
         FetchImageRequest.publisher(for: requests, retries: 3)?
-            .sinkOnMainThread(receiveCompletion: { completion in
-            switch completion {
-            case .finished: break
-            case .failure(let error): print(error)
-            }
-            }, receiveValue: { index, image in
-                if let image = image {
+            .sinkOnMainThread(receiveValue: { index, output in
+                switch output {
+                case .failure:
+                    // TORO: Handle error
+                    break
+                case .success(let image):
                     self.assignImage(image, to: commentsWithNoImages[index].commentId)
-                } else {
-                    // Fail to load the single image
                 }
             })
             .store(in: &cancellables)
@@ -142,7 +135,9 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     
     private func assignImage(_ image: UIImage, to commentId: Int) {
         guard let index = postDataWrapper.post.comments.firstIndex(where: { $0.commentId == commentId }) else { return }
-        self.postDataWrapper.post.comments[index].image?.image = image
+        withAnimation {
+            self.postDataWrapper.post.comments[index].image?.image = image
+        }
     }
     
     // MARK: - Vote
@@ -155,9 +150,9 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
             .retry(2)
             .sinkOnMainThread(receiveError: { error in
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
-            }, receiveValue: { result in
+            }, receiveValue: { result in withAnimation {
                 self.postDataWrapper.post.vote = result
-            })
+            }})
             .store(in: &cancellables)
     }
 }

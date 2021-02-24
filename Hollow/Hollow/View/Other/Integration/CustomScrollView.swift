@@ -60,14 +60,6 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
     let refresh: ((@escaping () -> Void) -> Void)?
-    private var isRefreshing: Bool = false {
-        // FIXME: Fix this when actually use it
-        didSet { if !isRefreshing {
-            DispatchQueue.main.async {
-                self.scrollView?.refreshControl?.endRefreshing()
-            }
-        } }
-    }
     var ready = false
     var scrollView: UIScrollView? = nil
     
@@ -131,7 +123,9 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     @objc
     func refreshAction() {
         refresh? {
-            self.isRefreshing = false
+            DispatchQueue.main.async {
+                self.scrollView?.refreshControl?.endRefreshing()
+            }
         }
     }
     
