@@ -74,12 +74,12 @@ struct HollowContentView: View {
     private func textView() -> some View {
         var text: String = postDataWrapper.post.text
         if options.contains(.addTextForImage) && postDataWrapper.post.hollowImage != nil {
-            text += "[" + "Image" + "] "
+            text += "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "] "
         }
         if postDataWrapper.post.text == "" &&
             postDataWrapper.post.hollowImage != nil &&
             options.contains(.replaceForImageOnly) {
-            text = "[" + "Image" + "]"
+            text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
         }
         return HollowTextView(text: text, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
     }

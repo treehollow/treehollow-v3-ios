@@ -41,7 +41,8 @@ struct HollowCommentInputView: View {
                     buttonFontSize: buttonFontSize
                 )
                 .overlay(Group { if store.text == "" {
-                    Text("Input text" + "...")
+                    let text = NSLocalizedString("COMMENT_INPUT_EDITOR_PLACEHOLDER", comment: "")
+                    Text(text + "...")
                         .foregroundColor(.uiColor(.systemFill))
                 }})
                 .frame(height: editorFontSize * 7)
@@ -114,7 +115,7 @@ extension HollowCommentInputView {
                     .trailing()
                 )
                 .overlay(
-                    Text("Size: \(store.imageSizeInformation ?? "??")")
+                    Text(NSLocalizedString("INPUTVIEW_IMAGE_SIZE_LABEL", comment: "") + ": \(store.imageSizeInformation ?? "??")")
                         .fontWeight(.semibold)
                         .font(.footnote)
                         .padding(8)
@@ -131,7 +132,7 @@ extension HollowCommentInputView {
                 .foregroundColor(.uiColor(.systemFill))
                 .aspectRatio(image.size.width / image.size.height, contentMode: .fit)
                 .overlay(
-                    Text("Compressing" + "...")
+                    Text(NSLocalizedString("INPUTVIEW_IMAGE_COMPRESSING_LABEL", comment: "") + "...")
                         .fontWeight(.semibold)
                         .font(.footnote)
                 )

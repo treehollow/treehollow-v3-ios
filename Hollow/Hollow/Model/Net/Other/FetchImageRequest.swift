@@ -27,7 +27,7 @@ enum FetchImageRequestError: RequestError {
     }
     var description: String {
         switch self {
-        case .invalidURL: return "Invalid image URL"
+        case .invalidURL: return NSLocalizedString("REQUEST_FETCH_IMAGE_ERROR_INVALID_URL", comment: "")
         case .loadingCompleted: return ""
         case .failed(let description): return description
         }

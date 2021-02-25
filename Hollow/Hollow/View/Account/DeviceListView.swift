@@ -36,7 +36,7 @@ struct DeviceListView: View {
             .padding(.bottom)
         }
         .background(Color.background.ignoresSafeArea())
-        .navigationTitle("Devices")
+        .navigationTitle("DEVICELISTVIEW_NAV_TITLE")
         .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))
         .navigationBarItems(trailing: Button(action: deviceListStore.requestDeviceList) {
@@ -65,10 +65,12 @@ extension DeviceListView {
         
         var body: some View {
             VStack(alignment: .leading, spacing: body14) {
-                section(header: "device" + (isCurrentDevice ? " (current)" : ""), content: device.deviceInfo)
+                let deviceLocalized = NSLocalizedString("DEVICELIST_CARD_DEVICE_TITLE", comment: "")
+                let currentLocalized = NSLocalizedString("DEVICELIST_CARD_DEVICE_TITLE_CURRENT", comment: "")
+                section(header: deviceLocalized + (isCurrentDevice ? " " + currentLocalized : ""), content: device.deviceInfo)
                 
                 HStack(alignment: .bottom) {
-                    section(header: "login date", content: String(device.loginDate.description.prefix(10)))
+                    section(header: NSLocalizedString("DEVICELIST_CARD_LOGIN_DATE_TITLE", comment: ""), content: String(device.loginDate.description.prefix(10)))
                     Spacer()
                     
                     // We won't allow the user to terminate the current
@@ -80,9 +82,10 @@ extension DeviceListView {
                             transitionAnimation: .default) {
                             Group {
                                 if isLoggingout {
-                                    Text("Processing" + "...")
+                                    let processingText = NSLocalizedString("DEVICELIST_CARD_BUTTON_PROCESSING", comment: "")
+                                    Text(processingText + "...")
                                 } else {
-                                    Text("Logout")
+                                    Text("DEVICELIST_CARD_BUTTON_LOGOUT")
                                 }
                             }
                             .font(.system(size: buttonFontSize, weight: .bold))
@@ -106,8 +109,12 @@ extension DeviceListView {
             )
             .cornerRadius(15)
             
-            .styledAlert(presented: $alertPresented, title: "Logout", message: "\(device.deviceInfo)", buttons: [
-                .init(text: "Logout", style: .destructive, action: { logoutAction(device.deviceUUID) }),
+            .styledAlert(
+                presented: $alertPresented,
+                title: NSLocalizedString("DEVICE_LIST_LOGOUT_ALERT_TITLE", comment: ""),
+                message: "\(device.deviceInfo)",
+                buttons: [
+                .init(text: NSLocalizedString("DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON", comment: ""), style: .destructive, action: { logoutAction(device.deviceUUID) }),
                 .cancel
             ])
         }

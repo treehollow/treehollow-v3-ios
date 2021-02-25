@@ -11,7 +11,7 @@ import WaterfallGrid
 struct WanderView: View {
     @State private var scrolledToBottom: Bool? = false
     @State private var shouldLoadMorePosts = true
-    @State var detailStore: HollowDetailStore? = nil
+    @State private var detailStore: HollowDetailStore? = nil
     @State private var detailPresentedIndex: Int?
     
     @Binding var showCreatePost: Bool
@@ -27,8 +27,8 @@ struct WanderView: View {
                 // view is presenting
                 guard detailPresentedIndex == nil else { return }
                 // Due to performance issue of WaterfallGrid, we set the
-                // maximum number of posts to 60
-                if viewModel.posts.count > 59 {
+                // maximum number of posts to 60 (at least loading for 2 times)
+                if viewModel.posts.count >= 60 {
                     viewModel.posts.removeAll()
                 }
                 viewModel.loadMorePosts(clearPosts: false)
@@ -52,7 +52,7 @@ struct WanderView: View {
                         .disabled(viewModel.isLoading)
                         .id(index)
                 }
-                .gridStyle(columnsInPortrait: 2, columnsInLandscape: 3, spacing: 10, animation: nil)
+                .gridStyle(columns: 2, spacing: 10, animation: nil)
                 .padding(.horizontal, 15)
                 .background(Color.background)
                 .onChange(of: shouldReload) { _ in

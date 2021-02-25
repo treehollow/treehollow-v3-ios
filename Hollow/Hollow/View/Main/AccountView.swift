@@ -12,52 +12,52 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("account")) {
+                Section(header: Text("ACCOUNTVIEW_ACCOUNT_HEADER")) {
                     NavigationLink(
                         destination: AccountInfoView(),
                         label: {
-                            Label(LocalizedStringKey("Account"), systemImage: "person")
+                            Label("ACCOUNTVIEW_ACCOUNT_CELL", systemImage: "person")
                         })
                     NavigationLink(
                         destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
                         label: {
-                            Label("Settings", systemImage: "gear")
+                            Label("ACCOUNTVIEW_SETTINGS_CELL", systemImage: "gear")
                         })
                 }
-                Section(header: Text("info")) {
+                Section(header: Text("ACCOUNTVIEW_INFO_HEADER")) {
                     NavigationLink(
                         destination: Text("Regulation"),
                         label: {
-                            Label(LocalizedStringKey("Rules"), systemImage: "doc.plaintext")
+                            Label(LocalizedStringKey("ACCOUNTVIEW_RULES_CELL"), systemImage: "doc.plaintext")
                         })
                     NavigationLink(
                         destination: Text("Regulation"),
                         label: {
-                            Label(LocalizedStringKey("Privacy"), systemImage: "checkmark.shield")
+                            Label(LocalizedStringKey("ACCOUNTVIEW_PRIVACY_CELL"), systemImage: "checkmark.shield")
                         })
                     NavigationLink(
                         destination: Text("About"),
                         label: {
-                            Label(LocalizedStringKey("About"), systemImage: "info.circle")
+                            Label(LocalizedStringKey("ACCOUNTVIEW_ABOUT_CELL"), systemImage: "info.circle")
                         })
 
                 }
                 
                 Section {
                     Button(action: {}) {
-                        Label("Contact Us", systemImage: "envelope")
+                        Label("ACCOUNTVIEW_CONTACT_US_CELL", systemImage: "envelope")
                     }
 
                     // TODO: shows only when available
                     Button(action: {}) {
-                        Label("Update", systemImage: "arrow.up")
+                        Label("ACCOUNTVIEW_UPDATE_CELL", systemImage: "arrow.up")
                     }
 
                 }
                 
                 Section {
                     Button(action: {}) {
-                        Text("Log Out")
+                        Text("ACCOUNTVIEW_LOGOUT_BUTTON")
                             .foregroundColor(.red)
                             .horizontalCenter()
                     }
@@ -65,7 +65,7 @@ struct AccountView: View {
 
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle(LocalizedStringKey("Account"))
+            .navigationTitle("ACCOUNTVIEW_NAV_TITLE")
             .navigationBarItems(leading: Button(action: { presented = false }) {
                 Image(systemName: "xmark")
                     .foregroundColor(.hollowContentText)

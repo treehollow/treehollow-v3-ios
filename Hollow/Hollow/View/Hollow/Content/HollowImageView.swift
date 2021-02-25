@@ -32,18 +32,15 @@ struct HollowImageView: View {
                                     savePhotoError = error?.localizedDescription
                                 }).saveImage(image)
                             }) {
-                                Label(LocalizedStringKey("Save to Photos"), systemImage: "square.and.arrow.down")
+                                Label("IMAGEVIEW_SAVE_PHOTO_BUTTON", systemImage: "square.and.arrow.down")
                             }
                         }))
                         .styledAlert(
                             presented: $showSavePhotoAlert,
-                            title: savePhotoError?.description ?? NSLocalizedString("Successfully saved to Photos.", comment: ""),
+                            title: savePhotoError?.description ?? NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: ""),
                             message: nil,
                             buttons: [.ok]
                         )
-                        .alert(isPresented: $showSavePhotoAlert, content: {
-                            return Alert(title: Text(savePhotoError?.description ?? NSLocalizedString("Successfully saved to Photos.", comment: "")))
-                        })
                         .onTapGesture {
                             showImageViewer = true
                         }

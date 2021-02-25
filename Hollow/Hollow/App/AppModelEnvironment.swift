@@ -38,7 +38,7 @@ extension AppModelEnvironment {
     func defaultErrorHandler(errorMessage: inout (title: String, message: String)?, error: DefaultRequestError) {
         if handleTokenExpireError(error) { return }
         if error.loadingCompleted() { return }
-        errorMessage = (title: String.errorLocalized.capitalized, message: error.description)
+        errorMessage = (title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""), message: error.description)
     }
 }
 

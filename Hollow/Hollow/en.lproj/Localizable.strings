@@ -1,0 +1,202 @@
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_ACCOUNT_HEADER" = "Account";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_LOGOUT_BUTTON" = "Log Out";
+
+/* No comment provided by engineer. */
+"COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
+
+/* No comment provided by engineer. */
+"DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON" = "Confirm";
+
+/* No comment provided by engineer. */
+"DEVICE_LIST_LOGOUT_ALERT_TITLE" = "Log out";
+
+/* No comment provided by engineer. */
+"DEVICELIST_CARD_BUTTON_LOGOUT" = "Logout";
+
+/* No comment provided by engineer. */
+"DEVICELIST_CARD_BUTTON_PROCESSING" = "Processing";
+
+/* No comment provided by engineer. */
+"DEVICELIST_CARD_DEVICE_TITLE" = "Device";
+
+/* No comment provided by engineer. */
+"DEVICELIST_CARD_DEVICE_TITLE_CURRENT" = " (Current)";
+
+/* No comment provided by engineer. */
+"DEVICELIST_CARD_LOGIN_DATE_TITLE" = "Login Date";
+
+/* No comment provided by engineer. */
+"ERROR_ALERT_OK_BUTTON" = "OK";
+
+/* No comment provided by engineer. */
+"GLOBAL_ERROR_MSG_TITLE" = "Error";
+
+/* No comment provided by engineer. */
+"GLOBAL_TIMELINE" = "Timeline";
+
+/* No comment provided by engineer. */
+"GLOBAL_WANDER" = "Wander";
+
+/* No comment provided by engineer. */
+"HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX" = "Comments";
+
+/* No comment provided by engineer. */
+"IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "Successfully saved to Photos";
+
+/* No comment provided by engineer. */
+"IMAGEVIEW_SAVE_PHOTO_BUTTON" = "Save to Photos";
+
+/* No comment provided by engineer. */
+"IMAGEVIEWER_ACTION_SHEET_TITLE" = "Image";
+
+/* No comment provided by engineer. */
+"IMAGEVIEWER_DONE_BUTTON" = "Done";
+
+/* ... */
+"INPUTVIEW_IMAGE_COMPRESSING_LABEL" = "Compressing";
+
+/* : \(inputStore.imageSizeInformation ?? "??")
+   : \(store.imageSizeInformation ?? "??") */
+"INPUTVIEW_IMAGE_SIZE_LABEL" = "Size";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_SELECT_TAG_MENU_LABEL" = "Select a tag";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_SEND_BUTTON_SEND_POST" = "Post";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_SEND_BUTTON_SENDING" = "Sending";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_TEXT_EDITOR_DONE_BUTTON" = "Done";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_VOTE_OPTION_PLACEHOLDER_PREFIX" = "Option";
+
+/* No comment provided by engineer. */
+"LOADING_LABEL_TEXT" = "Loading";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_BUTTON_CONTINUE" = "Continue";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_BUTTON_LOADING" = "Loading";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_BUTTON_LOGIN" = "Login";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_BUTTON_REGISTER" = "Register";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_CONFIRMED_PASSWORD_TEXTFIELD_TITLE" = "Confirmed Password";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER" = "Email address";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_EMAIL_VERIF_TEXTFIELD_FOOTER" = "Please check your inbox for the code.";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_EMAIL_VERIF_TEXTFIELD_TITLE" = "Verification Code";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_FORGET_PASSWORD_BUTTON" = "Forget password";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_NO_CONTACT_EMAIL_ERROR" = "No contact email found in the configuration!";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER" = "Input password";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER" = "The password should contains at least 8 characters without blankspaces.";
+
+/* No comment provided by engineer. */
+"REQUEST_DECODE_FAILED_ERROR_MSG" = "Fail to decode result from the response.";
+
+/* No comment provided by engineer. */
+"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "The URL for the image is invalid.";
+
+/* No comment provided by engineer. */
+"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "The uploaded file is too large and is refused by the server.";
+
+/* No comment provided by engineer. */
+"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "Fail to decode treehollow configuration from the response.";
+
+/* No comment provided by engineer. */
+"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "The format of the configuration is incorrect.";
+
+/* No comment provided by engineer. */
+"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "The treehollow configuration is invalid.";
+
+/* No comment provided by engineer. */
+"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "The URL for the configuration is invalid.";
+
+/* No comment provided by engineer. */
+"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "Received error from the server.";
+
+/* No comment provided by engineer. */
+"REQUEST_NO_SUCH_POST_ERROR_MSG" = "The requested post does not exist.";
+
+/* No comment provided by engineer. */
+"REQUEST_OTHER_ERROR_NO_DESCRIPTION_WITH_CODE_MSG" = "Received error code: ";
+
+/* No comment provided by engineer. */
+"REQUEST_TOKEN_EXPIRED_ERROR_MSG" = "The access token has expired. Please login again.";
+
+/* No comment provided by engineer. */
+"REQUEST_UNKNOWN_ERROR_MSG" = "An unknown message occured.";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_ADVANCED_BUTTON" = "Advanced";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_ADVANCED_OPTION_RANGE_LABEL" = "Range";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL" = "Time Interval";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_SEARCH_BUTTON" = "Search";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_SEARCH_HISTORY_LABEL" = "History";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_TEXTFIELD_PLACEHOLDER" = "Search content or tags";
+
+/* No comment provided by engineer. */
+"TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "Image";
+
+/* No comment provided by engineer. */
+"TIMELINE_CARD_COMMENTS_HAIYOU" = "";
+
+/* No comment provided by engineer. */
+"TIMELINE_CARD_COMMENTS_TIAOPINGLUN" = " more comments";
+
+/* No comment provided by engineer. */
+"TIMELINE_SEARCH_BAR_PLACEHOLDER" = "Search";
+
+/* No comment provided by engineer. */
+"WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_FOOTER" = "Get the URL for the configuration from the treehollow website.";
+
+/* No comment provided by engineer. */
+"WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER" = "Custom Configuration";
+
+/* No comment provided by engineer. */
+"WELCOMEVIEW_CUSTOM_URL_TEXTFIELD_PLACEHOLDER" = "https://example.com/config.txt";
+
+/* No comment provided by engineer. */
+"WELCOMEVIEW_OTHER_BUTTON" = "Other";
+
+/* No comment provided by engineer. */
+"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "Select Hollow";
+
+/* No comment provided by engineer. */
+"WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";
+

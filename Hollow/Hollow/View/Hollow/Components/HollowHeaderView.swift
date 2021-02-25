@@ -53,7 +53,7 @@ struct HollowHeaderView: View {
                     if showContent {
                         let postDescription =
                             postData.text != "" ?
-                            postData.text.removeLineBreak() : "[" + "Image" + "]"
+                            postData.text.removeLineBreak() : "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
                             
                         secondaryText(postDescription)
                     } else {

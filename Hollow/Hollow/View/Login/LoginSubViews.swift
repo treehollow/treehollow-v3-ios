@@ -66,15 +66,15 @@ extension LoginView {
         }
         
         private let passwordRequirements: String =
-            NSLocalizedString("The password should contains at least 8 characters without blank spaces.", comment: "")
+            NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER", comment: "")
         
         var body: some View {
             // Verification code text field
-            MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: String.verificationCodeLocalized.capitalized, footer: NSLocalizedString("Please check your inbox.", comment: ""))
+            MyTextField<EmptyView>(text: $viewModel.emailVerificationCode, title: NSLocalizedString("LOGINVIEW_EMAIL_VERIF_TEXTFIELD_TITLE", comment: ""), footer: NSLocalizedString("LOGINVIEW_EMAIL_VERIF_TEXTFIELD_FOOTER", comment: ""))
                 .keyboardType(.numberPad)
             
             // Password text field
-            MyTextField(text: $viewModel.originalPassword, title: String.passwordLocalized.capitalized, footer: passwordRequirements, isSecureContent: true) {
+            MyTextField(text: $viewModel.originalPassword, title: "LOGINVIEW_PASSWORD_TEXTFIELD_TITLE", footer: passwordRequirements, isSecureContent: true) {
                 Group {
                     if viewModel.originalPassword != "" && !passwordValid {
                         Image(systemName: "xmark")
@@ -89,7 +89,7 @@ extension LoginView {
             
             // Confirmed password text field
             MyTextField(text: $viewModel.confirmedPassword,
-                        title: String.confirmedPassWordLocalized.capitalized,
+                        title: NSLocalizedString("LOGINVIEW_CONFIRMED_PASSWORD_TEXTFIELD_TITLE", comment: ""),
                         isSecureContent: true) {
                 Group {
                     // Original password should be valid first.
@@ -116,8 +116,8 @@ extension LoginView {
 
         var body: some View {
             MyTextField(text: $viewModel.email,
-                        placeHolder: NSLocalizedString("Enter your email", comment: ""),
-                        title: String.emailAddressLocalized.firstLetterUppercased) {
+                        placeHolder: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER", comment: ""),
+                        title: "LOGINVIEW_EMAIL_TEXTFIELD_TITLE") {
                 // Accessory view for selecting email suffix
                 Menu(content: {
                     ForEach(configuration.emailSuffixes.indices, id: \.self) { index in
@@ -151,8 +151,8 @@ extension LoginView {
         var body: some View {
             VStack(alignment: .leading) {
                 MyTextField<EmptyView>(text: $viewModel.loginPassword,
-                                       placeHolder: NSLocalizedString("Enter your password", comment: ""),
-                                       title: String.passwordLocalized.capitalized,
+                                       placeHolder: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER", comment: ""),
+                                       title: "LOGINVIEW_PASSWORD_TEXTFIELD_TITLE",
                                        isSecureContent: true)
                 Button(action: {
                     if let mailString = Defaults[.hollowConfig]?.contactEmail,
@@ -161,12 +161,12 @@ extension LoginView {
                         alertPresented = true
                     } else {
                         viewModel.errorMessage = (
-                            title: String.errorLocalized.capitalized,
-                            message: NSLocalizedString("No contact email found in the treehollow configuration.", comment: "")
+                            title: "GLOBAL_ERROR_MSG_TITLE",
+                            message: NSLocalizedString("LOGINVIEW_NO_CONTACT_EMAIL_ERROR", comment: "")
                         )
                     }
                 }) {
-                    Text("Forget password")
+                    Text("LOGINVIEW_FORGET_PASSWORD_BUTTON")
                         .underline()
                         .font(.system(size: footnote12))
                         .foregroundColor(.secondary)
@@ -175,11 +175,11 @@ extension LoginView {
             
             .styledAlert(
                 presented: $alertPresented,
-                title: "Restore Password",
-                message: "Please send an email using current email address to the contact email to restore your password.",
+                title: "LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE",
+                message: "LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE",
                 buttons: [
-                    .init(text: "Send email", action: { openURL(contactEmailURL) }),
-                    .init(text: "Copy email address", action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
+                    .init(text: "LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON", action: { openURL(contactEmailURL) }),
+                    .init(text: "LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON", action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
                     .cancel
                 ]
             )

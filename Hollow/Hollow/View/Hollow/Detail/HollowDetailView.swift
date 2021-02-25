@@ -80,16 +80,21 @@ extension HollowDetailView {
     private struct CommentView: View {
         @Binding var postData: PostData
         var maxImageHeight: CGFloat?
-        var body: some View {
-            VStack {
-                (Text("\(postData.replyNumber) ") + Text(LocalizedStringKey("Comments")))
-                    .fontWeight(.heavy)
-                    .leading()
-                    .padding(.top)
-                    .padding(.bottom, 5)
-                ForEach(postData.comments.indices, id: \.self) { index in
-                    HollowCommentContentView(commentData: $postData.comments[index], compact: false, maxImageHeight: maxImageHeight)
-                }
+        @ViewBuilder var content: some View {
+            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+                .fontWeight(.heavy)
+                .leading()
+                .padding(.top)
+                .padding(.bottom, 5)
+            ForEach(postData.comments.indices, id: \.self) { index in
+                HollowCommentContentView(commentData: $postData.comments[index], compact: false, maxImageHeight: maxImageHeight)
+            }
+        }
+        @ViewBuilder var body: some View {
+            if postData.replyNumber > 100 {
+                LazyVStack { content }
+            } else {
+                VStack { content }
             }
         }
     }
