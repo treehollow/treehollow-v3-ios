@@ -29,7 +29,7 @@ extension Comment {
             name: self.name,
             permissions: self.permissions,
             postId: self.pid,
-            tags: self.tags ?? [String](),
+            tags: self.tags ?? "",
             text: self.text ?? "",
             image: image
         )

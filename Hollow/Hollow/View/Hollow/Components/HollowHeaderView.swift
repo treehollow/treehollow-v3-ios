@@ -93,10 +93,10 @@ struct HollowHeaderView_Previews: PreviewProvider {
         .init(title: "Yes", voteCount: 123),
         .init(title: "No", voteCount: 24)
     ]), comments: [
-        .init(commentId: 10000, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: [], text: "太抽象了，太批爆了",  image: nil),
-        .init(commentId: 10001, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: [], text: "爷爷大象笑",  image: nil),
-        .init(commentId: 10002, deleted: false, name: "Bob", permissions: [], postId: 10000, tags: [], text: "允", image: nil),
-        .init(commentId: 10003, deleted: false, name: "Carol", permissions: [], postId: 10000, tags: [], text: "讲道理 这可以当作图灵测试",  image: nil)
+        .init(commentId: 10000, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: "", text: "太抽象了，太批爆了",  image: nil),
+        .init(commentId: 10001, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: "", text: "爷爷大象笑",  image: nil),
+        .init(commentId: 10002, deleted: false, name: "Bob", permissions: [], postId: 10000, tags: "", text: "允", image: nil),
+        .init(commentId: 10003, deleted: false, name: "Carol", permissions: [], postId: 10000, tags: "", text: "讲道理 这可以当作图灵测试",  image: nil)
         
     ])
     

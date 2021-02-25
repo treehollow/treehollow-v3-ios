@@ -22,7 +22,7 @@ struct Comment: Codable {
     var permissions: [PostPermissionType]
     /// postID
     var pid: Int
-    var tags: [String]?
+    var tags: String?
     var text: String?
     /// unix timestamp
     var timestamp: Int
