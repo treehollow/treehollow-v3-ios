@@ -138,11 +138,3 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
     }
     
 }
-
-#if DEBUG
-struct ImageViewer_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageViewer(image: UIImage(named: "test.2")!, footnote: testPostData.text, presented: .constant(true))
-    }
-}
-#endif

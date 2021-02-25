@@ -22,12 +22,13 @@ struct Comment: Codable {
     var permissions: [PostPermissionType]
     /// postID
     var pid: Int
-    var tags: String?
+    var tag: String?
     var text: String?
     /// unix timestamp
     var timestamp: Int
     /// comment ID
     var replyTo: Int
+    var isDz: Bool
     // deprecated
     var type: CommentType {
         get {

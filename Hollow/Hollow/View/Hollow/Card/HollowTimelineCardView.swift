@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct HollowTimelineCardView: View {
     @Binding var postDataWrapper: PostDataWrapper
     @ObservedObject var viewModel: HollowTimelineCard
+    
+    private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
+    private var hideComments: Bool {
+        if let tag = postDataWrapper.post.tag {
+            return foldTags.contains(tag)
+        }
+        return false
+    }
     
     var body: some View {
         VStack(spacing: 15) {
@@ -21,7 +30,7 @@ struct HollowTimelineCardView: View {
                 voteHandler: viewModel.voteHandler
             )
             // Check if comments exist to avoid additional spacing
-            if postDataWrapper.post.comments.count > 0 {
+            if postDataWrapper.post.comments.count > 0, !hideComments {
                 CommentView(postData: $postDataWrapper.post)
             }
         }
@@ -67,19 +76,3 @@ struct HollowTimelineCardView: View {
         }
     }
 }
-
-#if DEBUG
-struct HollowTimelineCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView {
-            HollowTimelineCardView(postDataWrapper: .constant(testPostWrappers[1]), viewModel: .init(voteHandler: {string in print(string)}))
-                .padding()
-                .background(Color.background)
-            HollowTimelineCardView(postDataWrapper: .constant(testPostWrappers[1]), viewModel: .init(voteHandler: {string in print(string)}))
-                .padding()
-                .background(Color.background)
-                .colorScheme(.dark)
-        }
-    }
-}
-#endif

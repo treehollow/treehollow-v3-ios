@@ -23,14 +23,25 @@ extension Comment {
                 image: nil,
                 imageURL: imageURL)
         }
+        var text = self.text
+        while text?.first == "\n" {
+            text?.removeFirst()
+        }
+        while text?.last == "\n" {
+            text?.removeLast()
+        }
+
         return CommentData(
             commentId: self.cid,
             deleted: self.deleted,
             name: self.name,
             permissions: self.permissions,
             postId: self.pid,
-            tags: self.tags ?? "",
-            text: self.text ?? "",
+            tag: self.tag,
+            text: text ?? "",
+            date: Date(timeIntervalSince1970: TimeInterval(self.timestamp)),
+            isDz: self.isDz,
+            replyTo: self.replyTo,
             image: image
         )
     }

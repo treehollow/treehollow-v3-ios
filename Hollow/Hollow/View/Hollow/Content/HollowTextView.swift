@@ -23,14 +23,3 @@ struct HollowTextView: View {
             .lineLimit(compactLineLimit)
     }
 }
-
-#if DEBUG
-struct HollowTextView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView {
-            HollowTextView(text: testComments[0].text,
-            compactLineLimit: nil)
-        }
-    }
-}
-#endif
