@@ -49,7 +49,7 @@ struct HollowCommentContentView: View {
                             if commentData.text != "" {
                                 Text(commentData.text)
                             } else if commentData.type == .image && compact {
-                                (Text("[") + Text(LocalizedStringKey("Photo")) + Text("]"))
+                                (Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
                                     .foregroundColor(.uiColor(.secondaryLabel))
                             }
                             // TODO: Has replies indicator

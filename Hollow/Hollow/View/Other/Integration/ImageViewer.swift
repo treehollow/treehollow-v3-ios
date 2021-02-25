@@ -31,7 +31,7 @@ struct ImageViewer: View {
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 Button(action: { presented = false }) {
-                    Text("Done")
+                    Text("IMAGEVIEWER_DONE_BUTTON")
                         .font(.system(size: body16, weight: .semibold))
                         .foregroundColor(.primary)
                         .padding(.horizontal, 13)
@@ -73,12 +73,12 @@ struct ImageViewer: View {
         )
         
         .actionSheet(isPresented: $showActionSheet) {
-            ActionSheet(title: Text("Image"), buttons: [
+            ActionSheet(title: Text("IMAGEVIEWER_ACTION_SHEET_TITLE"), buttons: [
                 .cancel(),
-                .default(Text("Save to Photos"), action: {
+                .default(Text("IMAGEVIEW_SAVE_PHOTO_BUTTON"), action: {
                     let saver = ImageSaver(finishHandler: { error in
                         savePhotoMessage =
-                            (error?.localizedDescription ?? "Successfully saved to Photos", "")
+                            (error?.localizedDescription ?? NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: ""), "")
                     })
                     saver.saveImage(image)
                 })

@@ -28,7 +28,7 @@ struct WelcomeView: View {
                     .frame(maxHeight: UIScreen.main.bounds.height * 0.23)
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
-                    Text(LocalizedStringKey("Select Hollow"))
+                    Text("WELCOMEVIEW_SELECT_HOLLOW_TITLE")
                         .font(.system(size: title22, weight: .semibold))
                         .foregroundColor(Color("hollow.content.text.other"))
                         .padding(.top, 70)
@@ -69,7 +69,7 @@ struct WelcomeView: View {
                             Defaults[.hollowType] = .other
                             viewModel.hollowSelection = HollowType.other.rawValue
                         }, gradient: buttonGradient) {
-                            selectHollowButton(text: String.othersLocalized.capitalized)
+                            selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: ""))
                         }}
                     Spacer()
                     if viewModel.isLoadingConfig {
@@ -77,7 +77,7 @@ struct WelcomeView: View {
                             .padding()
                     }
                     if appModel.tokenExpired {
-                        Text("Your access token has expired. Please login again.")
+                        Text("WELCOMVIEW_TOKEN_EXPIRED_LABEL")
                             .font(.footnote)
                             .padding(.vertical, 5)
                             .layoutPriority(1)
@@ -87,7 +87,7 @@ struct WelcomeView: View {
             // Disable the buttons when loading config
             .disabled(viewModel.isLoadingConfig)
             .background(Color("background.other").edgesIgnoringSafeArea(.all))
-            .navigationTitle(LocalizedStringKey("Welcome"))
+            .navigationTitle("WELCOMEVIEW_NAV_TITLE")
             
             // Show alert on receiving error
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
@@ -123,9 +123,9 @@ struct WelcomeView: View {
             VStack {
                 MyTextField<EmptyView>(
                     text: $text,
-                    placeHolder: NSLocalizedString("URL for custom configuration", comment: ""),
-                    title: NSLocalizedString("Custom Configuration", comment: ""),
-                    footer: NSLocalizedString("Get the URL for the configuration from the treehollow website.", comment: "")
+                    placeHolder: NSLocalizedString("WELCOMEVIEW_CUSTOM_URL_TEXTFIELD_PLACEHOLDER", comment: ""),
+                    title: NSLocalizedString("WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER", comment: ""),
+                    footer: NSLocalizedString("WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_FOOTER", comment: "")
                 )
                 .keyboardType(.URL)
                 .navigationBarItems(
@@ -153,7 +153,7 @@ struct WelcomeView: View {
             .padding()
             .padding(.horizontal)
             .background(Color.background.edgesIgnoringSafeArea(.all))
-            .navigationTitle(String.othersLocalized.capitalized)
+            .navigationTitle("WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE")
         }
     }
     

@@ -45,8 +45,11 @@ struct HollowInputView: View {
             HStack {
                 BarButton(action: { withAnimation { inputStore.presented.wrappedValue = false }}, systemImageName: "xmark")
                 Spacer()
+                
+                let sendingText = NSLocalizedString("INPUTVIEW_SEND_BUTTON_SENDING", comment: "")
+                let sendPostText = NSLocalizedString("INPUTVIEW_SEND_BUTTON_SEND_POST", comment: "")
                 MyButton(action: inputStore.sendPost) {
-                    Text(inputStore.sending ? "Sending" + "..." : "Send Post")
+                    Text(inputStore.sending ? sendingText + "..." : sendPostText)
                         .modifier(MyButtonDefaultStyle())
                 }
                 .disabled(!contentValid)
@@ -73,10 +76,10 @@ struct HollowInputView: View {
         .onChange(of: inputStore.image) { _ in inputStore.compressImage() }
         .styledAlert(
             presented: $showVoteOptionsAlert,
-            title: "The number of the options must be no less than 2",
-            message: "Do you want to remove all the options?",
+            title: "INPUTVIEW_VOTE_REMOVE_ALL_ALERT_TITLE",
+            message: "INPUTVIEW_VOTE_REMOVE_ALL_ALERT_MESSAGE",
             buttons: [
-                .init(text: "Yes", action: { withAnimation { inputStore.voteInformation = nil }}),
+                .init(text: "INPUTVIEW_VOTE_REMOVE_ALL_ALERT_BUTTON_CONFIRM", action: { withAnimation { inputStore.voteInformation = nil }}),
                 .cancel
             ]
         )

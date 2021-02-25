@@ -48,7 +48,7 @@ class Welcome: ObservableObject {
                 self.isLoadingConfig = false
                 switch completion {
                 case .failure(let error):
-                    self.errorMessage = (String.errorLocalized.capitalized, error.description)
+                    self.errorMessage = ("GLOBAL_ERROR_MSG_TITLE", error.description)
                 case .finished: break
                 }
             }, receiveValue: { result in

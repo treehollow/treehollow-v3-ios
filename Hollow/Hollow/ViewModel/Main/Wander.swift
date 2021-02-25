@@ -39,6 +39,7 @@ class Wander: ObservableObject, AppModelEnvironment {
         request.publisher
             .map { $0.map { $0.post } }
             .sinkOnMainThread(receiveCompletion: { completion in
+                withAnimation { self.isLoading = false }
                 switch completion {
                 case .finished:
                     self.fetchImages()

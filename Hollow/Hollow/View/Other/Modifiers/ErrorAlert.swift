@@ -14,7 +14,7 @@ struct ErrorAlert: ViewModifier {
     
     func body(content: Content) -> some View {
         return content
-            .styledAlert(presented: $presented, title: errorMessage?.title ?? "", message: errorMessage?.message, buttons: [.init(text: "OK", style: .cancel, action: { errorMessage = nil })])
+            .styledAlert(presented: $presented, title: errorMessage?.title ?? "", message: errorMessage?.message, buttons: [.init(text: NSLocalizedString("ERROR_ALERT_OK_BUTTON", comment: ""), style: .cancel, action: { errorMessage = nil })])
             .onChange(of: errorMessage?.message) { message in
                 presented = message != nil
             }

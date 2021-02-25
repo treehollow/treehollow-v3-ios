@@ -46,7 +46,7 @@ struct SearchView: View {
                 .animation(.none)
                 Spacer()
                 MyButton(action: {}, gradient: .vertical(gradient: .button), transitionAnimation: transitionAnimation) {
-                    Text(String.searchLocalized.capitalized)
+                    Text("SEARCHVIEW_SEARCH_BUTTON")
                         .font(.system(size: buttonFontSize, weight: .bold))
                         .foregroundColor(.white)
                 }
@@ -59,7 +59,7 @@ struct SearchView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
-                        TextField(LocalizedStringKey("Search content or tags"), text: $searchText, onEditingChanged: { _ in
+                        TextField("SEARCHVIEW_TEXTFIELD_PLACEHOLDER", text: $searchText, onEditingChanged: { _ in
                             // Toggle `isSearching`
                         }, onCommit: {
                             // Perform search action
@@ -76,7 +76,7 @@ struct SearchView: View {
                 }
                 .padding(.vertical)
                 Button(action:{ withAnimation { showsAdvancedOptions.toggle() }}) {
-                    Text(String.advancedLocalized.capitalized)
+                    Text("SEARCHVIEW_ADVANCED_BUTTON")
                         .font(.system(size: body16, weight: .semibold))
                         .animation(transitionAnimation)
                     Image(systemName: "triangle.fill")
@@ -94,7 +94,7 @@ struct SearchView: View {
                         .animation(.searchViewTransition)
                 }
                 
-                Text(String.historyLocalized.capitalized)
+                Text("SEARCHVIEW_SEARCH_HISTORY_LABEL")
                     .font(.system(size: body16, weight: .semibold))
                     .animation(transitionAnimation)
                     .leading()
@@ -127,7 +127,7 @@ extension SearchView {
     private func pickerOverlay(isStart: Bool) -> some View {
         VStack {
             Spacer()
-            Text(isStart ? LocalizedStringKey("Choose the start date") : LocalizedStringKey("Choose the end date"))
+            Text(isStart ? "SEARCHVIEW_PICKER_START" : "SEARCHVIEW_PICKER_END")
                 .bold()
                 .padding(.bottom)
             DatePicker("", selection: isStart ? $startDate : $endDate, displayedComponents: .date)
@@ -164,7 +164,7 @@ extension SearchView {
         
         var body: some View {
             VStack {
-                Text(String.timeLocalized.capitalized)
+                Text("SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL")
                     .fontWeight(.semibold)
                     .leading()
                 HStack {
@@ -184,13 +184,13 @@ extension SearchView {
                 .padding(.bottom)
                 .padding(.bottom, 5)
                 
-                Text(String.rangeLocalized.capitalized)
+                Text("SEARCHVIEW_ADVANCED_OPTION_RANGE_LABEL")
                     .fontWeight(.semibold)
                     .leading()
                     .padding(.bottom, 5)
-                rangeButton(text: LocalizedStringKey("Partial"), description: LocalizedStringKey("Hollows only"), selected: selectsPartialSearch, isPartial: true)
+                rangeButton(text: "SEARCHVIEW_BUTTON_PARTIAL", description: "SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION", selected: selectsPartialSearch, isPartial: true)
                     .padding(.bottom, 5)
-                rangeButton(text: LocalizedStringKey("Global"), description: LocalizedStringKey("Hollows and comments"), selected: !selectsPartialSearch, isPartial: false)
+                rangeButton(text: LocalizedStringKey("SEARCHVIEW_BUTTON_GLOBAL"), description: "SEARCHVIEW_BUTTON_GLOBAL_DESCRIPTION", selected: !selectsPartialSearch, isPartial: false)
             }
         }
         

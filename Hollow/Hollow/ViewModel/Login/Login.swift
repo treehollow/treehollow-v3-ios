@@ -42,11 +42,6 @@ class Login: ObservableObject, AppModelEnvironment {
     
     func checkEmail() {
         guard let config = Defaults[.hollowConfig] else { return }
-        guard email != "" else {
-            errorMessage = (title: String.invalidInputLocalized.capitalized,
-                            message: NSLocalizedString("Email cannot be empty.", comment: ""))
-            return
-        }
         withAnimation {
             isLoading = true
         }
@@ -82,7 +77,7 @@ class Login: ObservableObject, AppModelEnvironment {
     func register() {
         guard let config = Defaults[.hollowConfig] else { return }
         guard let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString() else {
-            errorMessage = (title: String.errorLocalized.capitalized,
+            errorMessage = (title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""),
                             message: .retriveDeviceTokenFailedMessageLocalized)
             UIApplication.shared.registerForRemoteNotifications()
             return
@@ -121,7 +116,7 @@ class Login: ObservableObject, AppModelEnvironment {
     func login() {
         guard let config = Defaults[.hollowConfig] else { return }
         guard let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString() else {
-            errorMessage = (title: String.errorLocalized.capitalized,
+            errorMessage = (title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""),
                             message: .retriveDeviceTokenFailedMessageLocalized)
             UIApplication.shared.registerForRemoteNotifications()
             return

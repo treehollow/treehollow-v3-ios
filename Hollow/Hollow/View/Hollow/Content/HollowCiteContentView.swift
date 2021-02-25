@@ -13,7 +13,7 @@ struct HollowCiteContentView: View {
     
     var displayedText: String {
         if let postData = self.postData {
-            return postData.text == "" ? "[" + "Image" + "]" : postData.text
+            return postData.text == "" ? "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" : postData.text
         }
         return "Loading" + "..."
     }

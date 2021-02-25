@@ -53,7 +53,7 @@ struct TimelineView: View {
                     }) {
                         HStack {
                             Image(systemName: "magnifyingglass")
-                            Text("Search")
+                            Text("TIMELINE_SEARCH_BAR_PLACEHOLDER")
                             Spacer()
                         }
                         .font(.system(size: body17))

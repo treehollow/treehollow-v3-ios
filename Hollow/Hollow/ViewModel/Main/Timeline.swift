@@ -76,7 +76,11 @@ class Timeline: ObservableObject, AppModelEnvironment {
         withAnimation {
             noMorePosts = false
         }
-        requestPosts(at: 1, completion: finshHandler)
+        let completion = {
+            finshHandler()
+            self.posts.removeAll()
+        }
+        requestPosts(at: 1, completion: completion)
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {
@@ -130,7 +134,7 @@ class Timeline: ObservableObject, AppModelEnvironment {
     
     // MARK: - Load Cited Posts
     private func fetchCitedPosts() {
-        let postsWrapperWithCitation = posts.compactMap { $0.citedPostID == nil ? nil : $0 }
+        let postsWrapperWithCitation = posts.filter { $0.citedPostID != nil }
         let citedPostId = postsWrapperWithCitation.compactMap { $0.citedPostID }
         
         let hollowConfig = Defaults[.hollowConfig]!

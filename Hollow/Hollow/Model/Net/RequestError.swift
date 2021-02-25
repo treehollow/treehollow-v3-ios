@@ -18,8 +18,6 @@ enum DefaultRequestError: RequestError {
     case tokenExpiredError
     case fileTooLarge
     case unknown
-    case imageLoadingFail(postID: Int)
-    case commentImageLoadingFail(postID: Int, commentID: Int)
     case noSuchPost
     /// Indicating that current request has finished successfully.
     case loadingCompleted
@@ -27,13 +25,11 @@ enum DefaultRequestError: RequestError {
     
     var description: String {
         switch self {
-        case .tokenExpiredError: return "Token expired, please login again."
-        case .decodeFailed: return "Fail to decode result from the response."
-        case .unknown: return "Fail to initialize data. This is an internal error."
-        case .fileTooLarge: return "The uploaded file is too large and is refused by the server."
-        case .imageLoadingFail(let postID): return "Fail to load image for post" + " #\(postID)."
-        case .commentImageLoadingFail(let postID, let commentID): return "Fail to load image for comment #\(commentID) in post #\(postID)."
-        case .noSuchPost: return "The post does not exist."
+        case .tokenExpiredError: return NSLocalizedString("REQUEST_TOKEN_EXPIRED_ERROR_MSG", comment: "")
+        case .decodeFailed: return NSLocalizedString("REQUEST_DECODE_FAILED_ERROR_MSG", comment: "")
+        case .unknown: return NSLocalizedString("REQUEST_UNKNOWN_ERROR_MSG", comment: "")
+        case .fileTooLarge: return NSLocalizedString("REQUEST_FILE_TOO_LARGE_ERROR_MSG", comment: "")
+        case .noSuchPost: return NSLocalizedString("REQUEST_NO_SUCH_POST_ERROR_MSG", comment: "")
         case .loadingCompleted: return ""
         case .other(let description): return description
         }
@@ -50,7 +46,7 @@ enum DefaultRequestError: RequestError {
         switch errorCode {
         case -100: self = .tokenExpiredError
         case -101: self = .noSuchPost
-        default: self = .other(description: description ?? "Request failed with no description for error code \(errorCode)")
+        default: self = .other(description: description ?? NSLocalizedString("REQUEST_OTHER_ERROR_NO_DESCRIPTION_WITH_CODE_MSG", comment: "") + "\(errorCode)")
         }
     }
 }

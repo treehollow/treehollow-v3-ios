@@ -15,7 +15,7 @@ struct LoadingLabel: View {
     
     var body: some View {
         HStack {
-            Text(String.loadingLocalized.capitalized)
+            Text("LOADING_LABEL_TEXT")
                 .font(.system(size: body16, weight: .medium))
             Spinner(color: .hollowContentText, desiredWidth: body14)
         }

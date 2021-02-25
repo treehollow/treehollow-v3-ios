@@ -35,7 +35,7 @@ struct HollowTimelineCardView: View {
                 Button(action: {
 
                 }) {
-                    Label("Report", systemImage: "exclamationmark")
+                    Label("TIMELINE_CARD_MENU_REPORT", systemImage: "exclamationmark")
                 }
             }
         }))
@@ -54,8 +54,10 @@ struct HollowTimelineCardView: View {
                     HollowCommentContentView(commentData: $postData.comments[index], compact: true, contentVerticalPadding: 10)
                 }
                 if postData.replyNumber > maxCommentCount {
-                    // FIXME: How to localize this stuff??
-                    Text("还有 \(postData.replyNumber - maxCommentCount) 条评论")
+                    // Localize the text based on chinese expression
+                    let text1 = NSLocalizedString("TIMELINE_CARD_COMMENTS_HAIYOU", comment: "")
+                    let text2 = NSLocalizedString("TIMELINE_CARD_COMMENTS_TIAOPINGLUN", comment: "")
+                    Text(text1 + "\(postData.replyNumber - maxCommentCount)" + text2)
                         .font(.system(size: body15)).lineSpacing(3)
 
                     .foregroundColor(.uiColor(.secondaryLabel))

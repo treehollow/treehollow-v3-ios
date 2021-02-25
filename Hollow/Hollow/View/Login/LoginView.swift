@@ -24,10 +24,10 @@ struct LoginView: View {
     private var shouldLogin: Bool { viewModel.emailCheckType == .oldUser }
     
     private var buttonText: String {
-        if viewModel.isLoading { return String.loadingLocalized.capitalized + "..." }
-        if shouldCheckEmail { return String.continueLocalized.capitalized }
-        if shouldRegister { return String.registerLocalized.capitalized }
-        if shouldLogin { return String.loginLocalized.capitalized }
+        if viewModel.isLoading { return NSLocalizedString("LOGINVIEW_BUTTON_LOADING", comment: "") + "..." }
+        if shouldCheckEmail { return NSLocalizedString("LOGINVIEW_BUTTON_CONTINUE", comment: "") }
+        if shouldRegister { return NSLocalizedString("LOGINVIEW_BUTTON_REGISTER", comment: "") }
+        if shouldLogin { return NSLocalizedString("LOGINVIEW_BUTTON_LOGIN", comment: "") }
         return ""
     }
     

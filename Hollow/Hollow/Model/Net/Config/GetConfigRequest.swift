@@ -64,11 +64,11 @@ enum GetConfigRequestError: RequestError {
     
     var description: String {
         switch self {
-        case .serverError: return "Received error from the server."
-        case .decodeFailed: return "Fail to decode tree hollow configuration from the URL."
-        case .incorrectFormat: return "The format of the tree hollow configuration is incorrect."
-        case .invalidConfigUrl: return "The URL for the configuration is invalid."
-        case .invalidConfiguration: return "The configuration is invalid."
+        case .serverError: return NSLocalizedString("REQUEST_GET_CONFIG_ERROR_SERVER_ERROR", comment: "")
+        case .decodeFailed: return NSLocalizedString("REQUEST_GET_CONFIG_ERROR_DECODE_FAILED", comment: "")
+        case .incorrectFormat: return NSLocalizedString("REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT", comment: "")
+        case .invalidConfigUrl: return NSLocalizedString("REQUEST_GET_CONFIG_ERROR_INVALID_URL", comment: "")
+        case .invalidConfiguration: return NSLocalizedString("REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG", comment: "")
         case .loadingCompleted: return ""
         case .other(let description): return description
         }
@@ -102,7 +102,6 @@ struct GetConfigRequest: Request {
         }
         let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         let task = session.dataTask(with: url) { data, response, error in
-            print("[Request] \(self)")
 
             if let error = error {
                 completion(nil, .other(description: error.localizedDescription))
@@ -132,16 +131,14 @@ struct GetConfigRequest: Request {
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     do {
                         let result = try jsonDecoder.decode(Result.self, from: apiInfo)
-                        print("[Result] \(result)")
                         
-                        if validateConfig(result) {
+                        if GetConfigRequest.validateConfig(result) {
                             // Call the callback
                             completion(result, nil)
                         } else {
                             completion(nil, .invalidConfigUrl)
                         }
                     } catch {
-                        print("[Request Error]: \(error)")
                         completion(nil, .decodeFailed)
                     }
                     return
@@ -155,7 +152,7 @@ struct GetConfigRequest: Request {
         task.resume()
     }
     
-    private func validateConfig(_ config: GetConfigRequestResult) -> Bool {
+    static private func validateConfig(_ config: GetConfigRequestResult) -> Bool {
         return
             config.apiRootUrls != [] &&
             config.emailSuffixes.count > 0 &&

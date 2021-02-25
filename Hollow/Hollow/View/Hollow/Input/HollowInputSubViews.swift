@@ -45,7 +45,7 @@ extension HollowInputView {
                     .trailing()
                 )
                 .overlay(
-                    Text("Size: \(inputStore.imageSizeInformation ?? "??")")
+                    Text(NSLocalizedString("INPUTVIEW_IMAGE_SIZE_LABEL", comment: "") + ": \(inputStore.imageSizeInformation ?? "??")")
                         .fontWeight(.semibold)
                         .font(.footnote)
                         .padding(8)
@@ -62,7 +62,7 @@ extension HollowInputView {
                 .foregroundColor(.uiColor(.systemFill))
                 .aspectRatio(image.size.width / image.size.height, contentMode: .fit)
                 .overlay(
-                    Text("Compressing" + "...")
+                    Text(NSLocalizedString("INPUTVIEW_IMAGE_COMPRESSING_LABEL", comment: "") + "...")
                         .fontWeight(.semibold)
                         .font(.footnote)
                 )
@@ -94,9 +94,10 @@ extension HollowInputView {
                         set: { inputStore.voteInformation?.options[index] = $0 }
                     )
                     
+                    let optionLabelPrefix = NSLocalizedString("INPUTVIEW_VOTE_OPTION_PLACEHOLDER_PREFIX", comment: "")
                     MyTextField(
                         text: bindingText,
-                        placeHolder: "Option \(index + 1)",
+                        placeHolder: optionLabelPrefix + " \(index + 1)",
                         backgroundColor: .background, content: {
                             Button(action: {
                                 if voteInfo.options.count == 2 {
@@ -139,14 +140,14 @@ extension HollowInputView {
     var footerView: some View {
         HStack(spacing: body12) {
             Menu(content: {
-                Button("None", action: { withAnimation { inputStore.selectedTag = nil }})
+                Button("INPUTVIEW_SELECT_TAG_MENU_NO_TAG_BUTTON_LABEL", action: { withAnimation { inputStore.selectedTag = nil }})
                 
                 ForEach(inputStore.availableTags, id: \.self) { tag in
                     Button(tag, action: { withAnimation { inputStore.selectedTag = tag }})
                 }
             }, label: {
                 let labelText = inputStore.selectedTag != nil ?
-                    "#" + inputStore.selectedTag! : "Select a tag"
+                    "#" + inputStore.selectedTag! : NSLocalizedString("INPUTVIEW_SELECT_TAG_MENU_LABEL", comment: "")
                 Text(labelText)
                     .modifier(MyButtonDefaultStyle())
                     .defaultButtonStyle()
@@ -265,7 +266,7 @@ extension CustomTextEditor {
                 
                 if editing.wrappedValue {
                     MyButton(action: { editing.wrappedValue = false }) {
-                        Text("Done")
+                        Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
                             .font(.system(size: buttonFontSize, weight: .bold))
                             .foregroundColor(.white)
                     }
