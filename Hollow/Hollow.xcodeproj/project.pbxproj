@@ -104,14 +104,12 @@
 		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
 		0E8BCFE725E0A4720056D809 /* IntegrationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */; };
 		0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */; };
-		0E906CFC25DCEADD0034053C /* PublishedPostsMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBC25DCEADC0034053C /* PublishedPostsMessageRequest.swift */; };
 		0E906CFD25DCEADD0034053C /* SearchHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */; };
 		0E906CFE25DCEADD0034053C /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBE25DCEADC0034053C /* SearchRequest.swift */; };
 		0E906CFF25DCEADD0034053C /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBF25DCEADC0034053C /* PostListRequest.swift */; };
 		0E906D0025DCEADD0034053C /* SystemMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC025DCEADC0034053C /* SystemMessageRequest.swift */; };
 		0E906D0125DCEADD0034053C /* AttentionListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC125DCEADC0034053C /* AttentionListRequest.swift */; };
 		0E906D0225DCEADD0034053C /* RandomListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC225DCEADC0034053C /* RandomListRequest.swift */; };
-		0E906D0325DCEADD0034053C /* ParticipatedPostsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC325DCEADC0034053C /* ParticipatedPostsRequest.swift */; };
 		0E906D0425DCEADD0034053C /* AttentionListSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC425DCEADC0034053C /* AttentionListSearchRequest.swift */; };
 		0E906D0525DCEADD0034053C /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC525DCEADC0034053C /* DefaultRequest.swift */; };
 		0E906D0625DCEADD0034053C /* GetConfigRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CC725DCEADC0034053C /* GetConfigRequest.swift */; };
@@ -266,14 +264,12 @@
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
 		0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationUtilities.swift; sourceTree = "<group>"; };
 		0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailRequest.swift; sourceTree = "<group>"; };
-		0E906CBC25DCEADC0034053C /* PublishedPostsMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishedPostsMessageRequest.swift; sourceTree = "<group>"; };
 		0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryRequest.swift; sourceTree = "<group>"; };
 		0E906CBE25DCEADC0034053C /* SearchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
 		0E906CBF25DCEADC0034053C /* PostListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequest.swift; sourceTree = "<group>"; };
 		0E906CC025DCEADC0034053C /* SystemMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemMessageRequest.swift; sourceTree = "<group>"; };
 		0E906CC125DCEADC0034053C /* AttentionListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionListRequest.swift; sourceTree = "<group>"; };
 		0E906CC225DCEADC0034053C /* RandomListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomListRequest.swift; sourceTree = "<group>"; };
-		0E906CC325DCEADC0034053C /* ParticipatedPostsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipatedPostsRequest.swift; sourceTree = "<group>"; };
 		0E906CC425DCEADC0034053C /* AttentionListSearchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionListSearchRequest.swift; sourceTree = "<group>"; };
 		0E906CC525DCEADC0034053C /* DefaultRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequest.swift; sourceTree = "<group>"; };
 		0E906CC725DCEADC0034053C /* GetConfigRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetConfigRequest.swift; sourceTree = "<group>"; };
@@ -746,14 +742,12 @@
 			isa = PBXGroup;
 			children = (
 				0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */,
-				0E906CBC25DCEADC0034053C /* PublishedPostsMessageRequest.swift */,
 				0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */,
 				0E906CBE25DCEADC0034053C /* SearchRequest.swift */,
 				0E906CBF25DCEADC0034053C /* PostListRequest.swift */,
 				0E906CC025DCEADC0034053C /* SystemMessageRequest.swift */,
 				0E906CC125DCEADC0034053C /* AttentionListRequest.swift */,
 				0E906CC225DCEADC0034053C /* RandomListRequest.swift */,
-				0E906CC325DCEADC0034053C /* ParticipatedPostsRequest.swift */,
 				0E906CC425DCEADC0034053C /* AttentionListSearchRequest.swift */,
 			);
 			path = Contents;
@@ -986,7 +980,6 @@
 				00EFC07425DFC73800536B52 /* ImageMetadata.swift in Sources */,
 				0E906D0825DCEADD0034053C /* SetPushRequest.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsView.swift in Sources */,
-				0E906CFC25DCEADD0034053C /* PublishedPostsMessageRequest.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
 				0E906D2425DCEADD0034053C /* PostData.swift in Sources */,
 				0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */,
@@ -1023,7 +1016,6 @@
 				0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */,
 				00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
-				0E906D0325DCEADD0034053C /* ParticipatedPostsRequest.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				0E906D0C25DCEADD0034053C /* DeviceListRequest.swift in Sources */,
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
