@@ -38,7 +38,7 @@ struct HollowHeaderView: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(tintColor))
                 VStack(alignment: .leading, spacing: 2) {
-                    let timeLabelText = String(postData.timestamp.description.prefix(10))
+                    let timeLabelText = HollowDateFormatter(date: postData.timestamp).formattedString(compact: compact)
                     HStack {
                         Text("#\(postData.postId.string)")
                             .fontWeight(.medium)
@@ -82,27 +82,7 @@ struct HollowHeaderView: View {
         Text(text)
             .font(.system(size: body13, weight: fontWeight))
             .lineSpacing(2.5)
-            .foregroundColor(Color.gray)
+            .foregroundColor(.hollowCardStarUnselected)
             .lineLimit(1)
     }
 }
-
-#if DEBUG
-struct HollowHeaderView_Previews: PreviewProvider {
-    static let postData: PostData = .init(attention: true, deleted: false, likeNumber: 21, permissions: [], postId: 198431, replyNumber: 12, timestamp: Date(timeIntervalSince1970: TimeInterval(0)), tag: "", text: "asdasdsdsdadsdasdsdasdasdasdasdadsdasdasdsadds", hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test"), imageURL: ""), vote: .init(votedOption: "Yes", voteData: [
-        .init(title: "Yes", voteCount: 123),
-        .init(title: "No", voteCount: 24)
-    ]), comments: [
-        .init(commentId: 10000, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: [], text: "太抽象了，太批爆了",  image: nil),
-        .init(commentId: 10001, deleted: false, name: "Alice", permissions: [], postId: 10000, tags: [], text: "爷爷大象笑",  image: nil),
-        .init(commentId: 10002, deleted: false, name: "Bob", permissions: [], postId: 10000, tags: [], text: "允", image: nil),
-        .init(commentId: 10003, deleted: false, name: "Carol", permissions: [], postId: 10000, tags: [], text: "讲道理 这可以当作图灵测试",  image: nil)
-        
-    ])
-    
-    static var previews: some View {
-        HollowHeaderView(postData: postData, compact: false)
-            .background(Color.background)
-    }
-}
-#endif

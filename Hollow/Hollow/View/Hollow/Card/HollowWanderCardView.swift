@@ -11,6 +11,7 @@ struct HollowWanderCardView: View {
     @Binding var postData: PostData
     
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
+
     var body: some View {
         // FIXME: Handlers
         VStack {
@@ -26,16 +27,15 @@ struct HollowWanderCardView: View {
             }
             // TODO: Vote and cite
             HStack {
-                HollowStarButton(attention: postData.attention, likeNumber: postData.likeNumber, starHandler: {_ in})
-                    .padding(.leading, 10)
+                Label("\(postData.replyNumber)", systemImage: "quote.bubble")
+                    .foregroundColor(.hollowCardStarUnselected)
                 Spacer()
-                HollowButton(number: postData.comments.count, action: {
-                    // Show detail
-                }, systemImageName: "quote.bubble")
-                .foregroundColor(.hollowContentText)
-                .padding(.trailing, 10)
+                Label("\(postData.likeNumber)", systemImage: postData.attention ? "star.fill" : "star")
+                    .foregroundColor(postData.attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
             }
+            .font(.system(size: 17, weight: .semibold, design: .rounded))
             .padding(.top, body5)
+            .padding(.horizontal, 5)
         }
         .padding()
         .background(Color.hollowCardBackground)

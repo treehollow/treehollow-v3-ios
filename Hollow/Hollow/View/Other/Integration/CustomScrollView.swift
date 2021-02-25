@@ -15,6 +15,7 @@ struct CustomScrollView<Content>: View where Content: View {
     var offset: Binding<CGFloat?> = .constant(nil)
     var atBottom: Binding<Bool?> = .constant(nil)
     var didScrollToBottom: (() -> Void)? = nil
+    // Don't use it (performance issue)
     var didScroll: ((ScrollDirection) -> Void)? = nil
     var didEndScroll: (() -> Void)? = nil
     /// Handler to call when refreshing.
@@ -130,8 +131,8 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let direction: ScrollDirection = scrollView.panGestureRecognizer.translation(in: scrollView).y > 0 ? .up : .down
-        didScroll?(direction)
+//        let direction: ScrollDirection = scrollView.panGestureRecognizer.translation(in: scrollView).y > 0 ? .up : .down
+//        didScroll?(direction)
         if (scrollView.contentOffset.y + 1) >= (scrollView.contentSize.height - scrollView.frame.size.height) {
             atBottom.wrappedValue = true
             didScrollToBottom?()

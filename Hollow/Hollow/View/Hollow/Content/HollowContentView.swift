@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct HollowContentView: View {
     @State private var presentedIndex: Int?
@@ -18,18 +19,44 @@ struct HollowContentView: View {
     var maxImageHeight: CGFloat? = nil
     var lineLimit: Int = 12
     
+    private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
+    
     private var hasVote: Bool { postDataWrapper.post.vote != nil }
     private var hasImage: Bool { postDataWrapper.post.hollowImage != nil }
-
+    private var hideContent: Bool {
+        if options.contains(.revealFoldTags) { return false }
+        if let tag = postDataWrapper.post.tag {
+            return foldTags.contains(tag)
+        }
+        return false
+    }
+    
+    @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
+    @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
+    @ScaledMetric(wrappedValue: 6, relativeTo: .body) var body6: CGFloat
+    
     var body: some View {
-        if hasImage && options.contains(.displayImage) {
+        if let tag = postDataWrapper.post.tag {
+            Text(tag)
+                .font(.system(size: body14, weight: .semibold))
+                .foregroundColor(.white)
+                .padding(.horizontal, body6)
+                .padding(.vertical, body4)
+                .background(Color.hollowContentVoteGradient1)
+                .cornerRadius(body6)
+                .leading()
+        }
+
+        if hasImage && options.contains(.displayImage) && !hideContent {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage!, description: postDataWrapper.post.text)
                 .cornerRadius(4)
                 .frame(maxHeight: maxImageHeight)
                 .fixedSize(horizontal: false, vertical: true)
         }
         
-        if let citedPid = postDataWrapper.citedPostID, options.contains(.displayCitedPost) {
+        if let citedPid = postDataWrapper.citedPostID,
+           options.contains(.displayCitedPost),
+           !hideContent {
             if let citedPost = postDataWrapper.citedPost {
                 Button(action: {
                     DispatchQueue.main.async {
@@ -48,7 +75,7 @@ struct HollowContentView: View {
         }
         
         // Enable the context menu for the text if it is in detail view.
-        if postDataWrapper.post.text != "" {
+        if postDataWrapper.post.text != "" && !hideContent {
             if options.contains(.compactText) {
                 textView()
             } else {
@@ -65,7 +92,7 @@ struct HollowContentView: View {
                     
         }
         
-        if hasVote {
+        if hasVote && !hideContent {
             HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler, allowVote: !options.contains(.disableVote))
         }
 
@@ -95,5 +122,6 @@ extension HollowContentView {
         static let replaceForImageOnly = DisplayOptions(rawValue: 1 << 5)
         static let addTextForImage = DisplayOptions(rawValue: 1 << 6)
         static let disableVote = DisplayOptions(rawValue: 1 << 7)
+        static let revealFoldTags = DisplayOptions(rawValue: 1 << 8)
     }
 }

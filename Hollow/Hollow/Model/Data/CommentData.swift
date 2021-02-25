@@ -18,8 +18,11 @@ struct CommentData: Identifiable, Codable {
     var name: String
     var permissions: [PostPermissionType]
     var postId: Int
-    var tags: [String]
+    var tag: String?
     var text: String
+    var date: Date
+    var isDz: Bool
+    var replyTo: Int
     /// **will be deprecated**
     var type: CommentType {
         get {

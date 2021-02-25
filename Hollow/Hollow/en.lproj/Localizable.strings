@@ -8,6 +8,15 @@
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
 
 /* No comment provided by engineer. */
+"DATEFORMATTER_HOUR" = " h";
+
+/* No comment provided by engineer. */
+"DATEFORMATTER_MINUTE" = " min";
+
+/* No comment provided by engineer. */
+"DATEFORMATTER_SECOND" = " s";
+
+/* No comment provided by engineer. */
 "DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON" = "Confirm";
 
 /* No comment provided by engineer. */

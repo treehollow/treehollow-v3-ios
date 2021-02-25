@@ -13,13 +13,15 @@ struct LoadingLabel: View {
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     
+    var foregroundColor: Color = .hollowContentText
+    
     var body: some View {
         HStack {
             Text("LOADING_LABEL_TEXT")
                 .font(.system(size: body16, weight: .medium))
-            Spinner(color: .hollowContentText, desiredWidth: body14)
+            Spinner(color: foregroundColor, desiredWidth: body14)
         }
-        .foregroundColor(.hollowContentText)
+        .foregroundColor(foregroundColor)
     }
 }
 
