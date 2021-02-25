@@ -44,6 +44,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Fetch the lastest config
         fetchConfig()
+        // test all api when updated
+        LineSwitch().testAll()
         return true
     }
     
