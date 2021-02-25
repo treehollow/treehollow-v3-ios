@@ -162,6 +162,7 @@
 		0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4D25E6971500904296 /* Localizable.strings */; };
 		0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B5625E7694400904296 /* InfoPlist.strings */; };
 		0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */; };
+		0EAC358725E7EC98000E9F36 /* TestCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358625E7EC98000E9F36 /* TestCommentData.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
@@ -324,6 +325,7 @@
 		0EAA1B4E25E6971500904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EAA1B5725E7694400904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
+		0EAC358625E7EC98000E9F36 /* TestCommentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCommentData.swift; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */,
+				0EAC358625E7EC98000E9F36 /* TestCommentData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -966,6 +969,7 @@
 				0E415B4525CD772200351672 /* ReCAPTCHAWebView.swift in Sources */,
 				0E415B5B25CD772200351672 /* HollowTimelineCardView.swift in Sources */,
 				0E906CFF25DCEADD0034053C /* PostListRequest.swift in Sources */,
+				0EAC358725E7EC98000E9F36 /* TestCommentData.swift in Sources */,
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
 				0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */,
 				0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */,
