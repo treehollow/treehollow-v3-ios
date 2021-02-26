@@ -47,8 +47,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         fetchConfig()
         // test all api when updated
         LineSwitchManager.testAll()
-        // setup network change notifier
-        setupNetworkChangeNotifier()
+
         return true
     }
     
@@ -108,31 +107,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 Defaults[.hollowConfig] = result
             }
         })
-    }
-    
-    /// setup Network Change Notifier
-    private func setupNetworkChangeNotifier() {
-        let connectivity: Connectivity = Connectivity()
-        
-        let connectivityChanged: (Connectivity) -> Void = { _ in
-            updateConnectionStatus(connectivity.status)
-        }
-        
-        connectivity.whenConnected = connectivityChanged
-        connectivity.whenDisconnected = connectivityChanged
-
-        connectivity.startNotifier()
-        
-        func updateConnectionStatus(_ status: Connectivity.Status) {
-            
-            switch status {
-            case .connected:
-                LineSwitchManager.testAll()
-                print("NetWork changes")
-            default:
-                print("NetWork changes")
-            }
-            
-        }
     }
 }

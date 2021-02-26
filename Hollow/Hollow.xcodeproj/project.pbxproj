@@ -172,6 +172,7 @@
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
 		0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */; };
 		0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */; };
+		0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -337,6 +338,7 @@
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
 		0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputComponents.swift; sourceTree = "<group>"; };
 		0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modalPresent.swift"; sourceTree = "<group>"; };
+		0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectivityStatus+isConnected.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -847,6 +849,7 @@
 				0E906CF525DCEADC0034053C /* String+Date.swift */,
 				0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */,
 				00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */,
+				0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */,
 				0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */,
 				0E906D3925DCEBF20034053C /* Test.swift in Sources */,
+				0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */,
 				0E906D1B25DCEADD0034053C /* SystemMessage.swift in Sources */,
 				0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,

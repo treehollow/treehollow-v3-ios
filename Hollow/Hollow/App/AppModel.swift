@@ -8,10 +8,26 @@
 
 import Combine
 import Defaults
+import Connectivity
 
 class AppModel: ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+    
     @Published var isInMainView = Defaults[.accessToken] != nil
     
     // Only for indicating expired state in `WelcomeView`
     @Published var tokenExpired = false
+    
+    @Published var connectedToNetwork = Connectivity().status.isConnected
+    
+    init() {
+        ConnectivityPublisher()
+            .map { $0.status.isConnected }
+            .print()
+            .sinkOnMainThread(receiveValue: {
+                LineSwitchManager.testAll()
+                self.connectedToNetwork = $0
+            })
+            .store(in: &cancellables)
+    }
 }
