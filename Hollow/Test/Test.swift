@@ -10,6 +10,7 @@
 
 import Foundation
 import UIKit
+import Defaults
 
 struct Test {
     struct Options: OptionSet {
@@ -24,6 +25,7 @@ struct Test {
         static let sendComment = Options(rawValue: 1 << 7)
         static let sendVoteData = Options(rawValue: 1 << 8)
         static let getPostList = Options(rawValue: 1 << 9)
+        static let testPing = Options(rawValue: 1 << 10)
     }
     
     static func performTest(options: Options = []) {
@@ -62,6 +64,11 @@ struct Test {
         if options.contains(.getPostList) {
             let getPostList = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: testAPIRoots, token: testAccessToken, page: 1))
             getPostList.performTestRequest()
+        }
+        if options.contains(.testPing) {
+            Defaults.reset(.orderdLineStorage)
+            LineSwitch().setAPIList(urlBase: testAPIRoots, type: .apiRoot)
+            LineSwitch().testPing(type: .apiRoot)
         }
     }
 }

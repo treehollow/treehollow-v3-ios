@@ -11,6 +11,7 @@ import Defaults
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import Connectivity
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
@@ -20,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
         Test.performTest(options: [])
-//        Defaults[.accessToken] = testAccessToken
+        //        Defaults[.accessToken] = testAccessToken
         #else
         
         // Start AppCenter services
@@ -44,6 +45,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Fetch the lastest config
         fetchConfig()
+        // test all api when updated
+        LineSwitch().testAll()
+        // setup network change notifier
+        setupNetworkChangeNotifier()
         return true
     }
     
@@ -64,7 +69,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         #endif
         print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
-
+    
     // MARK: - Tree Hollow Configuration
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
         guard let config = Defaults[.hollowConfig] else { return }
@@ -103,5 +108,31 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 Defaults[.hollowConfig] = result
             }
         })
+    }
+    
+    /// setup Network Change Notifier
+    private func setupNetworkChangeNotifier() {
+        let connectivity: Connectivity = Connectivity()
+        
+        let connectivityChanged: (Connectivity) -> Void = { _ in
+            updateConnectionStatus(connectivity.status)
+        }
+        
+        connectivity.whenConnected = connectivityChanged
+        connectivity.whenDisconnected = connectivityChanged
+
+        connectivity.startNotifier()
+        
+        func updateConnectionStatus(_ status: Connectivity.Status) {
+            
+            switch status {
+            case .connected:
+                LineSwitch().testAll()
+                print("NetWork changes")
+            default:
+                print("NetWork changes")
+            }
+            
+        }
     }
 }

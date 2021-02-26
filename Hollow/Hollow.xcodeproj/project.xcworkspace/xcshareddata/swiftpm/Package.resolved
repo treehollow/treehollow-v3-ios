@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Connectivity",
+        "repositoryURL": "https://github.com/rwbutler/Connectivity.git",
+        "state": {
+          "branch": null,
+          "revision": "19f08ea4f25efe44cceea2ed5c52a0ca1bb567b5",
+          "version": "5.0.1"
+        }
+      },
+      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {

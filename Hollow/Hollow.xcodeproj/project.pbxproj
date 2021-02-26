@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 006DF03625DF7FBA0005C2B5 /* Cache */; };
+		00AA103525E74212006B3D6D /* LineSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA103425E74212006B3D6D /* LineSwitch.swift */; };
+		00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */; };
+		00AA104625E89C2F006B3D6D /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 00AA104525E89C2F006B3D6D /* Connectivity */; };
+		00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014E925E1054C004E416E /* Post+PostData.swift */; };
 		00B014ED25E1205A004E416E /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014EC25E1205A004E416E /* PostCache.swift */; };
 		00EFC06925DF922000536B52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00EFC06825DF922000536B52 /* Kingfisher */; };
 		00EFC07125DFC71500536B52 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07025DFC71500536B52 /* Vote.swift */; };
@@ -173,6 +177,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00AA103425E74212006B3D6D /* LineSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSwitch.swift; sourceTree = "<group>"; };
+		00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLString+Host.swift"; sourceTree = "<group>"; };
+		00B014E925E1054C004E416E /* Post+PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+PostData.swift"; sourceTree = "<group>"; };
 		00B014EC25E1205A004E416E /* PostCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCache.swift; sourceTree = "<group>"; };
 		00EFC07025DFC71500536B52 /* Vote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		00EFC07325DFC73800536B52 /* ImageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadata.swift; sourceTree = "<group>"; };
@@ -346,6 +353,7 @@
 				0E1DD7D325D94B52000D27BA /* AvatarX in Frameworks */,
 				00EFC06925DF922000536B52 /* Kingfisher in Frameworks */,
 				0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */,
+				00AA104625E89C2F006B3D6D /* Connectivity in Frameworks */,
 				0E415B9625CD77C600351672 /* Defaults in Frameworks */,
 				0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */,
 				0E09B7A725D4D70600DC5615 /* ImageScrollView in Frameworks */,
@@ -843,6 +851,7 @@
 				0E906CF525DCEADC0034053C /* String+Date.swift */,
 				00EFC07625DFC77D00536B52 /* Vote+VoteData.swift */,
 				0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */,
+				00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -854,6 +863,7 @@
 				0E906CFA25DCEADD0034053C /* ImageSaver.swift */,
 				00B014EC25E1205A004E416E /* PostCache.swift */,
 				0EAA1B4225E5392700904296 /* TimerPublisher.swift */,
+				00AA103425E74212006B3D6D /* LineSwitch.swift */,
 				0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */,
 			);
 			path = Utilities;
@@ -893,6 +903,7 @@
 				0E1DD7D225D94B52000D27BA /* AvatarX */,
 				006DF03625DF7FBA0005C2B5 /* Cache */,
 				00EFC06825DF922000536B52 /* Kingfisher */,
+				00AA104525E89C2F006B3D6D /* Connectivity */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -930,6 +941,7 @@
 				0E1DD7D125D94B52000D27BA /* XCRemoteSwiftPackageReference "AvatarX" */,
 				006DF03525DF7FBA0005C2B5 /* XCRemoteSwiftPackageReference "Cache" */,
 				00EFC06725DF922000536B52 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -1023,6 +1035,7 @@
 				0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
+				00AA103525E74212006B3D6D /* LineSwitch.swift in Sources */,
 				0E906D0C25DCEADD0034053C /* DeviceListRequest.swift in Sources */,
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
 				00EFC07725DFC77D00536B52 /* Vote+VoteData.swift in Sources */,
@@ -1059,6 +1072,7 @@
 				0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */,
 				0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */,
 				0E415B5225CD772200351672 /* CustomGradient.swift in Sources */,
+				00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */,
 				0E415B6125CD772200351672 /* HollowInputView.swift in Sources */,
 				0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */,
 				0E415B6E25CD772200351672 /* AboutView.swift in Sources */,
@@ -1332,6 +1346,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rwbutler/Connectivity.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		00EFC06725DF922000536B52 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1395,6 +1417,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 006DF03525DF7FBA0005C2B5 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		00AA104525E89C2F006B3D6D /* Connectivity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */;
+			productName = Connectivity;
 		};
 		00EFC06825DF922000536B52 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
