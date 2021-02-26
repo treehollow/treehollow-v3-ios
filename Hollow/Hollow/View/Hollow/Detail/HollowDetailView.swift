@@ -13,6 +13,8 @@ struct HollowDetailView: View {
     
     @State private var commentRect: CGRect = .zero
     @State private var scrollViewOffset: CGFloat? = 0
+    @State var replyIndex: Int = -2
+    @State var inputPresented = false
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     
@@ -50,45 +52,26 @@ struct HollowDetailView: View {
                         HollowContentView(
                             postDataWrapper: store.postDataWrapper,
                             options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags],
-                            voteHandler: store.vote
+                            voteHandler: store.vote,
+                            imageReloadHandler: { _ in store.loadPostImage() }
                         )
                         .fixedSize(horizontal: false, vertical: true)
+                        .id(-1)
+                        .onTapGesture {
+                            replyIndex = -1
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                        }
                         
                         Spacer().frame(height: 0)
                             // Get the frame of the comment view.
                             .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
-
-                        // Comment
-                        let postData = store.postDataWrapper.post
-                        (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
-                            .fontWeight(.heavy)
-                            .leading()
-                            .padding(.top)
-                            .padding(.bottom, 5)
-                        let doubleTapAction: (Int) -> Void = { index in
-                            let desComment = postData.comments[index].replyTo
-                            guard desComment >= 0 else { return }
-                            withAnimation { proxy.scrollTo(desComment, anchor: .center) }
-                        }
-                        if postData.comments.count > 30 {
-                            LazyVStack {
-                                ForEach(postData.comments.indices, id: \.self) { index in
-                                    commentView(at: index, onDoubleTap: { doubleTapAction(index) })
-                                    .id(postData.comments[index].commentId)
+                        
+                        commentView
+                            .onChange(of: replyIndex) { index in
+                                withAnimation {
+                                    proxy.scrollTo(index, anchor: .top)
                                 }
                             }
-                        } else {
-                            VStack {
-                                ForEach(postData.comments.indices, id: \.self) { index in
-                                    commentView(at: index, onDoubleTap: { doubleTapAction(index) })
-                                    .id(postData.comments[index].commentId)
-                                }
-                            }
-
-                        }
-                        if store.isLoading {
-                            LoadingLabel(foregroundColor: .primary).leading()
-                        }
                     }
                     .padding(.horizontal)
                     .background(Color.hollowDetailBackground)
@@ -96,15 +79,34 @@ struct HollowDetailView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
-            
+        }
+        .overlay(Group {
+            if replyIndex >= -1 {
+                let post = store.postDataWrapper.post
+                let replyTo = replyIndex == -1 ? -1 : post.comments[replyIndex].commentId
+                let name = replyIndex == -1 ?
+                    NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
+                    post.comments[replyIndex].name
+                HollowCommentInputView(
+                    store: .init(presented: $inputPresented, postId: post.postId, replyTo: replyTo, name: name, onFinishSending: store.requestDetail)
+                )
+                .shadow(radius: 12)
+                .bottom()
+                .transition(.move(edge: .bottom))
+            }
+        })
+
+        .onChange(of: replyIndex) { index in
+            if index >= -1 {
+                withAnimation { inputPresented = true }
+            }
+        }
+        .onChange(of: inputPresented) { presented in
+            if !presented { withAnimation { replyIndex = -2 }}
         }
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
         .animation(.default)
     }
     
-    func commentView(at index: Int, onDoubleTap: @escaping () -> Void) -> some View {
-        HollowCommentContentView(commentData: $store.postDataWrapper.post.comments[index], compact: false)
-            .gesture(TapGesture(count: 2).onEnded(onDoubleTap))
-    }
 }

@@ -95,7 +95,7 @@ struct HollowVoteContentView: View {
                 LinearGradient.vertical(gradient: selected ? .hollowContentVote : .clear)
                     .opacity(selected && voteData.voteCount != totalCount ? 0.7 : 1)
                     .overlay(Group { if voted {
-                        VotePortionRectangle(proportion: Double(voteData.voteCount) / Double(totalCount))
+                        VotePortionCapsule(proportion: Double(voteData.voteCount) / Double(totalCount))
                             .foregroundColor(.hollowContentVoteGradient1)
                             .opacity(selected ? 1 : 0.3)
                             .opacity(voteData.voteCount == totalCount ? 0 : 1)
@@ -111,7 +111,7 @@ struct HollowVoteContentView: View {
         }
     }
     
-        private struct VotePortionRectangle: Shape, Animatable {
+        private struct VotePortionCapsule: Shape, Animatable {
             var proportion: Double
             func path(in rect: CGRect) -> Path {
                 let endX = rect.minX + rect.width * CGFloat(proportion)

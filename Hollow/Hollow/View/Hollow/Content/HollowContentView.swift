@@ -19,6 +19,8 @@ struct HollowContentView: View {
     var maxImageHeight: CGFloat? = nil
     var lineLimit: Int = 12
     
+    var imageReloadHandler: ((HollowImage) -> Void)? = nil
+    
     private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
     
     private var hasVote: Bool { postDataWrapper.post.vote != nil }
@@ -46,12 +48,15 @@ struct HollowContentView: View {
                 .cornerRadius(body6)
                 .leading()
         }
-
+        
         if hasImage && options.contains(.displayImage) && !hideContent {
-            HollowImageView(hollowImage: postDataWrapper.post.hollowImage!, description: postDataWrapper.post.text)
-                .cornerRadius(4)
-                .frame(maxHeight: maxImageHeight)
-                .fixedSize(horizontal: false, vertical: true)
+            HollowImageView(hollowImage: postDataWrapper.post.hollowImage!,
+                            description: postDataWrapper.post.text,
+                            reloadImage: imageReloadHandler
+            )
+            .cornerRadius(4)
+            .frame(maxHeight: maxImageHeight)
+            .fixedSize(horizontal: false, vertical: true)
         }
         
         if let citedPid = postDataWrapper.citedPostID,

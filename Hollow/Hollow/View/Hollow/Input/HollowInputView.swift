@@ -58,9 +58,11 @@ struct HollowInputView: View {
             .padding(.top, vstackSpacing)
             
             VStack(spacing: vstackSpacing) {
-                avatar
+                HollowInputAvatar(avatarWidth: avatarWidth)
                 imageView
-                editorView
+                
+                let text = NSLocalizedString("INPUT_EDITOR_PLACEHOLDER", comment: "")
+                HollowInputTextEditor(text: $inputStore.text, editorEditing: $editorEditing, placeholder: text)
                 voteView
                 footerView
             }

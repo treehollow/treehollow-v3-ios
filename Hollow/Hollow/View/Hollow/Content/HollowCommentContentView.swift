@@ -13,6 +13,8 @@ struct HollowCommentContentView: View {
     @Binding var commentData: CommentData
     var compact: Bool
     var contentVerticalPadding: CGFloat? = 10
+    var hideLabel: Bool = false
+    var imageReloadHandler: ((HollowImage) -> Void)? = nil
     private let compactLineLimit = 3
     private var nameLabelWidth: CGFloat {
         return compact ? body60 : body45
@@ -38,7 +40,9 @@ struct HollowCommentContentView: View {
             }
             HStack {
                 HStack(alignment: .top) {
-                    Group {
+                    Group { if hideLabel {
+                        Spacer(minLength: nameLabelWidth)
+                    } else {
                         if compact {
                             Text(commentData.name)
                                 .bold()
@@ -51,7 +55,7 @@ struct HollowCommentContentView: View {
                         } else {
                             avatarView
                         }
-                    }
+                    }}
                     VStack(alignment: .leading, spacing: compact ? 0 : body5) {
                         if !compact {
                             HStack {
@@ -77,10 +81,14 @@ struct HollowCommentContentView: View {
                         }
                         
                         if commentData.type == .image && !compact {
-                            HollowImageView(hollowImage: commentData.image!, description: commentData.text)
-                                .cornerRadius(4)
-                                .padding(.bottom, 10)
-                                .fixedSize(horizontal: false, vertical: true)
+                            HollowImageView(
+                                hollowImage: commentData.image!,
+                                description: commentData.text,
+                                reloadImage: imageReloadHandler
+                            )
+                            .cornerRadius(4)
+                            .padding(.bottom, 10)
+                            .fixedSize(horizontal: false, vertical: true)
                         }
                         Group {
                             if commentData.text != "" {

@@ -46,6 +46,39 @@ struct Post: Codable {
     var url: String?
     var imageMetadata: ImageMetadata?
     var vote: Vote?
+    
 }
 
-
+extension Post {
+    func toPostData(comments: [CommentData]) -> PostData {
+        // precess post image
+        var image: HollowImage? = nil
+        if let imageurl = self.url, let imageMetadata = self.imageMetadata,
+           let w = imageMetadata.w, let h = imageMetadata.h {
+            image = HollowImage(placeholder: (width: w, height: h), image: nil, imageURL: imageurl)
+        }
+        
+        var text = self.text
+        
+        while text.first == "\n" {
+            text.removeFirst()
+        }
+        while text.last == "\n" {
+            text.removeLast()
+        }
+        
+        return PostData(
+            attention: attention,
+            deleted: deleted,
+            likeNumber: likenum,
+            permissions: permissions,
+            postId: pid,
+            replyNumber: reply,
+            timestamp: Date(timeIntervalSince1970: TimeInterval(self.timestamp)),
+            tag: tag,
+            text: text,
+            hollowImage: image,
+            vote: vote?.toVoteData(),
+            comments: comments)
+    }
+}

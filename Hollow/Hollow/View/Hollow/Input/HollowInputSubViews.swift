@@ -9,20 +9,6 @@
 import SwiftUI
 
 extension HollowInputView {
-    var avatar: some View {
-        AvatarWrapper(
-            colors: [.buttonGradient1, .background],
-            resolution: 4,
-            padding: avatarWidth * 0.1,
-            // Boom! You've discover a hidden "bug"!
-            value: "liang2kl"
-        )
-        .frame(width: avatarWidth)
-        .fixedSize()
-        .clipShape(Circle())
-        .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.buttonGradient1))
-        .leading()
-    }
     
     var imageView: some View { Group {
         if let image = inputStore.compressedImage, !hideComponents {

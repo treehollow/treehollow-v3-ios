@@ -8,6 +8,15 @@
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
 
 /* No comment provided by engineer. */
+"COMMENT_INPUT_REPLY_TO_PREFIX" = "Reply to ";
+
+/* No comment provided by engineer. */
+"COMMENT_INPUT_SEND_BUTTON_SEND_POST" = "Send";
+
+/* No comment provided by engineer. */
+"COMMENT_INPUT_SEND_BUTTON_SENDING" = "Sending";
+
+/* No comment provided by engineer. */
 "DATEFORMATTER_HOUR" = " h";
 
 /* No comment provided by engineer. */

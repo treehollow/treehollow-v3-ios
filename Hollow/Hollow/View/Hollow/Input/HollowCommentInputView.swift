@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct HollowCommentInputView: View {
-    @ObservedObject var store = HollowCommentInputStore()
-    
-    @State private var editorEditing = false
+    @ObservedObject var store: HollowCommentInputStore
     @State var keyboardShown = false
     @State var showImagePicker = false
     
@@ -29,30 +27,55 @@ struct HollowCommentInputView: View {
     var hasImage: Bool { store.compressedImage != nil }
     var hideComponents: Bool { keyboardShown }
     
+    var contentValid: Bool { store.text != "" || store.compressedImage != nil }
+    
     var body: some View {
         VStack(spacing: vstackSpacing) {
+            HStack {
+                BarButton(action: { withAnimation { store.presented.wrappedValue = false }}, systemImageName: "xmark")
+
+                Spacer()
+                let sendingText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SENDING", comment: "")
+                let sendCommentText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SEND_POST", comment: "")
+
+                MyButton(action: store.sendComment) {
+                    Text(store.isLoading ? sendingText + "..." : sendCommentText)
+                        .modifier(MyButtonDefaultStyle())
+                }
+                .disabled(!contentValid)
+            }
+            
             imageView
             
-            CustomTextEditor(text: $store.text, editing: $editorEditing, modifiers: { $0 })
-                .overlayDoneButtonAndLimit(
-                    editing: $editorEditing,
-                    textCount: store.text.count,
-                    limit: 10000,
-                    buttonFontSize: buttonFontSize
-                )
-                .overlay(Group { if store.text == "" {
-                    let text = NSLocalizedString("COMMENT_INPUT_EDITOR_PLACEHOLDER", comment: "")
-                    Text(text + "...")
-                        .foregroundColor(.uiColor(.systemFill))
-                }})
-                .frame(height: editorFontSize * 7)
-            imageButton.trailing()
+            let placeholder = NSLocalizedString("COMMENT_INPUT_REPLY_TO_PREFIX", comment: "") + store.replyToName
+
+            HollowInputTextEditor(text: $store.text, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
+                .accentColor(.hollowContentText)
+
+            .frame(height: editorFontSize * 10)
+            HStack {
+                if !keyboardShown { Spacer() }
+                imageButton
+                if keyboardShown {
+                    Spacer()
+                    MyButton(action: self.hideKeyboard) {
+                        Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
+                            .font(.system(size: buttonFontSize, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                }
+            }
         }
+        .padding()
+        .background(Color.hollowCardBackground)
+        .cornerRadius(12)
+        .padding()
         
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in withAnimation { keyboardShown = false }}
         .modifier(ImagePickerModifier(presented: $showImagePicker, image: $store.image))
         .onChange(of: store.image) { _ in store.compressImage() }
+        .disabled(store.isLoading)
     }
 }
 
@@ -63,7 +86,8 @@ extension HollowCommentInputView {
             Color.background.aspectRatio(1, contentMode: .fit)
             
             Button(action: { withAnimation {
-                editorEditing = false
+//                editorEditing = false
+                self.hideKeyboard()
                 if !hasImage || !hideComponents {
                     showImagePicker = true
                 }
@@ -139,11 +163,3 @@ extension HollowCommentInputView {
         }}
     }
 }
-
-#if DEBUG
-struct HollowCommentInputView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowCommentInputView()
-    }
-}
-#endif

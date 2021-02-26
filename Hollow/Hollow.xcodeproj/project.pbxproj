@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 006DF03625DF7FBA0005C2B5 /* Cache */; };
-		00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014E925E1054C004E416E /* Post+PostData.swift */; };
 		00B014ED25E1205A004E416E /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014EC25E1205A004E416E /* PostCache.swift */; };
 		00EFC06925DF922000536B52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00EFC06825DF922000536B52 /* Kingfisher */; };
 		00EFC07125DFC71500536B52 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07025DFC71500536B52 /* Vote.swift */; };
 		00EFC07425DFC73800536B52 /* ImageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07325DFC73800536B52 /* ImageMetadata.swift */; };
 		00EFC07725DFC77D00536B52 /* Vote+VoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07625DFC77D00536B52 /* Vote+VoteData.swift */; };
-		00EFC07A25E00D7200536B52 /* Comment+CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07925E00D7200536B52 /* Comment+CommentData.swift */; };
 		0E09B7A725D4D70600DC5615 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E09B7A625D4D70600DC5615 /* ImageScrollView */; };
 		0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7A925D4D73100DC5615 /* ImageViewer.swift */; };
 		0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */; };
@@ -162,21 +160,23 @@
 		0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4D25E6971500904296 /* Localizable.strings */; };
 		0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B5625E7694400904296 /* InfoPlist.strings */; };
 		0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */; };
+		0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */; };
+		0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
+		0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */; };
+		0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00B014E925E1054C004E416E /* Post+PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+PostData.swift"; sourceTree = "<group>"; };
 		00B014EC25E1205A004E416E /* PostCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCache.swift; sourceTree = "<group>"; };
 		00EFC07025DFC71500536B52 /* Vote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		00EFC07325DFC73800536B52 /* ImageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadata.swift; sourceTree = "<group>"; };
 		00EFC07625DFC77D00536B52 /* Vote+VoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vote+VoteData.swift"; sourceTree = "<group>"; };
-		00EFC07925E00D7200536B52 /* Comment+CommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comment+CommentData.swift"; sourceTree = "<group>"; };
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
 		0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputStore.swift; sourceTree = "<group>"; };
@@ -324,12 +324,16 @@
 		0EAA1B4E25E6971500904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EAA1B5725E7694400904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
+		0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+revertColorScheme.swift"; sourceTree = "<group>"; };
+		0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailSubViews.swift; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
+		0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputComponents.swift; sourceTree = "<group>"; };
+		0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modalPresent.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,6 +486,8 @@
 				0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */,
 				0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */,
 				0EAA1B4A25E6562B00904296 /* View+flash.swift */,
+				0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */,
+				0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -526,6 +532,7 @@
 		0E415B0B25CD772200351672 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */,
 				0E415B0D25CD772200351672 /* HollowCommentInputView.swift */,
 				0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */,
 				0E415B1125CD772200351672 /* HollowInputView.swift */,
@@ -560,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				0E415B2025CD772200351672 /* HollowDetailView.swift */,
+				0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -834,8 +842,6 @@
 				0E906CF425DCEADC0034053C /* Bool+int.swift */,
 				0E906CF525DCEADC0034053C /* String+Date.swift */,
 				00EFC07625DFC77D00536B52 /* Vote+VoteData.swift */,
-				00EFC07925E00D7200536B52 /* Comment+CommentData.swift */,
-				00B014E925E1054C004E416E /* Post+PostData.swift */,
 				0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */,
 			);
 			path = Extensions;
@@ -954,6 +960,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E906D1025DCEADD0034053C /* ChangePasswordRequest.swift in Sources */,
+				0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */,
 				0E415B6C25CD772200351672 /* HollowHeaderView.swift in Sources */,
 				0E906D1F25DCEADD0034053C /* HollowType.swift in Sources */,
 				0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */,
@@ -975,6 +982,7 @@
 				0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */,
 				0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */,
 				00EFC07425DFC73800536B52 /* ImageMetadata.swift in Sources */,
+				0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */,
 				0E906D0825DCEADD0034053C /* SetPushRequest.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsView.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
@@ -1009,10 +1017,10 @@
 				0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */,
 				0E906D0125DCEADD0034053C /* AttentionListRequest.swift in Sources */,
 				0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */,
+				0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */,
 				0E906D3925DCEBF20034053C /* Test.swift in Sources */,
 				0E906D1B25DCEADD0034053C /* SystemMessage.swift in Sources */,
 				0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */,
-				00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */,
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				0E906D0C25DCEADD0034053C /* DeviceListRequest.swift in Sources */,
@@ -1053,11 +1061,11 @@
 				0E415B5225CD772200351672 /* CustomGradient.swift in Sources */,
 				0E415B6125CD772200351672 /* HollowInputView.swift in Sources */,
 				0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */,
-				00EFC07A25E00D7200536B52 /* Comment+CommentData.swift in Sources */,
 				0E415B6E25CD772200351672 /* AboutView.swift in Sources */,
 				0E415B7525CD772200351672 /* AccountView.swift in Sources */,
 				0E906D2A25DCEADD0034053C /* Int+bool.swift in Sources */,
 				0E415B7A25CD772200351672 /* LoginSubViews.swift in Sources */,
+				0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */,
 				0E415B7C25CD772200351672 /* HollowTimelineCard.swift in Sources */,
 				0E906D0425DCEADD0034053C /* AttentionListSearchRequest.swift in Sources */,
 				00EFC07125DFC71500536B52 /* Vote.swift in Sources */,

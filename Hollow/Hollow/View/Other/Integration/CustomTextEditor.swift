@@ -13,11 +13,12 @@ import SwiftUI
 struct CustomTextEditor<Content>: View where Content: View {
     @Binding var text: String
     @Binding var editing: Bool
+    var receiveCallback = false
 
     let modifiers: (TextEditor) -> Content
     
     var body: some View {
-        TextEditorRepresentable(text: $text, editing: $editing, content: modifiers(TextEditor(text: $text)))
+        TextEditorRepresentable(text: $text, editing: $editing, receiveCallback: receiveCallback, content: modifiers(TextEditor(text: $text)))
     }
 }
 
@@ -26,17 +27,18 @@ fileprivate struct TextEditorRepresentable<Content>: UIViewControllerRepresentab
     
     var text: Binding<String>
     var editing: Binding<Bool>
+    var receiveCallback: Bool
     let content: Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<TextEditorRepresentable<Content>>) -> TextEditorUIHostingController<Content> {
-        return TextEditorUIHostingController(text: text, textViewEditing: editing, rootView: self.content)
+        return TextEditorUIHostingController(text: text, textViewEditing: editing, receiveCallback: receiveCallback, rootView: self.content)
     }
     
     func updateUIViewController(_ uiViewController: TextEditorUIHostingController<Content>, context: UIViewControllerRepresentableContext<TextEditorRepresentable<Content>>) {
         // necessary here as we need to update the `rootView` property
         // when SwiftUI updates the view (the property `content`)
         uiViewController.rootView = content
-        if !editing.wrappedValue {
+        if !editing.wrappedValue && receiveCallback {
             uiViewController.textView?.endEditing(true)
         }
     }
@@ -46,10 +48,12 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
     var text: Binding<String>
     var textViewEditing: Binding<Bool>
     var textView: UITextView?
+    var receiveCallback: Bool
     
-    init(text: Binding<String>, textViewEditing: Binding<Bool>, rootView: Content) {
+    init(text: Binding<String>, textViewEditing: Binding<Bool>, receiveCallback: Bool, rootView: Content) {
         self.text = text
         self.textViewEditing = textViewEditing
+        self.receiveCallback = receiveCallback
         super.init(rootView: rootView)
     }
     
@@ -75,10 +79,12 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
         textView = findUITextView(view: view)
         textView?.backgroundColor = nil
         
-        // Once we set the delegate to `self`, some of the original functionality
-        // of SwiftUI's TextEditor will be lost (e.g. the @Binding text will not
-        // change). Thus we need to implement by ourselves (using delegate methods).
-        textView?.delegate = self
+        if receiveCallback {
+            // Once we set the delegate to `self`, some of the original functionality
+            // of SwiftUI's TextEditor will be lost (e.g. the @Binding text will not
+            // change). Thus we need to implement by ourselves (using delegate methods).
+            textView?.delegate = self
+        }
     }
     
     private func findUITextView(view: UIView) -> UITextView? {

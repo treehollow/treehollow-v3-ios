@@ -55,10 +55,10 @@ struct HollowHeaderView: View {
                             postData.text != "" ?
                             postData.text.removeLineBreak() : "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
                             
-                        secondaryText(postDescription)
+                        secondaryText(postDescription, fontWeight: .semibold)
                     } else {
                         // Time label
-                        secondaryText(timeLabelText, fontWeight: .medium)
+                        secondaryText(timeLabelText, fontWeight: .semibold)
                             .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                     }
                 }

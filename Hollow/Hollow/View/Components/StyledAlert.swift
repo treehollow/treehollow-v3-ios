@@ -11,34 +11,12 @@ import SwiftUI
 extension View {
     func styledAlert(presented: Binding<Bool>, title: String, message: String?, buttons: [StyledAlert.Button]) -> some View {
         return self
-            .modifier(StyledAlertModifier(presented: presented, title: title, message: message, buttons: buttons))
-    }
-}
-
-fileprivate struct StyledAlertModifier: ViewModifier {
-    @Binding var presented: Bool
-    var title: String
-    var message: String?
-    var buttons: [StyledAlert.Button]
-
-    func body(content: Content) -> some View {
-        content
-            .onChange(of: presented) { _ in
-                guard let topVC = IntegrationUtilities.topViewController() else { return }
-                if presented {
-                    // Top controller will present out alert controller
-                    let newVC = UIHostingController(rootView: StyledAlert(presented: $presented, title: title, message: message, buttons: buttons))
-                    newVC.view.backgroundColor = nil
-                    newVC.modalPresentationStyle = .overFullScreen
-                    newVC.modalTransitionStyle = .crossDissolve
-                    topVC.present(newVC, animated: true)
-                } else {
-                    // Top view controller is our alert controller
-                    topVC.dismiss(animated: true)
-                }
+            .modalPresent(presented: presented, presentationStyle: .overFullScreen, transitionStyle: .crossDissolve) {
+                StyledAlert(presented: presented, title: title, message: message, buttons: buttons)
             }
     }
 }
+
 
 struct StyledAlert: View {
     @Binding var presented: Bool
@@ -122,16 +100,3 @@ struct StyledAlert: View {
         }
     }
 }
-
-#if DEBUG
-struct StyledAlert_Previews: PreviewProvider {
-    static var previews: some View {
-        StyledAlert(presented: .constant(true), title: "Restore Password", message: "Please send an email using current email address to the contact email to restore your password.", buttons: [
-            .init(text: "Default", action: {}),
-            .init(text: "Cancel", style: .cancel, action: {}),
-            .init(text: "Destructive", style:. destructive, action: {})
-        ])
-        .background(Color.background)
-    }
-}
-#endif

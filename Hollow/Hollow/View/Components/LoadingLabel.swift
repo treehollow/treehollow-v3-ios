@@ -18,7 +18,7 @@ struct LoadingLabel: View {
     var body: some View {
         HStack {
             Text("LOADING_LABEL_TEXT")
-                .font(.system(size: body16, weight: .medium))
+                .font(.system(size: body16, weight: .bold))
             Spinner(color: foregroundColor, desiredWidth: body14)
         }
         .foregroundColor(foregroundColor)

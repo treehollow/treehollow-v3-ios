@@ -16,6 +16,14 @@ struct HollowImageView: View {
     @State private var savePhotoError: String? = nil
     @State private var showImageViewer = false
     
+    /// Handler to reload the current image if error occurs.
+    ///
+    /// As the image view does not manage the data source, it is more appropirate
+    /// to handle the request outside the view.
+    var reloadImage: ((HollowImage) -> Void)? = nil
+    
+    @ScaledMetric private var reloadButtonSize: CGFloat = 50
+    
     var body: some View {
         Group {
             if let hollowImage = self.hollowImage {
@@ -51,6 +59,23 @@ struct HollowImageView: View {
                     Rectangle()
                         .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))
                         .aspectRatio(hollowImage.placeholder.width / hollowImage.placeholder.height, contentMode: .fit)
+                        .overlay(Group { if let _ = self.hollowImage?.loadingError {
+                            Button(action: { reloadImage?(self.hollowImage!) }) {
+                                ZStack {
+                                    Blur()
+                                    Image(systemName: "arrow.clockwise")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .padding()
+                                        .font(.system(size: reloadButtonSize, weight: .semibold))
+                                }
+                                .revertColorScheme()
+                                .frame(maxWidth: reloadButtonSize * 1.5, maxHeight: reloadButtonSize * 1.5)
+                                .clipShape(Circle())
+                                .padding()
+
+                            }
+                        }})
                         .onAppear {
                             withAnimation(Animation.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
                                 flash.toggle()
@@ -61,11 +86,3 @@ struct HollowImageView: View {
         }
     }
 }
-
-#if DEBUG
-struct HollowImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowImageView(hollowImage: .init(placeholder: (1760, 1152), image: UIImage(named: "test"), imageURL: ""))
-    }
-}
-#endif

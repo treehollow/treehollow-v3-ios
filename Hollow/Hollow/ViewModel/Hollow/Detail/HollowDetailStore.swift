@@ -35,7 +35,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     }
     
     // MARK: - Load Post Detail
-    private func requestDetail() {
+    func requestDetail() {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, includeComments: true)
@@ -73,23 +73,32 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         loadCitedPost()
     }
     
-    private func loadPostImage() {
+    func loadPostImage() {
         if let imageURL = postDataWrapper.post.hollowImage?.imageURL,
            postDataWrapper.post.hollowImage?.image == nil {
-            let config = Defaults[.hollowConfig]!
-            let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.imgBaseUrls, urlString: imageURL))
-
-            imageRequest.publisher
-                .retry(3)
-                .sinkOnMainThread(receiveError: { error in
-                    // TODO: Handle error
-                }, receiveValue: { image in
-                    withAnimation {
-                        self.postDataWrapper.post.hollowImage?.image = image
-                    }
-                })
-                .store(in: &cancellables)
+            loadImage(
+                for: imageURL,
+                receiveValue: { image in withAnimation {
+                    self.postDataWrapper.post.hollowImage?.image = image
+                }},
+                receiveError: { error in withAnimation {
+                    self.postDataWrapper.post.hollowImage?.loadingError = error.description
+                }}
+            )
         }
+    }
+    
+    private func loadImage(for imageURL: String, receiveValue: @escaping (UIImage) -> Void, receiveError: @escaping (FetchImageRequestError) -> Void) {
+        let config = Defaults[.hollowConfig]!
+        let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.imgBaseUrls, urlString: imageURL))
+
+        imageRequest.publisher
+            .retry(3)
+            .sinkOnMainThread(
+                receiveError: receiveError,
+                receiveValue: receiveValue
+            )
+            .store(in: &cancellables)
     }
     
     private func loadCitedPost() {
@@ -122,12 +131,14 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         
         FetchImageRequest.publisher(for: requests, retries: 3)?
             .sinkOnMainThread(receiveValue: { index, output in
+                let commentId = commentsWithNoImages[index].commentId
                 switch output {
-                case .failure:
-                    // TORO: Handle error
-                    break
+                case .failure(let error):
+                    withAnimation {
+                        self.sendImageLoadingError(error.description, to: commentId)
+                    }
                 case .success(let image):
-                    self.assignImage(image, to: commentsWithNoImages[index].commentId)
+                    self.assignImage(image, to: commentId)
                 }
             })
             .store(in: &cancellables)
@@ -138,6 +149,21 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         withAnimation {
             self.postDataWrapper.post.comments[index].image?.image = image
         }
+    }
+    
+    private func sendImageLoadingError(_ error: String?, to commentId: Int) {
+        guard let index = postDataWrapper.post.comments.firstIndex(where: { $0.commentId == commentId }) else { return }
+        withAnimation {
+            self.postDataWrapper.post.comments[index].image?.loadingError = error
+        }
+    }
+    
+    func reloadImage(_ hollowImage: HollowImage, commentId: Int) {
+        loadImage(
+            for: hollowImage.imageURL,
+            receiveValue: { self.assignImage($0, to: commentId) },
+            receiveError: { self.sendImageLoadingError($0.description, to: commentId) }
+        )
     }
     
     // MARK: - Vote
