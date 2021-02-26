@@ -28,7 +28,7 @@ extension Defaults.Keys {
     /// User access token
     static let accessToken = Key<String?>("user.access.token")
     /// Auto line switch result
-    static let orderdLineStorage = Key<LineSwitchManager.OrderdLineStorage?>("net.hollow.lineswitch.orderdlinestorage")
+    static let orderdLineStorage = Key<LineSwitchManager.OrderedLineStorage?>("net.hollow.lineswitch.orderdlinestorage")
 }
 
 

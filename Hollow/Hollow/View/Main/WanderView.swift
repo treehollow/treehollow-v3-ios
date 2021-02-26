@@ -20,6 +20,9 @@ struct WanderView: View {
     
     @ObservedObject var viewModel: Wander
     
+    @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
+
+    
     var body: some View {
         CustomScrollView(
             didScrollToBottom: {
@@ -27,8 +30,8 @@ struct WanderView: View {
                 // view is presenting
                 guard detailPresentedIndex == nil else { return }
                 // Due to performance issue of WaterfallGrid, we set the
-                // maximum number of posts to 60 (at least loading for 2 times)
-                if viewModel.posts.count >= 60 {
+                // maximum number of posts to 90 (at least loading for 3 times)
+                if viewModel.posts.count >= 90 {
                     viewModel.posts.removeAll()
                 }
                 viewModel.loadMorePosts(clearPosts: false)
@@ -36,12 +39,13 @@ struct WanderView: View {
             didScroll: { direction in withAnimation { showReload = direction == .up }},
             refresh: viewModel.refresh,
             content: { proxy in Group {
-                WaterfallGrid(Array(viewModel.posts.enumerated()), id: \.element.id) { index, element in
-                    HollowWanderCardView(postData: $viewModel.posts[index])
+                WaterfallGrid(viewModel.posts) { postData in
+                    cardView(for: postData)
                         .onTapGesture {
+                            guard let index = viewModel.posts.firstIndex(where: { $0.id == postData.id }) else { return }
                             detailStore = HollowDetailStore(
                                 bindingPostWrapper: Binding(
-                                    get: { PostDataWrapper(post: element, citedPost: nil) },
+                                    get: { PostDataWrapper(post: postData, citedPost: nil) },
                                     set: { self.viewModel.posts[index] = $0.post }
                                 )
                             )
@@ -50,7 +54,6 @@ struct WanderView: View {
                             }
                         }
                         .disabled(viewModel.isLoading)
-                        .id(index)
                 }
                 .gridStyle(columns: 2, spacing: 10, animation: nil)
                 .padding(.horizontal, 15)
@@ -80,5 +83,34 @@ struct WanderView: View {
             
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
             .modifier(AppModelBehaviour(state: viewModel.appModelState))
+    }
+    
+    func cardView(for postData: PostData) -> some View {
+        VStack {
+            HollowHeaderView(postData: postData, compact: true)
+                .padding(.bottom, body5)
+            VStack {
+                HollowContentView(
+                    postDataWrapper: .init(post: postData, citedPost: nil),
+                    options: [.displayVote, .disableVote, .displayImage, .replaceForImageOnly, .compactText],
+                    voteHandler: { _ in },
+                    lineLimit: 20
+                )
+            }
+            // TODO: Vote and cite
+            HStack {
+                Label("\(postData.replyNumber)", systemImage: "quote.bubble")
+                    .foregroundColor(.hollowCardStarUnselected)
+                Spacer()
+                Label("\(postData.likeNumber)", systemImage: postData.attention ? "star.fill" : "star")
+                    .foregroundColor(postData.attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
+            }
+            .font(.system(size: 17, weight: .semibold, design: .rounded))
+            .padding(.top, body5)
+            .padding(.horizontal, 5)
+        }
+        .padding()
+        .background(Color.hollowCardBackground)
+        .cornerRadius(20)
     }
 }

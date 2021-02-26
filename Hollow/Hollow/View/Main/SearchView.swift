@@ -10,20 +10,25 @@ import Defaults
 
 struct SearchView: View {
     @Binding var presented: Bool
-    @ObservedObject var viewModel: Search = .init()
+    @ObservedObject var store = PostListRequestStore(type: .search)
     // TODO: Add other options in Defaults
-    @State private var showsAdvancedOptions = Defaults[.searchViewShowsAdvanced] {
+    @State var showsAdvancedOptions = Defaults[.searchViewShowsAdvanced] {
         didSet { Defaults[.searchViewShowsAdvanced] = showsAdvancedOptions }
     }
-    @State private var isSearching = false
-    @State private var startPickerPresented = false
-    @State private var endPickerPresented = false
+    @State var isSearching = false
+    @State var startPickerPresented = false
+    @State var endPickerPresented = false
     @State var searchText: String = ""
     // TODO: Time constrains
     @State var startDate: Date = .init()
     @State var endDate: Date = .init()
-    @State var selectsPartialSearch = false
-    private let transitionAnimation = Animation.searchViewTransition
+    @State var detailPresentedIndex: Int?
+    @State var detailStore: HollowDetailStore? = nil
+
+    let transitionAnimation = Animation.searchViewTransition
+    @State var showPost = false
+    
+    @Namespace var animation
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
@@ -32,85 +37,42 @@ struct SearchView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Button(action:{
-                    withAnimation(transitionAnimation) {
-                        presented = false
-                    }
-                }) {
-                    Image(systemName: "xmark")
-                        .modifier(ImageButtonModifier())
-                        .animation(transitionAnimation)
-                        .padding(.trailing)
-                }
-                .animation(.none)
-                Spacer()
-                MyButton(action: {}, gradient: .vertical(gradient: .button), transitionAnimation: transitionAnimation) {
-                    Text("SEARCHVIEW_SEARCH_BUTTON")
-                        .font(.system(size: buttonFontSize, weight: .bold))
-                        .foregroundColor(.white)
-                }
-                .animation(.none)
-            }
-            .topBar()
+            topBar()
+                .padding(.horizontal)
+
             // Group for additional padding
             Group {
-                VStack(spacing: 0) {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.secondary)
-                        TextField("SEARCHVIEW_TEXTFIELD_PLACEHOLDER", text: $searchText, onEditingChanged: { _ in
-                            // Toggle `isSearching`
-                        }, onCommit: {
-                            // Perform search action
-                        })
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                    }
-                    .font(.system(size: body16))
-                    .padding(.bottom, 5)
-                    Rectangle()
-                        .frame(height: 1)
-                        // TODO: Change color when start editing
-                        .foregroundColor(.uiColor(isSearching ? .secondaryLabel : .systemFill))
+                if !showPost {
+                    searchField()
+                        .padding(.vertical)
+                        .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
+                    searchConfigurationView()
+
                 }
-                .padding(.vertical)
-                Button(action:{ withAnimation { showsAdvancedOptions.toggle() }}) {
-                    Text("SEARCHVIEW_ADVANCED_BUTTON")
-                        .font(.system(size: body16, weight: .semibold))
-                        .animation(transitionAnimation)
-                    Image(systemName: "triangle.fill")
-                        .rotationEffect(Angle(degrees: showsAdvancedOptions ? 180 : 90))
-                        .animation(transitionAnimation)
-                        .font(.system(size: body10))
-                }
-                .foregroundColor(.plainButton)
-                .animation(.none)
-                .leading()
-                if showsAdvancedOptions {
-                    AdvancedOptionsView(startPickerPresented: $startPickerPresented, endPickerPresented: $endPickerPresented, startDate: $startDate, endDate: $endDate, selectsPartialSearch: $selectsPartialSearch)
-                        .padding()
-                        .horizontalCenter()
-                        .animation(.searchViewTransition)
-                }
-                
-                Text("SEARCHVIEW_SEARCH_HISTORY_LABEL")
-                    .font(.system(size: body16, weight: .semibold))
-                    .animation(transitionAnimation)
-                    .leading()
-                    .padding(.top)
-                // TODO: Search history
             }
             .padding(.horizontal)
-            Spacer()
+            .padding(.horizontal)
+            
+            
+            if showPost {
+                if store.posts.count == 0 && !store.isLoading {
+                    Text("No Result")
+                        .foregroundColor(.hollowContentText)
+                        .verticalCenter()
+                } else {
+                    listView().ignoresSafeArea()
+                }
+            } else {
+                Spacer()
+            }
         }
-        .padding(.horizontal)
         // Background color
         .background(Color.background.opacity(0.4).edgesIgnoringSafeArea(.all))
         // Blur background
         .blurBackground(style: .systemUltraThinMaterial)
         .transition(.move(edge: .bottom))
-        .animation(transitionAnimation)
+//        .animation(transitionAnimation)
+        .edgesIgnoringSafeArea(.bottom)
         .overlay(
             Group {
                 if startPickerPresented {
@@ -120,131 +82,20 @@ struct SearchView: View {
                 }
             }
         )
+        .sheet(item: $detailPresentedIndex, content: { index in Group {
+            if let store = detailStore {
+                HollowDetailView(store: store, presentedIndex: $detailPresentedIndex)
+            }
+        }})
     }
-}
-
-extension SearchView {
-    private func pickerOverlay(isStart: Bool) -> some View {
-        VStack {
-            Spacer()
-            Text(isStart ? "SEARCHVIEW_PICKER_START" : "SEARCHVIEW_PICKER_END")
-                .bold()
-                .padding(.bottom)
-            DatePicker("", selection: isStart ? $startDate : $endDate, displayedComponents: .date)
-                .datePickerStyle(WheelDatePickerStyle())
-                .horizontalCenter()
-                .labelsHidden()
+    
+    func listView() -> some View {
+        CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
+            
+            HollowTimeilneListView(postDataWrappers: $store.posts, detailStore: $detailStore, detailPresentedIndex: $detailPresentedIndex, voteHandler: store.vote)
+                .padding(.top)
         }
-        .background(
-            Blur(style: .systemUltraThinMaterial)
-                .edgesIgnoringSafeArea(.all)
-                // Dismiss the view when the user tap outside the picker
-                .onTapGesture {
-                    withAnimation {
-                        if isStart { startPickerPresented = false }
-                        else { endPickerPresented = false }
-                    }
-                }
-        )
-    }
-}
-
-extension SearchView {
-    private struct AdvancedOptionsView: View {
-        @Binding var startPickerPresented: Bool
-        @Binding var endPickerPresented: Bool
-        @Binding var startDate: Date
-        @Binding var endDate: Date
-        @Binding var selectsPartialSearch: Bool
-        
-        @Environment(\.colorScheme) var colorScheme
-        
-        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
-        @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
-        
-        var body: some View {
-            VStack {
-                Text("SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL")
-                    .fontWeight(.semibold)
-                    .leading()
-                HStack {
-                    timeButton(text: String(startDate.description.prefix(10)), action: {
-                        withAnimation {
-                            startPickerPresented.toggle()
-                        }
-                        
-                    }).layoutPriority(1)
-                    Rectangle().makeDivider(height: 2).foregroundColor(.uiColor(.secondaryLabel)).opacity(0.3).padding(.horizontal)
-                    timeButton(text: String(endDate.description.prefix(10)), action: {
-                        withAnimation {
-                            endPickerPresented.toggle()
-                        }
-                    }).layoutPriority(1)
-                }
-                .padding(.bottom)
-                .padding(.bottom, 5)
-                
-                Text("SEARCHVIEW_ADVANCED_OPTION_RANGE_LABEL")
-                    .fontWeight(.semibold)
-                    .leading()
-                    .padding(.bottom, 5)
-                rangeButton(text: "SEARCHVIEW_BUTTON_PARTIAL", description: "SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION", selected: selectsPartialSearch, isPartial: true)
-                    .padding(.bottom, 5)
-                rangeButton(text: LocalizedStringKey("SEARCHVIEW_BUTTON_GLOBAL"), description: "SEARCHVIEW_BUTTON_GLOBAL_DESCRIPTION", selected: !selectsPartialSearch, isPartial: false)
-            }
-        }
-        
-        private func timeButton(text: String, action: @escaping () -> Void) -> some View {
-            return Button(action: action) {
-                Text(text)
-                    .lineLimit(1)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .font(.system(size: body14))
-                    .foregroundColor(.primary)
-                    .background(Color.searchButtonBackground.opacity(colorScheme == .dark ? 0.2 : 0.6))
-                    .blurBackground(style: colorScheme == .dark ? .systemUltraThinMaterialLight : .systemUltraThinMaterialDark)
-                    .cornerRadius(7)
-                    .animation(.searchViewTransition)
-            }
-            .animation(.none)
-        }
-        
-        private func rangeButton(text: LocalizedStringKey, description: LocalizedStringKey, selected: Bool, isPartial: Bool) -> some View {
-            return Button(action: {
-                withAnimation {
-                    selectsPartialSearch = isPartial
-                }
-            }) {
-                HStack {
-                    Text(text)
-                        .font(.system(size: body14, weight: .semibold))
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Text(description)
-                        .font(.system(size: body12))
-                        .foregroundColor(.secondary)
-                }
-                .colorScheme(selected ? .dark : colorScheme)
-                .lineLimit(1)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 10)
-                .horizontalCenter()
-                .background(
-                    Group {
-                        if selected {
-                            LinearGradient.vertical(gradient: .button)
-                        } else {
-                            Color.searchButtonBackground.opacity(colorScheme == .dark ? 0.2 : 0.6)
-                        }
-                    }
-                )
-                .blurBackground(style: colorScheme == .dark ? .systemUltraThinMaterialLight : .systemUltraThinMaterialDark)
-                .cornerRadius(10)
-                .animation(.searchViewTransition)
-            }
-            .animation(.none)
-        }
+        .modifier(LoadingIndicator(isLoading: store.isLoading))
     }
 }
 

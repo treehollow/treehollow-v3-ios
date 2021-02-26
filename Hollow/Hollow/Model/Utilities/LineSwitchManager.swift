@@ -20,7 +20,7 @@ struct LineSwitchManager {
     
     /// store api roots in order
     /// `"name" : [apiList]`
-    typealias OrderdLineStorage = [String: [apiLatencyBundle]]
+    typealias OrderedLineStorage = [String: [apiLatencyBundle]]
     
     /// identify different line type
     enum LineType: String {
@@ -39,7 +39,7 @@ struct LineSwitchManager {
         else {
             setAPIList(urlBase: urlBase, type: type)
             testPing(type: type)
-            return lineSelection(for: urlBase, type: type)
+            return urlBase[0]
         }
         return apiList[0].api
     }
@@ -80,7 +80,7 @@ struct LineSwitchManager {
     static func setAPIList(urlBase: [String], type: LineType) {
         let apiList = urlBase.map{apiLatencyBundle(api: $0, ping: UINT64_MAX)}
         // get an old one or summon a new one
-        var orderdLineStorage = Defaults[.orderdLineStorage] ?? OrderdLineStorage()
+        var orderdLineStorage = Defaults[.orderdLineStorage] ?? OrderedLineStorage()
         orderdLineStorage[type.rawValue] = apiList
         Defaults[.orderdLineStorage] = orderdLineStorage
     }

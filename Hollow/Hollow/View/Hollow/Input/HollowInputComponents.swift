@@ -12,7 +12,7 @@ struct HollowInputTextEditor: View {
     @Binding var text: String
     @Binding var editorEditing: Bool
     var placeholder: String
-    var receiveCallback = true
+    var receiveCallback = false
     
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     

@@ -1,5 +1,5 @@
 //
-//  Timeline.swift
+//  PostListRequestStore.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/1/25.
@@ -10,34 +10,57 @@ import SwiftUI
 import Defaults
 import Combine
 
-class Timeline: ObservableObject, AppModelEnvironment {
+class PostListRequestStore: ObservableObject, AppModelEnvironment {
     
+    // MARK: -  Shared Variables
+    let type: PostListRequestGroupType
     var page = 1
     var noMorePosts = false
     @Published var posts: [PostDataWrapper]
     @Published var isLoading = false
     @Published var errorMessage: (title: String, message: String)?
-    
     @Published var appModelState = AppModelState()
 
     var cancellables = Set<AnyCancellable>()
     
-    init() {
+    // MARK: - Search Specific Variables
+    
+    @Published var searchString: String = ""
+    @Published var excludeComments = false
+    
+    init(type: PostListRequestGroupType) {
+        self.type = type
         self.posts = []
-        requestPosts(at: 1)
+        switch type {
+        case .postList, .attentionList: requestPosts(at: 1)
+        default: break
+        }
     }
     
     // MARK: - Load Posts
-    private func requestPosts(at page: Int, completion: (() -> Void)? = nil) {
+    func requestPosts(at page: Int, completion: (() -> Void)? = nil) {
         guard !self.noMorePosts else { return }
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
-        let request = PostListRequest(configuration: PostListRequestConfiguration(apiRoot: config.apiRootUrls, token: token, page: page))
+        let configuration: PostListRequestGroupConfiguration
+        switch type {
+        case .attentionList:
+            configuration = .attentionList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
+        case .attentionListSearch:
+            configuration = .attentionListSearch(.init(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, keywords: searchString, page: page))
+        case .postList:
+            configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
+        case .search:
+            // FIXME: Other attributes
+            configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, beforeTimestamp: nil, includeComment: !excludeComments))
+        }
+        let request = PostListRequestGroup(configuration: configuration)
         withAnimation {
             isLoading = true
         }
 
         request.publisher
+            .print()
             .sinkOnMainThread(
                 receiveCompletion: { completion in
                     withAnimation { self.isLoading = false }

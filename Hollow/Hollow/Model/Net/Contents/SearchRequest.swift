@@ -10,12 +10,12 @@ import Alamofire
 
 struct SearchRequestConfiguration {
     var apiRoot: [String]
-    var imageBaseURL: [String]
     var token: String
     var keywords: String
     var page: Int
     var beforeTimestamp: Int?
     var includeComment: Bool = true
+    // TODO: Order
 }
 
 /// The result type is `PostListRequestResult`

@@ -48,11 +48,13 @@ struct HollowCommentInputView: View {
             imageView
             
             let placeholder = NSLocalizedString("COMMENT_INPUT_REPLY_TO_PREFIX", comment: "") + store.replyToName
-
+            
             HollowInputTextEditor(text: $store.text, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
                 .accentColor(.hollowContentText)
-
-            .frame(height: editorFontSize * 10)
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
+                .frame(height: editorFontSize * 10)
+            
             HStack {
                 if !keyboardShown { Spacer() }
                 imageButton

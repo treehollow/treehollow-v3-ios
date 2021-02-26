@@ -53,9 +53,6 @@
 		0E415B5825CD772200351672 /* MyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0325CD772200351672 /* MyTextField.swift */; };
 		0E415B5925CD772200351672 /* ExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0425CD772200351672 /* ExpandedButton.swift */; };
 		0E415B5A25CD772200351672 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0525CD772200351672 /* MyButton.swift */; };
-		0E415B5B25CD772200351672 /* HollowTimelineCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0825CD772200351672 /* HollowTimelineCardView.swift */; };
-		0E415B5C25CD772200351672 /* HollowWanderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0925CD772200351672 /* HollowWanderCardView.swift */; };
-		0E415B5D25CD772200351672 /* HollowFavouritesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0A25CD772200351672 /* HollowFavouritesCardView.swift */; };
 		0E415B5E25CD772200351672 /* HollowCommentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0D25CD772200351672 /* HollowCommentInputView.swift */; };
 		0E415B6125CD772200351672 /* HollowInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1125CD772200351672 /* HollowInputView.swift */; };
 		0E415B6325CD772200351672 /* HollowCommentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1425CD772200351672 /* HollowCommentContentView.swift */; };
@@ -84,9 +81,8 @@
 		0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3125CD772200351672 /* WelcomeView.swift */; };
 		0E415B7C25CD772200351672 /* HollowTimelineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3525CD772200351672 /* HollowTimelineCard.swift */; };
 		0E415B7F25CD772200351672 /* HollowHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3A25CD772200351672 /* HollowHeader.swift */; };
-		0E415B8025CD772200351672 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3C25CD772200351672 /* Timeline.swift */; };
+		0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3C25CD772200351672 /* PostListRequestStore.swift */; };
 		0E415B8125CD772200351672 /* Wander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3D25CD772200351672 /* Wander.swift */; };
-		0E415B8225CD772200351672 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3E25CD772200351672 /* Search.swift */; };
 		0E415B8325CD772200351672 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4025CD772200351672 /* Login.swift */; };
 		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
 		0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9125CD775F00351672 /* WaterfallGrid */; };
@@ -173,6 +169,10 @@
 		0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */; };
 		0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */; };
 		0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */; };
+		0EFB54F425E926A1001BC98A /* PostListRequestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */; };
+		0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */; };
+		0EFB54FF25E92F64001BC98A /* SearchSubViews2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54FE25E92F64001BC98A /* SearchSubViews2.swift */; };
+		0EFB550525E93E24001BC98A /* HollowTimeilneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB550425E93E24001BC98A /* HollowTimeilneListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,9 +218,6 @@
 		0E415B0325CD772200351672 /* MyTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTextField.swift; sourceTree = "<group>"; };
 		0E415B0425CD772200351672 /* ExpandedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedButton.swift; sourceTree = "<group>"; };
 		0E415B0525CD772200351672 /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
-		0E415B0825CD772200351672 /* HollowTimelineCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCardView.swift; sourceTree = "<group>"; };
-		0E415B0925CD772200351672 /* HollowWanderCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowWanderCardView.swift; sourceTree = "<group>"; };
-		0E415B0A25CD772200351672 /* HollowFavouritesCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowFavouritesCardView.swift; sourceTree = "<group>"; };
 		0E415B0D25CD772200351672 /* HollowCommentInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowCommentInputView.swift; sourceTree = "<group>"; };
 		0E415B1125CD772200351672 /* HollowInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowInputView.swift; sourceTree = "<group>"; };
 		0E415B1425CD772200351672 /* HollowCommentContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowCommentContentView.swift; sourceTree = "<group>"; };
@@ -249,9 +246,8 @@
 		0E415B3125CD772200351672 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0E415B3525CD772200351672 /* HollowTimelineCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCard.swift; sourceTree = "<group>"; };
 		0E415B3A25CD772200351672 /* HollowHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowHeader.swift; sourceTree = "<group>"; };
-		0E415B3C25CD772200351672 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		0E415B3C25CD772200351672 /* PostListRequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequestStore.swift; sourceTree = "<group>"; };
 		0E415B3D25CD772200351672 /* Wander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wander.swift; sourceTree = "<group>"; };
-		0E415B3E25CD772200351672 /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		0E415B4025CD772200351672 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0E415B4125CD772200351672 /* Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -339,6 +335,10 @@
 		0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputComponents.swift; sourceTree = "<group>"; };
 		0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modalPresent.swift"; sourceTree = "<group>"; };
 		0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectivityStatus+isConnected.swift"; sourceTree = "<group>"; };
+		0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListRequestGroup.swift; sourceTree = "<group>"; };
+		0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubViews.swift; sourceTree = "<group>"; };
+		0EFB54FE25E92F64001BC98A /* SearchSubViews2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubViews2.swift; sourceTree = "<group>"; };
+		0EFB550425E93E24001BC98A /* HollowTimeilneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowTimeilneListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,23 +516,12 @@
 		0E415B0625CD772200351672 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
-				0E415B0725CD772200351672 /* Card */,
 				0E415B0B25CD772200351672 /* Input */,
 				0E415B1325CD772200351672 /* Content */,
 				0E415B1A25CD772200351672 /* Components */,
 				0E415B1F25CD772200351672 /* Detail */,
 			);
 			path = Hollow;
-			sourceTree = "<group>";
-		};
-		0E415B0725CD772200351672 /* Card */ = {
-			isa = PBXGroup;
-			children = (
-				0E415B0825CD772200351672 /* HollowTimelineCardView.swift */,
-				0E415B0925CD772200351672 /* HollowWanderCardView.swift */,
-				0E415B0A25CD772200351672 /* HollowFavouritesCardView.swift */,
-			);
-			path = Card;
 			sourceTree = "<group>";
 		};
 		0E415B0B25CD772200351672 /* Input */ = {
@@ -594,9 +583,12 @@
 			isa = PBXGroup;
 			children = (
 				0E415B2C25CD772200351672 /* MainView.swift */,
+				0EFB550425E93E24001BC98A /* HollowTimeilneListView.swift */,
 				0E415B2925CD772200351672 /* TimelineView.swift */,
 				0E415B2B25CD772200351672 /* WanderView.swift */,
 				0E415B2825CD772200351672 /* SearchView.swift */,
+				0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */,
+				0EFB54FE25E92F64001BC98A /* SearchSubViews2.swift */,
 				0E415B2725CD772200351672 /* FavouritesView.swift */,
 				0E415B2A25CD772200351672 /* AccountView.swift */,
 				0E415B2D25CD772200351672 /* MessageView.swift */,
@@ -655,9 +647,8 @@
 		0E415B3B25CD772200351672 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0E415B3C25CD772200351672 /* Timeline.swift */,
+				0E415B3C25CD772200351672 /* PostListRequestStore.swift */,
 				0E415B3D25CD772200351672 /* Wander.swift */,
-				0E415B3E25CD772200351672 /* Search.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -743,6 +734,7 @@
 				0E906CBA25DCEADC0034053C /* Contents */,
 				0E906CD425DCEADC0034053C /* Edit */,
 				0E906CD925DCEADC0034053C /* Send */,
+				0EFB54F225E92685001BC98A /* Groups */,
 				0E4786D725E3E11B0004F8FA /* Other */,
 			);
 			path = Net;
@@ -875,6 +867,14 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
+		0EFB54F225E92685001BC98A /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -981,7 +981,6 @@
 				0E415B5A25CD772200351672 /* MyButton.swift in Sources */,
 				0E906D2325DCEADD0034053C /* CommentData.swift in Sources */,
 				0E415B4525CD772200351672 /* ReCAPTCHAWebView.swift in Sources */,
-				0E415B5B25CD772200351672 /* HollowTimelineCardView.swift in Sources */,
 				0E906CFF25DCEADD0034053C /* PostListRequest.swift in Sources */,
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
 				0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */,
@@ -1007,7 +1006,6 @@
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */,
-				0E415B5D25CD772200351672 /* HollowFavouritesCardView.swift in Sources */,
 				0E415B7125CD772200351672 /* RegulationView.swift in Sources */,
 				0E906D1C25DCEADD0034053C /* PushNotificationType.swift in Sources */,
 				0E415A7425CD769B00351672 /* HollowApp.swift in Sources */,
@@ -1018,9 +1016,9 @@
 				0E415B8125CD772200351672 /* Wander.swift in Sources */,
 				0E906D2D25DCEADD0034053C /* Bool+int.swift in Sources */,
 				0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */,
+				0EFB54F425E926A1001BC98A /* PostListRequestGroup.swift in Sources */,
 				0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */,
 				0E415B5E25CD772200351672 /* HollowCommentInputView.swift in Sources */,
-				0E415B5C25CD772200351672 /* HollowWanderCardView.swift in Sources */,
 				0E906D0725DCEADD0034053C /* GetPushRequest.swift in Sources */,
 				0E415B7325CD772200351672 /* SearchView.swift in Sources */,
 				0E906D1925DCEADD0034053C /* RequestError.swift in Sources */,
@@ -1045,7 +1043,9 @@
 				0E415B7425CD772200351672 /* TimelineView.swift in Sources */,
 				0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
+				0EFB550525E93E24001BC98A /* HollowTimeilneListView.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
+				0EFB54FF25E92F64001BC98A /* SearchSubViews2.swift in Sources */,
 				0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
@@ -1087,7 +1087,7 @@
 				0E906D0F25DCEADD0034053C /* AccountCreationRequest.swift in Sources */,
 				0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */,
 				0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */,
-				0E415B8025CD772200351672 /* Timeline.swift in Sources */,
+				0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */,
 				0E906D0E25DCEADD0034053C /* DeviceTerminationRequest.swift in Sources */,
 				0E415B7725CD772200351672 /* MainView.swift in Sources */,
 				0E906D0225DCEADD0034053C /* RandomListRequest.swift in Sources */,
@@ -1108,13 +1108,13 @@
 				0E415B5825CD772200351672 /* MyTextField.swift in Sources */,
 				0E415B5925CD772200351672 /* ExpandedButton.swift in Sources */,
 				0E906D2925DCEADD0034053C /* DefaultsKeys.swift in Sources */,
-				0E415B8225CD772200351672 /* Search.swift in Sources */,
 				0E415B4225CD772200351672 /* ViewConstants.swift in Sources */,
 				0E415B5125CD772200351672 /* View+topBar.swift in Sources */,
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0E415B8425CD772200351672 /* Welcome.swift in Sources */,
+				0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */,
 				0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */,
 				0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */,
 				0E906D2525DCEADD0034053C /* String+SHA256.swift in Sources */,

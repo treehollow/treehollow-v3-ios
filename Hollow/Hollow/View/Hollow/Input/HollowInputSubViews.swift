@@ -55,20 +55,27 @@ extension HollowInputView {
         }}
     }
     
-    var editorView: some View {
-        CustomTextEditor(text: $inputStore.text, editing: $editorEditing) { $0 }
-            .overlayDoneButtonAndLimit(
-                editing: $editorEditing,
-                textCount: inputStore.text.count,
-                limit: 10000,
-                buttonFontSize: buttonFontSize
-            )
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
-            .overlay(Group { if inputStore.text == "" {
-                Text("Input text" + "...")
-                    .foregroundColor(.uiColor(.systemFill))
-            }})
+    var editorAccessoryView: some View {
+        HStack(alignment: .bottom) {
+            if !textValid { HStack(spacing: 0) {
+                Text("\(inputStore.text.count)")
+                    .font(.footnote)
+                    .foregroundColor(.red)
+                Text(" / \(10000)")
+                    .font(.footnote)
+            }}
+            
+            if keyboardShown {
+                MyButton(action: hideKeyboard) {
+                    Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
+                        .font(.system(size: buttonFontSize, weight: .bold))
+                        .foregroundColor(.white)
+                }
+            }
+        }
+        .trailing()
+        .padding(.bottom, 5)
+        .fixedSize(horizontal: false, vertical: true)
     }
     
     var voteView: some View { Group {
@@ -168,7 +175,7 @@ extension HollowInputView {
             Color.background.aspectRatio(1, contentMode: .fit)
             
             Button(action: { withAnimation {
-                editorEditing = false
+                hideKeyboard()
                 if !hasImage || !hideComponents {
                     showImagePicker = true
                 }

@@ -13,8 +13,7 @@ struct TimelineView: View {
     @Binding var showReload: Bool
     @Binding var shouldReload: Bool
 
-    @ObservedObject var viewModel: Timeline
-    @EnvironmentObject var appModel: AppModel
+    @ObservedObject var viewModel: PostListRequestStore
     
     @State private var detailPresentedIndex: Int?
     @State private var offset: CGFloat? = 0
@@ -74,48 +73,14 @@ struct TimelineView: View {
                     
                     Color.background.frame(height: body14 / 2)
                         .id(-1)
-                    
-                    // FIXME: Can we use postId as the id instead of the index?
-                    // Using index will apply an imperfect animation on the cards
-                    // (directly update the card content rather than moving the whole card).
-                    
-                    let nonLazyPostsCount = min(maxNoneLazyCards, viewModel.posts.count)
-
-                    // None lazy views for the first `maxNoneLazyCards` cards
-                    // to avoid being stuck when scrolling to top
-                    VStack(spacing: 0) {
-                        // Placeholder to fill the space when no posts are loaded
-                        if viewModel.posts.count == 0 {
-                            Color.background
-                        }
-                        
-                        let nonLazyPosts = viewModel.posts.prefix(nonLazyPostsCount)
-                        
-                        ForEach(Array(nonLazyPosts.enumerated()), id: \.element.id) { index, element in
-                            cardView(at: index)
-                        }
-                    }
-                    
-                    // Lazily load cards after `maxNoneLazyCards`
                     LazyVStack(spacing: 0) {
-
-                        let lazyPosts = viewModel.posts.suffix(viewModel.posts.count - nonLazyPostsCount)
-                        
-                        ForEach(Array(lazyPosts.enumerated()), id: \.element.id) { index, element in
-                            cardView(at: index + nonLazyPostsCount)
-                        }
-                        
-                        if viewModel.posts.count != 0 && !viewModel.noMorePosts {
-                            // TODO: Show retry button if failed.
-                            LoadingLabel()
-                                .padding(.bottom)
-                                .padding(.bottom)
-                            // TODO: Animation
-                            // FIXME: Should show spinner after the request start processing
-                        }
-
+                        HollowTimeilneListView(
+                            postDataWrappers: $viewModel.posts,
+                            detailStore: $detailStore,
+                            detailPresentedIndex: $detailPresentedIndex,
+                            voteHandler: viewModel.vote)
                     }
-                    
+
                 }
                 
                 // Observe the change of the offset when the user finish scrolling,
@@ -164,25 +129,6 @@ struct TimelineView: View {
             .modifier(AppModelBehaviour(state: viewModel.appModelState))
     }
     
-    private func cardView(at index: Int) -> some View {
-        // FIXME: Disable the card interaction when refreshing!
-        HollowTimelineCardView(
-            postDataWrapper: $viewModel.posts[index],
-            viewModel: .init(voteHandler: { option in viewModel.vote(postId: viewModel.posts[index].post.postId, for: option)})
-        )
-        .padding(.horizontal)
-        .padding(.bottom)
-        .background(Color.background)
-        .onTapGesture {
-            detailStore = HollowDetailStore(bindingPostWrapper: $viewModel.posts[index])
-            DispatchQueue.main.async {
-                detailPresentedIndex = index
-            }
-        }
-        .disabled(viewModel.isLoading)
-        // Id for ScrollViewProxy to use
-        .id(index)
-    }
 }
 
 extension TimelineView {

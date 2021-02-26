@@ -28,7 +28,7 @@ struct MainView: View {
     @Namespace var animation
     
     // Initialize time line view model here to avoid creating repeatedly
-    let timelineViewModel = Timeline()
+    let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly
     let wanderViewModel = Wander()
 

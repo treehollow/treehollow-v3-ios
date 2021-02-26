@@ -61,8 +61,12 @@ struct HollowInputView: View {
                 HollowInputAvatar(avatarWidth: avatarWidth)
                 imageView
                 
-                let text = NSLocalizedString("INPUT_EDITOR_PLACEHOLDER", comment: "")
-                HollowInputTextEditor(text: $inputStore.text, editorEditing: $editorEditing, placeholder: text)
+                VStack(spacing: 0) {
+                    let text = NSLocalizedString("INPUT_EDITOR_PLACEHOLDER", comment: "")
+                    
+                    HollowInputTextEditor(text: $inputStore.text, editorEditing: $editorEditing, placeholder: text)
+                    editorAccessoryView
+                }
                 voteView
                 footerView
             }
@@ -91,16 +95,3 @@ struct HollowInputView: View {
         .modifier(AppModelBehaviour(state: inputStore.appModelState))
     }
 }
-
-#if DEBUG
-//struct HollowInputView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        HollowInputView(presented: .constant(true))
-//        //            .background(Color.hollowCardBackground)
-//        //            .cornerRadius(12)
-//        //            .padding()
-//        //            .background(Color.background)
-//        //            .colorScheme(.dark)
-//    }
-//}
-#endif

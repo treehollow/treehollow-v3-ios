@@ -18,15 +18,14 @@ class AppModel: ObservableObject {
     // Only for indicating expired state in `WelcomeView`
     @Published var tokenExpired = false
     
-    @Published var connectedToNetwork = Connectivity().status.isConnected
+    var connectedToNetwork = Connectivity().status.isConnected
     
     init() {
         ConnectivityPublisher()
             .map { $0.status.isConnected }
             .print()
-            .sinkOnMainThread(receiveValue: {
+            .sinkOnMainThread(receiveValue: { _ in
                 LineSwitchManager.testAll()
-                self.connectedToNetwork = $0
             })
             .store(in: &cancellables)
     }
