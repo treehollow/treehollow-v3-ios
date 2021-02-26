@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 006DF03625DF7FBA0005C2B5 /* Cache */; };
 		00AA103525E74212006B3D6D /* LineSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA103425E74212006B3D6D /* LineSwitch.swift */; };
-		00AA103D25E7FBDB006B3D6D /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 00AA103C25E7FBDB006B3D6D /* SwiftyPing */; };
 		00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */; };
+		00AA104625E89C2F006B3D6D /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 00AA104525E89C2F006B3D6D /* Connectivity */; };
 		00B014EA25E1054C004E416E /* Post+PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014E925E1054C004E416E /* Post+PostData.swift */; };
 		00B014ED25E1205A004E416E /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014EC25E1205A004E416E /* PostCache.swift */; };
 		00EFC06925DF922000536B52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00EFC06825DF922000536B52 /* Kingfisher */; };
@@ -347,10 +347,10 @@
 				0E1DD7D325D94B52000D27BA /* AvatarX in Frameworks */,
 				00EFC06925DF922000536B52 /* Kingfisher in Frameworks */,
 				0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */,
+				00AA104625E89C2F006B3D6D /* Connectivity in Frameworks */,
 				0E415B9625CD77C600351672 /* Defaults in Frameworks */,
 				0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */,
 				0E09B7A725D4D70600DC5615 /* ImageScrollView in Frameworks */,
-				00AA103D25E7FBDB006B3D6D /* SwiftyPing in Frameworks */,
 				006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,7 +895,7 @@
 				0E1DD7D225D94B52000D27BA /* AvatarX */,
 				006DF03625DF7FBA0005C2B5 /* Cache */,
 				00EFC06825DF922000536B52 /* Kingfisher */,
-				00AA103C25E7FBDB006B3D6D /* SwiftyPing */,
+				00AA104525E89C2F006B3D6D /* Connectivity */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -933,7 +933,7 @@
 				0E1DD7D125D94B52000D27BA /* XCRemoteSwiftPackageReference "AvatarX" */,
 				006DF03525DF7FBA0005C2B5 /* XCRemoteSwiftPackageReference "Cache" */,
 				00EFC06725DF922000536B52 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				00AA103B25E7FBDB006B3D6D /* XCRemoteSwiftPackageReference "SwiftyPing" */,
+				00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -1336,12 +1336,12 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		00AA103B25E7FBDB006B3D6D /* XCRemoteSwiftPackageReference "SwiftyPing" */ = {
+		00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/samiyr/SwiftyPing.git";
+			repositoryURL = "https://github.com/rwbutler/Connectivity.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.9;
+				minimumVersion = 5.0.1;
 			};
 		};
 		00EFC06725DF922000536B52 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -1408,10 +1408,10 @@
 			package = 006DF03525DF7FBA0005C2B5 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
 		};
-		00AA103C25E7FBDB006B3D6D /* SwiftyPing */ = {
+		00AA104525E89C2F006B3D6D /* Connectivity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 00AA103B25E7FBDB006B3D6D /* XCRemoteSwiftPackageReference "SwiftyPing" */;
-			productName = SwiftyPing;
+			package = 00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */;
+			productName = Connectivity;
 		};
 		00EFC06825DF922000536B52 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -25,5 +25,6 @@ struct Constants {
 
     struct URLConstant {
         static let urlSuffix = "?v=v\(Constants.Application.appVersion)&device=2"
+        static let apiTestPath = "generate_204"
     }
 }

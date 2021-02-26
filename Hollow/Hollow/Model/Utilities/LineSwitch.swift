@@ -8,14 +8,14 @@
 
 import Foundation
 import Defaults
-import SwiftyPing
+import Alamofire
 
 /// perform auto line switching
 struct LineSwitch {
     
     struct apiLatencyBundle: Codable {
         var api: String
-        var ping: TimeInterval
+        var ping: UInt64
     }
     
     /// store api roots in order
@@ -46,32 +46,29 @@ struct LineSwitch {
     
     /// test all the and sort them in order
     /// - Parameter type: line type, img or api
-    /// # TODO: perform test on network change
     func testPing(type: LineType) {
         guard var apiList = Defaults[.orderdLineStorage]?[type.rawValue] else { return }
         
         let testPingGroup = DispatchGroup()
+        var time = [Int: UInt64]()
         
         for index in apiList.indices {
-            guard let hostname = apiList[index].api.findHost() else { continue }
             testPingGroup.enter()
+            time[index] = DispatchTime.now().uptimeNanoseconds
             
-            let once = try? SwiftyPing(host: hostname, configuration: PingConfiguration(interval: 0.5, with: 5), queue: DispatchQueue.global())
-            once?.observer = { (response) in
-                let duration = response.duration
-                // no ping, set to a very large value
-                apiList[index].ping = duration ?? TimeInterval(INT_MAX)
-                //print(apiList)
+            AF.request(
+                apiList[index].api + Constants.URLConstant.apiTestPath,
+                method: .get
+            ).validate(statusCode: 204..<204).response { response in
+                let endtime = DispatchTime.now().uptimeNanoseconds
+                apiList[index].ping = endtime - (time[index] ?? 0)
                 testPingGroup.leave()
             }
-            once?.targetCount = 1
-            try? once?.startPinging()
         }
         
         testPingGroup.notify(queue: .main) {
             //sort all apis by ping
             apiList.sort { $0.ping < $1.ping }
-            //print(apiList)
             Defaults[.orderdLineStorage]?[type.rawValue] = apiList
         }
     }
@@ -81,13 +78,14 @@ struct LineSwitch {
     ///   - urlBase: url base list
     ///   - type: line type
     func setAPIList(urlBase: [String], type: LineType) {
-        let apiList = urlBase.map{apiLatencyBundle(api: $0, ping: TimeInterval(INT_MAX))}
+        let apiList = urlBase.map{apiLatencyBundle(api: $0, ping: UINT64_MAX)}
         // get an old one or summon a new one
         var orderdLineStorage = Defaults[.orderdLineStorage] ?? OrderdLineStorage()
         orderdLineStorage[type.rawValue] = apiList
         Defaults[.orderdLineStorage] = orderdLineStorage
     }
     
+    /// test all api roots, including api and img
     func testAll() {
         testPing(type: .apiRoot)
         testPing(type: .imageBaseURL)

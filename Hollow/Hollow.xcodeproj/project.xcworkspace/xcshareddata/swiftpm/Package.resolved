@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Connectivity",
+        "repositoryURL": "https://github.com/rwbutler/Connectivity.git",
+        "state": {
+          "branch": null,
+          "revision": "19f08ea4f25efe44cceea2ed5c52a0ca1bb567b5",
+          "version": "5.0.1"
+        }
+      },
+      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
@@ -71,15 +80,6 @@
           "branch": null,
           "revision": "de6b8f9db4b2a0aa859a5507550a70548e4da936",
           "version": "1.8.1"
-        }
-      },
-      {
-        "package": "SwiftyPing",
-        "repositoryURL": "https://github.com/samiyr/SwiftyPing.git",
-        "state": {
-          "branch": null,
-          "revision": "f996a0bea1f4a32db32938d040dae3d79435510a",
-          "version": "1.1.9"
         }
       },
       {
