@@ -46,7 +46,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Fetch the lastest config
         fetchConfig()
         // test all api when updated
-        LineSwitch().testAll()
+        LineSwitchManager.testAll()
         // setup network change notifier
         setupNetworkChangeNotifier()
         return true
@@ -127,7 +127,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             
             switch status {
             case .connected:
-                LineSwitch().testAll()
+                LineSwitchManager.testAll()
                 print("NetWork changes")
             default:
                 print("NetWork changes")

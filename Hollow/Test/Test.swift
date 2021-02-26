@@ -67,8 +67,8 @@ struct Test {
         }
         if options.contains(.testPing) {
             Defaults.reset(.orderdLineStorage)
-            LineSwitch().setAPIList(urlBase: testAPIRoots, type: .apiRoot)
-            LineSwitch().testPing(type: .apiRoot)
+            LineSwitchManager.setAPIList(urlBase: testAPIRoots, type: .apiRoot)
+            LineSwitchManager.testPing(type: .apiRoot)
         }
     }
 }

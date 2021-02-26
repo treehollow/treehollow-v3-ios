@@ -48,7 +48,7 @@ struct FetchImageRequest: Request {
     }
     
     func performRequest(completion: @escaping (Result?, FetchImageRequestError?) -> Void) {
-        let urlBase = LineSwitch().LineSelect(urlBase: configuration.urlBase, type: .imageBaseURL)
+        let urlBase = LineSwitchManager.lineSelection(for: configuration.urlBase, type: .imageBaseURL)
         let urlString = urlBase + configuration.urlString
         guard let url = URL(string: urlString) else {
             completion(nil, .invalidURL)

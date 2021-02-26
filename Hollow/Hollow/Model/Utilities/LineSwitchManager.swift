@@ -11,7 +11,7 @@ import Defaults
 import Alamofire
 
 /// perform auto line switching
-struct LineSwitch {
+struct LineSwitchManager {
     
     struct apiLatencyBundle: Codable {
         var api: String
@@ -31,7 +31,7 @@ struct LineSwitch {
     /// Select a urlbase for request
     /// - Parameter urlBase: api root list
     /// - Returns: url which should be used
-    func LineSelect (urlBase: [String], type: LineType) -> String {
+    static func lineSelection(for urlBase: [String], type: LineType) -> String {
         
         guard let orderdLineStorage = Defaults[.orderdLineStorage],
               let apiList = orderdLineStorage[type.rawValue],
@@ -39,14 +39,14 @@ struct LineSwitch {
         else {
             setAPIList(urlBase: urlBase, type: type)
             testPing(type: type)
-            return LineSelect(urlBase: urlBase, type: type)
+            return lineSelection(for: urlBase, type: type)
         }
         return apiList[0].api
     }
     
     /// test all the and sort them in order
     /// - Parameter type: line type, img or api
-    func testPing(type: LineType) {
+    static func testPing(type: LineType) {
         guard var apiList = Defaults[.orderdLineStorage]?[type.rawValue] else { return }
         
         let testPingGroup = DispatchGroup()
@@ -77,7 +77,7 @@ struct LineSwitch {
     /// - Parameters:
     ///   - urlBase: url base list
     ///   - type: line type
-    func setAPIList(urlBase: [String], type: LineType) {
+    static func setAPIList(urlBase: [String], type: LineType) {
         let apiList = urlBase.map{apiLatencyBundle(api: $0, ping: UINT64_MAX)}
         // get an old one or summon a new one
         var orderdLineStorage = Defaults[.orderdLineStorage] ?? OrderdLineStorage()
@@ -86,7 +86,7 @@ struct LineSwitch {
     }
     
     /// test all api roots, including api and img
-    func testAll() {
+    static func testAll() {
         testPing(type: .apiRoot)
         testPing(type: .imageBaseURL)
     }

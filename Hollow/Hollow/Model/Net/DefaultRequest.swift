@@ -45,7 +45,7 @@ extension DefaultRequest {
         resultToResultData: @escaping (Result) -> ResultData?,
         completion: @escaping (ResultData?, DefaultRequestError?) -> Void
     ) {
-        let urlRoot = LineSwitch().LineSelect(urlBase: urlBase, type: .apiRoot)
+        let urlRoot = LineSwitchManager.lineSelection(for: urlBase, type: .apiRoot)
         AF.request(
             urlRoot + urlPath,
             method: method,
