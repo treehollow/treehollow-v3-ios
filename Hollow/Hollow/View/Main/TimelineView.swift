@@ -76,7 +76,8 @@ struct TimelineView: View {
                         PostListView(
                             postDataWrappers: $viewModel.posts,
                             detailStore: $detailStore,
-                            voteHandler: viewModel.vote
+                            voteHandler: viewModel.vote,
+                            starHandler: viewModel.star
                         )
                     }
 

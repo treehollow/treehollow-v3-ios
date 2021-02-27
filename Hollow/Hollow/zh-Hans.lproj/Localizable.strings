@@ -1,156 +1,174 @@
 /* No comment provided by engineer. */
-"ACCOUNTVIEW_ACCOUNT_HEADER" = "Account";
+"ACCOUNTVIEW_ACCOUNT_HEADER" = "账户";
 
 /* No comment provided by engineer. */
-"ACCOUNTVIEW_LOGOUT_BUTTON" = "Log Out";
+"ACCOUNTVIEW_LOGOUT_BUTTON" = "注销";
 
 /* No comment provided by engineer. */
-"COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
+"COMMENT_INPUT_EDITOR_PLACEHOLDER" = "输入评论";
 
 /* No comment provided by engineer. */
-"DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON" = "Confirm";
+"COMMENT_INPUT_REPLY_TO_PREFIX" = "回复";
 
 /* No comment provided by engineer. */
-"DEVICE_LIST_LOGOUT_ALERT_TITLE" = "Log out";
+"COMMENT_INPUT_SEND_BUTTON_SEND_POST" = "发送";
 
 /* No comment provided by engineer. */
-"DEVICELIST_CARD_BUTTON_LOGOUT" = "Logout";
+"COMMENT_INPUT_SEND_BUTTON_SENDING" = "发送中";
 
 /* No comment provided by engineer. */
-"DEVICELIST_CARD_BUTTON_PROCESSING" = "Processing";
+"DATEFORMATTER_HOUR" = "小时前";
 
 /* No comment provided by engineer. */
-"DEVICELIST_CARD_DEVICE_TITLE" = "Device";
+"DATEFORMATTER_MINUTE" = "分钟前";
 
 /* No comment provided by engineer. */
-"DEVICELIST_CARD_DEVICE_TITLE_CURRENT" = " (Current)";
+"DATEFORMATTER_SECOND" = "秒前";
 
 /* No comment provided by engineer. */
-"DEVICELIST_CARD_LOGIN_DATE_TITLE" = "Login Date";
+"DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON" = "确认";
 
 /* No comment provided by engineer. */
-"ERROR_ALERT_OK_BUTTON" = "OK";
+"DEVICE_LIST_LOGOUT_ALERT_TITLE" = "登出";
 
 /* No comment provided by engineer. */
-"GLOBAL_ERROR_MSG_TITLE" = "Error";
+"DEVICELIST_CARD_BUTTON_LOGOUT" = "登出";
 
 /* No comment provided by engineer. */
-"GLOBAL_TIMELINE" = "Timeline";
+"DEVICELIST_CARD_BUTTON_PROCESSING" = "处理中";
 
 /* No comment provided by engineer. */
-"GLOBAL_WANDER" = "Wander";
+"DEVICELIST_CARD_DEVICE_TITLE" = "设备";
 
 /* No comment provided by engineer. */
-"HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX" = "Comments";
+"DEVICELIST_CARD_DEVICE_TITLE_CURRENT" = "- 当前";
 
 /* No comment provided by engineer. */
-"IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "Successfully saved to Photos";
+"DEVICELIST_CARD_LOGIN_DATE_TITLE" = "登陆日期";
 
 /* No comment provided by engineer. */
-"IMAGEVIEW_SAVE_PHOTO_BUTTON" = "Save to Photos";
+"ERROR_ALERT_OK_BUTTON" = "好";
 
 /* No comment provided by engineer. */
-"IMAGEVIEWER_ACTION_SHEET_TITLE" = "Image";
+"GLOBAL_ERROR_MSG_TITLE" = "错误";
 
 /* No comment provided by engineer. */
-"IMAGEVIEWER_DONE_BUTTON" = "Done";
+"GLOBAL_TIMELINE" = "时间轴";
+
+/* No comment provided by engineer. */
+"GLOBAL_WANDER" = "随机漫步";
+
+/* No comment provided by engineer. */
+"HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX" = "条评论";
+
+/* No comment provided by engineer. */
+"IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "成功保存至系统相册";
+
+/* No comment provided by engineer. */
+"IMAGEVIEW_SAVE_PHOTO_BUTTON" = "保存至系统相册";
+
+/* No comment provided by engineer. */
+"IMAGEVIEWER_ACTION_SHEET_TITLE" = "图像";
+
+/* No comment provided by engineer. */
+"IMAGEVIEWER_DONE_BUTTON" = "完成";
 
 /* ... */
-"INPUTVIEW_IMAGE_COMPRESSING_LABEL" = "Compressing";
+"INPUTVIEW_IMAGE_COMPRESSING_LABEL" = "正在压缩";
 
 /* : \(inputStore.imageSizeInformation ?? "??")
    : \(store.imageSizeInformation ?? "??") */
-"INPUTVIEW_IMAGE_SIZE_LABEL" = "Size";
+"INPUTVIEW_IMAGE_SIZE_LABEL" = "大小";
 
 /* No comment provided by engineer. */
-"INPUTVIEW_SELECT_TAG_MENU_LABEL" = "Select a tag";
+"INPUTVIEW_SELECT_TAG_MENU_LABEL" = "选择标签";
 
 /* No comment provided by engineer. */
-"INPUTVIEW_SEND_BUTTON_SEND_POST" = "Post";
+"INPUTVIEW_SEND_BUTTON_SEND_POST" = "发布";
 
 /* No comment provided by engineer. */
-"INPUTVIEW_SEND_BUTTON_SENDING" = "Sending";
+"INPUTVIEW_SEND_BUTTON_SENDING" = "正在发送";
 
 /* No comment provided by engineer. */
-"INPUTVIEW_TEXT_EDITOR_DONE_BUTTON" = "Done";
+"INPUTVIEW_TEXT_EDITOR_DONE_BUTTON" = "完成";
 
 /* No comment provided by engineer. */
-"INPUTVIEW_VOTE_OPTION_PLACEHOLDER_PREFIX" = "Option";
+"INPUTVIEW_VOTE_OPTION_PLACEHOLDER_PREFIX" = "选项";
 
 /* No comment provided by engineer. */
-"LOADING_LABEL_TEXT" = "Loading";
+"LOADING_LABEL_TEXT" = "加载中";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_BUTTON_CONTINUE" = "Continue";
+"LOGINVIEW_BUTTON_CONTINUE" = "下一步";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_BUTTON_LOADING" = "Loading";
+"LOGINVIEW_BUTTON_LOADING" = "加载中";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_BUTTON_LOGIN" = "Login";
+"LOGINVIEW_BUTTON_LOGIN" = "登陆";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_BUTTON_REGISTER" = "Register";
+"LOGINVIEW_BUTTON_REGISTER" = "注册";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_CONFIRMED_PASSWORD_TEXTFIELD_TITLE" = "Confirmed Password";
+"LOGINVIEW_CONFIRMED_PASSWORD_TEXTFIELD_TITLE" = "确认密码";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER" = "Email address";
+"LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER" = "邮箱";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_EMAIL_VERIF_TEXTFIELD_FOOTER" = "Please check your inbox for the code.";
+"LOGINVIEW_EMAIL_VERIF_TEXTFIELD_FOOTER" = "请检查邮箱收件箱或垃圾信箱。";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_EMAIL_VERIF_TEXTFIELD_TITLE" = "Verification Code";
+"LOGINVIEW_EMAIL_VERIF_TEXTFIELD_TITLE" = "验证码";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_FORGET_PASSWORD_BUTTON" = "Forget password";
+"LOGINVIEW_FORGET_PASSWORD_BUTTON" = "忘记密码";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_NO_CONTACT_EMAIL_ERROR" = "No contact email found in the configuration!";
+"LOGINVIEW_NO_CONTACT_EMAIL_ERROR" = "当前使用的树洞配置中无联系邮箱！";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER" = "Input password";
+"LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER" = "输入密码";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER" = "The password should contains at least 8 characters without blankspaces.";
+"LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER" = "密码最少包含8字符，不能包含空格。";
 
 /* No comment provided by engineer. */
-"REQUEST_DECODE_FAILED_ERROR_MSG" = "Fail to decode result from the response.";
+"REQUEST_DECODE_FAILED_ERROR_MSG" = "解码失败。";
 
 /* No comment provided by engineer. */
-"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "The URL for the image is invalid.";
+"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "图片网址无效。";
 
 /* No comment provided by engineer. */
-"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "The uploaded file is too large and is refused by the server.";
+"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "上传文件大小超过限制，被服务器拒绝。";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "Fail to decode treehollow configuration from the response.";
+"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "从当前网址无法解码树洞配置。";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "The format of the configuration is incorrect.";
+"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "树洞配置格式不正确。";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "The treehollow configuration is invalid.";
+"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "树洞配置无效。";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "The URL for the configuration is invalid.";
+"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "树洞配置网址无效。";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "Received error from the server.";
+"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "服务器返回错误。";
 
 /* No comment provided by engineer. */
-"REQUEST_NO_SUCH_POST_ERROR_MSG" = "The requested post does not exist.";
+"REQUEST_NO_SUCH_POST_ERROR_MSG" = "树洞不存在";
 
 /* No comment provided by engineer. */
-"REQUEST_OTHER_ERROR_NO_DESCRIPTION_WITH_CODE_MSG" = "Received error code: ";
+"REQUEST_OTHER_ERROR_NO_DESCRIPTION_WITH_CODE_MSG" = "错误代码：";
 
 /* No comment provided by engineer. */
-"REQUEST_TOKEN_EXPIRED_ERROR_MSG" = "The access token has expired. Please login again.";
+"REQUEST_TOKEN_EXPIRED_ERROR_MSG" = "用户认证过期，请重新登录。";
 
 /* No comment provided by engineer. */
-"REQUEST_UNKNOWN_ERROR_MSG" = "An unknown message occured.";
+"REQUEST_UNKNOWN_ERROR_MSG" = "发生未知错误。";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_ADVANCED_BUTTON" = "Advanced";
@@ -159,44 +177,44 @@
 "SEARCHVIEW_ADVANCED_OPTION_RANGE_LABEL" = "Range";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL" = "Time Interval";
+"SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL" = "时间";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_SEARCH_BUTTON" = "Search";
+"SEARCHVIEW_SEARCH_BUTTON" = "搜索";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_SEARCH_HISTORY_LABEL" = "History";
+"SEARCHVIEW_SEARCH_HISTORY_LABEL" = "搜索历史";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_TEXTFIELD_PLACEHOLDER" = "Search content or tags";
+"SEARCHVIEW_TEXTFIELD_PLACEHOLDER" = "搜索内容/#标签/#树洞号";
 
 /* No comment provided by engineer. */
-"TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "Image";
+"TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "图片";
 
 /* No comment provided by engineer. */
 "TIMELINE_CARD_COMMENTS_HAIYOU" = "";
 
 /* No comment provided by engineer. */
-"TIMELINE_CARD_COMMENTS_TIAOPINGLUN" = " more comments";
+"TIMELINE_CARD_COMMENTS_TIAOPINGLUN" = "条评论";
 
 /* No comment provided by engineer. */
-"TIMELINE_SEARCH_BAR_PLACEHOLDER" = "Search";
+"TIMELINE_SEARCH_BAR_PLACEHOLDER" = "搜索";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_FOOTER" = "Get the URL for the configuration from the treehollow website.";
+"WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_FOOTER" = "请从树洞网站获取配置文件网址。";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER" = "Custom Configuration";
+"WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER" = "自定义配置";
 
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_URL_TEXTFIELD_PLACEHOLDER" = "https://example.com/config.txt";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_OTHER_BUTTON" = "Other";
+"WELCOMEVIEW_OTHER_BUTTON" = "其他";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "Select Hollow";
+"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "选择树洞";
 
 /* No comment provided by engineer. */
-"WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";
+"WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录。";
 

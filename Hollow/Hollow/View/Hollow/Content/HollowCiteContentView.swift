@@ -12,9 +12,6 @@ struct HollowCiteContentView: View {
     var postData: CitedPostData?
     
     var displayedText: String {
-        if let message = postData?.loadingError {
-            return message
-        }
         if let postData = self.postData {
             return postData.text == "" ? "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" : postData.text
         }
@@ -32,8 +29,13 @@ struct HollowCiteContentView: View {
                 .fontWeight(.semibold)
                 .leading()
             
-            Text(displayedText)
-                .lineLimit(1)
+            if let error = postData?.loadingError {
+                Label(error, systemImage: "exclamationmark.triangle")
+                    .lineLimit(1)
+            } else {
+                Text(displayedText)
+                    .lineLimit(1)
+            }
         }
         .font(.system(size: body15))
         .padding(.horizontal, 12)

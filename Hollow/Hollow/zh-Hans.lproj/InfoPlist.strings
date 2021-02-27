@@ -1,3 +1,6 @@
+/* Bundle name */
+"CFBundleName" = "树洞";
+
 /* Privacy - Photo Library Additions Usage Description */
-"NSPhotoLibraryAddUsageDescription" = "Allow access to save photos to your library.";
+"NSPhotoLibraryAddUsageDescription" = "授予访问权限以将图片保存至相册中。";
 

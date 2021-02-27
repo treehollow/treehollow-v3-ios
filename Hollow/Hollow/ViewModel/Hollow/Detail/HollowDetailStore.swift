@@ -16,6 +16,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     @Published var postDataWrapper: PostDataWrapper
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
+    @Published var isEditingAttention = false
     
     @Published var appModelState = AppModelState()
     
@@ -186,7 +187,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         )
     }
     
-    // MARK: - Vote
+    // MARK: - Vote And Star
     func vote(for option: String) {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
@@ -199,6 +200,26 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
             }, receiveValue: { result in withAnimation {
                 self.postDataWrapper.post.vote = result
             }})
+            .store(in: &cancellables)
+    }
+    
+    func star(_ star: Bool) {
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, switchToAttention: star))
+        withAnimation { isEditingAttention = true }
+        
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                withAnimation { self.isEditingAttention = false }
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
+                withAnimation {
+                    self.isEditingAttention = false
+                    self.postDataWrapper.post.attention = result.attention
+                    self.postDataWrapper.post.likeNumber = result.likenum
+                }
+            })
             .store(in: &cancellables)
     }
 }

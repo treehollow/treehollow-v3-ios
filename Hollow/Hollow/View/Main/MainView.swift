@@ -12,6 +12,7 @@ struct MainView: View {
     /// Define `TabView` state.
     @State private var page: Page = .timeline
     @State private var isSearching = false
+    @State private var showTrending = false
     @State private var showCreatePost = false
     /// Whether to show the overlay refresh button.
     ///
@@ -36,7 +37,7 @@ struct MainView: View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             VStack(spacing: 12) {
-                HeaderView(page: $page, isSearching: $isSearching)
+                HeaderView(page: $page, isSearching: $isSearching, showTrending: $showTrending)
                     .padding(.horizontal)
                     .padding(.top, 10)
 //                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 3 : 0)
@@ -98,11 +99,14 @@ struct MainView: View {
         .overlay(
             Group {
                 if isSearching {
-                    SearchView(presented: $isSearching)
+                    SearchView(presented: $isSearching, store: .init(type: .search, options: [.unordered]))
                 }
                 if showCreatePost {
                     HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost))
                         .matchedGeometryEffect(id: "add.post", in: animation)
+                }
+                if showTrending {
+                    SearchView(presented: $showTrending, store: .init(type: .searchTrending, options: [.unordered]))
                 }
             }
         )
@@ -133,6 +137,7 @@ extension MainView {
     private struct HeaderView: View {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool
+        @Binding var showTrending: Bool
         @State private var accountPresented = false
         
         // iPhone
@@ -160,7 +165,7 @@ extension MainView {
                 .layoutPriority(1)
                 Spacer()
                 Group {
-                    Button(action:{}) {
+                    Button(action: { withAnimation { showTrending = true } }) {
                         Image(systemName: "flame")
                             .padding(.horizontal, 10)
                     }
@@ -179,7 +184,7 @@ extension MainView {
                 .font(.system(size: iconSize, weight: .medium))
                 .foregroundColor(.mainBarButton)
             }
-            .sheet(isPresented: $accountPresented, content: {
+            .fullScreenCover(isPresented: $accountPresented, content: {
                 AccountView(presented: $accountPresented)
             })
 
@@ -194,12 +199,3 @@ extension MainView {
         }
     }
 }
-
-#if DEBUG
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-//            .colorScheme(.dark)
-    }
-}
-#endif

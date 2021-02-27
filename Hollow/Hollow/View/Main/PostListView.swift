@@ -22,6 +22,7 @@ struct PostListView: View {
         return options
     }
     var voteHandler: (Int, String) -> Void
+    var starHandler: (Bool, Int) -> Void
     private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
     
     private func hideComments(for post: PostData) -> Bool {
@@ -38,7 +39,7 @@ struct PostListView: View {
             let post = postDataWrapper.post
             VStack(spacing: 15) {
                 // TODO: Star actions
-                HollowHeaderView(postData: post, compact: false)
+                HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, isEditingAttention: false)
                 HollowContentView(
                     postDataWrapper: postDataWrapper,
                     options: displayOptions,

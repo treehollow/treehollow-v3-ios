@@ -26,7 +26,8 @@ struct PostListRequestGroup: Request {
         case .postList(let configuration):
             PostListRequest(configuration: configuration)
                 .performRequest(completion: completion)
-        case .search(let configuration):
+        case .search(let configuration),
+             .searchTrending(let configuration):
             SearchRequest(configuration: configuration)
                 .performRequest(completion: completion)
         case .attentionList(let configuration):
@@ -46,11 +47,12 @@ struct PostListRequestGroup: Request {
 enum PostListRequestGroupConfiguration {
     case postList(PostListRequestConfiguration)
     case search(SearchRequestConfiguration)
+    case searchTrending(SearchRequestConfiguration)
     case attentionList(AttentionListRequestConfiguration)
     case attentionListSearch(AttentionListSearchRequestConfiguration)
     case wander(RandomListRequestConfiguration)
 }
 
 enum PostListRequestGroupType {
-    case postList, search, attentionList, attentionListSearch, wander
+    case postList, search, searchTrending, attentionList, attentionListSearch, wander
 }

@@ -22,6 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
         Test.performTest(options: [])
+        Defaults[.hollowType] = .thu
         //        Defaults[.accessToken] = testAccessToken
         #else
         
@@ -49,8 +50,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Fetch the lastest config
         fetchConfig()
-        // test all api when updated
-        LineSwitchManager.testAll()
 
         return true
     }
@@ -75,9 +74,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
 }
 
+// MARK: - Tree Hollow Configuration
 extension AppDelegate {
-    
-    // MARK: - Tree Hollow Configuration
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
         guard let config = Defaults[.hollowConfig] else { return }
         let configuration = UpdateDeviceTokenRequestConfiguration(deviceToken: deviceToken, token: accessToken, apiRoot: config.apiRootUrls)
@@ -111,8 +109,9 @@ extension AppDelegate {
             }
             
             if let result = result {
-                // Update the config
+                // Update the config and test connectivity
                 Defaults[.hollowConfig] = result
+                LineSwitchManager.testAll()
             }
         })
     }

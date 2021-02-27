@@ -11,10 +11,11 @@ import AvatarX
 
 // TODO: Actions
 struct HollowHeaderView: View {
-    @ObservedObject var viewModel: HollowHeader = .init()
     var postData: PostData
     var compact: Bool
     var showContent = false
+    var starAction: (_ star: Bool) -> Void
+    var isEditingAttention: Bool
     private var starred: Bool? { postData.attention }
     
     @Namespace private var headerNamespace
@@ -68,8 +69,10 @@ struct HollowHeaderView: View {
             
             if !compact {
                 // If `postData.attention` is nil, it means that the changed state of attention is submitting
-                if let _ = postData.attention {
-                    HollowStarButton(attention: postData.attention, likeNumber: postData.likeNumber, starHandler: viewModel.starPost)
+                if let attention = postData.attention {
+                    HollowButton(number: postData.likeNumber, action: { starAction(!attention) }, systemImageName: attention ? "star.fill" : "star")
+                        .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
+                        .disabled(isEditingAttention)
                 } else {
                     Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }

@@ -36,7 +36,9 @@ struct HollowDetailView: View {
                             postData: store.postDataWrapper.post,
                             compact: false,
                             // Show text on header when the text is not visible
-                            showContent: (scrollViewOffset ?? 0) > commentRect.minY
+                            showContent: (scrollViewOffset ?? 0) > commentRect.minY,
+                            starAction: store.star,
+                            isEditingAttention: store.isEditingAttention
                         )
                     }
                     .padding(.horizontal)

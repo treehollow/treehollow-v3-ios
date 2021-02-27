@@ -37,7 +37,7 @@ extension SearchView {
         HStack {
             Button(action:{
                 withAnimation {
-                    if showPost {
+                    if showPost && store.type == .search {
                         showPost = false
                     } else {
                         presented = false
@@ -49,7 +49,7 @@ extension SearchView {
                     .padding(.trailing)
             }
             .animation(.none)
-            if showPost {
+            if showPost && store.type == .search {
                 searchField()
                     .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
             } else {
@@ -61,16 +61,18 @@ extension SearchView {
                     showPost = true
                 }
                 
+                store.posts.removeAll()
                 store.refresh(finshHandler: {})
                 
             }, gradient: .vertical(gradient: .button)) {
-                Text("SEARCHVIEW_SEARCH_BUTTON")
+                Text(store.type == .search ? "SEARCHVIEW_SEARCH_BUTTON" : "SEARCHVIEW_TRENDING_REFRESH_BUTTON")
                     .font(.system(size: buttonFontSize, weight: .bold))
                     .foregroundColor(.white)
             }
-            .topBar()
             .disabled(store.isLoading)
         }
+        .topBar()
+
     }
     
     func searchField() -> some View {

@@ -35,7 +35,7 @@ struct HollowDateFormatter {
             let format = compact ? "MM-dd" : "MM-dd hh:mm"
             formatter.dateFormat = format
         } else {
-            let format = compact ? "yyyy-MM-dd" : "yyyy-MM-dd hh:mm"
+            let format = compact ? "yy-MM-dd" : "yy-MM-dd hh:mm"
             formatter.dateFormat = format
         }
         var string = formatter.string(from: date)

@@ -10,7 +10,7 @@ import Defaults
 
 struct SearchView: View {
     @Binding var presented: Bool
-    @ObservedObject var store = PostListRequestStore(type: .search)
+    @ObservedObject var store: PostListRequestStore
     // TODO: Add other options in Defaults
     @State var showsAdvancedOptions = Defaults[.searchViewShowsAdvanced] {
         didSet { Defaults[.searchViewShowsAdvanced] = showsAdvancedOptions }
@@ -64,7 +64,7 @@ struct SearchView: View {
                 } else {
                     CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
                         LazyVStack(spacing: 0) {
-                            PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: true, voteHandler: store.vote)
+                            PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: true, voteHandler: store.vote, starHandler: store.star)
                         }
                         .padding(.top)
                     }
@@ -94,5 +94,8 @@ struct SearchView: View {
             }
         )
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
+        .onAppear {
+            if store.type == .searchTrending { showPost = true }
+        }
     }
 }

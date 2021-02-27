@@ -82,7 +82,6 @@
 		0E415B7C25CD772200351672 /* HollowTimelineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3525CD772200351672 /* HollowTimelineCard.swift */; };
 		0E415B7F25CD772200351672 /* HollowHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3A25CD772200351672 /* HollowHeader.swift */; };
 		0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3C25CD772200351672 /* PostListRequestStore.swift */; };
-		0E415B8125CD772200351672 /* Wander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3D25CD772200351672 /* Wander.swift */; };
 		0E415B8325CD772200351672 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4025CD772200351672 /* Login.swift */; };
 		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
 		0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E415B9125CD775F00351672 /* WaterfallGrid */; };
@@ -248,7 +247,6 @@
 		0E415B3525CD772200351672 /* HollowTimelineCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCard.swift; sourceTree = "<group>"; };
 		0E415B3A25CD772200351672 /* HollowHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowHeader.swift; sourceTree = "<group>"; };
 		0E415B3C25CD772200351672 /* PostListRequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequestStore.swift; sourceTree = "<group>"; };
-		0E415B3D25CD772200351672 /* Wander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wander.swift; sourceTree = "<group>"; };
 		0E415B4025CD772200351672 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0E415B4125CD772200351672 /* Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -257,6 +255,8 @@
 		0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageRequest.swift; sourceTree = "<group>"; };
 		0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPublisherExtensions.swift; sourceTree = "<group>"; };
 		0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+presentPopover.swift"; sourceTree = "<group>"; };
+		0E58811925EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0E58811A25EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
@@ -650,7 +650,6 @@
 			isa = PBXGroup;
 			children = (
 				0E415B3C25CD772200351672 /* PostListRequestStore.swift */,
-				0E415B3D25CD772200351672 /* Wander.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -931,6 +930,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 0E415A6725CD769B00351672;
 			packageReferences = (
@@ -1016,7 +1016,6 @@
 				00B014ED25E1205A004E416E /* PostCache.swift in Sources */,
 				0E415B6325CD772200351672 /* HollowCommentContentView.swift in Sources */,
 				0E906CFE25DCEADD0034053C /* SearchRequest.swift in Sources */,
-				0E415B8125CD772200351672 /* Wander.swift in Sources */,
 				0E906D2D25DCEADD0034053C /* Bool+int.swift in Sources */,
 				0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */,
 				0EFB54F425E926A1001BC98A /* PostListRequestGroup.swift in Sources */,
@@ -1135,6 +1134,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0EAA1B4E25E6971500904296 /* en */,
+				0E58811A25EA674B006F6A94 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1143,6 +1143,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0EAA1B5725E7694400904296 /* en */,
+				0E58811925EA674B006F6A94 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

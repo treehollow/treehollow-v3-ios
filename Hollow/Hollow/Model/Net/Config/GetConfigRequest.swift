@@ -47,9 +47,8 @@ struct GetConfigRequestResult: Codable {
     var reportableTags: [String]
     var sendableTags: [String]
     var imgBaseUrls: [String]
-    // deprecated imgBaseUrlBak
-    // var imgBaseUrlBak: String
     var websocketUrl: String
+    var searchTrending: String
 }
 
 /// GetConfigRequestError
@@ -102,7 +101,6 @@ struct GetConfigRequest: Request {
         }
         let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         let task = session.dataTask(with: url) { data, response, error in
-
             if let error = error {
                 completion(nil, .other(description: error.localizedDescription))
                 return
@@ -120,7 +118,6 @@ struct GetConfigRequest: Request {
                 completion(nil, .incorrectFormat)
                 return
             }
-            
             let components1 = string.components(separatedBy: "-----BEGIN TREEHOLLOW CONFIG-----")
             if components1.count == 2 {
                 let component2 = components1[1].components(separatedBy: "-----END TREEHOLLOW CONFIG-----")

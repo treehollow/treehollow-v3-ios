@@ -77,8 +77,14 @@ struct WanderView: View {
     
     func cardView(for postData: PostData) -> some View {
         VStack {
-            HollowHeaderView(postData: postData, compact: true)
-                .padding(.bottom, body5)
+            HollowHeaderView(
+                postData: postData,
+                compact: true,
+                starAction: { viewModel.star($0, for: postData.postId) },
+                isEditingAttention: false
+            )
+            .padding(.bottom, body5)
+            
             VStack {
                 HollowContentView(
                     postDataWrapper: .init(post: postData, citedPost: nil),

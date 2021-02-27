@@ -14,13 +14,14 @@ import Combine
 /// and `AttentionListSearch`.
 class PostListRequestStore: ObservableObject, AppModelEnvironment {
     
-    // MARK: -  Shared Variables
+    // MARK: - Shared Variables
     let type: PostListRequestGroupType
     var page = 1
     var noMorePosts = false
     var options: Options = []
     @Published var posts: [PostDataWrapper]
     @Published var isLoading = false
+    @Published var isEditingAttention = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var appModelState = AppModelState()
 
@@ -35,8 +36,9 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         self.type = type
         self.posts = []
         self.options = options
+        if type == .searchTrending { searchString = Defaults[.hollowConfig]!.searchTrending }
         switch type {
-        case .postList, .attentionList, .wander: requestPosts(at: 1)
+        case .postList, .attentionList, .wander, .searchTrending: requestPosts(at: 1)
         default: break
         }
     }
@@ -54,7 +56,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             configuration = .attentionListSearch(.init(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, keywords: searchString, page: page))
         case .postList:
             configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
-        case .search:
+        case .search, .searchTrending:
             // FIXME: Other attributes
             configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, beforeTimestamp: nil, includeComment: !excludeComments))
         case .wander:
@@ -177,7 +179,15 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         PostDetailRequest.publisher(for: requests)?
             .sinkOnMainThread(receiveValue: { index, output in
                 switch output {
-                case .failure: break
+                case .failure(let error):
+                    switch error {
+                    case .noSuchPost:
+                        self.assignCitedPostError(
+                            error.description,
+                            to: postsWrapperWithCitation[index].post.postId
+                        )
+                    default: break
+                    }
                 case .success(let postData):
                     self.assignCitedPost(
                         postData.post,
@@ -192,8 +202,15 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         guard let index = posts.firstIndex(where: { $0.post.postId == postId }) else { return }
         self.posts[index].citedPost = citedPost
     }
+    
+    private func assignCitedPostError(_ error: String, to postId: Int) {
+        guard let index = posts.firstIndex(where: { $0.post.postId == postId }) else { return }
+        var post = PostDataWrapper.templatePost(for: postId).post
+        post.loadingError = error
+        self.posts[index].citedPost = post
+    }
         
-    // MARK: - Handle vote action
+    // MARK: - Handle vote and star action
     func vote(postId: Int, for option: String) {
         // FIXME: Keep the version of vote in sync with detail view when the request is processing!
         let config = Defaults[.hollowConfig]!
@@ -211,6 +228,34 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
                 }
             })
             .store(in: &cancellables)
+    }
+    
+    func star(_ star: Bool, for postId: Int) {
+        guard !isEditingAttention else { return }
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, postId: postId, switchToAttention: star))
+        withAnimation { isEditingAttention = true }
+        
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                withAnimation { self.isEditingAttention = false }
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { result in
+                withAnimation {
+                    self.isEditingAttention = false
+                    self.assignAttentionResult(result.attention, starNumber: result.likenum, to: postId)
+                }
+            })
+            .store(in: &cancellables)
+    }
+
+    func assignAttentionResult(_ attention: Bool, starNumber: Int, to postId: Int) {
+        guard let index = posts.firstIndex(where: { $0.post.id == postId }) else { return }
+        withAnimation {
+            posts[index].post.attention = attention
+            posts[index].post.likeNumber = starNumber
+        }
     }
 
 }
