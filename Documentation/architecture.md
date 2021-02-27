@@ -1,34 +1,10 @@
-## 架构
+# 架构
 
 采用如下图所示的MVVM架构。
 
-```mermaid
-graph BT
-	cache[(Cache)]
-	remote[(Remote)]
-	request[Request]
-	rp[Request Publisher]
-	vm[View Model]
-	v[View]
-	
-	cache --> request
-	request --> |update| cache
-	remote --> request
-	request --> rp --> |publish| vm --> |data source| v
-	vm --> |subscribe| rp
-	v --> |intent| vm
-	
-	subgraph Model
-		cache
-		remote
-		request
-		rp
-	end
-	
-	style Model fill:#ffffde,stroke:#aaaa33;
-```
+[![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggQlRcblx0Y2FjaGVbKENhY2hlKV1cblx0cmVtb3RlWyhSZW1vdGUpXVxuXHRyZXF1ZXN0W1JlcXVlc3RdXG5cdHJwW1JlcXVlc3QgUHVibGlzaGVyXVxuXHR2bVtWaWV3IE1vZGVsXVxuXHR2W1ZpZXddXG5cdFxuXHRjYWNoZSAtLT4gcmVxdWVzdFxuXHRyZXF1ZXN0IC0tPiB8dXBkYXRlfCBjYWNoZVxuXHRyZW1vdGUgLS0-IHJlcXVlc3Rcblx0cmVxdWVzdCAtLT4gcnAgLS0-IHxwdWJsaXNofCB2bSAtLT4gfGRhdGEgc291cmNlfCB2XG5cdHZtIC0tPiB8c3Vic2NyaWJlfCBycFxuXHR2IC0tPiB8aW50ZW50fCB2bVxuXHRcblx0c3ViZ3JhcGggTW9kZWxcblx0XHRjYWNoZVxuXHRcdHJlbW90ZVxuXHRcdHJlcXVlc3Rcblx0XHRycFxuXHRlbmRcblx0XG5cdHN0eWxlIE1vZGVsIGZpbGw6I2ZmZmZkZSxzdHJva2U6I2FhYWEzMzsiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
-### Model
+## Model
 
 Model部分主要进行缓存的管理，以及向服务器请求和发送数据。如上图所示，`Request` 进行具体的请求（查询缓存/进行HTTP请求），`Request Publisher` 对 `Request` 进行包装，并向 `ViewModel` 提供声明式的接口。
 
