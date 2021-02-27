@@ -12,6 +12,7 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import Connectivity
+import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
@@ -43,6 +44,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
         
+        // Set the delegate to self
+        center.delegate = self
+        
         // Fetch the lastest config
         fetchConfig()
         // test all api when updated
@@ -68,6 +72,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         #endif
         print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
+    
+}
+
+extension AppDelegate {
     
     // MARK: - Tree Hollow Configuration
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
@@ -107,5 +115,29 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 Defaults[.hollowConfig] = result
             }
         })
+    }
+}
+
+// MARK: - User Notifications
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let content = response.notification.request.content
+        if let postId = content.userInfo["pid"] as? Int {
+            presentDetail(postId: postId)
+        }
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound])
+    }
+    
+    func presentDetail(postId: Int) {
+        guard let topVC = IntegrationUtilities.topViewController() else { return }
+        let postDataWrapper = PostDataWrapper.templatePost(for: postId)
+        let detailView = HollowDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper)))
+        let vc = UIHostingController(rootView: detailView)
+        vc.modalPresentationStyle = .popover
+        topVC.present(vc, animated: true)
     }
 }

@@ -62,7 +62,14 @@ struct SearchView: View {
                         .foregroundColor(.hollowContentText)
                         .verticalCenter()
                 } else {
-                    listView().ignoresSafeArea()
+                    CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
+                        LazyVStack(spacing: 0) {
+                            PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: true, voteHandler: store.vote)
+                        }
+                        .padding(.top)
+                    }
+                    .ignoresSafeArea()
+                    .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }
             } else {
                 Spacer()
@@ -87,15 +94,5 @@ struct SearchView: View {
             }
         )
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
-    }
-    
-    func listView() -> some View {
-        CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
-            LazyVStack(spacing: 0) {
-                PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: true, voteHandler: store.vote)
-            }
-            .padding(.top)
-        }
-        .modifier(LoadingIndicator(isLoading: store.isLoading))
     }
 }

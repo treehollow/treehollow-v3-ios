@@ -47,3 +47,10 @@ struct PostDataWrapper: Identifiable {
     }
     var citedPost: PostData?
 }
+
+extension PostDataWrapper {
+    static func templatePost(for postId: Int) -> PostDataWrapper {
+        let post = PostData(attention: false, deleted: false, likeNumber: 0, permissions: [], postId: postId, replyNumber: 0, timestamp: Date(), tag: nil, text: "", hollowImage: nil, vote: nil, comments: [], loadingError: nil)
+        return PostDataWrapper(post: post, citedPost: nil)
+    }
+}

@@ -60,8 +60,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
                 withAnimation { self.isLoading = false }
                 switch completion {
                 case .finished:
-                    self.loadImages()
-                    self.loadCitedPost()
+                    self.loadComponents()
                 case .failure(let error):
                     self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
                 }
@@ -80,6 +79,10 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
             })
             .store(in: &cancellables)
         
+        loadComponents()
+    }
+    
+    private func loadComponents() {
         loadPostImage()
         loadImages()
         loadCitedPost()

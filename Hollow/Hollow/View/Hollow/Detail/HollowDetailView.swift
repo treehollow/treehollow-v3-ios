@@ -14,7 +14,7 @@ struct HollowDetailView: View {
     @State private var scrollViewOffset: CGFloat? = 0
     @State var replyIndex: Int = -2
     @State var inputPresented = false
-    @Environment(\.presentationMode) var presentationMode
+    
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     
     var body: some View {
@@ -87,8 +87,10 @@ struct HollowDetailView: View {
                     NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
                     post.comments[replyIndex].name
                 let animation: Animation = .easeInOut(duration: 0.25)
+                // FIXME: Recreated store
+                let commentStore: HollowCommentInputStore = .init(presented: $inputPresented, postId: post.postId, replyTo: replyTo, name: name, onFinishSending: store.requestDetail)
                 HollowCommentInputView(
-                    store: .init(presented: $inputPresented, postId: post.postId, replyTo: replyTo, name: name, onFinishSending: store.requestDetail),
+                    store: commentStore,
                     transitionAnimation: animation
                 )
                 .bottom()
@@ -106,7 +108,6 @@ struct HollowDetailView: View {
         }
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
-        .onDisappear(perform: store.cancelAll)
     }
     
 }
