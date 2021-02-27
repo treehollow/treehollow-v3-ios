@@ -22,21 +22,10 @@ struct LoadingIndicator: ViewModifier {
         content
             .overlay(
                 Group { if isLoading {
-                    LoadingLabel()
+                    LoadingLabel(foregroundColor: .white)
                         .modifier(IndicatorOverlay())
                 }}
             )
             .disabled(isLoading && disableWhenLoading)
     }
 }
-
-#if DEBUG
-struct LoadingIndicator_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            DeviceListView()
-        }
-        .modifier(LoadingIndicator(isLoading: true))
-    }
-}
-#endif

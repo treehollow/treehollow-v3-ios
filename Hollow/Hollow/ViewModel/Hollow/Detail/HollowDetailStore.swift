@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 import Defaults
+import Connectivity
 
 class HollowDetailStore: ObservableObject, AppModelEnvironment {
     var bindingPostWrapper: Binding<PostDataWrapper>
@@ -30,8 +31,19 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         // source of truth when the detail view exists.
         $postDataWrapper
             .receive(on: DispatchQueue.main)
-            .assign(to: \.wrappedValue, on: self.bindingPostWrapper)
+            .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
             .store(in: &cancellables)
+        
+        // When reconnect to the internet, fetch again.
+        ConnectivityPublisher.networkConnectedStatusPublisher
+            .sink(receiveValue: { connected in
+                if connected { self.requestDetail() }
+            })
+            .store(in: &cancellables)
+    }
+    
+    func cancelAll() {
+        cancellables.removeAll()
     }
     
     // MARK: - Load Post Detail
@@ -76,6 +88,7 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     func loadPostImage() {
         if let imageURL = postDataWrapper.post.hollowImage?.imageURL,
            postDataWrapper.post.hollowImage?.image == nil {
+            postDataWrapper.post.hollowImage?.loadingError = nil
             loadImage(
                 for: imageURL,
                 receiveValue: { image in withAnimation {
@@ -112,12 +125,13 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
         request.publisher
             .map({ $0.post })
             .sinkOnMainThread(receiveError: { error in
-                
+                self.postDataWrapper.citedPost?.loadingError = error.description
             }, receiveValue: { postData in
                 withAnimation { self.postDataWrapper.citedPost = postData }
             })
             .store(in: &cancellables)
     }
+    
     
     // MARK: - Load Images in Comments
     private func loadImages() {
@@ -159,6 +173,9 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
     }
     
     func reloadImage(_ hollowImage: HollowImage, commentId: Int) {
+        if let index = postDataWrapper.post.comments.firstIndex(where: { $0.commentId == commentId }) {
+            postDataWrapper.post.comments[index].image?.loadingError = nil
+        }
         loadImage(
             for: hollowImage.imageURL,
             receiveValue: { self.assignImage($0, to: commentId) },

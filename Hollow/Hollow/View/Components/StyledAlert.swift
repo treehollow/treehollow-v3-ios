@@ -21,7 +21,7 @@ extension View {
 struct StyledAlert: View {
     @Binding var presented: Bool
     
-    @State private var scale: CGFloat = 0
+    @State private var scale: CGFloat = 0.3
     
     @ScaledMetric private var spacing: CGFloat = 14
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) private var secondaryText: CGFloat

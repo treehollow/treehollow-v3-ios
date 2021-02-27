@@ -91,6 +91,8 @@
 		0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */; };
 		0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
+		0E58810A25E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */; };
+		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
@@ -171,8 +173,7 @@
 		0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */; };
 		0EFB54F425E926A1001BC98A /* PostListRequestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */; };
 		0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */; };
-		0EFB54FF25E92F64001BC98A /* SearchSubViews2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54FE25E92F64001BC98A /* SearchSubViews2.swift */; };
-		0EFB550525E93E24001BC98A /* HollowTimeilneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB550425E93E24001BC98A /* HollowTimeilneListView.swift */; };
+		0EFB550525E93E24001BC98A /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB550425E93E24001BC98A /* PostListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -254,6 +255,8 @@
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPublisher.swift; sourceTree = "<group>"; };
 		0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageRequest.swift; sourceTree = "<group>"; };
+		0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPublisherExtensions.swift; sourceTree = "<group>"; };
+		0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+presentPopover.swift"; sourceTree = "<group>"; };
 		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
@@ -337,8 +340,7 @@
 		0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectivityStatus+isConnected.swift"; sourceTree = "<group>"; };
 		0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListRequestGroup.swift; sourceTree = "<group>"; };
 		0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubViews.swift; sourceTree = "<group>"; };
-		0EFB54FE25E92F64001BC98A /* SearchSubViews2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubViews2.swift; sourceTree = "<group>"; };
-		0EFB550425E93E24001BC98A /* HollowTimeilneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowTimeilneListView.swift; sourceTree = "<group>"; };
+		0EFB550425E93E24001BC98A /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,6 +496,7 @@
 				0EAA1B4A25E6562B00904296 /* View+flash.swift */,
 				0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */,
 				0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */,
+				0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -583,12 +586,11 @@
 			isa = PBXGroup;
 			children = (
 				0E415B2C25CD772200351672 /* MainView.swift */,
-				0EFB550425E93E24001BC98A /* HollowTimeilneListView.swift */,
+				0EFB550425E93E24001BC98A /* PostListView.swift */,
 				0E415B2925CD772200351672 /* TimelineView.swift */,
 				0E415B2B25CD772200351672 /* WanderView.swift */,
 				0E415B2825CD772200351672 /* SearchView.swift */,
 				0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */,
-				0EFB54FE25E92F64001BC98A /* SearchSubViews2.swift */,
 				0E415B2725CD772200351672 /* FavouritesView.swift */,
 				0E415B2A25CD772200351672 /* AccountView.swift */,
 				0E415B2D25CD772200351672 /* MessageView.swift */,
@@ -842,6 +844,7 @@
 				0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */,
 				00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */,
 				0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */,
+				0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1043,9 +1046,8 @@
 				0E415B7425CD772200351672 /* TimelineView.swift in Sources */,
 				0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
-				0EFB550525E93E24001BC98A /* HollowTimeilneListView.swift in Sources */,
+				0EFB550525E93E24001BC98A /* PostListView.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
-				0EFB54FF25E92F64001BC98A /* SearchSubViews2.swift in Sources */,
 				0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
@@ -1058,6 +1060,7 @@
 				0E906D0525DCEADD0034053C /* DefaultRequest.swift in Sources */,
 				0E906D1225DCEADD0034053C /* ReportPostRequest.swift in Sources */,
 				0E906D0D25DCEADD0034053C /* UpdateDeviceTokenRequest.swift in Sources */,
+				0E58810A25E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift in Sources */,
 				0E415B7225CD772200351672 /* FavouritesView.swift in Sources */,
 				0E415B6F25CD772200351672 /* AccountInfoView.swift in Sources */,
 				0E906D1425DCEADD0034053C /* EditAttentionRequest.swift in Sources */,
@@ -1096,6 +1099,7 @@
 				0E906D0B25DCEADD0034053C /* EmailCheckRequest.swift in Sources */,
 				0E415B4425CD772200351672 /* CustomTabView.swift in Sources */,
 				0E906D2125DCEADD0034053C /* HollowImage.swift in Sources */,
+				0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */,
 				0E906D2625DCEADD0034053C /* Data+hexEncodedString.swift in Sources */,
 				0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */,
 				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,

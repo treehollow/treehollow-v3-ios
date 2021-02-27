@@ -25,11 +25,13 @@ struct SearchView: View {
     @State var detailPresentedIndex: Int?
     @State var detailStore: HollowDetailStore? = nil
 
-    let transitionAnimation = Animation.searchViewTransition
     @State var showPost = false
+    
+    let transitionAnimation = Animation.searchViewTransition
     
     @Namespace var animation
     
+    @Environment(\.colorScheme) var colorScheme
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
@@ -56,7 +58,7 @@ struct SearchView: View {
             
             if showPost {
                 if store.posts.count == 0 && !store.isLoading {
-                    Text("No Result")
+                    Text("SEARCHVIEW_NO_RESULT_LABEL")
                         .foregroundColor(.hollowContentText)
                         .verticalCenter()
                 } else {
@@ -67,11 +69,13 @@ struct SearchView: View {
             }
         }
         // Background color
-        .background(Color.background.opacity(0.4).edgesIgnoringSafeArea(.all))
+        .background(
+            Color.background
+                .opacity(showPost && colorScheme == .dark ? 1 : 0.4)
+                .edgesIgnoringSafeArea(.all)
+        )
         // Blur background
-        .blurBackground(style: .systemUltraThinMaterial)
-        .transition(.move(edge: .bottom))
-//        .animation(transitionAnimation)
+        .blurBackground()
         .edgesIgnoringSafeArea(.bottom)
         .overlay(
             Group {
@@ -82,28 +86,16 @@ struct SearchView: View {
                 }
             }
         )
-        .sheet(item: $detailPresentedIndex, content: { index in Group {
-            if let store = detailStore {
-                HollowDetailView(store: store, presentedIndex: $detailPresentedIndex)
-            }
-        }})
+        .modifier(ErrorAlert(errorMessage: $store.errorMessage))
     }
     
     func listView() -> some View {
         CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
-            
-            HollowTimeilneListView(postDataWrappers: $store.posts, detailStore: $detailStore, detailPresentedIndex: $detailPresentedIndex, voteHandler: store.vote)
-                .padding(.top)
+            LazyVStack(spacing: 0) {
+                PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: true, voteHandler: store.vote)
+            }
+            .padding(.top)
         }
         .modifier(LoadingIndicator(isLoading: store.isLoading))
     }
 }
-
-#if DEBUG
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-//            .colorScheme(.dark)
-    }
-}
-#endif

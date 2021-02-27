@@ -11,14 +11,13 @@ import WaterfallGrid
 struct WanderView: View {
     @State private var scrolledToBottom: Bool? = false
     @State private var shouldLoadMorePosts = true
-    @State private var detailStore: HollowDetailStore? = nil
     @State private var detailPresentedIndex: Int?
     
     @Binding var showCreatePost: Bool
     @Binding var showReload: Bool
     @Binding var shouldReload: Bool
     
-    @ObservedObject var viewModel: Wander
+    @ObservedObject var viewModel: PostListRequestStore
     
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
 
@@ -30,50 +29,41 @@ struct WanderView: View {
                 // view is presenting
                 guard detailPresentedIndex == nil else { return }
                 // Due to performance issue of WaterfallGrid, we set the
-                // maximum number of posts to 90 (at least loading for 3 times)
-                if viewModel.posts.count >= 90 {
+                // maximum number of posts to 60 (at least loading for 2 times)
+                if viewModel.posts.count >= 60 {
                     viewModel.posts.removeAll()
                 }
-                viewModel.loadMorePosts(clearPosts: false)
+                viewModel.loadMorePosts()
             },
             didScroll: { direction in withAnimation { showReload = direction == .up }},
             refresh: viewModel.refresh,
             content: { proxy in Group {
-                WaterfallGrid(viewModel.posts) { postData in
+                WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
+                    let postData = postDataWrapper.post
                     cardView(for: postData)
                         .onTapGesture {
-                            guard let index = viewModel.posts.firstIndex(where: { $0.id == postData.id }) else { return }
-                            detailStore = HollowDetailStore(
-                                bindingPostWrapper: Binding(
-                                    get: { PostDataWrapper(post: postData, citedPost: nil) },
-                                    set: { self.viewModel.posts[index] = $0.post }
+                            guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
+                            presentPopover {
+                                HollowDetailView(
+                                    store: HollowDetailStore(
+                                        bindingPostWrapper: Binding(
+                                            get: { postDataWrapper },
+                                            set: { self.viewModel.posts[index] = $0 }
+                                        )
+                                    )
                                 )
-                            )
-                            DispatchQueue.main.async {
-                                detailPresentedIndex = index
                             }
                         }
                         .disabled(viewModel.isLoading)
-                }
+                }}
                 .gridStyle(columns: 2, spacing: 10, animation: nil)
                 .padding(.horizontal, 15)
                 .background(Color.background)
                 .onChange(of: shouldReload) { _ in
                     if shouldReload { withAnimation {
                         proxy.scrollTo(0, anchor: .top)
-                        viewModel.refresh()
+                        viewModel.refresh(finshHandler: {})
                     }}
-                }
-                
-                LoadingLabel()
-                    .padding(.vertical)
-                    .padding(.bottom)
-            }})
-            // Present post detail
-            .sheet(item: $detailPresentedIndex, content: { index in Group {
-                if let store = detailStore {
-                    // FIXME: Data binding
-                    HollowDetailView(store: store, presentedIndex: $detailPresentedIndex)
                 }
             }})
 
@@ -95,9 +85,10 @@ struct WanderView: View {
                     options: [.displayVote, .disableVote, .displayImage, .replaceForImageOnly, .compactText],
                     voteHandler: { _ in },
                     lineLimit: 20
+                    // TODO: Reload handler
                 )
             }
-            // TODO: Vote and cite
+
             HStack {
                 Label("\(postData.replyNumber)", systemImage: "quote.bubble")
                     .foregroundColor(.hollowCardStarUnselected)

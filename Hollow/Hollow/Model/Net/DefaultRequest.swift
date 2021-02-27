@@ -67,7 +67,6 @@ extension DefaultRequest {
                     }
                     let result = try jsonDecoder.decode(Result.self, from: data)
                     if result.code >= 0 {
-                        print(result)
                         // result code >= 0 valid!
                         if let resultData = resultToResultData(result) {
                             completion(resultData, nil)

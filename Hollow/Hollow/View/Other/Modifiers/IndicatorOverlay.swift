@@ -10,8 +10,6 @@ import SwiftUI
 
 struct IndicatorOverlay: ViewModifier {
     
-    @Environment(\.colorScheme) var colorScheme
-
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var fontSize: CGFloat
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
@@ -20,8 +18,7 @@ struct IndicatorOverlay: ViewModifier {
         content
             .padding(.horizontal, body10)
             .padding(.vertical, body5)
-            .background(Color.background)
-            .colorScheme(colorScheme == .dark ? .light : .dark)
+            .background(LinearGradient.vertical(gradient: .hollowContentVote))
             .clipShape(Capsule())
             .padding(.top)
             .top()

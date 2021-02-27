@@ -10,12 +10,15 @@ import SwiftUI
 import Defaults
 import Combine
 
+/// Shared view model for views that request `PostList`, `Search`, `AttentionList`
+/// and `AttentionListSearch`.
 class PostListRequestStore: ObservableObject, AppModelEnvironment {
     
     // MARK: -  Shared Variables
     let type: PostListRequestGroupType
     var page = 1
     var noMorePosts = false
+    var options: Options = []
     @Published var posts: [PostDataWrapper]
     @Published var isLoading = false
     @Published var errorMessage: (title: String, message: String)?
@@ -28,11 +31,12 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     @Published var searchString: String = ""
     @Published var excludeComments = false
     
-    init(type: PostListRequestGroupType) {
+    init(type: PostListRequestGroupType, options: Options = []) {
         self.type = type
         self.posts = []
+        self.options = options
         switch type {
-        case .postList, .attentionList: requestPosts(at: 1)
+        case .postList, .attentionList, .wander: requestPosts(at: 1)
         default: break
         }
     }
@@ -53,6 +57,8 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         case .search:
             // FIXME: Other attributes
             configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, beforeTimestamp: nil, includeComment: !excludeComments))
+        case .wander:
+            configuration = .wander(.init(apiRoot: config.apiRootUrls, token: token, page: page))
         }
         let request = PostListRequestGroup(configuration: configuration)
         withAnimation {
@@ -120,7 +126,9 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
                 posts.append(newPost)
             }
         }
-        posts.sort(by: { $0.post.postId > $1.post.postId })
+        if !options.contains(.unordered) {
+            posts.sort(by: { $0.post.postId > $1.post.postId })
+        }
         self.posts = posts
     }
     
@@ -205,4 +213,14 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             .store(in: &cancellables)
     }
 
+}
+
+extension PostListRequestStore {
+    struct Options: OptionSet {
+        let rawValue: Int
+        
+        static let ignoreCitedPost = Options(rawValue: 1 << 0)
+        static let ignoreComments = Options(rawValue: 1 << 1)
+        static let unordered = Options(rawValue: 1 << 2)
+    }
 }

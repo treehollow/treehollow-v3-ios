@@ -10,8 +10,8 @@ import SwiftUI
 import Defaults
 
 struct HollowContentView: View {
-    @State private var presentedIndex: Int?
-    @State private var detailStore: HollowDetailStore?
+    var detailStore: HollowDetailStore?
+    @State private var newDetailStore: HollowDetailStore?
     var postDataWrapper: PostDataWrapper
     var options: DisplayOptions
     var voteHandler: (String) -> Void
@@ -50,7 +50,7 @@ struct HollowContentView: View {
         }
         
         if hasImage && options.contains(.displayImage) && !hideContent {
-            HollowImageView(hollowImage: postDataWrapper.post.hollowImage!,
+            HollowImageView(hollowImage: postDataWrapper.post.hollowImage,
                             description: postDataWrapper.post.text,
                             reloadImage: imageReloadHandler
             )
@@ -62,18 +62,19 @@ struct HollowContentView: View {
         if let citedPid = postDataWrapper.citedPostID,
            options.contains(.displayCitedPost),
            !hideContent {
-            if let citedPost = postDataWrapper.citedPost {
+            if let citedPost = postDataWrapper.citedPost,
+               citedPost.loadingError == nil {
                 Button(action: {
-                    DispatchQueue.main.async {
-                        presentedIndex = 1
+//                    newDetailStore = HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil)))
+                    presentPopover {
+                        HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))))
                     }
+//                    DispatchQueue.main.async {
+//                        presentedIndex = 1
+//                    }
                 }) {
                     HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
                 }
-                .sheet(item: $presentedIndex) { _ in Group {
-                    // FIXME: Possibly initializing more than once.
-                    HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))), presentedIndex: $presentedIndex)
-                }}
             } else {
                 HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
             }

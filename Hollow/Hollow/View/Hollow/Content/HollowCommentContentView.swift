@@ -82,7 +82,7 @@ struct HollowCommentContentView: View {
                         
                         if commentData.type == .image && !compact {
                             HollowImageView(
-                                hollowImage: commentData.image!,
+                                hollowImage: commentData.image,
                                 description: commentData.text,
                                 reloadImage: imageReloadHandler
                             )

@@ -19,7 +19,8 @@ struct HollowImageView: View {
     /// Handler to reload the current image if error occurs.
     ///
     /// As the image view does not manage the data source, it is more appropirate
-    /// to handle the request outside the view.
+    /// to handle the request outside the view. The handler is responsible for
+    /// removing the error message before reload action.
     var reloadImage: ((HollowImage) -> Void)? = nil
     
     @ScaledMetric private var reloadButtonSize: CGFloat = 50
@@ -60,20 +61,22 @@ struct HollowImageView: View {
                         .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))
                         .aspectRatio(hollowImage.placeholder.width / hollowImage.placeholder.height, contentMode: .fit)
                         .overlay(Group { if let _ = self.hollowImage?.loadingError {
-                            Button(action: { reloadImage?(self.hollowImage!) }) {
+                            Button(action: {
+                                reloadImage?(self.hollowImage!)
+                            }) {
                                 ZStack {
-                                    Blur()
+                                    Color.hollowContentVoteGradient1
                                     Image(systemName: "arrow.clockwise")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .padding()
                                         .font(.system(size: reloadButtonSize, weight: .semibold))
+                                        .foregroundColor(.white)
                                 }
                                 .revertColorScheme()
                                 .frame(maxWidth: reloadButtonSize * 1.5, maxHeight: reloadButtonSize * 1.5)
                                 .clipShape(Circle())
                                 .padding()
-
                             }
                         }})
                         .onAppear {

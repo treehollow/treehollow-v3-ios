@@ -23,7 +23,6 @@ class AppModel: ObservableObject {
     init() {
         ConnectivityPublisher()
             .map { $0.status.isConnected }
-            .print()
             .sinkOnMainThread(receiveValue: { _ in
                 LineSwitchManager.testAll()
             })

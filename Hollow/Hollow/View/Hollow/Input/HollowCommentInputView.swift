@@ -11,6 +11,9 @@ struct HollowCommentInputView: View {
     @ObservedObject var store: HollowCommentInputStore
     @State var keyboardShown = false
     @State var showImagePicker = false
+    @State private var viewSize: CGSize = .zero
+    
+    @GestureState var dragOffset: CGFloat = 0
     
     @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
@@ -23,6 +26,8 @@ struct HollowCommentInputView: View {
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var editorFontSize: CGFloat
     
     @Namespace var animation
+    
+    var transitionAnimation: Animation?
     
     var hasImage: Bool { store.compressedImage != nil }
     var hideComponents: Bool { keyboardShown }
@@ -38,7 +43,7 @@ struct HollowCommentInputView: View {
                 let sendingText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SENDING", comment: "")
                 let sendCommentText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SEND_POST", comment: "")
 
-                MyButton(action: store.sendComment) {
+                MyButton(action: store.sendComment, transitionAnimation: transitionAnimation) {
                     Text(store.isLoading ? sendingText + "..." : sendCommentText)
                         .modifier(MyButtonDefaultStyle())
                 }
@@ -60,7 +65,7 @@ struct HollowCommentInputView: View {
                 imageButton
                 if keyboardShown {
                     Spacer()
-                    MyButton(action: self.hideKeyboard) {
+                    MyButton(action: self.hideKeyboard, transitionAnimation: transitionAnimation) {
                         Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
                             .font(.system(size: buttonFontSize, weight: .bold))
                             .foregroundColor(.white)
@@ -72,12 +77,29 @@ struct HollowCommentInputView: View {
         .background(Color.hollowCardBackground)
         .cornerRadius(12)
         .padding()
+        .shadow(radius: 12)
+        .animation(transitionAnimation)
         
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in withAnimation { keyboardShown = false }}
         .modifier(ImagePickerModifier(presented: $showImagePicker, image: $store.image))
         .onChange(of: store.image) { _ in store.compressImage() }
+        .offset(y: dragOffset)
+        .gesture(
+            DragGesture()
+                .updating($dragOffset) { value, state, _ in
+                    if value.translation.height > 0 {
+                        state = value.translation.height
+                    }
+                }
+                .onEnded { value in
+                    if value.predictedEndTranslation.height > viewSize.height / 2 {
+                        store.presented.wrappedValue = false
+                    }
+                }
+        )
         .disabled(store.isLoading)
+        .modifier(GetSize(size: $viewSize))
     }
 }
 

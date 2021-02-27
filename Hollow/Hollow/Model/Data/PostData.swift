@@ -28,6 +28,8 @@ struct PostData: Identifiable, Codable {
     var hollowImage: HollowImage?
     var vote: VoteData?
     var comments: [CommentData]
+    
+    var loadingError: String?
 }
 
 typealias CitedPostData = PostData

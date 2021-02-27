@@ -14,8 +14,7 @@ struct TimelineView: View {
     @Binding var shouldReload: Bool
 
     @ObservedObject var viewModel: PostListRequestStore
-    
-    @State private var detailPresentedIndex: Int?
+
     @State private var offset: CGFloat? = 0
     /// To track the offset when the user scroll to the middle of the searchbar.
     @State private var searchBarTrackingOffset: CGFloat?
@@ -74,11 +73,11 @@ struct TimelineView: View {
                     Color.background.frame(height: body14 / 2)
                         .id(-1)
                     LazyVStack(spacing: 0) {
-                        HollowTimeilneListView(
+                        PostListView(
                             postDataWrappers: $viewModel.posts,
                             detailStore: $detailStore,
-                            detailPresentedIndex: $detailPresentedIndex,
-                            voteHandler: viewModel.vote)
+                            voteHandler: viewModel.vote
+                        )
                     }
 
                 }
@@ -114,12 +113,6 @@ struct TimelineView: View {
                 
             })
 
-            // Present post detail
-            .sheet(item: $detailPresentedIndex, content: { index in Group {
-                if let store = detailStore {
-                    HollowDetailView(store: store, presentedIndex: $detailPresentedIndex)
-                }
-            }})
             
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic
@@ -130,26 +123,6 @@ struct TimelineView: View {
     }
     
 }
-
-extension TimelineView {
-    struct OffsetPreferenceKey: PreferenceKey {
-        typealias Value = CGFloat?
-
-        static var defaultValue: CGFloat? = nil
-        
-        static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
-            value = nextValue()
-        }
-    }
-}
-
-#if DEBUG
-struct TimelineView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
-#endif
 
 extension Int: Identifiable {
     public var id: Int { self }

@@ -9,13 +9,12 @@ import SwiftUI
 
 struct HollowDetailView: View {
     @ObservedObject var store: HollowDetailStore
-    @Binding var presentedIndex: Int?
     
     @State private var commentRect: CGRect = .zero
     @State private var scrollViewOffset: CGFloat? = 0
     @State var replyIndex: Int = -2
     @State var inputPresented = false
-    
+    @Environment(\.presentationMode) var presentationMode
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     
     var body: some View {
@@ -26,7 +25,7 @@ struct HollowDetailView: View {
                 // Header
                 VStack(spacing: 0) {
                     HStack {
-                        Button(action: { presentedIndex = nil }) {
+                        Button(action: dismissSelf) {
                             Image(systemName: "xmark")
                                 .modifier(ImageButtonModifier())
                                 .padding(.trailing, 5)
@@ -68,7 +67,7 @@ struct HollowDetailView: View {
                         
                         commentView
                             .onChange(of: replyIndex) { index in
-                                withAnimation {
+                                withAnimation(.easeInOut(duration: 0.25)) {
                                     proxy.scrollTo(index, anchor: .top)
                                 }
                             }
@@ -87,10 +86,11 @@ struct HollowDetailView: View {
                 let name = replyIndex == -1 ?
                     NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
                     post.comments[replyIndex].name
+                let animation: Animation = .easeInOut(duration: 0.25)
                 HollowCommentInputView(
-                    store: .init(presented: $inputPresented, postId: post.postId, replyTo: replyTo, name: name, onFinishSending: store.requestDetail)
+                    store: .init(presented: $inputPresented, postId: post.postId, replyTo: replyTo, name: name, onFinishSending: store.requestDetail),
+                    transitionAnimation: animation
                 )
-                .shadow(radius: 12)
                 .bottom()
                 .transition(.move(edge: .bottom))
             }
@@ -106,7 +106,7 @@ struct HollowDetailView: View {
         }
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
-        .animation(.default)
+        .onDisappear(perform: store.cancelAll)
     }
     
 }

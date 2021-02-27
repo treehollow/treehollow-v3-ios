@@ -12,6 +12,9 @@ struct HollowCiteContentView: View {
     var postData: CitedPostData?
     
     var displayedText: String {
+        if let message = postData?.loadingError {
+            return message
+        }
         if let postData = self.postData {
             return postData.text == "" ? "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" : postData.text
         }

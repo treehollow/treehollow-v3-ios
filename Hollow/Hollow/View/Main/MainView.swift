@@ -30,7 +30,7 @@ struct MainView: View {
     // Initialize time line view model here to avoid creating repeatedly
     let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly
-    let wanderViewModel = Wander()
+    let wanderViewModel = PostListRequestStore(type: .wander, options: [.ignoreCitedPost, .ignoreComments, .unordered])
 
     var body: some View {
         ZStack {
@@ -65,7 +65,10 @@ struct MainView: View {
                     VStack {
                         if !showCreatePost {
                             button(
-                                action: { withAnimation { showCreatePost = true }},
+                                action: {
+                                    withAnimation { showCreatePost = true }
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                },
                                 systemName: "plus"
                             )
                             .matchedGeometryEffect(id: "add.post", in: animation)
