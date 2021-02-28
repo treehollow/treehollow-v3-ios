@@ -65,8 +65,8 @@ PostDetailRequest.publisher(for: requests)?
         case .success(let postData):
           // 处理第 index 个请求的结果
         }
-      })
-      .store(...)
+    })
+    .store(...)
 ```
 
 这在传统的依赖回调函数的代码中的实现是非常复杂的。
