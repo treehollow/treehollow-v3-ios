@@ -10,6 +10,18 @@ import SwiftUI
 import Defaults
 
 extension SearchView {
+    func performSearch() {
+        withAnimation {
+            hideKeyboard()
+            showPost = true
+        }
+        updateHistoryDefaults(with: store.searchString)
+        store.posts.removeAll()
+        store.refresh(finshHandler: {})
+    }
+    
+    var searchStringValid: Bool { !store.searchString.drop(while: { $0 == " " }).isEmpty }
+    
     @ViewBuilder func searchConfigurationView() -> some View {
 
         AdvancedOptionsView(startPickerPresented: $startPickerPresented, endPickerPresented: $endPickerPresented, startDate: $store.startDate, endDate: $store.endDate, selectsPartialSearch: $store.excludeComments)
@@ -35,27 +47,22 @@ extension SearchView {
                     .modifier(ImageButtonModifier())
                     .padding(.trailing)
             }
-            .animation(.none)
+            
             if showPost && store.type == .search {
                 searchField()
             } else {
                 Spacer()
             }
-            MyButton(action: {
-                withAnimation {
-                    hideKeyboard()
-                    showPost = true
-                }
-                updateHistoryDefaults(with: store.searchString)
-                store.posts.removeAll()
-                store.refresh(finshHandler: {})
-                
-            }, gradient: .vertical(gradient: .button)) {
-                Text(store.type == .search ? "SEARCHVIEW_SEARCH_BUTTON" : "SEARCHVIEW_TRENDING_REFRESH_BUTTON")
+            
+            let searchButtonText = store.type == .search ?
+                NSLocalizedString("SEARCHVIEW_SEARCH_BUTTON", comment: "") :
+                NSLocalizedString("SEARCHVIEW_TRENDING_REFRESH_BUTTON", comment: "")
+            MyButton(action: performSearch, gradient: .vertical(gradient: .button)) {
+                return Text(searchButtonText)
                     .font(.system(size: buttonFontSize, weight: .bold))
                     .foregroundColor(.white)
             }
-            .disabled(store.isLoading || store.searchString == "")
+            .disabled(store.isLoading || !searchStringValid)
         }
         .topBar()
 
@@ -63,24 +70,22 @@ extension SearchView {
     
     func searchField() -> some View {
         VStack(spacing: 0) {
+            let foregroundColor = Color.uiColor(store.searchString != "" ? .systemGray2 : .systemFill)
             HStack {
                 Image(systemName: "magnifyingglass")
-                TextField("SEARCHVIEW_TEXTFIELD_PLACEHOLDER", text: $store.searchString, onEditingChanged: { _ in
-                    // Toggle `isSearching`
-//                    showPost = false
-                }, onCommit: {
-                    // Perform search action
-                })
+                    .foregroundColor(showPost ? .primary : foregroundColor)
+                TextField("SEARCHVIEW_TEXTFIELD_PLACEHOLDER", text: $store.searchString, onCommit: performSearch)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
             }
+            .animation(.default)
             .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
             .font(.system(size: body16))
             .padding(.bottom, showPost ? 0 : 5)
             if !showPost {
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundColor(.uiColor(store.searchString != "" ? .systemGray2 : .systemFill))
+                    .foregroundColor(foregroundColor)
                     .animation(.default)
             }
         }
@@ -105,13 +110,16 @@ extension SearchView {
     func bindingDate(isStart: Bool) -> Binding<Date> {
         if isStart {
             return Binding(
-                get: { store.startDate ?? Date() },
-                set: { store.startDate = $0 }
+                get: { store.startDate ?? store.endDate ?? Date().startOfDay },
+                // It seems that date picker with WheelDatePickerStyle hiding
+                // the time components will not automatically set the selected
+                // time to the end of the day.
+                set: { print($0); store.startDate = $0.endOfDay }
             )
         } else {
             return Binding(
-                get: { store.endDate ?? Date() },
-                set: { store.endDate = $0 }
+                get: { store.endDate ?? store.startDate ?? Date().endOfDay },
+                set: { print($0); store.endDate = $0.endOfDay }
             )
         }
     }
@@ -123,7 +131,10 @@ extension SearchView {
         
         return VStack {
             Spacer()
-            Text(isStart ? "SEARCHVIEW_PICKER_START" : "SEARCHVIEW_PICKER_END")
+            let text = isStart ?
+                NSLocalizedString("SEARCHVIEW_PICKER_START", comment: "") :
+                NSLocalizedString("SEARCHVIEW_PICKER_END", comment: "")
+            Text(text)
                 .bold()
                 .padding(.bottom)
             DatePicker("", selection: bindingDate(isStart: isStart), in: dateRange, displayedComponents: .date)
@@ -141,9 +152,11 @@ extension SearchView {
                 }
             }}) {
                 Text("SEARCHVIEW_PICKER_CLEAR_BUTTON")
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 3)
                     .modifier(MyButtonDefaultStyle())
             }
-            .padding(.top)
+            .padding(.vertical)
 
         }
         .background(
@@ -195,8 +208,9 @@ extension SearchView {
                     .leading()
                 HStack {
                     timeButton(text: startButtonText, hasContent: startDate != nil, action: {
+                        
                         withAnimation {
-                            startDate = startDate ?? Date()
+                            startDate = startDate ?? endDate ?? Date().endOfDay
                             startPickerPresented.toggle()
                         }
                         
@@ -205,7 +219,7 @@ extension SearchView {
 
                     timeButton(text: endButtonText, hasContent: endDate != nil, action: {
                         withAnimation {
-                            endDate = endDate ?? Date()
+                            endDate = endDate ?? startDate ?? Date().endOfDay
                             endPickerPresented.toggle()
                         }
                     }).layoutPriority(1)
@@ -217,9 +231,20 @@ extension SearchView {
                     .fontWeight(.semibold)
                     .leading()
                     .padding(.bottom, 5)
-                rangeButton(text: "SEARCHVIEW_BUTTON_PARTIAL", description: "SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION", selected: selectsPartialSearch, isPartial: true)
-                    .padding(.bottom, 5)
-                rangeButton(text: LocalizedStringKey("SEARCHVIEW_BUTTON_GLOBAL"), description: "SEARCHVIEW_BUTTON_GLOBAL_DESCRIPTION", selected: !selectsPartialSearch, isPartial: false)
+                rangeButton(
+                    text: NSLocalizedString("SEARCHVIEW_BUTTON_GLOBAL", comment: ""),
+                    description: NSLocalizedString("SEARCHVIEW_BUTTON_GLOBAL_DESCRIPTION", comment: ""),
+                    selected: !selectsPartialSearch,
+                    isPartial: false
+                )
+                .padding(.bottom, 5)
+                rangeButton(
+                    text: NSLocalizedString("SEARCHVIEW_BUTTON_PARTIAL", comment: ""),
+                    description: NSLocalizedString("SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION", comment: ""),
+                    selected: selectsPartialSearch,
+                    isPartial: true
+                )
+
             }
         }
         
@@ -241,7 +266,7 @@ extension SearchView {
             }
         }
         
-        func rangeButton(text: LocalizedStringKey, description: LocalizedStringKey, selected: Bool, isPartial: Bool) -> some View {
+        func rangeButton(text: String, description: String, selected: Bool, isPartial: Bool) -> some View {
             return Button(action: {
                 withAnimation {
                     selectsPartialSearch = isPartial

@@ -8,6 +8,9 @@
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "输入评论";
 
 /* No comment provided by engineer. */
+"COMMENT_INPUT_REPLY_POST_SUFFIX" = "树洞";
+
+/* No comment provided by engineer. */
 "COMMENT_INPUT_REPLY_TO_PREFIX" = "回复";
 
 /* No comment provided by engineer. */
@@ -48,6 +51,9 @@
 
 /* No comment provided by engineer. */
 "ERROR_ALERT_OK_BUTTON" = "好";
+
+/* No comment provided by engineer. */
+"Fail to retrieve device token for remote notifications. Please try again." = "获取推送token失败，请退出应用后重试。";
 
 /* No comment provided by engineer. */
 "GLOBAL_ERROR_MSG_TITLE" = "错误";
@@ -174,10 +180,34 @@
 "SEARCHVIEW_ADVANCED_BUTTON" = "Advanced";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_ADVANCED_OPTION_RANGE_LABEL" = "Range";
+"SEARCHVIEW_ADVANCED_OPTION_RANGE_LABEL" = "范围";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL" = "时间";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_GLOBAL" = "全局搜索";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_GLOBAL_DESCRIPTION" = "正文+评论";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_PARTIAL" = "局部搜索";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION" = "仅正文";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_NO_RESULT_LABEL" = "无结果";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_PICKER_CLEAR_BUTTON" = "清除";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_PICKER_END" = "选择结束日期";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_PICKER_START" = "选择起始日期";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_SEARCH_BUTTON" = "搜索";
@@ -186,7 +216,16 @@
 "SEARCHVIEW_SEARCH_HISTORY_LABEL" = "搜索历史";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_TEXTFIELD_PLACEHOLDER" = "搜索内容/#标签/#树洞号";
+"SEARCHVIEW_SELECT_END_DATE_BUTTON" = "结束日期";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_SELECT_START_DATE_BUTTON" = "起始日期";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_TEXTFIELD_PLACEHOLDER" = "搜索内容、#标签、#树洞号";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_TRENDING_REFRESH_BUTTON" = "刷新";
 
 /* No comment provided by engineer. */
 "TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "图片";

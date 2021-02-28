@@ -44,6 +44,11 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         case .postList, .attentionList, .wander, .searchTrending: requestPosts(at: 1)
         default: break
         }
+        
+        $startDate
+            .print()
+            .sink(receiveValue: { _ in })
+            .store(in: &cancellables)
     }
     
     // MARK: - Load Posts
@@ -61,17 +66,8 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
         case .search, .searchTrending:
             // FIXME: Other attributes
-            var startOfStartDate: Date? = nil
-            var endOfEndDate: Date? = nil
-            let calendar = Calendar(identifier: .iso8601)
-            if let startDate = startDate {
-                startOfStartDate = calendar.startOfDay(for: startDate)
-            }
-            if let endDate = endDate {
-                endOfEndDate = calendar.startOfDay(for: endDate + 24 * 60 * 60)
-            }
-            let startTimestamp = startOfStartDate?.timeIntervalSince1970.int
-            let endTimestamp = endOfEndDate?.timeIntervalSince1970.int
+            let startTimestamp = startDate?.startOfDay.timeIntervalSince1970.int
+            let endTimestamp = endDate?.endOfDay.timeIntervalSince1970.int
             configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, afterTimestamp: startTimestamp, beforeTimestamp: endTimestamp, includeComment: !excludeComments))
         case .wander:
             configuration = .wander(.init(apiRoot: config.apiRootUrls, token: token, page: page))

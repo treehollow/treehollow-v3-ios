@@ -62,15 +62,17 @@ struct ImageCompressor {
                     finalResizingData = jpegData
                     if i < resizeAttempt { continue }
                     return (jpegData, formatter.sizeDescription(forData: jpegData)!)
-                } else if let finalResizingData = finalResizingData {
-                    let base64Data = finalResizingData.base64EncodedData()
-                    return (finalResizingData, formatter.sizeDescription(forData: base64Data)!)
                 } else {
                     print("[ImageCompressor] Fail to compress with resizing factor \(resizeFactor), the size is \(base64Data.count)")
                 }
             }
             
             maxResizingFactor = (maxResizingFactor + minResizingFactor) / 2
+        }
+        
+        if let finalResizingData = finalResizingData {
+            let base64Data = finalResizingData.base64EncodedData()
+            return (finalResizingData, formatter.sizeDescription(forData: base64Data)!)
         }
         
         return nil

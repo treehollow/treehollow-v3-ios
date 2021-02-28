@@ -2,10 +2,16 @@
 "ACCOUNTVIEW_ACCOUNT_HEADER" = "Account";
 
 /* No comment provided by engineer. */
+"ACCOUNTVIEW_INFO_HEADER" = "Info";
+
+/* No comment provided by engineer. */
 "ACCOUNTVIEW_LOGOUT_BUTTON" = "Log Out";
 
 /* No comment provided by engineer. */
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
+
+/* No comment provided by engineer. */
+"COMMENT_INPUT_REPLY_POST_SUFFIX" = " post";
 
 /* No comment provided by engineer. */
 "COMMENT_INPUT_REPLY_TO_PREFIX" = "Reply to ";
@@ -72,6 +78,9 @@
 
 /* No comment provided by engineer. */
 "IMAGEVIEWER_DONE_BUTTON" = "Done";
+
+/* No comment provided by engineer. */
+"INPUT_EDITOR_PLACEHOLDER" = "Input text";
 
 /* ... */
 "INPUTVIEW_IMAGE_COMPRESSING_LABEL" = "Compressing";
@@ -180,13 +189,46 @@
 "SEARCHVIEW_ADVANCED_OPTION_TIME_LEBEL" = "Time Interval";
 
 /* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_GLOBAL" = "Global";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_GLOBAL_DESCRIPTION" = "Posts and Comments";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_PARTIAL" = "Partial";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION" = "Posts only";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_NO_RESULT_LABEL" = "No Result";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_PICKER_CLEAR_BUTTON" = "Clear";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_PICKER_END" = "Select the end date";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_PICKER_START" = "Select the start date";
+
+/* No comment provided by engineer. */
 "SEARCHVIEW_SEARCH_BUTTON" = "Search";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_SEARCH_HISTORY_LABEL" = "History";
 
 /* No comment provided by engineer. */
+"SEARCHVIEW_SELECT_END_DATE_BUTTON" = "End";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_SELECT_START_DATE_BUTTON" = "Start";
+
+/* No comment provided by engineer. */
 "SEARCHVIEW_TEXTFIELD_PLACEHOLDER" = "Search content or tags";
+
+/* No comment provided by engineer. */
+"SEARCHVIEW_TRENDING_REFRESH_BUTTON" = "Refresh";
 
 /* No comment provided by engineer. */
 "TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "Image";
