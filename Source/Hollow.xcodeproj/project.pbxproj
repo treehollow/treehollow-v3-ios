@@ -150,8 +150,8 @@
 		0E906D3225DCEADD0034053C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CFA25DCEADD0034053C /* ImageSaver.swift */; };
 		0E906D3925DCEBF20034053C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3825DCEBF20034053C /* Test.swift */; };
 		0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */; };
-		0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4825DD13590034053C /* HollowCommentInputStore.swift */; };
 		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
+		0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298A25EB6F4D00B74D5D /* Double+int.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
 		0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4225E5392700904296 /* TimerPublisher.swift */; };
 		0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4625E6422E00904296 /* Request+publisher.swift */; };
@@ -318,8 +318,8 @@
 		0E906CFA25DCEADD0034053C /* ImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		0E906D3825DCEBF20034053C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigurationData.swift; sourceTree = "<group>"; };
-		0E906D4825DD13590034053C /* HollowCommentInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowCommentInputStore.swift; sourceTree = "<group>"; };
 		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
+		0EA4298A25EB6F4D00B74D5D /* Double+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+int.swift"; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
 		0EAA1B4225E5392700904296 /* TimerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPublisher.swift; sourceTree = "<group>"; };
 		0EAA1B4625E6422E00904296 /* Request+publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+publisher.swift"; sourceTree = "<group>"; };
@@ -368,7 +368,6 @@
 			isa = PBXGroup;
 			children = (
 				0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */,
-				0E906D4825DD13590034053C /* HollowCommentInputStore.swift */,
 				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
 			);
 			path = Input;
@@ -844,6 +843,7 @@
 				00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */,
 				0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */,
 				0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */,
+				0EA4298A25EB6F4D00B74D5D /* Double+int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1005,7 +1005,6 @@
 				0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */,
 				0E906D1325DCEADD0034053C /* ReportCommentRequest.swift in Sources */,
 				0E906D1625DCEADD0034053C /* SendPostRequest.swift in Sources */,
-				0E906D4925DD13590034053C /* HollowCommentInputStore.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */,
@@ -1073,6 +1072,7 @@
 				0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */,
 				0E415B5225CD772200351672 /* CustomGradient.swift in Sources */,
 				00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */,
+				0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */,
 				0E415B6125CD772200351672 /* HollowInputView.swift in Sources */,
 				0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */,
 				0E415B6E25CD772200351672 /* AboutView.swift in Sources */,

@@ -27,11 +27,14 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
 
     var cancellables = Set<AnyCancellable>()
     
-    // MARK: - Search Specific Variables
+    // MARK: Search Specific Variables
     
     @Published var searchString: String = ""
     @Published var excludeComments = false
-    
+    @Published var startDate: Date?
+    @Published var endDate: Date?
+
+    // MARK: -
     init(type: PostListRequestGroupType, options: Options = []) {
         self.type = type
         self.posts = []
@@ -58,7 +61,18 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
         case .search, .searchTrending:
             // FIXME: Other attributes
-            configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, beforeTimestamp: nil, includeComment: !excludeComments))
+            var startOfStartDate: Date? = nil
+            var endOfEndDate: Date? = nil
+            let calendar = Calendar(identifier: .iso8601)
+            if let startDate = startDate {
+                startOfStartDate = calendar.startOfDay(for: startDate)
+            }
+            if let endDate = endDate {
+                endOfEndDate = calendar.startOfDay(for: endDate + 24 * 60 * 60)
+            }
+            let startTimestamp = startOfStartDate?.timeIntervalSince1970.int
+            let endTimestamp = endOfEndDate?.timeIntervalSince1970.int
+            configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, afterTimestamp: startTimestamp, beforeTimestamp: endTimestamp, includeComment: !excludeComments))
         case .wander:
             configuration = .wander(.init(apiRoot: config.apiRootUrls, token: token, page: page))
         }
@@ -68,7 +82,6 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         }
 
         request.publisher
-            .print()
             .sinkOnMainThread(
                 receiveCompletion: { completion in
                     withAnimation { self.isLoading = false }

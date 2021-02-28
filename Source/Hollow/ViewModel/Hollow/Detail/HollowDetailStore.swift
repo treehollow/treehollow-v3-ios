@@ -11,17 +11,27 @@ import SwiftUI
 import Defaults
 import Connectivity
 
-class HollowDetailStore: ObservableObject, AppModelEnvironment {
+class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironment {
+    // MARK: Post Variables
     var bindingPostWrapper: Binding<PostDataWrapper>
     @Published var postDataWrapper: PostDataWrapper
-    @Published var errorMessage: (title: String, message: String)?
-    @Published var isLoading = false
     @Published var isEditingAttention = false
     
+    // MARK: Input Variables
+    @Published var replyToIndex: Int = -2
+    @Published var imageSizeInformation: String?
+    @Published var text: String = ""
+    @Published var image: UIImage?
+    @Published var compressedImage: UIImage?
+
+    // MARK: Shared Variables
+    @Published var errorMessage: (title: String, message: String)?
+    @Published var isLoading = false
     @Published var appModelState = AppModelState()
     
     private var cancellables = Set<AnyCancellable>()
 
+    // MARK: -
     init(bindingPostWrapper: Binding<PostDataWrapper>) {
         self.postDataWrapper = bindingPostWrapper.wrappedValue
         self.bindingPostWrapper = bindingPostWrapper
@@ -221,5 +231,34 @@ class HollowDetailStore: ObservableObject, AppModelEnvironment {
                 }
             })
             .store(in: &cancellables)
+    }
+    
+    // MARK: - Input Comments
+    func sendComment() {
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let replyTo = replyToIndex == -1 ? -1 : postDataWrapper.post.comments[replyToIndex].commentId
+        let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls, token: token, text: text, imageData: compressedImage?.jpegData(compressionQuality: 0.7), postId: postDataWrapper.post.postId, replyCommentId: replyTo)
+        
+        let request = SendCommentRequest(configuration: configuration)
+        
+        withAnimation { isLoading = true }
+        request.publisher
+            .sinkOnMainThread(receiveError: { error in
+                withAnimation { self.isLoading = false }
+                self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+            }, receiveValue: { _ in
+                withAnimation { self.restoreInput() }
+                self.requestDetail()
+            })
+            .store(in: &cancellables)
+    }
+    
+    private func restoreInput() {
+        self.text = ""
+        self.replyToIndex = -2
+        self.image = nil
+        self.compressedImage = nil
+        self.imageSizeInformation = nil
     }
 }

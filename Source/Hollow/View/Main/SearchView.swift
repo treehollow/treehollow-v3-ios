@@ -11,17 +11,8 @@ import Defaults
 struct SearchView: View {
     @Binding var presented: Bool
     @ObservedObject var store: PostListRequestStore
-    // TODO: Add other options in Defaults
-    @State var showsAdvancedOptions = Defaults[.searchViewShowsAdvanced] {
-        didSet { Defaults[.searchViewShowsAdvanced] = showsAdvancedOptions }
-    }
-    @State var isSearching = false
     @State var startPickerPresented = false
     @State var endPickerPresented = false
-    @State var searchText: String = ""
-    // TODO: Time constrains
-    @State var startDate: Date = .init()
-    @State var endDate: Date = .init()
     @State var detailPresentedIndex: Int?
     @State var detailStore: HollowDetailStore? = nil
 
@@ -31,6 +22,7 @@ struct SearchView: View {
     
     @Namespace var animation
     
+    @Default(.searchHistory) var searchHistory
     @Environment(\.colorScheme) var colorScheme
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
@@ -47,7 +39,6 @@ struct SearchView: View {
                 if !showPost {
                     searchField()
                         .padding(.vertical)
-                        .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
                     searchConfigurationView()
 
                 }

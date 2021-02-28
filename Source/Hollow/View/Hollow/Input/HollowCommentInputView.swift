@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HollowCommentInputView: View {
-    @ObservedObject var store: HollowCommentInputStore
+    @ObservedObject var store: HollowDetailStore
     @State var keyboardShown = false
     @State var showImagePicker = false
     @State private var viewSize: CGSize = .zero
@@ -28,22 +28,28 @@ struct HollowCommentInputView: View {
     @Namespace var animation
     
     var transitionAnimation: Animation?
+    var replyToName: String
     
     var hasImage: Bool { store.compressedImage != nil }
     var hideComponents: Bool { keyboardShown }
     
     var contentValid: Bool { store.text != "" || store.compressedImage != nil }
     
+
+    
     var body: some View {
         VStack(spacing: vstackSpacing) {
             HStack {
-                BarButton(action: { withAnimation { store.presented.wrappedValue = false }}, systemImageName: "xmark")
+                BarButton(action: { withAnimation { store.replyToIndex = -2 }}, systemImageName: "xmark")
 
                 Spacer()
                 let sendingText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SENDING", comment: "")
                 let sendCommentText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SEND_POST", comment: "")
-
-                MyButton(action: store.sendComment, transitionAnimation: transitionAnimation) {
+                
+                MyButton(action: {
+                    store.sendComment()
+                    hideKeyboard()
+                }, transitionAnimation: transitionAnimation) {
                     Text(store.isLoading ? sendingText + "..." : sendCommentText)
                         .modifier(MyButtonDefaultStyle())
                 }
@@ -52,7 +58,7 @@ struct HollowCommentInputView: View {
             
             imageView
             
-            let placeholder = NSLocalizedString("COMMENT_INPUT_REPLY_TO_PREFIX", comment: "") + store.replyToName
+            let placeholder = NSLocalizedString("COMMENT_INPUT_REPLY_TO_PREFIX", comment: "") + replyToName
             
             HollowInputTextEditor(text: $store.text, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
                 .accentColor(.hollowContentText)
@@ -94,7 +100,7 @@ struct HollowCommentInputView: View {
                 }
                 .onEnded { value in
                     if value.predictedEndTranslation.height > viewSize.height / 2 {
-                        store.presented.wrappedValue = false
+                        store.replyToIndex = -2
                     }
                 }
         )

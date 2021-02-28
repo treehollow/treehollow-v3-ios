@@ -32,7 +32,7 @@ extension Request {
         let pubilsher = requests[0].publisher
             .retry(retries)
             .map { OutputWrapper.success($0) }
-            .catch { Just<OutputWrapper>(.failure($0)) }
+            .catch { Just(.failure($0)) }
             .map { (0, $0) }
             .eraseToAnyPublisher()
         if requests.count == 1 { return pubilsher }
@@ -42,7 +42,7 @@ extension Request {
                 .merge(with: requests[index].publisher
                         .retry(retries)
                         .map { OutputWrapper.success($0) }
-                        .catch { Just<OutputWrapper>(.failure($0)) }
+                        .catch { Just(.failure($0)) }
                         .map { (index, $0) }
                 )
                 .eraseToAnyPublisher()

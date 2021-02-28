@@ -34,8 +34,8 @@ extension Defaults.Keys {
 
 // MARK: - UI
 extension Defaults.Keys {
-    /// Whether the user uses advanced search in `SearchView`
-    static let searchViewShowsAdvanced = Key<Bool>("search.shows.advanced", default: false)
+    /// Search history.
+    static let searchHistory = Key<[String]>("user.search.history", default: [])
 }
 
 

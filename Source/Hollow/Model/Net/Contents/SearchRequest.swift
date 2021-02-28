@@ -13,6 +13,7 @@ struct SearchRequestConfiguration {
     var token: String
     var keywords: String
     var page: Int
+    var afterTimestamp: Int?
     var beforeTimestamp: Int?
     var includeComment: Bool = true
     // TODO: Order
@@ -53,6 +54,10 @@ struct SearchRequest: DefaultRequest {
         
         if let before = configuration.beforeTimestamp {
             parameters["before"] = before
+        }
+        
+        if let after = configuration.afterTimestamp {
+            parameters["after"] = after
         }
         
         let resultToResultData: (PostListRequestResult) -> SearchRequestResultData? = { result in

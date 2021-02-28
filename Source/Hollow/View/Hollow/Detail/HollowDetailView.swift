@@ -12,7 +12,6 @@ struct HollowDetailView: View {
     
     @State private var commentRect: CGRect = .zero
     @State private var scrollViewOffset: CGFloat? = 0
-    @State var replyIndex: Int = -2
     @State var inputPresented = false
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
@@ -59,7 +58,7 @@ struct HollowDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .id(-1)
                         .onTapGesture {
-                            replyIndex = -1
+                            store.replyToIndex = -1
                             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                         }
                         
@@ -68,7 +67,7 @@ struct HollowDetailView: View {
                             .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
                         
                         commentView
-                            .onChange(of: replyIndex) { index in
+                            .onChange(of: store.replyToIndex) { index in
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     proxy.scrollTo(index, anchor: .top)
                                 }
@@ -82,31 +81,30 @@ struct HollowDetailView: View {
             }
         }
         .overlay(Group {
-            if replyIndex >= -1 {
+            if store.replyToIndex >= -1 {
                 let post = store.postDataWrapper.post
-                let replyTo = replyIndex == -1 ? -1 : post.comments[replyIndex].commentId
-                let name = replyIndex == -1 ?
+                let name = store.replyToIndex == -1 ?
                     NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
-                    post.comments[replyIndex].name
+                    post.comments[store.replyToIndex].name
                 let animation: Animation = .easeInOut(duration: 0.25)
                 // FIXME: Recreated store
-                let commentStore: HollowCommentInputStore = .init(presented: $inputPresented, postId: post.postId, replyTo: replyTo, name: name, onFinishSending: store.requestDetail)
                 HollowCommentInputView(
-                    store: commentStore,
-                    transitionAnimation: animation
+                    store: store,
+                    transitionAnimation: animation,
+                    replyToName: name
                 )
                 .bottom()
                 .transition(.move(edge: .bottom))
             }
         })
 
-        .onChange(of: replyIndex) { index in
+        .onChange(of: store.replyToIndex) { index in
             if index >= -1 {
                 withAnimation { inputPresented = true }
             }
         }
         .onChange(of: inputPresented) { presented in
-            if !presented { withAnimation { replyIndex = -2 }}
+            if !presented { withAnimation { store.replyToIndex = -2 }}
         }
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
