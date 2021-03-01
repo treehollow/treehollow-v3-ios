@@ -51,7 +51,7 @@ struct MainView: View {
                         shouldReload: $shouldReloadWander,
                         viewModel: wanderViewModel
                     )
-                        .tag(Page.wander)
+                    .tag(Page.wander)
                     TimelineView(
                         isSearching: $isSearching,
                         showReload: $showRefresh,

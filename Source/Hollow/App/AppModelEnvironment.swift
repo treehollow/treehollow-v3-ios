@@ -45,7 +45,7 @@ extension AppModelEnvironment {
 /// State definition reflecting the view model.
 struct AppModelState {
     var errorMessage: (title: String, message: String)?
-    // It might be buggy
+
     var shouldShowMainView = Defaults[.accessToken] != nil
     
     var tokenExpired = false

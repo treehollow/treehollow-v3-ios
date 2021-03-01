@@ -26,6 +26,9 @@
 "DATEFORMATTER_HOUR" = " h";
 
 /* No comment provided by engineer. */
+"DATEFORMATTER_LESS_THAN_A_MINUTE" = "less than a minute";
+
+/* No comment provided by engineer. */
 "DATEFORMATTER_MINUTE" = " min";
 
 /* No comment provided by engineer. */

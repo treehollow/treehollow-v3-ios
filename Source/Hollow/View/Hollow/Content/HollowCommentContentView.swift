@@ -58,8 +58,11 @@ struct HollowCommentContentView: View {
                     }}
                     VStack(alignment: .leading, spacing: compact ? 0 : body5) {
                         if !compact {
-                            HStack {
+                            let nameTextView: Text = commentData.isDz ?
+                                Text(commentData.name + " ") + Text(Image(systemName: "person.fill")) :
                                 Text(commentData.name)
+                            HStack {
+                                nameTextView
                                     .bold()
                                     .lineLimit(1)
                                 

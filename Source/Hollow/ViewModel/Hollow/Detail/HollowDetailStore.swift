@@ -16,6 +16,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     var bindingPostWrapper: Binding<PostDataWrapper>
     @Published var postDataWrapper: PostDataWrapper
     @Published var isEditingAttention = false
+    @Published var jumpToCommentId: Int?
     
     // MARK: Input Variables
     @Published var replyToIndex: Int = -2
@@ -32,10 +33,11 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: -
-    init(bindingPostWrapper: Binding<PostDataWrapper>) {
+    init(bindingPostWrapper: Binding<PostDataWrapper>, jumpToComment commentId: Int? = nil) {
         self.postDataWrapper = bindingPostWrapper.wrappedValue
         self.bindingPostWrapper = bindingPostWrapper
         requestDetail()
+        self.jumpToCommentId = commentId
         
         // Subscribe the changes in post data in the detail store
         // and update the upstream data source. This will be the
@@ -247,7 +249,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
             .sinkOnMainThread(receiveError: { error in
                 withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
-            }, receiveValue: { _ in
+            }, receiveValue: { result in
+                self.jumpToCommentId = result.commentId
                 withAnimation { self.restoreInput() }
                 self.requestDetail()
             })

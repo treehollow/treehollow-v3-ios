@@ -23,6 +23,9 @@
 "DATEFORMATTER_HOUR" = "小时前";
 
 /* No comment provided by engineer. */
+"DATEFORMATTER_LESS_THAN_A_MINUTE" = "不到1分钟";
+
+/* No comment provided by engineer. */
 "DATEFORMATTER_MINUTE" = "分钟前";
 
 /* No comment provided by engineer. */
@@ -231,7 +234,7 @@
 "TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "图片";
 
 /* No comment provided by engineer. */
-"TIMELINE_CARD_COMMENTS_HAIYOU" = "";
+"TIMELINE_CARD_COMMENTS_HAIYOU" = "还有";
 
 /* No comment provided by engineer. */
 "TIMELINE_CARD_COMMENTS_TIAOPINGLUN" = "条评论";

@@ -11,6 +11,7 @@ import Defaults
 
 extension SearchView {
     func performSearch() {
+        guard searchStringValid else { return }
         withAnimation {
             hideKeyboard()
             showPost = true
@@ -29,7 +30,7 @@ extension SearchView {
             .padding(.bottom)
             .horizontalCenter()
         
-        HistoryView(searchText: $store.searchString)
+        HistoryView(searchText: $store.searchString, performSearch: performSearch)
     }
     
     func topBar() -> some View {
@@ -309,6 +310,8 @@ extension SearchView {
         @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
         @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
         @ScaledMetric(wrappedValue: 15) var historySpcing: CGFloat
+        
+        var performSearch: () -> Void
         var body: some View {
             HStack {
                 Text("SEARCHVIEW_SEARCH_HISTORY_LABEL")
@@ -331,11 +334,7 @@ extension SearchView {
                         .font(.system(size: body16))
                         .onTapGesture {
                             withAnimation { searchText = history }
-                            guard let index = searchHistory.firstIndex(of: history) else { return }
-                            withAnimation {
-                                searchHistory.remove(at: index)
-                                searchHistory.insert(history, at: 0)
-                            }
+                            performSearch()
                         }
                 }
             }}

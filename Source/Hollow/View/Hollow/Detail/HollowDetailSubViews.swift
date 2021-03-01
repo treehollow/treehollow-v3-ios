@@ -48,13 +48,15 @@ extension HollowDetailView {
             .contentShape(Rectangle())
             .background(
                 Group {
-                    store.replyToIndex == index ? Color.background : Color.clear
+                    store.replyToIndex == index || jumpedToIndex == index ?
+                        Color.background : nil
                 }
                 .cornerRadius(10)
             )
             .onTapGesture {
                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 store.replyToIndex = index
+                jumpedToIndex = nil
             }
     }
 

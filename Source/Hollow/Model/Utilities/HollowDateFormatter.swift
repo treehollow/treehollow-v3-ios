@@ -16,8 +16,7 @@ struct HollowDateFormatter {
         let currentDate = Date()
         let timeInterval = currentDate.timeIntervalSince(date)
         if timeInterval < 60 {
-            let value = Int(timeInterval)
-            return value.string + NSLocalizedString("DATEFORMATTER_SECOND", comment: "")
+            return NSLocalizedString("DATEFORMATTER_LESS_THAN_A_MINUTE", comment: "")
         }
         if timeInterval < 3600 {
             let value = Int(timeInterval) / 60

@@ -35,7 +35,6 @@ struct WanderView: View {
                 }
                 viewModel.loadMorePosts()
             },
-            didScroll: { direction in withAnimation { showReload = direction == .up }},
             refresh: viewModel.refresh,
             content: { proxy in Group {
                 WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
@@ -44,14 +43,12 @@ struct WanderView: View {
                         .onTapGesture {
                             guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
                             presentPopover {
-                                HollowDetailView(
-                                    store: HollowDetailStore(
-                                        bindingPostWrapper: Binding(
-                                            get: { postDataWrapper },
-                                            set: { self.viewModel.posts[index] = $0 }
-                                        )
+                                HollowDetailView(store: HollowDetailStore(
+                                    bindingPostWrapper: Binding(
+                                        get: { postDataWrapper },
+                                        set: { self.viewModel.posts[index] = $0 }
                                     )
-                                )
+                                ))
                             }
                         }
                         .disabled(viewModel.isLoading)
@@ -81,7 +78,7 @@ struct WanderView: View {
                 postData: postData,
                 compact: true,
                 starAction: { viewModel.star($0, for: postData.postId) },
-                isEditingAttention: false
+                disableAttention: false
             )
             .padding(.bottom, body5)
             

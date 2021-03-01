@@ -22,8 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
         Test.performTest(options: [])
-        Defaults[.hollowType] = .thu
-        //        Defaults[.accessToken] = testAccessToken
+//                Defaults[.accessToken] = testAccessToken
         #else
         
         // Start AppCenter services
@@ -122,7 +121,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let content = response.notification.request.content
         if let postId = content.userInfo["pid"] as? Int {
-            presentDetail(postId: postId)
+            let commentId = content.userInfo["cid"] as? Int
+            presentDetail(postId: postId, commentId: commentId)
         }
         completionHandler()
     }
@@ -131,10 +131,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler([.banner, .sound])
     }
     
-    func presentDetail(postId: Int) {
+    func presentDetail(postId: Int, commentId: Int?) {
         guard let topVC = IntegrationUtilities.topViewController() else { return }
         let postDataWrapper = PostDataWrapper.templatePost(for: postId)
-        let detailView = HollowDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper)))
+        let detailView = HollowDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper), jumpToComment: commentId))
         let vc = UIHostingController(rootView: detailView)
         vc.modalPresentationStyle = .popover
         topVC.present(vc, animated: true)

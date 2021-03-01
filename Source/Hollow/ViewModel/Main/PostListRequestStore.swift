@@ -44,11 +44,6 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         case .postList, .attentionList, .wander, .searchTrending: requestPosts(at: 1)
         default: break
         }
-        
-        $startDate
-            .print()
-            .sink(receiveValue: { _ in })
-            .store(in: &cancellables)
     }
     
     // MARK: - Load Posts

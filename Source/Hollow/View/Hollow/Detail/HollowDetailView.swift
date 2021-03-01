@@ -13,6 +13,7 @@ struct HollowDetailView: View {
     @State private var commentRect: CGRect = .zero
     @State private var scrollViewOffset: CGFloat? = 0
     @State var inputPresented = false
+    @State var jumpedToIndex: Int?
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     
@@ -37,7 +38,7 @@ struct HollowDetailView: View {
                             // Show text on header when the text is not visible
                             showContent: (scrollViewOffset ?? 0) > commentRect.minY,
                             starAction: store.star,
-                            isEditingAttention: store.isEditingAttention
+                            disableAttention: store.isEditingAttention || store.isLoading
                         )
                     }
                     .padding(.horizontal)
@@ -70,6 +71,25 @@ struct HollowDetailView: View {
                             .onChange(of: store.replyToIndex) { index in
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     proxy.scrollTo(index, anchor: .top)
+                                }
+                            }
+                            // Jump to certain comment
+                            .onChange(of: store.isLoading) { loading in
+                                if !loading {
+                                    // Check if there is any comment to jump to
+                                    // when finish loading
+                                    if let jumpToCommentId = store.jumpToCommentId {
+                                        if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == jumpToCommentId }) {
+                                            withAnimation {
+                                                proxy.scrollTo(index, anchor: .center)
+                                                jumpedToIndex = index
+                                            }
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                withAnimation { jumpedToIndex = nil }
+                                            }
+                                        }
+                                        store.jumpToCommentId = nil
+                                    }
                                 }
                             }
                     }

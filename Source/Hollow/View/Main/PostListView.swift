@@ -39,7 +39,7 @@ struct PostListView: View {
             let post = postDataWrapper.post
             VStack(spacing: 15) {
                 // TODO: Star actions
-                HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, isEditingAttention: false)
+                HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, disableAttention: false)
                 HollowContentView(
                     postDataWrapper: postDataWrapper,
                     options: displayOptions,
@@ -51,7 +51,6 @@ struct PostListView: View {
                         ForEach(post.comments.prefix(3)) { commentData in
                             HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10)
                         }
-                        // FIXME
                         let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
                         if post.replyNumber > shownReplyNumber {
                             if post.comments.count == 0 {

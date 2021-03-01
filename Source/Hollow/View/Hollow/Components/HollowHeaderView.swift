@@ -15,7 +15,7 @@ struct HollowHeaderView: View {
     var compact: Bool
     var showContent = false
     var starAction: (_ star: Bool) -> Void
-    var isEditingAttention: Bool
+    var disableAttention: Bool
     private var starred: Bool? { postData.attention }
     
     @Namespace private var headerNamespace
@@ -72,7 +72,7 @@ struct HollowHeaderView: View {
                 if let attention = postData.attention {
                     HollowButton(number: postData.likeNumber, action: { starAction(!attention) }, systemImageName: attention ? "star.fill" : "star")
                         .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
-                        .disabled(isEditingAttention)
+                        .disabled(disableAttention)
                 } else {
                     Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
                 }

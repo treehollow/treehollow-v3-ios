@@ -22,6 +22,7 @@ struct SendCommentRequestConfiguration {
 struct SendCommentRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
+    var commentId: Int?
 }
 
 struct SendCommentRequest: DefaultRequest {
