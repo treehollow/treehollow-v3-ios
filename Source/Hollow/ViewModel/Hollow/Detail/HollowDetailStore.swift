@@ -132,7 +132,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     
     private func loadCitedPost() {
         guard let citedPid = self.postDataWrapper.citedPostID,
-              postDataWrapper.citedPost == nil else { return }
+              postDataWrapper.citedPost == nil ||
+                postDataWrapper.citedPost?.loadingError != nil  else { return }
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: citedPid, includeComments: false)
@@ -141,7 +142,12 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         request.publisher
             .map({ $0.post })
             .sinkOnMainThread(receiveError: { error in
-                self.postDataWrapper.citedPost?.loadingError = error.description
+                let description: String
+                switch error {
+                case .noSuchPost: description = error.description
+                default: description = NSLocalizedString("CITED_POST_LOADING_ERROR", comment: "")
+                }
+                self.postDataWrapper.citedPost?.loadingError = description
             }, receiveValue: { postData in
                 withAnimation { self.postDataWrapper.citedPost = postData }
             })

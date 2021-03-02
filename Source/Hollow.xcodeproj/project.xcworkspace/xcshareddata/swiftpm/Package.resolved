@@ -57,11 +57,11 @@
       },
       {
         "package": "ImageScrollView",
-        "repositoryURL": "https://github.com/huynguyencong/ImageScrollView.git",
+        "repositoryURL": "https://github.com/liang2kl/ImageScrollView.git",
         "state": {
           "branch": null,
-          "revision": "4f6d01ac0ac56cf4b075c4e6134538ecbbd52af1",
-          "version": "1.9.2"
+          "revision": "007f0579ef1a3ceaa8d9c4346e728af91a647142",
+          "version": "2.0.1"
         }
       },
       {

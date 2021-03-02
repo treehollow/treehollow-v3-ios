@@ -15,7 +15,6 @@
 		00EFC06925DF922000536B52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00EFC06825DF922000536B52 /* Kingfisher */; };
 		00EFC07125DFC71500536B52 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07025DFC71500536B52 /* Vote.swift */; };
 		00EFC07425DFC73800536B52 /* ImageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC07325DFC73800536B52 /* ImageMetadata.swift */; };
-		0E09B7A725D4D70600DC5615 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E09B7A625D4D70600DC5615 /* ImageScrollView */; };
 		0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7A925D4D73100DC5615 /* ImageViewer.swift */; };
 		0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */; };
 		0E09B7BB25D52F4F00DC5615 /* HollowInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */; };
@@ -26,6 +25,7 @@
 		0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */; };
 		0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */; };
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
+		0E33BA9C25EE49190089F2E7 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E33BA9B25EE49190089F2E7 /* ImageScrollView */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
 		0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */; };
 		0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSize.swift */; };
@@ -354,11 +354,11 @@
 				0E340F6B25CFDA6C002F0F0C /* AppCenterAnalytics in Frameworks */,
 				0E1DD7D325D94B52000D27BA /* AvatarX in Frameworks */,
 				00EFC06925DF922000536B52 /* Kingfisher in Frameworks */,
+				0E33BA9C25EE49190089F2E7 /* ImageScrollView in Frameworks */,
 				0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */,
 				00AA104625E89C2F006B3D6D /* Connectivity in Frameworks */,
 				0E415B9625CD77C600351672 /* Defaults in Frameworks */,
 				0E415B9225CD775F00351672 /* WaterfallGrid in Frameworks */,
-				0E09B7A725D4D70600DC5615 /* ImageScrollView in Frameworks */,
 				006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -902,11 +902,11 @@
 				0E4F032F25CE29D500F4B228 /* Alamofire */,
 				0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */,
 				0E340F6A25CFDA6C002F0F0C /* AppCenterAnalytics */,
-				0E09B7A625D4D70600DC5615 /* ImageScrollView */,
 				0E1DD7D225D94B52000D27BA /* AvatarX */,
 				006DF03625DF7FBA0005C2B5 /* Cache */,
 				00EFC06825DF922000536B52 /* Kingfisher */,
 				00AA104525E89C2F006B3D6D /* Connectivity */,
+				0E33BA9B25EE49190089F2E7 /* ImageScrollView */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -934,6 +934,7 @@
 			knownRegions = (
 				en,
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 0E415A6725CD769B00351672;
 			packageReferences = (
@@ -941,11 +942,11 @@
 				0E415B9425CD77C600351672 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E4F032E25CE29D500F4B228 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
-				0E09B7A525D4D70600DC5615 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E1DD7D125D94B52000D27BA /* XCRemoteSwiftPackageReference "AvatarX" */,
 				006DF03525DF7FBA0005C2B5 /* XCRemoteSwiftPackageReference "Cache" */,
 				00EFC06725DF922000536B52 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				00AA104425E89C2F006B3D6D /* XCRemoteSwiftPackageReference "Connectivity" */,
+				0E33BA9A25EE49190089F2E7 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -1369,20 +1370,20 @@
 				minimumVersion = 6.1.1;
 			};
 		};
-		0E09B7A525D4D70600DC5615 /* XCRemoteSwiftPackageReference "ImageScrollView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/huynguyencong/ImageScrollView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.2;
-			};
-		};
 		0E1DD7D125D94B52000D27BA /* XCRemoteSwiftPackageReference "AvatarX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/liang2kl/AvatarX.git";
 			requirement = {
 				branch = main;
 				kind = branch;
+			};
+		};
+		0E33BA9A25EE49190089F2E7 /* XCRemoteSwiftPackageReference "ImageScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/liang2kl/ImageScrollView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
 			};
 		};
 		0E340F6525CFDA6C002F0F0C /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
@@ -1435,15 +1436,15 @@
 			package = 00EFC06725DF922000536B52 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		0E09B7A625D4D70600DC5615 /* ImageScrollView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E09B7A525D4D70600DC5615 /* XCRemoteSwiftPackageReference "ImageScrollView" */;
-			productName = ImageScrollView;
-		};
 		0E1DD7D225D94B52000D27BA /* AvatarX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E1DD7D125D94B52000D27BA /* XCRemoteSwiftPackageReference "AvatarX" */;
 			productName = AvatarX;
+		};
+		0E33BA9B25EE49190089F2E7 /* ImageScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E33BA9A25EE49190089F2E7 /* XCRemoteSwiftPackageReference "ImageScrollView" */;
+			productName = ImageScrollView;
 		};
 		0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;

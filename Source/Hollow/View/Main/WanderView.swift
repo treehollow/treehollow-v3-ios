@@ -55,6 +55,7 @@ struct WanderView: View {
                 }}
                 .gridStyle(columns: 2, spacing: 10, animation: nil)
                 .padding(.horizontal, 15)
+                .padding(.bottom, 70)
                 .background(Color.background)
                 .onChange(of: shouldReload) { _ in
                     if shouldReload { withAnimation {

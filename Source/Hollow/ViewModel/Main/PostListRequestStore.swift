@@ -184,14 +184,15 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             .sinkOnMainThread(receiveValue: { index, output in
                 switch output {
                 case .failure(let error):
+                    let description: String
                     switch error {
-                    case .noSuchPost:
-                        self.assignCitedPostError(
-                            error.description,
-                            to: postsWrapperWithCitation[index].post.postId
-                        )
-                    default: break
+                    case .noSuchPost: description = error.description
+                    default: description = NSLocalizedString("CITED_POST_LOADING_ERROR", comment: "")
                     }
+                    self.assignCitedPostError(
+                        description,
+                        to: postsWrapperWithCitation[index].post.postId
+                    )
                 case .success(let postData):
                     self.assignCitedPost(
                         postData.post,
