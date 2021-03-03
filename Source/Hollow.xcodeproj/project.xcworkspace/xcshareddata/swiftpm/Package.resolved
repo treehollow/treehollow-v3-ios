@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/liang2kl/AvatarX.git",
         "state": {
           "branch": "main",
-          "revision": "b853a680d8bcc7c01382dcd4bfdb6cb12eec1b09",
+          "revision": "f96b4f131dec159af18c7e0fa053e7a6b8b6bdd2",
           "version": null
         }
       },
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
           "branch": null,
-          "revision": "d98119fee49c893fae553103a8659ffe003b6cfe",
-          "version": "4.1.0"
+          "revision": "63dcea312f9cbd17064294a3ae99c9147704b65f",
+          "version": "4.2.1"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/liang2kl/ImageScrollView.git",
         "state": {
           "branch": null,
-          "revision": "007f0579ef1a3ceaa8d9c4346e728af91a647142",
-          "version": "2.0.1"
+          "revision": "16a6302950c0b2c44f59b19ba797a73e8b0653ce",
+          "version": "2.0.2"
         }
       },
       {

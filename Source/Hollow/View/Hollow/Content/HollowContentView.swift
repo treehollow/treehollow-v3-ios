@@ -65,7 +65,7 @@ struct HollowContentView: View {
             if let citedPost = postDataWrapper.citedPost,
                citedPost.loadingError == nil {
                 Button(action: {
-                    presentPopover {
+                    presentView {
                         HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))))
                     }
                 }) {

@@ -1,5 +1,5 @@
 //
-//  View+presentPopover.swift
+//  View+presentView.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/2/27.
@@ -10,9 +10,9 @@ import SwiftUI
 
 extension View {
     /// Imperative method for synchronously presenting popover.
-    func presentPopover<Content: View>(@ViewBuilder content: () -> Content) {
+    func presentView<Content: View>(style: UIModalPresentationStyle = .popover, @ViewBuilder content: () -> Content) {
         let vc = UIHostingController(rootView: content())
-        vc.modalPresentationStyle = .popover
+        vc.modalPresentationStyle = style
         guard let topVC = IntegrationUtilities.topViewController() else { return }
         topVC.present(vc, animated: true)
     }

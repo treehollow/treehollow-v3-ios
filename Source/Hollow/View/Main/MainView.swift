@@ -14,14 +14,6 @@ struct MainView: View {
     @State private var isSearching = false
     @State private var showTrending = false
     @State private var showCreatePost = false
-    /// Whether to show the overlay refresh button.
-    ///
-    /// The value is determined by the current nested view.
-    @State private var showRefresh = false
-    /// Whether the nested `TimelineView` should reload.
-    @State private var shouldReloadTimeline = false
-    /// Whether the nested `WanderView` should reload.
-    @State private var shouldReloadWander = false
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
@@ -47,15 +39,11 @@ struct MainView: View {
                 CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
                     WanderView(
                         showCreatePost: $showCreatePost,
-                        showReload: $showRefresh,
-                        shouldReload: $shouldReloadWander,
                         viewModel: wanderViewModel
                     )
                     .tag(Page.wander)
                     TimelineView(
                         isSearching: $isSearching,
-                        showReload: $showRefresh,
-                        shouldReload: $shouldReloadTimeline,
                         viewModel: timelineViewModel
                     )
                     .tag(Page.timeline)
@@ -63,30 +51,16 @@ struct MainView: View {
                 
                 // Overlay circular buttons
                 .overlay(
-                    VStack {
-                        if !showCreatePost {
-                            button(
-                                action: {
-                                    withAnimation { showCreatePost = true }
-                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                },
-                                systemName: "plus"
-                            )
-                            .matchedGeometryEffect(id: "add.post", in: animation)
-                        }
-                        if showRefresh {
-                            button(
-                                action: { withAnimation {
-                                        switch page {
-                                        case .timeline: shouldReloadTimeline = true
-                                        case .wander: shouldReloadWander = true
-                                        }
-                                }},
-                                systemName: "arrow.clockwise"
-                            )
-                            .padding(.top, 5)
-                        }
-                    }
+                    Group { if !showCreatePost {
+                        button(
+                            action: {
+                                withAnimation { showCreatePost = true }
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            },
+                            systemName: "plus"
+                        )
+                        .matchedGeometryEffect(id: "add.post", in: animation)
+                    }}
                     .bottom()
                     .trailing()
                     .padding()
@@ -138,6 +112,7 @@ extension MainView {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool
         @Binding var showTrending: Bool
+
         @State private var accountPresented = false
         
         // iPhone
@@ -169,8 +144,7 @@ extension MainView {
                         Image(systemName: "flame")
                             .padding(.horizontal, 10)
                     }
-                    Button(action:{}) {
-                        // TODO: bell.badge
+                    Button(action:{ presentView(style: .fullScreen) { MessageView() } }) {
                         Image(systemName: "bell")
                             .padding(.horizontal, 7)
                     }

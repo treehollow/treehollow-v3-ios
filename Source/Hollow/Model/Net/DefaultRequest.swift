@@ -84,6 +84,7 @@ extension DefaultRequest {
                     }
                     
                 } catch {
+                    print(error)
                     completion(nil, .decodeFailed)
                     return
                 }

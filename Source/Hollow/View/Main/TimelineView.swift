@@ -10,8 +10,6 @@ import WaterfallGrid
 
 struct TimelineView: View {
     @Binding var isSearching: Bool
-    @Binding var showReload: Bool
-    @Binding var shouldReload: Bool
 
     @ObservedObject var viewModel: PostListRequestStore
 
@@ -37,38 +35,16 @@ struct TimelineView: View {
             offset: $offset,
             atBottom: $scrolledToBottom,
             didScrollToBottom: viewModel.loadMorePosts,
-            didScroll: { direction in withAnimation { showReload = direction == .up }},
             didEndScroll: { searchBarTrackingOffset = offset },
             refresh: viewModel.refresh,
             content: { proxy in
                 VStack(spacing: 0) {
-                    Button(action:{
-                        // FIXME: Ugly animation here
-                        // Navigate to search view
-                        withAnimation(.searchViewTransition) {
-                            isSearching = true
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                            Text("TIMELINE_SEARCH_BAR_PLACEHOLDER")
-                            Spacer()
-                        }
-                        .font(.system(size: body17))
-                        .foregroundColor(.mainSearchBarText)
-                        .padding(.vertical, 7)
-                        .padding(.horizontal, 15)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color.mainSearchBarBackground.opacity(0.6))
-                        )
-                        
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, body14 / 2)
-                    .background(Color.background)
-                    .modifier(GetSize(size: $searchBarSize))
-                    .id(-2)
+                    SearchBar(isSearching: $isSearching)
+                        .padding(.horizontal)
+                        .padding(.bottom, body14 / 2)
+                        .background(Color.background)
+                        .modifier(GetSize(size: $searchBarSize))
+                        .id(-2)
                     
                     Color.background.frame(height: body14 / 2)
                         .id(-1)
@@ -101,15 +77,6 @@ struct TimelineView: View {
                         }
                         searchBarTrackingOffset = nil
                     }
-                }
-                
-                // Receive the notification of performing reload from the main view
-                .onChange(of: shouldReload) { _ in
-                    if shouldReload { withAnimation {
-                        proxy.scrollTo(-1, anchor: .top)
-                        viewModel.refresh(finshHandler: {})
-                        shouldReload = false
-                    }}
                 }
                 
             })

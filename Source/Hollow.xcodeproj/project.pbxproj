@@ -79,8 +79,6 @@
 		0E415B7925CD772200351672 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2F25CD772200351672 /* LoginView.swift */; };
 		0E415B7A25CD772200351672 /* LoginSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3025CD772200351672 /* LoginSubViews.swift */; };
 		0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3125CD772200351672 /* WelcomeView.swift */; };
-		0E415B7C25CD772200351672 /* HollowTimelineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3525CD772200351672 /* HollowTimelineCard.swift */; };
-		0E415B7F25CD772200351672 /* HollowHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3A25CD772200351672 /* HollowHeader.swift */; };
 		0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3C25CD772200351672 /* PostListRequestStore.swift */; };
 		0E415B8325CD772200351672 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4025CD772200351672 /* Login.swift */; };
 		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
@@ -151,6 +149,8 @@
 		0E906D3925DCEBF20034053C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3825DCEBF20034053C /* Test.swift */; };
 		0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */; };
 		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
+		0EA2D50C25EF8125003D539E /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50B25EF8125003D539E /* MessageStore.swift */; };
+		0EA2D50F25EF9F41003D539E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50E25EF9F41003D539E /* SearchBar.swift */; };
 		0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298A25EB6F4D00B74D5D /* Double+int.swift */; };
 		0EA4298E25EBBB8B00B74D5D /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
@@ -245,8 +245,6 @@
 		0E415B2F25CD772200351672 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0E415B3025CD772200351672 /* LoginSubViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSubViews.swift; sourceTree = "<group>"; };
 		0E415B3125CD772200351672 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		0E415B3525CD772200351672 /* HollowTimelineCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTimelineCard.swift; sourceTree = "<group>"; };
-		0E415B3A25CD772200351672 /* HollowHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowHeader.swift; sourceTree = "<group>"; };
 		0E415B3C25CD772200351672 /* PostListRequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequestStore.swift; sourceTree = "<group>"; };
 		0E415B4025CD772200351672 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0E415B4125CD772200351672 /* Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
@@ -320,6 +318,8 @@
 		0E906D3825DCEBF20034053C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigurationData.swift; sourceTree = "<group>"; };
 		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
+		0EA2D50B25EF8125003D539E /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
+		0EA2D50E25EF9F41003D539E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		0EA4298A25EB6F4D00B74D5D /* Double+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+int.swift"; sourceTree = "<group>"; };
 		0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
@@ -366,23 +366,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E09B7B925D52F3E00DC5615 /* Input */ = {
-			isa = PBXGroup;
-			children = (
-				0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */,
-				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
-			);
-			path = Input;
-			sourceTree = "<group>";
-		};
-		0E294C0B25E256FE00A9875A /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
 		0E340F6F25CFEBFE002F0F0C /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +496,7 @@
 				0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */,
 				0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */,
 				0E8BCFE225E095A90056D809 /* StyledAlert.swift */,
+				0EA2D50E25EF9F41003D539E /* SearchBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -623,34 +607,18 @@
 		0E415B3325CD772200351672 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
-				0E294C0B25E256FE00A9875A /* Detail */,
-				0E09B7B925D52F3E00DC5615 /* Input */,
-				0E415B3425CD772200351672 /* Card */,
-				0E415B3925CD772200351672 /* Components */,
+				0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */,
+				0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */,
+				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
 			);
 			path = Hollow;
-			sourceTree = "<group>";
-		};
-		0E415B3425CD772200351672 /* Card */ = {
-			isa = PBXGroup;
-			children = (
-				0E415B3525CD772200351672 /* HollowTimelineCard.swift */,
-			);
-			path = Card;
-			sourceTree = "<group>";
-		};
-		0E415B3925CD772200351672 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				0E415B3A25CD772200351672 /* HollowHeader.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		0E415B3B25CD772200351672 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				0E415B3C25CD772200351672 /* PostListRequestStore.swift */,
+				0EA2D50B25EF8125003D539E /* MessageStore.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1007,6 +975,8 @@
 				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
 				0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */,
 				0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */,
+				0EA2D50C25EF8125003D539E /* MessageStore.swift in Sources */,
+				0EA2D50F25EF9F41003D539E /* SearchBar.swift in Sources */,
 				0E906D1325DCEADD0034053C /* ReportCommentRequest.swift in Sources */,
 				0E906D1625DCEADD0034053C /* SendPostRequest.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
@@ -1085,11 +1055,9 @@
 				0E906D2A25DCEADD0034053C /* Int+bool.swift in Sources */,
 				0E415B7A25CD772200351672 /* LoginSubViews.swift in Sources */,
 				0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */,
-				0E415B7C25CD772200351672 /* HollowTimelineCard.swift in Sources */,
 				0E906D0425DCEADD0034053C /* AttentionListSearchRequest.swift in Sources */,
 				00EFC07125DFC71500536B52 /* Vote.swift in Sources */,
 				0E906D2C25DCEADD0034053C /* Int+string.swift in Sources */,
-				0E415B7F25CD772200351672 /* HollowHeader.swift in Sources */,
 				0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */,
 				0E906D0F25DCEADD0034053C /* AccountCreationRequest.swift in Sources */,
 				0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */,

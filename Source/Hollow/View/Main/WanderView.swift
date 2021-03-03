@@ -14,8 +14,6 @@ struct WanderView: View {
     @State private var detailPresentedIndex: Int?
     
     @Binding var showCreatePost: Bool
-    @Binding var showReload: Bool
-    @Binding var shouldReload: Bool
     
     @ObservedObject var viewModel: PostListRequestStore
     
@@ -42,7 +40,7 @@ struct WanderView: View {
                     cardView(for: postData)
                         .onTapGesture {
                             guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
-                            presentPopover {
+                            presentView {
                                 HollowDetailView(store: HollowDetailStore(
                                     bindingPostWrapper: Binding(
                                         get: { postDataWrapper },
@@ -57,12 +55,6 @@ struct WanderView: View {
                 .padding(.horizontal, 15)
                 .padding(.bottom, 70)
                 .background(Color.background)
-                .onChange(of: shouldReload) { _ in
-                    if shouldReload { withAnimation {
-                        proxy.scrollTo(0, anchor: .top)
-                        viewModel.refresh(finshHandler: {})
-                    }}
-                }
             }})
 
             // Show loading indicator when no posts are loaded or refresh on top

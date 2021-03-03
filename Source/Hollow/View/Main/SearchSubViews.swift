@@ -24,11 +24,12 @@ extension SearchView {
     var searchStringValid: Bool { !store.searchString.drop(while: { $0 == " " }).isEmpty }
     
     @ViewBuilder func searchConfigurationView() -> some View {
-
-        AdvancedOptionsView(startPickerPresented: $startPickerPresented, endPickerPresented: $endPickerPresented, startDate: $store.startDate, endDate: $store.endDate, selectsPartialSearch: $store.excludeComments)
-            .padding([.vertical, .horizontal, .bottom])
-            .padding(.bottom)
-            .horizontalCenter()
+        if showAdvancedOptions {
+            AdvancedOptionsView(startPickerPresented: $startPickerPresented, endPickerPresented: $endPickerPresented, startDate: $store.startDate, endDate: $store.endDate, selectsPartialSearch: $store.excludeComments)
+                .padding([.vertical, .horizontal, .bottom])
+                .padding(.bottom)
+                .horizontalCenter()
+        }
         
         HistoryView(searchText: $store.searchString, performSearch: performSearch)
     }
@@ -37,7 +38,7 @@ extension SearchView {
         HStack {
             Button(action:{
                 withAnimation {
-                    if showPost && store.type == .search {
+                    if showPost && store.type != .searchTrending {
                         showPost = false
                     } else {
                         presented = false
@@ -49,15 +50,15 @@ extension SearchView {
                     .padding(.trailing)
             }
             
-            if showPost && store.type == .search {
+            if showPost && store.type != .searchTrending {
                 searchField()
             } else {
                 Spacer()
             }
             
-            let searchButtonText = store.type == .search ?
-                NSLocalizedString("SEARCHVIEW_SEARCH_BUTTON", comment: "") :
-                NSLocalizedString("SEARCHVIEW_TRENDING_REFRESH_BUTTON", comment: "")
+            let searchButtonText = store.type == .searchTrending ?
+                NSLocalizedString("SEARCHVIEW_TRENDING_REFRESH_BUTTON", comment: "") :
+                NSLocalizedString("SEARCHVIEW_SEARCH_BUTTON", comment: "")
             MyButton(action: performSearch, gradient: .vertical(gradient: .button)) {
                 return Text(searchButtonText)
                     .font(.system(size: buttonFontSize, weight: .bold))

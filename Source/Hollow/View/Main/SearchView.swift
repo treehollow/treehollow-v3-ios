@@ -17,7 +17,7 @@ struct SearchView: View {
     @State var detailStore: HollowDetailStore? = nil
 
     @State var showPost = false
-    
+    var showAdvancedOptions = true
     let transitionAnimation = Animation.searchViewTransition
     
     @Namespace var animation

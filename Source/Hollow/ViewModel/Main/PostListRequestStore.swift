@@ -28,7 +28,6 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     var cancellables = Set<AnyCancellable>()
     
     // MARK: Search Specific Variables
-    
     @Published var searchString: String = ""
     @Published var excludeComments = false
     @Published var startDate: Date?
