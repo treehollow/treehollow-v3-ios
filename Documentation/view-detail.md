@@ -9,7 +9,7 @@
 ```swift
 struct HollowApp: App {
     ...
-	@StateObject var appModel = AppModel()
+    @StateObject var appModel = AppModel()
     ...
 }
 ```
@@ -43,7 +43,7 @@ struct AppModelBehaviour: ViewModifier {
 
 在 `HollowDetailView` 中，我们希望将其获取的 `postData` 作为唯一的数据源对传入的数据进行覆盖。其关系如下：
 
-![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggVERcblx0YmluZGluZ1tCaW5kaW5nIGRhdGFdXG5cdGRhdGFbRGF0YV1cblx0cltSZXF1ZXN0XVxuXHR2bVtWaWV3IE1vZGVsXVxuXHR2W1ZpZXddXG5cdHB2W1BhcmVudCBWaWV3XVxuXHRcblx0dm0gLS0-IHxwZXJmb3JtfCByIC0tPiB8dXBkYXRlfCBkYXRhIC0tPiB8b24gY2hhbmdlLCB1cGRhdGV8IGJpbmRpbmdcblx0cHYgLS0tPiBiaW5kaW5nXG5cdGRhdGEgLS0-IHxyZWZsZWN0IG9ufCB2XG5cdGJpbmRpbmcgLS0-IHxpbml0aWFsaXplfCBkYXRhXG5cdFxuXHRzdWJncmFwaCBzdWJcblx0ZGF0YVxuXHRyXG5cdHZtXG5cdHZcblx0ZW5kXG5cdFxuXHRzdHlsZSBzdWIgZmlsbDojZmZmZmRlLHN0cm9rZTojYWFhYTMzOyIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
+![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggVERcblx0YmluZGluZ1tCaW5kaW5nIGRhdGFdXG5cdGRhdGFbRGF0YV1cblx0cltSZXF1ZXN0XVxuXHR2bVtWaWV3IE1vZGVsXVxuXHR2W1ZpZXddXG5cdHB2W1BhcmVudCBWaWV3XVxuXHRcblx0dm0gLS0-IHxwZXJmb3JtfCByIC0tPiB8dXBkYXRlfCBkYXRhIC0tPiB8b24gY2hhbmdlLCB1cGRhdGV8IGJpbmRpbmdcblx0cHYgLS0-IGJpbmRpbmdcblx0ZGF0YSAtLT4gfHJlZmxlY3Qgb258IHZcblx0YmluZGluZyAtLT4gfGluaXRpYWxpemV8IGRhdGEiLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
 
 在其 View Model 中进行如下的实现：
 
