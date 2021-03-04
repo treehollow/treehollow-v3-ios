@@ -39,12 +39,14 @@ struct WanderView: View {
                     let postData = postDataWrapper.post
                     cardView(for: postData)
                         .onTapGesture {
-                            guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
                             presentView {
                                 HollowDetailView(store: HollowDetailStore(
                                     bindingPostWrapper: Binding(
                                         get: { postDataWrapper },
-                                        set: { self.viewModel.posts[index] = $0 }
+                                        set: {
+                                            guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
+                                            self.viewModel.posts[index] = $0
+                                        }
                                     )
                                 ))
                             }

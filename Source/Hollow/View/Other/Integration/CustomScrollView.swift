@@ -36,6 +36,7 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
     
     @Binding var offset: CGFloat?
     @Binding var atBottom: Bool?
+    @Environment(\.disableScrolling) var disableScrolling: Bool
     let didScroll: ((ScrollDirection) -> Void)?
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
@@ -43,12 +44,14 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
     let content: Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ScrollViewRepresentable<Content>>) -> ScrollViewUIHostingController<Content> {
-        return ScrollViewUIHostingController(offset: self.$offset, atBottom: self.$atBottom, didScroll: didScroll, didScrollToBottom: didScrollToBottom, didEndScroll: didEndScroll, refresh: refresh, rootView: self.content)
+        return ScrollViewUIHostingController(offset: self.$offset, atBottom: self.$atBottom, disableScroll: disableScrolling, didScroll: didScroll, didScrollToBottom: didScrollToBottom, didEndScroll: didEndScroll, refresh: refresh, rootView: self.content)
     }
     
     func updateUIViewController(_ uiViewController: ScrollViewUIHostingController<Content>, context: UIViewControllerRepresentableContext<ScrollViewRepresentable<Content>>) {
         // necessary here as we need to update the `rootView` property
         // when SwiftUI updates the view (the property `content`)
+//        uiViewController.scrollView?.isScrollEnabled = !disableScrolling
+        print(disableScrolling)
         uiViewController.rootView = content
     }
 }
@@ -57,6 +60,7 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     
     var offset: Binding<CGFloat?>
     var atBottom: Binding<Bool?>
+    var disableScroll: Bool
     let didScroll: ((ScrollDirection) -> Void)?
     var didScrollToBottom: (() -> Void)?
     let didEndScroll: (() -> Void)?
@@ -64,12 +68,13 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     var ready = false
     var scrollView: UIScrollView? = nil
     
-    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, didScroll: ((ScrollDirection) -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
+    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, disableScroll: Bool, didScroll: ((ScrollDirection) -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
         self.offset = offset
         self.atBottom = atBottom
         self.didScroll = didScroll
         self.didScrollToBottom = didScrollToBottom
         self.didEndScroll = didEndScroll
+        self.disableScroll = disableScroll
         self.refresh = refresh
         super.init(rootView: rootView)
     }
@@ -94,6 +99,8 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         
         self.scrollView = findUIScrollView(view: self.view)
         scrollView?.delegate = self
+//        scrollView?.isScrollEnabled = !disableScroll
+        scrollView?.delaysContentTouches = true
 
         if refresh != nil {
             scrollView?.refreshControl = UIRefreshControl()
@@ -157,4 +164,21 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         didEndScroll?()
     }
     
+}
+
+private struct DisableScrollingKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var disableScrolling: Bool {
+        get { self[DisableScrollingKey.self] }
+        set { self[DisableScrollingKey.self] = newValue }
+    }
+}
+
+extension View {
+    func disableScroll(_ disabled: Bool) -> some View {
+        self.environment(\.disableScrolling, disabled)
+    }
 }

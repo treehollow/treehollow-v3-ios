@@ -14,6 +14,7 @@ struct MainView: View {
     @State private var isSearching = false
     @State private var showTrending = false
     @State private var showCreatePost = false
+    @State private var showMessage = false
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
@@ -29,7 +30,7 @@ struct MainView: View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             VStack(spacing: 12) {
-                HeaderView(page: $page, isSearching: $isSearching, showTrending: $showTrending)
+                HeaderView(page: $page, isSearching: $isSearching, showTrending: $showTrending, showMessage: $showMessage)
                     .padding(.horizontal)
                     .padding(.top, 10)
 //                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 3 : 0)
@@ -59,7 +60,6 @@ struct MainView: View {
                             },
                             systemName: "plus"
                         )
-                        .matchedGeometryEffect(id: "add.post", in: animation)
                     }}
                     .bottom()
                     .trailing()
@@ -74,13 +74,20 @@ struct MainView: View {
             Group {
                 if isSearching {
                     SearchView(presented: $isSearching, store: .init(type: .search, options: [.unordered]))
+                        .swipeToDismiss(presented: $isSearching)
                 }
                 if showCreatePost {
                     HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost))
-                        .matchedGeometryEffect(id: "add.post", in: animation)
+                        .swipeToDismiss(presented: $showCreatePost)
                 }
                 if showTrending {
                     SearchView(presented: $showTrending, store: .init(type: .searchTrending, options: [.unordered]))
+                        .swipeToDismiss(presented: $showTrending)
+                }
+                
+                if showMessage {
+                    MessageView(presented: $showMessage)
+                        .swipeToDismiss(presented: $showMessage)
                 }
             }
         )
@@ -112,6 +119,7 @@ extension MainView {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool
         @Binding var showTrending: Bool
+        @Binding var showMessage: Bool
 
         @State private var accountPresented = false
         
@@ -144,7 +152,7 @@ extension MainView {
                         Image(systemName: "flame")
                             .padding(.horizontal, 10)
                     }
-                    Button(action:{ presentView(style: .fullScreen) { MessageView() } }) {
+                    Button(action:{ withAnimation { showMessage = true } }) {
                         Image(systemName: "bell")
                             .padding(.horizontal, 7)
                     }

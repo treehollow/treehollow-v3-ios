@@ -80,7 +80,6 @@ extension SearchView {
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
             }
-            .animation(.default)
             .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
             .font(.system(size: body16))
             .padding(.bottom, showPost ? 0 : 5)
@@ -88,7 +87,6 @@ extension SearchView {
                 Rectangle()
                     .frame(height: 1)
                     .foregroundColor(foregroundColor)
-                    .animation(.default)
             }
         }
     }

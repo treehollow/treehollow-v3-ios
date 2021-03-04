@@ -59,6 +59,7 @@ struct SearchView: View {
                         }
                         .padding(.top)
                     }
+                    .padding(.horizontal)
                     .ignoresSafeArea()
                     .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }

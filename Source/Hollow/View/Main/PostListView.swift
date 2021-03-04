@@ -74,7 +74,6 @@ struct PostListView: View {
             .cornerRadius(10)
             .fixedSize(horizontal: false, vertical: true)
             .contentShape(RoundedRectangle(cornerRadius: 8))
-            .padding(.horizontal)
             .padding(.bottom)
             .onTapGesture {
                 guard let index = postDataWrappers.firstIndex(where: { $0.id == postDataWrapper.id }) else { return }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MessageView: View {
+    @Binding var presented: Bool
     @State private var page: Page = .message
     @ObservedObject var messageStore = MessageStore()
     @ObservedObject var postListStore = PostListRequestStore(type: .attentionList)
@@ -19,14 +20,11 @@ struct MessageView: View {
     var body: some View {
         VStack(spacing: 0) {
             topBar
-            CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
+            if page == .message {
                 systemMessageView
-                    .tag(Page.message)
-                
+            } else if page == .attention {
                 attentionListView
-                    .tag(Page.attention)
             }
-            .ignoresSafeArea()
         }
         .background(Color.background.ignoresSafeArea())
         .overlay(Group { if isSearching {
@@ -42,7 +40,7 @@ struct MessageView: View {
 extension MessageView {
     var topBar: some View {
         HStack {
-            Button(action: dismissSelf) {
+            Button(action: { withAnimation { presented = false } }) {
                 Image(systemName: "xmark")
                     .modifier(ImageButtonModifier())
                     .padding(.trailing)
@@ -64,15 +62,17 @@ extension MessageView {
     }
     
     var systemMessageView: some View {
-        CustomScrollView(refresh: {_ in}) { proxy in
+        CustomScrollView(refresh: {_ in}) { proxy in VStack(spacing: 0) {
             ForEach(messageStore.messages) { message in
                 VStack(alignment: .leading) {
                     HStack {
                         Text(message.title)
                             .bold()
+                            .foregroundColor(.hollowContentText)
                         Spacer()
                         Text(HollowDateFormatter(date: message.timestamp).formattedString())
                             .foregroundColor(.secondary)
+                            .font(.footnote)
                     }
                     .padding(.bottom, 7)
                     Text(message.content)
@@ -80,12 +80,13 @@ extension MessageView {
                 .padding()
                 .background(Color.hollowCardBackground)
                 .cornerRadius(15)
-                .padding([.horizontal, .bottom])
             }
             .padding(.top)
-        }
+        }}
         .ignoresSafeArea()
+        .padding(.horizontal)
         .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
+        .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
         .modifier(AppModelBehaviour(state: messageStore.appModelState))
     }
     
@@ -96,7 +97,6 @@ extension MessageView {
         ) { proxy in
             VStack(spacing: 0) {
                 SearchBar(isSearching: $isSearching)
-                    .padding(.horizontal)
                     .padding(.bottom)
 
                 PostListView(
@@ -107,6 +107,7 @@ extension MessageView {
                 )
             }
         }
+        .padding(.horizontal)
         .ignoresSafeArea()
         .background(Color.background)
         .modifier(AppModelBehaviour(state: postListStore.appModelState))

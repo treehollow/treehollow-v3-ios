@@ -27,7 +27,7 @@ struct MyButton<Content>: View where Content: View {
                 .background(gradient)
                 .opacity(enabled ? 1 : 0.5)
                 .cornerRadius(cornerRadius)
-                .animation(transitionAnimation)
+//                .animation(transitionAnimation)
         }
     }
 }

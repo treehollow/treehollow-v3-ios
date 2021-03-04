@@ -18,7 +18,7 @@ struct SystemMessageRequestConfiguration {
 struct SystemMessageRequestResult: DefaultRequestResult {
     var code: Int
     var msg: String?
-    var data: [SystemMessage]?
+    var result: [SystemMessage]?
 }
 
 typealias SystemMessageRequestResultData = [SystemMessage]
@@ -46,7 +46,7 @@ struct SystemMessageRequest: DefaultRequest {
             urlPath: urlPath,
             headers: headers,
             method: .get,
-            resultToResultData: { $0.data },
+            resultToResultData: { $0.result },
             completion: completion)
     }
     

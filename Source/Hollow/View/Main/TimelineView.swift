@@ -55,6 +55,7 @@ struct TimelineView: View {
                             voteHandler: viewModel.vote,
                             starHandler: viewModel.star
                         )
+                        .padding(.horizontal)
                     }
 
                 }
