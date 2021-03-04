@@ -33,27 +33,22 @@ fileprivate struct TabViewRepresentable<Content>: UIViewControllerRepresentable 
     typealias UIViewControllerType = TabViewUIHostingController<Content>
     
     let content: Content
-    @Environment(\.disableScrolling) var disableScroll
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<TabViewRepresentable<Content>>) -> TabViewUIHostingController<Content> {
-        return TabViewUIHostingController(disableScroll: disableScroll, rootView: self.content)
+        return TabViewUIHostingController(rootView: self.content)
     }
     
     func updateUIViewController(_ uiViewController: TabViewUIHostingController<Content>, context: UIViewControllerRepresentableContext<TabViewRepresentable<Content>>) {
         // necessary here as we need to update the `rootView` property
         // when SwiftUI updates the view (the property `content`)
-        uiViewController.topScrollView?.isScrollEnabled = !disableScroll
         uiViewController.rootView = content
     }
 }
 
 fileprivate class TabViewUIHostingController<Content>: UIHostingController<Content> where Content: View {
     var ready = false
-    var disableScroll: Bool
-    var topScrollView: UIScrollView?
     
-    init(disableScroll: Bool, rootView: Content) {
-        self.disableScroll = disableScroll
+    override init(rootView: Content) {
         super.init(rootView: rootView)
     }
     
@@ -79,7 +74,6 @@ fileprivate class TabViewUIHostingController<Content>: UIHostingController<Conte
                 if let HostingScrollView = HostingScrollView,
                    !subView.isKind(of: HostingScrollView) {
                     (subView as! UIScrollView).scrollsToTop = false
-                    topScrollView = topScrollView ?? subView as? UIScrollView
                 }
                 
                 // Set the background of the wrapper view to nil
@@ -88,5 +82,4 @@ fileprivate class TabViewUIHostingController<Content>: UIHostingController<Conte
             setHostingScrollViews(for: subView)
         }
     }
-    
 }

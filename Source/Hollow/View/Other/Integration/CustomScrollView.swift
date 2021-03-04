@@ -50,8 +50,7 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
     func updateUIViewController(_ uiViewController: ScrollViewUIHostingController<Content>, context: UIViewControllerRepresentableContext<ScrollViewRepresentable<Content>>) {
         // necessary here as we need to update the `rootView` property
         // when SwiftUI updates the view (the property `content`)
-//        uiViewController.scrollView?.isScrollEnabled = !disableScrolling
-        print(disableScrolling)
+        uiViewController.scrollView?.isScrollEnabled = !disableScrolling
         uiViewController.rootView = content
     }
 }
@@ -99,7 +98,7 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         
         self.scrollView = findUIScrollView(view: self.view)
         scrollView?.delegate = self
-//        scrollView?.isScrollEnabled = !disableScroll
+        scrollView?.isScrollEnabled = !disableScroll
         scrollView?.delaysContentTouches = true
 
         if refresh != nil {
