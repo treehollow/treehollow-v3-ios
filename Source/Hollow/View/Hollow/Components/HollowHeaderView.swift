@@ -9,14 +9,27 @@
 import SwiftUI
 import AvatarX
 
-// TODO: Actions
 struct HollowHeaderView: View {
     var postData: PostData
     var compact: Bool
     var showContent = false
     var starAction: (_ star: Bool) -> Void
     var disableAttention: Bool
+
+    var body: some View {
+        _HollowHeaderView<EmptyView>(postData: postData, compact: compact, showContent: showContent, starAction: starAction, disableAttention: disableAttention)
+    }
+}
+
+struct _HollowHeaderView<MenuContent: View>: View {
+    var postData: PostData
+    var compact: Bool
+    var showContent = false
+    var starAction: (_ star: Bool) -> Void
+    var disableAttention: Bool
     private var starred: Bool? { postData.attention }
+    
+    var menuContent: (() -> MenuContent)? = nil
     
     @Namespace private var headerNamespace
     
@@ -68,15 +81,30 @@ struct HollowHeaderView: View {
             Spacer()
             
             if !compact {
-                // If `postData.attention` is nil, it means that the changed state of attention is submitting
-                if let attention = postData.attention {
-                    HollowButton(number: postData.likeNumber, action: { starAction(!attention) }, systemImageName: attention ? "star.fill" : "star")
-                        .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
-                        .disabled(disableAttention)
-                } else {
-                    Spinner(color: .hollowCardStarUnselected, desiredWidth: 16)
+                let attention = postData.attention
+                Button(action: { starAction(!attention) }) {
+                    HStack(spacing: 3) {
+                        Text("\(postData.likeNumber)")
+                        Image(systemName: attention ? "star.fill" : "star")
+                    }
+                    .modifier(HollowButtonStyle())
+                    .padding(.vertical, 5)
+                    .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
                 }
-                
+                .disabled(disableAttention)
+
+                if let menuContent = menuContent {
+                    Menu(content: { menuContent() }, label: {
+                        Image(systemName: "ellipsis")
+                            .rotationEffect(.degrees(90))
+                            .frame(width: body16, height: body16)
+                            .padding(5)
+                            .padding(.vertical, 5)
+                            .padding(.leading, 2)
+                            .foregroundColor(.hollowCardStarUnselected)
+                            .modifier(HollowButtonStyle())
+                    })
+                }
             }
         }
     }

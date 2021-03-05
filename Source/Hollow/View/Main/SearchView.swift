@@ -67,14 +67,7 @@ struct SearchView: View {
                 Spacer()
             }
         }
-        // Background color
-        .background(
-            Color.background
-                .opacity(showPost && colorScheme == .dark ? 1 : 0.4)
-                .edgesIgnoringSafeArea(.all)
-        )
-        // Blur background
-        .blurBackground()
+        .defaultBlurBackground(hasPost: showPost)
         .edgesIgnoringSafeArea(.bottom)
         .overlay(
             Group {

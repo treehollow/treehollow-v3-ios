@@ -133,7 +133,7 @@ extension HollowInputView {
     var footerView: some View {
         HStack(spacing: body12) {
             Menu(content: {
-                Button("INPUTVIEW_SELECT_TAG_MENU_NO_TAG_BUTTON_LABEL", action: { withAnimation { inputStore.selectedTag = nil }})
+                Button(NSLocalizedString("INPUTVIEW_SELECT_TAG_MENU_NO_TAG_BUTTON_LABEL", comment: ""), action: { withAnimation { inputStore.selectedTag = nil }})
                 
                 ForEach(inputStore.availableTags, id: \.self) { tag in
                     Button(tag, action: { withAnimation { inputStore.selectedTag = tag }})

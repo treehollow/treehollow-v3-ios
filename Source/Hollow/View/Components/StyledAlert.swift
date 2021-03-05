@@ -9,16 +9,49 @@
 import SwiftUI
 
 extension View {
-    func styledAlert(presented: Binding<Bool>, title: String, message: String?, buttons: [StyledAlert.Button]) -> some View {
+    func styledAlert(presented: Binding<Bool>, title: String, message: String?, buttons: [StyledAlertButton]) -> some View {
         return self
             .modalPresent(presented: presented, presentationStyle: .overFullScreen, transitionStyle: .crossDissolve) {
                 StyledAlert(presented: presented, title: title, message: message, buttons: buttons)
             }
     }
+    
+    func styledAlert<Content: View>(presented: Binding<Bool>, title: String, message: String?, buttons: [StyledAlertButton], accessoryView: @escaping () -> Content) -> some View {
+        return self
+            .modalPresent(presented: presented, presentationStyle: .overFullScreen, transitionStyle: .crossDissolve) {
+                AccessoryStyledAlert(presented: presented, title: title, message: message, buttons: buttons, accessoryView: accessoryView)
+            }
+    }
 }
 
-
 struct StyledAlert: View {
+    fileprivate typealias StyledAlertView = _StyledAlert<EmptyView>
+    @Binding var presented: Bool
+    var title: String
+    var message: String?
+    var buttons: [StyledAlertButton]
+
+    var body: some View {
+        StyledAlertView(presented: $presented, title: title, message: message, buttons: buttons)
+    }
+}
+
+struct AccessoryStyledAlert<Content: View>: View {
+    fileprivate typealias StyledAlertView = _StyledAlert<Content>
+    
+    @Binding var presented: Bool
+    var title: String
+    var message: String?
+    var buttons: [StyledAlertButton]
+    var accessoryView: () -> Content
+
+    var body: some View {
+        StyledAlertView(presented: $presented, title: title, message: message, buttons: buttons, accessoryView: accessoryView)
+    }
+
+}
+
+fileprivate struct _StyledAlert<Content: View>: View {
     @Binding var presented: Bool
     
     @State private var scale: CGFloat = 0.3
@@ -31,7 +64,8 @@ struct StyledAlert: View {
 
     var title: String
     var message: String?
-    var buttons: [Button]
+    var buttons: [StyledAlertButton]
+    var accessoryView: (() -> Content)? = nil
     
     var body: some View {
         VStack(spacing: spacing) {
@@ -45,6 +79,9 @@ struct StyledAlert: View {
                     .font(.system(size: secondaryText))
                     .padding(.bottom)
             }
+            
+            accessoryView?()
+            
             ForEach(buttons.indices) { index in
                 let button = buttons[index]
                 let style = button.style
@@ -80,23 +117,27 @@ struct StyledAlert: View {
         }
     }
     
-    struct Button {
-        typealias Action = () -> Void
-        var text: String
-        var style: Style = .default
-        var action: Action
+}
+
+struct StyledAlertButton {
+    typealias Action = () -> Void
+    var text: String
+    var style: Style = .default
+    var action: Action
+    
+    static func cancel(action: @escaping Action) -> Self {
+        return Self(text: NSLocalizedString("ALERT_CANCEL_BUTTON", comment: ""), style: .cancel, action: action)
+    }
+    static let cancel = Self(text: NSLocalizedString("ALERT_CANCEL_BUTTON", comment: ""), style: .cancel, action: {})
+    static let ok = Self(text: NSLocalizedString("ALERT_OK_BUTTON", comment: ""), style: .cancel, action: {})
+    
+    struct Style {
+        var accentColor: Color
+        var backgroundColor: Color { accentColor.opacity(0.3) }
+        var fontWeight: Font.Weight
         
-        static let cancel = Button(text: "Cancel", style: .cancel, action: {})
-        static let ok = Button(text: "OK", style: .cancel, action: {})
-        
-        struct Style {
-            var accentColor: Color
-            var backgroundColor: Color { accentColor.opacity(0.3) }
-            var fontWeight: Font.Weight
-            
-            static let `default` = Style(accentColor: .hollowContentVoteGradient1, fontWeight: .medium)
-            static let cancel = Style(accentColor: .secondary, fontWeight: .semibold)
-            static let destructive = Style(accentColor: .red, fontWeight: .medium)
-        }
+        static let `default` = Style(accentColor: .hollowContentVoteGradient1, fontWeight: .medium)
+        static let cancel = Style(accentColor: .secondary, fontWeight: .semibold)
+        static let destructive = Style(accentColor: .red, fontWeight: .medium)
     }
 }

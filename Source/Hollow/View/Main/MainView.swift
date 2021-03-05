@@ -19,8 +19,6 @@ struct MainView: View {
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
     
-    @Namespace var animation
-    
     // Initialize time line view model here to avoid creating repeatedly
     let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly
@@ -123,7 +121,6 @@ extension MainView {
 
         @State private var accountPresented = false
         
-        // iPhone
         @ScaledMetric(wrappedValue: 20, relativeTo: .body) var iconSize: CGFloat
         @ScaledMetric(wrappedValue: 22, relativeTo: .body) var tabSelectedSize: CGFloat
         @ScaledMetric(wrappedValue: 18, relativeTo: .body) var tabUnselectedSize: CGFloat

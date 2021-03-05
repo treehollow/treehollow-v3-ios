@@ -36,7 +36,7 @@ struct DeviceListView: View {
             .padding(.bottom)
         }
         .background(Color.background.ignoresSafeArea())
-        .navigationTitle("DEVICELISTVIEW_NAV_TITLE")
+        .navigationTitle(NSLocalizedString("DEVICELISTVIEW_NAV_TITLE", comment: ""))
         .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))
         .navigationBarItems(trailing: Button(action: deviceListStore.requestDeviceList) {

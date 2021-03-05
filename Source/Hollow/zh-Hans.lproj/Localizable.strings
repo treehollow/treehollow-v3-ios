@@ -1,8 +1,47 @@
 /* No comment provided by engineer. */
+"About" = "关于";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_ABOUT_CELL" = "关于";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_ACCOUNT_CELL" = "账户";
+
+/* No comment provided by engineer. */
 "ACCOUNTVIEW_ACCOUNT_HEADER" = "账户";
 
 /* No comment provided by engineer. */
+"ACCOUNTVIEW_CONTACT_US_CELL" = "联系我们";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_INFO_HEADER" = "信息";
+
+/* No comment provided by engineer. */
 "ACCOUNTVIEW_LOGOUT_BUTTON" = "注销";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_NAV_TITLE" = "账户";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_PRIVACY_CELL" = "隐私政策";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_RULES_CELL" = "树洞规则";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_SETTINGS_CELL" = "设置";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_UPDATE_CELL" = "有可用更新";
+
+/* No comment provided by engineer. */
+"ALERT_CANCEL_BUTTON" = "取消";
+
+/* No comment provided by engineer. */
+"ALERT_OK_BUTTON" = "好";
+
+/* No comment provided by engineer. */
+"CITED_POST_LOADING_ERROR" = "加载树洞失败";
 
 /* No comment provided by engineer. */
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "输入评论";
@@ -50,7 +89,10 @@
 "DEVICELIST_CARD_DEVICE_TITLE_CURRENT" = "- 当前";
 
 /* No comment provided by engineer. */
-"DEVICELIST_CARD_LOGIN_DATE_TITLE" = "登陆日期";
+"DEVICELIST_CARD_LOGIN_DATE_TITLE" = "登录日期";
+
+/* No comment provided by engineer. */
+"DEVICELISTVIEW_NAV_TITLE" = "设备";
 
 /* No comment provided by engineer. */
 "ERROR_ALERT_OK_BUTTON" = "好";
@@ -68,7 +110,13 @@
 "GLOBAL_WANDER" = "随机漫步";
 
 /* No comment provided by engineer. */
+"HOLLOW_CONTENT_DELETED_TAG" = "已删除";
+
+/* No comment provided by engineer. */
 "HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX" = "条评论";
+
+/* No comment provided by engineer. */
+"HOLLOWDETAIL_COMMENTS_NEW_COMMENT_BUTTON" = "新建评论";
 
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "成功保存至系统相册";
@@ -82,6 +130,9 @@
 /* No comment provided by engineer. */
 "IMAGEVIEWER_DONE_BUTTON" = "完成";
 
+/* No comment provided by engineer. */
+"INPUT_EDITOR_PLACEHOLDER" = "输入正文";
+
 /* ... */
 "INPUTVIEW_IMAGE_COMPRESSING_LABEL" = "正在压缩";
 
@@ -91,6 +142,9 @@
 
 /* No comment provided by engineer. */
 "INPUTVIEW_SELECT_TAG_MENU_LABEL" = "选择标签";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_SELECT_TAG_MENU_NO_TAG_BUTTON_LABEL" = "无";
 
 /* No comment provided by engineer. */
 "INPUTVIEW_SEND_BUTTON_SEND_POST" = "发布";
@@ -114,7 +168,7 @@
 "LOGINVIEW_BUTTON_LOADING" = "加载中";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_BUTTON_LOGIN" = "登陆";
+"LOGINVIEW_BUTTON_LOGIN" = "登录";
 
 /* No comment provided by engineer. */
 "LOGINVIEW_BUTTON_REGISTER" = "注册";
@@ -124,6 +178,9 @@
 
 /* No comment provided by engineer. */
 "LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER" = "邮箱";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_EMAIL_TEXTFIELD_TITLE" = "邮箱";
 
 /* No comment provided by engineer. */
 "LOGINVIEW_EMAIL_VERIF_TEXTFIELD_FOOTER" = "请检查邮箱收件箱或垃圾信箱。";
@@ -142,6 +199,66 @@
 
 /* No comment provided by engineer. */
 "LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER" = "密码最少包含8字符，不能包含空格。";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_PASSWORD_TEXTFIELD_TITLE" = "密码";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON" = "复制邮箱地址";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE" = "用当前邮箱发送邮件到指定邮箱以重置密码。";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON" = "发送邮件";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE" = "重置密码";
+
+/* No comment provided by engineer. */
+"MESSAGEVIEW_PICKER_ATTENTION" = "关注";
+
+/* No comment provided by engineer. */
+"MESSAGEVIEW_PICKER_MESSAGE" = "系统信息";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_DELETE_BAN" = "删除并禁言";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_REMOVE" = "删除";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG" = "设置标签";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG_CUSTOM" = "自定义";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG_EXISTED" = "从列表中选择";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_UNBAN" = "取消禁言";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_UNDELETE_UNBAN" = "恢复树洞并取消禁言";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM" = "确认";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_DELETE" = "撤回";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_DELETE" = "举报删除";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "请输入操作的文字信息。";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_REASON_ALERT_TITLE" = "操作";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_TAG" = "举报标签";
 
 /* No comment provided by engineer. */
 "REQUEST_DECODE_FAILED_ERROR_MSG" = "解码失败。";

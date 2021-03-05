@@ -98,7 +98,7 @@ struct WelcomeView: View {
         .onAppear {
             // Don't use AppModelBehaviour modifier on this view.
             if appModel.tokenExpired {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     withAnimation { appModel.tokenExpired = false }
                 }
             }

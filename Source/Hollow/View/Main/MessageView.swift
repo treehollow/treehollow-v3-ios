@@ -26,7 +26,7 @@ struct MessageView: View {
                 attentionListView
             }
         }
-        .background(Color.background.ignoresSafeArea())
+        .defaultBlurBackground(hasPost: true)
         .overlay(Group { if isSearching {
             SearchView(
                 presented: $isSearching,

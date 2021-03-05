@@ -16,41 +16,41 @@ struct AccountView: View {
                     NavigationLink(
                         destination: AccountInfoView(),
                         label: {
-                            Label("ACCOUNTVIEW_ACCOUNT_CELL", systemImage: "person")
+                            Label(NSLocalizedString("ACCOUNTVIEW_ACCOUNT_CELL", comment: ""), systemImage: "person")
                         })
                     NavigationLink(
                         destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
                         label: {
-                            Label("ACCOUNTVIEW_SETTINGS_CELL", systemImage: "gear")
+                            Label(NSLocalizedString("ACCOUNTVIEW_SETTINGS_CELL", comment: ""), systemImage: "gear")
                         })
                 }
                 Section(header: Text("ACCOUNTVIEW_INFO_HEADER")) {
                     NavigationLink(
                         destination: Text("Regulation"),
                         label: {
-                            Label(LocalizedStringKey("ACCOUNTVIEW_RULES_CELL"), systemImage: "doc.plaintext")
+                            Label(NSLocalizedString("ACCOUNTVIEW_RULES_CELL", comment: ""), systemImage: "doc.plaintext")
                         })
                     NavigationLink(
                         destination: Text("Regulation"),
                         label: {
-                            Label(LocalizedStringKey("ACCOUNTVIEW_PRIVACY_CELL"), systemImage: "checkmark.shield")
+                            Label(NSLocalizedString("ACCOUNTVIEW_PRIVACY_CELL", comment: ""), systemImage: "checkmark.shield")
                         })
                     NavigationLink(
                         destination: Text("About"),
                         label: {
-                            Label(LocalizedStringKey("ACCOUNTVIEW_ABOUT_CELL"), systemImage: "info.circle")
+                            Label(NSLocalizedString("ACCOUNTVIEW_ABOUT_CELL", comment: ""), systemImage: "info.circle")
                         })
 
                 }
                 
                 Section {
                     Button(action: {}) {
-                        Label("ACCOUNTVIEW_CONTACT_US_CELL", systemImage: "envelope")
+                        Label(NSLocalizedString("ACCOUNTVIEW_CONTACT_US_CELL", comment: ""), systemImage: "envelope")
                     }
 
                     // TODO: shows only when available
                     Button(action: {}) {
-                        Label("ACCOUNTVIEW_UPDATE_CELL", systemImage: "arrow.up")
+                        Label(NSLocalizedString("ACCOUNTVIEW_UPDATE_CELL", comment: ""), systemImage: "arrow.up")
                     }
 
                 }
@@ -65,7 +65,7 @@ struct AccountView: View {
 
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("ACCOUNTVIEW_NAV_TITLE")
+            .navigationTitle(NSLocalizedString("ACCOUNTVIEW_NAV_TITLE", comment: ""))
             .navigationBarItems(leading: Button(action: { presented = false }) {
                 Image(systemName: "xmark")
                     .foregroundColor(.hollowContentText)

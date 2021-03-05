@@ -66,14 +66,14 @@ struct HollowCommentContentView: View {
                                     .bold()
                                     .lineLimit(1)
                                 
-                                if let tag = commentData.tag {
-                                    Text(tag)
-                                        .font(.system(size: body12, weight: .semibold))
-                                        .foregroundColor(.white)
-                                        .padding(.vertical, body2)
-                                        .padding(.horizontal, body4)
-                                        .background(Color.hollowContentVoteGradient1)
-                                        .cornerRadius(body5)
+                                if commentData.tag != nil || commentData.deleted {
+                                    if commentData.deleted {
+                                        tagView(text: NSLocalizedString("HOLLOW_CONTENT_DELETED_TAG", comment: ""), removed: true)
+                                    }
+
+                                    if let tag = commentData.tag {
+                                        tagView(text: tag, removed: false)
+                                    }
                                 }
                                 Spacer()
                                 Text(HollowDateFormatter(date: commentData.date).formattedString())
@@ -155,6 +155,16 @@ struct HollowCommentContentView: View {
         .frame(width: nameLabelWidth)
         .fixedSize()
         
+    }
+    
+    func tagView(text: String, removed: Bool) -> some View {
+        Text(text)
+            .font(.system(size: body12, weight: .semibold))
+            .foregroundColor(.white)
+            .padding(.vertical, body2)
+            .padding(.horizontal, body4)
+            .background(removed ? Color.red : Color.hollowContentVoteGradient1)
+            .cornerRadius(body5)
     }
     
 }

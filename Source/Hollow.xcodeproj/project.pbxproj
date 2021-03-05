@@ -24,6 +24,7 @@
 		0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */; };
 		0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */; };
 		0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */; };
+		0E294E9725F1F448001E4C08 /* ReportRequestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */; };
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
 		0E33BA9C25EE49190089F2E7 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E33BA9B25EE49190089F2E7 /* ImageScrollView */; };
 		0E340F6925CFDA6C002F0F0C /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E340F6825CFDA6C002F0F0C /* AppCenterCrashes */; };
@@ -62,7 +63,7 @@
 		0E415B6725CD772200351672 /* HollowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1825CD772200351672 /* HollowImageView.swift */; };
 		0E415B6825CD772200351672 /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1925CD772200351672 /* HollowTextView.swift */; };
 		0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */; };
-		0E415B6B25CD772200351672 /* HollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1D25CD772200351672 /* HollowButton.swift */; };
+		0E415B6B25CD772200351672 /* HollowButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1D25CD772200351672 /* HollowButtonStyle.swift */; };
 		0E415B6C25CD772200351672 /* HollowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1E25CD772200351672 /* HollowHeaderView.swift */; };
 		0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2025CD772200351672 /* HollowDetailView.swift */; };
 		0E415B6E25CD772200351672 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2225CD772200351672 /* AboutView.swift */; };
@@ -152,6 +153,8 @@
 		0EA2D50C25EF8125003D539E /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50B25EF8125003D539E /* MessageStore.swift */; };
 		0EA2D50F25EF9F41003D539E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50E25EF9F41003D539E /* SearchBar.swift */; };
 		0EA2D51225F0A53F003D539E /* View+swipeToDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */; };
+		0EA2D51A25F0FA05003D539E /* View+defaultBlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D51925F0FA05003D539E /* View+defaultBlurBackground.swift */; };
+		0EA2D51D25F11EA9003D539E /* ReportMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D51C25F11EA9003D539E /* ReportMenuContent.swift */; };
 		0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298A25EB6F4D00B74D5D /* Double+int.swift */; };
 		0EA4298E25EBBB8B00B74D5D /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
@@ -191,6 +194,7 @@
 		0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
 		0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailStore.swift; sourceTree = "<group>"; };
+		0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRequestGroup.swift; sourceTree = "<group>"; };
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
@@ -229,7 +233,7 @@
 		0E415B1825CD772200351672 /* HollowImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowImageView.swift; sourceTree = "<group>"; };
 		0E415B1925CD772200351672 /* HollowTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTextView.swift; sourceTree = "<group>"; };
 		0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowVerticalDivider.swift; sourceTree = "<group>"; };
-		0E415B1D25CD772200351672 /* HollowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowButton.swift; sourceTree = "<group>"; };
+		0E415B1D25CD772200351672 /* HollowButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowButtonStyle.swift; sourceTree = "<group>"; };
 		0E415B1E25CD772200351672 /* HollowHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowHeaderView.swift; sourceTree = "<group>"; };
 		0E415B2025CD772200351672 /* HollowDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowDetailView.swift; sourceTree = "<group>"; };
 		0E415B2225CD772200351672 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 		0EA2D50B25EF8125003D539E /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
 		0EA2D50E25EF9F41003D539E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+swipeToDismiss.swift"; sourceTree = "<group>"; };
+		0EA2D51925F0FA05003D539E /* View+defaultBlurBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultBlurBackground.swift"; sourceTree = "<group>"; };
+		0EA2D51C25F11EA9003D539E /* ReportMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenuContent.swift; sourceTree = "<group>"; };
 		0EA4298A25EB6F4D00B74D5D /* Double+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+int.swift"; sourceTree = "<group>"; };
 		0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
@@ -383,7 +389,6 @@
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
-				0E415B8725CD773E00351672 /* Test */,
 				0E415A7225CD769B00351672 /* Hollow */,
 				0E415A7125CD769B00351672 /* Products */,
 			);
@@ -417,6 +422,7 @@
 		0E415A7925CD769F00351672 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				0E415B8725CD773E00351672 /* Test */,
 				0E415A7A25CD769F00351672 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -440,6 +446,7 @@
 		0E415AEA25CD772200351672 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				0E415B1D25CD772200351672 /* HollowButtonStyle.swift */,
 				0E415AEB25CD772200351672 /* ErrorAlert.swift */,
 				0E36F53F25D0E02F001AE852 /* GetSize.swift */,
 				0E36F54525D0F0FB001AE852 /* GetFrame.swift */,
@@ -484,6 +491,7 @@
 				0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */,
 				0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */,
 				0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */,
+				0EA2D51925F0FA05003D539E /* View+defaultBlurBackground.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,8 +551,8 @@
 			isa = PBXGroup;
 			children = (
 				0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */,
-				0E415B1D25CD772200351672 /* HollowButton.swift */,
 				0E415B1E25CD772200351672 /* HollowHeaderView.swift */,
+				0EA2D51C25F11EA9003D539E /* ReportMenuContent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -638,18 +646,10 @@
 		0E415B8725CD773E00351672 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				0E415B8925CD773E00351672 /* Data */,
+				0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */,
 				0E906D3825DCEBF20034053C /* Test.swift */,
 			);
 			path = Test;
-			sourceTree = "<group>";
-		};
-		0E415B8925CD773E00351672 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		0E415B9D25CD988F00351672 /* Other */ = {
@@ -847,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */,
+				0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -1016,6 +1017,7 @@
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
 				0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */,
 				0E906D1725DCEADD0034053C /* SendCommentRequest.swift in Sources */,
+				0E294E9725F1F448001E4C08 /* ReportRequestGroup.swift in Sources */,
 				0E906CFD25DCEADD0034053C /* SearchHistoryRequest.swift in Sources */,
 				0E906D0625DCEADD0034053C /* GetConfigRequest.swift in Sources */,
 				0E906D3025DCEADD0034053C /* Constants.swift in Sources */,
@@ -1023,7 +1025,7 @@
 				0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
 				0EFB550525E93E24001BC98A /* PostListView.swift in Sources */,
-				0E415B6B25CD772200351672 /* HollowButton.swift in Sources */,
+				0E415B6B25CD772200351672 /* HollowButtonStyle.swift in Sources */,
 				0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
@@ -1049,6 +1051,7 @@
 				0E906D2E25DCEADD0034053C /* String+Date.swift in Sources */,
 				0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */,
 				0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */,
+				0EA2D51D25F11EA9003D539E /* ReportMenuContent.swift in Sources */,
 				0E415B5225CD772200351672 /* CustomGradient.swift in Sources */,
 				00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */,
 				0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */,
@@ -1063,6 +1066,7 @@
 				00EFC07125DFC71500536B52 /* Vote.swift in Sources */,
 				0E906D2C25DCEADD0034053C /* Int+string.swift in Sources */,
 				0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */,
+				0EA2D51A25F0FA05003D539E /* View+defaultBlurBackground.swift in Sources */,
 				0E906D0F25DCEADD0034053C /* AccountCreationRequest.swift in Sources */,
 				0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */,
 				0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */,

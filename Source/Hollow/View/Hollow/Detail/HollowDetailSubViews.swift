@@ -10,13 +10,25 @@ import SwiftUI
 
 extension HollowDetailView {
     @ViewBuilder var commentView: some View {
-        // Comment
         let postData = store.postDataWrapper.post
-        (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
-            .fontWeight(.heavy)
-            .leading()
-            .padding(.top)
-            .padding(.bottom, 5)
+
+        HStack {
+            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+                .fontWeight(.heavy)
+            Spacer()
+            Button(action: {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                store.replyToIndex = -1
+            }) {
+                Text("HOLLOWDETAIL_COMMENTS_NEW_COMMENT_BUTTON")
+                    .fontWeight(.medium)
+                    .font(.system(size: newCommentLabelSize))
+                    .lineLimit(1)
+            }
+            .accentColor(.hollowContentVoteGradient1)
+        }
+        .padding(.top)
+        .padding(.bottom, 5)
 
         if postData.comments.count > 30 {
             LazyVStack {
@@ -45,18 +57,30 @@ extension HollowDetailView {
         if index == 0 { hideLabel = false }
         else { hideLabel = comment.name == store.postDataWrapper.post.comments[index - 1].name }
         return HollowCommentContentView(commentData: $store.postDataWrapper.post.comments[index], compact: false, hideLabel: hideLabel, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
-            .contentShape(Rectangle())
+            .contentShape(RoundedRectangle(cornerRadius: 10))
             .background(
                 Group {
                     store.replyToIndex == index || jumpedToIndex == index ?
                         Color.background : nil
                 }
                 .cornerRadius(10)
+                .animation(.none)
             )
             .onTapGesture {
                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 store.replyToIndex = index
                 jumpedToIndex = nil
+            }
+            .contextMenu {
+                ReportMenuContent(
+                    store: store,
+                    data: \.postDataWrapper.post.comments[index].permissions,
+                    commentId: comment.commentId,
+                    reportCommentId: $reportCommentId,
+                    showConfirm: $showReportConfirmAlert,
+                    textFieldPresented: $reportTextFieldPresented,
+                    reportType: $reportType
+                )
             }
     }
 

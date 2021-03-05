@@ -16,10 +16,7 @@ struct ReportCommentRequestConfiguration {
     var reason: String
 }
 
-struct ReportCommentRequestResult: DefaultRequestResult {
-    var code: Int
-    var msg: String?
-}
+typealias ReportCommentRequestResult = ReportRequestGroupResult
 
 typealias ReportCommentRequestResultData = ReportCommentRequestResult
 
@@ -44,7 +41,7 @@ struct ReportCommentRequest: DefaultRequest {
         
         let parameters: [String : Encodable] = [
             "id" : self.configuration.commentId,
-            "type": self.configuration.type,
+            "type": self.configuration.type.rawValue,
             "reason" : self.configuration.reason,
         ]
         performRequest(

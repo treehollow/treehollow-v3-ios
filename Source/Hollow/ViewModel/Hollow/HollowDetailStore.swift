@@ -24,6 +24,10 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var text: String = ""
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
+    
+    // MARK: - Report
+    @Published var reportReason: String = ""
+    @Published var reportCommentId: Int?
 
     // MARK: Shared Variables
     @Published var errorMessage: (title: String, message: String)?
@@ -36,8 +40,9 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     init(bindingPostWrapper: Binding<PostDataWrapper>, jumpToComment commentId: Int? = nil) {
         self.postDataWrapper = bindingPostWrapper.wrappedValue
         self.bindingPostWrapper = bindingPostWrapper
-        requestDetail()
         self.jumpToCommentId = commentId
+        
+        requestDetail()
         
         // Subscribe the changes in post data in the detail store
         // and update the upstream data source. This will be the
@@ -46,7 +51,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
             .receive(on: DispatchQueue.main)
             .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
             .store(in: &cancellables)
-        
+
         // When reconnect to the internet, fetch again.
         ConnectivityPublisher.networkConnectedStatusPublisher
             .sink(receiveValue: { connected in
@@ -165,7 +170,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
             return FetchImageRequest(configuration: configuration)
         }
         
-        FetchImageRequest.publisher(for: requests, retries: 3)?
+        FetchImageRequest.publisher(for: requests, retries: 2)?
             .sinkOnMainThread(receiveValue: { index, output in
                 let commentId = commentsWithNoImages[index].commentId
                 switch output {
@@ -251,7 +256,9 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         let request = SendCommentRequest(configuration: configuration)
         
         withAnimation { isLoading = true }
+        print(configuration)
         request.publisher
+            .print("Send Comment")
             .sinkOnMainThread(receiveError: { error in
                 withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
@@ -269,5 +276,35 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         self.image = nil
         self.compressedImage = nil
         self.imageSizeInformation = nil
+    }
+    
+    // MARK: - Report
+    func report(commentId: Int? = nil, type: PostPermissionType, reason: String) {
+        let config = Defaults[.hollowConfig]!
+        let token = Defaults[.accessToken]!
+        let postId = postDataWrapper.post.postId
+        
+        let configuration: ReportRequestGroupConfiguration
+        
+        if let commentId = commentId {
+            configuration = .comment(.init(apiRoot: config.apiRootUrls, token: token, commentId: commentId, type: type, reason: reason))
+        } else {
+            configuration = .post(.init(apiRoot: config.apiRootUrls, token: token, postId: postId, type: type, reason: reason))
+        }
+        
+        let request = ReportRequestGroup(configuration: configuration)
+        print(configuration)
+        request.publisher
+            .print()
+            .sinkOnMainThread(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.requestDetail()
+                case .failure(let error):
+                    // TODO: Handle user deletion
+                    self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
     }
 }

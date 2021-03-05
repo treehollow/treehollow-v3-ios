@@ -33,19 +33,24 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                         }
                     })
                     .onEnded { value in
-                        if value.predictedEndTranslation.width + value.startLocation.x > screenWidth / 2 &&
-                            offset > 0 {
-                            withAnimation(.easeIn(duration: 0.2)) {
+                        let predictedPosition = value.predictedEndLocation.x
+                        if (predictedPosition > screenWidth * 3 / 4 || value.location.x > screenWidth * 2 / 3) &&
+                            offset > 0 &&
+                            predictedPosition > value.location.x {
+                            let speed = Double((predictedPosition - value.location.x) / screenWidth)
+                            print(speed)
+                            withAnimation(Animation.easeOut(duration: 0.1).speed(min(max(speed, 0.4), 0.7))) {
                                 presented = false
+                                offset = 0
                             }
                         } else {
-                            withAnimation(.easeOut(duration: 0.3)) {
+                            withAnimation(.spring(response: 0.2)) {
                                 offset = 0
                             }
                         }
                         
                     }
             )
-        
+            .onAppear { offset = 0 }
     }
 }

@@ -17,10 +17,7 @@ struct ReportPostRequestConfiguration {
     var reason: String
 }
 
-struct ReportPostRequestResult: DefaultRequestResult {
-    var code: Int
-    var msg: String?
-}
+typealias ReportPostRequestResult = ReportRequestGroupResult
 
 typealias ReportPostRequestResultData = ReportPostRequestResult
 
@@ -45,7 +42,7 @@ struct ReportPostRequest: DefaultRequest {
         
         let parameters: [String : Encodable] = [
             "id" : self.configuration.postId,
-            "type": self.configuration.type,
+            "type": self.configuration.type.rawValue,
             "reason" : self.configuration.reason,
         ]
         performRequest(

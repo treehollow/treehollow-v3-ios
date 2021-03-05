@@ -31,7 +31,7 @@ struct HollowImageView: View {
                 if let image = hollowImage.image {
                     Image(uiImage: image)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .animation(.default)
                         .contentShape(RoundedRectangle(cornerRadius: 4))
                         .contextMenu(ContextMenu(menuItems: {

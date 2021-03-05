@@ -38,15 +38,16 @@ struct HollowContentView: View {
     @ScaledMetric(wrappedValue: 6, relativeTo: .body) var body6: CGFloat
     
     var body: some View {
-        if let tag = postDataWrapper.post.tag {
-            Text(tag)
-                .font(.system(size: body14, weight: .semibold))
-                .foregroundColor(.white)
-                .padding(.horizontal, body6)
-                .padding(.vertical, body4)
-                .background(Color.hollowContentVoteGradient1)
-                .cornerRadius(body6)
-                .leading()
+        if postDataWrapper.post.tag != nil || postDataWrapper.post.deleted {
+            HStack(spacing: body6) {
+                if postDataWrapper.post.deleted {
+                    tagView(text: NSLocalizedString("HOLLOW_CONTENT_DELETED_TAG", comment: ""), deleted: true)
+                }
+                if let tag = postDataWrapper.post.tag {
+                    tagView(text: tag, deleted: false)
+                }
+                Spacer()
+            }
         }
         
         if hasImage && options.contains(.displayImage) && !hideContent {
@@ -111,6 +112,16 @@ struct HollowContentView: View {
             text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
         }
         return HollowTextView(text: text, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+    }
+    
+    private func tagView(text: String, deleted: Bool) -> some View {
+        Text(text)
+            .font(.system(size: body14, weight: .semibold))
+            .foregroundColor(.white)
+            .padding(.horizontal, body6)
+            .padding(.vertical, body4)
+            .background(deleted ? Color.red : Color.hollowContentVoteGradient1)
+            .cornerRadius(body6)
     }
 }
 

@@ -150,7 +150,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             return FetchImageRequest(configuration: configuration)
         }
         
-        FetchImageRequest.publisher(for: requests, retries: 3)?
+        FetchImageRequest.publisher(for: requests, retries: 2)?
             .sinkOnMainThread(receiveValue: { index, output in
                 switch output {
                 case .failure: break // handle error

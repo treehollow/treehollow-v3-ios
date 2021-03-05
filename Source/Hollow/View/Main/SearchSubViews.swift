@@ -325,19 +325,21 @@ extension SearchView {
             .font(.system(size: body17, weight: .semibold))
             .padding(.top)
             
-            ScrollView(showsIndicators: false) { VStack(spacing: historySpcing) {
-                ForEach(searchHistory, id: \.self) { history in
-                    Text(history)
-                        .foregroundColor(.secondary)
-                        .leading()
-                        .font(.system(size: body16))
-                        .onTapGesture {
-                            withAnimation { searchText = history }
-                            performSearch()
-                        }
-                }
-            }}
-            .padding(.top, 10)
+            if searchHistory.count > 0 {
+                ScrollView(showsIndicators: false) { VStack(spacing: historySpcing) {
+                    ForEach(searchHistory, id: \.self) { history in
+                        Text(history)
+                            .foregroundColor(.secondary)
+                            .leading()
+                            .font(.system(size: body16))
+                            .onTapGesture {
+                                withAnimation { searchText = history }
+                                performSearch()
+                            }
+                    }
+                }}
+                .padding(.top, 10)
+            }
         }
     }
 }

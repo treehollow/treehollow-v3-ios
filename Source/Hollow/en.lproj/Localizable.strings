@@ -1,11 +1,44 @@
 /* No comment provided by engineer. */
+"ACCOUNTVIEW_ABOUT_CELL" = "About";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_ACCOUNT_CELL" = "Account";
+
+/* No comment provided by engineer. */
 "ACCOUNTVIEW_ACCOUNT_HEADER" = "Account";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_CONTACT_US_CELL" = "Contact Us";
 
 /* No comment provided by engineer. */
 "ACCOUNTVIEW_INFO_HEADER" = "Info";
 
 /* No comment provided by engineer. */
 "ACCOUNTVIEW_LOGOUT_BUTTON" = "Log Out";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_NAV_TITLE" = "Account";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_PRIVACY_CELL" = "Privacy";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_RULES_CELL" = "Rules";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_SETTINGS_CELL" = "Settings";
+
+/* No comment provided by engineer. */
+"ACCOUNTVIEW_UPDATE_CELL" = "Update Available";
+
+/* No comment provided by engineer. */
+"ALERT_CANCEL_BUTTON" = "Cancel";
+
+/* No comment provided by engineer. */
+"ALERT_OK_BUTTON" = "OK";
+
+/* No comment provided by engineer. */
+"CITED_POST_LOADING_ERROR" = "Fail to load the post.";
 
 /* No comment provided by engineer. */
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
@@ -56,6 +89,9 @@
 "DEVICELIST_CARD_LOGIN_DATE_TITLE" = "Login Date";
 
 /* No comment provided by engineer. */
+"DEVICELISTVIEW_NAV_TITLE" = "Devices";
+
+/* No comment provided by engineer. */
 "ERROR_ALERT_OK_BUTTON" = "OK";
 
 /* No comment provided by engineer. */
@@ -68,7 +104,13 @@
 "GLOBAL_WANDER" = "Wander";
 
 /* No comment provided by engineer. */
+"HOLLOW_CONTENT_DELETED_TAG" = "Deleted";
+
+/* No comment provided by engineer. */
 "HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX" = "Comments";
+
+/* No comment provided by engineer. */
+"HOLLOWDETAIL_COMMENTS_NEW_COMMENT_BUTTON" = "New Comment";
 
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "Successfully saved to Photos";
@@ -94,6 +136,9 @@
 
 /* No comment provided by engineer. */
 "INPUTVIEW_SELECT_TAG_MENU_LABEL" = "Select a tag";
+
+/* No comment provided by engineer. */
+"INPUTVIEW_SELECT_TAG_MENU_NO_TAG_BUTTON_LABEL" = "None";
 
 /* No comment provided by engineer. */
 "INPUTVIEW_SEND_BUTTON_SEND_POST" = "Post";
@@ -129,6 +174,9 @@
 "LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER" = "Email address";
 
 /* No comment provided by engineer. */
+"LOGINVIEW_EMAIL_TEXTFIELD_TITLE" = "Email";
+
+/* No comment provided by engineer. */
 "LOGINVIEW_EMAIL_VERIF_TEXTFIELD_FOOTER" = "Please check your inbox for the code.";
 
 /* No comment provided by engineer. */
@@ -145,6 +193,66 @@
 
 /* No comment provided by engineer. */
 "LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER" = "The password should contains at least 8 characters without blankspaces.";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_PASSWORD_TEXTFIELD_TITLE" = "Password";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON" = "Copy Email Address";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE" = "Send an email to the contact email to restore your password.";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON" = "Send Email";
+
+/* No comment provided by engineer. */
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE" = "Restore Password";
+
+/* No comment provided by engineer. */
+"MESSAGEVIEW_PICKER_ATTENTION" = "Attention";
+
+/* No comment provided by engineer. */
+"MESSAGEVIEW_PICKER_MESSAGE" = "Message";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_DELETE_BAN" = "Delete and Ban";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_REMOVE" = "Delete";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG" = "Set Tag";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG_CUSTOM" = "Custom";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG_EXISTED" = "Select from list";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_UNBAN" = "Unban";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_UNDELETE_UNBAN" = "Undelete and Unban";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM" = "Confirm";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_DELETE" = "Delete";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_DELETE" = "Report Delete";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "Please enter the message for the operation.";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_REASON_ALERT_TITLE" = "Operation";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_REPORT_TAG" = "Report Tag";
 
 /* No comment provided by engineer. */
 "REQUEST_DECODE_FAILED_ERROR_MSG" = "Fail to decode result from the response.";

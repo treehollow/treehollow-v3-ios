@@ -74,7 +74,11 @@ extension LoginView {
                 .keyboardType(.numberPad)
             
             // Password text field
-            MyTextField(text: $viewModel.originalPassword, title: "LOGINVIEW_PASSWORD_TEXTFIELD_TITLE", footer: passwordRequirements, isSecureContent: true) {
+            MyTextField(
+                text: $viewModel.originalPassword,
+                title: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_TITLE", comment: ""),
+                footer: passwordRequirements,
+                isSecureContent: true) {
                 Group {
                     if viewModel.originalPassword != "" && !passwordValid {
                         Image(systemName: "xmark")
@@ -117,7 +121,7 @@ extension LoginView {
         var body: some View {
             MyTextField(text: $viewModel.email,
                         placeHolder: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER", comment: ""),
-                        title: "LOGINVIEW_EMAIL_TEXTFIELD_TITLE") {
+                        title: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_TITLE", comment: "")) {
                 // Accessory view for selecting email suffix
                 Menu(content: {
                     ForEach(configuration.emailSuffixes.indices, id: \.self) { index in
@@ -152,7 +156,7 @@ extension LoginView {
             VStack(alignment: .leading) {
                 MyTextField<EmptyView>(text: $viewModel.loginPassword,
                                        placeHolder: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER", comment: ""),
-                                       title: "LOGINVIEW_PASSWORD_TEXTFIELD_TITLE",
+                                       title: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_TITLE", comment: ""),
                                        isSecureContent: true)
                 Button(action: {
                     if let mailString = Defaults[.hollowConfig]?.contactEmail,
@@ -161,7 +165,7 @@ extension LoginView {
                         alertPresented = true
                     } else {
                         viewModel.errorMessage = (
-                            title: "GLOBAL_ERROR_MSG_TITLE",
+                            title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""),
                             message: NSLocalizedString("LOGINVIEW_NO_CONTACT_EMAIL_ERROR", comment: "")
                         )
                     }
@@ -175,11 +179,11 @@ extension LoginView {
             
             .styledAlert(
                 presented: $alertPresented,
-                title: "LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE",
-                message: "LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE",
+                title: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE", comment: ""),
+                message: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE", comment: ""),
                 buttons: [
-                    .init(text: "LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON", action: { openURL(contactEmailURL) }),
-                    .init(text: "LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON", action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
+                    .init(text: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON", comment: ""), action: { openURL(contactEmailURL) }),
+                    .init(text: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON", comment: ""), action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
                     .cancel
                 ]
             )
