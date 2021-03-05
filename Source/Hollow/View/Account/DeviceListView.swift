@@ -107,7 +107,7 @@ extension DeviceListView {
                         .top()
                 )
             )
-            .cornerRadius(15)
+            .roundedCorner(15)
             
             .styledAlert(
                 presented: $alertPresented,

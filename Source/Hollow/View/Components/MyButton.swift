@@ -26,7 +26,7 @@ struct MyButton<Content>: View where Content: View {
                 .padding(.vertical, 7)
                 .background(gradient)
                 .opacity(enabled ? 1 : 0.5)
-                .cornerRadius(cornerRadius)
+                .roundedCorner(cornerRadius)
 //                .animation(transitionAnimation)
         }
     }
@@ -38,6 +38,6 @@ extension View {
             .padding(.horizontal, 13)
             .padding(.vertical, 7)
             .background(defaultGradient)
-            .cornerRadius(defaultButtonRadius)
+            .roundedCorner(defaultButtonRadius)
     }
 }

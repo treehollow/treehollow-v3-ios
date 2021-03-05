@@ -371,3 +371,8 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";
 
+"WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE" = "Custom";
+
+"WELCOMEVIEW_NAV_TITLE" = "Welcome";
+
+"WELCOMEVIEW_CUSTOM_NEXT_BUTTON" = "Next";

@@ -16,7 +16,7 @@ extension HollowInputView {
                 .antialiased(true)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .cornerRadius(4)
+                .roundedCorner(4)
                 .overlay(
                     Button(action: { withAnimation { inputStore.compressedImage = nil }}) {
                         ZStack {
@@ -36,7 +36,7 @@ extension HollowInputView {
                         .font(.footnote)
                         .padding(8)
                         .blurBackground()
-                        .cornerRadius(8)
+                        .roundedCorner(8)
                         .bottom()
                         .trailing()
                         .padding(body10)

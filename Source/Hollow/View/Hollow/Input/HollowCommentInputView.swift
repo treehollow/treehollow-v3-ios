@@ -81,7 +81,7 @@ struct HollowCommentInputView: View {
         }
         .padding()
         .background(Color.hollowCardBackground)
-        .cornerRadius(12)
+        .roundedCorner(12)
         .padding()
         .shadow(radius: 12)
         .animation(transitionAnimation)
@@ -154,7 +154,7 @@ extension HollowCommentInputView {
                 .antialiased(true)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .cornerRadius(4)
+                .roundedCorner(4)
                 .overlay(
                     Button(action: { withAnimation { store.compressedImage = nil }}) {
                         ZStack {
@@ -174,7 +174,7 @@ extension HollowCommentInputView {
                         .font(.footnote)
                         .padding(8)
                         .blurBackground()
-                        .cornerRadius(8)
+                        .roundedCorner(8)
                         .bottom()
                         .trailing()
                         .padding(body10)

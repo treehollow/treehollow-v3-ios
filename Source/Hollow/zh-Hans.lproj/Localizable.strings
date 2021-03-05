@@ -377,3 +377,8 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录。";
 
+"WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE" = "自定义配置";
+
+"WELCOMEVIEW_NAV_TITLE" = "欢迎";
+
+"WELCOMEVIEW_CUSTOM_NEXT_BUTTON" = "下一步";

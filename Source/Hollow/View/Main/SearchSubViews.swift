@@ -262,7 +262,7 @@ extension SearchView {
                         Color.searchButtonBackground.opacity(colorScheme == .dark ? 0.2 : 0.6)
                     }})
                     .blurBackground(style: colorScheme == .dark ? .systemUltraThinMaterialLight : .systemUltraThinMaterialDark)
-                    .cornerRadius(7)
+                    .roundedCorner(7)
             }
         }
         
@@ -296,7 +296,7 @@ extension SearchView {
                     }
                 )
                 .blurBackground(style: colorScheme == .dark ? .systemUltraThinMaterialLight : .systemUltraThinMaterialDark)
-                .cornerRadius(10)
+                .roundedCorner(10)
             }
         }
     }

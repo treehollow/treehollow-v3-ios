@@ -55,7 +55,7 @@ struct HollowContentView: View {
                             description: postDataWrapper.post.text,
                             reloadImage: imageReloadHandler
             )
-            .cornerRadius(4)
+            .roundedCorner(4)
             .frame(maxHeight: maxImageHeight)
             .fixedSize(horizontal: false, vertical: true)
         }
@@ -121,7 +121,7 @@ struct HollowContentView: View {
             .padding(.horizontal, body6)
             .padding(.vertical, body4)
             .background(deleted ? Color.red : Color.hollowContentVoteGradient1)
-            .cornerRadius(body6)
+            .roundedCorner(body6)
     }
 }
 

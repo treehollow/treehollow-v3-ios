@@ -37,7 +37,7 @@ struct ImageViewer: View {
                         .padding(.horizontal, 13)
                         .padding(.vertical, 6)
                         .blurBackground()
-                        .cornerRadius(8)
+                        .roundedCorner(8)
                 }
                 .padding(.horizontal)
                 .trailing()

@@ -48,7 +48,7 @@ struct MyTextField<Content>: View where Content: View {
             .padding(10)
             .padding(.horizontal, 6)
             .background(backgroundColor)
-            .cornerRadius(10)
+            .roundedCorner(10)
             
             if let footer = footer {
                 Text(footer)

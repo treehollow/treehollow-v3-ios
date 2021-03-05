@@ -45,6 +45,6 @@ struct HollowCiteContentView: View {
         // Higher opacity for dark mode
         .opacity(colorScheme == .light ? 0.6 : 0.75)
         .foregroundColor(.hollowContentText)
-        .cornerRadius(9)
+        .roundedCorner(9)
     }
 }

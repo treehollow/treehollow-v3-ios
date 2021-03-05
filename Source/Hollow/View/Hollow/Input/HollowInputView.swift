@@ -72,7 +72,7 @@ struct HollowInputView: View {
             }
             .padding()
             .background(Color.hollowCardBackground)
-            .cornerRadius(12)
+            .roundedCorner(12)
             .padding()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}

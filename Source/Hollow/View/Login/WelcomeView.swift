@@ -87,7 +87,7 @@ struct WelcomeView: View {
             // Disable the buttons when loading config
             .disabled(viewModel.isLoadingConfig)
             .background(Color("background.other").edgesIgnoringSafeArea(.all))
-            .navigationTitle("WELCOMEVIEW_NAV_TITLE")
+            .navigationTitle(NSLocalizedString("WELCOMEVIEW_NAV_TITLE", comment: ""))
             
             // Show alert on receiving error
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
@@ -134,7 +134,7 @@ struct WelcomeView: View {
                             if viewModel.isLoadingConfig {
                                 Spinner(color: .hollowContentText, desiredWidth: spinnerWidth)
                             } else {
-                                Button(LocalizedStringKey("Next"), action: {
+                                Button(NSLocalizedString("WELCOMEVIEW_CUSTOM_NEXT_BUTTON", comment: ""), action: {
                                     viewModel.requestConfig(hollowType: .other, customConfigURL: text)
                                 })
                             }
@@ -153,7 +153,7 @@ struct WelcomeView: View {
             .padding()
             .padding(.horizontal)
             .background(Color.background.edgesIgnoringSafeArea(.all))
-            .navigationTitle("WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE")
+            .navigationTitle(NSLocalizedString("WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE", comment: ""))
         }
     }
     

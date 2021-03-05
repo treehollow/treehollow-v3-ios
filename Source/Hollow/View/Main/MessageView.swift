@@ -16,6 +16,9 @@ struct MessageView: View {
     @State private var isSearching = false
     
     @Environment(\.colorScheme) var colorScheme
+    
+    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var textFontSize: CGFloat
+    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var titleFontSize: CGFloat
 
     var body: some View {
         VStack(spacing: 0) {
@@ -69,6 +72,7 @@ extension MessageView {
                         Text(message.title)
                             .bold()
                             .foregroundColor(.hollowContentText)
+                            .font(.system(size: titleFontSize))
                         Spacer()
                         Text(HollowDateFormatter(date: message.timestamp).formattedString())
                             .foregroundColor(.secondary)
@@ -76,10 +80,11 @@ extension MessageView {
                     }
                     .padding(.bottom, 7)
                     Text(message.content)
+                        .font(.system(size: textFontSize))
                 }
                 .padding()
                 .background(Color.hollowCardBackground)
-                .cornerRadius(15)
+                .roundedCorner(15)
             }
             .padding(.top)
         }}

@@ -95,14 +95,14 @@ fileprivate struct _StyledAlert<Content: View>: View {
                         .horizontalCenter()
                         .padding(.vertical)
                         .background(style.backgroundColor)
-                        .cornerRadius(12)
+                        .roundedCorner(12)
                 }
             }
         }
         .multilineTextAlignment(.center)
         .padding(spacing)
         .background(Color.uiColor(colorScheme == .light ? .systemBackground : .tertiarySystemBackground))
-        .cornerRadius(15)
+        .roundedCorner(15)
         .padding()
         .shadow(radius: 11)
         .frame(maxWidth: 310)

@@ -165,7 +165,7 @@ struct HollowDetailView: View {
                     .frame(maxHeight: 100)
                     .padding(7)
                     .background(Color.uiColor(.secondarySystemFill))
-                    .cornerRadius(10)
+                    .roundedCorner(10)
                     .accentColor(.hollowContentText)
             })
 

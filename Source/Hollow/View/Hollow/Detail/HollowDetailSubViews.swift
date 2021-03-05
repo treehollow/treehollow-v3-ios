@@ -63,7 +63,7 @@ extension HollowDetailView {
                     store.replyToIndex == index || jumpedToIndex == index ?
                         Color.background : nil
                 }
-                .cornerRadius(10)
+                .roundedCorner(10)
                 .animation(.none)
             )
             .onTapGesture {

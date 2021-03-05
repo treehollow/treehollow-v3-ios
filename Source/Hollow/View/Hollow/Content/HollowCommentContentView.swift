@@ -89,7 +89,7 @@ struct HollowCommentContentView: View {
                                 description: commentData.text,
                                 reloadImage: imageReloadHandler
                             )
-                            .cornerRadius(4)
+                            .roundedCorner(4)
                             .padding(.bottom, 10)
                             .fixedSize(horizontal: false, vertical: true)
                         }
@@ -164,7 +164,7 @@ struct HollowCommentContentView: View {
             .padding(.vertical, body2)
             .padding(.horizontal, body4)
             .background(removed ? Color.red : Color.hollowContentVoteGradient1)
-            .cornerRadius(body5)
+            .roundedCorner(body5)
     }
     
 }

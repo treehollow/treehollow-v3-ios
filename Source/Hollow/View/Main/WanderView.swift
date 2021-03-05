@@ -100,6 +100,6 @@ struct WanderView: View {
         }
         .padding()
         .background(Color.hollowCardBackground)
-        .cornerRadius(20)
+        .roundedCorner(20)
     }
 }
