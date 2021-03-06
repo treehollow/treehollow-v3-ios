@@ -79,6 +79,9 @@ extension Post {
             text: text,
             hollowImage: image,
             vote: vote?.toVoteData(),
-            comments: comments)
+            comments: comments,
+            hasURL: text.links().count > 0,
+            hasCitedNumbers: text.citations().count > 0
+        )
     }
 }

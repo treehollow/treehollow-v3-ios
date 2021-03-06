@@ -17,7 +17,7 @@ struct CustomScrollView<Content>: View where Content: View {
     var didScrollToBottom: (() -> Void)? = nil
     // Don't use it (performance issue)
     var didScroll: ((ScrollDirection) -> Void)? = nil
-    var didEndScroll: (() -> Void)? = nil
+    var didEndScroll: ((CGFloat) -> Void)? = nil
     /// Handler to call when refreshing.
     ///
     /// Must call the given closure to stop the animating spinner when finished.
@@ -39,7 +39,7 @@ fileprivate struct ScrollViewRepresentable<Content>: UIViewControllerRepresentab
     @Environment(\.disableScrolling) var disableScrolling: Bool
     let didScroll: ((ScrollDirection) -> Void)?
     var didScrollToBottom: (() -> Void)?
-    let didEndScroll: (() -> Void)?
+    var didEndScroll: ((CGFloat) -> Void)? = nil
     let refresh: ((@escaping () -> Void) -> Void)?
     let content: Content
     
@@ -62,12 +62,12 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
     var disableScroll: Bool
     let didScroll: ((ScrollDirection) -> Void)?
     var didScrollToBottom: (() -> Void)?
-    let didEndScroll: (() -> Void)?
+    var didEndScroll: ((CGFloat) -> Void)? = nil
     let refresh: ((@escaping () -> Void) -> Void)?
     var ready = false
     var scrollView: UIScrollView? = nil
     
-    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, disableScroll: Bool, didScroll: ((ScrollDirection) -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: (() -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
+    init(offset: Binding<CGFloat?>, atBottom: Binding<Bool?>, disableScroll: Bool, didScroll: ((ScrollDirection) -> Void)?, didScrollToBottom: (() -> Void)?, didEndScroll: ((CGFloat) -> Void)?, refresh: ((@escaping () -> Void) -> Void)?, rootView: Content) {
         self.offset = offset
         self.atBottom = atBottom
         self.didScroll = didScroll
@@ -155,12 +155,12 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         // Solution for detecting slow dragging: if the scroll view is not
         // decelerating, then the end of the dragging marks the end of the scrolling
         if !scrollView.isDecelerating {
-            didEndScroll?()
+            didEndScroll?(scrollView.contentOffset.y)
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        didEndScroll?()
+        didEndScroll?(scrollView.contentOffset.y)
     }
     
 }

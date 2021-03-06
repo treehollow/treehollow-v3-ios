@@ -80,22 +80,30 @@ extension HollowDetailView {
                     })
                     Divider()
                 }
-                let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
-                let citedPosts = comment.text.citationNumbers()
-                if !links.isEmpty { Divider() }
-                ForEach(links, id: \.self) { link in
-                    Button(link.absoluteString, action: { openURL(link) })
-                }
-                if !links.isEmpty { Divider() }
-                ForEach(citedPosts, id: \.self) { post in
-                    let wrapper = PostDataWrapper.templatePost(for: post)
-                    Button(post.string, action: {
-                        presentView {
-                            HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                if comment.hasURL {
+                    let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
+                    Divider()
+                    ForEach(links, id: \.self) { link in
+                        Button(action: { openURL(link) }) {
+                            Label(link.absoluteString, systemImage: "link")
                         }
-                    })
+                    }
+                    Divider()
                 }
-                if !citedPosts.isEmpty { Divider() }
+                if comment.hasCitedNumbers {
+                    let citedPosts = comment.text.citationNumbers()
+                    ForEach(citedPosts, id: \.self) { post in
+                        let wrapper = PostDataWrapper.templatePost(for: post)
+                        Button(action: {
+                            presentView {
+                                HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                            }
+                        }) {
+                            Label("#\(post.string)", systemImage: "text.quote")
+                        }
+                    }
+                    Divider()
+                }
                 ReportMenuContent(
                     store: store,
                     data: \.postDataWrapper.post.comments[index].permissions,

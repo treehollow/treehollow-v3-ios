@@ -75,7 +75,9 @@ extension Comment {
             date: Date(timeIntervalSince1970: TimeInterval(self.timestamp)),
             isDz: self.isDz,
             replyTo: self.replyTo,
-            image: image
+            image: image,
+            hasURL: (text?.links().count ?? 0) > 0,
+            hasCitedNumbers: (text?.citations().count ?? 0) > 0
         )
     }
 }

@@ -10,16 +10,15 @@ import Foundation
 
 extension Array where Element == Range<String.Index> {
     func sortedByRange() -> Self {
+        guard self.count > 0 else { return self }
         var newRanges = self.sorted(by: { $0.lowerBound <= $1.lowerBound })
-        for index in 0..<newRanges.count-1 {
-            if newRanges[index].upperBound >= newRanges[index + 1].lowerBound {
-                if newRanges[index].upperBound > newRanges[index + 1].upperBound {
-                    newRanges[index] = .init(uncheckedBounds: (newRanges[index].lowerBound, newRanges[index + 1].lowerBound))
-                    newRanges[index + 1] = .init(uncheckedBounds: (newRanges[index + 1].lowerBound, newRanges[index].upperBound))
-                } else {
-                    newRanges[index] = .init(uncheckedBounds: (newRanges[index].lowerBound, newRanges[index + 1].lowerBound))
-                }
-            }
+        for index in 0..<newRanges.count - 1 {
+            let firstLower = newRanges[index].lowerBound
+            let firstUpper = newRanges[index].upperBound
+            let secondLower = newRanges[index + 1].lowerBound
+            let secondUpper = newRanges[index + 1].upperBound
+            newRanges[index] = .init(uncheckedBounds: (firstLower, Swift.min(firstUpper, secondLower)))
+            newRanges[index + 1] = .init(uncheckedBounds: (secondLower, Swift.max(firstUpper, secondUpper)))
         }
         return newRanges
     }

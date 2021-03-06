@@ -10,10 +10,11 @@ import SwiftUI
 struct HollowDetailView: View {
     @ObservedObject var store: HollowDetailStore
     
-    @State private var commentRect: CGRect = .zero
-    @State private var scrollViewOffset: CGFloat? = 0
+    @State private var headerFrame: CGRect = .zero
+    @State private var commentViewFrame: CGRect = .zero
     @State var inputPresented = false
     @State var jumpedToIndex: Int?
+    @State private var showHeaderContent = false
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
@@ -39,7 +40,8 @@ struct HollowDetailView: View {
                             postData: store.postDataWrapper.post,
                             compact: false,
                             // Show text on header when the text is not visible
-                            showContent: (scrollViewOffset ?? 0) > commentRect.minY,
+//                            showContent: headerFrame.maxY > commentViewFrame.minY,
+                            showContent: showHeaderContent,
                             starAction: store.star,
                             disableAttention: store.isEditingAttention || store.isLoading,
                             menuContent: {
@@ -57,13 +59,14 @@ struct HollowDetailView: View {
                     .padding(.vertical, headerVerticalPadding)
                     Divider()
                 }
+//                .modifier(GetFrame(frame: $headerFrame))
                 // Contents
-                CustomScrollView(offset: $scrollViewOffset) { proxy in
+                CustomScrollView { proxy in
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
                         if store.noSuchPost {
-                            HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), inDetail: true)
+                            HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), inDetail: true, highlight: store.postDataWrapper.post.renderHighlight)
                         } else {
                             HollowContentView(
                                 postDataWrapper: store.postDataWrapper,
@@ -77,7 +80,7 @@ struct HollowDetailView: View {
                         
                         Spacer().frame(height: 0)
                             // Get the frame of the comment view.
-                            .modifier(GetFrame(frame: $commentRect, coordinateSpace: .named("detail.scrollview.content")))
+//                            .modifier(GetFrame(frame: $commentViewFrame))
                         
                         commentView
                             .onChange(of: store.replyToIndex) { index in
@@ -140,6 +143,13 @@ struct HollowDetailView: View {
             if !presented { withAnimation { store.replyToIndex = -2 }}
         }
         
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation {
+                    showHeaderContent = true
+                }
+            }
+        }
 
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))

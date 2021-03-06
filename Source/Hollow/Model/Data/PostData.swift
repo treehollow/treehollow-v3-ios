@@ -30,6 +30,10 @@ struct PostData: Identifiable, Codable {
     var comments: [CommentData]
     
     var loadingError: String?
+    
+    var hasURL = false
+    var hasCitedNumbers = false
+    var renderHighlight: Bool { hasURL || hasCitedNumbers }
 }
 
 typealias CitedPostData = PostData

@@ -88,6 +88,7 @@
 		0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */; };
 		0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */; };
 		0E4F033025CE29D500F4B228 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4F032F25CE29D500F4B228 /* Alamofire */; };
+		0E527CD225F3D84800D91706 /* Array+removeDuplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E527CD125F3D84800D91706 /* Array+removeDuplicates.swift */; };
 		0E58810A25E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */; };
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
@@ -257,6 +258,7 @@
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPublisher.swift; sourceTree = "<group>"; };
 		0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageRequest.swift; sourceTree = "<group>"; };
+		0E527CD125F3D84800D91706 /* Array+removeDuplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+removeDuplicates.swift"; sourceTree = "<group>"; };
 		0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPublisherExtensions.swift; sourceTree = "<group>"; };
 		0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+presentPopover.swift"; sourceTree = "<group>"; };
 		0E58811925EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 				0EA4298A25EB6F4D00B74D5D /* Double+int.swift */,
 				0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */,
 				0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */,
+				0E527CD125F3D84800D91706 /* Array+removeDuplicates.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				0E906D0825DCEADD0034053C /* SetPushRequest.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsView.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
+				0E527CD225F3D84800D91706 /* Array+removeDuplicates.swift in Sources */,
 				0E906D2425DCEADD0034053C /* PostData.swift in Sources */,
 				0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */,
 				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
@@ -1261,6 +1265,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1270,7 +1275,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1286,6 +1291,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1295,7 +1301,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

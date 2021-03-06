@@ -7,6 +7,7 @@
 //
 
 import Foundation
+var cnt = 0
 
 extension String {
     /// find CitedPostID from a post text
@@ -53,7 +54,12 @@ extension String {
     }
     
     func citationNumbers() -> [Int] {
-        return self.citations().compactMap({ Int(String($0.dropFirst())) })
+        print(cnt)
+        cnt += 1
+        return self.citations()
+            .compactMap({ Int(String($0.dropFirst())) })
+            .dropDuplicates()
+            .sorted(by: { $0 < $1 })
     }
     
     func rangeForLink() -> [Range<String.Index>] {

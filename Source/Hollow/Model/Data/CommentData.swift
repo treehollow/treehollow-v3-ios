@@ -31,4 +31,8 @@ struct CommentData: Identifiable, Codable {
         }
     }
     var image: HollowImage?
+    
+    var hasURL = false
+    var hasCitedNumbers = false
+    var renderHighlight: Bool { hasURL || hasCitedNumbers }
 }

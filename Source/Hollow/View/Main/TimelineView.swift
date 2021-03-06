@@ -13,7 +13,6 @@ struct TimelineView: View {
 
     @ObservedObject var viewModel: PostListRequestStore
 
-    @State private var offset: CGFloat? = 0
     /// To track the offset when the user scroll to the middle of the searchbar.
     @State private var searchBarTrackingOffset: CGFloat?
     @State private var scrolledToBottom: Bool? = false
@@ -32,10 +31,8 @@ struct TimelineView: View {
     
     var body: some View {
         CustomScrollView(
-            offset: $offset,
-            atBottom: $scrolledToBottom,
             didScrollToBottom: viewModel.loadMorePosts,
-            didEndScroll: { searchBarTrackingOffset = offset },
+            didEndScroll: { searchBarTrackingOffset = $0 },
             refresh: viewModel.refresh,
             content: { proxy in
                 VStack(spacing: 0) {

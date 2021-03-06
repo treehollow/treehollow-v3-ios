@@ -21,6 +21,7 @@ extension Text {
             text = text + modifiers(Text(subString2))
             position = range.upperBound
         }
+        text = text + Text(string[position...])
         return text
     }
     

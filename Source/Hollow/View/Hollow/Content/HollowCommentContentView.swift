@@ -95,7 +95,7 @@ struct HollowCommentContentView: View {
                         }
                         Group {
                             if commentData.text != "" {
-                                if compact {
+                                if compact || !commentData.renderHighlight {
                                     Text(commentData.text)
                                 } else {
                                     Text.highlightLinksAndCitation(commentData.text, modifiers: {
