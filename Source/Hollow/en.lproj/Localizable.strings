@@ -440,3 +440,10 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";
 
+"HOLLOW_CONTENT_LINKS_MENU_LABEL" = "Links";
+
+"HOLLOW_CONTENT_QUOTE_MENU_LABEL" = "Quotes";
+
+"COMMENT_VIEW_COPY_TEXT_LABEL" = "Copy Text";
+
+"DETAILVIEW_NO_SUCH_POST_PLACEHOLDER" = "No such post";

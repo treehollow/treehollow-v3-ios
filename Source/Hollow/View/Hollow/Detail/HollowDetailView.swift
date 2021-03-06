@@ -18,6 +18,8 @@ struct HollowDetailView: View {
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
     
+    @Environment(\.openURL) var openURL
+    
     var body: some View {
         // FIXME: Handlers
         ZStack {
@@ -49,7 +51,7 @@ struct HollowDetailView: View {
                                 .disabled(store.isLoading)
                             }
                         )
-                        
+                        .disabled(store.noSuchPost)
                     }
                     .padding(.horizontal)
                     .padding(.vertical, headerVerticalPadding)
@@ -60,14 +62,18 @@ struct HollowDetailView: View {
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        HollowContentView(
-                            postDataWrapper: store.postDataWrapper,
-                            options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags],
-                            voteHandler: store.vote,
-                            imageReloadHandler: { _ in store.loadPostImage() }
-                        )
-                        .fixedSize(horizontal: false, vertical: true)
-                        .id(-1)
+                        if store.noSuchPost {
+                            HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), inDetail: true)
+                        } else {
+                            HollowContentView(
+                                postDataWrapper: store.postDataWrapper,
+                                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
+                                voteHandler: store.vote,
+                                imageReloadHandler: { _ in store.loadPostImage() }
+                            )
+                            .fixedSize(horizontal: false, vertical: true)
+                            .id(-1)
+                        }
                         
                         Spacer().frame(height: 0)
                             // Get the frame of the comment view.
@@ -104,6 +110,7 @@ struct HollowDetailView: View {
                     .coordinateSpace(name: "detail.scrollview.content")
                 }
                 .edgesIgnoringSafeArea(.bottom)
+                .disabled(store.noSuchPost)
             }
         }
         .overlay(Group {

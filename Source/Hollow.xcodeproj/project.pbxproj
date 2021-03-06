@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		006DF03725DF7FBA0005C2B5 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 006DF03625DF7FBA0005C2B5 /* Cache */; };
 		00AA103525E74212006B3D6D /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA103425E74212006B3D6D /* LineSwitchManager.swift */; };
-		00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */; };
 		00AA104625E89C2F006B3D6D /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 00AA104525E89C2F006B3D6D /* Connectivity */; };
 		00B014ED25E1205A004E416E /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B014EC25E1205A004E416E /* PostCache.swift */; };
 		00EFC06925DF922000536B52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00EFC06825DF922000536B52 /* Kingfisher */; };
@@ -137,7 +136,7 @@
 		0E906D2425DCEADD0034053C /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CEA25DCEADC0034053C /* PostData.swift */; };
 		0E906D2525DCEADD0034053C /* String+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CEC25DCEADC0034053C /* String+SHA256.swift */; };
 		0E906D2625DCEADD0034053C /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CED25DCEADC0034053C /* Data+hexEncodedString.swift */; };
-		0E906D2725DCEADD0034053C /* String+findCitedPostID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CEE25DCEADC0034053C /* String+findCitedPostID.swift */; };
+		0E906D2725DCEADD0034053C /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CEE25DCEADC0034053C /* String+regex.swift */; };
 		0E906D2925DCEADD0034053C /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CF025DCEADC0034053C /* DefaultsKeys.swift */; };
 		0E906D2A25DCEADD0034053C /* Int+bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CF125DCEADC0034053C /* Int+bool.swift */; };
 		0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CF225DCEADC0034053C /* String+removeLineBreak.swift */; };
@@ -166,6 +165,8 @@
 		0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */; };
 		0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */; };
 		0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */; };
+		0EB4F9A225F37A0E00BDAFF1 /* Text+highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */; };
+		0EB4F9A625F3837C00BDAFF1 /* Array+sortedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
@@ -182,7 +183,6 @@
 
 /* Begin PBXFileReference section */
 		00AA103425E74212006B3D6D /* LineSwitchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSwitchManager.swift; sourceTree = "<group>"; };
-		00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLString+Host.swift"; sourceTree = "<group>"; };
 		00B014EC25E1205A004E416E /* PostCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCache.swift; sourceTree = "<group>"; };
 		00EFC07025DFC71500536B52 /* Vote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		00EFC07325DFC73800536B52 /* ImageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadata.swift; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 		0E906CEA25DCEADC0034053C /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		0E906CEC25DCEADC0034053C /* String+SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SHA256.swift"; sourceTree = "<group>"; };
 		0E906CED25DCEADC0034053C /* Data+hexEncodedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hexEncodedString.swift"; sourceTree = "<group>"; };
-		0E906CEE25DCEADC0034053C /* String+findCitedPostID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+findCitedPostID.swift"; sourceTree = "<group>"; };
+		0E906CEE25DCEADC0034053C /* String+regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+regex.swift"; sourceTree = "<group>"; };
 		0E906CF025DCEADC0034053C /* DefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		0E906CF125DCEADC0034053C /* Int+bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+bool.swift"; sourceTree = "<group>"; };
 		0E906CF225DCEADC0034053C /* String+removeLineBreak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+removeLineBreak.swift"; sourceTree = "<group>"; };
@@ -339,6 +339,8 @@
 		0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
 		0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+revertColorScheme.swift"; sourceTree = "<group>"; };
 		0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailSubViews.swift; sourceTree = "<group>"; };
+		0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+highlight.swift"; sourceTree = "<group>"; };
+		0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedRange.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */,
 				0EA2D51925F0FA05003D539E /* View+defaultBlurBackground.swift */,
 				0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */,
+				0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -805,7 +808,7 @@
 			children = (
 				0E906CEC25DCEADC0034053C /* String+SHA256.swift */,
 				0E906CED25DCEADC0034053C /* Data+hexEncodedString.swift */,
-				0E906CEE25DCEADC0034053C /* String+findCitedPostID.swift */,
+				0E906CEE25DCEADC0034053C /* String+regex.swift */,
 				0E906CF025DCEADC0034053C /* DefaultsKeys.swift */,
 				0E906CF125DCEADC0034053C /* Int+bool.swift */,
 				0E906CF225DCEADC0034053C /* String+removeLineBreak.swift */,
@@ -813,11 +816,11 @@
 				0E906CF425DCEADC0034053C /* Bool+int.swift */,
 				0E906CF525DCEADC0034053C /* String+Date.swift */,
 				0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */,
-				00AA103F25E7FFFD006B3D6D /* URLString+Host.swift */,
 				0EFB54EB25E90B55001BC98A /* ConnectivityStatus+isConnected.swift */,
 				0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */,
 				0EA4298A25EB6F4D00B74D5D /* Double+int.swift */,
 				0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */,
+				0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
 				0EFB550525E93E24001BC98A /* PostListView.swift in Sources */,
+				0EB4F9A625F3837C00BDAFF1 /* Array+sortedRange.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButtonStyle.swift in Sources */,
 				0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
@@ -1033,7 +1037,7 @@
 				0E906D0A25DCEADD0034053C /* LogoutRequest.swift in Sources */,
 				0E415B4D25CD772200351672 /* LinearGradientExtensions.swift in Sources */,
 				0E415B4725CD772200351672 /* Blur.swift in Sources */,
-				0E906D2725DCEADD0034053C /* String+findCitedPostID.swift in Sources */,
+				0E906D2725DCEADD0034053C /* String+regex.swift in Sources */,
 				0EAA1B4B25E6562B00904296 /* View+flash.swift in Sources */,
 				0E906D1525DCEADD0034053C /* Request.swift in Sources */,
 				0E906D0525DCEADD0034053C /* DefaultRequest.swift in Sources */,
@@ -1053,9 +1057,9 @@
 				0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */,
 				0EA2D51D25F11EA9003D539E /* ReportMenuContent.swift in Sources */,
 				0E415B5225CD772200351672 /* CustomGradient.swift in Sources */,
-				00AA104025E7FFFD006B3D6D /* URLString+Host.swift in Sources */,
 				0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */,
 				0E415B6125CD772200351672 /* HollowInputView.swift in Sources */,
+				0EB4F9A225F37A0E00BDAFF1 /* Text+highlight.swift in Sources */,
 				0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */,
 				0E415B6E25CD772200351672 /* AboutView.swift in Sources */,
 				0E415B7525CD772200351672 /* AccountView.swift in Sources */,

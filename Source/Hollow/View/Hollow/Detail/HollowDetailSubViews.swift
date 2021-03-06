@@ -72,6 +72,30 @@ extension HollowDetailView {
                 jumpedToIndex = nil
             }
             .contextMenu {
+                if comment.text != "" {
+                    Button(action: {
+                        UIPasteboard.general.string = comment.text
+                    }, label: {
+                        Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "plus.square.on.square")
+                    })
+                    Divider()
+                }
+                let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
+                let citedPosts = comment.text.citationNumbers()
+                if !links.isEmpty { Divider() }
+                ForEach(links, id: \.self) { link in
+                    Button(link.absoluteString, action: { openURL(link) })
+                }
+                if !links.isEmpty { Divider() }
+                ForEach(citedPosts, id: \.self) { post in
+                    let wrapper = PostDataWrapper.templatePost(for: post)
+                    Button(post.string, action: {
+                        presentView {
+                            HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                        }
+                    })
+                }
+                if !citedPosts.isEmpty { Divider() }
                 ReportMenuContent(
                     store: store,
                     data: \.postDataWrapper.post.comments[index].permissions,

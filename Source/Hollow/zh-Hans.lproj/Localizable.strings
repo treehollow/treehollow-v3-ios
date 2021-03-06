@@ -446,3 +446,10 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录。";
 
+"HOLLOW_CONTENT_LINKS_MENU_LABEL" = "链接";
+
+"HOLLOW_CONTENT_QUOTE_MENU_LABEL" = "引用";
+
+"COMMENT_VIEW_COPY_TEXT_LABEL" = "拷贝文本";
+
+"DETAILVIEW_NO_SUCH_POST_PLACEHOLDER" = "树洞不存在";

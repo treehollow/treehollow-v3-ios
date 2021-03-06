@@ -17,6 +17,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var postDataWrapper: PostDataWrapper
     @Published var isEditingAttention = false
     @Published var jumpToCommentId: Int?
+    @Published var noSuchPost = false
     
     // MARK: Input Variables
     @Published var replyToIndex: Int = -2
@@ -76,6 +77,11 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
                 case .finished:
                     self.loadComponents()
                 case .failure(let error):
+                    switch error {
+                    case .noSuchPost:
+                        withAnimation { self.noSuchPost = true }
+                    default: break
+                    }
                     self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
                 }
             }, receiveValue: { postDataWrapper in

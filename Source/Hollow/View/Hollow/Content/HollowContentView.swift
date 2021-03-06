@@ -24,6 +24,7 @@ struct HollowContentView: View {
     private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
     
     private var hasVote: Bool { postDataWrapper.post.vote != nil }
+    private var showVote: Bool { hasVote && !hideContent }
     private var hasImage: Bool { postDataWrapper.post.hollowImage != nil }
     private var hideContent: Bool {
         if options.contains(.revealFoldTags) { return false }
@@ -33,9 +34,19 @@ struct HollowContentView: View {
         return false
     }
     
+    private var links: [URL] {
+        postDataWrapper.post.text.links().compactMap({ URL(string: $0) })
+    }
+    
+    private var citedPosts: [Int] {
+        postDataWrapper.post.text.citationNumbers()
+    }
+    
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
     @ScaledMetric(wrappedValue: 6, relativeTo: .body) var body6: CGFloat
+    
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         if postDataWrapper.post.tag != nil || postDataWrapper.post.deleted {
@@ -87,18 +98,60 @@ struct HollowContentView: View {
                     // offset when presenting context menu
                     .background(Color.clear)
                     .contextMenu(ContextMenu(menuItems: {
-                        Button("Copy full text", action: {
+                        Button(action: {
                             UIPasteboard.general.string = postDataWrapper.post.text
-                        })
+                        }) {
+                            Label("COMMENT_VIEW_COPY_TEXT_LABEL", systemImage: "plus.square.on.square")
+                        }
                     }))
             }
                     
         }
         
-        if hasVote && !hideContent {
+        let links = self.links
+        let citations = self.citedPosts
+        if options.contains(.showHyperlinks) &&
+            !hideContent &&
+            (!links.isEmpty || (citations.count > 1)) {
+            HStack {
+                let links = postDataWrapper.post.text.links()
+                if links.count > 0 {
+                    Menu(content: {
+                        ForEach(links, id: \.self) { link in
+                            Button(link, action: {
+                                guard let url = URL(string: link) else { return }
+                                openURL(url)
+                            })
+                        }
+                    } , label: {
+                        linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_LINKS_MENU_LABEL", comment: ""), systemImageName: "link")
+                    })
+                }
+                if citations.count > 1 {
+                    Menu(content: {
+                        ForEach(citations, id: \.self) { citation in
+                            Button("#\(citation.string)", action: {
+                                let wrapper = PostDataWrapper.templatePost(for: citation)
+                                presentView {
+                                    HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(wrapper)))
+                                }
+                            })
+                        }
+                    } , label: {
+                        linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_QUOTE_MENU_LABEL", comment: ""), systemImageName: "text.quote")
+                    })
+                }
+                Spacer()
+            }
+            .padding(.top, 1)
+            .padding(.bottom, showVote ? 10 : 0)
+            
+        }
+        
+        if showVote {
             HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler, allowVote: !options.contains(.disableVote))
         }
-
+        
     }
     
     private func textView() -> some View {
@@ -123,6 +176,17 @@ struct HollowContentView: View {
             .background(deleted ? Color.red : Color.hollowContentVoteGradient1)
             .roundedCorner(body6)
     }
+    
+    private func linkMenuLabel(text: String, systemImageName: String) -> some View {
+        // Keep the same with tagView
+        Label(text, systemImage: systemImageName)
+            .font(.system(size: body14, weight: .semibold))
+            .padding(.horizontal, body6)
+            .padding(.vertical, body4)
+            .background(Color.background)
+            .roundedCorner(body6)
+            .accentColor(.hollowContentText)
+    }
 }
 
 extension HollowContentView {
@@ -136,5 +200,6 @@ extension HollowContentView {
         static let addTextForImage = DisplayOptions(rawValue: 1 << 6)
         static let disableVote = DisplayOptions(rawValue: 1 << 7)
         static let revealFoldTags = DisplayOptions(rawValue: 1 << 8)
+        static let showHyperlinks = DisplayOptions(rawValue: 1 << 9)
     }
 }

@@ -13,14 +13,17 @@ struct HollowTextView: View {
     var inDetail: Bool
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
-
+    
     var compactLineLimit: Int? = nil
     var body: some View {
-        Text(text)
-            .font(.system(size: body16))
-            .lineSpacing(3)
-            .leading()
-            .foregroundColor(inDetail ? .primary : .hollowContentText)
-            .lineLimit(compactLineLimit)
+        Text.highlightLinksAndCitation(text, modifiers: {
+            $0.underline()
+                .foregroundColor(.hollowContentText)
+        })
+        .font(.system(size: body16))
+        .lineSpacing(3)
+        .leading()
+        .foregroundColor(inDetail ? .primary : .hollowContentText)
+        .lineLimit(compactLineLimit)
     }
 }

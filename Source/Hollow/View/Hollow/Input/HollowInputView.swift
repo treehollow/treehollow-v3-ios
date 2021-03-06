@@ -65,6 +65,8 @@ struct HollowInputView: View {
                     let text = NSLocalizedString("INPUT_EDITOR_PLACEHOLDER", comment: "")
                     
                     HollowInputTextEditor(text: $inputStore.text, editorEditing: $editorEditing, placeholder: text)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                     editorAccessoryView
                 }
                 voteView

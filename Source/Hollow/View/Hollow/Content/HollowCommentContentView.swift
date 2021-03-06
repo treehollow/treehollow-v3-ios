@@ -95,7 +95,14 @@ struct HollowCommentContentView: View {
                         }
                         Group {
                             if commentData.text != "" {
-                                Text(commentData.text)
+                                if compact {
+                                    Text(commentData.text)
+                                } else {
+                                    Text.highlightLinksAndCitation(commentData.text, modifiers: {
+                                        $0.underline()
+                                            .foregroundColor(.hollowContentText)
+                                    })
+                                }
                             } else if commentData.type == .image && compact {
                                 (Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
                                     .foregroundColor(.uiColor(.secondaryLabel))
