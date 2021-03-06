@@ -13,10 +13,7 @@ struct ReportMenuContent: View {
     @ObservedObject var store: HollowDetailStore
     var data: KeyPath<HollowDetailStore, [PostPermissionType]>
     var commentId: Int?
-    @Binding var reportCommentId: Int?
-    @Binding var showConfirm: Bool
-    @Binding var textFieldPresented: Bool
-    @Binding var reportType: PostPermissionType?
+    @State var reason: String = ""
     
     private var permissions: [PostPermissionType] { store[keyPath: data] }
     private var showReportTag: Bool { permissions.contains(.fold) && !permissions.contains(.setTag) }
@@ -47,7 +44,11 @@ struct ReportMenuContent: View {
                 Menu(content: {
                     ForEach(reportableTags, id: \.self) { tag in
                         Button(tag) {
-                            showConfirm(type: .fold, reason: tag)
+                            showConfirm(
+                                type: .fold,
+                                reason: tag,
+                                title: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE", comment: "")
+                            )
                         }
                     }
                 }, label: {
@@ -57,14 +58,23 @@ struct ReportMenuContent: View {
             if showReportDelete {
                 let text = NSLocalizedString("REPORT_MENU_REPORT_DELETE", comment: "")
                 button(text: text, systemImageName: "exclamationmark.bubble", action: {
-                    showTextField(type: .report)
+                    showTextField(
+                        type: .report,
+                        title: NSLocalizedString("REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE", comment: ""),
+                        message: NSLocalizedString("REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG", comment: "")
+                        
+                    )
                 })
             }
             
             if showRemove {
                 let text = NSLocalizedString("REPORT_MENU_DELETE", comment: "")
                 button(text: text, systemImageName: "arrow.uturn.backward", action: {
-                    showConfirm(type: .delete, reason: "")
+                    showConfirm(
+                        type: .delete,
+                        reason: "",
+                        title: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE", comment: "")
+                    )
                 })
             }
             if showAdminSetTag {
@@ -73,12 +83,27 @@ struct ReportMenuContent: View {
                     Menu(NSLocalizedString("REPORT_MENU_ADMIN_SET_TAG_EXISTED", comment: "")) {
                         ForEach(reportableTags, id: \.self) { tag in
                             Button(tag) {
-                                showConfirm(type: .fold, reason: tag)
+                                showConfirm(
+                                    type: .setTag,
+                                    reason: tag,
+                                    title: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_TITLE", comment: "")
+                                )
                             }
                         }
                     }
                     Button(NSLocalizedString("REPORT_MENU_ADMIN_SET_TAG_CUSTOM", comment: "")) {
-                        showTextField(type: .setTag)
+                        showTextField(
+                            type: .setTag,
+                            title: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_TITLE", comment: ""),
+                            message: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG", comment: "")
+                        )
+                    }
+                    Button(NSLocalizedString("REPORT_MENU_ADMIN_SET_TAG_REMOVE", comment: "")) {
+                        showConfirm(
+                            type: .setTag,
+                            reason: "",
+                            title: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_REMOVE_TITLE", comment: "")
+                        )
                     }
                 } , label: {
                     Label(text, systemImage: "tag.fill")
@@ -87,28 +112,45 @@ struct ReportMenuContent: View {
             if showAdminRemove {
                 let text = NSLocalizedString("REPORT_MENU_ADMIN_REMOVE", comment: "")
                 button(text: text, systemImageName: "trash.fill", action: {
-                    showTextField(type: .delete)
+                    showTextField(
+                        type: .delete,
+                        title: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_TITLE", comment: ""),
+                        message: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG", comment: "")
+                    )
                 })
             }
             
             if showAdminDeleteBan {
                 let text = NSLocalizedString("REPORT_MENU_ADMIN_DELETE_BAN", comment: "")
                 button(text: text, systemImageName: "mic.slash.fill", action: {
-                    showTextField(type: .deleteBan)
+                    showTextField(
+                        type: .deleteBan,
+                        title: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_TITLE", comment: ""),
+                        message: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG", comment: "")
+                    )
                 })
             }
             
             if showAdminUndeleteUnban {
                 let text = NSLocalizedString("REPORT_MENU_ADMIN_UNDELETE_UNBAN", comment: "")
                 button(text: text, systemImageName: "mic.fill", action: {
-                    showTextField(type: .undeleteUnban)
+                    showTextField(
+                        type: .undeleteUnban,
+                        title: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_TITLE", comment: ""),
+                        message: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG", comment: "")
+                    )
                 })
             }
             
             if showAdminUnban {
                 let text = NSLocalizedString("REPORT_MENU_ADMIN_UNBAN", comment: "")
                 button(text: text, systemImageName: "trash.slash.fill", action: {
-                    showTextField(type: .unban)
+                    showTextField(
+                        type: .unban,
+                        title: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_TITLE", comment: ""),
+                        message: NSLocalizedString("REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG", comment: "")
+
+                    )
                 })
             }
         }
@@ -120,16 +162,34 @@ struct ReportMenuContent: View {
         }
     }
     
-    private func showConfirm(type: PostPermissionType, reason: String) {
-        reportCommentId = commentId
-        reportType = type
-        store.reportReason = reason
-        showConfirm = true
+    private func showConfirm(type: PostPermissionType, reason: String, title: String) {
+        let alertView = StyledAlert(presented: .constant(true), selfDismiss: true, title: title, message: nil, buttons: [
+            .init(text: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM", comment: ""), style: .default, action: {
+                store.report(commentId: commentId, type: type, reason: reason)
+            }),
+            .cancel
+        ])
+        
+        IntegrationUtilities.presentView(presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, content: { alertView })
     }
     
-    private func showTextField(type: PostPermissionType) {
-        reportCommentId = commentId
-        reportType = type
-        textFieldPresented = true
+    private func showTextField(type: PostPermissionType, title: String, message: String?) {
+        let alertView = AccessoryStyledAlert(presented: .constant(true), selfDismiss: true, title: title, message: message, buttons: [
+            .init(text: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM", comment: ""), style: .default, action: {
+                store.report(commentId: commentId, type: type, reason: reason)
+                self.reason = ""
+            }),
+            .cancel(action: { self.reason = "" })
+        ], accessoryView: {
+            CustomTextEditor(text: $reason, editing: .constant(true), modifiers: { $0 })
+                .multilineTextAlignment(.leading)
+                .frame(maxHeight: 100)
+                .padding(7)
+                .background(Color.uiColor(.secondarySystemFill))
+                .roundedCorner(10)
+                .accentColor(.hollowContentText)
+        })
+
+        IntegrationUtilities.presentView(presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, content: { alertView })
     }
 }

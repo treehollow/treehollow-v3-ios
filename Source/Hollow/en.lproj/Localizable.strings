@@ -44,7 +44,7 @@
 "COMMENT_INPUT_EDITOR_PLACEHOLDER" = "Input comments";
 
 /* No comment provided by engineer. */
-"COMMENT_INPUT_REPLY_POST_SUFFIX" = " post";
+"COMMENT_INPUT_REPLY_POST_SUFFIX" = "post";
 
 /* No comment provided by engineer. */
 "COMMENT_INPUT_REPLY_TO_PREFIX" = "Reply to ";
@@ -152,6 +152,15 @@
 /* No comment provided by engineer. */
 "INPUTVIEW_VOTE_OPTION_PLACEHOLDER_PREFIX" = "Option";
 
+/* (No Comment) */
+"INPUTVIEW_VOTE_REMOVE_ALL_ALERT_BUTTON_CONFIRM" = "Yes";
+
+/* (No Comment) */
+"INPUTVIEW_VOTE_REMOVE_ALL_ALERT_MESSAGE" = "The number of the options must be no less than 2. Do you want to remove the vote?";
+
+/* (No Comment) */
+"INPUTVIEW_VOTE_REMOVE_ALL_ALERT_TITLE" = "Remove";
+
 /* No comment provided by engineer. */
 "LOADING_LABEL_TEXT" = "Loading";
 
@@ -231,13 +240,64 @@
 "REPORT_MENU_ADMIN_SET_TAG_EXISTED" = "Select from list";
 
 /* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG_REMOVE" = "Remove Tag";
+
+/* No comment provided by engineer. */
 "REPORT_MENU_ADMIN_UNBAN" = "Unban";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ADMIN_UNDELETE_UNBAN" = "Undelete and Unban";
 
 /* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG" = "Enter the reason for the deletion and ban.";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_TITLE" = "Delete and Ban";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG" = "Enter the reason for the deletion.";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_TITLE" = "Remove";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG" = "Enter the tag.";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_TITLE" = "Set Custom Tag";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG" = "Enter message.";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_TITLE" = "Unban";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG" = "Enter message.";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_TITLE" = "Undelete and Unban";
+
+/* No comment provided by engineer. */
 "REPORT_MENU_ALERT_CONFIRM" = "Confirm";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_REMOVE_TITLE" = "Remove Tag";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_TITLE" = "Are you sure to set the selected tag?";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE" = "Are you sure to report with the selected tag?";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "Are you sure to delete?";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "Are you sure to delete?";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "Delete";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_DELETE" = "Delete";
@@ -353,14 +413,23 @@
 /* No comment provided by engineer. */
 "TIMELINE_SEARCH_BAR_PLACEHOLDER" = "Search";
 
+/* (No Comment) */
+"WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE" = "Custom";
+
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_FOOTER" = "Get the URL for the configuration from the treehollow website.";
 
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER" = "Custom Configuration";
 
+/* (No Comment) */
+"WELCOMEVIEW_CUSTOM_NEXT_BUTTON" = "Next";
+
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_URL_TEXTFIELD_PLACEHOLDER" = "https://example.com/config.txt";
+
+/* (No Comment) */
+"WELCOMEVIEW_NAV_TITLE" = "Welcome";
 
 /* No comment provided by engineer. */
 "WELCOMEVIEW_OTHER_BUTTON" = "Other";
@@ -371,8 +440,3 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";
 
-"WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE" = "Custom";
-
-"WELCOMEVIEW_NAV_TITLE" = "Welcome";
-
-"WELCOMEVIEW_CUSTOM_NEXT_BUTTON" = "Next";

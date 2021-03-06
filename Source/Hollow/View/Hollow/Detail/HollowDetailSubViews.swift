@@ -75,11 +75,7 @@ extension HollowDetailView {
                 ReportMenuContent(
                     store: store,
                     data: \.postDataWrapper.post.comments[index].permissions,
-                    commentId: comment.commentId,
-                    reportCommentId: $reportCommentId,
-                    showConfirm: $showReportConfirmAlert,
-                    textFieldPresented: $reportTextFieldPresented,
-                    reportType: $reportType
+                    commentId: comment.commentId
                 )
             }
     }

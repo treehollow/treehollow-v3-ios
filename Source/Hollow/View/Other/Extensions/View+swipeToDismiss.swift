@@ -38,7 +38,6 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                             offset > 0 &&
                             predictedPosition > value.location.x {
                             let speed = Double((predictedPosition - value.location.x) / screenWidth)
-                            print(speed)
                             withAnimation(Animation.easeOut(duration: 0.1).speed(min(max(speed, 0.4), 0.7))) {
                                 presented = false
                                 offset = 0

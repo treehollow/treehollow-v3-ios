@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HollowTextView: View {
     var text: String
+    var inDetail: Bool
     
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
 
@@ -19,7 +20,7 @@ struct HollowTextView: View {
             .font(.system(size: body16))
             .lineSpacing(3)
             .leading()
-            .foregroundColor(.hollowContentText)
+            .foregroundColor(inDetail ? .primary : .hollowContentText)
             .lineLimit(compactLineLimit)
     }
 }

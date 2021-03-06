@@ -15,13 +15,6 @@ struct HollowDetailView: View {
     @State var inputPresented = false
     @State var jumpedToIndex: Int?
     
-    @State var reportTextFieldPresented = false
-    @State var reportType: PostPermissionType?
-    // Managed by ReportMenu and must be restored after presenting
-    // text field
-    @State var reportCommentId: Int?
-    @State var showReportConfirmAlert = false
-    
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
     
@@ -51,11 +44,9 @@ struct HollowDetailView: View {
                                 ReportMenuContent(
                                     store: store,
                                     data: \.postDataWrapper.post.permissions,
-                                    reportCommentId: .constant(nil),
-                                    showConfirm: $showReportConfirmAlert,
-                                    textFieldPresented: $reportTextFieldPresented,
-                                    reportType: $reportType
+                                    commentId: nil
                                 )
+                                .disabled(store.isLoading)
                             }
                         )
                         
@@ -142,45 +133,9 @@ struct HollowDetailView: View {
             if !presented { withAnimation { store.replyToIndex = -2 }}
         }
         
-        .styledAlert(
-            presented: $showReportConfirmAlert,
-            title: NSLocalizedString("REPORT_MENU_REPORT_REASON_ALERT_TITLE", comment: ""),
-            message: nil,
-            buttons: [
-                .init(text: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM", comment: ""), style: .default, action: report),
-                .cancel(action: { store.reportReason = "" })
-            ]
-        )
-        
-        .styledAlert(
-            presented: $reportTextFieldPresented,
-            title: NSLocalizedString("REPORT_MENU_REPORT_REASON_ALERT_TITLE", comment: ""),
-            message: NSLocalizedString("REPORT_MENU_REPORT_REASON_ALERT_MESSAGE", comment: ""),
-            buttons: [
-                .init(text: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM", comment: ""), style: .default, action: report),
-                .cancel(action: { store.reportReason = "" })
-            ], accessoryView: {
-                CustomTextEditor(text: $store.reportReason, editing: .constant(true), modifiers: { $0 })
-                    .multilineTextAlignment(.leading)
-                    .frame(maxHeight: 100)
-                    .padding(7)
-                    .background(Color.uiColor(.secondarySystemFill))
-                    .roundedCorner(10)
-                    .accentColor(.hollowContentText)
-            })
 
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
     }
-    
-    private func report() {
-        let reason = store.reportReason
-        let reportCommentId = self.reportCommentId
-        self.reportCommentId = nil
-        store.reportReason = ""
-        guard let type = reportType else { return }
-        store.report(commentId: reportCommentId, type: type, reason: reason)
-    }
-    
 }
 

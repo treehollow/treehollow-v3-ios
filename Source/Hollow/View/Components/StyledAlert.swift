@@ -27,12 +27,15 @@ extension View {
 struct StyledAlert: View {
     fileprivate typealias StyledAlertView = _StyledAlert<EmptyView>
     @Binding var presented: Bool
+    // Whether to dismiss itself
+    var selfDismiss = false
+
     var title: String
     var message: String?
     var buttons: [StyledAlertButton]
 
     var body: some View {
-        StyledAlertView(presented: $presented, title: title, message: message, buttons: buttons)
+        StyledAlertView(presented: $presented, selfDismiss: selfDismiss, title: title, message: message, buttons: buttons)
     }
 }
 
@@ -40,13 +43,18 @@ struct AccessoryStyledAlert<Content: View>: View {
     fileprivate typealias StyledAlertView = _StyledAlert<Content>
     
     @Binding var presented: Bool
+    // Whether to dismiss itself
+    var selfDismiss = false
+
     var title: String
     var message: String?
+    
     var buttons: [StyledAlertButton]
+
     var accessoryView: () -> Content
 
     var body: some View {
-        StyledAlertView(presented: $presented, title: title, message: message, buttons: buttons, accessoryView: accessoryView)
+        StyledAlertView(presented: $presented, selfDismiss: selfDismiss, title: title, message: message, buttons: buttons, accessoryView: accessoryView)
     }
 
 }
@@ -55,6 +63,9 @@ fileprivate struct _StyledAlert<Content: View>: View {
     @Binding var presented: Bool
     
     @State private var scale: CGFloat = 0.3
+    
+    // Whether to dismiss itself
+    var selfDismiss = false
     
     @ScaledMetric private var spacing: CGFloat = 14
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) private var secondaryText: CGFloat
@@ -87,7 +98,11 @@ fileprivate struct _StyledAlert<Content: View>: View {
                 let style = button.style
                 SwiftUI.Button(action: {
                     button.action()
-                    withAnimation { presented = false }
+                    if selfDismiss {
+                        dismissSelf()
+                    } else {
+                        withAnimation { presented = false }
+                    }
                 }) {
                     Text(button.text)
                         .font(.system(size: buttonText, weight: style.fontWeight))

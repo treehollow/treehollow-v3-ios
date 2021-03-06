@@ -49,7 +49,7 @@ struct SearchRequest: DefaultRequest {
         var parameters: [String : Encodable] = [
             "keywords" : configuration.keywords,
             "page" : configuration.page,
-            "include_comment" : configuration.includeComment
+            "include_comment" : configuration.includeComment ? "true" : "false"
         ]
         
         if let before = configuration.beforeTimestamp {

@@ -20,4 +20,13 @@ struct IntegrationUtilities {
         }
         return nil
     }
+    
+    static func presentView<Content: View>(presentationStyle: UIModalPresentationStyle = .popover, transitionStyle: UIModalTransitionStyle = .coverVertical, @ViewBuilder content: () -> Content) {
+        let vc = UIHostingController(rootView: content())
+        vc.view.backgroundColor = nil
+        vc.modalPresentationStyle = presentationStyle
+        vc.modalTransitionStyle = transitionStyle
+        guard let topVC = IntegrationUtilities.topViewController() else { return }
+        topVC.present(vc, animated: true)
+    }
 }

@@ -13,7 +13,7 @@ import Connectivity
 class AppModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var isInMainView = Defaults[.accessToken] != nil
+    @Published var isInMainView = Defaults[.accessToken] != nil && Defaults[.hollowConfig] != nil
     
     // Only for indicating expired state in `WelcomeView`
     @Published var tokenExpired = false
@@ -23,6 +23,7 @@ class AppModel: ObservableObject {
     init() {
         ConnectivityPublisher()
             .map { $0.status.isConnected }
+            .removeDuplicates(by: { $0 == $1 })
             .sinkOnMainThread(receiveValue: { _ in
                 LineSwitchManager.testAll()
             })

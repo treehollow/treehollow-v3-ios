@@ -82,10 +82,12 @@ struct HollowInputView: View {
         .onChange(of: inputStore.image) { _ in inputStore.compressImage() }
         .styledAlert(
             presented: $showVoteOptionsAlert,
-            title: "INPUTVIEW_VOTE_REMOVE_ALL_ALERT_TITLE",
-            message: "INPUTVIEW_VOTE_REMOVE_ALL_ALERT_MESSAGE",
+            title: NSLocalizedString("INPUTVIEW_VOTE_REMOVE_ALL_ALERT_TITLE", comment: ""),
+            message: NSLocalizedString("INPUTVIEW_VOTE_REMOVE_ALL_ALERT_MESSAGE", comment: ""),
             buttons: [
-                .init(text: "INPUTVIEW_VOTE_REMOVE_ALL_ALERT_BUTTON_CONFIRM", action: { withAnimation { inputStore.voteInformation = nil }}),
+                .init(
+                    text: NSLocalizedString("INPUTVIEW_VOTE_REMOVE_ALL_ALERT_BUTTON_CONFIRM", comment: ""),
+                    action: { withAnimation { inputStore.voteInformation = nil }}),
                 .cancel
             ]
         )

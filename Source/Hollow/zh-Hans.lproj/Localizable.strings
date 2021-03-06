@@ -158,6 +158,15 @@
 /* No comment provided by engineer. */
 "INPUTVIEW_VOTE_OPTION_PLACEHOLDER_PREFIX" = "选项";
 
+/* (No Comment) */
+"INPUTVIEW_VOTE_REMOVE_ALL_ALERT_BUTTON_CONFIRM" = "是";
+
+/* (No Comment) */
+"INPUTVIEW_VOTE_REMOVE_ALL_ALERT_MESSAGE" = "投票选项个数必须大于等于2。是否删除投票？";
+
+/* (No Comment) */
+"INPUTVIEW_VOTE_REMOVE_ALL_ALERT_TITLE" = "删除投票";
+
 /* No comment provided by engineer. */
 "LOADING_LABEL_TEXT" = "加载中";
 
@@ -237,13 +246,64 @@
 "REPORT_MENU_ADMIN_SET_TAG_EXISTED" = "从列表中选择";
 
 /* No comment provided by engineer. */
+"REPORT_MENU_ADMIN_SET_TAG_REMOVE" = "移除标签";
+
+/* No comment provided by engineer. */
 "REPORT_MENU_ADMIN_UNBAN" = "取消禁言";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ADMIN_UNDELETE_UNBAN" = "恢复树洞并取消禁言";
 
 /* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG" = "输入原因。";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_TITLE" = "删除并禁言";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG" = "输入删除原因。";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_TITLE" = "删除";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG" = "输入标签。";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_TITLE" = "设置自定义标签";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG" = "输入信息。";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_TITLE" = "取消禁言";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG" = "输入信息。";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_TITLE" = "恢复树洞并取消禁言";
+
+/* No comment provided by engineer. */
 "REPORT_MENU_ALERT_CONFIRM" = "确认";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_REMOVE_TITLE" = "移除标签";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_TITLE" = "确定要设置所选标签？";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE" = "确定要用所选的标签举报？";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "确定要删除？";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "确定要删除？";
+
+/* No comment provided by engineer. */
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "删除";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_DELETE" = "撤回";
@@ -359,14 +419,23 @@
 /* No comment provided by engineer. */
 "TIMELINE_SEARCH_BAR_PLACEHOLDER" = "搜索";
 
+/* (No Comment) */
+"WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE" = "自定义配置";
+
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_FOOTER" = "请从树洞网站获取配置文件网址。";
 
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER" = "自定义配置";
 
+/* (No Comment) */
+"WELCOMEVIEW_CUSTOM_NEXT_BUTTON" = "下一步";
+
 /* No comment provided by engineer. */
 "WELCOMEVIEW_CUSTOM_URL_TEXTFIELD_PLACEHOLDER" = "https://example.com/config.txt";
+
+/* (No Comment) */
+"WELCOMEVIEW_NAV_TITLE" = "欢迎";
 
 /* No comment provided by engineer. */
 "WELCOMEVIEW_OTHER_BUTTON" = "其他";
@@ -377,8 +446,3 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录。";
 
-"WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE" = "自定义配置";
-
-"WELCOMEVIEW_NAV_TITLE" = "欢迎";
-
-"WELCOMEVIEW_CUSTOM_NEXT_BUTTON" = "下一步";

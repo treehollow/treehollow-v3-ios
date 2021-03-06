@@ -114,12 +114,12 @@ extension SearchView {
                 // It seems that date picker with WheelDatePickerStyle hiding
                 // the time components will not automatically set the selected
                 // time to the end of the day.
-                set: { print($0); store.startDate = $0.endOfDay }
+                set: { store.startDate = $0.endOfDay }
             )
         } else {
             return Binding(
                 get: { store.endDate ?? store.startDate ?? Date().endOfDay },
-                set: { print($0); store.endDate = $0.endOfDay }
+                set: { store.endDate = $0.endOfDay }
             )
         }
     }

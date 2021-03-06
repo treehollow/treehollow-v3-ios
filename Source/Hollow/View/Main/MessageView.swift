@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MessageView: View {
     @Binding var presented: Bool
-    @State private var page: Page = .message
+    @State private var page: Page = .attention
     @ObservedObject var messageStore = MessageStore()
     @ObservedObject var postListStore = PostListRequestStore(type: .attentionList)
     @State var detailStore: HollowDetailStore?
@@ -49,10 +49,10 @@ extension MessageView {
                     .padding(.trailing)
             }
             Picker("", selection: $page) {
-                Text(NSLocalizedString("MESSAGEVIEW_PICKER_MESSAGE", comment: ""))
-                    .tag(Page.message)
                 Text(NSLocalizedString("MESSAGEVIEW_PICKER_ATTENTION", comment: ""))
                     .tag(Page.attention)
+                Text(NSLocalizedString("MESSAGEVIEW_PICKER_MESSAGE", comment: ""))
+                    .tag(Page.message)
             }
             .padding(.horizontal)
             .pickerStyle(SegmentedPickerStyle())
@@ -114,7 +114,6 @@ extension MessageView {
         }
         .padding(.horizontal)
         .ignoresSafeArea()
-        .background(Color.background)
         .modifier(AppModelBehaviour(state: postListStore.appModelState))
         .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))

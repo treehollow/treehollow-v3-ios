@@ -24,10 +24,6 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var text: String = ""
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
-    
-    // MARK: - Report
-    @Published var reportReason: String = ""
-    @Published var reportCommentId: Int?
 
     // MARK: Shared Variables
     @Published var errorMessage: (title: String, message: String)?
@@ -251,14 +247,16 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let replyTo = replyToIndex == -1 ? -1 : postDataWrapper.post.comments[replyToIndex].commentId
+        var text = self.text
+        if replyToIndex >= 0 {
+            text = "Re \(postDataWrapper.post.comments[replyToIndex].name): " + text
+        }
         let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls, token: token, text: text, imageData: compressedImage?.jpegData(compressionQuality: 0.7), postId: postDataWrapper.post.postId, replyCommentId: replyTo)
         
         let request = SendCommentRequest(configuration: configuration)
         
         withAnimation { isLoading = true }
-        print(configuration)
         request.publisher
-            .print("Send Comment")
             .sinkOnMainThread(receiveError: { error in
                 withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
@@ -293,10 +291,13 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         }
         
         let request = ReportRequestGroup(configuration: configuration)
-        print(configuration)
+        
+        withAnimation { isLoading = true }
+
         request.publisher
-            .print()
             .sinkOnMainThread(receiveCompletion: { completion in
+                withAnimation { self.isLoading = true }
+
                 switch completion {
                 case .finished:
                     self.requestDetail()

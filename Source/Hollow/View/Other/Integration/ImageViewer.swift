@@ -132,6 +132,10 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
             
         }
         
+        func imageScrollViewDidIndicateDismiss() {
+            parent.presented.wrappedValue = false
+        }
+        
         @objc func onLongPresss() {
             parent.showActionSheet.wrappedValue = true
         }

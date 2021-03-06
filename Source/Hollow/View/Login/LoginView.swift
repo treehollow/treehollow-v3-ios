@@ -123,11 +123,3 @@ struct LoginView: View {
         .modifier(AppModelBehaviour(state: viewModel.appModelState))
     }
 }
-
-#if DEBUG
-struct RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
-#endif
