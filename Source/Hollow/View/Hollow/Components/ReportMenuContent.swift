@@ -11,11 +11,10 @@ import Defaults
 
 struct ReportMenuContent: View {
     @ObservedObject var store: HollowDetailStore
-    var data: KeyPath<HollowDetailStore, [PostPermissionType]>
+    var permissions: [PostPermissionType]
     var commentId: Int?
     @State var reason: String = ""
     
-    private var permissions: [PostPermissionType] { store[keyPath: data] }
     private var showReportTag: Bool { permissions.contains(.fold) && !permissions.contains(.setTag) }
     private var showReportDelete: Bool {
         permissions.contains(.report) &&

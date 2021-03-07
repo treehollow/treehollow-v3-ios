@@ -32,16 +32,16 @@ extension HollowDetailView {
 
         if postData.comments.count > 30 {
             LazyVStack {
-                ForEach(postData.comments.indices, id: \.self) { index in
-                    commentView(at: index)
-                    .id(postData.comments[index].commentId)
+                ForEach(postData.comments) { comment in
+                    commentView(for: comment)
+                        .id(comment.commentId)
                 }
             }
         } else {
             VStack {
-                ForEach(postData.comments.indices, id: \.self) { index in
-                    commentView(at: index)
-                    .id(postData.comments[index].commentId)
+                ForEach(postData.comments) { comment in
+                    commentView(for: comment)
+                        .id(comment.commentId)
                 }
             }
 
@@ -51,65 +51,77 @@ extension HollowDetailView {
         }
     }
     
-    func commentView(at index: Int) -> some View {
-        let hideLabel: Bool
-        let comment = store.postDataWrapper.post.comments[index]
+    func commentView(for comment: CommentData) -> some View {
+        var hideLabel: Bool = false
+        let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == comment.commentId })
         if index == 0 { hideLabel = false }
-        else { hideLabel = comment.name == store.postDataWrapper.post.comments[index - 1].name }
-        return HollowCommentContentView(commentData: $store.postDataWrapper.post.comments[index], compact: false, hideLabel: hideLabel, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
-            .contentShape(RoundedRectangle(cornerRadius: 10))
-            .background(
-                Group {
-                    store.replyToIndex == index || jumpedToIndex == index ?
-                        Color.background : nil
+        else if let index = index {
+            hideLabel = comment.name == store.postDataWrapper.post.comments[index - 1].name
+        }
+        return Group { if let index = index {
+            let bindingComment = Binding(
+                get: { comment },
+                set: { comment in
+                    if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == comment.commentId  }) {
+                        store.postDataWrapper.post.comments[index] = comment
+                    }
                 }
-                .roundedCorner(10)
-                .animation(.none)
             )
-            .onTapGesture {
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                store.replyToIndex = index
-                jumpedToIndex = nil
-            }
-            .contextMenu {
-                if comment.text != "" {
-                    Button(action: {
-                        UIPasteboard.general.string = comment.text
-                    }, label: {
-                        Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "plus.square.on.square")
-                    })
-                    Divider()
-                }
-                if comment.hasURL {
-                    let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
-                    Divider()
-                    ForEach(links, id: \.self) { link in
-                        Button(action: { openURL(link) }) {
-                            Label(link.absoluteString, systemImage: "link")
-                        }
+            HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
+                .contentShape(RoundedRectangle(cornerRadius: 10))
+                .background(
+                    Group {
+                        store.replyToIndex == index || jumpedToIndex == index ?
+                            Color.background : nil
                     }
-                    Divider()
-                }
-                if comment.hasCitedNumbers {
-                    let citedPosts = comment.text.citationNumbers()
-                    ForEach(citedPosts, id: \.self) { post in
-                        let wrapper = PostDataWrapper.templatePost(for: post)
-                        Button(action: {
-                            presentView {
-                                HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
-                            }
-                        }) {
-                            Label("#\(post.string)", systemImage: "text.quote")
-                        }
-                    }
-                    Divider()
-                }
-                ReportMenuContent(
-                    store: store,
-                    data: \.postDataWrapper.post.comments[index].permissions,
-                    commentId: comment.commentId
+                    .roundedCorner(10)
+                    .animation(.none)
                 )
-            }
+                .onTapGesture {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    store.replyToIndex = index
+                    jumpedToIndex = nil
+                }
+                .contextMenu {
+                    if comment.text != "" {
+                        Button(action: {
+                            UIPasteboard.general.string = comment.text
+                        }, label: {
+                            Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "plus.square.on.square")
+                        })
+                        Divider()
+                    }
+                    if comment.hasURL {
+                        let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
+                        Divider()
+                        ForEach(links, id: \.self) { link in
+                            Button(action: { openURL(link) }) {
+                                Label(link.absoluteString, systemImage: "link")
+                            }
+                        }
+                        Divider()
+                    }
+                    if comment.hasCitedNumbers {
+                        let citedPosts = comment.text.citationNumbers()
+                        ForEach(citedPosts, id: \.self) { post in
+                            let wrapper = PostDataWrapper.templatePost(for: post)
+                            Button(action: {
+                                presentView {
+                                    HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                                }
+                            }) {
+                                Label("#\(post.string)", systemImage: "text.quote")
+                            }
+                        }
+                        Divider()
+                    }
+                    ReportMenuContent(
+                        store: store,
+                        permissions: comment.permissions,
+                        commentId: comment.commentId
+                    )
+                }
+            
+        }}
     }
-
 }

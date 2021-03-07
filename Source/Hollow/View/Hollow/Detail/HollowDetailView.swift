@@ -44,14 +44,21 @@ struct HollowDetailView: View {
                             showContent: showHeaderContent,
                             starAction: store.star,
                             disableAttention: store.isEditingAttention || store.isLoading,
-                            menuContent: {
+                            menuContent: { Group {
+                                Button(action: store.requestDetail) {
+                                    Label("DETAIL_MENU_REFRESH_LABEL", systemImage: "arrow.clockwise")
+                                }
+                                .disabled(store.isLoading)
+                                
+                                Divider()
+                                
                                 ReportMenuContent(
                                     store: store,
-                                    data: \.postDataWrapper.post.permissions,
+                                    permissions: store.postDataWrapper.post.permissions,
                                     commentId: nil
                                 )
                                 .disabled(store.isLoading)
-                            }
+                            }}
                         )
                         .disabled(store.noSuchPost)
                     }
