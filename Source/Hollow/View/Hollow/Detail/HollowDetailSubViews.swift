@@ -34,14 +34,12 @@ extension HollowDetailView {
             LazyVStack {
                 ForEach(postData.comments) { comment in
                     commentView(for: comment)
-                        .id(comment.commentId)
                 }
             }
         } else {
             VStack {
                 ForEach(postData.comments) { comment in
                     commentView(for: comment)
-                        .id(comment.commentId)
                 }
             }
 
@@ -68,6 +66,7 @@ extension HollowDetailView {
                 }
             )
             HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
+                .id(index)
                 .contentShape(RoundedRectangle(cornerRadius: 10))
                 .background(
                     Group {
@@ -78,6 +77,7 @@ extension HollowDetailView {
                     .animation(.none)
                 )
                 .onTapGesture {
+                    guard !store.isSendingComment else { return }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     store.replyToIndex = index
                     jumpedToIndex = nil
@@ -95,7 +95,10 @@ extension HollowDetailView {
                         let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
                         Divider()
                         ForEach(links, id: \.self) { link in
-                            Button(action: { openURL(link) }) {
+                            Button(action: {
+                                let helper = OpenURLHelper(openURL: openURL)
+                                try? helper.tryOpen(link)
+                            }) {
                                 Label(link.absoluteString, systemImage: "link")
                             }
                         }

@@ -50,7 +50,7 @@ struct HollowCommentInputView: View {
                     store.sendComment()
                     hideKeyboard()
                 }, transitionAnimation: transitionAnimation) {
-                    Text(store.isLoading ? sendingText + "..." : sendCommentText)
+                    Text(store.isSendingComment ? sendingText + "..." : sendCommentText)
                         .modifier(MyButtonDefaultStyle())
                 }
                 .disabled(!contentValid)
@@ -60,7 +60,11 @@ struct HollowCommentInputView: View {
             
             let placeholder = NSLocalizedString("COMMENT_INPUT_REPLY_TO_PREFIX", comment: "") + replyToName
             
-            HollowInputTextEditor(text: $store.text, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
+            let bindingText = Binding(
+                get: { store.text },
+                set: { store.text = $0 }
+            )
+            HollowInputTextEditor(text: bindingText, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
                 .accentColor(.hollowContentText)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
@@ -87,6 +91,7 @@ struct HollowCommentInputView: View {
         .animation(transitionAnimation)
         
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in withAnimation { store.objectWillChange.send() }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in withAnimation { keyboardShown = false }}
         .modifier(ImagePickerModifier(presented: $showImagePicker, image: $store.image))
         .onChange(of: store.image) { _ in store.compressImage() }
@@ -104,7 +109,7 @@ struct HollowCommentInputView: View {
                     }
                 }
         )
-        .disabled(store.isLoading)
+        .disabled(store.isSendingComment || store.isLoading)
         .modifier(GetSize(size: $viewSize))
     }
 }

@@ -83,7 +83,7 @@ struct HollowCommentContentView: View {
                             }
                         }
                         
-                        if commentData.type == .image && !compact {
+                        if commentData.image != nil && !compact {
                             HollowImageView(
                                 hollowImage: commentData.image,
                                 description: commentData.text,
@@ -103,11 +103,10 @@ struct HollowCommentContentView: View {
                                             .foregroundColor(.hollowContentText)
                                     })
                                 }
-                            } else if commentData.type == .image && compact {
+                            } else if commentData.image != nil && compact {
                                 (Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
                                     .foregroundColor(.uiColor(.secondaryLabel))
                             }
-                            // TODO: Has replies indicator
                         }
                         .leading()
                         .lineLimit(compact ? compactLineLimit : nil)
@@ -115,7 +114,7 @@ struct HollowCommentContentView: View {
                     }
                 }
                 
-                if commentData.type == .image && compact {
+                if commentData.image != nil && compact {
                     Image(systemName: "photo")
                         .font(.system(size: body15))
                         .layoutPriority(1)

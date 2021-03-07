@@ -71,7 +71,7 @@ struct PostListView: View {
             }
             .padding()
             .background(Color.hollowCardBackground)
-            .roundedCorner(10)
+            .roundedCorner(13)
             .fixedSize(horizontal: false, vertical: true)
             .contentShape(RoundedRectangle(cornerRadius: 8))
             .padding(.bottom)

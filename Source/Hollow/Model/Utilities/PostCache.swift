@@ -65,7 +65,6 @@ struct PostCache {
     /// - Parameter postId: postID
     /// - Returns: true if exist
     func existPost(postId: Int) -> Bool {
-        guard let exist = try? postStorage?.existsObject(forKey: postId) else { return false }
-        return exist
+        return (try? postStorage?.existsObject(forKey: postId)) ?? false
     }
 }

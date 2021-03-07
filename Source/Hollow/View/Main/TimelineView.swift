@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import WaterfallGrid
+//import WaterfallGrid
 
 struct TimelineView: View {
     @Binding var isSearching: Bool
@@ -31,7 +31,11 @@ struct TimelineView: View {
     
     var body: some View {
         CustomScrollView(
-            didScrollToBottom: viewModel.loadMorePosts,
+            didScrollToBottom: {
+                if viewModel.allowLoadMorePosts {
+                    viewModel.loadMorePosts()
+                }
+            },
             didEndScroll: { searchBarTrackingOffset = $0 },
             refresh: viewModel.refresh,
             content: { proxy in

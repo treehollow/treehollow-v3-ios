@@ -50,17 +50,19 @@ struct PostDetailRequest: DefaultRequest {
             "include_comment" : configuration.includeComments.int.string
         ]
         
-        if let oldupdated = PostCache().getTimestamp(postId: configuration.postId), PostCache().existPost(postId: configuration.postId) {
+        let postCache = PostCache()
+        
+        if let oldupdated = postCache.getTimestamp(postId: configuration.postId),
+           postCache.existPost(postId: configuration.postId) {
             parameters["old_updated_at"] = oldupdated
         }
         
         let resultToResultData: (Result) -> ResultData? = { result in
             var postWrapper: PostDataWrapper
-            
             if result.code == 1 {
                 // use cached result
                 // if return cache hit, then post must be in cache
-                guard let postCache = PostCache().getPost(postId: configuration.postId) else { return nil }
+                guard let postCache = postCache.getPost(postId: configuration.postId) else { return nil }
                 postWrapper = PostDataWrapper(post: postCache)
                 completion(postWrapper,nil)
             } else {

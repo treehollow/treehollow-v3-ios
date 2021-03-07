@@ -67,8 +67,10 @@ struct _HollowHeaderView<MenuContent: View>: View {
                     if showContent {
                         let postDescription =
                             postData.text != "" ?
-                            postData.text.removeLineBreak() : "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
-                            
+                            postData.text.removeLineBreak() :
+                            postData.hollowImage != nil ?
+                            "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" : ""
+                        
                         secondaryText(postDescription, fontWeight: .semibold)
                     } else {
                         // Time label

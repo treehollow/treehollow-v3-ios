@@ -21,15 +21,17 @@ class MessageStore: ObservableObject, AppModelEnvironment {
         requestMessages()
     }
     
-    func requestMessages() {
+    func requestMessages(completion: (() -> Void)? = nil) {
         let config = Defaults[.hollowConfig]!
         let token = Defaults[.accessToken]!
         let request = SystemMessageRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
         
         request.publisher
             .sink(receiveError: {
+                completion?()
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: $0)
             }, receiveValue: { result in
+                completion?()
                 self.messages = result
             })
             .store(in: &cancellables)

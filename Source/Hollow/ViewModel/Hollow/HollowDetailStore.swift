@@ -22,13 +22,18 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     // MARK: Input Variables
     @Published var replyToIndex: Int = -2
     @Published var imageSizeInformation: String?
-    @Published var text: String = ""
+    var text: String = "" {
+        didSet { if text == "" || oldValue == "" {
+            self.objectWillChange.send()
+        }}
+    }
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
 
     // MARK: Shared Variables
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
+    @Published var isSendingComment = false
     @Published var appModelState = AppModelState()
     
     private var cancellables = Set<AnyCancellable>()
@@ -261,12 +266,13 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         
         let request = SendCommentRequest(configuration: configuration)
         
-        withAnimation { isLoading = true }
+        withAnimation { isSendingComment = true }
         request.publisher
             .sinkOnMainThread(receiveError: { error in
-                withAnimation { self.isLoading = false }
+                withAnimation { self.isSendingComment = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
             }, receiveValue: { result in
+                withAnimation { self.isSendingComment = false }
                 self.jumpToCommentId = result.commentId
                 withAnimation { self.restoreInput() }
                 self.requestDetail()

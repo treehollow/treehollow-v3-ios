@@ -23,15 +23,13 @@ struct CommentData: Identifiable, Codable {
     var date: Date
     var isDz: Bool
     var replyTo: Int
-    /// **will be deprecated**
-    var type: CommentType {
-        get {
-            if self.image != nil { return .image}
-            else { return .text }
-        }
-    }
     var image: HollowImage?
     
+    // To avoid scanning the text over and over when the
+    // text does not has components that needed to be
+    // rendered as hyperlink, set the variable when initialize
+    // comment data, and check them to decide whether to call
+    // the methods to scan the text.
     var hasURL = false
     var hasCitedNumbers = false
     var renderHighlight: Bool { hasURL || hasCitedNumbers }

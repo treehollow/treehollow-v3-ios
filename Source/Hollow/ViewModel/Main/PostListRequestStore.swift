@@ -24,6 +24,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     @Published var isEditingAttention = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var appModelState = AppModelState()
+    @Published var allowLoadMorePosts = true
 
     var cancellables = Set<AnyCancellable>()
     
@@ -76,10 +77,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
                 receiveCompletion: { completion in
                     withAnimation { self.isLoading = false }
                     switch completion {
-                    case .finished:
-                        // Fetch images after loading all the posts.
-                        self.fetchImages()
-                        self.fetchCitedPosts()
+                    case .finished: break
                     case .failure(let error):
                         self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
                     }
@@ -100,9 +98,14 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     }
     
     func loadMorePosts() {
-        guard !isLoading else { return }
+        guard !isLoading && allowLoadMorePosts else { return }
+        allowLoadMorePosts = false
         self.page += 1
-        requestPosts(at: page)
+        requestPosts(at: page, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.allowLoadMorePosts = true
+            }
+        })
     }
     
     func refresh(finshHandler: @escaping () -> Void) {
@@ -118,23 +121,29 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {
-        var posts = self.posts
-        for newPost in newPosts {
-            var found = false
-            for index in posts.indices {
-                if newPost.id == posts[index].id {
-                    posts[index] = newPost
-                    found = true
+        DispatchQueue.global(qos: .background).async {
+            var posts = self.posts
+            for newPost in newPosts {
+                var found = false
+                for index in posts.indices {
+                    if newPost.id == posts[index].id {
+                        posts[index] = newPost
+                        found = true
+                    }
+                }
+                if !found {
+                    posts.append(newPost)
                 }
             }
-            if !found {
-                posts.append(newPost)
+            if !self.options.contains(.unordered) {
+                posts.sort(by: { $0.post.postId > $1.post.postId })
+            }
+            DispatchQueue.main.async {
+                self.posts = posts
+                self.fetchImages()
+                self.fetchCitedPosts()
             }
         }
-        if !options.contains(.unordered) {
-            posts.sort(by: { $0.post.postId > $1.post.postId })
-        }
-        self.posts = posts
     }
     
     // MARK: - Load Images

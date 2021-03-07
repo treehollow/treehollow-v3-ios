@@ -55,48 +55,51 @@ extension DefaultRequest {
         )
         .validate()
         .responseJSON { response in
-            switch response.result {
-            case .success:
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    guard let data = response.data else {
-                        completion(nil, .unknown)
-                        return
-                    }
-                    let result = try jsonDecoder.decode(Result.self, from: data)
-                    if result.code >= 0 {
-                        // result code >= 0 valid!
-                        if let resultData = resultToResultData(result) {
-                            completion(resultData, nil)
-                            // The current request has finished successfully
-                            completion(nil, .loadingCompleted)
-                            return
-                        } else {
+            DispatchQueue.global(qos: .background).async {
+                switch response.result {
+                case .success:
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    do {
+                        guard let data = response.data else {
                             completion(nil, .unknown)
                             return
                         }
+                        let result = try jsonDecoder.decode(Result.self, from: data)
+                        if result.code >= 0 {
+                            // result code >= 0 valid!
+                                if let resultData = resultToResultData(result) {
+                                    completion(resultData, nil)
+                                    // The current request has finished successfully
+                                    completion(nil, .loadingCompleted)
+                                    return
+                                } else {
+                                    completion(nil, .unknown)
+                                    return
+                                }
+                            
+                        } else {
+                            let error = DefaultRequestError(errorCode: result.code, description: result.msg)
+                            completion(nil, error)
+                            return
+                        }
                         
-                    } else {
-                        let error = DefaultRequestError(errorCode: result.code, description: result.msg)
-                        completion(nil, error)
+                    } catch {
+                        completion(nil, .decodeFailed)
                         return
                     }
                     
-                } catch {
-                    completion(nil, .decodeFailed)
-                    return
+                case let .failure(error):
+        
+                    if let errorCode = error.responseCode, errorCode == 413 {
+                        completion(nil, .fileTooLarge)
+                        return
+                    } else {
+                        completion(nil, .other(description: error.localizedDescription))
+                        return
+                    }
                 }
-                
-            case let .failure(error):
-    
-                if let errorCode = error.responseCode, errorCode == 413 {
-                    completion(nil, .fileTooLarge)
-                    return
-                } else {
-                    completion(nil, .other(description: error.localizedDescription))
-                    return
-                }
+
             }
         }
     }

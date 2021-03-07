@@ -56,13 +56,15 @@ struct FetchImageRequest: Request {
         }
         let resource = ImageResource(downloadURL: url, cacheKey: urlString)
         
-        KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
-            switch result {
-            case .success(let value):
-                completion(value.image, nil)
-                completion(nil, .loadingCompleted)
-            case .failure(let error):
-                completion(nil, .failed(description: error.errorDescription ?? ""))
+        DispatchQueue.global(qos: .background).async {
+            KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
+                switch result {
+                case .success(let value):
+                    completion(value.image, nil)
+                    completion(nil, .loadingCompleted)
+                case .failure(let error):
+                    completion(nil, .failed(description: error.errorDescription ?? ""))
+                }
             }
         }
 

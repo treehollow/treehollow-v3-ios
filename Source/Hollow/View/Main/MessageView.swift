@@ -65,7 +65,7 @@ extension MessageView {
     }
     
     var systemMessageView: some View {
-        CustomScrollView(refresh: {_ in}) { proxy in VStack(spacing: 0) {
+        CustomScrollView(refresh: messageStore.requestMessages) { proxy in VStack(spacing: 0) {
             ForEach(messageStore.messages) { message in
                 VStack(alignment: .leading) {
                     HStack {

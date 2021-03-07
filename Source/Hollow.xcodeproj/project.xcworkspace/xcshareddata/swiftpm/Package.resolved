@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "repositoryURL": "git://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
           "revision": "eaf6e622dd41b07b251d8f01752eab31bc811493",
@@ -12,7 +12,7 @@
       },
       {
         "package": "AppCenter",
-        "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
+        "repositoryURL": "git://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
           "revision": "484dead179e6d7edd534d0d7defdf65c14a5b426",
@@ -21,7 +21,7 @@
       },
       {
         "package": "AvatarX",
-        "repositoryURL": "https://github.com/liang2kl/AvatarX.git",
+        "repositoryURL": "git://github.com/liang2kl/AvatarX.git",
         "state": {
           "branch": null,
           "revision": "f96b4f131dec159af18c7e0fa053e7a6b8b6bdd2",
@@ -30,7 +30,7 @@
       },
       {
         "package": "Cache",
-        "repositoryURL": "https://github.com/hyperoslo/Cache.git",
+        "repositoryURL": "git://github.com/hyperoslo/Cache.git",
         "state": {
           "branch": null,
           "revision": "c7f4d633049c3bd649a353bad36f6c17e9df085f",
@@ -39,7 +39,7 @@
       },
       {
         "package": "Connectivity",
-        "repositoryURL": "https://github.com/rwbutler/Connectivity.git",
+        "repositoryURL": "git://github.com/rwbutler/Connectivity.git",
         "state": {
           "branch": null,
           "revision": "19f08ea4f25efe44cceea2ed5c52a0ca1bb567b5",
@@ -48,7 +48,7 @@
       },
       {
         "package": "Defaults",
-        "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
+        "repositoryURL": "git://github.com/sindresorhus/Defaults.git",
         "state": {
           "branch": null,
           "revision": "63dcea312f9cbd17064294a3ae99c9147704b65f",
@@ -57,7 +57,7 @@
       },
       {
         "package": "ImageScrollView",
-        "repositoryURL": "https://github.com/liang2kl/ImageScrollView.git",
+        "repositoryURL": "git://github.com/liang2kl/ImageScrollView.git",
         "state": {
           "branch": null,
           "revision": "211385f1f52f0be6ba3e2007f903f3986bf278e5",
@@ -66,7 +66,7 @@
       },
       {
         "package": "Kingfisher",
-        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "repositoryURL": "git://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
           "revision": "81dd1ce8401137637663046c7314e7c885bcc56d",
@@ -84,7 +84,7 @@
       },
       {
         "package": "WaterfallGrid",
-        "repositoryURL": "https://github.com/paololeonardi/WaterfallGrid.git",
+        "repositoryURL": "git://github.com/paololeonardi/WaterfallGrid.git",
         "state": {
           "branch": null,
           "revision": "944aa82832ed5a9eaaf50862cdd53e3c10ab55eb",

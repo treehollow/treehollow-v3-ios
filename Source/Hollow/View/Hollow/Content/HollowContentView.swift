@@ -108,44 +108,45 @@ struct HollowContentView: View {
                     
         }
         
-        let links = self.links
-        let citations = self.citedPosts
         if options.contains(.showHyperlinks) &&
-            !hideContent &&
-            (!links.isEmpty || (citations.count > 1)) {
-            HStack {
-                let links = postDataWrapper.post.text.links()
-                if links.count > 0 {
-                    Menu(content: {
-                        ForEach(links, id: \.self) { link in
-                            Button(link, action: {
-                                guard let url = URL(string: link) else { return }
-                                openURL(url)
-                            })
-                        }
-                    } , label: {
-                        linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_LINKS_MENU_LABEL", comment: ""), systemImageName: "link")
-                    })
+            !hideContent {
+            let links = self.links
+            let citations = self.citedPosts
+            if !links.isEmpty || !citations.isEmpty {
+                HStack {
+                    let links = postDataWrapper.post.text.links()
+                    if links.count > 0 {
+                        Menu(content: {
+                            ForEach(links, id: \.self) { link in
+                                Button(link, action: {
+                                    guard let url = URL(string: link) else { return }
+                                    let helper = OpenURLHelper(openURL: openURL)
+                                    try? helper.tryOpen(url)
+                                })
+                            }
+                        } , label: {
+                            linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_LINKS_MENU_LABEL", comment: ""), systemImageName: "link")
+                        })
+                    }
+                    if citations.count > 1 {
+                        Menu(content: {
+                            ForEach(citations, id: \.self) { citation in
+                                Button("#\(citation.string)", action: {
+                                    let wrapper = PostDataWrapper.templatePost(for: citation)
+                                    presentView {
+                                        HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(wrapper)))
+                                    }
+                                })
+                            }
+                        } , label: {
+                            linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_QUOTE_MENU_LABEL", comment: ""), systemImageName: "text.quote")
+                        })
+                    }
+                    Spacer()
                 }
-                if citations.count > 1 {
-                    Menu(content: {
-                        ForEach(citations, id: \.self) { citation in
-                            Button("#\(citation.string)", action: {
-                                let wrapper = PostDataWrapper.templatePost(for: citation)
-                                presentView {
-                                    HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(wrapper)))
-                                }
-                            })
-                        }
-                    } , label: {
-                        linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_QUOTE_MENU_LABEL", comment: ""), systemImageName: "text.quote")
-                    })
-                }
-                Spacer()
+                .padding(.top, 1)
+                .padding(.bottom, showVote ? 10 : 0)
             }
-            .padding(.top, 1)
-            .padding(.bottom, showVote ? 10 : 0)
-            
         }
         
         if showVote {
@@ -164,7 +165,7 @@ struct HollowContentView: View {
             options.contains(.replaceForImageOnly) {
             text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
         }
-        return HollowTextView(text: text, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+        return HollowTextView(text: text, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight && options.contains(.showHyperlinks), compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
     }
     
     private func tagView(text: String, deleted: Bool) -> some View {

@@ -24,13 +24,18 @@ struct PostData: Identifiable, Codable {
     var text: String
     /// Image wrapper for actual image.
     ///
-    /// Set `nil` when there is no image to display, and set `hollowImage.image` to `nil` then the actual image is still loading.
+    /// Set `nil` when there is no image to display, and set `hollowImage.image` to `nil` when the actual image is still loading.
     var hollowImage: HollowImage?
     var vote: VoteData?
     var comments: [CommentData]
     
     var loadingError: String?
     
+    // To avoid scanning the text over and over when the
+    // text does not has components that needed to be
+    // rendered as hyperlink, set the variable when initialize
+    // comment data, and check them to decide whether to call
+    // the methods to scan the text.
     var hasURL = false
     var hasCitedNumbers = false
     var renderHighlight: Bool { hasURL || hasCitedNumbers }
