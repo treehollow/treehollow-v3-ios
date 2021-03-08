@@ -38,7 +38,10 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     
     func sendPost() {
         withAnimation { sending = true }
-        let request = SendPostRequest(configuration: .init(apiRoot: Defaults[.hollowConfig]!.apiRootUrls, token: Defaults[.accessToken]!, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: ImageCompressor.resizingQuality), voteData: voteInformation?.options))
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
+
+        let request = SendPostRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: ImageCompressor.resizingQuality), voteData: voteInformation?.options))
         
         request.publisher
             .sinkOnMainThread(receiveError: { error in

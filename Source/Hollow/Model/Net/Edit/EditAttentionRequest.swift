@@ -56,7 +56,7 @@ struct EditAttentionRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: {
+            transformer: {
                 $0.data
             },
             completion: completion)

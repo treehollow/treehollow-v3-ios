@@ -53,7 +53,7 @@ struct SendVoteRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: { $0.vote?.toVoteData() },
+            transformer: { $0.vote?.toVoteData() },
             completion: completion
         )
     }

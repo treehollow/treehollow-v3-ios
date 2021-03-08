@@ -34,7 +34,7 @@ extension DefaultRequest {
     /// - parameter parameters: Paramenters for the request. Use an empty [String : String] dictionary when there are no parameters.
     /// - parameter headers: HTTP headers to be included.
     /// - parameter method: `.post` or `.get`.
-    /// - parameter resultToResultData: Method to generate result data from result.
+    /// - parameter transformer: Method to generate result data from result.
     /// - parameter completion: Handler to call to handle returned data.
     internal func performRequest(
         urlBase: [String],
@@ -42,7 +42,7 @@ extension DefaultRequest {
         parameters: [String : Any]? = nil,
         headers: HTTPHeaders? = nil,
         method: HTTPMethod,
-        resultToResultData: @escaping (Result) -> ResultData?,
+        transformer: @escaping (Result) -> ResultData?,
         completion: @escaping (ResultData?, DefaultRequestError?) -> Void
     ) {
         let urlRoot = LineSwitchManager.lineSelection(for: urlBase, type: .apiRoot)
@@ -68,7 +68,7 @@ extension DefaultRequest {
                         let result = try jsonDecoder.decode(Result.self, from: data)
                         if result.code >= 0 {
                             // result code >= 0 valid!
-                                if let resultData = resultToResultData(result) {
+                                if let resultData = transformer(result) {
                                     completion(resultData, nil)
                                     // The current request has finished successfully
                                     completion(nil, .loadingCompleted)

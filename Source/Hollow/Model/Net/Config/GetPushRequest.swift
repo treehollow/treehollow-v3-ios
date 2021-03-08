@@ -60,7 +60,7 @@ struct GetPushRequest: DefaultRequest {
             urlPath: urlPath,
             headers: headers,
             method: .get,
-            resultToResultData: { result in
+            transformer: { result in
                 guard let data = result.data else {return nil}
                 return ResultData(pushSystemMsg: data.pushSystemMsg.bool, pushReplyMe: data.pushReplyMe.bool, pushFavorited: data.pushFavorited.bool)
             },

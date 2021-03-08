@@ -49,8 +49,8 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     // MARK: - Load Posts
     func requestPosts(at page: Int, completion: (() -> Void)? = nil) {
         guard !self.noMorePosts else { return }
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let configuration: PostListRequestGroupConfiguration
         switch type {
         case .attentionList:
@@ -78,6 +78,10 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
                     withAnimation { self.isLoading = false }
                     switch completion {
                     case .finished: break
+                    // We handle the completion on receiving value. The only output
+                    // marks the completion, but is delivered before the completion,
+                    // so if we want to deal with the result asynchronously, we should
+                    // fetch other components when the asynchronous work is done.
                     case .failure(let error):
                         self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
                     }
@@ -140,6 +144,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             }
             DispatchQueue.main.async {
                 self.posts = posts
+                // Fetch other components after we assign the posts.
                 self.fetchImages()
                 self.fetchCitedPosts()
             }
@@ -182,10 +187,10 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         let postsWrapperWithCitation = posts.filter { $0.citedPostID != nil }
         let citedPostId = postsWrapperWithCitation.compactMap { $0.citedPostID }
         
-        let hollowConfig = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let requests: [PostDetailRequest] = citedPostId.map {
-            let configuration = PostDetailRequestConfiguration(apiRoot: hollowConfig.apiRootUrls, token: token, postId: $0, includeComments: false)
+            let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: $0, includeComments: false)
             return PostDetailRequest(configuration: configuration)
         }
         PostDetailRequest.publisher(for: requests)?
@@ -225,9 +230,8 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         
     // MARK: - Handle vote and star action
     func vote(postId: Int, for option: String) {
-        // FIXME: Keep the version of vote in sync with detail view when the request is processing!
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postId))
         
         request.publisher
@@ -245,8 +249,8 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     
     func star(_ star: Bool, for postId: Int) {
         guard !isEditingAttention else { return }
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, postId: postId, switchToAttention: star))
         withAnimation { isEditingAttention = true }
         
@@ -264,7 +268,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     }
 
     func assignAttentionResult(_ attention: Bool, starNumber: Int, to postId: Int) {
-        guard let index = posts.firstIndex(where: { $0.post.id == postId }) else { return }
+        guard let index = posts.firstIndex(where: { $0.post.postId == postId }) else { return }
         withAnimation {
             posts[index].post.attention = attention
             posts[index].post.likeNumber = starNumber

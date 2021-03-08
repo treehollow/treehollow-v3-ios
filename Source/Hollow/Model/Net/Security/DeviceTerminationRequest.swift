@@ -50,7 +50,7 @@ struct DeviceTerminationRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: { result in ResultData(rawValue: result.code)},
+            transformer: { result in ResultData(rawValue: result.code)},
             completion: completion
         )
     }

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import WaterfallGrid
 
 struct TimelineView: View {
     @Binding var isSearching: Bool

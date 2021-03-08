@@ -8,6 +8,7 @@
 
 import Defaults
 import Foundation
+import SwiftUI
 
 /// Store default's key here when firstly introduce it.
 /// Store the keys for `Defaults` here, declaring them static const member of `Defaults.Keys`
@@ -44,4 +45,16 @@ extension Defaults.Keys {
 // cache the lastest results, but just for placeholder use.
 extension Defaults.Keys {
     static let deviceListCache = Key<DeviceListRequestResultData?>("cache.device.list")
+    static let notificationTypeCache = Key<PushNotificationType>("cache.push.notification.type", default: .init())
+}
+
+
+// MARK: - User Settings
+// Defaults for user settings
+extension Defaults.Keys {
+    static let foldPredefinedTags = Key<Bool>("user.settings.fold.predifined.tags", default: true)
+    /// Additional tags to be blocked
+    static let blockedTags = Key<[String]>("user.settings.blocked.tags", default: [])
+    /// Color scheme that user selects (default: same as system)
+    static let colorScheme = Key<CustomColorScheme>("user.settings.color.scheme", default: .system)
 }

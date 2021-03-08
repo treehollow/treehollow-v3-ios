@@ -55,7 +55,7 @@ struct SearchView: View {
                 } else {
                     CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
                         LazyVStack(spacing: 0) {
-                            PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: true, voteHandler: store.vote, starHandler: store.star)
+                            PostListView(postDataWrappers: $store.posts, detailStore: $detailStore, revealFoldedTags: store.type != .searchTrending, voteHandler: store.vote, starHandler: store.star)
                         }
                         .padding(.top)
                     }

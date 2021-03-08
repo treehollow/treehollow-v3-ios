@@ -68,8 +68,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     
     // MARK: - Load Post Detail
     func requestDetail() {
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, includeComments: true)
         let request = PostDetailRequest(configuration: configuration)
         
@@ -146,8 +146,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         guard let citedPid = self.postDataWrapper.citedPostID,
               postDataWrapper.citedPost == nil ||
                 postDataWrapper.citedPost?.loadingError != nil  else { return }
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: citedPid, includeComments: false)
         let request = PostDetailRequest(configuration: configuration)
         
@@ -219,8 +219,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     
     // MARK: - Vote And Star
     func vote(for option: String) {
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postDataWrapper.post.postId))
         
         request.publisher
@@ -234,8 +234,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     }
     
     func star(_ star: Bool) {
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, switchToAttention: star))
         withAnimation { isEditingAttention = true }
         
@@ -255,8 +255,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     
     // MARK: - Input Comments
     func sendComment() {
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let replyTo = replyToIndex == -1 ? -1 : postDataWrapper.post.comments[replyToIndex].commentId
         var text = self.text
         if replyToIndex >= 0 {
@@ -290,8 +290,8 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     
     // MARK: - Report
     func report(commentId: Int? = nil, type: PostPermissionType, reason: String) {
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let postId = postDataWrapper.post.postId
         
         let configuration: ReportRequestGroupConfiguration

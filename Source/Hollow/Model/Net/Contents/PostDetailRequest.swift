@@ -52,44 +52,41 @@ struct PostDetailRequest: DefaultRequest {
         
         let postCache = PostCache()
         
-        if let oldupdated = postCache.getTimestamp(postId: configuration.postId),
+        if let oldUpdated = postCache.getTimestamp(postId: configuration.postId),
            postCache.existPost(postId: configuration.postId) {
-            parameters["old_updated_at"] = oldupdated
+            parameters["old_updated_at"] = oldUpdated
         }
         
-        let resultToResultData: (Result) -> ResultData? = { result in
+        let transformer: (Result) -> ResultData? = { result in
             var postWrapper: PostDataWrapper
-            if result.code == 1 {
-                // use cached result
-                // if return cache hit, then post must be in cache
-                guard let postCache = postCache.getPost(postId: configuration.postId) else { return nil }
-                postWrapper = PostDataWrapper(post: postCache)
-                completion(postWrapper,nil)
+
+            guard let post = result.post else { return nil }
+            
+            if result.code == 1, let cachedPost = postCache.getPost(postId: configuration.postId) {
+                // The only thing that is certain to remain unchanged is the comment data,
+                // thus we need to integrate the latest result
+                let postData = post.toPostData(comments: cachedPost.comments)
+                postWrapper = PostDataWrapper(post: postData)
+                completion(postWrapper, nil)
             } else {
-                // get new result
-                guard let post = result.post else { return nil }
-                var comments = [CommentData]()
-                if let commentData = result.data {
-                    comments = commentData.compactMap({ $0.toCommentData() })
-                }
+                let comments = result.data?.compactMap({ $0.toCommentData() }) ?? []
                 let postData = post.toPostData(comments: comments)
                 postWrapper = PostDataWrapper(post: postData)
                 completion(postWrapper, nil)
                 
-                let postCache = PostCache()
-                // cache without image, comment and cited post
                 postCache.updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
                 postCache.updatePost(postId: configuration.postId, postdata: postWrapper.post)
             }
             
             return postWrapper
         }
+        
         performRequest(urlBase: configuration.apiRoot,
                        urlPath: urlPath,
                        parameters: parameters,
                        headers: headers,
                        method: .get,
-                       resultToResultData: resultToResultData,
+                       transformer: transformer,
                        completion: completion
         )
     }

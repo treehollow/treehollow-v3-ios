@@ -52,7 +52,7 @@ struct ChangePasswordRequest: DefaultRequest {
             urlPath: urlPath,
             parameters: parameters,
             method: .post,
-            resultToResultData: { $0 },
+            transformer: { $0 },
             completion: completion
         )
     }

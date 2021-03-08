@@ -12,9 +12,11 @@ import Defaults
 struct PostListView: View {
     @Binding var postDataWrappers: [PostDataWrapper]
     @Binding var detailStore: HollowDetailStore?
+    @Default(.blockedTags) var customBlockedTags
+    @Default(.foldPredefinedTags) var foldPredefinedTags
     
     var revealFoldedTags = false
-    var displayOptions: HollowContentView.DisplayOptions {
+    var contentViewDisplayOptions: HollowContentView.DisplayOptions {
         var options: HollowContentView.DisplayOptions = [
             .compactText, .displayCitedPost, .displayImage, .displayVote
         ]
@@ -26,8 +28,12 @@ struct PostListView: View {
     private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
     
     private func hideComments(for post: PostData) -> Bool {
+        if revealFoldedTags { return false }
         if let tag = post.tag {
-            return foldTags.contains(tag)
+            if !foldPredefinedTags {
+                return customBlockedTags.contains(tag)
+            }
+            return foldTags.contains(tag) || customBlockedTags.contains(tag)
         }
         return false
     }
@@ -42,7 +48,7 @@ struct PostListView: View {
                 HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, disableAttention: false)
                 HollowContentView(
                     postDataWrapper: postDataWrapper,
-                    options: displayOptions,
+                    options: contentViewDisplayOptions,
                     voteHandler: { option in voteHandler(post.postId, option) }
                 )
                 // Check if comments exist to avoid additional spacing

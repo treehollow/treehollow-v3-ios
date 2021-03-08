@@ -48,7 +48,7 @@ struct UpdateDeviceTokenRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: { $0 },
+            transformer: { $0 },
             completion: completion
         )
     }

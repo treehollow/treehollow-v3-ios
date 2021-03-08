@@ -17,7 +17,7 @@
 "ACCOUNTVIEW_LOGOUT_BUTTON" = "Log Out";
 
 /* No comment provided by engineer. */
-"ACCOUNTVIEW_NAV_TITLE" = "Account";
+"SETTINGSVIEW_NAV_TITLE" = "Settings";
 
 /* No comment provided by engineer. */
 "ACCOUNTVIEW_PRIVACY_CELL" = "Privacy";
@@ -55,6 +55,9 @@
 /* No comment provided by engineer. */
 "COMMENT_INPUT_SEND_BUTTON_SENDING" = "Sending";
 
+/* (No Comment) */
+"COMMENT_VIEW_COPY_TEXT_LABEL" = "Copy Text";
+
 /* No comment provided by engineer. */
 "DATEFORMATTER_HOUR" = " h";
 
@@ -66,6 +69,12 @@
 
 /* No comment provided by engineer. */
 "DATEFORMATTER_SECOND" = " s";
+
+/* (No Comment) */
+"DETAIL_MENU_REFRESH_LABEL" = "Refresh";
+
+/* (No Comment) */
+"DETAILVIEW_NO_SUCH_POST_PLACEHOLDER" = "No such post";
 
 /* No comment provided by engineer. */
 "DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON" = "Confirm";
@@ -105,6 +114,12 @@
 
 /* No comment provided by engineer. */
 "HOLLOW_CONTENT_DELETED_TAG" = "Deleted";
+
+/* (No Comment) */
+"HOLLOW_CONTENT_LINKS_MENU_LABEL" = "Links";
+
+/* (No Comment) */
+"HOLLOW_CONTENT_QUOTE_MENU_LABEL" = "Quotes";
 
 /* No comment provided by engineer. */
 "HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX" = "Comments";
@@ -402,6 +417,21 @@
 "SEARCHVIEW_TRENDING_REFRESH_BUTTON" = "Refresh";
 
 /* No comment provided by engineer. */
+"SETTINGS_CUSTOM_COLOR_SCHEME_DARK" = "Dark";
+
+/* No comment provided by engineer. */
+"SETTINGS_CUSTOM_COLOR_SCHEME_LIGHT" = "Light";
+
+/* No comment provided by engineer. */
+"SETTINGS_CUSTOM_COLOR_SCHEME_SYSTEM" = "Automatic";
+
+/* No comment provided by engineer. */
+"SETTINGSVIEW_APPEARANCE_NAV_TITLE" = "Appearance";
+
+/* No comment provided by engineer. */
+"SETTINGSVIEW_NAV_TITLE" = "Settings";
+
+/* No comment provided by engineer. */
 "TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "Image";
 
 /* No comment provided by engineer. */
@@ -440,12 +470,32 @@
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";
 
-"HOLLOW_CONTENT_LINKS_MENU_LABEL" = "Links";
+"APPINFO_VERSION_PREFIX" = " Version ";
 
-"HOLLOW_CONTENT_QUOTE_MENU_LABEL" = "Quotes";
+"SETTINGSVIEW_CONTENT_NAV_TITLE" = "Content";
 
-"COMMENT_VIEW_COPY_TEXT_LABEL" = "Copy Text";
+"SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER" = "Refresh the interface to apply the changes.";
 
-"DETAILVIEW_NO_SUCH_POST_PLACEHOLDER" = "No such post";
+"SETTINGSVIEW_CONTENT_FOLD_CELL" = "Fold Predefined Tags";
 
-"DETAIL_MENU_REFRESH_LABEL" = "Refresh";
+"SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_HEADER" = "Custom Folded Tags";
+
+"SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON" = "Add More";
+
+"SETTINGSVIEW_CONTENT_CUSTOM_FOLD_INVALID_ALERT_TITLE" = "The tag cannot be empty or match existed tags.";
+
+"SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER" = "Enter a Tag";
+
+"ACCOUNTINFOVIEW_CHANGE_PASSWORD_CELL_LABEL" = "Change Password";
+
+"CHANGEPASSWORDVIEW_ENTER_EMAIL_PLACEHOLDER" = "Enter email";
+
+"CHANGEPASSWORDVIEW_ENTER_ORI_PASSWORD_PLACEHOLDER" = "Enter original password";
+
+"CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER" = "Enter new password";
+
+"CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER" = "Confirm password";
+
+"CHANGEPASSWORDVIEW_SUBMMIT_BUTTON" = "Submmit";
+
+"CHANGE_PASSWORD_SUCCESS_ALERT_TITLE" = "Successfully changed the password. Please login again.";

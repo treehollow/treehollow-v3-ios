@@ -27,8 +27,10 @@ struct HollowApp: App {
                     WelcomeView()
                 }
             }
-            // inject the app model into the environment
+            // Inject the app model into the environment
             .environmentObject(appModel)
+            // Set the color scheme when appear
+            .onAppear { IntegrationUtilities.setCustomColorScheme() }
         }
     }
 }

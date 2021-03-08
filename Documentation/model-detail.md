@@ -45,7 +45,7 @@ internal func performRequest(
         parameters: [String : Any]? = nil,
         headers: HTTPHeaders? = nil,
         method: HTTPMethod,
-        resultToResultData: @escaping (Result) -> ResultData?,
+        transformer: @escaping (Result) -> ResultData?,
         completion: @escaping (ResultData?, DefaultRequestError?) -> Void
     )
 ```
@@ -67,7 +67,7 @@ func performRequest(completion: @escaping (LoginRequestResultData?, Error?) -> V
         urlPath: urlPath,
         parameters: parameters,
         method: .post,
-        resultToResultData: { result in
+        transformer: { result in
             guard let token = result.token, let uuid = result.uuid else { return nil }
             return LoginRequestResultData(token: token, uuid: uuid, message: result.msg)
         },

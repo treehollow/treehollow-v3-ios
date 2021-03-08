@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PushNotificationType {
+struct PushNotificationType: Codable {
     // Set default value
     var pushSystemMsg: Bool = true
     var pushReplyMe: Bool = true

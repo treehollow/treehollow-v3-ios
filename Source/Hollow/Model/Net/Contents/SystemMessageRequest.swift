@@ -46,7 +46,7 @@ struct SystemMessageRequest: DefaultRequest {
             urlPath: urlPath,
             headers: headers,
             method: .get,
-            resultToResultData: { $0.data },
+            transformer: { $0.data },
             completion: completion)
     }
     

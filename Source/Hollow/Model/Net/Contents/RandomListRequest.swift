@@ -34,7 +34,7 @@ struct RandomListRequest: DefaultRequest {
         ]
         let parameters = [String : Encodable]()
         
-        let resultToResultData: (RandomListRequestResult) -> RandomListRequestResultData? = { result in
+        let transformer: (RandomListRequestResult) -> RandomListRequestResultData? = { result in
             guard let resultData = result.data else { return nil }
             var postWrappers = [PostDataWrapper]()
             postWrappers = resultData.map { post in
@@ -53,7 +53,7 @@ struct RandomListRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .get,
-            resultToResultData: resultToResultData,
+            transformer: transformer,
             completion: completion
         )
     }

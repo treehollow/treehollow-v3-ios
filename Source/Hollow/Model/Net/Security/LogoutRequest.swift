@@ -49,7 +49,7 @@ struct LogoutRequest: DefaultRequest {
             parameters: [String : Int](),
             headers: headers,
             method: .post,
-            resultToResultData: { result in LogoutRequestResultData(rawValue: result.code) },
+            transformer: { result in LogoutRequestResultData(rawValue: result.code) },
             completion: completion
         )
     }

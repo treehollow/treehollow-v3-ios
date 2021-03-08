@@ -59,7 +59,7 @@ struct LoginRequest: DefaultRequest {
             urlPath: urlPath,
             parameters: parameters,
             method: .post,
-            resultToResultData: { result in
+            transformer: { result in
                 guard let token = result.token, let uuid = result.uuid else { return nil }
                 return LoginRequestResultData(token: token, uuid: uuid, message: result.msg)
             },

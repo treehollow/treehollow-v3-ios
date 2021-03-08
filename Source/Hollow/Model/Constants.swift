@@ -14,8 +14,10 @@ import UIKit
 /// The purpose of the nested structs is to provide namespaces.
 struct Constants {
     struct Application {
-        static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        static let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
         static let deviceInfo = UIDevice.current.name + ", iOS " + UIDevice.current.systemVersion
+        static let appLocalizedName = Bundle.main.localizedInfoDictionary?["CFBundleName"] as? String ?? ""
     }
     
     struct HollowConfig {

@@ -22,12 +22,12 @@ class MessageStore: ObservableObject, AppModelEnvironment {
     }
     
     func requestMessages(completion: (() -> Void)? = nil) {
-        let config = Defaults[.hollowConfig]!
-        let token = Defaults[.accessToken]!
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
         let request = SystemMessageRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
         
         request.publisher
-            .sink(receiveError: {
+            .sinkOnMainThread(receiveError: {
                 completion?()
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: $0)
             }, receiveValue: { result in

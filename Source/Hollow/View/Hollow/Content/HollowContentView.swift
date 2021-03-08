@@ -26,13 +26,21 @@ struct HollowContentView: View {
     private var hasVote: Bool { postDataWrapper.post.vote != nil }
     private var showVote: Bool { hasVote && !hideContent }
     private var hasImage: Bool { postDataWrapper.post.hollowImage != nil }
+    
+    @Default(.blockedTags) var customBlockedTags
+    @Default(.foldPredefinedTags) var foldPredefinedTags
+    
     private var hideContent: Bool {
         if options.contains(.revealFoldTags) { return false }
         if let tag = postDataWrapper.post.tag {
-            return foldTags.contains(tag)
+            if !foldPredefinedTags {
+                return customBlockedTags.contains(tag)
+            }
+            return foldTags.contains(tag) || customBlockedTags.contains(tag)
         }
         return false
     }
+    
     
     private var links: [URL] {
         postDataWrapper.post.text.links().compactMap({ URL(string: $0) })

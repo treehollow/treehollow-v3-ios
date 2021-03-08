@@ -64,7 +64,7 @@ struct DeviceListRequest: DefaultRequest {
             urlPath: urlPath,
             headers: headers,
             method: .get,
-            resultToResultData: { result in
+            transformer: { result in
                 guard let data = result.data, let thisDeviceUUIDString = result.thisDevice else { return nil }
                 var devices = [DeviceInformationType]()
                 for device in data {

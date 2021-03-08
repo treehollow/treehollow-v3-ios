@@ -53,7 +53,7 @@ struct SetPushRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: { result in
+            transformer: { result in
                 ResultData.init(rawValue: result.code)
             },
             completion: completion

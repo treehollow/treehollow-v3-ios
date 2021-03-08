@@ -50,7 +50,7 @@ struct SearchHistoryRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .post,
-            resultToResultData: { $0.data },
+            transformer: { $0.data },
             completion: completion
         )
     }

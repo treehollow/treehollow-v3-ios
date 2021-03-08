@@ -23,14 +23,12 @@ class DeviceListStore: ObservableObject, AppModelEnvironment {
     init() {
         // Load the latest cache as placeholder
         deviceData = Defaults[.deviceListCache] ?? .init(devices: [], thisDeviceUUID: "")
-        
-        // Request data
-        requestDeviceList()
     }
     
     func requestDeviceList() {
-        let apiRoot = Defaults[.hollowConfig]!.apiRootUrls
-        let request = DeviceListRequest(configuration: .init(token: Defaults[.accessToken]!, apiRoot: apiRoot))
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
+        let request = DeviceListRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
         withAnimation {
             isLoading = true
         }
@@ -63,9 +61,9 @@ class DeviceListStore: ObservableObject, AppModelEnvironment {
     }
     
     func logout(deviceUUID: String) {
-        let token = Defaults[.accessToken]!
-        let apiRoot = Defaults[.hollowConfig]!.apiRootUrls
-        let request = DeviceTerminationRequest(configuration: .init(deviceUUID: deviceUUID, token: token, apiRoot: apiRoot))
+        guard let config = Defaults[.hollowConfig],
+              let token = Defaults[.accessToken] else { return }
+        let request = DeviceTerminationRequest(configuration: .init(deviceUUID: deviceUUID, token: token, apiRoot: config.apiRootUrls))
         
         withAnimation {
             isLoading = true

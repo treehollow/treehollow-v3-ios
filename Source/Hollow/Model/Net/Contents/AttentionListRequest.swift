@@ -35,7 +35,7 @@ struct AttentionListRequest: DefaultRequest {
             "page" : configuration.page
         ]
         
-        let resultToResultData: (PostListRequestResult) -> AttentionListRequestResultData? = { result in
+        let transformer: (PostListRequestResult) -> AttentionListRequestResultData? = { result in
             guard let resultData = result.data else { return nil }
             var postWrappers = [PostDataWrapper]()
             postWrappers = resultData.map{ post in
@@ -60,7 +60,7 @@ struct AttentionListRequest: DefaultRequest {
             parameters: parameters,
             headers: headers,
             method: .get,
-            resultToResultData: resultToResultData,
+            transformer: transformer,
             completion: completion
         )
     }
