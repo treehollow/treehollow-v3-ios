@@ -16,7 +16,10 @@ struct HollowDetailView: View {
     @State var jumpedToIndex: Int?
     @State private var showHeaderContent = false
     
+    private let scrollToAnchor = UnitPoint(x: 0.5, y: 0.1)
+    
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
+    @ScaledMetric(wrappedValue: 11, relativeTo: .body) var commentHeaderPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
     
     @Environment(\.openURL) var openURL
@@ -72,7 +75,7 @@ struct HollowDetailView: View {
                     VStack(spacing: 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
-                        if store.noSuchPost {
+                        Group { if store.noSuchPost {
                             HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), inDetail: true, highlight: store.postDataWrapper.post.renderHighlight)
                         } else {
                             HollowContentView(
@@ -83,7 +86,8 @@ struct HollowDetailView: View {
                             )
                             .fixedSize(horizontal: false, vertical: true)
                             .id(-1)
-                        }
+                        }}
+                        .padding(.horizontal)
                         
                         Spacer().frame(height: 0)
                             // Get the frame of the comment view.
@@ -92,7 +96,7 @@ struct HollowDetailView: View {
                         commentView
                             .onChange(of: store.replyToIndex) { index in
                                 withAnimation(.easeInOut(duration: 0.25)) {
-                                    proxy.scrollTo(index, anchor: .top)
+                                    proxy.scrollTo(index, anchor: scrollToAnchor)
                                 }
                             }
                             // Jump to certain comment
@@ -103,7 +107,7 @@ struct HollowDetailView: View {
                                     if let jumpToCommentId = store.jumpToCommentId {
                                         if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == jumpToCommentId }) {
                                             withAnimation {
-                                                proxy.scrollTo(index, anchor: .center)
+                                                proxy.scrollTo(index, anchor: scrollToAnchor)
                                                 jumpedToIndex = index
                                             }
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -115,7 +119,6 @@ struct HollowDetailView: View {
                                 }
                             }
                     }
-                    .padding(.horizontal)
                     .background(Color.hollowDetailBackground)
                     .coordinateSpace(name: "detail.scrollview.content")
                 }

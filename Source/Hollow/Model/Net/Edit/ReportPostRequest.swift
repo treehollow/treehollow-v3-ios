@@ -33,7 +33,7 @@ struct ReportPostRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (ReportPostRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/edit/report/post" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/edit/report/post" + Constants.Net.urlSuffix
         
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,

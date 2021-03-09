@@ -37,7 +37,7 @@ struct SendPostRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SendPostRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/send/post" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/send/post" + Constants.Net.urlSuffix
         let hasImage = configuration.imageData != nil
         
         let headers: HTTPHeaders = [

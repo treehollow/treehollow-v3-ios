@@ -53,7 +53,7 @@ struct LoginRequest: DefaultRequest {
                 "device_info": self.configuration.deviceInfo,
                 "ios_device_token": self.configuration.deviceToken,
             ]
-        let urlPath = "v3/security/login/login" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/login/login" + Constants.Net.urlSuffix
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,

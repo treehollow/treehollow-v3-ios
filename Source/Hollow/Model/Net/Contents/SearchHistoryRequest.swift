@@ -35,7 +35,7 @@ struct SearchHistoryRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SearchHistoryRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/search/get_search_history" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/search/get_search_history" + Constants.Net.urlSuffix
         
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,

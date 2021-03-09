@@ -99,7 +99,7 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         self.scrollView = findUIScrollView(view: self.view)
         scrollView?.delegate = self
         scrollView?.isScrollEnabled = !disableScroll
-        scrollView?.delaysContentTouches = true
+        scrollView?.keyboardDismissMode = .onDrag
 
         if refresh != nil {
             scrollView?.refreshControl = UIRefreshControl()

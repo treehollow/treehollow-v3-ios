@@ -9,23 +9,33 @@
 import SwiftUI
 import AvatarX
 
-struct AvatarWrapper<HashableValue>: View where HashableValue: Hashable {
+struct AvatarWrapper: View {
     var colors: [Color]
+    var paddingColor: Color
     var resolution: Int
-    var symmetric: Bool = true
-    var padding: CGFloat = 0
-    var value: HashableValue
+    var padding: CGFloat
+    
+    init(foregroundColor: Color, backgroundColor: Color, resolution: Int, padding: CGFloat, hashValue: Int) {
+        self.paddingColor = foregroundColor
+        self.colors = AvatarGenerator.colorData(foregroundColor: foregroundColor, backgroundColor: backgroundColor, resolution: resolution, hashValue: hashValue)
+        self.resolution = resolution
+        self.padding = padding
+    }
     
     var body: some View {
-        Avatar(
-            configuration: AvatarConfiguration(
-                colors: colors,
-                resolution: resolution,
-                symmetric: symmetric
-            ),
-            value: value
-        )
+        VStack(spacing: 0) {
+            ForEach(0..<resolution) { x in
+                HStack(spacing: 0) {
+                    ForEach(0..<resolution) { y in
+                        let index = x * resolution + y
+                        Rectangle()
+                            .foregroundColor(colors[index])
+                    }
+                }
+            }
+        }
+        .aspectRatio(1, contentMode: .fit)
         .padding(padding)
-        .background(colors.count >= 1 ? colors[0] : nil)
+        .background(paddingColor)
     }
 }

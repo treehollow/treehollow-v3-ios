@@ -15,6 +15,7 @@ struct HollowInputView: View {
     @State var showImagePicker = false
     @State var showErrorAlert = false
     @State var showVoteOptionsAlert = false
+    @State var hash = AvatarGenerator.hash(postId: Int.random(in: 0...200), name: "liang2kl")
     
     @ScaledMetric var avatarWidth: CGFloat = 37
     @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
@@ -58,7 +59,7 @@ struct HollowInputView: View {
             .padding(.top, vstackSpacing)
             
             VStack(spacing: vstackSpacing) {
-                HollowInputAvatar(avatarWidth: avatarWidth)
+                HollowInputAvatar(avatarWidth: avatarWidth, hash: hash)
                 imageView
                 
                 VStack(spacing: 0) {

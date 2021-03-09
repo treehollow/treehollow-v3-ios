@@ -37,7 +37,7 @@ struct LogoutRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (LogoutRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/security/logout" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/logout" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

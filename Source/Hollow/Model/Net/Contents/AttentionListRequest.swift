@@ -26,7 +26,7 @@ struct AttentionListRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (AttentionListRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/post/attentions" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/post/attentions" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

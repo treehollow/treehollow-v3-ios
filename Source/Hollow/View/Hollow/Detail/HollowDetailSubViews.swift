@@ -11,41 +11,43 @@ import SwiftUI
 extension HollowDetailView {
     @ViewBuilder var commentView: some View {
         let postData = store.postDataWrapper.post
-
-        HStack {
-            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
-                .fontWeight(.heavy)
-            Spacer()
-            Button(action: {
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                store.replyToIndex = -1
-            }) {
-                Text("HOLLOWDETAIL_COMMENTS_NEW_COMMENT_BUTTON")
-                    .fontWeight(.medium)
-                    .font(.system(size: newCommentLabelSize))
-                    .lineLimit(1)
-            }
-            .accentColor(.hollowContentVoteGradient1)
-        }
-        .padding(.top)
-        .padding(.bottom, 5)
-
-        if postData.comments.count > 30 {
-            LazyVStack {
+        
+        LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+            Section(
+                header:
+                    VStack(spacing: 0) {
+                        HStack {
+                            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+                                .fontWeight(.heavy)
+                            Spacer()
+                            Button(action: {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                store.replyToIndex = -1
+                            }) {
+                                Text("HOLLOWDETAIL_COMMENTS_NEW_COMMENT_BUTTON")
+                                    .fontWeight(.medium)
+                                    .font(.system(size: newCommentLabelSize))
+                                    .lineLimit(1)
+                            }
+                            .accentColor(.hollowContentVoteGradient1)
+                        }
+                        .padding(.horizontal)
+                        .padding(.vertical, commentHeaderPadding)
+                        .background(Color.hollowDetailBackground)
+                    }
+                
+            ) {
                 ForEach(postData.comments) { comment in
                     commentView(for: comment)
                 }
+                .padding(.horizontal)
             }
-        } else {
-            VStack {
-                ForEach(postData.comments) { comment in
-                    commentView(for: comment)
-                }
-            }
-
         }
+
         if store.isLoading {
-            LoadingLabel(foregroundColor: .primary).leading()
+            LoadingLabel(foregroundColor: .primary)
+                .leading()
+                .padding(.horizontal)
         }
     }
     
@@ -65,7 +67,7 @@ extension HollowDetailView {
                     }
                 }
             )
-            HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
+            HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
                 .id(index)
                 .contentShape(RoundedRectangle(cornerRadius: 10))
                 .background(

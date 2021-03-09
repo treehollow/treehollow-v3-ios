@@ -39,7 +39,7 @@ struct EditAttentionRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (EditAttentionRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/edit/attention" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/edit/attention" + Constants.Net.urlSuffix
         
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,

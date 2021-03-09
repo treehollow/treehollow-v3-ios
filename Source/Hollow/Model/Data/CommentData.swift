@@ -33,4 +33,8 @@ struct CommentData: Identifiable, Codable {
     var hasURL = false
     var hasCitedNumbers = false
     var renderHighlight: Bool { hasURL || hasCitedNumbers }
+    
+    // Color data used in avatar
+    var hash: Int
+    var colorIndex: Int
 }

@@ -63,21 +63,25 @@ extension Comment {
         while text?.last == "\n" {
             text?.removeLast()
         }
+        
+        let hash = AvatarGenerator.hash(postId: pid, name: name)
 
         return CommentData(
-            commentId: self.cid,
-            deleted: self.deleted,
-            name: self.name,
-            permissions: self.permissions,
-            postId: self.pid,
-            tag: self.tag,
+            commentId: cid,
+            deleted: deleted,
+            name: name,
+            permissions: permissions,
+            postId: pid,
+            tag: tag,
             text: text ?? "",
-            date: Date(timeIntervalSince1970: TimeInterval(self.timestamp)),
-            isDz: self.isDz,
-            replyTo: self.replyTo,
+            date: Date(timeIntervalSince1970: TimeInterval(timestamp)),
+            isDz: isDz,
+            replyTo: replyTo,
             image: image,
             hasURL: (text?.links().count ?? 0) > 0,
-            hasCitedNumbers: (text?.citations().count ?? 0) > 0
+            hasCitedNumbers: (text?.citations().count ?? 0) > 0,
+            hash: hash,
+            colorIndex: AvatarGenerator.colorIndex(hash: hash)
         )
     }
 }

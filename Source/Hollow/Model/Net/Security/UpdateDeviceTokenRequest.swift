@@ -33,7 +33,7 @@ struct UpdateDeviceTokenRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (UpdateDeviceTokenRequestResult?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/security/update_ios_token" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/update_ios_token" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

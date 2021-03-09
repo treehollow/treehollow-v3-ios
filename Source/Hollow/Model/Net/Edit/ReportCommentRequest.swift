@@ -32,7 +32,7 @@ struct ReportCommentRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (ReportCommentRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/edit/report/comment" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/edit/report/comment" + Constants.Net.urlSuffix
         
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,

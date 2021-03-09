@@ -46,7 +46,7 @@ struct ChangePasswordRequest: DefaultRequest {
             "old_password_hashed": self.configuration.oldPassword.sha256().sha256(),
             "new_password_hashed": self.configuration.newPassword.sha256().sha256(),
         ]
-        let urlPath = "v3/security/login/change_password" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/login/change_password" + Constants.Net.urlSuffix
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,

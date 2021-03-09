@@ -38,7 +38,7 @@ struct SendCommentRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SendCommentRequestResult?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/send/comment" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/send/comment" + Constants.Net.urlSuffix
         let hasImage = configuration.imageData != nil
         
         let headers: HTTPHeaders = [

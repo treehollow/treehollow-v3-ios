@@ -54,7 +54,7 @@ struct DeviceListRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
-        let urlPath = "v3/security/devices/list" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/devices/list" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

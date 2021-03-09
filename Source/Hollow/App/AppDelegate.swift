@@ -56,6 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Temporarily save the token in defaults. We are not using this
         // default except registering or logging in for the first time.
         Defaults[.deviceToken] = deviceToken
+        print(deviceToken.hexEncodedString())
         
         // Try to send the token to the server, if we have a user token.
         if let accessToken = Defaults[.accessToken] {
@@ -80,7 +81,8 @@ extension AppDelegate {
         let request = UpdateDeviceTokenRequest(configuration: configuration)
         
         request.performRequest(completion: { result, error in
-            if let _ = error {
+            if let error = error {
+                print(error)
                 // TODO: Handle error
             }
         })

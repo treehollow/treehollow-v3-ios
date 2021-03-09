@@ -35,7 +35,7 @@ struct SendVoteRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SendVoteRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/send/vote" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/send/vote" + Constants.Net.urlSuffix
         
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,

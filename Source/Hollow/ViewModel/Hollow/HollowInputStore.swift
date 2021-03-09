@@ -13,6 +13,7 @@ import Defaults
 
 class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStore {
     var presented: Binding<Bool>
+    var refreshHandler: (() -> Void)?
     
     @Published var text: String = ""
     // FIXME: Remove this code in real tests
@@ -28,8 +29,9 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     
     var cancellables = Set<AnyCancellable>()
     
-    init(presented: Binding<Bool>) {
+    init(presented: Binding<Bool>, refreshHandler: (() -> Void)?) {
         self.presented = presented
+        self.refreshHandler = refreshHandler
     }
     
     func newVote() {
@@ -48,6 +50,7 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
                 self.sending = false
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
             }, receiveValue: { result in
+                self.refreshHandler?()
                 self.presented.wrappedValue = false
                 // TODO: Show detail or refresh
             })

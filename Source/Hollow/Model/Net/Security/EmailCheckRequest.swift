@@ -74,7 +74,7 @@ struct EmailCheckRequest: DefaultRequest {
             parameters["recaptcha_version"] = reCAPTCHAInfo.version.rawValue
             parameters["recaptcha_token"] = reCAPTCHAInfo.token
         }
-        let urlPath = "v3/security/login/check_email" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/login/check_email" + Constants.Net.urlSuffix
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,

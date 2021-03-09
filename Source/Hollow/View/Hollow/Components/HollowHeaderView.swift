@@ -40,12 +40,13 @@ struct _HollowHeaderView<MenuContent: View>: View {
     var body: some View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
-                let tintColor = ViewConstants.avatarTintColors[postData.postId % ViewConstants.avatarTintColors.count]
+                let tintColor = ViewConstants.avatarTintColors[postData.colorIndex]
                 AvatarWrapper(
-                    colors: [tintColor, .white],
+                    foregroundColor: tintColor,
+                    backgroundColor: .white,
                     resolution: 6,
                     padding: body37 * 0.1,
-                    value: postData.postId
+                    hashValue: postData.hash
                 )
                 // Scale the avatar relative to the font scaling.
                 .frame(width: body37, height: body37)

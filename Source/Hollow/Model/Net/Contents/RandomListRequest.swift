@@ -27,7 +27,7 @@ struct RandomListRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (RandomListRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/post/randomlist" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/post/randomlist" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

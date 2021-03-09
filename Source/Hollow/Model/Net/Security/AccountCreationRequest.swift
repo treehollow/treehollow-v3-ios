@@ -76,7 +76,7 @@ struct AccountCreationRequest: DefaultRequest {
             parameters["valid_code"] = validCode
         }
         
-        let urlPath = "v3/security/login/create_account" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/login/create_account" + Constants.Net.urlSuffix
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,

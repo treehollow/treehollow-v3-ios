@@ -16,8 +16,9 @@ struct Constants {
     struct Application {
         static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         static let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-        static let deviceInfo = UIDevice.current.name + ", iOS " + UIDevice.current.systemVersion
+        static let deviceInfo = UIDevice.current.localizedModel + ", iOS " + UIDevice.current.systemVersion
         static let appLocalizedName = Bundle.main.localizedInfoDictionary?["CFBundleName"] as? String ?? ""
+        static let requestedNotificationOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
     }
     
     struct HollowConfig {
@@ -25,7 +26,7 @@ struct Constants {
         static let pkuConfigURL = ""
     }
 
-    struct URLConstant {
+    struct Net {
         static let urlSuffix = "?v=v\(Constants.Application.appVersion)&device=2"
         static let apiTestPath = "generate_204"
     }

@@ -33,14 +33,16 @@ struct HollowInputTextEditor: View {
 
 struct HollowInputAvatar: View {
     var avatarWidth: CGFloat
+    var hash: Int
     var body: some View {
         AvatarWrapper(
-            colors: [.buttonGradient1, .background],
-            resolution: 4,
+            foregroundColor: .buttonGradient1,
+            backgroundColor: .background,
+            resolution: 6,
             padding: avatarWidth * 0.1,
-            // Boom! You've discover a hidden "bug"!
-            value: "liang2kl"
+            hashValue: hash
         )
+
         .frame(width: avatarWidth)
         .fixedSize()
         .clipShape(Circle())

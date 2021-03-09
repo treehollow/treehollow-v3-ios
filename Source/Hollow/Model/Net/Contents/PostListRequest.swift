@@ -40,7 +40,7 @@ struct PostListRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (PostListRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/post/list" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/post/list" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

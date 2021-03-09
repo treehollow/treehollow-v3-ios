@@ -57,7 +57,7 @@ struct LineSwitchManager {
             time[index] = DispatchTime.now().uptimeNanoseconds
             
             AF.request(
-                apiList[index].api + Constants.URLConstant.apiTestPath,
+                apiList[index].api + Constants.Net.apiTestPath,
                 method: .get
             ).validate(statusCode: 204..<204).response { response in
                 let endtime = DispatchTime.now().uptimeNanoseconds

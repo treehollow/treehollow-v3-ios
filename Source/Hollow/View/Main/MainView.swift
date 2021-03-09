@@ -75,8 +75,10 @@ struct MainView: View {
                         .swipeToDismiss(presented: $isSearching)
                 }
                 if showCreatePost {
-                    HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost))
-                        .swipeToDismiss(presented: $showCreatePost)
+                    HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost, refreshHandler: {
+                        timelineViewModel.refresh(finshHandler: {})
+                    }))
+                    .swipeToDismiss(presented: $showCreatePost)
                 }
                 if showTrending {
                     SearchView(presented: $showTrending, store: .init(type: .searchTrending, options: [.unordered]))

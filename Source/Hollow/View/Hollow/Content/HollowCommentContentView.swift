@@ -14,6 +14,7 @@ struct HollowCommentContentView: View {
     var compact: Bool
     var contentVerticalPadding: CGFloat? = 10
     var hideLabel: Bool = false
+    var postColorIndex: Int
     var imageReloadHandler: ((HollowImage) -> Void)? = nil
     private let compactLineLimit = 3
     private var nameLabelWidth: CGFloat {
@@ -142,16 +143,26 @@ struct HollowCommentContentView: View {
     
     @ViewBuilder var avatarView: some View {
         let avatarWidth = nameLabelWidth * 0.7
-        let hashRoot = commentData.name + commentData.postId.string
-        let index = abs(hashRoot.hash) % ViewConstants.avatarTintColors.count
-        // FIXME: Put into one place
-        let postTintColor = ViewConstants.avatarTintColors[commentData.postId % ViewConstants.avatarTintColors.count]
-        let color = commentData.isDz ? postTintColor : ViewConstants.avatarTintColors[index]
+        let postTintColor = ViewConstants.avatarTintColors[postColorIndex]
+        let commentTintColor = ViewConstants.avatarTintColors[commentData.colorIndex]
+        let color = commentData.isDz ? postTintColor : commentTintColor
         Group {
             if commentData.isDz {
-                AvatarWrapper(colors: [color, .white], resolution: 6, padding: avatarWidth * 0.1, value: commentData.postId)
+                AvatarWrapper(
+                    foregroundColor: color,
+                    backgroundColor: .white,
+                    resolution: 6,
+                    padding: avatarWidth * 0.1,
+                    hashValue: commentData.hash
+                )
             } else {
-                AvatarWrapper(colors: [color, .white], resolution: 4, padding: avatarWidth * 0.1, value: hashRoot)
+                AvatarWrapper(
+                    foregroundColor: color,
+                    backgroundColor: .white,
+                    resolution: 4,
+                    padding: avatarWidth * 0.1,
+                    hashValue: commentData.hash
+                )
             }
         }
         .frame(width: avatarWidth)

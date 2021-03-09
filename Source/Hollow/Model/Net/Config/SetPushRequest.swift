@@ -37,7 +37,7 @@ struct SetPushRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SetPushRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/config/set_push" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/config/set_push" + Constants.Net.urlSuffix
         let parameters = [
             "push_system_msg": self.configuration.type.pushSystemMsg.int,
             "push_reply_me": self.configuration.type.pushReplyMe.int,

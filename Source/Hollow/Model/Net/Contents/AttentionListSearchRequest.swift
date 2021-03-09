@@ -34,7 +34,7 @@ struct AttentionListSearchRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (AttentionListSearchRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/search/attentions" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/search/attentions" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

@@ -17,9 +17,7 @@ struct ViewConstants {
     /// Font size for a bordered, small, textual button.
     static let plainButtonFontSize: CGFloat = 13
     /// Colors to use in avatars.
-    static let avatarTintColors: [Color] = [
-        .yellow, .blue, .orange, .red, .green, .pink, .purple
-    ]
+    static let avatarTintColors: [Color] = (1...16).map({ Color("avatar." + String($0)) })
     
     static let inputViewVStackSpacing: CGFloat = 12
 }

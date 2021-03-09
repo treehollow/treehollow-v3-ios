@@ -40,7 +40,7 @@ struct SearchRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SearchRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/search" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/search" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

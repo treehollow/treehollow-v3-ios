@@ -36,7 +36,7 @@ struct SystemMessageRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (SystemMessageRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/system_msg" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/contents/system_msg" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

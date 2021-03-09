@@ -121,6 +121,7 @@ struct ContentSettingsView: View {
                 Button(action: { withAnimation { showTextField = true } }) {
                     Label(NSLocalizedString("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON", comment: ""), systemImage: "plus")
                 }
+                .disabled(showTextField)
                 
             }
         }
@@ -132,5 +133,23 @@ struct ContentSettingsView: View {
         )
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), displayMode: .inline)
+    }
+}
+
+struct PushNotificationSettingsView: View {
+    @State private var granted: Bool = false
+    
+    var body: some View {
+        // TODO
+        Text("")
+            .onAppear { checkForPermissions() }
+    }
+    
+    func checkForPermissions() {
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: Constants.Application.requestedNotificationOptions,
+            completionHandler: { granted, _ in
+            self.granted = granted
+        })
     }
 }

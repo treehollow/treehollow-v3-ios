@@ -67,6 +67,7 @@ extension Post {
             text.removeLast()
         }
         
+        let hash = AvatarGenerator.hash(postId: pid, name: "")
         return PostData(
             attention: attention,
             deleted: deleted,
@@ -81,7 +82,9 @@ extension Post {
             vote: vote?.toVoteData(),
             comments: comments,
             hasURL: text.links().count > 0,
-            hasCitedNumbers: text.citations().count > 0
+            hasCitedNumbers: text.citations().count > 0,
+            hash: hash,
+            colorIndex: AvatarGenerator.colorIndex(hash: hash)
         )
     }
 }

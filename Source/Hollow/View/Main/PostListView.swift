@@ -55,7 +55,7 @@ struct PostListView: View {
                 if post.replyNumber > 0, !hideComments(for: post) {
                     VStack(spacing: 0) {
                         ForEach(post.comments.prefix(3)) { commentData in
-                            HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10)
+                            HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0)
                         }
                         let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
                         if post.replyNumber > shownReplyNumber {

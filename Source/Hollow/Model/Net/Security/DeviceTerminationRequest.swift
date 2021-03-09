@@ -38,7 +38,7 @@ struct DeviceTerminationRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (DeviceTerminationRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/security/devices/terminate" + Constants.URLConstant.urlSuffix
+        let urlPath = "v3/security/devices/terminate" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

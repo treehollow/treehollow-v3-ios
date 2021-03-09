@@ -104,7 +104,7 @@ struct HollowCommentInputView: View {
                     }
                 }
                 .onEnded { value in
-                    if value.predictedEndTranslation.height > viewSize.height / 2 {
+                    if value.predictedEndTranslation.height > viewSize.height * 2 / 3 {
                         store.replyToIndex = -2
                     }
                 }
