@@ -186,7 +186,7 @@ struct ReportMenuContent: View {
                 .padding(7)
                 .background(Color.uiColor(.secondarySystemFill))
                 .roundedCorner(10)
-                .accentColor(.hollowContentText)
+                .accentColor(.tint)
         })
 
         IntegrationUtilities.presentView(presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, content: { alertView })

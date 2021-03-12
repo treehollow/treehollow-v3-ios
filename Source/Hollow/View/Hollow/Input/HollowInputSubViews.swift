@@ -114,7 +114,7 @@ extension HollowInputView {
                                     Image(systemName: "xmark.circle.fill")
                                 }
                             }
-                            .accentColor(voteInfo.optionHasDuplicate(voteInfo.options[index]) ? .red : .hollowContentText)
+                            .accentColor(voteInfo.optionHasDuplicate(voteInfo.options[index]) ? .red : .tint)
                         }
                     )
                     

@@ -57,4 +57,7 @@ extension Color {
     static var searchButtonBackground: Color { Color("search.button.background") }
     
     static var loginBackgroundPrimary: Color { Color("login.background.primary") }
+    
+    static var tint: Color { customColor(prefix: "tint") }
+
 }

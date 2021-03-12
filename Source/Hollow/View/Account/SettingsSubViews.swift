@@ -9,6 +9,7 @@ import SwiftUI
 import Defaults
 import Kingfisher
 import Cache
+import Combine
 
 struct AppearanceSettingsView: View {
     @Default(.colorScheme) var customColorScheme
@@ -32,7 +33,7 @@ struct AppearanceSettingsView: View {
                         )
                         .foregroundColor(
                             customColorScheme == colorScheme ?
-                                .hollowContentText :  .uiColor(.systemFill)
+                                .tint : .uiColor(.systemFill)
                         )
                     }
                 }
@@ -57,7 +58,7 @@ struct ContentSettingsView: View {
                     Spacer()
                     Toggle(isOn: $fold, label: {})
                         .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: .hollowContentText))
+                        .toggleStyle(SwitchToggleStyle(tint: .tint))
                 }
                 let tags = Defaults[.hollowConfig]?.foldTags ?? []
                 if !tags.isEmpty {
@@ -79,7 +80,7 @@ struct ContentSettingsView: View {
                         Text(tag)
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.hollowContentText)
+                            .foregroundColor(.tint)
                             .imageScale(.medium)
                             .onTapGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
                                 _ = withAnimation { blockedTags.remove(at: index) }
@@ -140,11 +141,89 @@ struct ContentSettingsView: View {
 
 struct PushNotificationSettingsView: View {
     @State private var granted: Bool = false
+    @State private var isEditing = false
+    @ObservedObject private var viewModel = ViewModel()
     
     var body: some View {
-        
-        Text("")
-            .onAppear { checkForPermissions() }
+        List {
+            if !granted {
+                Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_LABEL")
+                Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+            } else {
+                ForEach(PushNotificationType.Enumeration.allCases) { type in
+                    // Read only mode
+                    Button(
+                        action: {
+                            viewModel.tempNotificationType[keyPath: type.keyPath].toggle()
+                        }) {
+                        HStack {
+                            Text(type.description)
+                            Spacer()
+                            if isEditing {
+                                let selected = viewModel.tempNotificationType[keyPath: type.keyPath]
+                                Image(
+                                    systemName: selected ? "checkmark.circle.fill" : "circle"
+                                )
+                                .foregroundColor(
+                                    selected ? .tint : .uiColor(.systemFill)
+                                )
+                            } else {
+                                if viewModel.notificationType[keyPath: type.keyPath] {
+                                    Image(systemName: "checkmark")
+                                        .imageScale(.medium)
+                                }
+                            }
+                        }
+                    }
+                    .foregroundColor(.primary)
+                    .disabled(!isEditing)
+                    
+                }
+            }
+        }
+        .defaultListStyle()
+        .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""))
+        .navigationBarItems(
+            leading: Group { if granted && isEditing {
+                Button("SETTINGSVIEW_NOTIFICATION_EDIT_CANCEL") {
+                    withAnimation { self.isEditing = false }
+                }
+            }}
+        )
+        .navigationBarItems(
+            leading: Group { if granted && isEditing {
+                Button("SETTINGSVIEW_NOTIFICATION_EDIT_CANCEL") {
+                    withAnimation { self.isEditing = false }
+                }
+            }},
+            trailing: Group { if granted {
+                Button(
+                    self.isEditing ?
+                        NSLocalizedString("SETTINGSVIEW_NOTIFICATION_SET_BUTTON", comment: "") :
+                        NSLocalizedString("SETTINGSVIEW_NOTIFICATION_EDIT_BUTTON", comment: "")
+                ) {
+                    if isEditing {
+                        // Set
+                        withAnimation {
+                            self.isEditing = false
+                        }
+                        viewModel.setPushTypes()
+                    } else {
+                        // Start
+                        withAnimation {
+                            self.isEditing = true
+                            viewModel.tempNotificationType = viewModel.notificationType
+                        }
+                    }
+                }
+            }}
+        )
+        .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
+        .modifier(AppModelBehaviour(state: viewModel.appModelState))
+        .modifier(LoadingIndicator(isLoading: viewModel.isLoading, disableWhenLoading: true))
+        .onAppear { checkForPermissions() }
     }
     
     func checkForPermissions() {
@@ -153,6 +232,58 @@ struct PushNotificationSettingsView: View {
             completionHandler: { granted, _ in
             self.granted = granted
         })
+    }
+    
+    private class ViewModel: ObservableObject, AppModelEnvironment {
+        @Published var isLoading = false
+        @Published var notificationType = Defaults[.notificationTypeCache]
+        @Published var tempNotificationType = Defaults[.notificationTypeCache]
+        @Published var errorMessage: (title: String, message: String)?
+        @Published var appModelState = AppModelState()
+        
+        var cancellables = Set<AnyCancellable>()
+        
+        init() {
+            getPushTypes()
+        }
+        
+        func getPushTypes() {
+            guard let config = Defaults[.hollowConfig],
+                  let token = Defaults[.accessToken] else { return }
+            let request = GetPushRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token))
+            withAnimation { self.isLoading = true }
+            request.publisher
+                .sinkOnMainThread(receiveError: { error in
+                    withAnimation { self.isLoading = false }
+                    self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+                }, receiveValue: { result in
+                    withAnimation { self.isLoading = false }
+                    self.notificationType = result
+                    self.tempNotificationType = result
+                    Defaults[.notificationTypeCache] = result
+                })
+                .store(in: &cancellables)
+        }
+        
+        func setPushTypes() {
+            guard tempNotificationType != Defaults[.notificationTypeCache] else { return }
+            guard let config = Defaults[.hollowConfig],
+                  let token = Defaults[.accessToken] else { return }
+            let request = SetPushRequest(configuration: .init(type: tempNotificationType, apiRoot: config.apiRootUrls, token: token))
+            withAnimation { self.isLoading = true }
+            
+            request.publisher
+                .sinkOnMainThread(receiveError: { error in
+                    withAnimation { self.isLoading = false }
+                    self.tempNotificationType = self.notificationType
+                    self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
+                }, receiveValue: { _ in
+                    Defaults[.notificationTypeCache] = self.tempNotificationType
+                    self.notificationType = self.tempNotificationType
+                    withAnimation { self.isLoading = false }
+                })
+                .store(in: &cancellables)
+        }
     }
 }
 
@@ -165,6 +296,7 @@ struct OtherSettingsView: View {
             CacheManagementView()
         }
         .defaultListStyle()
+        .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""))
     }
     
     private struct CacheManagementView: View {
@@ -181,7 +313,7 @@ struct OtherSettingsView: View {
                                 NSLocalizedString("SETTINGSVIEW_OTHER_CLEARING_LABEL", comment: "")
                         )
                         Spacer()
-                        Text(viewModel.cacheSize ?? ("SETTINGSVIEW_OTHER_CACHE_CALCULATING_LABEL" + "..."))
+                        Text(viewModel.cacheSize ?? (NSLocalizedString("SETTINGSVIEW_OTHER_CACHE_CALCULATING_LABEL", comment: "") + "..."))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -217,7 +349,7 @@ struct OtherSettingsView: View {
                     isClearing = true
                 }
                 DispatchQueue.global(qos: .background).async {
-                    try? PostCache().postStorage?.removeAll()
+                    PostCache().clear()
                     KingfisherManager.shared.cache.clearCache()
                     DispatchQueue.main.async { withAnimation {
                         self.isClearing = false

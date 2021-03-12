@@ -92,7 +92,7 @@ struct WelcomeView: View {
             // Show alert on receiving error
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         }
-        .accentColor(.hollowContentText)
+        .accentColor(.tint)
         .navigationViewStyle(StackNavigationViewStyle())
         
         .onAppear {

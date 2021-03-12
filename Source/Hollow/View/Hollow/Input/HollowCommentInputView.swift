@@ -65,7 +65,7 @@ struct HollowCommentInputView: View {
                 set: { store.text = $0 }
             )
             HollowInputTextEditor(text: bindingText, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
-                .accentColor(.hollowContentText)
+                .accentColor(.tint)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .frame(height: editorFontSize * 10)

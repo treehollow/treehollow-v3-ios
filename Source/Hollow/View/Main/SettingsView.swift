@@ -11,10 +11,15 @@ struct SettingsView: View {
     @Binding var presented: Bool
 
     var appInfo: String {
-        Constants.Application.appLocalizedName +
+        let info = Constants.Application.appLocalizedName +
             NSLocalizedString("APPINFO_VERSION_PREFIX", comment: "") +
             Constants.Application.appVersion +
             " (\(Constants.Application.buildVersion))"
+        #if DEBUG
+        return "DEBUG VERSION\n" + info
+        #else
+        return info
+        #endif
     }
 
     var body: some View {
@@ -30,22 +35,15 @@ struct SettingsView: View {
                 Section {
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_APPEARANCE_NAV_TITLE", comment: ""), destination: AppearanceSettingsView())
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), destination: ContentSettingsView())
+                    NavigationLink(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""), destination: PushNotificationSettingsView())
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
-//                    NavigationLink(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""), destination: ContentSettingsView())
                 }
                 
-                Section {
-                    NavigationLink(
-                        destination: Text(""),
-                        label: {
-                            Text("ACCOUNTVIEW_RULES_CELL")
-                        })
-                    NavigationLink(
-                        destination: Text(""),
-                        label: {
-                            Text("ACCOUNTVIEW_PRIVACY_CELL")
-                        })
-                }
+                NavigationLink(
+                    destination: Text(""),
+                    label: {
+                        Text("ACCOUNTVIEW_RULES_CELL")
+                    })
                                 
 //                Section {
 //                    // TODO: shows only when available
@@ -79,7 +77,7 @@ struct SettingsView: View {
             })
         }
         .environment(\.imageScale, .large)
-        .accentColor(.hollowContentText)
+        .accentColor(.tint)
     }
 }
 

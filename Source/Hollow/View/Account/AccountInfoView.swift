@@ -28,6 +28,7 @@ struct AccountInfoView: View {
                     .foregroundColor(.red)
             }
         }
+        .navigationBarTitle(NSLocalizedString("ACCOUNTVIEW_ACCOUNT_CELL", comment: ""))
         .defaultListStyle()
         .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
         .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
@@ -98,6 +99,7 @@ extension AccountInfoView {
                 }
                 .disabled(contentInvalid)
             }
+            .navigationBarTitle(NSLocalizedString("ACCOUNTINFOVIEW_CHANGE_PASSWORD_CELL_LABEL", comment: ""))
             .defaultListStyle()
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))

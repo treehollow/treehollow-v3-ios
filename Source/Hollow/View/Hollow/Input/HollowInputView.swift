@@ -95,7 +95,7 @@ struct HollowInputView: View {
             ]
         )
         .modifier(ErrorAlert(errorMessage: $inputStore.errorMessage))
-        .accentColor(.hollowContentText)
+        .accentColor(.tint)
         .disabled(inputStore.sending)
         .modifier(AppModelBehaviour(state: inputStore.appModelState))
     }

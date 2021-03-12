@@ -49,6 +49,12 @@ struct AboutView: View {
 
             }
             
+            NavigationLink(
+                destination: Text(""),
+                label: {
+                    Text("ACCOUNTVIEW_PRIVACY_CELL")
+                })
+            
             Section(
                 footer:
                     Text("ABOUTVIEW_OPENSOURCE_NOTICE")
@@ -66,6 +72,7 @@ struct AboutView: View {
                 Button("ABOUTVIEW_OPENSOURCE_NOTICE_LICENSE", action: {
                     openURL(URL(string: "https://www.gnu.org/licenses/agpl-3.0.html")!)
                 })
+                .accentColor(.primary)
             }
             
             Section(
@@ -79,6 +86,7 @@ struct AboutView: View {
                     }
                     .padding([.horizontal, .top])
             ) {
+
                 NavigationLink(
                     NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
                     destination: DependenciesView()

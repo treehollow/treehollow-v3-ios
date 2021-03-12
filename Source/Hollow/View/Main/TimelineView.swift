@@ -67,7 +67,7 @@ struct TimelineView: View {
                             MyButton(action: { withAnimation {
                                 hiddenAnnouncement = announcement
                             }}) {
-                                Text("Hide")
+                                Text("TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON")
                                     .dynamicFont(size: ViewConstants.plainButtonFontSize, weight: .bold)
                                     .foregroundColor(.white)
                             }

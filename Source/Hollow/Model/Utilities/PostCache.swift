@@ -67,4 +67,11 @@ struct PostCache {
     func existPost(postId: Int) -> Bool {
         return (try? postStorage?.existsObject(forKey: postId)) ?? false
     }
+    
+    func clear() {
+        try? postStorage?.removeAll()
+        try? timestampStorage?.removeAll()
+        try? postStorage?.removeExpiredObjects()
+        try? timestampStorage?.removeExpiredObjects()
+    }
 }
