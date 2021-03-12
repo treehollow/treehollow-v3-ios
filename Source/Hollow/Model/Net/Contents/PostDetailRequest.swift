@@ -63,9 +63,14 @@ struct PostDetailRequest: DefaultRequest {
             guard let post = result.post else { return nil }
             
             if result.code == 1, let cachedPost = postCache.getPost(postId: configuration.postId) {
+                // Update the color data in case of the change of the preset
+                var comments = cachedPost.comments
+                for index in comments.indices {
+                    comments[index].updateHashAndColor()
+                }
                 // The only thing that is certain to remain unchanged is the comment data,
                 // thus we need to integrate the latest result
-                let postData = post.toPostData(comments: cachedPost.comments)
+                let postData = post.toPostData(comments: comments)
                 postWrapper = PostDataWrapper(post: postData)
                 completion(postWrapper, nil)
             } else {

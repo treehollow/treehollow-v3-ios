@@ -17,7 +17,7 @@ struct HollowCiteContentView: View {
             if postData.hollowImage != nil { return "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" }
             return ""
         }
-        return "Loading" + "..."
+        return NSLocalizedString("CITECONTENTVIEW_LOADING_POST_LABEL", comment: "") + "..."
     }
     
     @Environment(\.colorScheme) var colorScheme

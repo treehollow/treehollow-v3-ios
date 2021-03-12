@@ -30,6 +30,8 @@ extension Defaults.Keys {
     static let accessToken = Key<String?>("user.access.token")
     /// Auto line switch result
     static let orderdLineStorage = Key<LineSwitchManager.OrderedLineStorage?>("net.hollow.lineswitch.orderdlinestorage")
+    /// Announcement explictly hidden by the user.
+    static let hiddenAnnouncement = Key<String>("user.hidden.announcement", default: "")
 }
 
 

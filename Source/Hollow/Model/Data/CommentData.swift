@@ -37,4 +37,9 @@ struct CommentData: Identifiable, Codable {
     // Color data used in avatar
     var hash: Int
     var colorIndex: Int
+    
+    mutating func updateHashAndColor() {
+        hash = AvatarGenerator.hash(postId: postId, name: name)
+        colorIndex = AvatarGenerator.colorIndex(hash: hash)
+    }
 }

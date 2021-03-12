@@ -81,7 +81,7 @@ extension SearchView {
                 .disableAutocorrection(true)
             }
             .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
-            .font(.system(size: body16))
+            .dynamicFont(size: 16)
             .padding(.bottom, showPost ? 0 : 5)
             if !showPost {
                 Rectangle()
@@ -142,33 +142,45 @@ extension SearchView {
                 .horizontalCenter()
                 .labelsHidden()
             
-            MyButton(action: { withAnimation {
-                if isStart {
-                    store.startDate = nil
-                    startPickerPresented = false
-                } else {
-                    store.endDate = nil
-                    endPickerPresented = false
+            HStack(spacing: 10) {
+                MyButton(
+                    action: { withAnimation {
+                        if isStart {
+                            store.startDate = nil
+                            startPickerPresented = false
+                        } else {
+                            store.endDate = nil
+                            endPickerPresented = false
+                        }
+                    }},
+                    gradient: .vertical(gradient: .init(colors: [.uiColor(.systemFill)]))) {
+                    Text("SEARCHVIEW_PICKER_CLEAR_BUTTON")
+                        .foregroundColor(.primary)
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 3)
+                        .modifier(MyButtonDefaultStyle())
                 }
-            }}) {
-                Text("SEARCHVIEW_PICKER_CLEAR_BUTTON")
-                    .padding(.horizontal, 30)
-                    .padding(.vertical, 3)
-                    .modifier(MyButtonDefaultStyle())
+                
+                MyButton(action: { withAnimation {
+                    if isStart {
+                        startPickerPresented = false
+                    } else {
+                        endPickerPresented = false
+                    }
+                }}) {
+                    Text("SEARCHVIEW_PICKER_CONFIRM_BUTTON")
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 3)
+                        .modifier(MyButtonDefaultStyle())
+                }
+
             }
             .padding(.vertical)
-
+            
         }
         .background(
             Blur(style: .systemUltraThinMaterial)
                 .edgesIgnoringSafeArea(.all)
-                // Dismiss the view when the user tap outside the picker
-                .onTapGesture {
-                    withAnimation {
-                        if isStart { startPickerPresented = false }
-                        else { endPickerPresented = false }
-                    }
-                }
         )
     }
 }

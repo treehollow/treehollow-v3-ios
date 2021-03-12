@@ -1,5 +1,5 @@
 //
-//  AvatarWrapper.swift
+//  Avatar.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/2/15.
@@ -7,9 +7,8 @@
 //
 
 import SwiftUI
-import AvatarX
 
-struct AvatarWrapper: View {
+struct Avatar: View {
     var colors: [Color]
     var paddingColor: Color
     var resolution: Int
@@ -30,11 +29,12 @@ struct AvatarWrapper: View {
                         let index = x * resolution + y
                         Rectangle()
                             .foregroundColor(colors[index])
+                            .aspectRatio(1, contentMode: .fill)
                     }
                 }
             }
         }
-        .aspectRatio(1, contentMode: .fit)
+        .aspectRatio(1, contentMode: .fill)
         .padding(padding)
         .background(paddingColor)
     }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Defaults
+import Kingfisher
+import Cache
 
 struct AppearanceSettingsView: View {
     @Default(.colorScheme) var customColorScheme
@@ -140,7 +142,7 @@ struct PushNotificationSettingsView: View {
     @State private var granted: Bool = false
     
     var body: some View {
-        // TODO
+        
         Text("")
             .onAppear { checkForPermissions() }
     }
@@ -151,5 +153,78 @@ struct PushNotificationSettingsView: View {
             completionHandler: { granted, _ in
             self.granted = granted
         })
+    }
+}
+
+struct OtherSettingsView: View {
+    @State private var isLoading = false
+    @State private var cacheSize: String?
+    
+    var body: some View {
+        List {
+            CacheManagementView()
+        }
+        .defaultListStyle()
+    }
+    
+    private struct CacheManagementView: View {
+        @ObservedObject private var viewModel = ViewModel()
+        
+        var body: some View {
+            Section(
+                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER").padding(.horizontal)) {
+                Button(action: viewModel.clearCache) {
+                    HStack {
+                        Text(
+                            !viewModel.isClearing ?
+                                NSLocalizedString("SETTINGSVIEW_OTHER_CLEAR_CACHE_BUTTON", comment: "") :
+                                NSLocalizedString("SETTINGSVIEW_OTHER_CLEARING_LABEL", comment: "")
+                        )
+                        Spacer()
+                        Text(viewModel.cacheSize ?? ("SETTINGSVIEW_OTHER_CACHE_CALCULATING_LABEL" + "..."))
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .disabled(viewModel.isClearing)
+            }
+        }
+        
+        private class ViewModel: ObservableObject {
+            @Published var cacheSize: String?
+            @Published var isClearing = false
+            
+            init() {
+                getSize()
+            }
+            
+            func getSize() {
+                DispatchQueue.global(qos: .background).async {
+                    KingfisherManager.shared.cache.calculateDiskStorageSize(completion: { result in
+                        if let count = try? result.get() {
+                            let formatter = ByteCountFormatter()
+                            formatter.allowedUnits = [.useMB]
+                            formatter.countStyle = .file
+                            DispatchQueue.main.async {
+                                self.cacheSize = formatter.string(fromByteCount: Int64(count))
+                            }
+                        }
+                    })
+                }
+            }
+            
+            func clearCache() {
+                withAnimation {
+                    isClearing = true
+                }
+                DispatchQueue.global(qos: .background).async {
+                    try? PostCache().postStorage?.removeAll()
+                    KingfisherManager.shared.cache.clearCache()
+                    DispatchQueue.main.async { withAnimation {
+                        self.isClearing = false
+                        self.getSize()
+                    }}
+                }
+            }
+        }
     }
 }

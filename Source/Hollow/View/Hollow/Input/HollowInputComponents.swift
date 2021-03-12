@@ -12,12 +12,13 @@ struct HollowInputTextEditor: View {
     @Binding var text: String
     @Binding var editorEditing: Bool
     var placeholder: String
+    var startEditingOnAppear = false
     var receiveCallback = false
     
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     
     var body: some View {
-        CustomTextEditor(text: $text, editing: $editorEditing, receiveCallback: receiveCallback, modifiers: { $0 })
+        CustomTextEditor(text: $text, editing: $editorEditing, receiveCallback: receiveCallback, editOnAppear: startEditingOnAppear, modifiers: { $0 })
             .overlayDoneButtonAndLimit(
                 editing: $editorEditing,
                 textCount: text.count,
@@ -35,7 +36,7 @@ struct HollowInputAvatar: View {
     var avatarWidth: CGFloat
     var hash: Int
     var body: some View {
-        AvatarWrapper(
+        Avatar(
             foregroundColor: .buttonGradient1,
             backgroundColor: .background,
             resolution: 6,

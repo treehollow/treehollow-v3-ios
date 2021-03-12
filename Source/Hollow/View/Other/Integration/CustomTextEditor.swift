@@ -14,11 +14,12 @@ struct CustomTextEditor<Content>: View where Content: View {
     @Binding var text: String
     @Binding var editing: Bool
     var receiveCallback = false
+    var editOnAppear = false
 
     let modifiers: (TextEditor) -> Content
     
     var body: some View {
-        TextEditorRepresentable(text: $text, editing: $editing, receiveCallback: receiveCallback, content: modifiers(TextEditor(text: $text)))
+        TextEditorRepresentable(text: $text, editing: $editing, receiveCallback: receiveCallback, editOnAppear: editOnAppear, content: modifiers(TextEditor(text: $text)))
     }
 }
 
@@ -28,10 +29,11 @@ fileprivate struct TextEditorRepresentable<Content>: UIViewControllerRepresentab
     var text: Binding<String>
     var editing: Binding<Bool>
     var receiveCallback: Bool
+    var editOnAppear: Bool
     let content: Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<TextEditorRepresentable<Content>>) -> TextEditorUIHostingController<Content> {
-        return TextEditorUIHostingController(text: text, textViewEditing: editing, receiveCallback: receiveCallback, rootView: self.content)
+        return TextEditorUIHostingController(text: text, textViewEditing: editing, receiveCallback: receiveCallback, editOnAppear: editOnAppear, rootView: self.content)
     }
     
     func updateUIViewController(_ uiViewController: TextEditorUIHostingController<Content>, context: UIViewControllerRepresentableContext<TextEditorRepresentable<Content>>) {
@@ -44,16 +46,18 @@ fileprivate struct TextEditorRepresentable<Content>: UIViewControllerRepresentab
     }
 }
 
-fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Content>, UITextViewDelegate where Content: View {
+fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Content>, UITextViewDelegate, UIGestureRecognizerDelegate where Content: View {
     var text: Binding<String>
     var textViewEditing: Binding<Bool>
     var textView: UITextView?
     var receiveCallback: Bool
+    var editOnAppear: Bool
     
-    init(text: Binding<String>, textViewEditing: Binding<Bool>, receiveCallback: Bool, rootView: Content) {
+    init(text: Binding<String>, textViewEditing: Binding<Bool>, receiveCallback: Bool, editOnAppear: Bool, rootView: Content) {
         self.text = text
         self.textViewEditing = textViewEditing
         self.receiveCallback = receiveCallback
+        self.editOnAppear = editOnAppear
         super.init(rootView: rootView)
     }
     
@@ -78,6 +82,10 @@ fileprivate class TextEditorUIHostingController<Content>: UIHostingController<Co
         
         textView = findUITextView(view: view)
         textView?.backgroundColor = nil
+        
+        if editOnAppear {
+            textView?.becomeFirstResponder()
+        }
         
         if receiveCallback {
             // Once we set the delegate to `self`, some of the original functionality

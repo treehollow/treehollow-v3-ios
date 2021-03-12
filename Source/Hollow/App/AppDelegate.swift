@@ -22,6 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Perform test in test environment.
         // Add the modules you want to test in `options`.
         Test.performTest(options: [])
+        Defaults[.hollowType] = .pku
         #else
         
         // Start AppCenter services
@@ -56,7 +57,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Temporarily save the token in defaults. We are not using this
         // default except registering or logging in for the first time.
         Defaults[.deviceToken] = deviceToken
-        print(deviceToken.hexEncodedString())
         
         // Try to send the token to the server, if we have a user token.
         if let accessToken = Defaults[.accessToken] {

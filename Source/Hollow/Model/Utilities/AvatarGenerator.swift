@@ -26,10 +26,10 @@ struct AvatarGenerator {
         let int32PostId = Int32(postId)
         var hash = Int32(5381)
         for _ in 0..<20 {
-            hash &+= (hash << 5) + int32PostId
+            hash &+= (hash << 5) &+ int32PostId
         }
         for character in name {
-            hash &+= (hash << 5) + Int32(character.asciiValue ?? 0)
+            hash &+= (hash << 5) &+ Int32(character.asciiValue ?? 0)
         }
         hash = (hash >> 8) ^ hash
         return Int(hash)
@@ -39,7 +39,6 @@ struct AvatarGenerator {
         let colors = ViewConstants.avatarTintColors
         let newValue = Int(Int32(hash) &>> 18)
         var colorIndex = newValue % colors.count
-        print(colorIndex)
         if colorIndex < 0 {
             colorIndex += colors.count
         }

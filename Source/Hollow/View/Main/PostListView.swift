@@ -38,8 +38,6 @@ struct PostListView: View {
         return false
     }
     
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
-    
     var body: some View {
         ForEach(postDataWrappers) { postDataWrapper in
             let post = postDataWrapper.post
@@ -55,7 +53,7 @@ struct PostListView: View {
                 if post.replyNumber > 0, !hideComments(for: post) {
                     VStack(spacing: 0) {
                         ForEach(post.comments.prefix(3)) { commentData in
-                            HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0)
+                            HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0, postHash: 0)
                         }
                         let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
                         if post.replyNumber > shownReplyNumber {
@@ -67,7 +65,7 @@ struct PostListView: View {
                             let text1 = NSLocalizedString("TIMELINE_CARD_COMMENTS_HAIYOU", comment: "")
                             let text2 = NSLocalizedString("TIMELINE_CARD_COMMENTS_TIAOPINGLUN", comment: "")
                             Text(text1 + "\(post.replyNumber - shownReplyNumber)" + text2)
-                                .font(.system(size: body15)).lineSpacing(post.comments.count == 0 ? 0 : 3)
+                                .dynamicFont(size: 15).lineSpacing(post.comments.count == 0 ? 0 : 3)
                                 
                                 .foregroundColor(.uiColor(.secondaryLabel))
                                 .padding(.top)
@@ -79,7 +77,6 @@ struct PostListView: View {
             .background(Color.hollowCardBackground)
             .roundedCorner(13)
             .fixedSize(horizontal: false, vertical: true)
-            .contentShape(RoundedRectangle(cornerRadius: 8))
             .padding(.bottom)
             .onTapGesture {
                 guard let index = postDataWrappers.firstIndex(where: { $0.id == postDataWrapper.id }) else { return }

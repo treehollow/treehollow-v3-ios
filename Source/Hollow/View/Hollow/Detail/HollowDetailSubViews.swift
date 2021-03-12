@@ -12,43 +12,31 @@ extension HollowDetailView {
     @ViewBuilder var commentView: some View {
         let postData = store.postDataWrapper.post
         
-        LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
-            Section(
-                header:
-                    VStack(spacing: 0) {
-                        HStack {
-                            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
-                                .fontWeight(.heavy)
-                            Spacer()
-                            Button(action: {
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                                store.replyToIndex = -1
-                            }) {
-                                Text("HOLLOWDETAIL_COMMENTS_NEW_COMMENT_BUTTON")
-                                    .fontWeight(.medium)
-                                    .font(.system(size: newCommentLabelSize))
-                                    .lineLimit(1)
-                            }
-                            .accentColor(.hollowContentVoteGradient1)
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, commentHeaderPadding)
-                        .background(Color.hollowDetailBackground)
-                    }
-                
-            ) {
+        (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+            .fontWeight(.heavy)
+            .leading()
+            .padding(.top)
+            .padding(.bottom, 5)
+
+        if postData.comments.count > 30 {
+            LazyVStack {
                 ForEach(postData.comments) { comment in
                     commentView(for: comment)
                 }
-                .padding(.horizontal)
             }
+        } else {
+            VStack {
+                ForEach(postData.comments) { comment in
+                    commentView(for: comment)
+                }
+            }
+            
         }
-
-        if store.isLoading {
-            LoadingLabel(foregroundColor: .primary)
-                .leading()
-                .padding(.horizontal)
-        }
+        LoadingLabel(foregroundColor: .primary)
+            .leading()
+            .opacity(store.isLoading ? 1 : 0)
+        
+        Spacer(minLength: commentViewBottomPadding)
     }
     
     func commentView(for comment: CommentData) -> some View {
@@ -67,7 +55,7 @@ extension HollowDetailView {
                     }
                 }
             )
-            HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
+            HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, postHash: store.postDataWrapper.post.hash, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
                 .id(index)
                 .contentShape(RoundedRectangle(cornerRadius: 10))
                 .background(
@@ -126,7 +114,6 @@ extension HollowDetailView {
                         commentId: comment.commentId
                     )
                 }
-            
         }}
     }
 }

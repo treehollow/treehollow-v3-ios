@@ -64,7 +64,7 @@ extension Comment {
             text?.removeLast()
         }
         
-        let hash = AvatarGenerator.hash(postId: pid, name: name)
+        let hash = AvatarGenerator.hash(postId: pid, name: isDz ? "" : name)
 
         return CommentData(
             commentId: cid,

@@ -84,6 +84,7 @@ struct ImageViewer: View {
                 })
             ])
         }
+        .statusBar(hidden: true)
         
         .modifier(ErrorAlert(errorMessage: $savePhotoMessage))
 

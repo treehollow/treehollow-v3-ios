@@ -53,6 +53,9 @@ extension String {
     }
     
     func citationNumbers() -> [Int] {
+        // Won't scan for long long long long string
+        if self.count > 4000 { return [] }
+
         return self.citations()
             .compactMap({ Int(String($0.dropFirst())) })
             .dropDuplicates()
@@ -60,6 +63,8 @@ extension String {
     }
     
     func rangeForLink() -> [Range<String.Index>] {
+        // Won't scan for long long long long string
+        if self.count > 4000 { return [] }
         let types: NSTextCheckingResult.CheckingType = [.link]
         let detector = try! NSDataDetector(types: types.rawValue)
         let matches = detector.matches(in: self, range: NSRange(self.startIndex..., in: self))

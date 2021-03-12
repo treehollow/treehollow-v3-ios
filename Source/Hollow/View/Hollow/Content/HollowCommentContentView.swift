@@ -15,6 +15,7 @@ struct HollowCommentContentView: View {
     var contentVerticalPadding: CGFloat? = 10
     var hideLabel: Bool = false
     var postColorIndex: Int
+    var postHash: Int
     var imageReloadHandler: ((HollowImage) -> Void)? = nil
     private let compactLineLimit = 3
     private var nameLabelWidth: CGFloat {
@@ -146,25 +147,15 @@ struct HollowCommentContentView: View {
         let postTintColor = ViewConstants.avatarTintColors[postColorIndex]
         let commentTintColor = ViewConstants.avatarTintColors[commentData.colorIndex]
         let color = commentData.isDz ? postTintColor : commentTintColor
-        Group {
-            if commentData.isDz {
-                AvatarWrapper(
-                    foregroundColor: color,
-                    backgroundColor: .white,
-                    resolution: 6,
-                    padding: avatarWidth * 0.1,
-                    hashValue: commentData.hash
-                )
-            } else {
-                AvatarWrapper(
-                    foregroundColor: color,
-                    backgroundColor: .white,
-                    resolution: 4,
-                    padding: avatarWidth * 0.1,
-                    hashValue: commentData.hash
-                )
-            }
-        }
+        let hash = commentData.isDz ? postHash : commentData.hash
+        let resolution = commentData.isDz ? 6 : 4
+        Avatar(
+            foregroundColor: color,
+            backgroundColor: .white,
+            resolution: resolution,
+            padding: avatarWidth * 0.1,
+            hashValue: hash
+        )
         .frame(width: avatarWidth)
         .clipShape(Circle())
         .overlay(Circle().stroke(lineWidth: 2).foregroundColor(color))

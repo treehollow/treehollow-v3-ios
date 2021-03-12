@@ -21,4 +21,13 @@ extension Gradient {
     static var button: Gradient {
         return Gradient(colors: [.buttonGradient1, .buttonGradient2])
     }
+    
+    func opacity(_ opacity: Double) -> Gradient {
+        let stops: [Gradient.Stop] = self.stops.map({
+            var stop = $0
+            stop.color = stop.color.opacity(opacity)
+            return stop
+        })
+        return Gradient(stops: stops)
+    }
 }

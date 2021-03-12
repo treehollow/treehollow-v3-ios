@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "AvatarX",
-        "repositoryURL": "git://github.com/liang2kl/AvatarX.git",
-        "state": {
-          "branch": null,
-          "revision": "f96b4f131dec159af18c7e0fa053e7a6b8b6bdd2",
-          "version": "0.1.0"
-        }
-      },
-      {
         "package": "Cache",
         "repositoryURL": "git://github.com/hyperoslo/Cache.git",
         "state": {

@@ -14,7 +14,7 @@
 		0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7A925D4D73100DC5615 /* ImageViewer.swift */; };
 		0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */; };
 		0E09B7BB25D52F4F00DC5615 /* HollowInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */; };
-		0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */; };
+		0E1DD7D625D983BE000D27BA /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D525D983BE000D27BA /* Avatar.swift */; };
 		0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */; };
 		0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */; };
 		0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */; };
@@ -23,7 +23,6 @@
 		0E28BC1C25F4ED8200A97820 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC1B25F4ED8200A97820 /* Alamofire */; };
 		0E28BC2025F4EE7B00A97820 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC1F25F4EE7B00A97820 /* AppCenterCrashes */; };
 		0E28BC2225F4EE7B00A97820 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2125F4EE7B00A97820 /* AppCenterAnalytics */; };
-		0E28BC2625F4EE9E00A97820 /* AvatarX in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2525F4EE9E00A97820 /* AvatarX */; };
 		0E28BC2925F4EED000A97820 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2825F4EED000A97820 /* Cache */; };
 		0E28BC2D25F4EF4D00A97820 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2C25F4EF4D00A97820 /* Kingfisher */; };
 		0E28BC3125F4EF7300A97820 /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC3025F4EF7300A97820 /* Connectivity */; };
@@ -98,6 +97,9 @@
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
+		0E6EF31825F9C3D2001293FE /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EF31725F9C3D2001293FE /* FloatButton.swift */; };
+		0E6EF31B25F9DFDE001293FE /* View+dynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */; };
+		0E6EF32B25FB6C05001293FE /* dependencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EF32A25FB6C05001293FE /* dependencies.json */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
 		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
@@ -195,7 +197,7 @@
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
 		0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputStore.swift; sourceTree = "<group>"; };
-		0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarWrapper.swift; sourceTree = "<group>"; };
+		0E1DD7D525D983BE000D27BA /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		0E1DD7D825DA4B91000D27BA /* AppModelBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelBehaviour.swift; sourceTree = "<group>"; };
 		0E1DD7DB25DA4BE5000D27BA /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
@@ -275,6 +277,9 @@
 		0E58811A25EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
+		0E6EF31725F9C3D2001293FE /* FloatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButton.swift; sourceTree = "<group>"; };
+		0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+dynamicFont.swift"; sourceTree = "<group>"; };
+		0E6EF32A25FB6C05001293FE /* dependencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dependencies.json; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
@@ -372,7 +377,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E28BC2625F4EE9E00A97820 /* AvatarX in Frameworks */,
 				0E28BC2925F4EED000A97820 /* Cache in Frameworks */,
 				0E28BC1C25F4ED8200A97820 /* Alamofire in Frameworks */,
 				0E28BC1925F4ED2D00A97820 /* Defaults in Frameworks */,
@@ -423,6 +427,7 @@
 				0E906CB825DCEAC80034053C /* Model */,
 				0E415B3225CD772200351672 /* ViewModel */,
 				0E415AE825CD772200351672 /* View */,
+				0E6EF32925FB6962001293FE /* Resources */,
 				0E4284BC25CE2A96008F134A /* Hollow.entitlements */,
 				0E415A7725CD769F00351672 /* Assets.xcassets */,
 				0E415A7C25CD769F00351672 /* Info.plist */,
@@ -509,6 +514,7 @@
 				0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */,
 				0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */,
 				0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */,
+				0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -522,9 +528,10 @@
 				0E415B0525CD772200351672 /* MyButton.swift */,
 				0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */,
 				0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */,
-				0E1DD7D525D983BE000D27BA /* AvatarWrapper.swift */,
+				0E1DD7D525D983BE000D27BA /* Avatar.swift */,
 				0E8BCFE225E095A90056D809 /* StyledAlert.swift */,
 				0EA2D50E25EF9F41003D539E /* SearchBar.swift */,
+				0E6EF31725F9C3D2001293FE /* FloatButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -685,6 +692,14 @@
 				0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		0E6EF32925FB6962001293FE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0E6EF32A25FB6C05001293FE /* dependencies.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		0E8BCFE525E0A45F0056D809 /* Utilities */ = {
@@ -895,7 +910,6 @@
 				0E28BC1B25F4ED8200A97820 /* Alamofire */,
 				0E28BC1F25F4EE7B00A97820 /* AppCenterCrashes */,
 				0E28BC2125F4EE7B00A97820 /* AppCenterAnalytics */,
-				0E28BC2525F4EE9E00A97820 /* AvatarX */,
 				0E28BC2825F4EED000A97820 /* Cache */,
 				0E28BC2C25F4EF4D00A97820 /* Kingfisher */,
 				0E28BC3025F4EF7300A97820 /* Connectivity */,
@@ -935,7 +949,6 @@
 				0E28BC1725F4ED2D00A97820 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E28BC1A25F4ED8200A97820 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E28BC1E25F4EE7B00A97820 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
-				0E28BC2425F4EE9D00A97820 /* XCRemoteSwiftPackageReference "AvatarX" */,
 				0E28BC2725F4EED000A97820 /* XCRemoteSwiftPackageReference "Cache" */,
 				0E28BC2B25F4EF4D00A97820 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0E28BC2F25F4EF7300A97820 /* XCRemoteSwiftPackageReference "Connectivity" */,
@@ -955,6 +968,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6EF32B25FB6C05001293FE /* dependencies.json in Resources */,
 				0E415A7B25CD769F00351672 /* Preview Assets.xcassets in Resources */,
 				0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */,
 				0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */,
@@ -1014,6 +1028,7 @@
 				0EA2D51225F0A53F003D539E /* View+swipeToDismiss.swift in Sources */,
 				0E906D3125DCEADD0034053C /* ImageCompressor.swift in Sources */,
 				00B014ED25E1205A004E416E /* PostCache.swift in Sources */,
+				0E6EF31825F9C3D2001293FE /* FloatButton.swift in Sources */,
 				0E294E9C25F2405C001E4C08 /* View+roundedCorner.swift in Sources */,
 				0E415B6325CD772200351672 /* HollowCommentContentView.swift in Sources */,
 				0E906CFE25DCEADD0034053C /* SearchRequest.swift in Sources */,
@@ -1027,7 +1042,7 @@
 				0E906D1925DCEADD0034053C /* RequestError.swift in Sources */,
 				0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */,
 				0E906D0125DCEADD0034053C /* AttentionListRequest.swift in Sources */,
-				0E1DD7D625D983BE000D27BA /* AvatarWrapper.swift in Sources */,
+				0E1DD7D625D983BE000D27BA /* Avatar.swift in Sources */,
 				0E28BC4A25F60EB400A97820 /* AccountInfoViewModel.swift in Sources */,
 				0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */,
 				0E906D3925DCEBF20034053C /* Test.swift in Sources */,
@@ -1111,6 +1126,7 @@
 				0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */,
 				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,
 				0E415B6825CD772200351672 /* HollowTextView.swift in Sources */,
+				0E6EF31B25F9DFDE001293FE /* View+dynamicFont.swift in Sources */,
 				0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */,
 				0E906D0925DCEADD0034053C /* LoginRequest.swift in Sources */,
 				0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */,
@@ -1386,14 +1402,6 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		0E28BC2425F4EE9D00A97820 /* XCRemoteSwiftPackageReference "AvatarX" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git://github.com/liang2kl/AvatarX.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
 		0E28BC2725F4EED000A97820 /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git://github.com/hyperoslo/Cache.git";
@@ -1453,11 +1461,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E28BC1E25F4EE7B00A97820 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
-		};
-		0E28BC2525F4EE9E00A97820 /* AvatarX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E28BC2425F4EE9D00A97820 /* XCRemoteSwiftPackageReference "AvatarX" */;
-			productName = AvatarX;
 		};
 		0E28BC2825F4EED000A97820 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -24,8 +24,8 @@ class AppModel: ObservableObject {
         ConnectivityPublisher()
             .map { $0.status.isConnected }
             .removeDuplicates(by: { $0 == $1 })
-            .sinkOnMainThread(receiveValue: { _ in
-                LineSwitchManager.testAll()
+            .sinkOnMainThread(receiveValue: { connected in
+                if connected { LineSwitchManager.testAll() }
             })
             .store(in: &cancellables)
     }

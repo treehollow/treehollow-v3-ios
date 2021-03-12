@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct TimelineView: View {
     @Binding var isSearching: Bool
@@ -23,6 +24,8 @@ struct TimelineView: View {
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     
     @State var detailStore: HollowDetailStore? = nil
+    @Default(.hollowConfig) var hollowConfig
+    @Default(.hiddenAnnouncement) var hiddenAnnouncement
     private var searchBarHeight: CGFloat { searchBarSize.height }
     
     /// Maximum cards to be displayed none-lazily.
@@ -48,6 +51,34 @@ struct TimelineView: View {
                     
                     Color.background.frame(height: body14 / 2)
                         .id(-1)
+                    
+                    if let announcement = hollowConfig?.announcement,
+                       announcement != hiddenAnnouncement {
+                        VStack(alignment: .leading) {
+                            Label(
+                                NSLocalizedString("TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE", comment: ""),
+                                systemImage: "megaphone.fill"
+                            )
+                            .padding(.bottom, 10)
+                            .dynamicFont(size: 17, weight: .bold)
+                            .foregroundColor(.hollowContentText)
+                            Text(announcement)
+                                .dynamicFont(size: 16)
+                            MyButton(action: { withAnimation {
+                                hiddenAnnouncement = announcement
+                            }}) {
+                                Text("Hide")
+                                    .dynamicFont(size: ViewConstants.plainButtonFontSize, weight: .bold)
+                                    .foregroundColor(.white)
+                            }
+                            .trailing()
+                        }
+                        .padding()
+                        .background(Color.hollowCardBackground)
+                        .roundedCorner(13)
+                        .padding([.bottom, .horizontal])
+                    }
+                    
                     LazyVStack(spacing: 0) {
                         PostListView(
                             postDataWrappers: $viewModel.posts,

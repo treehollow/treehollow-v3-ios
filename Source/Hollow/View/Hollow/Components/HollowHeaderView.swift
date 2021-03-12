@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import AvatarX
 
 struct HollowHeaderView: View {
     var postData: PostData
@@ -41,7 +40,7 @@ struct _HollowHeaderView<MenuContent: View>: View {
         HStack(alignment: .center) {
             HStack(alignment: .top) {
                 let tintColor = ViewConstants.avatarTintColors[postData.colorIndex]
-                AvatarWrapper(
+                Avatar(
                     foregroundColor: tintColor,
                     backgroundColor: .white,
                     resolution: 6,

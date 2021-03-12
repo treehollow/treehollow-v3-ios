@@ -30,6 +30,7 @@ struct SettingsView: View {
                 Section {
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_APPEARANCE_NAV_TITLE", comment: ""), destination: AppearanceSettingsView())
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), destination: ContentSettingsView())
+                    NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
 //                    NavigationLink(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""), destination: ContentSettingsView())
                 }
                 
@@ -60,7 +61,7 @@ struct SettingsView: View {
                         .padding(.horizontal)
                 ) {
                     NavigationLink(
-                        destination: Text(""),
+                        destination: AboutView(),
                         label: {
                             Text("ACCOUNTVIEW_ABOUT_CELL")
                         })

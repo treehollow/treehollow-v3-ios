@@ -23,11 +23,15 @@ struct MessageView: View {
     var body: some View {
         VStack(spacing: 0) {
             topBar
-            if page == .message {
-                systemMessageView
-            } else if page == .attention {
+            CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
                 attentionListView
+                    .tag(Page.attention)
+                systemMessageView
+                    .tag(Page.message)
             }
+            .ignoresSafeArea()
+            // To avoid conflict with swipe gesture
+            .padding(.leading)
         }
         .defaultBlurBackground(hasPost: true)
         .overlay(Group { if isSearching {
@@ -88,8 +92,7 @@ extension MessageView {
             }
             .padding(.top)
         }}
-        .ignoresSafeArea()
-        .padding(.horizontal)
+        .padding(.trailing)
         .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
         .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
         .modifier(AppModelBehaviour(state: messageStore.appModelState))
@@ -112,8 +115,7 @@ extension MessageView {
                 )
             }
         }
-        .padding(.horizontal)
-        .ignoresSafeArea()
+        .padding(.trailing)
         .modifier(AppModelBehaviour(state: postListStore.appModelState))
         .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))

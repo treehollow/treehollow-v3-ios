@@ -15,10 +15,7 @@ struct MainView: View {
     @State private var showTrending = false
     @State private var showCreatePost = false
     @State private var showMessage = false
-    
-    @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
-    @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
-    
+        
     // Initialize time line view model here to avoid creating repeatedly
     let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly
@@ -51,19 +48,19 @@ struct MainView: View {
                 // Overlay circular buttons
                 .overlay(
                     Group { if !showCreatePost {
-                        button(
+                        FloatButton(
                             action: {
                                 withAnimation { showCreatePost = true }
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             },
-                            systemName: "plus"
+                            systemImageName: "plus"
                         )
+                        .bottom()
+                        .trailing()
+                        .padding()
+                        .padding(5)
+                        .padding(.bottom, 5)
                     }}
-                    .bottom()
-                    .trailing()
-                    .padding()
-                    .padding(5)
-                    .padding(.bottom, 5)
                 )
             }
             .edgesIgnoringSafeArea(.bottom)
@@ -102,19 +99,6 @@ struct MainView: View {
 }
 
 extension MainView {
-    func button(action: @escaping () -> Void, systemName: String) -> some View {
-        Button(action: action) {
-            ZStack {
-                LinearGradient.vertical(gradient: .hollowContentVote)
-                Image(systemName: systemName)
-                    .font(.system(size: body30))
-                    .foregroundColor(.white)
-            }
-        }
-        .frame(width: body50, height: body50)
-        .clipShape(Circle())
-    }
-    
     private struct HeaderView: View {
         @Binding var page: MainView.Page
         @Binding var isSearching: Bool
@@ -122,10 +106,6 @@ extension MainView {
         @Binding var showMessage: Bool
 
         @State private var accountPresented = false
-        
-        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var iconSize: CGFloat
-        @ScaledMetric(wrappedValue: 22, relativeTo: .body) var tabSelectedSize: CGFloat
-        @ScaledMetric(wrappedValue: 18, relativeTo: .body) var tabUnselectedSize: CGFloat
 
         var body: some View {
             HStack(spacing: 2) {
@@ -162,7 +142,7 @@ extension MainView {
                             .padding(.leading, 7)
                     }
                 }
-                .font(.system(size: iconSize, weight: .medium))
+                .dynamicFont(size: 20, weight: .medium)
                 .foregroundColor(.mainBarButton)
             }
             .fullScreenCover(isPresented: $accountPresented, content: {
@@ -174,7 +154,7 @@ extension MainView {
         private func mainTabText(text: String, selected: Bool) -> some View {
             return Text(text)
                 .fontWeight(.heavy)
-                .font(.system(size: selected ? tabSelectedSize : tabUnselectedSize))
+                .dynamicFont(size: selected ? 22 : 18)
                 .foregroundColor(selected ? .mainPageSelected : .mainPageUnselected)
                 .lineLimit(1)
         }

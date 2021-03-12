@@ -43,6 +43,11 @@ struct PostData: Identifiable, Codable {
     // Color data used in avatar
     var hash: Int
     var colorIndex: Int
+    
+    mutating func updateHashAndColor() {
+        hash = AvatarGenerator.hash(postId: postId, name: "")
+        colorIndex = AvatarGenerator.colorIndex(hash: hash)
+    }
 }
 
 typealias CitedPostData = PostData
@@ -63,7 +68,9 @@ struct PostDataWrapper: Identifiable {
 
 extension PostDataWrapper {
     static func templatePost(for postId: Int) -> PostDataWrapper {
-        let post = PostData(attention: false, deleted: false, likeNumber: 0, permissions: [], postId: postId, replyNumber: 0, timestamp: Date(), tag: nil, text: "", hollowImage: nil, vote: nil, comments: [], loadingError: nil, hash: AvatarGenerator.hash(postId: postId, name: ""), colorIndex: 0)
+        let hash = AvatarGenerator.hash(postId: postId, name: "")
+        let colorIndex = AvatarGenerator.colorIndex(hash: hash)
+        let post = PostData(attention: false, deleted: false, likeNumber: 0, permissions: [], postId: postId, replyNumber: 0, timestamp: Date(), tag: nil, text: "", hollowImage: nil, vote: nil, comments: [], loadingError: nil, hash: hash, colorIndex: colorIndex)
         return PostDataWrapper(post: post, citedPost: nil)
     }
 }

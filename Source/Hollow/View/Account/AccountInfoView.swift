@@ -11,6 +11,7 @@ import Defaults
 
 struct AccountInfoView: View {
     @ObservedObject var viewModel = AccountInfoViewModel()
+    @State private var logoutAlertPresented = false
     var body: some View {
         List {
             Section {
@@ -23,7 +24,7 @@ struct AccountInfoView: View {
                 )
             }
             Section {
-                Button("ACCOUNTVIEW_LOGOUT_BUTTON", action: viewModel.logout)
+                Button("ACCOUNTVIEW_LOGOUT_BUTTON", action: { logoutAlertPresented = true })
                     .foregroundColor(.red)
             }
         }
@@ -32,6 +33,19 @@ struct AccountInfoView: View {
         .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         .modifier(AppModelBehaviour(state: viewModel.appModelState))
         .disabled(viewModel.isLoading)
+        .styledAlert(
+            presented: $logoutAlertPresented,
+            title: NSLocalizedString("ACCOUNTVIEW_LOGOUT_ALERT_TITLE", comment: ""),
+            message: nil,
+            buttons: [
+                .init(
+                    text: NSLocalizedString("ACCOUNTVIEW_LOGOUT_BUTTON", comment: ""),
+                    style: .destructive,
+                    action: viewModel.logout
+                ),
+                .cancel
+            ]
+        )
     }
 }
 

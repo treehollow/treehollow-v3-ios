@@ -30,11 +30,20 @@ struct AppModelBehaviour: ViewModifier {
             // Handle entering main view
             .onChange(of: state.shouldShowMainView) { show in
                 withAnimation { appModel.isInMainView = show }
+                if !show { restoreDefaults() }
             }
         
             // Handle expired state
             .onChange(of: state.tokenExpired) { tokenExpired in
                 withAnimation { appModel.tokenExpired = tokenExpired }
             }
+    }
+    
+    private func restoreDefaults() {
+        Defaults.Keys.customConfigURL.reset()
+        Defaults.Keys.accessToken.reset()
+        Defaults.Keys.hiddenAnnouncement.reset()
+        Defaults.Keys.deviceListCache.reset()
+        Defaults.Keys.notificationTypeCache.reset()
     }
 }

@@ -19,13 +19,13 @@ struct HollowDetailView: View {
     private let scrollToAnchor = UnitPoint(x: 0.5, y: 0.1)
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
-    @ScaledMetric(wrappedValue: 11, relativeTo: .body) var commentHeaderPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
+    @ScaledMetric var commentViewBottomPadding: CGFloat = 40
     
     @Environment(\.openURL) var openURL
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        // FIXME: Handlers
         ZStack {
             Color.hollowDetailBackground.edgesIgnoringSafeArea(.all)
             VStack(spacing: 0) {
@@ -87,7 +87,6 @@ struct HollowDetailView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .id(-1)
                         }}
-                        .padding(.horizontal)
                         
                         Spacer().frame(height: 0)
                             // Get the frame of the comment view.
@@ -119,6 +118,7 @@ struct HollowDetailView: View {
                                 }
                             }
                     }
+                    .padding(.horizontal)
                     .background(Color.hollowDetailBackground)
                     .coordinateSpace(name: "detail.scrollview.content")
                 }
@@ -126,23 +126,40 @@ struct HollowDetailView: View {
                 .disabled(store.noSuchPost)
             }
         }
-        .overlay(Group {
-            if store.replyToIndex >= -1 {
-                let post = store.postDataWrapper.post
-                let name = store.replyToIndex == -1 ?
-                    NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
-                    post.comments[store.replyToIndex].name
-                let animation: Animation = .easeInOut(duration: 0.25)
-                // FIXME: Recreated store
-                HollowCommentInputView(
-                    store: store,
-                    transitionAnimation: animation,
-                    replyToName: name
-                )
-                .bottom()
-                .transition(.move(edge: .bottom))
-            }
-        })
+        .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
+            FloatButton(
+                action: {
+                    withAnimation { store.replyToIndex = -1 }
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                },
+                systemImageName: "text.bubble.fill",
+                imageScaleFactor: 0.8
+            )
+            .edgesIgnoringSafeArea(.bottom)
+            .bottom()
+            .trailing()
+            .padding()
+            .padding(7)
+            .padding(.bottom, 7)
+        }})
+        .edgesIgnoringSafeArea(.bottom)
+
+        .overlay(Group { if store.replyToIndex >= -1 {
+            let post = store.postDataWrapper.post
+            let name = store.replyToIndex == -1 ?
+                NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
+                post.comments[store.replyToIndex].name
+            let animation: Animation = .easeInOut(duration: 0.25)
+            HollowCommentInputView(
+                store: store,
+                transitionAnimation: animation,
+                replyToName: name
+            )
+            .edgesIgnoringSafeArea([])
+            .bottom()
+            .transition(.move(edge: .bottom))
+            
+        }})
 
         .onChange(of: store.replyToIndex) { index in
             if index >= -1 {
