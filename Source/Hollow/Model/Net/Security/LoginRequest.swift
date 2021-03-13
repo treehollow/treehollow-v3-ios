@@ -14,8 +14,7 @@ struct LoginRequestConfiguration {
     var password: String
     let deviceType = 2
     let deviceInfo = Constants.Application.deviceInfo
-    // TODO: Device token
-    var deviceToken: String
+    var deviceToken: String?
     var apiRoot: [String]
 }
 
@@ -46,13 +45,15 @@ struct LoginRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (ResultData?, Error?) -> Void) {
-        let parameters = [
+        var parameters = [
                 "email": self.configuration.email,
                 "password_hashed": self.configuration.password.sha256().sha256(),
                 "device_type": self.configuration.deviceType.string,
                 "device_info": self.configuration.deviceInfo,
-                "ios_device_token": self.configuration.deviceToken,
             ]
+        if let token = configuration.deviceToken {
+            parameters["ios_device_token"] = token
+        }
         let urlPath = "v3/security/login/login" + Constants.Net.urlSuffix
         performRequest(
             urlBase: self.configuration.apiRoot,

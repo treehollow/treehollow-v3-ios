@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HollowType: Int, Hashable, Identifiable, Codable {
+enum HollowType: Int, Hashable, Identifiable, Codable, CaseIterable {
     var id: Int { rawValue }
     
     case thu = 1
@@ -21,4 +21,13 @@ enum HollowType: Int, Hashable, Identifiable, Codable {
         case .other: return "other"
         }
     }
+    
+    var name: String {
+        switch self {
+        case .thu: return "THU"
+        case .pku: return "PKU"
+        case .other: return NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: "")
+        }
+    }
+
 }

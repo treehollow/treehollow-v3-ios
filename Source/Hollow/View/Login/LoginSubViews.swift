@@ -51,7 +51,7 @@ extension LoginView {
     }
     
     struct RegisterTextFields: View {
-        @EnvironmentObject var viewModel: Login
+        @EnvironmentObject var viewModel: LoginStore
 
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         
@@ -113,7 +113,7 @@ extension LoginView {
     }
     
     struct EmailTextField: View {
-        @EnvironmentObject var viewModel: Login
+        @EnvironmentObject var viewModel: LoginStore
         private let configuration = Defaults[.hollowConfig]!
         
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
@@ -145,7 +145,7 @@ extension LoginView {
     }
     
     struct LoginTextField: View {
-        @EnvironmentObject var viewModel: Login
+        @EnvironmentObject var viewModel: LoginStore
         @State private var alertPresented = false
         @State private var contactEmailURL: URL!
         @Environment(\.openURL) var openURL

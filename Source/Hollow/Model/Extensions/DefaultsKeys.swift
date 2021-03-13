@@ -59,4 +59,10 @@ extension Defaults.Keys {
     static let blockedTags = Key<[String]>("user.settings.blocked.tags", default: [])
     /// Color scheme that user selects (default: same as system)
     static let colorScheme = Key<CustomColorScheme>("user.settings.color.scheme", default: .system)
+    /// Color set selected by user
+    static let customColorSet = Key<ColorSet?>("user.settings.custom.color.set", default: nil)
+    /// Whether to apply custom color set. Set to true when restart the application.
+    static let applyCustomColorSet = Key<Bool>("user.settings.custom.apply.color.set", default: false)
+    /// Store the custom color set until apply in the next startup.
+    static let tempCustomColorSet = Key<ColorSet?>("user.settings.temp.custom.color.set", default: nil)
 }

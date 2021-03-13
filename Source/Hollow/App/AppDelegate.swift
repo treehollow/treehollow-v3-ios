@@ -32,19 +32,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         #endif
         
-        // Request notification access
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { granted, error in
-            guard granted else { return }
-            
-            // Register for APN
-            DispatchQueue.main.async {
-                application.registerForRemoteNotifications()
-            }
-        }
+        Defaults[.customColorSet] = Defaults[.tempCustomColorSet]
+        Defaults[.tempCustomColorSet] = nil
+        Defaults[.applyCustomColorSet] = Defaults[.customColorSet] != nil
         
-        // Set the delegate to self
-        center.delegate = self
+        // Setup remote notifications
+        setupRemoteNotifications(application)
         
         // Fetch the lastest config
         fetchConfig()
@@ -64,9 +57,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        #if targetEnvironment(simulator)
-        Defaults[.deviceToken] = "placeholder".data(using: .utf8)
-        #endif
         print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
     
@@ -74,6 +64,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 // MARK: - Tree Hollow Configuration
 extension AppDelegate {
+    func setupRemoteNotifications(_ application: UIApplication) {
+        // Request notification access
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { granted, error in
+            guard granted else { return }
+            
+            // Register for APN
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
+    }
+    
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
         guard let config = Defaults[.hollowConfig] else { return }
         let configuration = UpdateDeviceTokenRequestConfiguration(deviceToken: deviceToken, token: accessToken, apiRoot: config.apiRootUrls)

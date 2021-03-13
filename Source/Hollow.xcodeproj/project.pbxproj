@@ -86,7 +86,7 @@
 		0E415B7A25CD772200351672 /* LoginSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3025CD772200351672 /* LoginSubViews.swift */; };
 		0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3125CD772200351672 /* WelcomeView.swift */; };
 		0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3C25CD772200351672 /* PostListRequestStore.swift */; };
-		0E415B8325CD772200351672 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4025CD772200351672 /* Login.swift */; };
+		0E415B8325CD772200351672 /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4025CD772200351672 /* LoginStore.swift */; };
 		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */; };
@@ -263,7 +263,7 @@
 		0E415B3025CD772200351672 /* LoginSubViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSubViews.swift; sourceTree = "<group>"; };
 		0E415B3125CD772200351672 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0E415B3C25CD772200351672 /* PostListRequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequestStore.swift; sourceTree = "<group>"; };
-		0E415B4025CD772200351672 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0E415B4025CD772200351672 /* LoginStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
 		0E415B4125CD772200351672 /* Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
@@ -660,7 +660,7 @@
 		0E415B3F25CD772200351672 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				0E415B4025CD772200351672 /* Login.swift */,
+				0E415B4025CD772200351672 /* LoginStore.swift */,
 				0E415B4125CD772200351672 /* Welcome.swift */,
 			);
 			path = Login;
@@ -1001,7 +1001,7 @@
 				0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */,
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
-				0E415B8325CD772200351672 /* Login.swift in Sources */,
+				0E415B8325CD772200351672 /* LoginStore.swift in Sources */,
 				0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */,
 				0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */,
 				00EFC07425DFC73800536B52 /* ImageMetadata.swift in Sources */,
@@ -1301,7 +1301,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1327,7 +1327,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;

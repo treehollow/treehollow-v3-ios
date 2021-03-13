@@ -64,7 +64,7 @@ struct ImageViewer: View {
             .opacity(scale > 2 ? 0 : 1)
         }
 
-        .blurBackground(style: .systemUltraThinMaterial)
+        .blurBackground()
         .background(
             Image(uiImage: image)
                 .resizable()

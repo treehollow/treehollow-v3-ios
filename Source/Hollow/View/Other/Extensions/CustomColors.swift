@@ -15,10 +15,10 @@ typealias ColorSet = HollowType
 extension Color {
     
     static func customColor(prefix: String, colorSet: ColorSet? = nil) -> Color {
-        let colorSet = colorSet ?? (Defaults[.hollowType] ?? .thu)
-        return Color(prefix + "." + colorSet.description)
+        // Prefers custom set
+        let finalColorSet = colorSet ?? Defaults[.customColorSet] ?? Defaults[.hollowType] ?? .thu
+        return Color(prefix + "." + finalColorSet.description)
     }
-    
     
     static var hollowContentVoteGradient1: Color { customColor(prefix: "hollow.content.vote.gradient.1") }
     

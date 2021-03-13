@@ -9,7 +9,7 @@ import SwiftUI
 import Defaults
 
 struct LoginView: View {
-    @ObservedObject var viewModel: Login = .init()
+    @ObservedObject var viewModel: LoginStore = .init()
     @State private var password = ""
     
     @ScaledMetric(wrappedValue: ViewConstants.navigationBarSpinnerWidth) var spinnerWidth

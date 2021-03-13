@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct Blur: UIViewRepresentable {
-    var style: UIBlurEffect.Style = .systemUltraThinMaterial
+    var style: UIBlurEffect.Style = .regular
     
     func makeUIView(context: Context) -> UIVisualEffectView {
         return UIVisualEffectView(effect: UIBlurEffect(style: style))
@@ -22,7 +22,7 @@ struct Blur: UIViewRepresentable {
 }
 
 extension View {
-    func blurBackground(style: UIBlurEffect.Style = .systemUltraThinMaterial) -> some View {
+    func blurBackground(style: UIBlurEffect.Style = .regular) -> some View {
         return self
             .background(Blur(style: style).edgesIgnoringSafeArea(.all))
     }

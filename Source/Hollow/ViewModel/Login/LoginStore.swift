@@ -1,5 +1,5 @@
 //
-//  Login.swift
+//  LoginStore.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/1/28.
@@ -12,7 +12,7 @@ import SwiftUI
 import Defaults
 
 /// View model for `LoginView`
-class Login: ObservableObject, AppModelEnvironment {
+class LoginStore: ObservableObject, AppModelEnvironment {
     @Published var appModelState = AppModelState()
 
     @Published var showsRecaptcha = false
@@ -115,12 +115,7 @@ class Login: ObservableObject, AppModelEnvironment {
     
     func login() {
         guard let config = Defaults[.hollowConfig] else { return }
-        guard let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString() else {
-            errorMessage = (title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""),
-                            message: .retriveDeviceTokenFailedMessageLocalized)
-            UIApplication.shared.registerForRemoteNotifications()
-            return
-        }
+        let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString()
 
         withAnimation {
             isLoading = true

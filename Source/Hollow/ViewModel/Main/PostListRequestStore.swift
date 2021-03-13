@@ -74,9 +74,10 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
 
         request.publisher
             .sinkOnMainThread(
-                receiveCompletion: { completion in
+                receiveCompletion: { _completion in
                     withAnimation { self.isLoading = false }
-                    switch completion {
+                    completion?()
+                    switch _completion {
                     case .finished: break
                     // We handle the completion on receiving value. The only output
                     // marks the completion, but is delivered before the completion,

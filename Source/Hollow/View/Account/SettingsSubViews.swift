@@ -13,28 +13,86 @@ import Combine
 
 struct AppearanceSettingsView: View {
     @Default(.colorScheme) var customColorScheme
+    @Default(.customColorSet) var customColorSet
+    @Default(.tempCustomColorSet) var tempColorSet
+    
+    @ScaledMetric(wrappedValue: 17) var colorHeight: CGFloat
     
     var body: some View {
         List {
-            ForEach(CustomColorScheme.allCases) { colorScheme in
-                Button(action: {
-                    customColorScheme = colorScheme
-                    withAnimation {
-                        IntegrationUtilities.setCustomColorScheme()
+            Section(
+                header: Text("SETTINGSVIEW_APPEARENCE_COLOR_SCHEME")
+                    .padding(.top)
+                    .padding(.horizontal)
+            ) {
+                ForEach(CustomColorScheme.allCases) { colorScheme in
+                    Button(action: {
+                        customColorScheme = colorScheme
+                        withAnimation {
+                            IntegrationUtilities.setCustomColorScheme()
+                        }
+                    }) {
+                        HStack {
+                            Text(colorScheme.description)
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Image(
+                                systemName: customColorScheme == colorScheme ?
+                                    "checkmark.circle.fill" : "circle"
+                            )
+                            .foregroundColor(
+                                customColorScheme == colorScheme ?
+                                    .tint : .uiColor(.systemFill)
+                            )
+                        }
                     }
+                }
+            }
+            
+            Section(
+                header: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER").padding(.horizontal),
+                footer: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER").padding(.horizontal)
+            ) {
+                Button(action: {
+                    customColorSet = nil
+                    tempColorSet = nil
                 }) {
                     HStack {
-                        Text(colorScheme.description)
+                        (Text("SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL") + Text(" - \(Defaults[.hollowType]?.name ?? "")"))
                             .foregroundColor(.primary)
                         Spacer()
+                        Color.customColor(prefix: "button.gradient.1", colorSet: Defaults[.hollowType])
+                            .frame(maxHeight: colorHeight)
+                            .aspectRatio(1, contentMode: .fit)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.uiColor(.systemFill)))
                         Image(
-                            systemName: customColorScheme == colorScheme ?
+                            systemName: customColorSet == nil && tempColorSet == nil ?
                                 "checkmark.circle.fill" : "circle"
                         )
-                        .foregroundColor(
-                            customColorScheme == colorScheme ?
-                                .tint : .uiColor(.systemFill)
-                        )
+                    }
+                }
+                ForEach(HollowType.allCases) { type in
+                    if type != Defaults[.hollowType] {
+                        Button(action: {
+                            customColorSet = nil
+                            tempColorSet = type
+                        }) {
+                            HStack {
+                                Text(type.name)
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Color.customColor(prefix: "button.gradient.1", colorSet: type)
+                                    .frame(maxHeight: colorHeight)
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.uiColor(.systemFill)))
+                                Image(
+                                    systemName: tempColorSet == type || customColorSet == type ?
+                                        "checkmark.circle.fill" : "circle"
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -281,8 +339,14 @@ struct PushNotificationSettingsView: View {
                     Defaults[.notificationTypeCache] = self.tempNotificationType
                     self.notificationType = self.tempNotificationType
                     withAnimation { self.isLoading = false }
+                    self.sendDeviceToken()
                 })
                 .store(in: &cancellables)
+        }
+        
+        func sendDeviceToken() {
+            guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            delegate.setupRemoteNotifications(UIApplication.shared)
         }
     }
 }
