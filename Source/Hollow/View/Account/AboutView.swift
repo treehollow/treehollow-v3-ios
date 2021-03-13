@@ -49,12 +49,6 @@ struct AboutView: View {
 
             }
             
-            NavigationLink(
-                destination: Text(""),
-                label: {
-                    Text("ACCOUNTVIEW_PRIVACY_CELL")
-                })
-            
             Section(
                 footer:
                     Text("ABOUTVIEW_OPENSOURCE_NOTICE")

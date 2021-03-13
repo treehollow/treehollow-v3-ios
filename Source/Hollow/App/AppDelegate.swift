@@ -33,7 +33,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         #endif
         
         Defaults[.customColorSet] = Defaults[.tempCustomColorSet]
-        Defaults[.tempCustomColorSet] = nil
         Defaults[.applyCustomColorSet] = Defaults[.customColorSet] != nil
         
         // Setup remote notifications

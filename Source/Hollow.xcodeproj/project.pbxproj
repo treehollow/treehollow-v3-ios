@@ -180,6 +180,7 @@
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
+		0EE60EFD25FCCCD700D97E7A /* CheckmarkButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
 		0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */; };
 		0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */; };
@@ -363,6 +364,7 @@
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButtonImage.swift; sourceTree = "<group>"; };
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
 		0EFB54D925E8CF4B001BC98A /* HollowInputComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputComponents.swift; sourceTree = "<group>"; };
 		0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modalPresent.swift"; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				0E8BCFE225E095A90056D809 /* StyledAlert.swift */,
 				0EA2D50E25EF9F41003D539E /* SearchBar.swift */,
 				0E6EF31725F9C3D2001293FE /* FloatButton.swift */,
+				0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -631,7 +634,6 @@
 			isa = PBXGroup;
 			children = (
 				0E415B3325CD772200351672 /* Hollow */,
-				0E415B3B25CD772200351672 /* Main */,
 				0E415B3F25CD772200351672 /* Login */,
 				0EDA262925D22C9800B67292 /* Account */,
 			);
@@ -644,17 +646,9 @@
 				0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */,
 				0E09B7BA25D52F4F00DC5615 /* HollowInputStore.swift */,
 				0E906D4F25DD18050034053C /* ImageCompressStore.swift */,
+				0E415B3C25CD772200351672 /* PostListRequestStore.swift */,
 			);
 			path = Hollow;
-			sourceTree = "<group>";
-		};
-		0E415B3B25CD772200351672 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				0E415B3C25CD772200351672 /* PostListRequestStore.swift */,
-				0EA2D50B25EF8125003D539E /* MessageStore.swift */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		0E415B3F25CD772200351672 /* Login */ = {
@@ -873,6 +867,7 @@
 		0EDA262925D22C9800B67292 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				0EA2D50B25EF8125003D539E /* MessageStore.swift */,
 				0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */,
 				0E28BC4925F60EB400A97820 /* AccountInfoViewModel.swift */,
 			);
@@ -1081,6 +1076,7 @@
 				0E906D0D25DCEADD0034053C /* UpdateDeviceTokenRequest.swift in Sources */,
 				0EA4298E25EBBB8B00B74D5D /* DateExtensions.swift in Sources */,
 				0E58810A25E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift in Sources */,
+				0EE60EFD25FCCCD700D97E7A /* CheckmarkButtonImage.swift in Sources */,
 				0E415B6F25CD772200351672 /* AccountInfoView.swift in Sources */,
 				0E3AC40025F7778400A4278A /* AvatarGenerator.swift in Sources */,
 				0E906D1425DCEADD0034053C /* EditAttentionRequest.swift in Sources */,
@@ -1301,7 +1297,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1311,7 +1307,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = "3.0.0-rc1";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1327,7 +1323,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1337,7 +1333,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = "3.0.0-rc1";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

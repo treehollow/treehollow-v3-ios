@@ -129,7 +129,7 @@ struct HollowContentView: View {
                                 Button(link, action: {
                                     guard let url = URL(string: link) else { return }
                                     let helper = OpenURLHelper(openURL: openURL)
-                                    try? helper.tryOpen(url)
+                                    try? helper.tryOpen(url, method: Defaults[.openURLMethod])
                                 })
                             }
                         } , label: {

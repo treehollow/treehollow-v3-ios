@@ -16,10 +16,9 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     var refreshHandler: (() -> Void)?
     
     @Published var text: String = ""
-    // FIXME: Remove this code in real tests
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
-    @Published var availableTags: [String] = Defaults[.hollowConfig]!.sendableTags
+    @Published var availableTags: [String] = Defaults[.hollowConfig]?.sendableTags ?? []
     @Published var selectedTag: String?
     @Published var voteInformation: VoteInformation?
     @Published var sending = false

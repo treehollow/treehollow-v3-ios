@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 extension HollowDetailView {
     @ViewBuilder var commentView: some View {
@@ -87,7 +88,7 @@ extension HollowDetailView {
                         ForEach(links, id: \.self) { link in
                             Button(action: {
                                 let helper = OpenURLHelper(openURL: openURL)
-                                try? helper.tryOpen(link)
+                                try? helper.tryOpen(link, method: Defaults[.openURLMethod])
                             }) {
                                 Label(link.absoluteString, systemImage: "link")
                             }

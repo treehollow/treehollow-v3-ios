@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct SettingsView: View {
     @Binding var presented: Bool
@@ -39,21 +40,29 @@ struct SettingsView: View {
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
                 }
                 
-                NavigationLink(
-                    destination: Text(""),
-                    label: {
-                        Text("ACCOUNTVIEW_RULES_CELL")
-                    })
+                Section(header: Text(Defaults[.hollowConfig]?.name ?? "").padding(.horizontal)) {
+                    Button("ACCOUNTVIEW_RULES_CELL") {
+                        if let urlString = Defaults[.hollowConfig]?.rulesUrl,
+                           let url = URL(string: urlString) {
+                            IntegrationUtilities.presentSafariVC(url: url)
+                        }
+                    }
+                    Button("LOGINVIEW_REGISTER_TOS_BUTTON") {
+                        if let urlString = Defaults[.hollowConfig]?.tosUrl,
+                           let url = URL(string: urlString) {
+                            IntegrationUtilities.presentSafariVC(url: url)
+                        }
+                    }
+                    Button("LOGINVIEW_REGISTER_PRIVACY_BUTTON") {
+                        if let urlString = Defaults[.hollowConfig]?.privacyUrl,
+                           let url = URL(string: urlString) {
+                            IntegrationUtilities.presentSafariVC(url: url)
+                        }
+                    }
+
+                }
+                .accentColor(.primary)
                                 
-//                Section {
-//                    // TODO: shows only when available
-//                    Button(action: {}) {
-//                        Text("ACCOUNTVIEW_UPDATE_CELL")
-//                            .padding(.horizontal, listContentPadding)
-//                    }
-//
-//                }
-                
                 Section(
                     footer: Text(appInfo)
                         .padding(.horizontal)

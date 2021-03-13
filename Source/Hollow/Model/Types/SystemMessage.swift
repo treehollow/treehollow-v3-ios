@@ -9,12 +9,14 @@ import Foundation
 
 /// Data representation of a system message
 struct SystemMessage: Codable, Identifiable {
-    var id: Double { timestamp.timeIntervalSince1970 }
+    var id: Int { timestamp }
     /// message content
     var content: String
     /// unix time stamp of this message
-    var timestamp: Date
+    var timestamp: Int
     /// message title
     var title: String
+    
+    var date: Date { Date(timeIntervalSince1970: TimeInterval(timestamp)) }
 }
 

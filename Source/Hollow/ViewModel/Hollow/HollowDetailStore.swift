@@ -130,7 +130,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     }
     
     private func loadImage(for imageURL: String, receiveValue: @escaping (UIImage) -> Void, receiveError: @escaping (FetchImageRequestError) -> Void) {
-        let config = Defaults[.hollowConfig]!
+        guard let config = Defaults[.hollowConfig] else { return }
         let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.imgBaseUrls, urlString: imageURL))
 
         imageRequest.publisher
@@ -171,9 +171,10 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     private func loadImages() {
         let commentsWithNoImages: [CommentData] = postDataWrapper.post.comments
             .filter({ $0.image?.imageURL != nil && $0.image?.image == nil })
+        guard let config = Defaults[.hollowConfig] else { return }
         let requests: [FetchImageRequest] = commentsWithNoImages.compactMap {
             let imageURL = $0.image!.imageURL
-            let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]!.imgBaseUrls, urlString: imageURL)
+            let configuration = FetchImageRequestConfiguration(urlBase: config.imgBaseUrls, urlString: imageURL)
             return FetchImageRequest(configuration: configuration)
         }
         

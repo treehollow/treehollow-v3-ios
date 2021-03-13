@@ -78,7 +78,7 @@ extension MessageView {
                             .foregroundColor(.hollowContentText)
                             .font(.system(size: titleFontSize))
                         Spacer()
-                        Text(HollowDateFormatter(date: message.timestamp).formattedString())
+                        Text(HollowDateFormatter(date: message.date).formattedString())
                             .foregroundColor(.secondary)
                             .font(.footnote)
                     }

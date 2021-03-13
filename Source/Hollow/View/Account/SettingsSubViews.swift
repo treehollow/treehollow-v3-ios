@@ -36,14 +36,8 @@ struct AppearanceSettingsView: View {
                             Text(colorScheme.description)
                                 .foregroundColor(.primary)
                             Spacer()
-                            Image(
-                                systemName: customColorScheme == colorScheme ?
-                                    "checkmark.circle.fill" : "circle"
-                            )
-                            .foregroundColor(
-                                customColorScheme == colorScheme ?
-                                    .tint : .uiColor(.systemFill)
-                            )
+                            CheckmarkButtonImage(isOn: customColorScheme == colorScheme)
+
                         }
                     }
                 }
@@ -54,28 +48,24 @@ struct AppearanceSettingsView: View {
                 footer: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER").padding(.horizontal)
             ) {
                 Button(action: {
-                    customColorSet = nil
                     tempColorSet = nil
                 }) {
                     HStack {
-                        (Text("SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL") + Text(" - \(Defaults[.hollowType]?.name ?? "")"))
+                        (Text("\(Defaults[.hollowType]?.name ?? "") - ") + Text("SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL"))
                             .foregroundColor(.primary)
                         Spacer()
                         Color.customColor(prefix: "button.gradient.1", colorSet: Defaults[.hollowType])
+                            .colorScheme(.light)
                             .frame(maxHeight: colorHeight)
                             .aspectRatio(1, contentMode: .fit)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.uiColor(.systemFill)))
-                        Image(
-                            systemName: customColorSet == nil && tempColorSet == nil ?
-                                "checkmark.circle.fill" : "circle"
-                        )
+                        CheckmarkButtonImage(isOn: tempColorSet == nil)
                     }
                 }
                 ForEach(HollowType.allCases) { type in
                     if type != Defaults[.hollowType] {
                         Button(action: {
-                            customColorSet = nil
                             tempColorSet = type
                         }) {
                             HStack {
@@ -83,14 +73,12 @@ struct AppearanceSettingsView: View {
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Color.customColor(prefix: "button.gradient.1", colorSet: type)
+                                    .colorScheme(.light)
                                     .frame(maxHeight: colorHeight)
                                     .aspectRatio(1, contentMode: .fit)
                                     .clipShape(Circle())
                                     .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.uiColor(.systemFill)))
-                                Image(
-                                    systemName: tempColorSet == type || customColorSet == type ?
-                                        "checkmark.circle.fill" : "circle"
-                                )
+                                CheckmarkButtonImage(isOn: tempColorSet == type)
                             }
                         }
                     }
@@ -221,12 +209,7 @@ struct PushNotificationSettingsView: View {
                             Spacer()
                             if isEditing {
                                 let selected = viewModel.tempNotificationType[keyPath: type.keyPath]
-                                Image(
-                                    systemName: selected ? "checkmark.circle.fill" : "circle"
-                                )
-                                .foregroundColor(
-                                    selected ? .tint : .uiColor(.systemFill)
-                                )
+                                CheckmarkButtonImage(isOn: selected)
                             } else {
                                 if viewModel.notificationType[keyPath: type.keyPath] {
                                     Image(systemName: "checkmark")
@@ -358,9 +341,34 @@ struct OtherSettingsView: View {
     var body: some View {
         List {
             CacheManagementView()
+            OpenURLSettingsView()
+            
         }
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""))
+    }
+    
+    private struct OpenURLSettingsView: View {
+        @Default(.openURLMethod) var openMethod
+        
+        var body: some View {
+            Section(header: Text("SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE").padding(.horizontal)) {
+                ForEach(OpenURLHelper.OpenMethod.allCases) { method in
+                    Button(action: {
+                        withAnimation {
+                            openMethod = method
+                        }
+                    }) {
+                        HStack {
+                            Text(method.description)
+                            Spacer()
+                            CheckmarkButtonImage(isOn: openMethod == method)
+                        }
+                    }
+                    .accentColor(.primary)
+                }
+            }
+        }
     }
     
     private struct CacheManagementView: View {
@@ -368,7 +376,7 @@ struct OtherSettingsView: View {
         
         var body: some View {
             Section(
-                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER").padding(.horizontal)) {
+                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER").padding(.horizontal).padding(.top)) {
                 Button(action: viewModel.clearCache) {
                     HStack {
                         Text(

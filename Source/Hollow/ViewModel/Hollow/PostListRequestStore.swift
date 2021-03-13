@@ -39,7 +39,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         self.type = type
         self.posts = []
         self.options = options
-        if type == .searchTrending { searchString = Defaults[.hollowConfig]!.searchTrending }
+        if type == .searchTrending { searchString = Defaults[.hollowConfig]?.searchTrending ?? "" }
         switch type {
         case .postList, .attentionList, .wander, .searchTrending: requestPosts(at: 1)
         default: break
@@ -60,7 +60,6 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         case .postList:
             configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
         case .search, .searchTrending:
-            // FIXME: Other attributes
             let startTimestamp = startDate?.startOfDay.timeIntervalSince1970.int
             let endTimestamp = endDate?.endOfDay.timeIntervalSince1970.int
             configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, afterTimestamp: startTimestamp, beforeTimestamp: endTimestamp, includeComment: !excludeComments))
@@ -161,7 +160,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         }
         let requests: [FetchImageRequest] = postsWithNoImages.compactMap {
             let imageURL = $0.hollowImage!.imageURL
-            let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]!.imgBaseUrls, urlString: imageURL)
+            let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]?.imgBaseUrls ?? [], urlString: imageURL)
             return FetchImageRequest(configuration: configuration)
         }
         

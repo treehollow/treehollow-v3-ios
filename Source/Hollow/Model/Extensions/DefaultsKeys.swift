@@ -65,4 +65,6 @@ extension Defaults.Keys {
     static let applyCustomColorSet = Key<Bool>("user.settings.custom.apply.color.set", default: false)
     /// Store the custom color set until apply in the next startup.
     static let tempCustomColorSet = Key<ColorSet?>("user.settings.temp.custom.color.set", default: nil)
+    /// The method to handle links.
+    static let openURLMethod = Key<OpenURLHelper.OpenMethod>("user.settings.open.url.method", default: .inApp)
 }

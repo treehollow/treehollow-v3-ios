@@ -21,7 +21,6 @@ class LoginStore: ObservableObject, AppModelEnvironment {
         didSet { if email != oldValue { restore() }}
     }
     @Published var emailCheckType: EmailCheckRequestResultData.ResultType?
-    // FIXME: There should be something in the model to validate the hollow config!
     // Set to "" first because `WelcomeView` will load the initializer of `LoginView`
     // before we fetch the config.
     @Published var emailSuffix: String = Defaults[.hollowConfig]?.emailSuffixes.first ?? "" {

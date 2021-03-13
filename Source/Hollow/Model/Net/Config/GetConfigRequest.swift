@@ -39,6 +39,7 @@ struct GetConfigRequestResult: Codable {
     var recaptchaUrl: String
     var apiRootUrls: [String]
     var tosUrl: String
+    var rulesUrl: String
     var privacyUrl: String
     var contactEmail: String
     var emailSuffixes: [String]
@@ -155,6 +156,9 @@ struct GetConfigRequest: Request {
             config.emailSuffixes.count > 0 &&
             config.imgBaseUrls != [] &&
             config.name != "" &&
-            config.recaptchaUrl != ""
-    }
+            config.recaptchaUrl != "" &&
+            config.tosUrl != "" &&
+            config.privacyUrl != "" &&
+            config.rulesUrl != ""
+    }   
 }

@@ -79,10 +79,10 @@ struct PostDetailRequest: DefaultRequest {
                 postWrapper = PostDataWrapper(post: postData)
                 completion(postWrapper, nil)
                 
-                // Only update cache when requesting comments
+                // Only update time stamp when requesting comments
                 if configuration.includeComments {
-                    postCache.updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
                     postCache.updatePost(postId: configuration.postId, postdata: postWrapper.post)
+                    postCache.updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
                 }
             }
             

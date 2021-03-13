@@ -86,7 +86,7 @@ struct WelcomeView: View {
             }
             // Disable the buttons when loading config
             .disabled(viewModel.isLoadingConfig)
-            .background(Color("background.other").edgesIgnoringSafeArea(.all))
+            .background(Color("welcome.background").edgesIgnoringSafeArea(.all))
             .navigationTitle(NSLocalizedString("WELCOMEVIEW_NAV_TITLE", comment: ""))
             
             // Show alert on receiving error
@@ -115,7 +115,11 @@ struct WelcomeView: View {
     
     struct CustomConfigConfigurationView: View {
         @ObservedObject var viewModel: Welcome = .init()
+        #if DEBUG
+        @State var text: String = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
+        #else
         @State var text: String = ""
+        #endif
         
         @ScaledMetric(wrappedValue: ViewConstants.navigationBarSpinnerWidth) var spinnerWidth
         

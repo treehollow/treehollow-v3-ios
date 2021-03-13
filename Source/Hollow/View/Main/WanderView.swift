@@ -30,6 +30,7 @@ struct WanderView: View {
                 // maximum number of posts to 60 (at least loading for 2 times)
                 if viewModel.posts.count >= 60 {
                     viewModel.posts.removeAll()
+                    viewModel.allowLoadMorePosts = false
                 }
                 viewModel.loadMorePosts()
             },
@@ -83,16 +84,19 @@ struct WanderView: View {
                     options: [.displayVote, .disableVote, .displayImage, .replaceForImageOnly, .compactText],
                     voteHandler: { _ in },
                     lineLimit: 20
-                    // TODO: Reload handler
                 )
             }
 
             HStack {
                 Label("\(postData.replyNumber)", systemImage: "quote.bubble")
                     .foregroundColor(.hollowCardStarUnselected)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 Spacer()
                 Label("\(postData.likeNumber)", systemImage: postData.attention ? "star.fill" : "star")
                     .foregroundColor(postData.attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
             }
             .font(.system(size: 17, weight: .semibold, design: .rounded))
             .padding(.top, body5)

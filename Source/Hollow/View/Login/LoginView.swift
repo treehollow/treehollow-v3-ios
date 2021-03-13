@@ -114,7 +114,7 @@ struct LoginView: View {
         // Show alert if there's any error message provided
         .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         
-        .navigationTitle(Defaults[.hollowConfig]!.name)
+        .navigationTitle(Defaults[.hollowConfig]?.name ?? "")
         .background(Color.background.edgesIgnoringSafeArea(.all))
         
         .environmentObject(viewModel)

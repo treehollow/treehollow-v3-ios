@@ -24,8 +24,8 @@ struct Constants {
     }
     
     struct HollowConfig {
-        static let thuConfigURL = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
-        static let pkuConfigURL = ""
+        static let thuConfigURL = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/main.txt"
+        static let pkuConfigURL = "https://cdn.jsdelivr.net/gh/pkuhollow/pkuhollow-config@master/config.txt"
     }
 
     struct Net {

@@ -52,7 +52,7 @@ extension LoginView {
     
     struct RegisterTextFields: View {
         @EnvironmentObject var viewModel: LoginStore
-
+        @Environment(\.openURL) var openURL
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         
         // The password is valid only if its length is no less than 8 and it contains no blank spaces.
@@ -91,24 +91,51 @@ extension LoginView {
                 .font(.system(size: body14))
             }
             
-            // Confirmed password text field
-            MyTextField(text: $viewModel.confirmedPassword,
-                        title: NSLocalizedString("LOGINVIEW_CONFIRMED_PASSWORD_TEXTFIELD_TITLE", comment: ""),
-                        isSecureContent: true) {
-                Group {
-                    // Original password should be valid first.
-                    if passwordValid {
-                        if viewModel.confirmedPassword != "" && !confirmedPasswordValid {
-                            Image(systemName: "xmark")
-                                .foregroundColor(.red)
-                        } else if viewModel.confirmedPassword != "" {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.green)
+            VStack(alignment: .leading) {
+                // Confirmed password text field
+                MyTextField(text: $viewModel.confirmedPassword,
+                            title: NSLocalizedString("LOGINVIEW_CONFIRMED_PASSWORD_TEXTFIELD_TITLE", comment: ""),
+                            isSecureContent: true) {
+                    Group {
+                        // Original password should be valid first.
+                        if passwordValid {
+                            if viewModel.confirmedPassword != "" && !confirmedPasswordValid {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.red)
+                            } else if viewModel.confirmedPassword != "" {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.green)
+                            }
                         }
                     }
+                    .font(.system(size: body14))
                 }
-                .font(.system(size: body14))
+                
+                // Policies
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("LOGINVIEW_REGISTER_TOS_FOOTER_PREFIX")
+                        .foregroundColor(.secondary)
+                        .padding(.bottom, 3)
+                    Button("LOGINVIEW_REGISTER_TOS_BUTTON") {
+                        if let tosURL = Defaults[.hollowConfig]?.tosUrl,
+                           let url = URL(string: tosURL) {
+                            IntegrationUtilities.presentSafariVC(url: url)
+                        }
+                    }
+                    .accentColor(.tint)
+                    Button("LOGINVIEW_REGISTER_PRIVACY_BUTTON") {
+                        if let tosURL = Defaults[.hollowConfig]?.privacyUrl,
+                           let url = URL(string: tosURL) {
+                            IntegrationUtilities.presentSafariVC(url: url)
+                        }
+                    }
+                    .accentColor(.tint)
+                }
+                .font(.footnote)
+                .lineLimit(1)
+                .padding(.top, 40)
             }
+
         }
     }
     

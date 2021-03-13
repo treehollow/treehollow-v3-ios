@@ -44,6 +44,5 @@ struct AppModelBehaviour: ViewModifier {
         Defaults.Keys.accessToken.reset()
         Defaults.Keys.hiddenAnnouncement.reset()
         Defaults.Keys.deviceListCache.reset()
-        Defaults.Keys.notificationTypeCache.reset()
     }
 }

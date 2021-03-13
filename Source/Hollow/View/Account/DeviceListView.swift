@@ -77,7 +77,7 @@ extension DeviceListView {
                     
                     // We won't allow the user to terminate the current
                     // device in device list.
-//                    if !isCurrentDevice {
+                    if !isCurrentDevice {
                         MyButton(
                             action: { alertPresented = true },
                             gradient: .vertical(gradient: .button),
@@ -93,7 +93,7 @@ extension DeviceListView {
                             .font(.system(size: buttonFontSize, weight: .bold))
                             .foregroundColor(.white)
                         }
-//                    }
+                    }
                 }
             }
             .padding()

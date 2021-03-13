@@ -15,7 +15,6 @@ struct SearchBar: View {
 
     var body: some View {
         Button(action:{
-            // FIXME: Ugly animation here
             // Navigate to search view
             withAnimation(.searchViewTransition) {
                 isSearching = true

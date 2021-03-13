@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import SafariServices
 
 struct IntegrationUtilities {
     static func topViewController() -> UIViewController? {
@@ -39,5 +40,10 @@ struct IntegrationUtilities {
         keyWindow()?.overrideUserInterfaceStyle =
             colorScheme == .system ? .unspecified :
             colorScheme == .light ? .light : .dark
+    }
+    
+    static func presentSafariVC(url: URL) {
+        let safari = SFSafariViewController(url: url)
+        topViewController()?.present(safari, animated: true)
     }
 }
