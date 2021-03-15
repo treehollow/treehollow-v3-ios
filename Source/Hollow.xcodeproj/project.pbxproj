@@ -162,6 +162,8 @@
 		0EA2D51225F0A53F003D539E /* View+swipeToDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */; };
 		0EA2D51A25F0FA05003D539E /* View+defaultBlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D51925F0FA05003D539E /* View+defaultBlurBackground.swift */; };
 		0EA2D51D25F11EA9003D539E /* ReportMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D51C25F11EA9003D539E /* ReportMenuContent.swift */; };
+		0EA3C15E25FEFBAA00865B4D /* View+singleLineText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3C15D25FEFBAA00865B4D /* View+singleLineText.swift */; };
+		0EA3C16225FEFCA600865B4D /* DeviceModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3C16125FEFCA600865B4D /* DeviceModelUtilities.swift */; };
 		0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298A25EB6F4D00B74D5D /* Double+int.swift */; };
 		0EA4298E25EBBB8B00B74D5D /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
@@ -346,6 +348,8 @@
 		0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+swipeToDismiss.swift"; sourceTree = "<group>"; };
 		0EA2D51925F0FA05003D539E /* View+defaultBlurBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultBlurBackground.swift"; sourceTree = "<group>"; };
 		0EA2D51C25F11EA9003D539E /* ReportMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenuContent.swift; sourceTree = "<group>"; };
+		0EA3C15D25FEFBAA00865B4D /* View+singleLineText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+singleLineText.swift"; sourceTree = "<group>"; };
+		0EA3C16125FEFCA600865B4D /* DeviceModelUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModelUtilities.swift; sourceTree = "<group>"; };
 		0EA4298A25EB6F4D00B74D5D /* Double+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+int.swift"; sourceTree = "<group>"; };
 		0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
@@ -517,6 +521,7 @@
 				0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */,
 				0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */,
 				0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */,
+				0EA3C15D25FEFBAA00865B4D /* View+singleLineText.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -860,6 +865,7 @@
 				0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */,
 				0E527CD525F4825700D91706 /* OpenURLHelper.swift */,
 				0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */,
+				0EA3C16125FEFCA600865B4D /* DeviceModelUtilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1084,6 +1090,7 @@
 				0E415B7625CD772200351672 /* WanderView.swift in Sources */,
 				0E906D3225DCEADD0034053C /* ImageSaver.swift in Sources */,
 				0E906D1825DCEADD0034053C /* SendVoteRequest.swift in Sources */,
+				0EA3C16225FEFCA600865B4D /* DeviceModelUtilities.swift in Sources */,
 				0E415B7925CD772200351672 /* LoginView.swift in Sources */,
 				0E906D2E25DCEADD0034053C /* String+Date.swift in Sources */,
 				0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */,
@@ -1144,6 +1151,7 @@
 				0E906D2525DCEADD0034053C /* String+SHA256.swift in Sources */,
 				0E906D1D25DCEADD0034053C /* Post.swift in Sources */,
 				0E09B7BB25D52F4F00DC5615 /* HollowInputStore.swift in Sources */,
+				0EA3C15E25FEFBAA00865B4D /* View+singleLineText.swift in Sources */,
 				0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,7 +1315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "3.0.0-rc1";
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1333,7 +1341,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "3.0.0-rc1";
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

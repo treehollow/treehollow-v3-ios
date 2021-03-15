@@ -10,7 +10,6 @@ import SwiftUI
 
 struct IndicatorOverlay: ViewModifier {
     
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var fontSize: CGFloat
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
     

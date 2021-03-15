@@ -129,6 +129,7 @@ struct HollowDetailView: View {
         .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
             FloatButton(
                 action: {
+                    guard !store.isSendingComment && !store.isLoading else { return }
                     withAnimation { store.replyToIndex = -1 }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 },

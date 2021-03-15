@@ -56,8 +56,6 @@ struct HollowVoteContentView: View {
         var selectedButNotFinish: Bool
         var selected: Bool
         var showProportion: Bool
-        
-        @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
 
         var body: some View {
             HStack {
@@ -86,7 +84,7 @@ struct HollowVoteContentView: View {
                         .layoutPriority(1)
                 }
             }
-            .font(.system(size: body15))
+            .dynamicFont(size: 15)
             .lineLimit(1)
             .foregroundColor(selected ? .white : .uiColor(.label))
             .padding(10)

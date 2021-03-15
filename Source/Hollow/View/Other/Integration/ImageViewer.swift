@@ -22,9 +22,6 @@ struct ImageViewer: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
-    
     var body: some View {
         ZStack {
             ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale, showActionSheet: $showActionSheet)
@@ -32,7 +29,7 @@ struct ImageViewer: View {
             VStack(spacing: 0) {
                 Button(action: { presented = false }) {
                     Text("IMAGEVIEWER_DONE_BUTTON")
-                        .font(.system(size: body16, weight: .semibold))
+                        .dynamicFont(size: 16, weight: .semibold)
                         .foregroundColor(.primary)
                         .padding(.horizontal, 13)
                         .padding(.vertical, 6)

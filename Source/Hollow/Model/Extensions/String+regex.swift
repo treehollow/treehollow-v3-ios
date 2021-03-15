@@ -22,7 +22,7 @@ extension String {
         }
     }
     
-    func range(matches regexString: String) -> [Range<String.Index>] {
+    private func range(matches regexString: String) -> [Range<String.Index>] {
         do {
             let regex = try NSRegularExpression(pattern: regexString)
             let results = regex.matches(in: self, range: NSRange(self.startIndex..., in: self))
@@ -35,12 +35,12 @@ extension String {
         }
     }
     
-    func matches(regexString: String) -> [String] {
+    private func matches(regexString: String) -> [String] {
         let range = self.range(matches: regexString)
         return matches(range: range)
     }
     
-    func matches(range: [Range<String.Index>]) -> [String] {
+    private func matches(range: [Range<String.Index>]) -> [String] {
         return range.map({ String(self[$0]) })
     }
     

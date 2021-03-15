@@ -50,7 +50,6 @@ struct HollowContentView: View {
         postDataWrapper.post.text.citationNumbers()
     }
     
-    @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
     @ScaledMetric(wrappedValue: 6, relativeTo: .body) var body6: CGFloat
     
@@ -178,7 +177,7 @@ struct HollowContentView: View {
     
     private func tagView(text: String, deleted: Bool) -> some View {
         Text(text)
-            .font(.system(size: body14, weight: .semibold))
+            .dynamicFont(size: 14, weight: .semibold)
             .foregroundColor(.white)
             .padding(.horizontal, body6)
             .padding(.vertical, body4)
@@ -189,7 +188,7 @@ struct HollowContentView: View {
     private func linkMenuLabel(text: String, systemImageName: String) -> some View {
         // Keep the same with tagView
         Label(text, systemImage: systemImageName)
-            .font(.system(size: body14, weight: .semibold))
+            .dynamicFont(size: 14, weight: .semibold)
             .padding(.horizontal, body6)
             .padding(.vertical, body4)
             .background(Color.background)

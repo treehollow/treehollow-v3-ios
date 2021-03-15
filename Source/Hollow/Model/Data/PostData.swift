@@ -31,6 +31,9 @@ struct PostData: Identifiable, Codable {
     
     var loadingError: String?
     
+    // Pre fetched cited post id
+    var citedPostId: Int?
+    
     // To avoid scanning the text over and over when the
     // text does not has components that needed to be
     // rendered as hyperlink, set the variable when initialize
@@ -60,7 +63,7 @@ struct PostDataWrapper: Identifiable {
     var post: PostData
     /// use `citedPostID` to get citedPostID
     var citedPostID: Int? {
-        let citedPid = self.post.text.findCitedPostID()
+        let citedPid = self.post.citedPostId
         return citedPid == self.post.postId ? nil : citedPid
     }
     var citedPost: PostData?
@@ -70,7 +73,22 @@ extension PostDataWrapper {
     static func templatePost(for postId: Int) -> PostDataWrapper {
         let hash = AvatarGenerator.hash(postId: postId, name: "")
         let colorIndex = AvatarGenerator.colorIndex(hash: hash)
-        let post = PostData(attention: false, deleted: false, likeNumber: 0, permissions: [], postId: postId, replyNumber: 0, timestamp: Date(), tag: nil, text: "", hollowImage: nil, vote: nil, comments: [], loadingError: nil, hash: hash, colorIndex: colorIndex)
+        let post = PostData(
+            attention: false,
+            deleted: false,
+            likeNumber: 0,
+            permissions: [],
+            postId: postId,
+            replyNumber: 0,
+            timestamp: Date(),
+            tag: nil, text: "",
+            hollowImage: nil,
+            vote: nil,
+            comments: [],
+            loadingError: nil,
+            hash: hash,
+            colorIndex: colorIndex
+        )
         return PostDataWrapper(post: post, citedPost: nil)
     }
 }

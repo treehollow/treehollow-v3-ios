@@ -81,7 +81,7 @@ extension Post {
             hollowImage: image,
             vote: vote?.toVoteData(),
             comments: comments,
-            hasURL: text.links().count > 0,
+            citedPostId: text.findCitedPostID(), hasURL: text.links().count > 0,
             hasCitedNumbers: text.citations().count > 0,
             hash: hash,
             colorIndex: AvatarGenerator.colorIndex(hash: hash)

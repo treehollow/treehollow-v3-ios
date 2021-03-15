@@ -9,11 +9,10 @@
 import SwiftUI
 
 struct ImageButtonModifier: ViewModifier {
-    @ScaledMetric var fontSize: CGFloat = 20
     
     func body(content: Content) -> some View {
         content
             .foregroundColor(.hollowContentText)
-            .font(.system(size: fontSize, weight: .medium))
+            .dynamicFont(size: 20, weight: .medium)
     }
 }

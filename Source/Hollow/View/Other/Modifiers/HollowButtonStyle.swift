@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct HollowButtonStyle: ViewModifier {
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @Environment(\.isEnabled) var enabled
     
     func body(content: Content) -> some View {
         content
-            .font(.system(size: body16, weight: .semibold, design: .rounded))
+            .dynamicFont(size: 16, weight: .semibold, design: .rounded)
             .opacity(enabled ? 1 : 0.5)
     }
 }

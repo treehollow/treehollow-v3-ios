@@ -68,7 +68,7 @@ extension HollowDetailView {
                     .animation(.none)
                 )
                 .onTapGesture {
-                    guard !store.isSendingComment else { return }
+                    guard !store.isSendingComment && !store.isLoading else { return }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     store.replyToIndex = index
                     jumpedToIndex = nil

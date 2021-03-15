@@ -18,28 +18,29 @@ extension HollowInputView {
                 .aspectRatio(contentMode: .fit)
                 .roundedCorner(4)
                 .overlay(
-                    Button(action: { withAnimation { inputStore.compressedImage = nil }}) {
-                        ZStack {
-                            Blur().frame(width: body30, height: body30).clipShape(Circle())
-                            Image(systemName: "xmark")
-                                .font(.system(size: body15, weight: .semibold))
-                                .foregroundColor(.primary)
+                    VStack {
+                        Button(action: { withAnimation { inputStore.compressedImage = nil }}) {
+                            ZStack {
+                                Blur().frame(width: body30, height: body30).clipShape(Circle())
+                                Image(systemName: "xmark")
+                                    .dynamicFont(size: 15, weight: .semibold)
+                                    .foregroundColor(.primary)
+                            }
+                            .padding(body10)
                         }
-                        .padding(body10)
+                        Spacer()
+                        
+                        Text(NSLocalizedString("INPUTVIEW_IMAGE_SIZE_LABEL", comment: "") + ": \(inputStore.imageSizeInformation ?? "??")")
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                            .padding(8)
+                            .blurBackground()
+                            .roundedCorner(8)
+                            .bottom()
+                            .trailing()
+                            .padding(body10)
                     }
-                    .top()
                     .trailing()
-                )
-                .overlay(
-                    Text(NSLocalizedString("INPUTVIEW_IMAGE_SIZE_LABEL", comment: "") + ": \(inputStore.imageSizeInformation ?? "??")")
-                        .fontWeight(.semibold)
-                        .font(.footnote)
-                        .padding(8)
-                        .blurBackground()
-                        .roundedCorner(8)
-                        .bottom()
-                        .trailing()
-                        .padding(body10)
                 )
                 .zIndex(1)
                 .matchedGeometryEffect(id: "photo", in: animation)
@@ -56,7 +57,7 @@ extension HollowInputView {
     }
     
     var editorAccessoryView: some View {
-        HStack(alignment: .bottom) {
+        HStack {
             if !textValid { HStack(spacing: 0) {
                 Text("\(inputStore.text.count)")
                     .font(.footnote)

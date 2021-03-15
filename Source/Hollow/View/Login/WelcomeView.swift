@@ -15,9 +15,6 @@ struct WelcomeView: View {
     @EnvironmentObject var appModel: AppModel
     
     @ObservedObject var viewModel: Welcome = .init()
-    
-    @ScaledMetric(wrappedValue: 22, relativeTo: .title) var title22: CGFloat
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
 
     var body: some View {
         NavigationView {
@@ -29,7 +26,7 @@ struct WelcomeView: View {
                     .foregroundColor(.loginBackgroundPrimary)
                 VStack(spacing: 20) {
                     Text("WELCOMEVIEW_SELECT_HOLLOW_TITLE")
-                        .font(.system(size: title22, weight: .semibold))
+                        .dynamicFont(size: 22, weight: .semibold)
                         .foregroundColor(Color("hollow.content.text.other"))
                         .padding(.top, 70)
                         .padding(.bottom, 20)
@@ -109,7 +106,7 @@ struct WelcomeView: View {
         return Text(text)
             .foregroundColor(Color("hollow.content.text.other"))
             .padding(.vertical, 5)
-            .font(.system(size: body15, weight: .medium))
+            .dynamicFont(size: 15, weight: .medium)
             .frame(width: 150)
     }
     

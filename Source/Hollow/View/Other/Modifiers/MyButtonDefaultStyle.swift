@@ -9,11 +9,10 @@
 import SwiftUI
 
 struct MyButtonDefaultStyle: ViewModifier {
-    @ScaledMetric var fontSize: CGFloat = 14
     
     func body(content: Content) -> some View {
         content
-            .font(.system(size: fontSize, weight: .bold))
+            .dynamicFont(size: 14, weight: .bold)
             .foregroundColor(.white)
     }
 }

@@ -35,7 +35,7 @@ struct OpenURLHelper {
         } else {
             if let newURL = URL(string: "https://" + url.absoluteString),
                UIApplication.shared.canOpenURL(newURL) {
-                open(url, method: method)
+                open(newURL, method: method)
             } else {
                 throw OpenURLError.invalidURL
             }

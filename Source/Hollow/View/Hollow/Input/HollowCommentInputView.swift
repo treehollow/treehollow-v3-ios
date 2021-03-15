@@ -18,10 +18,7 @@ struct HollowCommentInputView: View {
     @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     @ScaledMetric var buttonWidth: CGFloat = 37
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
-    @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
-    @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var editorFontSize: CGFloat
     
@@ -165,7 +162,7 @@ extension HollowCommentInputView {
                         ZStack {
                             Blur().frame(width: body30, height: body30).clipShape(Circle())
                             Image(systemName: "xmark")
-                                .font(.system(size: body15, weight: .semibold))
+                                .dynamicFont(size: 14, weight: .semibold)
                                 .foregroundColor(.primary)
                         }
                         .padding(body10)

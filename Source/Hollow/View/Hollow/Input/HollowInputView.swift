@@ -19,10 +19,8 @@ struct HollowInputView: View {
     
     @ScaledMetric var avatarWidth: CGFloat = 37
     @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
     @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
     @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
-    @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     
@@ -68,6 +66,8 @@ struct HollowInputView: View {
                     HollowInputTextEditor(text: $inputStore.text, editorEditing: $editorEditing, placeholder: text)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
+                        .frame(minHeight: 40)
+                        .layoutPriority(1)
                     editorAccessoryView
                 }
                 voteView

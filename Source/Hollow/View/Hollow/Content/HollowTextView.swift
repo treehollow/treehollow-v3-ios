@@ -13,12 +13,10 @@ struct HollowTextView: View {
     var inDetail: Bool
     var highlight: Bool
     
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
-    
     var compactLineLimit: Int? = nil
     var body: some View {
         textView
-            .font(.system(size: body16))
+            .dynamicFont(size: 16)
             .lineSpacing(3)
             .leading()
             .foregroundColor(inDetail ? .primary : .hollowContentText)

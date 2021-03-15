@@ -6,13 +6,12 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 import Defaults
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import Connectivity
-import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
@@ -123,23 +122,21 @@ extension AppDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let content = response.notification.request.content
-        if let postId = content.userInfo["pid"] as? Int {
+        if let type = content.userInfo["type"] as? Int, type == 1 {
+            // System message for type 1
+            let messageView = MessageView(presented: .constant(true), page: .message, selfDismiss: true)
+            IntegrationUtilities.presentView(content: { messageView })
+        } else if let postId = content.userInfo["pid"] as? Int {
             let commentId = content.userInfo["cid"] as? Int
-            presentDetail(postId: postId, commentId: commentId)
+            let postDataWrapper = PostDataWrapper.templatePost(for: postId)
+            let detailView = HollowDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper), jumpToComment: commentId))
+            IntegrationUtilities.presentView(content: { detailView })
         }
+        
         completionHandler()
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound])
-    }
-    
-    func presentDetail(postId: Int, commentId: Int?) {
-        guard let topVC = IntegrationUtilities.topViewController() else { return }
-        let postDataWrapper = PostDataWrapper.templatePost(for: postId)
-        let detailView = HollowDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper), jumpToComment: commentId))
-        let vc = UIHostingController(rootView: detailView)
-        vc.modalPresentationStyle = .popover
-        topVC.present(vc, animated: true)
     }
 }

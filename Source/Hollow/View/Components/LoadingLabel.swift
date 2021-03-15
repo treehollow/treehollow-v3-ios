@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LoadingLabel: View {
     
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     
     var foregroundColor: Color = .hollowContentText
@@ -18,7 +17,7 @@ struct LoadingLabel: View {
     var body: some View {
         HStack {
             Text("LOADING_LABEL_TEXT")
-                .font(.system(size: body16, weight: .semibold))
+                .dynamicFont(size: 16, weight: .semibold)
             Spinner(color: foregroundColor, desiredWidth: body14)
         }
         .foregroundColor(foregroundColor)

@@ -10,8 +10,6 @@ import SwiftUI
 
 struct SearchBar: View {
     @Binding var isSearching: Bool
-    
-    @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
 
     var body: some View {
         Button(action:{
@@ -25,7 +23,7 @@ struct SearchBar: View {
                 Text("TIMELINE_SEARCH_BAR_PLACEHOLDER")
                 Spacer()
             }
-            .font(.system(size: body17))
+            .dynamicFont(size: 17)
             .foregroundColor(.mainSearchBarText)
             .padding(.vertical, 7)
             .padding(.horizontal, 15)

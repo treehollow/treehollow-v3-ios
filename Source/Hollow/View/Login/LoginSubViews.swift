@@ -16,8 +16,6 @@ extension LoginView {
         @Binding var presented: Bool
         let successHandler: (String) -> Void
         @State private var pageLoadingFinish = false
-        
-        @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
 
         var body: some View {
             VStack {
@@ -53,7 +51,6 @@ extension LoginView {
     struct RegisterTextFields: View {
         @EnvironmentObject var viewModel: LoginStore
         @Environment(\.openURL) var openURL
-        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         
         // The password is valid only if its length is no less than 8 and it contains no blank spaces.
         private var passwordValid: Bool {
@@ -88,7 +85,7 @@ extension LoginView {
                             .foregroundColor(.green)
                     }
                 }
-                .font(.system(size: body14))
+                .dynamicFont(size: 14)
             }
             
             VStack(alignment: .leading) {
@@ -108,7 +105,7 @@ extension LoginView {
                             }
                         }
                     }
-                    .font(.system(size: body14))
+                    .dynamicFont(size: 14)
                 }
                 
                 // Policies
@@ -142,8 +139,6 @@ extension LoginView {
     struct EmailTextField: View {
         @EnvironmentObject var viewModel: LoginStore
         private let configuration = Defaults[.hollowConfig]!
-        
-        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
 
         var body: some View {
             MyTextField(text: $viewModel.email,
@@ -163,7 +158,7 @@ extension LoginView {
                             .layoutPriority(1)
                     }
                     .lineLimit(1)
-                    .font(.system(size: body14))
+                    .dynamicFont(size: 14)
                     .foregroundColor(.hollowContentText)
                 })
             }
@@ -176,8 +171,6 @@ extension LoginView {
         @State private var alertPresented = false
         @State private var contactEmailURL: URL!
         @Environment(\.openURL) var openURL
-        
-        @ScaledMetric(wrappedValue: 12, relativeTo: .footnote) var footnote12: CGFloat
 
         var body: some View {
             VStack(alignment: .leading) {
@@ -199,7 +192,7 @@ extension LoginView {
                 }) {
                     Text("LOGINVIEW_FORGET_PASSWORD_BUTTON")
                         .underline()
-                        .font(.system(size: footnote12))
+                        .dynamicFont(size: 12)
                         .foregroundColor(.secondary)
                 }
             }

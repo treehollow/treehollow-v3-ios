@@ -24,10 +24,6 @@ struct SearchView: View {
     
     @Default(.searchHistory) var searchHistory
     @Environment(\.colorScheme) var colorScheme
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
-    @ScaledMetric(wrappedValue: 10, relativeTo: .body) var body10: CGFloat
-    @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
-    @ScaledMetric(wrappedValue: 20, relativeTo: .body) var body20: CGFloat
 
     var body: some View {
         VStack {

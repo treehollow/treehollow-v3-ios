@@ -56,11 +56,7 @@ extension DeviceListView {
         var isCurrentDevice: Bool
         var isLoggingout: Bool
         var logoutAction: (String) -> Void
-        
-//        @State private var alertPresented = false
-        
-        @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
-        @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
+
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
         @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize
@@ -124,7 +120,7 @@ extension DeviceListView {
         private func section(header: String, content: String) -> some View {
             VStack(alignment: .leading, spacing: body5) {
                 Text(header.uppercased())
-                    .font(.system(size: body15, weight: .semibold))
+                    .dynamicFont(size: 15, weight: .semibold)
                     .foregroundColor(.hollowContentText)
                 Text(content)
                     .font(.system(.body, design: .monospaced))

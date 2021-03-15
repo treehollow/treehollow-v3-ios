@@ -19,8 +19,6 @@ struct TimelineView: View {
     @State private var scrollToIndex: Int = -1
     @State private var searchBarSize: CGSize = .zero
     
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
-    @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
     
     @State var detailStore: HollowDetailStore? = nil

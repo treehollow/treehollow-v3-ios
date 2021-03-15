@@ -34,7 +34,6 @@ struct _HollowHeaderView<MenuContent: View>: View {
     
     @ScaledMetric(wrappedValue: 37, relativeTo: .body) var body37: CGFloat
     @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
-    @ScaledMetric(wrappedValue: 13, relativeTo: .body) var body13: CGFloat
     
     var body: some View {
         HStack(alignment: .center) {
@@ -58,16 +57,18 @@ struct _HollowHeaderView<MenuContent: View>: View {
                             .fontWeight(.medium)
                             .font(.system(size: body16, weight: .semibold))
                             .foregroundColor(.hollowContentText)
+                            .singleLineText()
                         if showContent {
                             // Time label
                             secondaryText(timeLabelText, fontWeight: .medium)
+                                .minimumScaleFactor(0.5)
                                 .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                         }
                     }
                     if showContent {
                         let postDescription =
                             postData.text != "" ?
-                            postData.text.removeLineBreak() :
+                            postData.text :
                             postData.hollowImage != nil ?
                             "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" : ""
                         
@@ -75,6 +76,7 @@ struct _HollowHeaderView<MenuContent: View>: View {
                     } else {
                         // Time label
                         secondaryText(timeLabelText, fontWeight: .semibold)
+                            .minimumScaleFactor(0.5)
                             .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                     }
                 }
@@ -113,7 +115,7 @@ struct _HollowHeaderView<MenuContent: View>: View {
     
     func secondaryText(_ text: String, fontWeight: Font.Weight = .regular) -> some View {
         Text(text)
-            .font(.system(size: body13, weight: fontWeight))
+            .dynamicFont(size: 13, weight: fontWeight)
             .lineSpacing(2.5)
             .foregroundColor(.hollowCardStarUnselected)
             .lineLimit(1)

@@ -68,8 +68,6 @@ fileprivate struct _StyledAlert<Content: View>: View {
     var selfDismiss = false
     
     @ScaledMetric private var spacing: CGFloat = 14
-    @ScaledMetric(wrappedValue: 14, relativeTo: .body) private var secondaryText: CGFloat
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) private var buttonText: CGFloat
     
     @Environment(\.colorScheme) private var colorScheme
 
@@ -87,7 +85,7 @@ fileprivate struct _StyledAlert<Content: View>: View {
 
             if let message = self.message, message != "" {
                 Text(message)
-                    .font(.system(size: secondaryText))
+                    .dynamicFont(size: 14)
                     .padding(.bottom)
             }
             
@@ -105,7 +103,7 @@ fileprivate struct _StyledAlert<Content: View>: View {
                     }
                 }) {
                     Text(button.text)
-                        .font(.system(size: buttonText, weight: style.fontWeight))
+                        .dynamicFont(size: 15, weight: style.fontWeight)
                         .foregroundColor(style.accentColor)
                         .horizontalCenter()
                         .padding(.vertical)

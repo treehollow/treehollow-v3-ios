@@ -61,7 +61,7 @@ extension SearchView {
                 NSLocalizedString("SEARCHVIEW_SEARCH_BUTTON", comment: "")
             MyButton(action: performSearch, gradient: .vertical(gradient: .button)) {
                 return Text(searchButtonText)
-                    .font(.system(size: buttonFontSize, weight: .bold))
+                    .dynamicFont(size: ViewConstants.plainButtonFontSize, weight: .bold)
                     .foregroundColor(.white)
             }
             .disabled(store.isLoading || !searchStringValid)
@@ -195,9 +195,6 @@ extension SearchView {
         
         @Environment(\.colorScheme) var colorScheme
         
-        @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
-        @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
-        
         private var startButtonText: String {
             if let startDate = startDate {
                 return String(startDate.description.prefix(10))
@@ -266,7 +263,7 @@ extension SearchView {
                     .lineLimit(1)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .font(.system(size: body14, weight: hasContent ? .semibold : .medium))
+                    .dynamicFont(size: 14, weight: hasContent ? .semibold : .medium)
                     .foregroundColor(hasContent ? .white : .primary)
                     .background(Group { if hasContent {
                         LinearGradient.vertical(gradient: .button)
@@ -286,11 +283,11 @@ extension SearchView {
             }) {
                 HStack {
                     Text(text)
-                        .font(.system(size: body14, weight: .semibold))
+                        .dynamicFont(size: 14, weight: .semibold)
                         .foregroundColor(.primary)
                     Spacer()
                     Text(description)
-                        .font(.system(size: body12))
+                        .dynamicFont(size: 12)
                         .foregroundColor(.secondary)
                 }
                 .colorScheme(selected ? .dark : colorScheme)
@@ -318,8 +315,6 @@ extension SearchView {
     struct HistoryView: View {
         @Default(.searchHistory) var searchHistory
         @Binding var searchText: String
-        @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
-        @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
         @ScaledMetric(wrappedValue: 15) var historySpcing: CGFloat
         
         var performSearch: () -> Void
@@ -334,7 +329,7 @@ extension SearchView {
                         .foregroundColor(.uiColor(.systemFill))
                 }
             }
-            .font(.system(size: body17, weight: .semibold))
+            .dynamicFont(size: 17, weight: .semibold)
             .padding(.top)
             
             if searchHistory.count > 0 {
@@ -343,7 +338,7 @@ extension SearchView {
                         Text(history)
                             .foregroundColor(.secondary)
                             .leading()
-                            .font(.system(size: body16))
+                            .dynamicFont(size: 16)
                             .onTapGesture {
                                 withAnimation { searchText = history }
                                 performSearch()

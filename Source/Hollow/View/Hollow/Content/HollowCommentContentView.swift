@@ -22,14 +22,8 @@ struct HollowCommentContentView: View {
         return compact ? body60 : body45
     }
     
-    @State private var screenSize = UIScreen.main.bounds.size
-    
     @ScaledMetric(wrappedValue: 60, relativeTo: .body) var body60: CGFloat
     @ScaledMetric(wrappedValue: 45, relativeTo: .body) var body45: CGFloat
-    @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
-    @ScaledMetric(wrappedValue: 12, relativeTo: .body) var body12: CGFloat
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var body15: CGFloat
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
     @ScaledMetric(wrappedValue: 2, relativeTo: .body) var body2: CGFloat
@@ -79,7 +73,7 @@ struct HollowCommentContentView: View {
                                 }
                                 Spacer()
                                 Text(HollowDateFormatter(date: commentData.date).formattedString())
-                                    .font(.system(size: body14, weight: .medium))
+                                    .dynamicFont(size: 15, weight: .medium)
                                     .foregroundColor(.hollowCardStarUnselected)
                                     .lineLimit(1)
                             }
@@ -118,12 +112,12 @@ struct HollowCommentContentView: View {
                 
                 if commentData.image != nil && compact {
                     Image(systemName: "photo")
-                        .font(.system(size: body15))
+                        .dynamicFont(size: 15)
                         .layoutPriority(1)
                 }
                 
             }
-            .font(.system(size: body15))
+            .dynamicFont(size: 15)
             .lineSpacing(3)
             .foregroundColor(compact ? .hollowContentText : .primary)
             if let padding = contentVerticalPadding {
@@ -137,7 +131,7 @@ struct HollowCommentContentView: View {
                 }
             }
         }
-        .font(.system(size: body16))
+        .dynamicFont(size: 16)
         .fixedSize(horizontal: false, vertical: true)
     }
     
@@ -167,7 +161,7 @@ struct HollowCommentContentView: View {
     
     func tagView(text: String, removed: Bool) -> some View {
         Text(text)
-            .font(.system(size: body12, weight: .semibold))
+            .dynamicFont(size: 12, weight: .semibold)
             .foregroundColor(.white)
             .padding(.vertical, body2)
             .padding(.horizontal, body4)

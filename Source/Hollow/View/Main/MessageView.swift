@@ -9,16 +9,15 @@ import SwiftUI
 
 struct MessageView: View {
     @Binding var presented: Bool
-    @State private var page: Page = .attention
+    @State var page: Page = .attention
     @ObservedObject var messageStore = MessageStore()
     @ObservedObject var postListStore = PostListRequestStore(type: .attentionList)
     @State var detailStore: HollowDetailStore?
     @State private var isSearching = false
     
-    @Environment(\.colorScheme) var colorScheme
+    var selfDismiss = false
     
-    @ScaledMetric(wrappedValue: 15, relativeTo: .body) var textFontSize: CGFloat
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var titleFontSize: CGFloat
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -47,7 +46,12 @@ struct MessageView: View {
 extension MessageView {
     var topBar: some View {
         HStack {
-            Button(action: { withAnimation { presented = false } }) {
+            Button(action: {
+                if selfDismiss { dismissSelf() }
+                else {
+                    withAnimation { presented = false }
+                }
+            }) {
                 Image(systemName: "xmark")
                     .modifier(ImageButtonModifier())
                     .padding(.trailing)
@@ -64,7 +68,7 @@ extension MessageView {
         }
         .padding(.horizontal)
         .topBar()
-        .padding(.bottom, 5)
+        .padding(.vertical, 5)
 
     }
     
@@ -76,7 +80,7 @@ extension MessageView {
                         Text(message.title)
                             .bold()
                             .foregroundColor(.hollowContentText)
-                            .font(.system(size: titleFontSize))
+                            .dynamicFont(size: 16)
                         Spacer()
                         Text(HollowDateFormatter(date: message.date).formattedString())
                             .foregroundColor(.secondary)
@@ -84,7 +88,7 @@ extension MessageView {
                     }
                     .padding(.bottom, 7)
                     Text(message.content)
-                        .font(.system(size: textFontSize))
+                        .dynamicFont(size: 15)
                 }
                 .padding()
                 .background(Color.hollowCardBackground)
