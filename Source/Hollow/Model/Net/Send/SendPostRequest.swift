@@ -13,7 +13,7 @@ struct SendPostRequestConfiguration {
     var token: String
     var text: String
     var tag: String?
-    var imageData: Data?
+    var imageData: String?
     var voteData: [String]?
 }
 
@@ -52,7 +52,7 @@ struct SendPostRequest: DefaultRequest {
         ]
 
         if let imageData = configuration.imageData {
-            parameters["data"] = imageData.base64EncodedString()
+            parameters["data"] = imageData
         }
 
         if let voteData = configuration.voteData {

@@ -37,6 +37,7 @@
 		0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSize.swift */; };
 		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
 		0E3AC40025F7778400A4278A /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */; };
+		0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */; };
 		0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
@@ -68,7 +69,6 @@
 		0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1725CD772200351672 /* HollowVoteContentView.swift */; };
 		0E415B6725CD772200351672 /* HollowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1825CD772200351672 /* HollowImageView.swift */; };
 		0E415B6825CD772200351672 /* HollowTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1925CD772200351672 /* HollowTextView.swift */; };
-		0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */; };
 		0E415B6B25CD772200351672 /* HollowButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1D25CD772200351672 /* HollowButtonStyle.swift */; };
 		0E415B6C25CD772200351672 /* HollowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B1E25CD772200351672 /* HollowHeaderView.swift */; };
 		0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2025CD772200351672 /* HollowDetailView.swift */; };
@@ -214,6 +214,7 @@
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
 		0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGenerator.swift; sourceTree = "<group>"; };
+		0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderInfoView.swift; sourceTree = "<group>"; };
 		0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputSubViews.swift; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
@@ -248,7 +249,6 @@
 		0E415B1725CD772200351672 /* HollowVoteContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowVoteContentView.swift; sourceTree = "<group>"; };
 		0E415B1825CD772200351672 /* HollowImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowImageView.swift; sourceTree = "<group>"; };
 		0E415B1925CD772200351672 /* HollowTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowTextView.swift; sourceTree = "<group>"; };
-		0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowVerticalDivider.swift; sourceTree = "<group>"; };
 		0E415B1D25CD772200351672 /* HollowButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowButtonStyle.swift; sourceTree = "<group>"; };
 		0E415B1E25CD772200351672 /* HollowHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowHeaderView.swift; sourceTree = "<group>"; };
 		0E415B2025CD772200351672 /* HollowDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowDetailView.swift; sourceTree = "<group>"; };
@@ -582,7 +582,6 @@
 		0E415B1A25CD772200351672 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0E415B1B25CD772200351672 /* HollowVerticalDivider.swift */,
 				0E415B1E25CD772200351672 /* HollowHeaderView.swift */,
 				0EA2D51C25F11EA9003D539E /* ReportMenuContent.swift */,
 			);
@@ -606,6 +605,7 @@
 				0E415B2425CD772200351672 /* SettingsSubViews.swift */,
 				0E415B2525CD772200351672 /* RegulationView.swift */,
 				0EDA262625D22C8600B67292 /* DeviceListView.swift */,
+				0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1036,6 +1036,7 @@
 				0E906D2D25DCEADD0034053C /* Bool+int.swift in Sources */,
 				0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */,
 				0EFB54F425E926A1001BC98A /* PostListRequestGroup.swift in Sources */,
+				0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */,
 				0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */,
 				0E415B5E25CD772200351672 /* HollowCommentInputView.swift in Sources */,
 				0E906D0725DCEADD0034053C /* GetPushRequest.swift in Sources */,
@@ -1112,7 +1113,6 @@
 				0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */,
 				0EA2D51A25F0FA05003D539E /* View+defaultBlurBackground.swift in Sources */,
 				0E906D0F25DCEADD0034053C /* AccountCreationRequest.swift in Sources */,
-				0E415B6925CD772200351672 /* HollowVerticalDivider.swift in Sources */,
 				0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */,
 				0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */,
 				0E906D0E25DCEADD0034053C /* DeviceTerminationRequest.swift in Sources */,
@@ -1305,7 +1305,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1315,7 +1315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1331,7 +1331,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1341,7 +1341,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

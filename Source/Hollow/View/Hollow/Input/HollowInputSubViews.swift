@@ -18,7 +18,7 @@ extension HollowInputView {
                 .aspectRatio(contentMode: .fit)
                 .roundedCorner(4)
                 .overlay(
-                    VStack {
+                    VStack(alignment: .trailing) {
                         Button(action: { withAnimation { inputStore.compressedImage = nil }}) {
                             ZStack {
                                 Blur().frame(width: body30, height: body30).clipShape(Circle())
@@ -36,8 +36,6 @@ extension HollowInputView {
                             .padding(8)
                             .blurBackground()
                             .roundedCorner(8)
-                            .bottom()
-                            .trailing()
                             .padding(body10)
                     }
                     .trailing()

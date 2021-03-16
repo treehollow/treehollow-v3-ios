@@ -22,8 +22,11 @@ struct HollowCommentContentView: View {
         return compact ? body60 : body45
     }
     
+    static let avatarWidth: CGFloat = 45
+    static let avatarProportion: CGFloat = 0.7
+    
     @ScaledMetric(wrappedValue: 60, relativeTo: .body) var body60: CGFloat
-    @ScaledMetric(wrappedValue: 45, relativeTo: .body) var body45: CGFloat
+    @ScaledMetric(wrappedValue: avatarWidth, relativeTo: .body) var body45: CGFloat
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
     @ScaledMetric(wrappedValue: 2, relativeTo: .body) var body2: CGFloat
@@ -73,7 +76,7 @@ struct HollowCommentContentView: View {
                                 }
                                 Spacer()
                                 Text(HollowDateFormatter(date: commentData.date).formattedString())
-                                    .dynamicFont(size: 15, weight: .medium)
+                                    .dynamicFont(size: 14, weight: .medium)
                                     .foregroundColor(.hollowCardStarUnselected)
                                     .lineLimit(1)
                             }
@@ -137,7 +140,7 @@ struct HollowCommentContentView: View {
     
     
     @ViewBuilder var avatarView: some View {
-        let avatarWidth = nameLabelWidth * 0.7
+        let avatarWidth = nameLabelWidth * HollowCommentContentView.avatarProportion
         let postTintColor = ViewConstants.avatarTintColors[postColorIndex]
         let commentTintColor = ViewConstants.avatarTintColors[commentData.colorIndex]
         let color = commentData.isDz ? postTintColor : commentTintColor

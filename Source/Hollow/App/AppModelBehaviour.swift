@@ -30,13 +30,18 @@ struct AppModelBehaviour: ViewModifier {
             // Handle entering main view
             .onChange(of: state.shouldShowMainView) { show in
                 withAnimation { appModel.isInMainView = show }
-                if !show { restoreDefaults() }
+                if !show { restore() }
             }
         
             // Handle expired state
             .onChange(of: state.tokenExpired) { tokenExpired in
                 withAnimation { appModel.tokenExpired = tokenExpired }
             }
+    }
+    
+    private func restore() {
+        restoreDefaults()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     private func restoreDefaults() {

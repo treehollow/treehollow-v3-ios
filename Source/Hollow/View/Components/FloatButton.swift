@@ -16,6 +16,8 @@ struct FloatButton: View {
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
     
+    @Environment(\.isEnabled) var isEnabled
+    
     var body: some View {
         Button(action: action) {
             ZStack {
@@ -27,5 +29,6 @@ struct FloatButton: View {
         }
         .frame(width: body50, height: body50)
         .clipShape(Circle())
+        .opacity(isEnabled ? 1 : 0.5)
     }
 }

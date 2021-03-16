@@ -158,28 +158,28 @@ extension HollowCommentInputView {
                 .aspectRatio(contentMode: .fit)
                 .roundedCorner(4)
                 .overlay(
-                    Button(action: { withAnimation { store.compressedImage = nil }}) {
-                        ZStack {
-                            Blur().frame(width: body30, height: body30).clipShape(Circle())
-                            Image(systemName: "xmark")
-                                .dynamicFont(size: 14, weight: .semibold)
-                                .foregroundColor(.primary)
+                    VStack(alignment: .trailing) {
+                        Button(action: { withAnimation { store.compressedImage = nil }}) {
+                            ZStack {
+                                Blur().frame(width: body30, height: body30).clipShape(Circle())
+                                Image(systemName: "xmark")
+                                    .dynamicFont(size: 14, weight: .semibold)
+                                    .foregroundColor(.primary)
+                            }
+                            .padding(body10)
                         }
-                        .padding(body10)
+                        
+                        Spacer()
+                        
+                        Text(NSLocalizedString("INPUTVIEW_IMAGE_SIZE_LABEL", comment: "") + ": \(store.imageSizeInformation ?? "??")")
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                            .padding(8)
+                            .blurBackground()
+                            .roundedCorner(8)
+                            .padding(body10)
                     }
-                    .top()
                     .trailing()
-                )
-                .overlay(
-                    Text(NSLocalizedString("INPUTVIEW_IMAGE_SIZE_LABEL", comment: "") + ": \(store.imageSizeInformation ?? "??")")
-                        .fontWeight(.semibold)
-                        .font(.footnote)
-                        .padding(8)
-                        .blurBackground()
-                        .roundedCorner(8)
-                        .bottom()
-                        .trailing()
-                        .padding(body10)
                 )
                 .zIndex(1)
                 .matchedGeometryEffect(id: "photo", in: animation)

@@ -29,7 +29,8 @@ struct AvatarGenerator {
             hash &+= (hash << 5) &+ int32PostId
         }
         for character in name {
-            hash &+= (hash << 5) &+ Int32(character.asciiValue ?? 0)
+            let unicodeValue = Unicode.Scalar(String(character))?.value ?? 0
+            hash &+= (hash << 5) &+ Int32(unicodeValue)
         }
         hash = (hash >> 8) ^ hash
         return Int(hash)

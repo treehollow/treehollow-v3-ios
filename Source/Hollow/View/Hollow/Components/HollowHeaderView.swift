@@ -25,6 +25,7 @@ struct _HollowHeaderView<MenuContent: View>: View {
     var compact: Bool
     var showContent = false
     var starAction: (_ star: Bool) -> Void
+    var isLoading = false
     var disableAttention: Bool
     private var starred: Bool? { postData.attention }
     
@@ -85,17 +86,21 @@ struct _HollowHeaderView<MenuContent: View>: View {
             Spacer()
             
             if !compact {
-                let attention = postData.attention
-                Button(action: { starAction(!attention) }) {
-                    HStack(spacing: 3) {
-                        Text("\(postData.likeNumber)")
-                        Image(systemName: attention ? "star.fill" : "star")
+                if isLoading {
+                    Spinner(color: .hollowCardStarUnselected, desiredWidth: body16)
+                } else {
+                    let attention = postData.attention
+                    Button(action: { starAction(!attention) }) {
+                        HStack(spacing: 3) {
+                            Text("\(postData.likeNumber)")
+                            Image(systemName: attention ? "star.fill" : "star")
+                        }
+                        .modifier(HollowButtonStyle())
+                        .padding(.vertical, 5)
+                        .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
                     }
-                    .modifier(HollowButtonStyle())
-                    .padding(.vertical, 5)
-                    .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
+                    .disabled(disableAttention)
                 }
-                .disabled(disableAttention)
 
                 if let menuContent = menuContent {
                     Menu(content: { menuContent() }, label: {

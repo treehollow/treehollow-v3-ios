@@ -20,7 +20,7 @@ struct HollowDetailView: View {
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
-    @ScaledMetric var commentViewBottomPadding: CGFloat = 40
+    @ScaledMetric var commentViewBottomPadding: CGFloat = 50
     
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
@@ -46,6 +46,7 @@ struct HollowDetailView: View {
 //                            showContent: headerFrame.maxY > commentViewFrame.minY,
                             showContent: showHeaderContent,
                             starAction: store.star,
+                            isLoading: store.isLoading,
                             disableAttention: store.isEditingAttention || store.isLoading,
                             menuContent: { Group {
                                 Button(action: store.requestDetail) {
@@ -129,7 +130,6 @@ struct HollowDetailView: View {
         .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
             FloatButton(
                 action: {
-                    guard !store.isSendingComment && !store.isLoading else { return }
                     withAnimation { store.replyToIndex = -1 }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 },
@@ -142,6 +142,7 @@ struct HollowDetailView: View {
             .padding()
             .padding(7)
             .padding(.bottom, 7)
+            .disabled(store.isSendingComment || store.isLoading)
         }})
         .edgesIgnoringSafeArea(.bottom)
 

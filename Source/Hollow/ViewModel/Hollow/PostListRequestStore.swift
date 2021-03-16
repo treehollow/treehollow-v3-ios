@@ -116,6 +116,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         page = 1
         withAnimation {
             noMorePosts = false
+            allowLoadMorePosts = true
         }
         let completion = {
             finshHandler()

@@ -12,15 +12,15 @@ struct ImageCompressor {
     static let resizingQuality: CGFloat = 0.7
     var dataCountThreshold: Int
     var image: UIImage
-    func compress() -> (Data, String)? {
+    func compress() -> (jpegData: Data, base64String: String, description: String)? {
         let formatter = ByteCountFormatter()
         formatter.allowedUnits = [.useKB]
         formatter.countStyle = .file
         
-        if let jpegData = image.jpegData(compressionQuality: 1),
-           jpegData.count <= dataCountThreshold {
-            print("[ImageCompressor] Succeed to compress with quality 1, the size is \(jpegData.count)")
-            return (jpegData, formatter.sizeDescription(forData: jpegData)!)
+        if let pngData = image.pngData(),
+           pngData.count <= dataCountThreshold {
+            print("[ImageCompressor] Succeed to compress with quality 1, the size is \(pngData.count)")
+            return (pngData, pngData.base64EncodedString(), formatter.sizeDescription(forData: pngData)!)
         }
         
         // Quality
@@ -37,9 +37,9 @@ struct ImageCompressor {
                 minQuality = (maxQuality + minQuality) / 2
                 finalData = successData
                 if i < qualityAttempt { continue }
-                return (successData, formatter.sizeDescription(forData: successData)!)
+                return (successData, successData.base64EncodedString(), formatter.sizeDescription(forData: successData)!)
             } else if let finalData = finalData {
-                return (finalData, formatter.sizeDescription(forData: finalData)!)
+                return (finalData, finalData.base64EncodedString(), formatter.sizeDescription(forData: finalData)!)
             }
             
             maxQuality = (maxQuality + minQuality) / 2
@@ -54,16 +54,15 @@ struct ImageCompressor {
         let resizeAttempt = 6
         for i in 1...resizeAttempt {
             let resizeFactor = (maxResizingFactor + minResizingFactor) / 2
-            if let jpegData = image.resizeTo(scaleFactor: resizeFactor).jpegData(compressionQuality: ImageCompressor.resizingQuality) {
-                let base64Data = jpegData.base64EncodedData()
-                if base64Data.count <= dataCountThreshold {
-                    print("[ImageCompressor] Succeed to compress with resizing factor \(resizeFactor), the size is \(base64Data.count)")
+            if let jpegData = image.resizeTo(scaleFactor: resizeFactor).pngData() {
+                if jpegData.count <= dataCountThreshold {
+                    print("[ImageCompressor] Succeed to compress with resizing factor \(resizeFactor), the size is \(jpegData.count)")
                     minResizingFactor = (maxResizingFactor + minResizingFactor) / 2
                     finalResizingData = jpegData
                     if i < resizeAttempt { continue }
-                    return (jpegData, formatter.sizeDescription(forData: jpegData)!)
+                    return (jpegData, jpegData.base64EncodedString(), formatter.sizeDescription(forData: jpegData)!)
                 } else {
-                    print("[ImageCompressor] Fail to compress with resizing factor \(resizeFactor), the size is \(base64Data.count)")
+                    print("[ImageCompressor] Fail to compress with resizing factor \(resizeFactor), the size is \(jpegData.count)")
                 }
             }
             
@@ -71,8 +70,8 @@ struct ImageCompressor {
         }
         
         if let finalResizingData = finalResizingData {
-            let base64Data = finalResizingData.base64EncodedData()
-            return (finalResizingData, formatter.sizeDescription(forData: base64Data)!)
+            let base64String = finalResizingData.base64EncodedString()
+            return (finalResizingData, base64String, formatter.sizeDescription(forData: finalResizingData)!)
         }
         
         return nil
@@ -80,12 +79,11 @@ struct ImageCompressor {
     
     func compress(_ image: UIImage, quality: CGFloat) -> Data? {
         if let jpegData = image.jpegData(compressionQuality: quality) {
-            let base64Data = jpegData.base64EncodedData()
-            if base64Data.count <= dataCountThreshold {
-                print("[ImageCompressor] Succeed to compress with quality \(quality), the size is \(base64Data.count)")
+            if jpegData.count <= dataCountThreshold {
+                print("[ImageCompressor] Succeed to compress with quality \(quality), the size is \(jpegData.count)")
                 return jpegData
             } else {
-                print("[ImageCompressor] Fail to compress with quality \(quality), the size is \(base64Data.count)")
+                print("[ImageCompressor] Fail to compress with quality \(quality), the size is \(jpegData.count)")
             }
             
         }

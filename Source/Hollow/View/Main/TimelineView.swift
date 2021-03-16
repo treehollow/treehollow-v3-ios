@@ -55,7 +55,7 @@ struct TimelineView: View {
                         VStack(alignment: .leading) {
                             Label(
                                 NSLocalizedString("TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE", comment: ""),
-                                systemImage: "megaphone.fill"
+                                systemImage: "megaphone"
                             )
                             .padding(.bottom, 10)
                             .dynamicFont(size: 17, weight: .bold)

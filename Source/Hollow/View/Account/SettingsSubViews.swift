@@ -51,15 +51,17 @@ struct AppearanceSettingsView: View {
                     tempColorSet = nil
                 }) {
                     HStack {
-                        (Text("\(Defaults[.hollowType]?.name ?? "") - ") + Text("SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL"))
-                            .foregroundColor(.primary)
-                        Spacer()
                         Color.customColor(prefix: "button.gradient.1", colorSet: Defaults[.hollowType])
                             .colorScheme(.light)
                             .frame(maxHeight: colorHeight)
                             .aspectRatio(1, contentMode: .fit)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.uiColor(.systemFill)))
+
+                        Text("\(Defaults[.hollowType]?.name ?? "")")
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text("SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL")
+                            .foregroundColor(.secondary)
                         CheckmarkButtonImage(isOn: tempColorSet == nil)
                     }
                 }
@@ -69,15 +71,15 @@ struct AppearanceSettingsView: View {
                             tempColorSet = type
                         }) {
                             HStack {
-                                Text(type.name)
-                                    .foregroundColor(.primary)
-                                Spacer()
                                 Color.customColor(prefix: "button.gradient.1", colorSet: type)
                                     .colorScheme(.light)
                                     .frame(maxHeight: colorHeight)
                                     .aspectRatio(1, contentMode: .fit)
                                     .clipShape(Circle())
-                                    .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.uiColor(.systemFill)))
+
+                                Text(type.name)
+                                    .foregroundColor(.primary)
+                                Spacer()
                                 CheckmarkButtonImage(isOn: tempColorSet == type)
                             }
                         }
@@ -207,7 +209,7 @@ struct PushNotificationSettingsView: View {
                         HStack {
                             Text(type.description)
                             Spacer()
-                            if isEditing {
+                            if isEditing || viewModel.isLoading {
                                 let selected = viewModel.tempNotificationType[keyPath: type.keyPath]
                                 CheckmarkButtonImage(isOn: selected)
                             } else {
@@ -352,7 +354,9 @@ struct OtherSettingsView: View {
         @Default(.openURLMethod) var openMethod
         
         var body: some View {
-            Section(header: Text("SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE").padding(.horizontal)) {
+            Section(
+                header: Text("SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE").padding(.horizontal)
+            ) {
                 ForEach(OpenURLHelper.OpenMethod.allCases) { method in
                     Button(action: {
                         withAnimation {

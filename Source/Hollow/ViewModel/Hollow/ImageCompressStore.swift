@@ -13,6 +13,7 @@ import SwiftUI
 protocol ImageCompressStore: class {
     var image: UIImage? { get set }
     var compressedImage: UIImage? { get set }
+    var compressedImageBase64String: String? { get set }
     var errorMessage: (title: String, message: String)? { get set }
     var imageSizeInformation: String? { get set }
 }
@@ -22,7 +23,7 @@ extension ImageCompressStore {
         guard let image = image else { return }
         withAnimation { compressedImage = nil }
         DispatchQueue.global(qos: .background).async {
-            let compressor = ImageCompressor(dataCountThreshold: 512 * 1024, image: image)
+            let compressor = ImageCompressor(dataCountThreshold: 600 * 1024, image: image)
             guard let result = compressor.compress() else {
                 DispatchQueue.main.async { withAnimation {
                     self.image = nil
@@ -32,8 +33,9 @@ extension ImageCompressStore {
             }
             DispatchQueue.main.async { withAnimation {
                 self.image = nil
-                self.compressedImage = UIImage(data: result.0)
-                self.imageSizeInformation = result.1
+                self.compressedImage = UIImage(data: result.jpegData)
+                self.imageSizeInformation = result.description
+                self.compressedImageBase64String = result.base64String
             }}
         }
     }

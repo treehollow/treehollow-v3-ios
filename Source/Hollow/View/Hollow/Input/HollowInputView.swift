@@ -28,6 +28,7 @@ struct HollowInputView: View {
     
     var hasVote: Bool { inputStore.voteInformation != nil }
     var hasImage: Bool { inputStore.compressedImage != nil }
+    var isCompressing: Bool { inputStore.image != nil && inputStore.compressedImage == nil }
     var hideComponents: Bool { keyboardShown }
     var voteValid: Bool {
         inputStore.voteInformation == nil || inputStore.voteInformation!.valid
@@ -35,6 +36,7 @@ struct HollowInputView: View {
     var textValid: Bool { inputStore.text.count <= 10000 }
     var contentValid: Bool {
         if !voteValid { return false }
+        if isCompressing { return false }
         if inputStore.text == "" { return hasImage && !hasVote }
         return textValid
     }

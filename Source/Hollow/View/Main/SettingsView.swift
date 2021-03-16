@@ -40,26 +40,9 @@ struct SettingsView: View {
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
                 }
                 
-                Section(header: Text(Defaults[.hollowConfig]?.name ?? "").padding(.horizontal)) {
-                    Button("ACCOUNTVIEW_RULES_CELL") {
-                        if let urlString = Defaults[.hollowConfig]?.rulesUrl,
-                           let url = URL(string: urlString) {
-                            IntegrationUtilities.presentSafariVC(url: url)
-                        }
-                    }
-                    Button("LOGINVIEW_REGISTER_TOS_BUTTON") {
-                        if let urlString = Defaults[.hollowConfig]?.tosUrl,
-                           let url = URL(string: urlString) {
-                            IntegrationUtilities.presentSafariVC(url: url)
-                        }
-                    }
-                    Button("LOGINVIEW_REGISTER_PRIVACY_BUTTON") {
-                        if let urlString = Defaults[.hollowConfig]?.privacyUrl,
-                           let url = URL(string: urlString) {
-                            IntegrationUtilities.presentSafariVC(url: url)
-                        }
-                    }
-
+                Section(header: Text(NSLocalizedString("SETTINGSVIEW_PROVIDER_SECTION_TITLE", comment: "")).padding(.horizontal)) {
+                    NavigationLink(Defaults[.hollowConfig]?.name ?? "", destination: ProviderInfoView())
+                    
                 }
                 .accentColor(.primary)
                                 

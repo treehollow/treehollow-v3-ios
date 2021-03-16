@@ -33,10 +33,15 @@ extension HollowDetailView {
             }
             
         }
-        LoadingLabel(foregroundColor: .primary)
-            .leading()
-            .opacity(store.isLoading ? 1 : 0)
         
+        if store.isLoading, postData.replyNumber > postData.comments.count {
+            LazyVStack(spacing: 10) {
+                ForEach(0..<postData.replyNumber - postData.comments.count, id: \.self) { _ in
+                    PlaceholderComment()
+                }
+            }
+        }
+
         Spacer(minLength: commentViewBottomPadding)
     }
     
@@ -116,5 +121,39 @@ extension HollowDetailView {
                     )
                 }
         }}
+    }
+    
+    struct PlaceholderComment: View {
+        @State private var flash = false
+        @ScaledMetric(wrappedValue: 50) var textHeight: CGFloat
+        @ScaledMetric(wrappedValue: 7) var textCorner: CGFloat
+        @ScaledMetric(wrappedValue: 5) var nameCorner: CGFloat
+        
+        @ViewBuilder var body: some View {
+            // keep in sync with HollowCommentContentView
+            let avatarWidth = HollowCommentContentView.avatarWidth
+            let circleWidth = avatarWidth * HollowCommentContentView.avatarProportion + 4
+            HStack(alignment: .top) {
+                Circle()
+                    .frame(width: circleWidth, height: circleWidth)
+                    .leading()
+                    .frame(width: avatarWidth)
+                    .offset(x: -2)
+                VStack {
+                    Text("liang2kl")
+                        .foregroundColor(.clear)
+                        .overlay(RoundedRectangle(cornerRadius: nameCorner, style: .continuous))
+                        .leading()
+                    RoundedRectangle(cornerRadius: textCorner, style: .continuous)
+                        .frame(height: textHeight)
+                }
+            }
+            .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))
+            .onAppear {
+                withAnimation(Animation.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                    flash.toggle()
+                }
+            }
+        }
     }
 }

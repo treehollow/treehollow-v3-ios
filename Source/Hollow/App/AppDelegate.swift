@@ -66,7 +66,7 @@ extension AppDelegate {
         // Request notification access
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { granted, error in
+        center.requestAuthorization(options: [.badge, .alert, .sound]) { granted, error in
             guard granted else { return }
             
             // Register for APN

@@ -135,13 +135,3 @@ struct HollowVoteContentView: View {
             }
         }
 }
-
-#if DEBUG
-struct HollowVoteContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HollowVoteContentView(vote: .init(votedOption: "赞成", voteData: [.init(title: "赞成", voteCount: 4), .init(title: "反对", voteCount: 2)]), voteHandler: { string in print("Selected option \(string)") })
-            .background(Color.black)
-            .colorScheme(.dark)
-    }
-}
-#endif

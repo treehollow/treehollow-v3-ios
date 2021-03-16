@@ -528,7 +528,7 @@
 
 "TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE" = "Announcement";
 
-"ABOUTVIEW_COPYRIGHT_NOTICE" = "Copyright © 2021 treehollow.";
+"ABOUTVIEW_COPYRIGHT_NOTICE" = "Copyright © 2021 treehollow";
 
 "ABOUTVIEW_OPENSOURCE_NOTICE" = "The source code of this app is open-sourced on GitHub under AGPL-3.0 License.";
 
@@ -573,3 +573,9 @@
 "OPENURL_METHOD_UNIVERSAL" = "Universal";
 
 "SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE" = "Open Links";
+
+"SETTINGSVIEW_PROVIDER_SECTION_TITLE" = "Hollow Information";
+
+"PROVIDER_VIEW_RESTORE_ANNOUNCEMENT" = "Show on Timeline";
+
+"PROVIDER_VIEW_CONTACT" = "Contact Us";

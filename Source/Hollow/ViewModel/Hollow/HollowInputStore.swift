@@ -18,6 +18,7 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     @Published var text: String = ""
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
+    var compressedImageBase64String: String?
     @Published var availableTags: [String] = Defaults[.hollowConfig]?.sendableTags ?? []
     @Published var selectedTag: String?
     @Published var voteInformation: VoteInformation?
@@ -42,7 +43,7 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
 
-        let request = SendPostRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, text: text, tag: selectedTag, imageData: compressedImage?.jpegData(compressionQuality: ImageCompressor.resizingQuality), voteData: voteInformation?.options))
+        let request = SendPostRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, text: text, tag: selectedTag, imageData: compressedImageBase64String, voteData: voteInformation?.options))
         
         request.publisher
             .sinkOnMainThread(receiveError: { error in

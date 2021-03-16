@@ -124,6 +124,7 @@ extension AboutView {
                     )
                 }
             }
+            .listStyle(GroupedListStyle())
             .defaultListStyle()
             .navigationBarTitle(NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""))
         }

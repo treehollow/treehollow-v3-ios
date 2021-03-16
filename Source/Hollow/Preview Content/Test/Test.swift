@@ -40,7 +40,7 @@ struct Test {
                     apiRoot: testAPIRoots,
                     token: testAccessToken,
                     text: "test reply to #1's #1 comment",
-                    imageData: UIImage(named: "test")!.jpegData(compressionQuality: 1),
+                    imageData: UIImage(named: "test")!.jpegData(compressionQuality: 1)?.base64EncodedString(),
                     postId: 1,
                     replyCommentId: 1
                 )
@@ -55,7 +55,7 @@ struct Test {
                     token: testAccessToken,
                     text: "vote test",
                     tag: "",
-                    imageData: UIImage(named: "test.2")!.jpegData(compressionQuality: 0.5)!,
+                    imageData: UIImage(named: "test.2")?.jpegData(compressionQuality: 0.5)?.base64EncodedString(),
                     voteData: ["c djanjas","a","b","c"]
                 )
             )

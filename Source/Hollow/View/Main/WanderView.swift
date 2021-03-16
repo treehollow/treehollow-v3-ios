@@ -30,7 +30,7 @@ struct WanderView: View {
                 // maximum number of posts to 60 (at least loading for 2 times)
                 if viewModel.posts.count >= 60 {
                     viewModel.posts.removeAll()
-                    viewModel.allowLoadMorePosts = false
+                    viewModel.allowLoadMorePosts = true
                 }
                 viewModel.loadMorePosts()
             },
@@ -88,15 +88,11 @@ struct WanderView: View {
             }
 
             HStack {
-                Label("\(postData.replyNumber)", systemImage: "quote.bubble")
+                numberLabel(count: postData.replyNumber, systemImage: "quote.bubble")
                     .foregroundColor(.hollowCardStarUnselected)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
                 Spacer()
-                Label("\(postData.likeNumber)", systemImage: postData.attention ? "star.fill" : "star")
+                numberLabel(count: postData.likeNumber, systemImage: postData.attention ? "star.fill" : "star")
                     .foregroundColor(postData.attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
             }
             .font(.system(size: 17, weight: .semibold, design: .rounded))
             .padding(.top, body5)
@@ -105,5 +101,10 @@ struct WanderView: View {
         .padding()
         .background(Color.hollowCardBackground)
         .roundedCorner(20)
+    }
+    
+    private func numberLabel(count: Int, systemImage: String) -> some View {
+        (Text(Image(systemName: systemImage)) + Text("  \(count)"))
+            .singleLineText()
     }
 }

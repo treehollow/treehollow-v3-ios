@@ -13,7 +13,7 @@ struct SendCommentRequestConfiguration {
     var token: String
     
     var text: String
-    var imageData: Data?
+    var imageData: String?
     /// Id of the post to be commented
     var postId: Int
     var replyCommentId: Int?
@@ -53,7 +53,7 @@ struct SendCommentRequest: DefaultRequest {
         ]
         
         // Optionals are not allowed.
-        if let imageData = configuration.imageData?.base64EncodedString() {
+        if let imageData = configuration.imageData {
             parameters["data"] = imageData
         }
         

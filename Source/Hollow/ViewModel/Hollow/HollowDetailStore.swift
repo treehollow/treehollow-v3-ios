@@ -29,6 +29,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     }
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
+    var compressedImageBase64String: String?
 
     // MARK: Shared Variables
     @Published var errorMessage: (title: String, message: String)?
@@ -263,7 +264,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         if replyToIndex >= 0 {
             text = "Re \(postDataWrapper.post.comments[replyToIndex].name): " + text
         }
-        let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls, token: token, text: text, imageData: compressedImage?.jpegData(compressionQuality: 0.7), postId: postDataWrapper.post.postId, replyCommentId: replyTo)
+        let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls, token: token, text: text, imageData: compressedImageBase64String, postId: postDataWrapper.post.postId, replyCommentId: replyTo)
         
         let request = SendCommentRequest(configuration: configuration)
         
