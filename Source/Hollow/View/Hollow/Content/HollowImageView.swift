@@ -71,11 +71,10 @@ struct HollowImageView: View {
                         buttons: [.ok]
                     )
                     .onTapGesture {
-                        showImageViewer = true
+                        IntegrationUtilities.presentView(presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, content: {
+                            ImageViewer(image: image, footnote: description, presented: $showImageViewer, selfDismiss: true)
+                        })
                     }
-                    .fullScreenCover(isPresented: $showImageViewer, content: {
-                        ImageViewer(image: image, footnote: description, presented: $showImageViewer)
-                    })
                 } else {
                     Rectangle()
                         .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))
