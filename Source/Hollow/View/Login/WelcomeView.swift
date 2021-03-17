@@ -138,6 +138,7 @@ struct WelcomeView: View {
                                 Button(NSLocalizedString("WELCOMEVIEW_CUSTOM_NEXT_BUTTON", comment: ""), action: {
                                     viewModel.requestConfig(hollowType: .other, customConfigURL: text)
                                 })
+                                .disabled(text == "")
                             }
                         }
                 )

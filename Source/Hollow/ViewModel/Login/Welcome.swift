@@ -23,10 +23,6 @@ class Welcome: ObservableObject {
         
         // Validate the parameters
         if hollowType == .other {
-            if customConfigURL == "" || customConfigURL == nil {
-                errorMessage = (NSLocalizedString("Please input URL for your custom configuration", comment: ""), "")
-                return
-            }
             if customConfigURL == Constants.HollowConfig.thuConfigURL {
                 errorMessage = (NSLocalizedString("You are using configuration for", comment: "") + " T大树洞. " + NSLocalizedString("Please choose the corresponding entry in 'Select Hollow'.", comment: ""), "")
                 return

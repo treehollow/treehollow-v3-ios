@@ -81,7 +81,7 @@ struct WanderView: View {
             VStack {
                 HollowContentView(
                     postDataWrapper: .init(post: postData, citedPost: nil),
-                    options: [.displayVote, .disableVote, .displayImage, .replaceForImageOnly, .compactText],
+                    options: [.displayVote, .disableVote, .displayImage, .replaceForImageOnly, .compactText, .lowerImageAspectRatio],
                     voteHandler: { _ in },
                     lineLimit: 20
                 )

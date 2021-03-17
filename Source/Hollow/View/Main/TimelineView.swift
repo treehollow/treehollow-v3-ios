@@ -39,7 +39,7 @@ struct TimelineView: View {
             didEndScroll: { searchBarTrackingOffset = $0 },
             refresh: viewModel.refresh,
             content: { proxy in
-                VStack(spacing: 0) {
+                LazyVStack(spacing: 0) {
                     SearchBar(isSearching: $isSearching)
                         .padding(.horizontal)
                         .padding(.bottom, body14 / 2)
@@ -77,15 +77,13 @@ struct TimelineView: View {
                         .padding([.bottom, .horizontal])
                     }
                     
-                    LazyVStack(spacing: 0) {
-                        PostListView(
-                            postDataWrappers: $viewModel.posts,
-                            detailStore: $detailStore,
-                            voteHandler: viewModel.vote,
-                            starHandler: viewModel.star
-                        )
-                        .padding(.horizontal)
-                    }
+                    PostListView(
+                        postDataWrappers: $viewModel.posts,
+                        detailStore: $detailStore,
+                        voteHandler: viewModel.vote,
+                        starHandler: viewModel.star
+                    )
+                    .padding(.horizontal)
 
                 }
                 

@@ -72,7 +72,7 @@ struct HollowContentView: View {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage,
                             description: postDataWrapper.post.text,
                             reloadImage: imageReloadHandler,
-                            minRatio: 0.7
+                            minRatio: options.contains(.lowerImageAspectRatio) ? 0.2 : 0.7
             )
             .roundedCorner(4)
             .frame(maxHeight: maxImageHeight)
@@ -210,5 +210,6 @@ extension HollowContentView {
         static let disableVote = DisplayOptions(rawValue: 1 << 7)
         static let revealFoldTags = DisplayOptions(rawValue: 1 << 8)
         static let showHyperlinks = DisplayOptions(rawValue: 1 << 9)
+        static let lowerImageAspectRatio = DisplayOptions(rawValue: 1 << 10)
     }
 }
