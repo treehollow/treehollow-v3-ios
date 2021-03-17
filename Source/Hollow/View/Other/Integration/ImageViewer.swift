@@ -100,6 +100,8 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
         view.display(image: image)
         view.maxScaleFromMinScale = 4
         view.imageScrollViewDelegate = context.coordinator
+        view.alwaysBounceVertical = true
+        view.alwaysBounceHorizontal = true
         view.addGestureRecognizer(
             UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.onLongPresss))
         )

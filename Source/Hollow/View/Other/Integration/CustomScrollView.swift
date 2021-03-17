@@ -140,10 +140,14 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
 //        let direction: ScrollDirection = scrollView.panGestureRecognizer.translation(in: scrollView).y > 0 ? .up : .down
 //        didScroll?(direction)
         if (scrollView.contentOffset.y + 1) >= (scrollView.contentSize.height - scrollView.frame.size.height) {
-            atBottom.wrappedValue = true
+            if !(atBottom.wrappedValue ?? true) {
+                atBottom.wrappedValue = true
+            }
             didScrollToBottom?()
         } else {
-            atBottom.wrappedValue = false
+            if atBottom.wrappedValue ?? false {
+                atBottom.wrappedValue = false
+            }
         }
         
         withAnimation {

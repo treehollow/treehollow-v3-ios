@@ -252,7 +252,7 @@
 "REPORT_MENU_ADMIN_SET_TAG_CUSTOM" = "Custom";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ADMIN_SET_TAG_EXISTED" = "Select from list";
+"REPORT_MENU_ADMIN_SET_TAG_EXISTED" = "Select from List";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ADMIN_SET_TAG_REMOVE" = "Remove Tag";

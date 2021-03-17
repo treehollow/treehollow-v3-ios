@@ -71,7 +71,8 @@ struct HollowContentView: View {
         if hasImage && options.contains(.displayImage) && !hideContent {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage,
                             description: postDataWrapper.post.text,
-                            reloadImage: imageReloadHandler
+                            reloadImage: imageReloadHandler,
+                            minRatio: 0.7
             )
             .roundedCorner(4)
             .frame(maxHeight: maxImageHeight)

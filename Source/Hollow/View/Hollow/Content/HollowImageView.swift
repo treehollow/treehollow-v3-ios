@@ -23,43 +23,63 @@ struct HollowImageView: View {
     /// removing the error message before reload action.
     var reloadImage: ((HollowImage) -> Void)? = nil
     
+    var minRatio: CGFloat = 0
+    private var imageAspectRatio: CGFloat {
+        guard let image = hollowImage else { return 1 }
+        return image.placeholder.width / image.placeholder.height
+    }
+    private var aspectRatio: CGFloat {
+        return max(imageAspectRatio, minRatio)
+    }
+    
     @ScaledMetric private var reloadButtonSize: CGFloat = 50
     
     var body: some View {
         Group {
             if let hollowImage = self.hollowImage {
                 if let image = hollowImage.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .animation(.default)
-                        .contentShape(RoundedRectangle(cornerRadius: 4))
-                        .contextMenu(ContextMenu(menuItems: {
-                            Button(action:{
-                                ImageSaver(finishHandler: { error in
-                                    showSavePhotoAlert = true
-                                    savePhotoError = error?.localizedDescription
-                                }).saveImage(image)
-                            }) {
-                                Label("IMAGEVIEW_SAVE_PHOTO_BUTTON", systemImage: "square.and.arrow.down")
+                    Group {
+                        if imageAspectRatio > aspectRatio {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .contextMenu(ContextMenu(menuItems: {
+                                    contextMenu(image: image)
+                                }))
+                        } else {
+                            ZStack {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .overlay(Blur())
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .contextMenu(ContextMenu(menuItems: {
+                                        contextMenu(image: image)
+                                    }))
                             }
-                        }))
-                        .styledAlert(
-                            presented: $showSavePhotoAlert,
-                            title: savePhotoError?.description ?? NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: ""),
-                            message: nil,
-                            buttons: [.ok]
-                        )
-                        .onTapGesture {
-                            showImageViewer = true
+                            .aspectRatio(aspectRatio, contentMode: .fill)
                         }
-                        .fullScreenCover(isPresented: $showImageViewer, content: {
-                            ImageViewer(image: image, footnote: description, presented: $showImageViewer)
-                        })
+                    }
+                    
+                    .animation(.default)
+                    .contentShape(RoundedRectangle(cornerRadius: 4))
+                    .styledAlert(
+                        presented: $showSavePhotoAlert,
+                        title: savePhotoError?.description ?? NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: ""),
+                        message: nil,
+                        buttons: [.ok]
+                    )
+                    .onTapGesture {
+                        showImageViewer = true
+                    }
+                    .fullScreenCover(isPresented: $showImageViewer, content: {
+                        ImageViewer(image: image, footnote: description, presented: $showImageViewer)
+                    })
                 } else {
                     Rectangle()
                         .foregroundColor(.uiColor(flash ? .systemFill : .tertiarySystemFill))
-                        .aspectRatio(hollowImage.placeholder.width / hollowImage.placeholder.height, contentMode: .fit)
+                        .aspectRatio(aspectRatio, contentMode: .fit)
                         .overlay(Group { if let _ = self.hollowImage?.loadingError {
                             Button(action: {
                                 reloadImage?(self.hollowImage!)
@@ -88,4 +108,15 @@ struct HollowImageView: View {
             }
         }
     }
+    
+    func contextMenu(image: UIImage) -> some View {
+            Button(action:{
+                ImageSaver(finishHandler: { error in
+                    showSavePhotoAlert = true
+                    savePhotoError = error?.localizedDescription
+                }).saveImage(image)
+            }) {
+                Label("IMAGEVIEW_SAVE_PHOTO_BUTTON", systemImage: "square.and.arrow.down")
+            }
+        }
 }

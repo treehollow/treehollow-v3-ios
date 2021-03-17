@@ -170,7 +170,9 @@ struct ContentSettingsView: View {
                 }
                 
                 Button(action: { withAnimation { showTextField = true } }) {
-                    Label(NSLocalizedString("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON", comment: ""), systemImage: "plus")
+                    Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON") +
+                        Text("  ") +
+                        Text(Image(systemName: "plus"))
                 }
                 .disabled(showTextField)
                 

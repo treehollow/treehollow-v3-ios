@@ -86,7 +86,8 @@ struct HollowCommentContentView: View {
                             HollowImageView(
                                 hollowImage: commentData.image,
                                 description: commentData.text,
-                                reloadImage: imageReloadHandler
+                                reloadImage: imageReloadHandler,
+                                minRatio: 0.7
                             )
                             .roundedCorner(4)
                             .padding(.bottom, 10)

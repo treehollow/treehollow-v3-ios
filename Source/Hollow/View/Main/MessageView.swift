@@ -75,7 +75,7 @@ extension MessageView {
     var systemMessageView: some View {
         CustomScrollView(refresh: messageStore.requestMessages) { proxy in VStack(spacing: 0) {
             ForEach(messageStore.messages) { message in
-                VStack(alignment: .leading) {
+                LazyVStack(alignment: .leading) {
                     HStack {
                         Text(message.title)
                             .bold()
