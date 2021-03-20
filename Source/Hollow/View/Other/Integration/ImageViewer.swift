@@ -21,6 +21,7 @@ struct ImageViewer: View {
     @State private var savePhotoMessage: (title: String, message: String)?
     @State private var safeAreaInsets: EdgeInsets = .init()
     @State private var dragRelativeOffset: CGFloat = 0
+    @State private var isDragging = false
     
     @State private var shouldDismiss = false
     
@@ -28,11 +29,11 @@ struct ImageViewer: View {
     
     var selfDismiss = false
     
-    private let dismissScaleThreshold: CGFloat = 0.115
+    private let dismissScaleThreshold: CGFloat = 0.12
     
     var body: some View {
         ZStack {
-            ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale, showActionSheet: $showActionSheet, dragRelativeOffset: $dragRelativeOffset, selfDismiss: selfDismiss, didEndDragging: {
+            ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale, showActionSheet: $showActionSheet, dragRelativeOffset: $dragRelativeOffset, isDragging: $isDragging, selfDismiss: selfDismiss, didEndDragging: {
                 if shouldDismiss { dismiss() }
             })
             .ignoresSafeArea()
@@ -60,7 +61,7 @@ struct ImageViewer: View {
             .opacity(scale > 2 ? 0 : 1)
         }
         
-        .background(Color.black.ignoresSafeArea().opacity(max(1 - Double(dragRelativeOffset), 0)))
+        .background(Color.black.ignoresSafeArea().opacity(max(1 - Double(dragRelativeOffset) * 2, 0)))
         
         .actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("IMAGEVIEWER_ACTION_SHEET_TITLE"), buttons: [
@@ -76,7 +77,7 @@ struct ImageViewer: View {
         }
         
         .onChange(of: dragRelativeOffset, perform: { offset in
-            if offset > dismissScaleThreshold {
+            if offset > dismissScaleThreshold && isDragging {
                 if !shouldDismiss {
                     shouldDismiss = true
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -106,6 +107,7 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
     var scale: Binding<CGFloat>
     var showActionSheet: Binding<Bool>
     var dragRelativeOffset: Binding<CGFloat>
+    var isDragging: Binding<Bool>
     var selfDismiss: Bool
     var didEndDragging: () -> Void
     
@@ -117,61 +119,22 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
         view.imageScrollViewDelegate = context.coordinator
         view.alwaysBounceVertical = true
         view.alwaysBounceHorizontal = true
-        view.decelerationRate = .normal
         view.addGestureRecognizer(
             UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.onLongPresss))
         )
+        
+        // To filter out the initial values
         view.panGestureRecognizer.addTarget(context.coordinator, action: #selector(context.coordinator.panGestureDidPan))
         
         view.publisher(for: \.contentOffset)
             .dropFirst()
             .sink(receiveValue: { _ in
+                self.isDragging.wrappedValue = view.isDragging
                 guard !view.isZooming && context.coordinator.didPan else { return }
-                let contentOffset = view.contentOffset
-                let contentSize = view.contentSize
-                let contentInset = view.adjustedContentInset
-                let frameSize = view.frame.size
-                
-                let leftTranslation = contentInset.left - contentOffset.x
-                let rightTranslation = contentOffset.x + frameSize.width - contentInset.right - contentSize.width
-                let topTranslation = -contentOffset.y - contentInset.top
-                var bottomTranslation = contentOffset.y + frameSize.height - contentInset.bottom - contentSize.height
-                
-                var xOffset: CGFloat = 0
-                var yOffset: CGFloat = 0
-                if leftTranslation > 0 {
-                    xOffset = leftTranslation / frameSize.width
-                }
-                
-                if rightTranslation > 0 {
-                    xOffset = max(xOffset, rightTranslation / frameSize.width)
-                }
-                
-                if contentSize.height < frameSize.height {
-//                    topTranslation += (frameSize.height - contentSize.height) / 2
-                    bottomTranslation -= (frameSize.height - contentSize.height)
-                }
-                
-                if topTranslation > 0 {
-                    yOffset = topTranslation / frameSize.width
-                }
-                
-                if bottomTranslation > 0 {
-                    yOffset = max(yOffset, bottomTranslation / frameSize.width)
-                }
-                guard xOffset != 1 && yOffset != 1 else { return }
-                yOffset = min(1, yOffset)
-                print(leftTranslation)
-                print(rightTranslation)
-                print(topTranslation)
-                print(bottomTranslation, "\n")
-                
-
-                DispatchQueue.main.async {
-                    dragRelativeOffset.wrappedValue = sqrt(xOffset * xOffset + yOffset * yOffset)
-                }
+                updateOffset(view: view)
             })
             .store(in: &context.coordinator.cancellables)
+        
         return view
     }
     
@@ -181,6 +144,47 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
+    }
+    
+    func updateOffset(view: UIScrollView) {
+        let contentOffset = view.contentOffset
+        let contentSize = view.contentSize
+        let contentInset = view.adjustedContentInset
+        let frameSize = view.frame.size
+        
+        let leftTranslation = contentInset.left - contentOffset.x
+        let rightTranslation = contentOffset.x + frameSize.width - contentInset.right - contentSize.width
+        let topTranslation = -contentOffset.y - contentInset.top
+//        var bottomTranslation = contentOffset.y + frameSize.height - contentInset.bottom - contentSize.height
+        
+        var xOffset: CGFloat = 0
+        var yOffset: CGFloat = 0
+        if leftTranslation > 0 {
+            xOffset = leftTranslation / frameSize.width
+        }
+        
+        if rightTranslation > 0 {
+            xOffset = max(xOffset, rightTranslation / frameSize.width)
+        }
+        
+//        if contentSize.height < frameSize.height {
+//            bottomTranslation -= (frameSize.height - contentSize.height)
+//        }
+        
+        if topTranslation > 0 {
+            yOffset = topTranslation / frameSize.width
+        }
+        
+//        if bottomTranslation > 0 {
+//            yOffset = max(yOffset, bottomTranslation / frameSize.width)
+//        }
+
+        yOffset = min(1, yOffset)
+
+        DispatchQueue.main.async {
+            // Higher resistance for horizontal scroll
+            dragRelativeOffset.wrappedValue = sqrt(xOffset * xOffset / 3 + yOffset * yOffset)
+        }
     }
     
     class Coordinator: NSObject, ImageScrollViewDelegate {

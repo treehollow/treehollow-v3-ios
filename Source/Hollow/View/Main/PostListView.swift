@@ -38,9 +38,12 @@ struct PostListView: View {
         return false
     }
     
-    var body: some View {
+    @ViewBuilder var body: some View {
+
         ForEach(postDataWrappers) { postDataWrapper in
             let post = postDataWrapper.post
+            let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
+
             VStack(spacing: 15) {
                 // TODO: Star actions
                 HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, disableAttention: false)
@@ -50,12 +53,12 @@ struct PostListView: View {
                     voteHandler: { option in voteHandler(post.postId, option) }
                 )
                 // Check if comments exist to avoid additional spacing
+                
                 if post.replyNumber > 0, !hideComments(for: post) {
                     VStack(spacing: 0) {
                         ForEach(post.comments.prefix(3)) { commentData in
                             HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0, postHash: 0)
                         }
-                        let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
                         if post.replyNumber > shownReplyNumber {
                             if post.comments.count == 0 {
                                 Divider()
@@ -68,12 +71,13 @@ struct PostListView: View {
                                 .dynamicFont(size: 15).lineSpacing(post.comments.count == 0 ? 0 : 3)
                                 
                                 .foregroundColor(.uiColor(.secondaryLabel))
-                                .padding(.top)
+                                .padding(.top, 12)
                         }
                     }
                 }
             }
-            .padding()
+            .padding(.bottom, post.replyNumber > shownReplyNumber ? 12 : nil)
+            .padding([.horizontal, .top])
             .background(Color.hollowCardBackground)
             .roundedCorner(13)
             .fixedSize(horizontal: false, vertical: true)

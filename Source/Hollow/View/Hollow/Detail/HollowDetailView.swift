@@ -14,6 +14,7 @@ struct HollowDetailView: View {
     @State private var commentViewFrame: CGRect = .zero
     @State var inputPresented = false
     @State var jumpedToIndex: Int?
+    @State var jumpedIndexFromComment: Int?
     @State private var showHeaderContent = false
     
     private let scrollToAnchor = UnitPoint(x: 0.5, y: 0.1)
@@ -97,6 +98,18 @@ struct HollowDetailView: View {
                             .onChange(of: store.replyToIndex) { index in
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     proxy.scrollTo(index, anchor: scrollToAnchor)
+                                }
+                            }
+                            .onChange(of: jumpedIndexFromComment) { index in
+                                if index != nil {
+                                    withAnimation {
+                                        jumpedIndexFromComment = nil
+                                        proxy.scrollTo(index, anchor: scrollToAnchor)
+                                        jumpedToIndex = index
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        withAnimation { jumpedToIndex = nil }
+                                    }
                                 }
                             }
                             // Jump to certain comment

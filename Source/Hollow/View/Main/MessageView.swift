@@ -107,7 +107,7 @@ extension MessageView {
             didScrollToBottom: postListStore.loadMorePosts,
             refresh: postListStore.refresh
         ) { proxy in
-            VStack(spacing: 0) {
+            LazyVStack(spacing: 0) {
                 SearchBar(isSearching: $isSearching)
                     .padding(.bottom)
 

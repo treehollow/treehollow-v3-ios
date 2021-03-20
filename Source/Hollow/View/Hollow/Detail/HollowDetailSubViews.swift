@@ -83,9 +83,18 @@ extension HollowDetailView {
                         Button(action: {
                             UIPasteboard.general.string = comment.text
                         }, label: {
-                            Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "plus.square.on.square")
+                            Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
                         })
                         Divider()
+                    }
+                    if comment.replyTo != -1 {
+                        Button(action: {
+                            let comments = store.postDataWrapper.post.comments
+                            guard let index = comments.firstIndex(where: {$0.commentId == comment.replyTo}) else { return }
+                            jumpedIndexFromComment = index
+                        }) {
+                            Label("COMMENT_VIEW_JUMP_LABEL", systemImage: "text.quote")
+                        }
                     }
                     if comment.hasURL {
                         let links = Array(comment.text.links().compactMap({ URL(string: $0) }))

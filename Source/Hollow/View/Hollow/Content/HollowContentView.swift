@@ -109,7 +109,7 @@ struct HollowContentView: View {
                         Button(action: {
                             UIPasteboard.general.string = postDataWrapper.post.text
                         }) {
-                            Label("COMMENT_VIEW_COPY_TEXT_LABEL", systemImage: "plus.square.on.square")
+                            Label("COMMENT_VIEW_COPY_TEXT_LABEL", systemImage: "doc.on.doc")
                         }
                     }))
             }

@@ -45,8 +45,6 @@ struct LogoutRequest: DefaultRequest {
         performRequest(
             urlBase: self.configuration.apiRoot,
             urlPath: urlPath,
-            // Empty parameter to satisfy generic type constrain.
-            parameters: [String : Int](),
             headers: headers,
             method: .post,
             transformer: { result in LogoutRequestResultData(rawValue: result.code) },

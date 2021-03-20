@@ -24,7 +24,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     @Published var isEditingAttention = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var appModelState = AppModelState()
-    @Published var allowLoadMorePosts = true
+    @Published var allowLoadMorePosts = false
 
     var cancellables = Set<AnyCancellable>()
     
@@ -116,7 +116,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         page = 1
         withAnimation {
             noMorePosts = false
-            allowLoadMorePosts = true
+            allowLoadMorePosts = false
         }
         let completion = {
             finshHandler()
@@ -148,6 +148,9 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
                 // Fetch other components after we assign the posts.
                 self.fetchImages()
                 self.fetchCitedPosts()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.allowLoadMorePosts = true
+                }
             }
         }
     }
