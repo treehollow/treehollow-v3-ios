@@ -50,7 +50,7 @@ class AccountInfoViewModel: ObservableObject, AppModelEnvironment {
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
             }, receiveValue: { _ in
                 withAnimation { self.isLoading = false }
-                self.errorMessage = (title: "CHANGE_PASSWORD_SUCCESS_ALERT_TITLE", message: "")
+                self.errorMessage = (title: NSLocalizedString("CHANGE_PASSWORD_SUCCESS_ALERT_TITLE", comment: ""), message: "")
                 self.appModelState.shouldShowMainView = false
                 Defaults[.accessToken] = nil
             })

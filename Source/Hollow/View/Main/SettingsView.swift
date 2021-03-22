@@ -40,12 +40,17 @@ struct SettingsView: View {
                     NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
                 }
                 
-                Section(header: Text(NSLocalizedString("SETTINGSVIEW_PROVIDER_SECTION_TITLE", comment: "")).padding(.horizontal)) {
-                    NavigationLink(Defaults[.hollowConfig]?.name ?? "", destination: ProviderInfoView())
-                    
-                }
-                .accentColor(.primary)
-                                
+                NavigationLink(
+                    destination: ProviderInfoView(),
+                    label: {
+                        HStack {
+                            Text("SETTINGSVIEW_PROVIDER_SECTION_TITLE")
+                            Spacer()
+                            Text(Defaults[.hollowConfig]?.name ?? "")
+                                .foregroundColor(.secondary)
+                        }
+                    })
+                
                 Section(
                     footer: Text(appInfo)
                         .padding(.horizontal)
@@ -72,11 +77,3 @@ struct SettingsView: View {
         .accentColor(.tint)
     }
 }
-
-#if DEBUG
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(presented: .constant(true))
-    }
-}
-#endif

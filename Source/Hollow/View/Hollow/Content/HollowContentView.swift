@@ -96,65 +96,8 @@ struct HollowContentView: View {
             }
         }
         
-        // Enable the context menu for the text if it is in detail view.
         if postDataWrapper.post.text != "" && !hideContent {
-            if options.contains(.compactText) {
-                textView()
-            } else {
-                textView()
-                    // Apply a transparent background to avoid
-                    // offset when presenting context menu
-                    .background(Color.clear)
-                    .contextMenu(ContextMenu(menuItems: {
-                        Button(action: {
-                            UIPasteboard.general.string = postDataWrapper.post.text
-                        }) {
-                            Label("COMMENT_VIEW_COPY_TEXT_LABEL", systemImage: "doc.on.doc")
-                        }
-                    }))
-            }
-                    
-        }
-        
-        if options.contains(.showHyperlinks) &&
-            !hideContent {
-            let links = self.links
-            let citations = self.citedPosts
-            if !links.isEmpty || !citations.isEmpty {
-                HStack {
-                    let links = postDataWrapper.post.text.links()
-                    if links.count > 0 {
-                        Menu(content: {
-                            ForEach(links, id: \.self) { link in
-                                Button(link, action: {
-                                    guard let url = URL(string: link) else { return }
-                                    let helper = OpenURLHelper(openURL: openURL)
-                                    try? helper.tryOpen(url, method: Defaults[.openURLMethod])
-                                })
-                            }
-                        } , label: {
-                            linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_LINKS_MENU_LABEL", comment: ""), systemImageName: "link")
-                        })
-                    }
-                    if citations.count > 1 {
-                        Menu(content: {
-                            ForEach(citations, id: \.self) { citation in
-                                Button("#\(citation.string)", action: {
-                                    let wrapper = PostDataWrapper.templatePost(for: citation)
-                                    presentView {
-                                        HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(wrapper)))
-                                    }
-                                })
-                            }
-                        } , label: {
-                            linkMenuLabel(text: NSLocalizedString("HOLLOW_CONTENT_QUOTE_MENU_LABEL", comment: ""), systemImageName: "text.quote")
-                        })
-                    }
-                    Spacer()
-                }
-                .padding(.top, 1)
-                .padding(.bottom, showVote ? 10 : 0)
-            }
+            textView()
         }
         
         if showVote {
@@ -173,7 +116,7 @@ struct HollowContentView: View {
             options.contains(.replaceForImageOnly) {
             text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
         }
-        return HollowTextView(text: text, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight && options.contains(.showHyperlinks), compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+        return HollowTextView(postData: postDataWrapper.post, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight && options.contains(.showHyperlinks), compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
     }
     
     private func tagView(text: String, deleted: Bool) -> some View {
@@ -184,17 +127,6 @@ struct HollowContentView: View {
             .padding(.vertical, body4)
             .background(deleted ? Color.red : Color.hollowContentVoteGradient1)
             .roundedCorner(body6)
-    }
-    
-    private func linkMenuLabel(text: String, systemImageName: String) -> some View {
-        // Keep the same with tagView
-        Label(text, systemImage: systemImageName)
-            .dynamicFont(size: 14, weight: .semibold)
-            .padding(.horizontal, body6)
-            .padding(.vertical, body4)
-            .background(Color.background)
-            .roundedCorner(body6)
-            .accentColor(.hollowContentText)
     }
 }
 

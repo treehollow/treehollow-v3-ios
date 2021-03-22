@@ -24,11 +24,11 @@ class Welcome: ObservableObject {
         // Validate the parameters
         if hollowType == .other {
             if customConfigURL == Constants.HollowConfig.thuConfigURL {
-                errorMessage = (NSLocalizedString("You are using configuration for", comment: "") + " T大树洞. " + NSLocalizedString("Please choose the corresponding entry in 'Select Hollow'.", comment: ""), "")
+                errorMessage = (NSLocalizedString("WELCOMEVIEW_USING_IDENTICAL_CONFIG_ALERT_TITLE_PREFIX", comment: "") + "T大树洞" + NSLocalizedString("WELCOMEVIEW_USING_IDENTICAL_CONFIG_ALERT_TITLE_SUFFIX", comment: ""), "")
                 return
             }
             if customConfigURL == Constants.HollowConfig.pkuConfigURL {
-                errorMessage = (NSLocalizedString("You are using configuration for", comment: "") + " 未名树洞. " + NSLocalizedString("Please choose the corresponding entry in 'Select Hollow'.", comment: ""), "")
+                errorMessage = (NSLocalizedString("WELCOMEVIEW_USING_IDENTICAL_CONFIG_ALERT_TITLE_PREFIX", comment: "") + "未名树洞" + NSLocalizedString("WELCOMEVIEW_USING_IDENTICAL_CONFIG_ALERT_TITLE_SUFFIX", comment: ""), "")
                 return
             }
         }

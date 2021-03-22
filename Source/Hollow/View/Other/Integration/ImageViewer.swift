@@ -19,7 +19,6 @@ struct ImageViewer: View {
     @State private var scale: CGFloat = 0
     @State private var showActionSheet = false
     @State private var savePhotoMessage: (title: String, message: String)?
-    @State private var safeAreaInsets: EdgeInsets = .init()
     @State private var dragRelativeOffset: CGFloat = 0
     @State private var isDragging = false
     
@@ -46,7 +45,6 @@ struct ImageViewer: View {
                         .font(.footnote)
                         .padding(.horizontal)
                         .padding(.top)
-                        .conditionalPadding(safeAreaInsets: safeAreaInsets, bottom: nil)
                         .leading()
                         .blurBackground()
                         .lineLimit(lineLimit)
@@ -90,8 +88,6 @@ struct ImageViewer: View {
         })
         
         .modifier(ErrorAlert(errorMessage: $savePhotoMessage))
-        
-        .modifier(GetSafeAreaInsets(insets: $safeAreaInsets))
         .statusBar(hidden: true)
     }
     

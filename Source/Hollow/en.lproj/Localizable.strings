@@ -384,7 +384,7 @@
 "SEARCHVIEW_BUTTON_PARTIAL" = "Partial";
 
 /* No comment provided by engineer. */
-"SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION" = "Posts only";
+"SEARCHVIEW_BUTTON_PARTIAL_DESCRIPTION" = "Posts Only";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_NO_RESULT_LABEL" = "No Result";
@@ -496,7 +496,7 @@
 
 "CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER" = "Confirm password";
 
-"CHANGEPASSWORDVIEW_SUBMMIT_BUTTON" = "Submmit";
+"CHANGEPASSWORDVIEW_SUBMMIT_BUTTON" = "Submit";
 
 "CHANGE_PASSWORD_SUCCESS_ALERT_TITLE" = "Successfully changed the password. Please login again.";
 
@@ -581,3 +581,7 @@
 "PROVIDER_VIEW_CONTACT" = "Contact Us";
 
 "COMMENT_VIEW_JUMP_LABEL" = "Jump to Replying Commment";
+
+"WELCOMEVIEW_USING_IDENTICAL_CONFIG_ALERT_TITLE_PREFIX" = "You are using configuration for ";
+
+"WELCOMEVIEW_USING_IDENTICAL_CONFIG_ALERT_TITLE_SUFFIX" = ". Please choose the corresponding entry in 'Select Hollow'.";

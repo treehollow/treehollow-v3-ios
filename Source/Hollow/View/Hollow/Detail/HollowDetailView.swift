@@ -78,7 +78,8 @@ struct HollowDetailView: View {
                         Spacer(minLength: 5)
                             .fixedSize()
                         Group { if store.noSuchPost {
-                            HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), inDetail: true, highlight: store.postDataWrapper.post.renderHighlight)
+                            Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
+                                .modifier(HollowTextView.TextModifier(inDetail: true))
                         } else {
                             HollowContentView(
                                 postDataWrapper: store.postDataWrapper,

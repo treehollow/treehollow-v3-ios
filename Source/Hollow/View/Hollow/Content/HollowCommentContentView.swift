@@ -74,12 +74,12 @@ struct HollowCommentContentView: View {
                                         tagView(text: tag, removed: false)
                                     }
                                 }
+                                Spacer()
                                 Group {
                                     if commentData.replyTo != -1 {
                                         Image(systemName: "arrow.turn.up.right")
                                             .opacity(0.3)
                                     }
-                                    Spacer()
                                     Text(HollowDateFormatter(date: commentData.date).formattedString())
                                 }
                                 .dynamicFont(size: 14, weight: .medium)

@@ -10,7 +10,7 @@ import SwiftUI
 
 extension View {
     /// Imperative method for synchronously presenting popover.
-    func presentView<Content: View>(style: UIModalPresentationStyle = .popover, transitionStyle: UIModalTransitionStyle = .coverVertical, @ViewBuilder content: () -> Content) {
+    func presentView<Content: View>(style: UIModalPresentationStyle = .formSheet, transitionStyle: UIModalTransitionStyle = .coverVertical, @ViewBuilder content: () -> Content) {
         IntegrationUtilities.presentView(presentationStyle: style, transitionStyle: transitionStyle, content: content)
     }
     
