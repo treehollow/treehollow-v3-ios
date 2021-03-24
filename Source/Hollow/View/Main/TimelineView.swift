@@ -60,8 +60,7 @@ struct TimelineView: View {
                             .padding(.bottom, 10)
                             .dynamicFont(size: 17, weight: .bold)
                             .foregroundColor(.hollowContentText)
-                            Text(announcement)
-                                .dynamicFont(size: 16)
+                            HollowTextView(text: announcement, inDetail: true, highlight: true)
                             MyButton(action: { withAnimation {
                                 hiddenAnnouncement = announcement
                             }}) {

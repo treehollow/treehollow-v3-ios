@@ -104,6 +104,7 @@
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
 		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
 		0E8BCFE725E0A4720056D809 /* IntegrationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */; };
+		0E8CFBB8260B2E700050FDD2 /* HollowConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8CFBB7260B2E6F0050FDD2 /* HollowConfig.swift */; };
 		0E906CFB25DCEADD0034053C /* PostDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */; };
 		0E906CFD25DCEADD0034053C /* SearchHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */; };
 		0E906CFE25DCEADD0034053C /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CBE25DCEADC0034053C /* SearchRequest.swift */; };
@@ -287,6 +288,7 @@
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
 		0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationUtilities.swift; sourceTree = "<group>"; };
+		0E8CFBB7260B2E6F0050FDD2 /* HollowConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowConfig.swift; sourceTree = "<group>"; };
 		0E906CBB25DCEADC0034053C /* PostDetailRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailRequest.swift; sourceTree = "<group>"; };
 		0E906CBD25DCEADC0034053C /* SearchHistoryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryRequest.swift; sourceTree = "<group>"; };
 		0E906CBE25DCEADC0034053C /* SearchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
@@ -815,6 +817,7 @@
 				00EFC07325DFC73800536B52 /* ImageMetadata.swift */,
 				0E906CE325DCEADC0034053C /* DeviceInformationType.swift */,
 				0E906CE425DCEADC0034053C /* HollowType.swift */,
+				0E8CFBB7260B2E6F0050FDD2 /* HollowConfig.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1046,6 +1049,7 @@
 				0E906D0125DCEADD0034053C /* AttentionListRequest.swift in Sources */,
 				0E1DD7D625D983BE000D27BA /* Avatar.swift in Sources */,
 				0E28BC4A25F60EB400A97820 /* AccountInfoViewModel.swift in Sources */,
+				0E8CFBB8260B2E700050FDD2 /* HollowConfig.swift in Sources */,
 				0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */,
 				0E906D3925DCEBF20034053C /* Test.swift in Sources */,
 				0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */,
@@ -1305,7 +1309,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1331,7 +1335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
@@ -1435,7 +1439,7 @@
 			repositoryURL = "git://github.com/liang2kl/ImageScrollView.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.3;
+				minimumVersion = 2.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

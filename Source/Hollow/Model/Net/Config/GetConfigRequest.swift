@@ -33,24 +33,7 @@ struct GetConfigRequestConfiguration {
 }
 
 /// Result of requesting system config.
-typealias HollowConfig = GetConfigRequestResult
-struct GetConfigRequestResult: Codable {
-    var name: String
-    var recaptchaUrl: String
-    var apiRootUrls: [String]
-    var tosUrl: String
-    var rulesUrl: String
-    var privacyUrl: String
-    var contactEmail: String
-    var emailSuffixes: [String]
-    var announcement: String
-    var foldTags: [String]
-    var reportableTags: [String]
-    var sendableTags: [String]
-    var imgBaseUrls: [String]
-    var websocketUrl: String
-    var searchTrending: String
-}
+typealias GetConfigRequestResult = HollowConfig
 
 /// GetConfigRequestError
 enum GetConfigRequestError: RequestError {

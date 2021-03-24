@@ -10,53 +10,77 @@ import SwiftUI
 import Defaults
 
 struct HollowTextView: View {
-    var postData: PostData
+    var text: String
+    var hasURL: Bool
+    var hasCitedNumbers: Bool
     var inDetail: Bool
     var highlight: Bool
     
     var compactLineLimit: Int? = nil
+    
+    init(postData: PostData, inDetail: Bool, highlight: Bool, compactLineLimit: Int? = nil) {
+        self.text = postData.text
+        self.hasURL = postData.hasURL
+        self.hasCitedNumbers = postData.hasCitedNumbers
+        self.inDetail = inDetail
+        self.highlight = highlight
+        self.compactLineLimit = compactLineLimit
+    }
+    
+    init(text: String, hasURL: Bool = true, hasCitedNumbers: Bool = true, inDetail: Bool, highlight: Bool, compactLineLimit: Int? = nil) {
+        self.text = text
+        self.hasURL = hasURL
+        self.hasCitedNumbers = hasCitedNumbers
+        self.inDetail = inDetail
+        self.highlight = highlight
+        self.compactLineLimit = compactLineLimit
+    }
     
     @Environment(\.openURL) var openURL
     
     var body: some View {
         if inDetail {
             Menu(content: {
-                if postData.text != "" {
+                if text != "" {
                     Button(action: {
-                        UIPasteboard.general.string = postData.text
+                        UIPasteboard.general.string = text
                     }, label: {
                         Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
                     })
                     Divider()
                 }
-                if postData.hasURL {
-                    let links = Array(postData.text.links().compactMap({ URL(string: $0) }))
-                    Divider()
-                    ForEach(links, id: \.self) { link in
-                        Button(action: {
-                            let helper = OpenURLHelper(openURL: openURL)
-                            try? helper.tryOpen(link, method: Defaults[.openURLMethod])
-                        }) {
-                            Label(link.absoluteString, systemImage: "link")
-                        }
-                    }
-                    Divider()
-                }
-                if postData.hasCitedNumbers {
-                    let citedPosts = postData.text.citationNumbers()
-                    ForEach(citedPosts, id: \.self) { post in
-                        let wrapper = PostDataWrapper.templatePost(for: post)
-                        Button(action: {
-                            presentView {
-                                HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                if hasURL {
+                    let links = Array(text.links().compactMap({ URL(string: $0) }))
+                    if !links.isEmpty {
+                        Divider()
+                        ForEach(links, id: \.self) { link in
+                            Button(action: {
+                                let helper = OpenURLHelper(openURL: openURL)
+                                try? helper.tryOpen(link, method: Defaults[.openURLMethod])
+                            }) {
+                                Label(link.absoluteString, systemImage: "link")
                             }
-                        }) {
-                            Label("#\(post.string)", systemImage: "text.quote")
                         }
+                        Divider()
                     }
-                    Divider()
                 }
-
+                if hasCitedNumbers {
+                    let citedPosts = text.citationNumbers()
+                    if !citedPosts.isEmpty {
+                        ForEach(citedPosts, id: \.self) { post in
+                            let wrapper = PostDataWrapper.templatePost(for: post)
+                            Button(action: {
+                                presentView {
+                                    HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                                }
+                            }) {
+                                Label("#\(post.string)", systemImage: "text.quote")
+                            }
+                        }
+                        Divider()
+                    }
+                }
+                
             }, label: { textView })
         } else {
             textView
@@ -66,12 +90,12 @@ struct HollowTextView: View {
     var textView: some View {
         Group {
             if highlight {
-                Text.highlightLinksAndCitation(postData.text, modifiers: {
+                Text.highlightLinksAndCitation(text, modifiers: {
                     $0.underline()
                         .foregroundColor(.hollowContentText)
                 })
             } else {
-                Text(postData.text)
+                Text(text)
             }
         }
         .modifier(TextModifier(inDetail: inDetail, compactLineLimit: compactLineLimit))

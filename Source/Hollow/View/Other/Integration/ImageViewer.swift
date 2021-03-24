@@ -24,6 +24,8 @@ struct ImageViewer: View {
     
     @State private var shouldDismiss = false
     
+    @State private var safeAreaInsets = EdgeInsets()
+    
     @Environment(\.colorScheme) var colorScheme
     
     var selfDismiss = false
@@ -35,7 +37,7 @@ struct ImageViewer: View {
             ImageScrollViewWrapper(image: image, presented: $presented, scale: $scale, showActionSheet: $showActionSheet, dragRelativeOffset: $dragRelativeOffset, isDragging: $isDragging, selfDismiss: selfDismiss, didEndDragging: {
                 if shouldDismiss { dismiss() }
             })
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
             VStack(spacing: 0) {
                 
                 Spacer()
@@ -45,6 +47,7 @@ struct ImageViewer: View {
                         .font(.footnote)
                         .padding(.horizontal)
                         .padding(.top)
+                        .conditionalPadding(safeAreaInsets: safeAreaInsets, bottom: nil)
                         .leading()
                         .blurBackground()
                         .lineLimit(lineLimit)
@@ -58,6 +61,8 @@ struct ImageViewer: View {
             // Hide the components when overlapping
             .opacity(scale > 2 ? 0 : 1)
         }
+        
+        .modifier(GetSafeAreaInsets(insets: $safeAreaInsets))
         
         .background(Color.black.ignoresSafeArea().opacity(max(1 - Double(dragRelativeOffset) * 2, 0)))
         

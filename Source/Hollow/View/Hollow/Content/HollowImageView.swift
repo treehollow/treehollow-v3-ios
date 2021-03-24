@@ -39,7 +39,7 @@ struct HollowImageView: View {
             if let hollowImage = self.hollowImage {
                 if let image = hollowImage.image {
                     Group {
-                        if imageAspectRatio > aspectRatio {
+                        if imageAspectRatio >= aspectRatio - 0.001 {
                             Image(uiImage: image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)

@@ -288,6 +288,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         self.image = nil
         self.compressedImage = nil
         self.imageSizeInformation = nil
+        self.compressedImageBase64String = nil
     }
     
     // MARK: - Report
