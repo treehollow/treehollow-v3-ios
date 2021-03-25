@@ -41,7 +41,6 @@
 		0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
-		0E415A7B25CD769F00351672 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7A25CD769F00351672 /* Preview Assets.xcassets */; };
 		0E415B4225CD772200351672 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
 		0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AEB25CD772200351672 /* ErrorAlert.swift */; };
 		0E415B4425CD772200351672 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AED25CD772200351672 /* CustomTabView.swift */; };
@@ -75,7 +74,6 @@
 		0E415B6E25CD772200351672 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2225CD772200351672 /* AboutView.swift */; };
 		0E415B6F25CD772200351672 /* AccountInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2325CD772200351672 /* AccountInfoView.swift */; };
 		0E415B7025CD772200351672 /* SettingsSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2425CD772200351672 /* SettingsSubViews.swift */; };
-		0E415B7125CD772200351672 /* RegulationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2525CD772200351672 /* RegulationView.swift */; };
 		0E415B7325CD772200351672 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2825CD772200351672 /* SearchView.swift */; };
 		0E415B7425CD772200351672 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2925CD772200351672 /* TimelineView.swift */; };
 		0E415B7525CD772200351672 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B2A25CD772200351672 /* SettingsView.swift */; };
@@ -155,8 +153,6 @@
 		0E906D3025DCEADD0034053C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CF725DCEADD0034053C /* Constants.swift */; };
 		0E906D3125DCEADD0034053C /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CF925DCEADD0034053C /* ImageCompressor.swift */; };
 		0E906D3225DCEADD0034053C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906CFA25DCEADD0034053C /* ImageSaver.swift */; };
-		0E906D3925DCEBF20034053C /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3825DCEBF20034053C /* Test.swift */; };
-		0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */; };
 		0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E906D4F25DD18050034053C /* ImageCompressStore.swift */; };
 		0EA2D50C25EF8125003D539E /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50B25EF8125003D539E /* MessageStore.swift */; };
 		0EA2D50F25EF9F41003D539E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50E25EF9F41003D539E /* SearchBar.swift */; };
@@ -220,7 +216,6 @@
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
 		0E415A7725CD769F00351672 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0E415A7A25CD769F00351672 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E415A7C25CD769F00351672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E415AE925CD772200351672 /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		0E415AEB25CD772200351672 /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
@@ -256,7 +251,6 @@
 		0E415B2225CD772200351672 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		0E415B2325CD772200351672 /* AccountInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoView.swift; sourceTree = "<group>"; };
 		0E415B2425CD772200351672 /* SettingsSubViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSubViews.swift; sourceTree = "<group>"; };
-		0E415B2525CD772200351672 /* RegulationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegulationView.swift; sourceTree = "<group>"; };
 		0E415B2825CD772200351672 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		0E415B2925CD772200351672 /* TimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		0E415B2A25CD772200351672 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -342,8 +336,6 @@
 		0E906CF725DCEADD0034053C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0E906CF925DCEADD0034053C /* ImageCompressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		0E906CFA25DCEADD0034053C /* ImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
-		0E906D3825DCEBF20034053C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigurationData.swift; sourceTree = "<group>"; };
 		0E906D4F25DD18050034053C /* ImageCompressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
 		0EA2D50B25EF8125003D539E /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
 		0EA2D50E25EF9F41003D539E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -441,18 +433,8 @@
 				0E415A7C25CD769F00351672 /* Info.plist */,
 				0EAA1B5625E7694400904296 /* InfoPlist.strings */,
 				0EAA1B4D25E6971500904296 /* Localizable.strings */,
-				0E415A7925CD769F00351672 /* Preview Content */,
 			);
 			path = Hollow;
-			sourceTree = "<group>";
-		};
-		0E415A7925CD769F00351672 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0E415B8725CD773E00351672 /* Test */,
-				0E415A7A25CD769F00351672 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		0E415AE825CD772200351672 /* View */ = {
@@ -605,7 +587,6 @@
 				0E415B2225CD772200351672 /* AboutView.swift */,
 				0E415B2325CD772200351672 /* AccountInfoView.swift */,
 				0E415B2425CD772200351672 /* SettingsSubViews.swift */,
-				0E415B2525CD772200351672 /* RegulationView.swift */,
 				0EDA262625D22C8600B67292 /* DeviceListView.swift */,
 				0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */,
 			);
@@ -665,15 +646,6 @@
 				0E415B4125CD772200351672 /* Welcome.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		0E415B8725CD773E00351672 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				0E906D3B25DCEC8E0034053C /* TestConfigurationData.swift */,
-				0E906D3825DCEBF20034053C /* Test.swift */,
-			);
-			path = Test;
 			sourceTree = "<group>";
 		};
 		0E415B9D25CD988F00351672 /* Other */ = {
@@ -973,7 +945,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E6EF32B25FB6C05001293FE /* dependencies.json in Resources */,
-				0E415A7B25CD769F00351672 /* Preview Assets.xcassets in Resources */,
 				0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */,
 				0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */,
 				0E415A7825CD769F00351672 /* Assets.xcassets in Resources */,
@@ -1026,7 +997,6 @@
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0E1DD7DC25DA4BE5000D27BA /* AppModel.swift in Sources */,
-				0E415B7125CD772200351672 /* RegulationView.swift in Sources */,
 				0E906D1C25DCEADD0034053C /* PushNotificationType.swift in Sources */,
 				0E415A7425CD769B00351672 /* HollowApp.swift in Sources */,
 				0EA2D51225F0A53F003D539E /* View+swipeToDismiss.swift in Sources */,
@@ -1051,7 +1021,6 @@
 				0E28BC4A25F60EB400A97820 /* AccountInfoViewModel.swift in Sources */,
 				0E8CFBB8260B2E700050FDD2 /* HollowConfig.swift in Sources */,
 				0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */,
-				0E906D3925DCEBF20034053C /* Test.swift in Sources */,
 				0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */,
 				0E906D1B25DCEADD0034053C /* SystemMessage.swift in Sources */,
 				0E906D2B25DCEADD0034053C /* String+removeLineBreak.swift in Sources */,
@@ -1060,7 +1029,6 @@
 				00AA103525E74212006B3D6D /* LineSwitchManager.swift in Sources */,
 				0E906D0C25DCEADD0034053C /* DeviceListRequest.swift in Sources */,
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
-				0E906D3C25DCEC8E0034053C /* TestConfigurationData.swift in Sources */,
 				0E906D1725DCEADD0034053C /* SendCommentRequest.swift in Sources */,
 				0E294E9725F1F448001E4C08 /* ReportRequestGroup.swift in Sources */,
 				0E906CFD25DCEADD0034053C /* SearchHistoryRequest.swift in Sources */,
@@ -1310,7 +1278,6 @@
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1336,7 +1303,6 @@
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_ASSET_PATHS = "\"Hollow/Preview Content\"";
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;

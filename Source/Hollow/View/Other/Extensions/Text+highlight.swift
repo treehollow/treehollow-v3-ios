@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension Text {
-    static func highlight(_ string: String, matchedRange ranges: [Range<String.Index>], modifiers: @escaping (Text) -> Text) -> Text {
+    static private func highlight(_ string: String, matchedRange ranges: [Range<String.Index>], modifiers: @escaping (Text) -> Text) -> Text {
         if string == "" || ranges.isEmpty { return Text(string) }
         var text = Text("")
         var position = string.startIndex

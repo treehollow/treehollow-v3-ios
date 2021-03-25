@@ -177,11 +177,3 @@ struct WelcomeView: View {
         }
     }
 }
-
-#if DEBUG
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
-    }
-}
-#endif

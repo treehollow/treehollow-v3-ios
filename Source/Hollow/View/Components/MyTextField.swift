@@ -54,11 +54,3 @@ struct MyTextField<Content>: View where Content: View {
         }
     }
 }
-
-#if DEBUG
-struct MyTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        MyTextField<EmptyView>(text: .constant(""), placeHolder: "placeholder", title: "title")
-    }
-}
-#endif

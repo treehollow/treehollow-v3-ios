@@ -23,9 +23,3 @@ struct LoadingLabel: View {
         .foregroundColor(foregroundColor)
     }
 }
-
-struct LoadingLabel_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingLabel()
-    }
-}

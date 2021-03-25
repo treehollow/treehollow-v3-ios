@@ -128,13 +128,3 @@ extension DeviceListView {
         }
     }
 }
-
-#if DEBUG
-struct DeviceListView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeviceListView()
-        //            .background(Color.background)
-        //            .colorScheme(.dark)
-    }
-}
-#endif

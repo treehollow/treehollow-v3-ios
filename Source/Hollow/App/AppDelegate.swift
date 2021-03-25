@@ -16,19 +16,12 @@ import Connectivity
 class AppDelegate: NSObject, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        #if DEBUG
-        
-        // Perform test in test environment.
-        // Add the modules you want to test in `options`.
-        Test.performTest(options: [])
-        #else
-        
+        #if !DEBUG
         // Start AppCenter services
         AppCenter.start(
             withAppSecret: "aae3c20c-75f5-4840-96f3-541cd7e6dd88",
             services: [Analytics.self, Crashes.self]
         )
-        
         #endif
         
         Defaults[.customColorSet] = Defaults[.tempCustomColorSet]
@@ -68,7 +61,6 @@ extension AppDelegate {
         center.delegate = self
         center.requestAuthorization(options: [.badge, .alert, .sound]) { granted, error in
             guard granted else { return }
-            
             // Register for APN
             DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
