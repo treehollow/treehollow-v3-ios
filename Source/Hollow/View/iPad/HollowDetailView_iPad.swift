@@ -36,7 +36,9 @@ struct HollowDetailView_iPad: View {
                         
                         VStack(alignment: .leading) {
                             Text("#\(postData.postId.string)")
+                                .foregroundColor(.hollowContentText)
                             Text.dateText(postData.timestamp)
+                                .fontWeight(.semibold)
                                 .font(.footnote)
                                 .foregroundColor(.hollowCardStarUnselected)
                         }

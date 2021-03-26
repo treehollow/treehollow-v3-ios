@@ -11,6 +11,7 @@ import Defaults
 import SafariServices
 
 struct IntegrationUtilities {
+    static var topSplitVC: UISplitViewController?
     static func topViewController() -> UIViewController? {
         let keyWindow = IntegrationUtilities.keyWindow()
 
@@ -24,13 +25,14 @@ struct IntegrationUtilities {
     }
     
     static func getSplitViewController() -> UISplitViewController? {
-        let keyWindow = IntegrationUtilities.keyWindow()
-
-        if let topController = keyWindow?.rootViewController {
-            if let vc = topController as? UISplitViewController { return vc }
-            for child in topController.children {
-                if let child = child as? UISplitViewController { return child }
-            }
+        return topSplitVC
+    }
+    
+    static private func getSplitViewController(of parent: UIViewController) -> UISplitViewController? {
+        for child in parent.children {
+            print(child)
+            if let child = child as? UISplitViewController { return child }
+            if let vc = getSplitViewController(of: child) { return vc }
         }
         return nil
     }
@@ -61,7 +63,7 @@ struct IntegrationUtilities {
     
     static func getSecondaryNavigationVC() -> UINavigationController? {
         if let topVC = getSplitViewController(),
-           let navVC = topVC.viewController(for: .secondary) as? UINavigationController {
+           let navVC = topVC.viewController(for: .secondary)?.parent as? UINavigationController {
             return navVC
         }
         return nil

@@ -43,6 +43,7 @@
 		0E3E6955260E08EC005E8DA2 /* UIDevice+isPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E6954260E08EC005E8DA2 /* UIDevice+isPad.swift */; };
 		0E3E6958260E1312005E8DA2 /* MainSubViews_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */; };
 		0E3E695B260E166D005E8DA2 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E695A260E166D005E8DA2 /* HollowDateFormatter.swift */; };
+		0E3E6960260E3676005E8DA2 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E695F260E3676005E8DA2 /* SplitView.swift */; };
 		0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
@@ -222,6 +223,7 @@
 		0E3E6954260E08EC005E8DA2 /* UIDevice+isPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+isPad.swift"; sourceTree = "<group>"; };
 		0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSubViews_iPad.swift; sourceTree = "<group>"; };
 		0E3E695A260E166D005E8DA2 /* HollowDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
+		0E3E695F260E3676005E8DA2 /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputSubViews.swift; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				0E415AF025CD772200351672 /* Blur.swift */,
 				0E09B7A925D4D73100DC5615 /* ImageViewer.swift */,
 				0EC4B67E25D670070065BB82 /* ImagePicker.swift */,
+				0E3E695F260E3676005E8DA2 /* SplitView.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 				0E906D2425DCEADD0034053C /* PostData.swift in Sources */,
 				0E906D5025DD18050034053C /* ImageCompressStore.swift in Sources */,
 				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
+				0E3E6960260E3676005E8DA2 /* SplitView.swift in Sources */,
 				0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */,
 				0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */,
 				0EA2D50C25EF8125003D539E /* MessageStore.swift in Sources */,
