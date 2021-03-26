@@ -31,6 +31,8 @@ struct HollowCommentContentView: View {
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
     @ScaledMetric(wrappedValue: 2, relativeTo: .body) var body2: CGFloat
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         VStack(spacing: 0) {
             if let padding = contentVerticalPadding {
@@ -75,16 +77,11 @@ struct HollowCommentContentView: View {
                                     }
                                 }
                                 Spacer()
-                                Group {
-                                    if commentData.replyTo != -1 {
-                                        Image(systemName: "arrow.turn.up.right")
-                                            .opacity(0.3)
-                                    }
-                                    Text(HollowDateFormatter(date: commentData.date).formattedString())
-                                }
-                                .dynamicFont(size: 14, weight: .medium)
-                                .foregroundColor(.hollowCardStarUnselected)
-                                .lineLimit(1)
+                                
+                                Text.dateText(commentData.date)
+                                    .dynamicFont(size: 14, weight: .medium)
+                                    .foregroundColor(.hollowCardStarUnselected)
+                                    .lineLimit(1)
                             }
                         }
                         
@@ -93,24 +90,31 @@ struct HollowCommentContentView: View {
                                 hollowImage: commentData.image,
                                 description: commentData.text,
                                 reloadImage: imageReloadHandler,
-                                minRatio: 0.7
+                                minRatio: UIDevice.isPad ? 1.3 : 0.7
                             )
                             .roundedCorner(4)
                             .padding(.bottom, 10)
                             .fixedSize(horizontal: false, vertical: true)
                         }
                         Group {
+                            let replyText = (commentData.replyTo != -1 ?
+                                                Text(Image(systemName: "arrow.turn.up.right")) + Text(" ") :
+                                                Text("")
+                            )
+                            .foregroundColor(Color.hollowCardStarUnselected.opacity(colorScheme == .light ? 0.3 : 0.8))
+
                             if commentData.text != "" {
+                                
                                 if compact || !commentData.renderHighlight {
-                                    Text(commentData.text)
+                                    replyText + Text(commentData.text)
                                 } else {
-                                    Text.highlightLinksAndCitation(commentData.text, modifiers: {
+                                    replyText + Text.highlightLinksAndCitation(commentData.text, modifiers: {
                                         $0.underline()
                                             .foregroundColor(.hollowContentText)
                                     })
                                 }
                             } else if commentData.image != nil && compact {
-                                (Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
+                                (replyText + Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
                                     .foregroundColor(.uiColor(.secondaryLabel))
                             }
                         }

@@ -10,7 +10,7 @@ import Defaults
 
 struct SettingsView: View {
     @Binding var presented: Bool
-
+    
     var appInfo: String {
         let info = Constants.Application.appLocalizedName +
             NSLocalizedString("APPINFO_VERSION_PREFIX", comment: "") +
@@ -22,10 +22,10 @@ struct SettingsView: View {
         return info
         #endif
     }
-
+    
     var body: some View {
-        NavigationView {
-            List {
+        List {
+            if !UIDevice.isPad {
                 Section(header: Text("")) {
                     NavigationLink(
                         destination: AccountInfoView(),
@@ -33,13 +33,16 @@ struct SettingsView: View {
                             Text("ACCOUNTVIEW_ACCOUNT_CELL")
                         })
                 }
-                Section {
-                    NavigationLink(NSLocalizedString("SETTINGSVIEW_APPEARANCE_NAV_TITLE", comment: ""), destination: AppearanceSettingsView())
-                    NavigationLink(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), destination: ContentSettingsView())
-                    NavigationLink(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""), destination: PushNotificationSettingsView())
-                    NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
-                }
-                
+            }
+            
+            Section {
+                NavigationLink(NSLocalizedString("SETTINGSVIEW_APPEARANCE_NAV_TITLE", comment: ""), destination: AppearanceSettingsView())
+                NavigationLink(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), destination: ContentSettingsView())
+                NavigationLink(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""), destination: PushNotificationSettingsView())
+                NavigationLink(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""), destination: OtherSettingsView())
+            }
+            
+            if !UIDevice.isPad {
                 NavigationLink(
                     destination: ProviderInfoView(),
                     label: {
@@ -61,18 +64,22 @@ struct SettingsView: View {
                             Text("ACCOUNTVIEW_ABOUT_CELL")
                         })
                 }
-
-                
             }
-            .defaultListStyle()
-            .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_NAV_TITLE", comment: ""), displayMode: .inline)
-            .navigationBarItems(leading: Button(action: { presented = false }) {
-                Image(systemName: "xmark")
-                    .padding(5)
-                    .imageScale(.medium)
-                    .foregroundColor(.hollowContentText)
-            })
+            
         }
+        .defaultListStyle()
+        .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_NAV_TITLE", comment: ""), displayMode: UIDevice.isPad ? .automatic : .inline)
+        .navigationBarItems(leading: Group {
+            if !UIDevice.isPad {
+                Button(action: { presented = false }) {
+                    Image(systemName: "xmark")
+                        .padding(5)
+                        .imageScale(.medium)
+                        .foregroundColor(.hollowContentText)
+                }
+            }
+        })
+        .navigationViewStyle(StackNavigationViewStyle())
         .environment(\.imageScale, .large)
         .accentColor(.tint)
     }

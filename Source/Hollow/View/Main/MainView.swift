@@ -146,7 +146,9 @@ extension MainView {
                 .foregroundColor(.mainBarButton)
             }
             .fullScreenCover(isPresented: $accountPresented, content: {
-                SettingsView(presented: $accountPresented)
+                NavigationView {
+                    SettingsView(presented: $accountPresented)
+                }
             })
 
         }

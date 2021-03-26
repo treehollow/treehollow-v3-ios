@@ -22,7 +22,11 @@ struct HollowApp: App {
         WindowGroup {
             Group {
                 if appModel.isInMainView {
-                    MainView()
+                    if appModel.isPad {
+                        MainView_iPad()
+                    } else {
+                        MainView()
+                    }
                 } else {
                     WelcomeView()
                 }

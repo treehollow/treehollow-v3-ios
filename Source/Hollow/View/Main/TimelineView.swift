@@ -36,16 +36,20 @@ struct TimelineView: View {
                     viewModel.loadMorePosts()
                 }
             },
-            didEndScroll: { searchBarTrackingOffset = $0 },
+            didEndScroll: {
+                if !UIDevice.isPad { searchBarTrackingOffset = $0 }
+            },
             refresh: viewModel.refresh,
             content: { proxy in
                 LazyVStack(spacing: 0) {
-                    SearchBar(isSearching: $isSearching)
-                        .padding(.horizontal)
-                        .padding(.bottom, body14 / 2)
-                        .background(Color.background)
-                        .modifier(GetSize(size: $searchBarSize))
-                        .id(-2)
+                    if !UIDevice.isPad {
+                        SearchBar(isSearching: $isSearching)
+                            .padding(.horizontal)
+                            .padding(.bottom, body14 / 2)
+                            .background(Color.background)
+                            .modifier(GetSize(size: $searchBarSize))
+                            .id(-2)
+                    }
                     
                     Color.background.frame(height: body14 / 2)
                         .id(-1)

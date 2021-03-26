@@ -18,7 +18,7 @@ struct WanderView: View {
     @ObservedObject var viewModel: PostListRequestStore
     
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
-
+    
     
     var body: some View {
         CustomScrollView(
@@ -35,31 +35,34 @@ struct WanderView: View {
                 viewModel.loadMorePosts()
             },
             refresh: viewModel.refresh,
-            content: { proxy in Group {
-                WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
-                    let postData = postDataWrapper.post
-                    cardView(for: postData)
-                        .onTapGesture {
-                            presentView {
-                                HollowDetailView(store: HollowDetailStore(
-                                    bindingPostWrapper: Binding(
-                                        get: { postDataWrapper },
-                                        set: {
-                                            guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
-                                            self.viewModel.posts[index] = $0
-                                        }
-                                    )
-                                ))
+            content: { proxy in
+                Group {
+                    WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
+                        let postData = postDataWrapper.post
+                        cardView(for: postData)
+                            .onTapGesture {
+                                IntegrationUtilities.conditionallyPresentView(content: {
+                                    HollowDetailView.conditionalDetailView(store: HollowDetailStore(
+                                        bindingPostWrapper: Binding(
+                                            get: { postDataWrapper },
+                                            set: {
+                                                guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
+                                                self.viewModel.posts[index] = $0
+                                            }
+                                        )
+                                    ))
+                                    
+                                })
                             }
-                        }
-                        .disabled(viewModel.isLoading)
-                }}
-                .gridStyle(columns: 2, spacing: 10, animation: nil)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 70)
-                .background(Color.background)
-            }})
-
+                            .disabled(viewModel.isLoading)
+                    }}
+                    .gridStyle(columns: 2, spacing: 10, animation: nil)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 70)
+                    .background(Color.background)
+                }
+            })
+            
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
@@ -86,7 +89,7 @@ struct WanderView: View {
                     lineLimit: 20
                 )
             }
-
+            
             HStack {
                 numberLabel(count: postData.replyNumber, systemImage: "quote.bubble")
                     .foregroundColor(.hollowCardStarUnselected)

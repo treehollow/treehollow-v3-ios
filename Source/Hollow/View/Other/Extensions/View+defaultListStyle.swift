@@ -18,6 +18,8 @@ fileprivate struct DefaultListStyle: ViewModifier {
     @ScaledMetric(wrappedValue: 52) var height: CGFloat
     
     func body(content: Content) -> some View {
-        content.environment(\.defaultMinListRowHeight, height)
+        content
+            .imageScale(.large)
+            .environment(\.defaultMinListRowHeight, height)
     }
 }

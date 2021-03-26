@@ -34,37 +34,44 @@ extension SearchView {
         HistoryView(searchText: $store.searchString, performSearch: performSearch)
     }
     
+    @ViewBuilder var searchButton: some View {
+        let searchButtonText = store.type == .searchTrending ?
+            NSLocalizedString("SEARCHVIEW_TRENDING_REFRESH_BUTTON", comment: "") :
+            NSLocalizedString("SEARCHVIEW_SEARCH_BUTTON", comment: "")
+        MyButton(action: performSearch, gradient: .vertical(gradient: .button)) {
+            return Text(searchButtonText)
+                .dynamicFont(size: ViewConstants.plainButtonFontSize, weight: .bold)
+                .foregroundColor(.white)
+        }
+        .disabled(store.isLoading || !searchStringValid)
+        .opacity(presented ? 1 : 0)
+    }
+    
+    var closeButton: some View {
+        Button(action:{
+            withAnimation {
+                if showPost && store.type != .searchTrending {
+                    showPost = false
+                } else {
+                    presented = false
+                }
+            }
+        }) {
+            Image(systemName: showPost && store.type != .searchTrending ? "chevron.backward" : "xmark")
+                .modifier(ImageButtonModifier())
+                .padding(.trailing)
+        }
+    }
+    
     func topBar() -> some View {
         HStack {
-            Button(action:{
-                withAnimation {
-                    if showPost && store.type != .searchTrending {
-                        showPost = false
-                    } else {
-                        presented = false
-                    }
-                }
-            }) {
-                Image(systemName: "xmark")
-                    .modifier(ImageButtonModifier())
-                    .padding(.trailing)
-            }
-            
+            closeButton
             if showPost && store.type != .searchTrending {
                 searchField()
             } else {
                 Spacer()
             }
-            
-            let searchButtonText = store.type == .searchTrending ?
-                NSLocalizedString("SEARCHVIEW_TRENDING_REFRESH_BUTTON", comment: "") :
-                NSLocalizedString("SEARCHVIEW_SEARCH_BUTTON", comment: "")
-            MyButton(action: performSearch, gradient: .vertical(gradient: .button)) {
-                return Text(searchButtonText)
-                    .dynamicFont(size: ViewConstants.plainButtonFontSize, weight: .bold)
-                    .foregroundColor(.white)
-            }
-            .disabled(store.isLoading || !searchStringValid)
+            searchButton
         }
         .topBar()
 

@@ -23,6 +23,18 @@ struct IntegrationUtilities {
         return nil
     }
     
+    static func getSplitViewController() -> UISplitViewController? {
+        let keyWindow = IntegrationUtilities.keyWindow()
+
+        if let topController = keyWindow?.rootViewController {
+            if let vc = topController as? UISplitViewController { return vc }
+            for child in topController.children {
+                if let child = child as? UISplitViewController { return child }
+            }
+        }
+        return nil
+    }
+    
     static func keyWindow() -> UIWindow? {
         return UIApplication.shared.windows.filter {$0.isKeyWindow}.first
     }
@@ -45,5 +57,32 @@ struct IntegrationUtilities {
     static func presentSafariVC(url: URL) {
         let safari = SFSafariViewController(url: url)
         topViewController()?.present(safari, animated: true)
+    }
+    
+    static func getSecondaryNavigationVC() -> UINavigationController? {
+        if let topVC = getSplitViewController(),
+           let navVC = topVC.viewController(for: .secondary) as? UINavigationController {
+            return navVC
+        }
+        return nil
+    }
+    
+    static func pushView<Content: View>(navigationVC: UINavigationController, @ViewBuilder content: () -> Content) {
+        let vc = UIHostingController(rootView: content())
+        vc.view.backgroundColor = nil
+        navigationVC.pushViewController(vc, animated: true)
+    }
+    
+    static func pushViewOnSecondary<Content: View>(@ViewBuilder content: () -> Content) {
+        guard let navVC = getSecondaryNavigationVC() else { return }
+        pushView(navigationVC: navVC, content: content)
+    }
+    
+    static func conditionallyPresentView<Content: View>(@ViewBuilder content: () -> Content) {
+        if UIDevice.isPad {
+            pushViewOnSecondary(content: content)
+        } else {
+            presentView(content: content)
+        }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct AboutView: View {
     @Environment(\.openURL) var openURL
@@ -67,6 +68,19 @@ struct AboutView: View {
                     openURL(URL(string: "https://www.gnu.org/licenses/agpl-3.0.html")!)
                 })
                 .accentColor(.primary)
+            }
+            
+            if UIDevice.isPad {
+                NavigationLink(
+                    destination: ProviderInfoView(),
+                    label: {
+                        HStack {
+                            Text("SETTINGSVIEW_PROVIDER_SECTION_TITLE")
+                            Spacer()
+                            Text(Defaults[.hollowConfig]?.name ?? "")
+                                .foregroundColor(.secondary)
+                        }
+                    })
             }
             
             Section(

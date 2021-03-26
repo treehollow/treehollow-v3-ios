@@ -14,7 +14,7 @@ struct HollowHeaderView: View {
     var showContent = false
     var starAction: (_ star: Bool) -> Void
     var disableAttention: Bool
-
+    
     var body: some View {
         _HollowHeaderView<EmptyView>(postData: postData, compact: compact, showContent: showContent, starAction: starAction, disableAttention: disableAttention)
     }
@@ -52,7 +52,6 @@ struct _HollowHeaderView<MenuContent: View>: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(tintColor))
                 VStack(alignment: .leading, spacing: 2) {
-                    let timeLabelText = HollowDateFormatter(date: postData.timestamp).formattedString(compact: compact)
                     HStack {
                         Text("#\(postData.postId.string)")
                             .fontWeight(.medium)
@@ -61,9 +60,11 @@ struct _HollowHeaderView<MenuContent: View>: View {
                             .singleLineText()
                         if showContent {
                             // Time label
-                            secondaryText(timeLabelText, fontWeight: .medium)
-                                .minimumScaleFactor(0.5)
-                                .matchedGeometryEffect(id: "time.label", in: headerNamespace)
+                            secondaryText(fontWeight: .semibold) {
+                                Text.dateText(postData.timestamp, compact: compact)
+                            }
+                            .minimumScaleFactor(0.5)
+                            .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                         }
                     }
                     if showContent {
@@ -73,16 +74,20 @@ struct _HollowHeaderView<MenuContent: View>: View {
                             postData.hollowImage != nil ?
                             "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" : ""
                         
-                        secondaryText(postDescription, fontWeight: .semibold)
+                        secondaryText(fontWeight: .semibold) {
+                            Text(postDescription)
+                        }
                     } else {
                         // Time label
-                        secondaryText(timeLabelText, fontWeight: .semibold)
-                            .minimumScaleFactor(0.5)
-                            .matchedGeometryEffect(id: "time.label", in: headerNamespace)
+                        secondaryText(fontWeight: .semibold) {
+                            Text.dateText(postData.timestamp)
+                        }
+                        .minimumScaleFactor(0.5)
+                        .matchedGeometryEffect(id: "time.label", in: headerNamespace)
                     }
                 }
             }
-
+            
             Spacer()
             
             if !compact {
@@ -101,7 +106,7 @@ struct _HollowHeaderView<MenuContent: View>: View {
                     }
                     .disabled(disableAttention)
                 }
-
+                
                 if let menuContent = menuContent {
                     Menu(content: { menuContent() }, label: {
                         Image(systemName: "ellipsis")
@@ -118,8 +123,8 @@ struct _HollowHeaderView<MenuContent: View>: View {
         }
     }
     
-    func secondaryText(_ text: String, fontWeight: Font.Weight = .regular) -> some View {
-        Text(text)
+    func secondaryText<Content: View>(fontWeight: Font.Weight = .regular, content: () -> Content) -> some View {
+        content()
             .dynamicFont(size: 13, weight: fontWeight)
             .lineSpacing(2.5)
             .foregroundColor(.hollowCardStarUnselected)

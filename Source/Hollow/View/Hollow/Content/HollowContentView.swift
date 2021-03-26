@@ -72,7 +72,7 @@ struct HollowContentView: View {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage,
                             description: postDataWrapper.post.text,
                             reloadImage: imageReloadHandler,
-                            minRatio: options.contains(.lowerImageAspectRatio) ? 0.2 : 0.7
+                            minRatio: (options.contains(.lowerImageAspectRatio) ? 0.2 : 0.7) * (UIDevice.isPad ? 2.3 : 1)
             )
             .roundedCorner(4)
             .frame(maxHeight: maxImageHeight)
@@ -85,9 +85,9 @@ struct HollowContentView: View {
             if let citedPost = postDataWrapper.citedPost,
                citedPost.loadingError == nil {
                 Button(action: {
-                    presentView {
-                        HollowDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))))
-                    }
+                    IntegrationUtilities.conditionallyPresentView(content: {
+                        HollowDetailView.conditionalDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))))
+                    })
                 }) {
                     HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
                 }

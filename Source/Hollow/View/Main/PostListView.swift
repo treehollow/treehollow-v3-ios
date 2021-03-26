@@ -84,9 +84,9 @@ struct PostListView: View {
             .padding(.bottom)
             .onTapGesture {
                 guard let index = postDataWrappers.firstIndex(where: { $0.id == postDataWrapper.id }) else { return }
-                presentView {
-                    HollowDetailView(store: HollowDetailStore(bindingPostWrapper: $postDataWrappers[index]))
-                }
+                IntegrationUtilities.conditionallyPresentView(content: {
+                    HollowDetailView.conditionalDetailView(store: HollowDetailStore(bindingPostWrapper: $postDataWrappers[index]))
+                })
             }
         }
 

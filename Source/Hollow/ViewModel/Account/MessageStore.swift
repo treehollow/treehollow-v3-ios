@@ -14,6 +14,7 @@ class MessageStore: ObservableObject, AppModelEnvironment {
     var appModelState = AppModelState()
     @Published var messages: [SystemMessage] = []
     @Published var errorMessage: (title: String, message: String)?
+    @Published var isLoading = false
     
     var cancellables = Set<AnyCancellable>()
     
@@ -26,12 +27,16 @@ class MessageStore: ObservableObject, AppModelEnvironment {
               let token = Defaults[.accessToken] else { return }
         let request = SystemMessageRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
         
+        withAnimation { isLoading = true }
         request.publisher
             .sinkOnMainThread(receiveError: {
                 completion?()
+                withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: $0)
             }, receiveValue: { result in
                 completion?()
+                withAnimation { self.isLoading = false }
+
                 self.messages = result
             })
             .store(in: &cancellables)

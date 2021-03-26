@@ -13,7 +13,7 @@ struct HollowButtonStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .dynamicFont(size: 16, weight: .semibold, design: .rounded)
+            .dynamicFont(size: UIDevice.isPad ? 17 : 16, weight: .semibold, design: .rounded)
             .opacity(enabled ? 1 : 0.5)
     }
 }

@@ -30,7 +30,7 @@ struct ImageViewer: View {
     
     var selfDismiss = false
     
-    private let dismissScaleThreshold: CGFloat = 0.12
+    private let dismissScaleThreshold: CGFloat = UIDevice.isPad ? 0.08 : 0.12
     
     var body: some View {
         ZStack {
@@ -118,6 +118,7 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
         view.display(image: image)
         view.maxScaleFromMinScale = 4
         view.imageScrollViewDelegate = context.coordinator
+        view.imageContentMode = .aspectFit
         view.alwaysBounceVertical = true
         view.alwaysBounceHorizontal = true
         view.addGestureRecognizer(
@@ -153,11 +154,14 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
         let contentInset = view.adjustedContentInset
         let frameSize = view.frame.size
         
+        let horizontalOriginalOffset = max(frameSize.width - contentSize.width, 0)
+        
         let leftTranslation = contentInset.left - contentOffset.x
-        let rightTranslation = contentOffset.x + frameSize.width - contentInset.right - contentSize.width
+        let rightTranslation = contentOffset.x + frameSize.width - contentInset.right - contentSize.width - horizontalOriginalOffset
         let topTranslation = -contentOffset.y - contentInset.top
 //        var bottomTranslation = contentOffset.y + frameSize.height - contentInset.bottom - contentSize.height
         
+        print(leftTranslation, rightTranslation, topTranslation)
         var xOffset: CGFloat = 0
         var yOffset: CGFloat = 0
         if leftTranslation > 0 {

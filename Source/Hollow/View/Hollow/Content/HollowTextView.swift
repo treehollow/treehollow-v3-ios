@@ -70,8 +70,8 @@ struct HollowTextView: View {
                         ForEach(citedPosts, id: \.self) { post in
                             let wrapper = PostDataWrapper.templatePost(for: post)
                             Button(action: {
-                                presentView {
-                                    HollowDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                                IntegrationUtilities.conditionallyPresentView {
+                                    HollowDetailView.conditionalDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
                                 }
                             }) {
                                 Label("#\(post.string)", systemImage: "text.quote")

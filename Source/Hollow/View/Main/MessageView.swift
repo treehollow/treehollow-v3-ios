@@ -12,7 +12,6 @@ struct MessageView: View {
     @State var page: Page = .attention
     @ObservedObject var messageStore = MessageStore()
     @ObservedObject var postListStore = PostListRequestStore(type: .attentionList)
-    @State var detailStore: HollowDetailStore?
     @State private var isSearching = false
     
     var selfDismiss = false
@@ -23,9 +22,9 @@ struct MessageView: View {
         VStack(spacing: 0) {
             topBar
             CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
-                attentionListView
+                AttentionListView(postListStore: postListStore, isSearching: $isSearching)
                     .tag(Page.attention)
-                systemMessageView
+                SystemMessageView(messageStore: messageStore)
                     .tag(Page.message)
             }
             .ignoresSafeArea()
@@ -71,58 +70,69 @@ extension MessageView {
         .padding(.vertical, 5)
 
     }
-    
-    var systemMessageView: some View {
-        CustomScrollView(refresh: messageStore.requestMessages) { proxy in VStack(spacing: 0) {
-            ForEach(messageStore.messages) { message in
-                LazyVStack(alignment: .leading) {
-                    HStack {
-                        Text(message.title)
-                            .bold()
-                            .foregroundColor(.hollowContentText)
-                            .dynamicFont(size: 16)
-                        Spacer()
-                        Text(HollowDateFormatter(date: message.date).formattedString())
-                            .foregroundColor(.secondary)
-                            .font(.footnote)
-                    }
-                    .padding(.bottom, 7)
-                    Text(message.content)
-                        .dynamicFont(size: 15)
+}
+
+extension MessageView {
+    struct AttentionListView: View {
+        @ObservedObject var postListStore: PostListRequestStore
+        @Binding var isSearching: Bool
+        @State var detailStore: HollowDetailStore?
+
+        var body: some View {
+            CustomScrollView(
+                didScrollToBottom: postListStore.loadMorePosts,
+                refresh: postListStore.refresh
+            ) { proxy in
+                LazyVStack(spacing: 0) {
+                    SearchBar(isSearching: $isSearching)
+                        .padding(.bottom)
+
+                    PostListView(
+                        postDataWrappers: $postListStore.posts,
+                        detailStore: $detailStore,
+                        voteHandler: postListStore.vote,
+                        starHandler: postListStore.star
+                    )
                 }
-                .padding()
-                .background(Color.hollowCardBackground)
-                .roundedCorner(15)
             }
-            .padding(.top)
-        }}
-        .padding(.trailing)
-        .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
-        .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
-        .modifier(AppModelBehaviour(state: messageStore.appModelState))
+            .padding(.trailing)
+            .modifier(AppModelBehaviour(state: postListStore.appModelState))
+            .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
+            .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))
+        }
     }
     
-    var attentionListView: some View {
-        CustomScrollView(
-            didScrollToBottom: postListStore.loadMorePosts,
-            refresh: postListStore.refresh
-        ) { proxy in
-            LazyVStack(spacing: 0) {
-                SearchBar(isSearching: $isSearching)
-                    .padding(.bottom)
-
-                PostListView(
-                    postDataWrappers: $postListStore.posts,
-                    detailStore: $detailStore,
-                    voteHandler: postListStore.vote,
-                    starHandler: postListStore.star
-                )
-            }
+    struct SystemMessageView: View {
+        @ObservedObject var messageStore: MessageStore
+        var body: some View {
+            CustomScrollView(refresh: messageStore.requestMessages) { proxy in VStack(spacing: 0) {
+                ForEach(messageStore.messages) { message in
+                    LazyVStack(alignment: .leading) {
+                        HStack {
+                            Text(message.title)
+                                .bold()
+                                .foregroundColor(.hollowContentText)
+                                .dynamicFont(size: 16)
+                            Spacer()
+                            Text.dateText(message.date)
+                                .foregroundColor(.secondary)
+                                .font(.footnote)
+                        }
+                        .padding(.bottom, 7)
+                        Text(message.content)
+                            .dynamicFont(size: 15)
+                    }
+                    .padding()
+                    .background(Color.hollowCardBackground)
+                    .roundedCorner(15)
+                }
+                .padding(.top)
+            }}
+            .padding(.trailing)
+            .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
+            .modifier(AppModelBehaviour(state: messageStore.appModelState))
+            .modifier(LoadingIndicator(isLoading: messageStore.isLoading))
         }
-        .padding(.trailing)
-        .modifier(AppModelBehaviour(state: postListStore.appModelState))
-        .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
-        .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))
     }
 }
 

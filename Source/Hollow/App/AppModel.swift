@@ -9,6 +9,7 @@
 import Combine
 import Defaults
 import Connectivity
+import SwiftUI
 
 class AppModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
@@ -17,6 +18,8 @@ class AppModel: ObservableObject {
     
     // Only for indicating expired state in `WelcomeView`
     @Published var tokenExpired = false
+    
+    let isPad = UIDevice.isPad
     
     var connectedToNetwork = Connectivity().status.isConnected
     

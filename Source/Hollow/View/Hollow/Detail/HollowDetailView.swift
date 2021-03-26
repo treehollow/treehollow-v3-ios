@@ -10,6 +10,7 @@ import SwiftUI
 struct HollowDetailView: View {
     @ObservedObject var store: HollowDetailStore
     
+    var showHeader = true
     @State private var headerFrame: CGRect = .zero
     @State private var commentViewFrame: CGRect = .zero
     @State var inputPresented = false
@@ -31,45 +32,47 @@ struct HollowDetailView: View {
             Color.hollowDetailBackground.edgesIgnoringSafeArea(.all)
             VStack(spacing: 0) {
                 // Header
-                VStack(spacing: 0) {
-                    HStack {
-                        Button(action: dismissSelf) {
-                            Image(systemName: "xmark")
-                                .modifier(ImageButtonModifier())
-                                .padding(.trailing, 5)
+                if showHeader {
+                    VStack(spacing: 0) {
+                        HStack {
+                            Button(action: dismissSelf) {
+                                Image(systemName: "xmark")
+                                    .modifier(ImageButtonModifier())
+                                    .padding(.trailing, 5)
+                            }
+                            .padding(.trailing, 5)
+                            
+                            _HollowHeaderView(
+                                postData: store.postDataWrapper.post,
+                                compact: false,
+                                // Show text on header when the text is not visible
+            //                            showContent: headerFrame.maxY > commentViewFrame.minY,
+                                showContent: showHeaderContent,
+                                starAction: store.star,
+                                isLoading: store.isLoading,
+                                disableAttention: store.isEditingAttention || store.isLoading,
+                                menuContent: { Group {
+                                    Button(action: store.requestDetail) {
+                                        Label("DETAIL_MENU_REFRESH_LABEL", systemImage: "arrow.clockwise")
+                                    }
+                                    .disabled(store.isLoading)
+                                    
+                                    Divider()
+                                    
+                                    ReportMenuContent(
+                                        store: store,
+                                        permissions: store.postDataWrapper.post.permissions,
+                                        commentId: nil
+                                    )
+                                    .disabled(store.isLoading)
+                                }}
+                            )
+                            .disabled(store.noSuchPost)
                         }
-                        .padding(.trailing, 5)
-                        
-                        _HollowHeaderView(
-                            postData: store.postDataWrapper.post,
-                            compact: false,
-                            // Show text on header when the text is not visible
-//                            showContent: headerFrame.maxY > commentViewFrame.minY,
-                            showContent: showHeaderContent,
-                            starAction: store.star,
-                            isLoading: store.isLoading,
-                            disableAttention: store.isEditingAttention || store.isLoading,
-                            menuContent: { Group {
-                                Button(action: store.requestDetail) {
-                                    Label("DETAIL_MENU_REFRESH_LABEL", systemImage: "arrow.clockwise")
-                                }
-                                .disabled(store.isLoading)
-                                
-                                Divider()
-                                
-                                ReportMenuContent(
-                                    store: store,
-                                    permissions: store.postDataWrapper.post.permissions,
-                                    commentId: nil
-                                )
-                                .disabled(store.isLoading)
-                            }}
-                        )
-                        .disabled(store.noSuchPost)
+                        .padding(.horizontal)
+                        .padding(.vertical, headerVerticalPadding)
+                        Divider()
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, headerVerticalPadding)
-                    Divider()
                 }
 //                .modifier(GetFrame(frame: $headerFrame))
                 // Contents
@@ -196,6 +199,16 @@ struct HollowDetailView: View {
 
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))
+        
     }
 }
 
+extension HollowDetailView {
+    @ViewBuilder static func conditionalDetailView(store: HollowDetailStore, push: Bool = UIDevice.isPad) -> some View {
+        if push {
+            HollowDetailView_iPad(store: store)
+        } else {
+            HollowDetailView(store: store)
+        }
+    }
+}

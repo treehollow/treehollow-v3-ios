@@ -65,7 +65,7 @@ struct HollowCommentInputView: View {
                 .accentColor(.tint)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
-                .frame(height: editorFontSize * 10)
+                .frame(height: editorFontSize * (UIDevice.isPad ? 20 : 10))
             
             HStack {
                 if !keyboardShown { Spacer() }

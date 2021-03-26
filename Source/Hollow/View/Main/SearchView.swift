@@ -27,8 +27,10 @@ struct SearchView: View {
 
     var body: some View {
         VStack {
-            topBar()
-                .padding(.horizontal)
+            if !UIDevice.isPad {
+                topBar()
+                    .padding(.horizontal)
+            }
 
             // Group for additional padding
             Group {
@@ -48,6 +50,7 @@ struct SearchView: View {
                     Text("SEARCHVIEW_NO_RESULT_LABEL")
                         .foregroundColor(.hollowContentText)
                         .verticalCenter()
+                        .horizontalCenter()
                 } else {
                     CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
                         LazyVStack(spacing: 0) {
@@ -56,13 +59,16 @@ struct SearchView: View {
                         .padding(.top)
                     }
                     .padding(.horizontal)
-                    .ignoresSafeArea()
+                    .edgesIgnoringSafeArea(.bottom)
                     .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }
             } else {
                 Spacer()
             }
         }
+        .background(Group { if UIDevice.isPad {
+            Color.background.ignoresSafeArea()
+        }})
         .defaultBlurBackground(hasPost: showPost)
         .edgesIgnoringSafeArea(.bottom)
         .overlay(
@@ -78,5 +84,12 @@ struct SearchView: View {
         .onAppear {
             if store.type == .searchTrending { showPost = true }
         }
+        
+        // iPad
+        .navigationBarItems(leading: Group { if showPost && store.type != .searchTrending {
+            closeButton
+        }}, trailing: Group { if !showPost || store.type == .searchTrending {
+            searchButton
+        }})
     }
 }

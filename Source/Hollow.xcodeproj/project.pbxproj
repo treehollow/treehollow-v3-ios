@@ -38,6 +38,11 @@
 		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
 		0E3AC40025F7778400A4278A /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */; };
 		0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */; };
+		0E3E694B260DF2C8005E8DA2 /* HollowDetailView_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */; };
+		0E3E694E260DFCE8005E8DA2 /* Text+dateText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E694D260DFCE8005E8DA2 /* Text+dateText.swift */; };
+		0E3E6955260E08EC005E8DA2 /* UIDevice+isPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E6954260E08EC005E8DA2 /* UIDevice+isPad.swift */; };
+		0E3E6958260E1312005E8DA2 /* MainSubViews_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */; };
+		0E3E695B260E166D005E8DA2 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E695A260E166D005E8DA2 /* HollowDateFormatter.swift */; };
 		0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */; };
 		0E415A7425CD769B00351672 /* HollowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415A7325CD769B00351672 /* HollowApp.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
@@ -163,13 +168,13 @@
 		0EA3C16225FEFCA600865B4D /* DeviceModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3C16125FEFCA600865B4D /* DeviceModelUtilities.swift */; };
 		0EA4298B25EB6F4D00B74D5D /* Double+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298A25EB6F4D00B74D5D /* Double+int.swift */; };
 		0EA4298E25EBBB8B00B74D5D /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */; };
+		0EA6E98B260DD9FE00A151D7 /* MainView_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6E98A260DD9FE00A151D7 /* MainView_iPad.swift */; };
 		0EAA1B3B25E511BA00904296 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */; };
 		0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4225E5392700904296 /* TimerPublisher.swift */; };
 		0EAA1B4725E6422E00904296 /* Request+publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4625E6422E00904296 /* Request+publisher.swift */; };
 		0EAA1B4B25E6562B00904296 /* View+flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4A25E6562B00904296 /* View+flash.swift */; };
 		0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4D25E6971500904296 /* Localizable.strings */; };
 		0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B5625E7694400904296 /* InfoPlist.strings */; };
-		0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */; };
 		0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */; };
 		0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */; };
 		0EB4F9A225F37A0E00BDAFF1 /* Text+highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */; };
@@ -212,6 +217,11 @@
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
 		0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGenerator.swift; sourceTree = "<group>"; };
 		0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderInfoView.swift; sourceTree = "<group>"; };
+		0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailView_iPad.swift; sourceTree = "<group>"; };
+		0E3E694D260DFCE8005E8DA2 /* Text+dateText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+dateText.swift"; sourceTree = "<group>"; };
+		0E3E6954260E08EC005E8DA2 /* UIDevice+isPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+isPad.swift"; sourceTree = "<group>"; };
+		0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSubViews_iPad.swift; sourceTree = "<group>"; };
+		0E3E695A260E166D005E8DA2 /* HollowDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
 		0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputSubViews.swift; sourceTree = "<group>"; };
 		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7325CD769B00351672 /* HollowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
@@ -346,13 +356,13 @@
 		0EA3C16125FEFCA600865B4D /* DeviceModelUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModelUtilities.swift; sourceTree = "<group>"; };
 		0EA4298A25EB6F4D00B74D5D /* Double+int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+int.swift"; sourceTree = "<group>"; };
 		0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		0EA6E98A260DD9FE00A151D7 /* MainView_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView_iPad.swift; sourceTree = "<group>"; };
 		0EAA1B3A25E511BA00904296 /* PublisherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtensions.swift; sourceTree = "<group>"; };
 		0EAA1B4225E5392700904296 /* TimerPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPublisher.swift; sourceTree = "<group>"; };
 		0EAA1B4625E6422E00904296 /* Request+publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+publisher.swift"; sourceTree = "<group>"; };
 		0EAA1B4A25E6562B00904296 /* View+flash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+flash.swift"; sourceTree = "<group>"; };
 		0EAA1B4E25E6971500904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EAA1B5725E7694400904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
 		0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+revertColorScheme.swift"; sourceTree = "<group>"; };
 		0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailSubViews.swift; sourceTree = "<group>"; };
 		0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+highlight.swift"; sourceTree = "<group>"; };
@@ -442,6 +452,7 @@
 			children = (
 				0E415B0025CD772200351672 /* README.md */,
 				0E415AE925CD772200351672 /* ViewConstants.swift */,
+				0EA6E98D260DDA0500A151D7 /* iPad */,
 				0E415B2625CD772200351672 /* Main */,
 				0E415B2E25CD772200351672 /* Login */,
 				0E415B0625CD772200351672 /* Hollow */,
@@ -506,6 +517,7 @@
 				0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */,
 				0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */,
 				0EA3C15D25FEFBAA00865B4D /* View+singleLineText.swift */,
+				0E3E694D260DFCE8005E8DA2 /* Text+dateText.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -825,6 +837,7 @@
 				0EA4298D25EBBB8B00B74D5D /* DateExtensions.swift */,
 				0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */,
 				0E527CD125F3D84800D91706 /* Array+removeDuplicates.swift */,
+				0E3E6954260E08EC005E8DA2 /* UIDevice+isPad.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -837,12 +850,22 @@
 				00B014EC25E1205A004E416E /* PostCache.swift */,
 				0EAA1B4225E5392700904296 /* TimerPublisher.swift */,
 				00AA103425E74212006B3D6D /* LineSwitchManager.swift */,
-				0EAC357725E7A680000E9F36 /* HollowDateFormatter.swift */,
 				0E527CD525F4825700D91706 /* OpenURLHelper.swift */,
 				0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */,
 				0EA3C16125FEFCA600865B4D /* DeviceModelUtilities.swift */,
+				0E3E695A260E166D005E8DA2 /* HollowDateFormatter.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0EA6E98D260DDA0500A151D7 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				0EA6E98A260DD9FE00A151D7 /* MainView_iPad.swift */,
+				0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */,
+				0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */,
+			);
+			path = iPad;
 			sourceTree = "<group>";
 		};
 		0EDA262925D22C9800B67292 /* Account */ = {
@@ -1010,7 +1033,6 @@
 				0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */,
 				0EFB54F425E926A1001BC98A /* PostListRequestGroup.swift in Sources */,
 				0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */,
-				0EAC357825E7A680000E9F36 /* HollowDateFormatter.swift in Sources */,
 				0E415B5E25CD772200351672 /* HollowCommentInputView.swift in Sources */,
 				0E906D0725DCEADD0034053C /* GetPushRequest.swift in Sources */,
 				0E415B7325CD772200351672 /* SearchView.swift in Sources */,
@@ -1028,6 +1050,7 @@
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				00AA103525E74212006B3D6D /* LineSwitchManager.swift in Sources */,
 				0E906D0C25DCEADD0034053C /* DeviceListRequest.swift in Sources */,
+				0E3E694B260DF2C8005E8DA2 /* HollowDetailView_iPad.swift in Sources */,
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
 				0E906D1725DCEADD0034053C /* SendCommentRequest.swift in Sources */,
 				0E294E9725F1F448001E4C08 /* ReportRequestGroup.swift in Sources */,
@@ -1041,6 +1064,7 @@
 				0EFB550525E93E24001BC98A /* PostListView.swift in Sources */,
 				0EB4F9A625F3837C00BDAFF1 /* Array+sortedRange.swift in Sources */,
 				0E415B6B25CD772200351672 /* HollowButtonStyle.swift in Sources */,
+				0EA6E98B260DD9FE00A151D7 /* MainView_iPad.swift in Sources */,
 				0EAA1B4325E5392700904296 /* TimerPublisher.swift in Sources */,
 				0E1DD7DF25DA4E5C000D27BA /* AppModelEnvironment.swift in Sources */,
 				0E415B6525CD772200351672 /* HollowContentView.swift in Sources */,
@@ -1053,11 +1077,13 @@
 				0E906D0525DCEADD0034053C /* DefaultRequest.swift in Sources */,
 				0E906D1225DCEADD0034053C /* ReportPostRequest.swift in Sources */,
 				0E906D0D25DCEADD0034053C /* UpdateDeviceTokenRequest.swift in Sources */,
+				0E3E6958260E1312005E8DA2 /* MainSubViews_iPad.swift in Sources */,
 				0EA4298E25EBBB8B00B74D5D /* DateExtensions.swift in Sources */,
 				0E58810A25E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift in Sources */,
 				0EE60EFD25FCCCD700D97E7A /* CheckmarkButtonImage.swift in Sources */,
 				0E415B6F25CD772200351672 /* AccountInfoView.swift in Sources */,
 				0E3AC40025F7778400A4278A /* AvatarGenerator.swift in Sources */,
+				0E3E6955260E08EC005E8DA2 /* UIDevice+isPad.swift in Sources */,
 				0E906D1425DCEADD0034053C /* EditAttentionRequest.swift in Sources */,
 				0E906D0025DCEADD0034053C /* SystemMessageRequest.swift in Sources */,
 				0E415B7625CD772200351672 /* WanderView.swift in Sources */,
@@ -1098,6 +1124,7 @@
 				0E906D2125DCEADD0034053C /* HollowImage.swift in Sources */,
 				0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */,
 				0E906D2625DCEADD0034053C /* Data+hexEncodedString.swift in Sources */,
+				0E3E695B260E166D005E8DA2 /* HollowDateFormatter.swift in Sources */,
 				0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */,
 				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,
 				0E415B6825CD772200351672 /* HollowTextView.swift in Sources */,
@@ -1107,6 +1134,7 @@
 				0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */,
 				0E906D1A25DCEADD0034053C /* Comment.swift in Sources */,
 				0E415B4C25CD772200351672 /* ViewLayouts.swift in Sources */,
+				0E3E694E260DFCE8005E8DA2 /* Text+dateText.swift in Sources */,
 				0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */,
 				0E415B5825CD772200351672 /* MyTextField.swift in Sources */,
 				0E415B5925CD772200351672 /* ExpandedButton.swift in Sources */,
@@ -1277,7 +1305,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1291,7 +1319,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1302,7 +1330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1316,7 +1344,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
