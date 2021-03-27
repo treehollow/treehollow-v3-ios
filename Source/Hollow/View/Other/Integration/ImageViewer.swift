@@ -30,7 +30,7 @@ struct ImageViewer: View {
     
     var selfDismiss = false
     
-    private let dismissScaleThreshold: CGFloat = UIDevice.isPad ? 0.08 : 0.12
+    private let dismissScaleThreshold: CGFloat = UIDevice.isPad ? (UIDevice.isMac ? 0.04 : 0.08) : 0.12
     
     var body: some View {
         ZStack {
@@ -51,7 +51,7 @@ struct ImageViewer: View {
                         .leading()
                         .blurBackground()
                         .lineLimit(lineLimit)
-                        .onTapGesture { withAnimation {
+                        .onClickGesture { withAnimation {
                             lineLimit = lineLimit == nil ? 1 : nil
                         }}
                 }
@@ -64,7 +64,11 @@ struct ImageViewer: View {
         
         .modifier(GetSafeAreaInsets(insets: $safeAreaInsets))
         
-        .background(Color.black.ignoresSafeArea().opacity(max(1 - Double(dragRelativeOffset) * (UIDevice.isPad ? 3 : 2), 0)))
+        .background(
+            Color.black
+                .ignoresSafeArea()
+                .opacity(max(1 - Double(dragRelativeOffset) * (UIDevice.isPad ? (UIDevice.isMac ? 6 : 3) : 2), 0))
+        )
         
         .actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("IMAGEVIEWER_ACTION_SHEET_TITLE"), buttons: [

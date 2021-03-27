@@ -50,7 +50,7 @@ struct HollowImageView: View {
                             ZStack {
                                 Image(uiImage: image)
                                     .resizable()
-                                    .overlay(Blur())
+                                Blur().ignoresSafeArea()
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -58,6 +58,7 @@ struct HollowImageView: View {
                                         contextMenu(image: image)
                                     }))
                             }
+                            .compositingGroup()
                             .aspectRatio(aspectRatio, contentMode: .fill)
                         }
                     }
@@ -70,7 +71,7 @@ struct HollowImageView: View {
                         message: nil,
                         buttons: [.ok]
                     )
-                    .onTapGesture {
+                    .onClickGesture(lightEffect: false) {
                         IntegrationUtilities.presentView(presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, content: {
                             ImageViewer(image: image, footnote: description, presented: $showImageViewer, selfDismiss: true)
                         })

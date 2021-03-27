@@ -99,6 +99,7 @@ extension SearchView {
     }
     
     func updateHistoryDefaults(with newHistory: String) {
+        guard store.type != .searchTrending else { return }
         var exist = false
         for history in searchHistory {
             if history == newHistory {
@@ -346,7 +347,7 @@ extension SearchView {
                             .foregroundColor(.secondary)
                             .leading()
                             .dynamicFont(size: 16)
-                            .onTapGesture {
+                            .onClickGesture {
                                 withAnimation { searchText = history }
                                 performSearch()
                             }

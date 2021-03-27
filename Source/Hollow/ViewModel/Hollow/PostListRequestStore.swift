@@ -40,9 +40,11 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         self.posts = []
         self.options = options
         if type == .searchTrending { searchString = Defaults[.hollowConfig]?.searchTrending ?? "" }
-        switch type {
-        case .postList, .attentionList, .wander, .searchTrending: requestPosts(at: 1)
-        default: break
+        if !options.contains(.lazyLoad) {
+            switch type {
+            case .postList, .attentionList, .wander, .searchTrending: requestPosts(at: 1)
+            default: break
+            }
         }
     }
     
@@ -288,5 +290,6 @@ extension PostListRequestStore {
         static let ignoreCitedPost = Options(rawValue: 1 << 0)
         static let ignoreComments = Options(rawValue: 1 << 1)
         static let unordered = Options(rawValue: 1 << 2)
+        static let lazyLoad = Options(rawValue: 1 << 3)
     }
 }

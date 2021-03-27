@@ -16,7 +16,7 @@ struct HollowDetailView_iPad: View {
     
     var body: some View {
         HollowDetailView(store: store, showHeader: false)
-            .navigationBarTitle(Text(store.postDataWrapper.post.text.removeLineBreak()))
+            .navigationTitle(Text(store.postDataWrapper.post.text.removeLineBreak()))
             .navigationBarItems(
                 leading:
                     HStack(spacing: 10) {
@@ -66,6 +66,12 @@ struct HollowDetailView_iPad: View {
                     }
                     
                     Menu(content: {
+                        Button(action: store.requestDetail) {
+                            Label("DETAIL_MENU_REFRESH_LABEL", systemImage: "arrow.clockwise")
+                        }
+                        .disabled(store.isLoading)
+                        
+                        Divider()
                         ReportMenuContent(
                             store: store,
                             permissions: store.postDataWrapper.post.permissions,

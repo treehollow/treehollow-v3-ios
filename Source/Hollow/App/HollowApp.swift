@@ -31,6 +31,8 @@ struct HollowApp: App {
                     WelcomeView()
                 }
             }
+            // Set larger size category for macOS
+            .conditionalSizeCategory()
             // Inject the app model into the environment
             .environmentObject(appModel)
             // Set the color scheme when appear

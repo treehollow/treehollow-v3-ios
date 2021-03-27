@@ -130,7 +130,7 @@ struct ContentSettingsView: View {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.uiColor(.systemFill))
                             .imageScale(.medium)
-                            .onTapGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
+                            .onClickGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
                                 _ = withAnimation { blockedTags.remove(at: index) }
                             }}
                     }
@@ -162,7 +162,7 @@ struct ContentSettingsView: View {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.tint)
                             .imageScale(.medium)
-                            .onTapGesture { withAnimation {
+                            .onClickGesture { withAnimation {
                                 newTag = ""
                                 showTextField = false
                             }}
@@ -192,7 +192,7 @@ struct ContentSettingsView: View {
 struct PushNotificationSettingsView: View {
     @State private var granted: Bool = false
     @State private var isEditing = false
-    @ObservedObject private var viewModel = ViewModel()
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         List {
@@ -275,11 +275,14 @@ struct PushNotificationSettingsView: View {
         UNUserNotificationCenter.current().requestAuthorization(
             options: Constants.Application.requestedNotificationOptions,
             completionHandler: { granted, _ in
-            self.granted = granted
-        })
+                DispatchQueue.main.async {
+                    self.granted = granted
+                    self.viewModel.getPushTypes()
+                }
+            })
     }
     
-    private class ViewModel: ObservableObject, AppModelEnvironment {
+    class ViewModel: ObservableObject, AppModelEnvironment {
         @Published var isLoading = false
         @Published var notificationType = Defaults[.notificationTypeCache]
         @Published var tempNotificationType = Defaults[.notificationTypeCache]
@@ -287,10 +290,6 @@ struct PushNotificationSettingsView: View {
         @Published var appModelState = AppModelState()
         
         var cancellables = Set<AnyCancellable>()
-        
-        init() {
-            getPushTypes()
-        }
         
         func getPushTypes() {
             guard let config = Defaults[.hollowConfig],

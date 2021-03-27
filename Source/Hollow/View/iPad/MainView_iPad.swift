@@ -11,9 +11,12 @@ import Defaults
 
 struct MainView_iPad: View {
     @State var page: Page = .timeline
-    @State var showCreatePost = false
     
     @ObservedObject var sharedModel = SharedModel()
+    
+    @ScaledMetric(wrappedValue: 40) var rowHeight: CGFloat
+    
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         SplitView(sharedModel: sharedModel, primaryView: { _ in
@@ -46,7 +49,8 @@ struct MainView_iPad: View {
                     }
                 }
             }
-            .accentColor(.hollowContentVoteGradient1)
+            .conditionalTint(ios: .hollowContentVoteGradient1, mac: colorScheme == .dark ? .uiColor(.systemFill) : .hollowContentVoteGradient1)
+            .environment(\.defaultMinListRowHeight, rowHeight)
             .listStyle(SidebarListStyle())
             .navigationTitle(Defaults[.hollowConfig]?.name ?? Constants.Application.appLocalizedName)
         },
@@ -57,10 +61,14 @@ struct MainView_iPad: View {
             // navigate back to the root vc in onAppear to avoid the additional
             // navigation destinations
             splitVC.preferredDisplayMode = .oneBesideSecondary
+            // Apply blur background in mac
+            splitVC.primaryBackgroundStyle = .sidebar
+            splitVC.primaryController.view.backgroundColor = nil
             splitVC.primaryController.navigationController?.navigationBar.prefersLargeTitles = true
             splitVC.secondaryController.navigationController?.navigationBar.isTranslucent = true
-            splitVC.primaryController.navigationController?.navigationBar.tintColor = UIColor(.tint)
+            splitVC.primaryController.navigationController?.navigationBar.tintColor = UIColor(.hollowContentVoteGradient1)
             splitVC.secondaryController.navigationController?.navigationBar.tintColor = UIColor(.tint)
+            splitVC.primaryController.navigationController?.delegate = sharedModel
         })
         .ignoresSafeArea()
         
@@ -71,6 +79,11 @@ struct MainView_iPad: View {
         }
         
         .onAppear {
+            #if targetEnvironment(macCatalyst)
+            let titleBar = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.titlebar
+            titleBar?.titleVisibility = .hidden
+            titleBar?.toolbar = nil
+            #endif
             guard let splitVC = IntegrationUtilities.getSplitViewController() else { return }
             if let primaryNavVC = splitVC.viewController(for: .primary)?.parent as? UINavigationController {
                 DispatchQueue.main.async {
@@ -80,24 +93,31 @@ struct MainView_iPad: View {
             }
         }
 
-        .overlay(Group { if showCreatePost {
-            HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost, refreshHandler: {
+        .overlay(Group { if sharedModel.showCreatePost {
+            HollowInputView(inputStore: HollowInputStore(presented: $sharedModel.showCreatePost, refreshHandler: {
                 page = .timeline
                 sharedModel.timelineViewModel.refresh(finshHandler: {})
             }))
             .transition(.move(edge: .bottom))
         }})
-
-        .environment(\.horizontalSizeClass, .regular)
-        
     }
     
-    class SharedModel: ObservableObject {
+    class SharedModel: NSObject, ObservableObject, UINavigationControllerDelegate {
         @Published var page: MainView_iPad.Page = .timeline
+        @Published var showCreatePost = false
         // Initialize time line view model here to avoid creating repeatedly
-        let timelineViewModel = PostListRequestStore(type: .postList)
+        let timelineViewModel = PostListRequestStore(type: .postList, options: .lazyLoad)
         // Initialize wander view model here to avoid creating repeatedly
-        let wanderViewModel = PostListRequestStore(type: .wander, options: [.ignoreCitedPost, .ignoreComments, .unordered])
+        let wanderViewModel = PostListRequestStore(type: .wander, options: [.ignoreCitedPost, .ignoreComments, .unordered, .lazyLoad])
+        let messageStore = MessageStore(lazyLoad: true)
+        let searchTrendingStore = PostListRequestStore(type: .searchTrending, options: [.unordered, .lazyLoad])
+        let searchStore = PostListRequestStore(type: .search, options: [.unordered, .lazyLoad])
+        let favouriteStore = PostListRequestStore(type: .attentionList, options: .lazyLoad)
+        
+        func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+            // Never! let! it! push!
+            navigationController.popToRootViewController(animated: false)
+        }
     }
 }
 
@@ -160,5 +180,15 @@ extension MainView_iPad {
             case .account, .settings, .about: return .info
             }
         }
+    }
+}
+
+private extension View {
+    func conditionalTint(ios: Color, mac: Color) -> some View {
+        #if targetEnvironment(macCatalyst)
+        return self.accentColor(mac)
+        #else
+        return self.accentColor(ios)
+        #endif
     }
 }

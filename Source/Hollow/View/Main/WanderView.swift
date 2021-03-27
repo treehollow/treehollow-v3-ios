@@ -40,7 +40,7 @@ struct WanderView: View {
                     WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
                         let postData = postDataWrapper.post
                         cardView(for: postData)
-                            .onTapGesture {
+                            .onClickGesture {
                                 IntegrationUtilities.conditionallyPresentView(content: {
                                     HollowDetailView.conditionalDetailView(store: HollowDetailStore(
                                         bindingPostWrapper: Binding(
@@ -54,7 +54,6 @@ struct WanderView: View {
                                     
                                 })
                             }
-                            .disabled(viewModel.isLoading)
                     }}
                     .gridStyle(columns: 2, spacing: 10, animation: nil)
                     .padding(.horizontal, 15)
