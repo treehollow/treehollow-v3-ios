@@ -27,12 +27,21 @@ struct MainView_iPad: View {
                     ForEach(Page.allCases) { page in
                         
                         if page.section == section {
-                            Button(action: {
-                                sharedModel.page = page
-                            }) {
-                                Label(page.info.name, systemImage: page.info.imageName)
-                            }
-                            .accentColor(.hollowContentVoteGradient1)
+                            // We need NavigationLink to keep the items
+                            // highlighted when selected
+                            NavigationLink(
+                                destination: EmptyView(),
+                                tag: page.rawValue,
+                                selection: Binding(get: { page.rawValue }, set: {
+                                    if let rawValue = $0,
+                                       let page = Page(rawValue: rawValue) {
+                                        sharedModel.page = page
+                                    }
+                                }),
+                                label: {
+                                    Label(page.info.name, systemImage: page.info.imageName)
+                                })
+                                .accentColor(.hollowContentVoteGradient1)
                         }
                     }
                 }
@@ -44,6 +53,10 @@ struct MainView_iPad: View {
         secondaryView: { _ in secondaryView },
         modifiers: { splitVC in
             IntegrationUtilities.topSplitVC = splitVC
+            // Temperarily set to oneBesideSecondary first to ensure that we can
+            // navigate back to the root vc in onAppear to avoid the additional
+            // navigation destinations
+            splitVC.preferredDisplayMode = .oneBesideSecondary
             splitVC.primaryController.navigationController?.navigationBar.prefersLargeTitles = true
             splitVC.secondaryController.navigationController?.navigationBar.isTranslucent = true
             splitVC.primaryController.navigationController?.navigationBar.tintColor = UIColor(.tint)
@@ -52,8 +65,19 @@ struct MainView_iPad: View {
         .ignoresSafeArea()
         
         .onChange(of: sharedModel.page) { _ in
-            guard let navVC = IntegrationUtilities.getSecondaryNavigationVC() else { return }
-            navVC.popToRootViewController(animated: true)
+            if let navVC = IntegrationUtilities.getSecondaryNavigationVC() {
+                navVC.popToRootViewController(animated: true)
+            }
+        }
+        
+        .onAppear {
+            guard let splitVC = IntegrationUtilities.getSplitViewController() else { return }
+            if let primaryNavVC = splitVC.viewController(for: .primary)?.parent as? UINavigationController {
+                DispatchQueue.main.async {
+                    primaryNavVC.popToRootViewController(animated: false)
+                    splitVC.preferredDisplayMode = .automatic
+                }
+            }
         }
 
         .overlay(Group { if showCreatePost {

@@ -14,19 +14,21 @@ extension MainView_iPad {
         switch sharedModel.page {
         case .timeline:
             TimelineView(isSearching: .constant(false), viewModel: sharedModel.timelineViewModel)
-            .background(Color.background.ignoresSafeArea())
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationBarTitle("GLOBAL_TIMELINE", displayMode: .inline)
-            .overlay(overlayFloatButton)
+                .background(Color.background.ignoresSafeArea())
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationBarTitle("GLOBAL_TIMELINE", displayMode: .inline)
+                .overlay(overlayFloatButton)
+                .noNavigationItems()
         case .wander:
             WanderView(showCreatePost: .constant(false), viewModel: sharedModel.wanderViewModel)
-            .background(Color.background.ignoresSafeArea())
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationBarTitle("GLOBAL_WANDER", displayMode: .inline)
-            .overlay(overlayFloatButton)
+                .background(Color.background.ignoresSafeArea())
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationBarTitle("GLOBAL_WANDER", displayMode: .inline)
+                .overlay(overlayFloatButton)
+                .noNavigationItems()
         case .search:
             SearchView(presented: .constant(true), store: .init(type: .search, options: [.unordered]))
-            .navigationBarTitle("IPAD_SIDEBAR_SEARCH", displayMode: .inline)
+                .navigationBarTitle("IPAD_SIDEBAR_SEARCH", displayMode: .inline)
         case .trending:
             SearchView(presented: .constant(true), store: .init(type: .searchTrending, options: [.unordered]))
                 .navigationBarTitle("IPAD_SIDEBAR_TRENDING", displayMode: .inline)
@@ -34,22 +36,26 @@ extension MainView_iPad {
             FavouritesView_iPad()
         case .notifications:
             MessageView.SystemMessageView(messageStore: MessageStore())
-            .navigationBarTitle("IPAD_SIDEBAR_MESSAGES", displayMode: .inline)
-            .padding(.leading)
-            .edgesIgnoringSafeArea(.bottom)
-            .background(Color.background.ignoresSafeArea())
+                .navigationBarTitle("IPAD_SIDEBAR_MESSAGES", displayMode: .inline)
+                .padding(.leading)
+                .edgesIgnoringSafeArea(.bottom)
+                .background(Color.background.ignoresSafeArea())
+                .noNavigationItems()
         case .account:
             AccountInfoView()
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationViewStyle(StackNavigationViewStyle())
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationViewStyle(StackNavigationViewStyle())
+                .noNavigationItems()
         case .settings:
             SettingsView(presented: .constant(true))
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationViewStyle(StackNavigationViewStyle())
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationViewStyle(StackNavigationViewStyle())
+                .noNavigationItems()
         case .about:
             AboutView()
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationViewStyle(StackNavigationViewStyle())
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationViewStyle(StackNavigationViewStyle())
+                .noNavigationItems()
         }
     }
     

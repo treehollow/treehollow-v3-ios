@@ -10,7 +10,11 @@ import SwiftUI
 
 extension View {
     func defaultListStyle() -> some View {
-        self.modifier(DefaultListStyle()).listStyle(InsetGroupedListStyle())
+        self
+            .modifier(DefaultListStyle())
+            .listStyle(InsetGroupedListStyle())
+            .accentColor(.tint)
+            .imageScale(.large)
     }
 }
 
@@ -19,7 +23,6 @@ fileprivate struct DefaultListStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .imageScale(.large)
             .environment(\.defaultMinListRowHeight, height)
     }
 }
