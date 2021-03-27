@@ -121,8 +121,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } else if let postId = content.userInfo["pid"] as? Int {
             let commentId = content.userInfo["cid"] as? Int
             let postDataWrapper = PostDataWrapper.templatePost(for: postId)
-            let detailView = HollowDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper), jumpToComment: commentId))
-            IntegrationUtilities.presentView(content: { detailView })
+            let detailView = HollowDetailView.conditionalDetailView(store: .init(bindingPostWrapper: .constant(postDataWrapper), jumpToComment: commentId))
+            IntegrationUtilities.conditionallyPresentView(content: { detailView })
         }
         
         completionHandler()

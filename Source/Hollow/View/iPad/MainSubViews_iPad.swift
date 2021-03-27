@@ -18,29 +18,61 @@ extension MainView_iPad {
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_TIMELINE", displayMode: .inline)
                 .overlay(overlayFloatButton)
-                .noNavigationItems()
+                .navigationBarItems(leading: EmptyView(), trailing: Group {
+                    #if targetEnvironment(macCatalyst)
+                    Button(action: { sharedModel.timelineViewModel.refresh(finshHandler: {}) }) {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    #endif
+                })
+                .onAppear {
+                    if sharedModel.timelineViewModel.posts.isEmpty {
+                        sharedModel.timelineViewModel.requestPosts(at: 1)
+                    }
+                }
         case .wander:
             WanderView(showCreatePost: .constant(false), viewModel: sharedModel.wanderViewModel)
                 .background(Color.background.ignoresSafeArea())
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_WANDER", displayMode: .inline)
                 .overlay(overlayFloatButton)
-                .noNavigationItems()
+                .navigationBarItems(leading: EmptyView(), trailing: Group {
+                    #if targetEnvironment(macCatalyst)
+                    Button(action: { sharedModel.wanderViewModel.refresh(finshHandler: {}) }) {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    #endif
+                })
+                .onAppear {
+                    if sharedModel.wanderViewModel.posts.isEmpty {
+                        sharedModel.wanderViewModel.requestPosts(at: 1)
+                    }
+                }
         case .search:
-            SearchView(presented: .constant(true), store: .init(type: .search, options: [.unordered]))
+            SearchView(presented: .constant(true), store: sharedModel.searchStore)
                 .navigationBarTitle("IPAD_SIDEBAR_SEARCH", displayMode: .inline)
         case .trending:
-            SearchView(presented: .constant(true), store: .init(type: .searchTrending, options: [.unordered]))
+            SearchView(presented: .constant(true), store: sharedModel.searchTrendingStore)
                 .navigationBarTitle("IPAD_SIDEBAR_TRENDING", displayMode: .inline)
+                .onAppear {
+                    if sharedModel.searchTrendingStore.posts.isEmpty {
+                        sharedModel.searchTrendingStore.requestPosts(at: 1)
+                    }
+                }
         case .favourites:
-            FavouritesView_iPad()
+            FavouritesView_iPad(favouriteStore: sharedModel.favouriteStore)
         case .notifications:
-            MessageView.SystemMessageView(messageStore: MessageStore())
+            MessageView.SystemMessageView(messageStore: sharedModel.messageStore)
                 .navigationBarTitle("IPAD_SIDEBAR_MESSAGES", displayMode: .inline)
                 .padding(.leading)
                 .edgesIgnoringSafeArea(.bottom)
                 .background(Color.background.ignoresSafeArea())
                 .noNavigationItems()
+                .onAppear {
+                    if sharedModel.messageStore.messages.isEmpty {
+                        sharedModel.messageStore.requestMessages()
+                    }
+                }
         case .account:
             AccountInfoView()
                 .edgesIgnoringSafeArea(.bottom)
@@ -60,10 +92,10 @@ extension MainView_iPad {
     }
     
     var overlayFloatButton: some View {
-        Group { if !showCreatePost {
+        Group { if !sharedModel.showCreatePost {
             FloatButton(
                 action: {
-                    withAnimation { showCreatePost = true }
+                    withAnimation { sharedModel.showCreatePost = true }
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 },
                 systemImageName: "plus"
@@ -80,7 +112,7 @@ extension MainView_iPad {
     struct FavouritesView_iPad: View {
         @State private var isSearching = false
         @State private var searchStore = PostListRequestStore(type: .attentionListSearch, options: .unordered)
-        @State private var favouriteStore = PostListRequestStore(type: .attentionList)
+        let favouriteStore: PostListRequestStore
         var body: some View {
             MessageView.AttentionListView(postListStore: favouriteStore, isSearching: $isSearching)
                 .navigationBarTitle("IPAD_SIDEBAR_FAVOURITES", displayMode: .inline)
@@ -98,7 +130,13 @@ extension MainView_iPad {
                         }
                     }
                 }
-                .onAppear { isSearching = false }
+                .noNavigationItems()
+                .onAppear {
+                    isSearching = false
+                    if favouriteStore.posts.isEmpty {
+                        favouriteStore.requestPosts(at: 1)
+                    }
+                }
         }
     }
 }

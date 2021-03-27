@@ -32,7 +32,7 @@ struct HollowVoteContentView: View {
                     }
                     // Disable the button when the user has voted
                     .disabled(vote.voteData[index].voteCount >= 0 || selectedButNotFinishIndex != -1)
-                    .onTapGesture {
+                    .onClickGesture {
                         if !vote.voteData.isEmpty, vote.voteData[0].voteCount >= 0 {
                             withAnimation { showProportion.toggle() }
                         }

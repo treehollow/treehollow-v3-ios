@@ -72,7 +72,7 @@ extension HollowDetailView {
                     .roundedCorner(10)
                     .animation(.none)
                 )
-                .onTapGesture {
+                .onClickGesture {
                     guard !store.isSendingComment && !store.isLoading else { return }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     store.replyToIndex = index

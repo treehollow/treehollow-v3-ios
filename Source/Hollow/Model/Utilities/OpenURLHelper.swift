@@ -43,6 +43,9 @@ struct OpenURLHelper {
     }
     
     private func open(_ url: URL, method: OpenMethod) {
+        #if targetEnvironment(macCatalyst)
+        openURL(url)
+        #endif
         switch method {
         case .inApp:
             IntegrationUtilities.presentSafariVC(url: url)

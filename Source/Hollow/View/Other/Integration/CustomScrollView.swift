@@ -101,12 +101,14 @@ fileprivate class ScrollViewUIHostingController<Content>: UIHostingController<Co
         scrollView?.isScrollEnabled = !disableScroll
         scrollView?.keyboardDismissMode = .onDrag
 
+        #if !targetEnvironment(macCatalyst)
         if refresh != nil {
             scrollView?.refreshControl = UIRefreshControl()
             scrollView?.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
             scrollView?.refreshControl?.isEnabled = true
             scrollView?.refreshControl?.isHidden = false
         }
+        #endif
         view.backgroundColor = nil
         for subView in view.subviews {
             subView.backgroundColor = nil

@@ -18,8 +18,10 @@ class MessageStore: ObservableObject, AppModelEnvironment {
     
     var cancellables = Set<AnyCancellable>()
     
-    init() {
-        requestMessages()
+    init(lazyLoad: Bool = false) {
+        if !lazyLoad {
+            requestMessages()
+        }
     }
     
     func requestMessages(completion: (() -> Void)? = nil) {

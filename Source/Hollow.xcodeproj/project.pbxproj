@@ -23,7 +23,6 @@
 		0E28BC1C25F4ED8200A97820 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC1B25F4ED8200A97820 /* Alamofire */; };
 		0E28BC2025F4EE7B00A97820 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC1F25F4EE7B00A97820 /* AppCenterCrashes */; };
 		0E28BC2225F4EE7B00A97820 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2125F4EE7B00A97820 /* AppCenterAnalytics */; };
-		0E28BC2925F4EED000A97820 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2825F4EED000A97820 /* Cache */; };
 		0E28BC2D25F4EF4D00A97820 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC2C25F4EF4D00A97820 /* Kingfisher */; };
 		0E28BC3125F4EF7300A97820 /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC3025F4EF7300A97820 /* Connectivity */; };
 		0E28BC3525F4EFA400A97820 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC3425F4EFA400A97820 /* ImageScrollView */; };
@@ -99,6 +98,8 @@
 		0E527CD625F4825700D91706 /* OpenURLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E527CD525F4825700D91706 /* OpenURLHelper.swift */; };
 		0E58810A25E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810925E9E61B006F6A94 /* ConnectivityPublisherExtensions.swift */; };
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
+		0E671AC9260F394500590736 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E671AC8260F394500590736 /* Cache */; };
+		0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */; };
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
 		0E6BE3B4260ED1EC00B529F7 /* View+noNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE3B3260ED1EC00B529F7 /* View+noNavigationItems.swift */; };
@@ -181,6 +182,7 @@
 		0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */; };
 		0EB4F9A225F37A0E00BDAFF1 /* Text+highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */; };
 		0EB4F9A625F3837C00BDAFF1 /* Array+sortedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */; };
+		0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
@@ -286,6 +288,7 @@
 		0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+presentPopover.swift"; sourceTree = "<group>"; };
 		0E58811925EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E58811A25EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onClickGesture.swift"; sourceTree = "<group>"; };
 		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
 		0E6BE3B3260ED1EC00B529F7 /* View+noNavigationItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+noNavigationItems.swift"; sourceTree = "<group>"; };
@@ -371,6 +374,7 @@
 		0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailSubViews.swift; sourceTree = "<group>"; };
 		0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+highlight.swift"; sourceTree = "<group>"; };
 		0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedRange.swift"; sourceTree = "<group>"; };
+		0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalSizeCategory.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
@@ -391,7 +395,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E28BC2925F4EED000A97820 /* Cache in Frameworks */,
+				0E671AC9260F394500590736 /* Cache in Frameworks */,
 				0E28BC1C25F4ED8200A97820 /* Alamofire in Frameworks */,
 				0E28BC1925F4ED2D00A97820 /* Defaults in Frameworks */,
 				0E28BC3525F4EFA400A97820 /* ImageScrollView in Frameworks */,
@@ -524,6 +528,8 @@
 				0EA3C15D25FEFBAA00865B4D /* View+singleLineText.swift */,
 				0E3E694D260DFCE8005E8DA2 /* Text+dateText.swift */,
 				0E6BE3B3260ED1EC00B529F7 /* View+noNavigationItems.swift */,
+				0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */,
+				0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -868,8 +874,8 @@
 			isa = PBXGroup;
 			children = (
 				0EA6E98A260DD9FE00A151D7 /* MainView_iPad.swift */,
-				0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */,
 				0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */,
+				0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -915,10 +921,10 @@
 				0E28BC1B25F4ED8200A97820 /* Alamofire */,
 				0E28BC1F25F4EE7B00A97820 /* AppCenterCrashes */,
 				0E28BC2125F4EE7B00A97820 /* AppCenterAnalytics */,
-				0E28BC2825F4EED000A97820 /* Cache */,
 				0E28BC2C25F4EF4D00A97820 /* Kingfisher */,
 				0E28BC3025F4EF7300A97820 /* Connectivity */,
 				0E28BC3425F4EFA400A97820 /* ImageScrollView */,
+				0E671AC8260F394500590736 /* Cache */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -954,10 +960,10 @@
 				0E28BC1725F4ED2D00A97820 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E28BC1A25F4ED8200A97820 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E28BC1E25F4EE7B00A97820 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
-				0E28BC2725F4EED000A97820 /* XCRemoteSwiftPackageReference "Cache" */,
 				0E28BC2B25F4EF4D00A97820 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0E28BC2F25F4EF7300A97820 /* XCRemoteSwiftPackageReference "Connectivity" */,
 				0E28BC3325F4EFA400A97820 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
+				0E671AC7260F394500590736 /* XCRemoteSwiftPackageReference "Cache" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -987,6 +993,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */,
 				0E906D1025DCEADD0034053C /* ChangePasswordRequest.swift in Sources */,
 				0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */,
 				0E415B6C25CD772200351672 /* HollowHeaderView.swift in Sources */,
@@ -1057,6 +1064,7 @@
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				00AA103525E74212006B3D6D /* LineSwitchManager.swift in Sources */,
+				0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */,
 				0E906D0C25DCEADD0034053C /* DeviceListRequest.swift in Sources */,
 				0E3E694B260DF2C8005E8DA2 /* HollowDetailView_iPad.swift in Sources */,
 				0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */,
@@ -1313,7 +1321,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1325,7 +1333,7 @@
 				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1338,7 +1346,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1350,7 +1358,7 @@
 				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1412,14 +1420,6 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		0E28BC2725F4EED000A97820 /* XCRemoteSwiftPackageReference "Cache" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git://github.com/hyperoslo/Cache.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
 		0E28BC2B25F4EF4D00A97820 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git://github.com/onevcat/Kingfisher.git";
@@ -1442,6 +1442,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.4;
+			};
+		};
+		0E671AC7260F394500590736 /* XCRemoteSwiftPackageReference "Cache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git://github.com/liang2kl/Cache.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1472,11 +1480,6 @@
 			package = 0E28BC1E25F4EE7B00A97820 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
 		};
-		0E28BC2825F4EED000A97820 /* Cache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E28BC2725F4EED000A97820 /* XCRemoteSwiftPackageReference "Cache" */;
-			productName = Cache;
-		};
 		0E28BC2C25F4EF4D00A97820 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E28BC2B25F4EF4D00A97820 /* XCRemoteSwiftPackageReference "Kingfisher" */;
@@ -1491,6 +1494,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E28BC3325F4EFA400A97820 /* XCRemoteSwiftPackageReference "ImageScrollView" */;
 			productName = ImageScrollView;
+		};
+		0E671AC8260F394500590736 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E671AC7260F394500590736 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

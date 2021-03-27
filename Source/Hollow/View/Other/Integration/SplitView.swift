@@ -20,11 +20,10 @@ struct SplitView<Primary: View, Secondary: View, ViewModel>: UIViewControllerRep
         self.sharedModel = sharedModel
         self.modifiers = modifiers
     }
+    
     func makeUIViewController(context: Context) -> SplitViewController<Primary, Secondary, ViewModel> {
         let splitVC = SplitViewController(sharedModel: sharedModel, primaryView: primaryView, secondaryView: secondaryView)
-        if let modifiers = modifiers {
-            modifiers(splitVC)
-        }
+        modifiers?(splitVC)
         return splitVC
     }
     

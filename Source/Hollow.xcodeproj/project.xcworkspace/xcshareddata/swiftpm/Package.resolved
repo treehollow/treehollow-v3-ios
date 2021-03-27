@@ -21,11 +21,11 @@
       },
       {
         "package": "Cache",
-        "repositoryURL": "git://github.com/hyperoslo/Cache.git",
+        "repositoryURL": "git://github.com/liang2kl/Cache.git",
         "state": {
           "branch": null,
-          "revision": "c7f4d633049c3bd649a353bad36f6c17e9df085f",
-          "version": "6.0.0"
+          "revision": "520b1afd229e25051878c65ce1e780628ea43b4d",
+          "version": "6.0.1"
         }
       },
       {
