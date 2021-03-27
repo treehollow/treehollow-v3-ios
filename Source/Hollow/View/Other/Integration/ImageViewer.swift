@@ -64,7 +64,7 @@ struct ImageViewer: View {
         
         .modifier(GetSafeAreaInsets(insets: $safeAreaInsets))
         
-        .background(Color.black.ignoresSafeArea().opacity(max(1 - Double(dragRelativeOffset) * 2, 0)))
+        .background(Color.black.ignoresSafeArea().opacity(max(1 - Double(dragRelativeOffset) * (UIDevice.isPad ? 3 : 2), 0)))
         
         .actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("IMAGEVIEWER_ACTION_SHEET_TITLE"), buttons: [
@@ -161,7 +161,6 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
         let topTranslation = -contentOffset.y - contentInset.top
 //        var bottomTranslation = contentOffset.y + frameSize.height - contentInset.bottom - contentSize.height
         
-        print(leftTranslation, rightTranslation, topTranslation)
         var xOffset: CGFloat = 0
         var yOffset: CGFloat = 0
         if leftTranslation > 0 {

@@ -128,7 +128,7 @@ struct ContentSettingsView: View {
                         Text(tag)
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.tint)
+                            .foregroundColor(.uiColor(.systemFill))
                             .imageScale(.medium)
                             .onTapGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
                                 _ = withAnimation { blockedTags.remove(at: index) }
@@ -160,7 +160,7 @@ struct ContentSettingsView: View {
                             .disableAutocorrection(true)
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.uiColor(.systemFill))
+                            .foregroundColor(.tint)
                             .imageScale(.medium)
                             .onTapGesture { withAnimation {
                                 newTag = ""
@@ -170,9 +170,9 @@ struct ContentSettingsView: View {
                 }
                 
                 Button(action: { withAnimation { showTextField = true } }) {
-                    Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON") +
-                        Text("  ") +
-                        Text(Image(systemName: "plus"))
+                    Text(Image(systemName: "plus")) + Text("  ") +
+                        Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON")
+                        
                 }
                 .disabled(showTextField)
                 
