@@ -30,6 +30,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var image: UIImage?
     @Published var compressedImage: UIImage?
     var compressedImageBase64String: String?
+    var cancelledImages = [UIImage]()
 
     // MARK: Shared Variables
     @Published var errorMessage: (title: String, message: String)?

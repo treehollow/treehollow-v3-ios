@@ -24,6 +24,7 @@ struct SearchView: View {
     
     @Default(.searchHistory) var searchHistory
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.openURL) var openURL
 
     var body: some View {
         VStack {

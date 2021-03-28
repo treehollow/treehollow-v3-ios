@@ -16,9 +16,36 @@ protocol ImageCompressStore: class {
     var compressedImageBase64String: String? { get set }
     var errorMessage: (title: String, message: String)? { get set }
     var imageSizeInformation: String? { get set }
+    var cancelledImages: [UIImage] { get set }
 }
 
 extension ImageCompressStore {
+    func handleDrop(providers: [NSItemProvider]) -> Bool {
+        guard providers.count == 1 else { return false }
+        if let _ = providers.first?.loadObject(ofClass: UIImage.self, completionHandler: { image, error in
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.cancel()
+                    self.image = image as? UIImage
+                }
+            }
+        }) {
+            return true
+        }
+        return false
+    }
+    func cancel() {
+        if let image = self.image {
+            // To be checked when current compression
+            // is done.
+            self.cancelledImages.append(image)
+            self.image = nil
+        }
+        self.compressedImage = nil
+        self.compressedImageBase64String = nil
+        self.imageSizeInformation = nil
+    }
     func compressImage() {
         guard let image = image else { return }
         withAnimation { compressedImage = nil }
@@ -32,6 +59,12 @@ extension ImageCompressStore {
                 return
             }
             DispatchQueue.main.async { withAnimation {
+                for cancelledImageIndex in self.cancelledImages.indices {
+                    if self.cancelledImages[cancelledImageIndex].isEqual(image) {
+                        self.cancelledImages.remove(at: cancelledImageIndex)
+                        return
+                    }
+                }
                 self.image = nil
                 self.compressedImage = UIImage(data: result.jpegData)
                 self.imageSizeInformation = result.description

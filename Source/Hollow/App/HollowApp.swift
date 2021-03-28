@@ -38,8 +38,5 @@ struct HollowApp: App {
             // Set the color scheme when appear
             .onAppear { IntegrationUtilities.setCustomColorScheme() }
         }
-        WindowGroup {
-            Text("Hello, World!")
-        }
     }
 }

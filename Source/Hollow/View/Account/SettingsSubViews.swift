@@ -88,6 +88,7 @@ struct AppearanceSettingsView: View {
             }
         }
         .defaultListStyle()
+        .accentColor(.tint)
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_APPEARANCE_NAV_TITLE", comment: ""), displayMode: .inline)
     }
 }
@@ -185,6 +186,7 @@ struct ContentSettingsView: View {
             buttons: [.ok]
         )
         .defaultListStyle()
+        .accentColor(.tint)
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), displayMode: .inline)
     }
 }
@@ -228,6 +230,7 @@ struct PushNotificationSettingsView: View {
                 }
             }
         }
+        .accentColor(.tint)
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_NOTIFICATION_NAV_TITLE", comment: ""))
         .navigationBarItems(
@@ -344,8 +347,10 @@ struct OtherSettingsView: View {
     var body: some View {
         List {
             CacheManagementView()
-            OpenURLSettingsView()
             
+            #if !targetEnvironment(macCatalyst)
+            OpenURLSettingsView()
+            #endif
         }
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""))
@@ -373,6 +378,7 @@ struct OtherSettingsView: View {
                     .accentColor(.primary)
                 }
             }
+            .accentColor(.tint)
         }
     }
     
@@ -396,6 +402,7 @@ struct OtherSettingsView: View {
                 }
                 .disabled(viewModel.isClearing)
             }
+            .accentColor(.tint)
         }
         
         private class ViewModel: ObservableObject {
@@ -407,6 +414,7 @@ struct OtherSettingsView: View {
             }
             
             func getSize() {
+                cacheSize = nil
                 DispatchQueue.global(qos: .background).async {
                     KingfisherManager.shared.cache.calculateDiskStorageSize(completion: { result in
                         if let count = try? result.get() {
@@ -427,11 +435,12 @@ struct OtherSettingsView: View {
                 }
                 DispatchQueue.global(qos: .background).async {
                     PostCache().clear()
-                    KingfisherManager.shared.cache.clearCache()
-                    DispatchQueue.main.async { withAnimation {
-                        self.isClearing = false
-                        self.getSize()
-                    }}
+                    KingfisherManager.shared.cache.clearCache(completion: {
+                        DispatchQueue.main.async { withAnimation {
+                            self.isClearing = false
+                            self.getSize()
+                        }}
+                    })
                 }
             }
         }

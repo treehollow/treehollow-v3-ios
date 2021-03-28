@@ -103,5 +103,6 @@ struct HollowDetailView_iPad: View {
                 }
                 .padding(.leading)
             )
+
     }
 }

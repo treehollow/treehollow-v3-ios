@@ -16,7 +16,9 @@ struct Constants {
     struct Application {
         static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         static let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-        static let deviceInfo = DeviceModelUtilities.modelIdentifier + " (iOS " + UIDevice.current.systemVersion + ")"
+        static let deviceInfo = DeviceModelUtilities.modelIdentifier +
+            " (\(UIDevice.isMac ? "Mac Catalyst" : UIDevice.current.systemName) " +
+            UIDevice.current.systemVersion + ")"
         static let appLocalizedName =
             Bundle.main.localizedInfoDictionary?["CFBundleName"] as? String ??
             Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""

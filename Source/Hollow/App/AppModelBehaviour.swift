@@ -30,7 +30,12 @@ struct AppModelBehaviour: ViewModifier {
             // Handle entering main view
             .onChange(of: state.shouldShowMainView) { show in
                 withAnimation { appModel.isInMainView = show }
-                if !show { restore() }
+                if !show {
+                    #if targetEnvironment(macCatalyst)
+                    IntegrationUtilities.topSplitVC?.viewController(for: .primary)?.becomeFirstResponder()
+                    #endif
+                    restore()
+                }
             }
         
             // Handle expired state

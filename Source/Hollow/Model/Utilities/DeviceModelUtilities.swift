@@ -12,6 +12,8 @@ struct DeviceModelUtilities {
     static var modelIdentifier: String {
         #if targetEnvironment(simulator)
         return ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? ""
+        #elseif targetEnvironment(macCatalyst)
+        return "Mac"
         #else
         var systemInfo = utsname()
         uname(&systemInfo)

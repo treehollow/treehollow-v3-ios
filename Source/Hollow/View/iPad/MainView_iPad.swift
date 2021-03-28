@@ -49,7 +49,7 @@ struct MainView_iPad: View {
                     }
                 }
             }
-            .conditionalTint(ios: .hollowContentVoteGradient1, mac: colorScheme == .dark ? .uiColor(.systemFill) : .hollowContentVoteGradient1)
+            .conditionalTint(ios: .hollowContentVoteGradient1, mac: colorScheme == .dark ? .uiColor(.secondarySystemFill) : .hollowContentVoteGradient1)
             .conditionalRowHeight(rowHeight)
             .listStyle(SidebarListStyle())
             .navigationTitle(Defaults[.hollowConfig]?.name ?? Constants.Application.appLocalizedName)
@@ -105,6 +105,8 @@ struct MainView_iPad: View {
     class SharedModel: NSObject, ObservableObject, UINavigationControllerDelegate {
         @Published var page: MainView_iPad.Page = .timeline
         @Published var showCreatePost = false
+        // Toggle this to force update the view controller
+        @Published var shouldUpdate = false
         // Initialize time line view model here to avoid creating repeatedly
         let timelineViewModel = PostListRequestStore(type: .postList, options: .lazyLoad)
         // Initialize wander view model here to avoid creating repeatedly

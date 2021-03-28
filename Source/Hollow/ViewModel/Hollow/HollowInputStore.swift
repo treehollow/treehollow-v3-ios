@@ -26,6 +26,8 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     @Published var sending = false
     @Published var errorMessage: (title: String, message: String)?
     @Published var imageSizeInformation: String?
+    var cancelledImages = [UIImage]()
+
     @Published var appModelState = AppModelState()
     
     var cancellables = Set<AnyCancellable>()

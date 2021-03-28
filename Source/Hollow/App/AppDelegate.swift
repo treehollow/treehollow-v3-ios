@@ -13,7 +13,7 @@ import AppCenterAnalytics
 import AppCenterCrashes
 import Connectivity
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if !DEBUG
@@ -51,6 +51,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("Fail to register remote notification with error: \(error.localizedDescription)")
     }
     
+    #if targetEnvironment(macCatalyst)
+    override func buildMenu(with builder: UIMenuBuilder) {
+        builder.remove(menu: .file)
+        builder.remove(menu: .edit)
+        builder.remove(menu: .format)
+        builder.remove(menu: .help)
+        builder.remove(menu: .services)
+        builder.remove(menu: .toolbar)
+    }
+    #endif
 }
 
 // MARK: - Tree Hollow Configuration

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct HollowInputView: View {
     @ObservedObject var inputStore: HollowInputStore
@@ -82,6 +83,9 @@ struct HollowInputView: View {
             .background(Color.hollowCardBackground)
             .roundedCorner(12)
             .padding()
+        }
+        .onDrop(of: ["public.image"], isTargeted: nil) { providers in
+            return inputStore.handleDrop(providers: providers)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in withAnimation { keyboardShown = false }}

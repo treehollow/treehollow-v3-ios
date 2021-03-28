@@ -9,6 +9,11 @@
 import Foundation
 
 struct HollowConfig: Codable {
+    struct SearchPrompt: Codable {
+        var keywords: [String]
+        var description: String
+        var urls: [String : String]
+    }
     var name: String
     var recaptchaUrl: String
     var apiRootUrls: [String]
@@ -24,4 +29,5 @@ struct HollowConfig: Codable {
     var imgBaseUrls: [String]
     var websocketUrl: String
     var searchTrending: String
+    var searchPrompts: [SearchPrompt]
 }

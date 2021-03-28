@@ -87,6 +87,10 @@ struct HollowCommentInputView: View {
         .shadow(radius: 12)
         .animation(transitionAnimation)
         
+        .onDrop(of: ["public.image"], isTargeted: nil) { providers in
+            return store.handleDrop(providers: providers)
+        }
+        
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in withAnimation { store.objectWillChange.send() }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in withAnimation { keyboardShown = false }}

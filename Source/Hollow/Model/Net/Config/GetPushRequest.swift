@@ -50,7 +50,7 @@ struct GetPushRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (GetPushRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/security/get_push" + Constants.Net.urlSuffix
+        let urlPath = "v3/config/get_push" + Constants.Net.urlSuffix
         let headers: HTTPHeaders = [
             "TOKEN": self.configuration.token,
             "Accept": "application/json"

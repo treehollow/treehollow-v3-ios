@@ -22,15 +22,24 @@ struct WelcomeView: View {
                 PrimaryBackgroundShape()
                     .edgesIgnoringSafeArea(.all)
                     
-                    .frame(maxHeight: UIScreen.main.bounds.height * 0.23)
+                    .frame(maxHeight: UIScreen.main.bounds.height * (UIDevice.isPad ? 0.5 : 0.23))
                     .foregroundColor(.loginBackgroundPrimary)
+                Spacer()
+
                 VStack(spacing: 20) {
-                    Text("WELCOMEVIEW_SELECT_HOLLOW_TITLE")
-                        .dynamicFont(size: 22, weight: .semibold)
-                        .foregroundColor(Color("hollow.content.text.other"))
-                        .padding(.top, 70)
-                        .padding(.bottom, 20)
-                    
+
+                    HStack {
+                        Text("WELCOMEVIEW_SELECT_HOLLOW_TITLE")
+                            .dynamicFont(size: 22, weight: .semibold)
+                            .foregroundColor(Color("hollow.content.text.other"))
+
+                        if viewModel.isLoadingConfig {
+                            Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
+                        }
+                    }
+                    .padding(.top, 70)
+                    .padding(.bottom, 20)
+
                     let buttonGradient = LinearGradient.verticalSingleColor(color: Color("hollow.card.background.other"))
                     NavigationLink(
                         destination: LoginView(),
@@ -68,11 +77,7 @@ struct WelcomeView: View {
                         }, gradient: buttonGradient) {
                             selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: ""))
                         }}
-                    Spacer()
-                    if viewModel.isLoadingConfig {
-                        Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
-                            .padding()
-                    }
+                    
                     if appModel.tokenExpired {
                         Text("WELCOMVIEW_TOKEN_EXPIRED_LABEL")
                             .font(.footnote)
@@ -80,6 +85,9 @@ struct WelcomeView: View {
                             .layoutPriority(1)
                     }
                 }
+                .padding(.bottom)
+                .padding(.bottom)
+                .layoutPriority(1)
             }
             // Disable the buttons when loading config
             .disabled(viewModel.isLoadingConfig)
