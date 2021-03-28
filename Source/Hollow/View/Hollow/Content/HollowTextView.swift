@@ -40,48 +40,12 @@ struct HollowTextView: View {
     
     var body: some View {
         if inDetail {
-            Menu(content: {
-                if text != "" {
-                    Button(action: {
-                        UIPasteboard.general.string = text
-                    }, label: {
-                        Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
-                    })
-                    Divider()
-                }
-                if hasURL {
-                    let links = Array(text.links().compactMap({ URL(string: $0) }))
-                    if !links.isEmpty {
-                        Divider()
-                        ForEach(links, id: \.self) { link in
-                            Button(action: {
-                                let helper = OpenURLHelper(openURL: openURL)
-                                try? helper.tryOpen(link, method: Defaults[.openURLMethod])
-                            }) {
-                                Label(link.absoluteString, systemImage: "link")
-                            }
-                        }
-                        Divider()
-                    }
-                }
-                if hasCitedNumbers {
-                    let citedPosts = text.citationNumbers()
-                    if !citedPosts.isEmpty {
-                        ForEach(citedPosts, id: \.self) { post in
-                            let wrapper = PostDataWrapper.templatePost(for: post)
-                            Button(action: {
-                                IntegrationUtilities.conditionallyPresentView {
-                                    HollowDetailView.conditionalDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
-                                }
-                            }) {
-                                Label("#\(post.string)", systemImage: "text.quote")
-                            }
-                        }
-                        Divider()
-                    }
-                }
-                
-            }, label: { textView })
+            #if targetEnvironment(macCatalyst)
+            textView
+                .contextMenu { contextMenu }
+            #else
+            Menu(content: { contextMenu }, label: { textView })
+            #endif
         } else {
             textView
         }
@@ -99,6 +63,48 @@ struct HollowTextView: View {
             }
         }
         .modifier(TextModifier(inDetail: inDetail, compactLineLimit: compactLineLimit))
+    }
+    
+    @ViewBuilder var contextMenu: some View {
+        if text != "" {
+            Button(action: {
+                UIPasteboard.general.string = text
+            }, label: {
+                Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
+            })
+            Divider()
+        }
+        if hasURL {
+            let links = Array(text.links().compactMap({ URL(string: $0) }))
+            if !links.isEmpty {
+                Divider()
+                ForEach(links, id: \.self) { link in
+                    Button(action: {
+                        let helper = OpenURLHelper(openURL: openURL)
+                        try? helper.tryOpen(link, method: Defaults[.openURLMethod])
+                    }) {
+                        Label(link.absoluteString, systemImage: "link")
+                    }
+                }
+                Divider()
+            }
+        }
+        if hasCitedNumbers {
+            let citedPosts = text.citationNumbers()
+            if !citedPosts.isEmpty {
+                ForEach(citedPosts, id: \.self) { post in
+                    let wrapper = PostDataWrapper.templatePost(for: post)
+                    Button(action: {
+                        IntegrationUtilities.conditionallyPresentView {
+                            HollowDetailView.conditionalDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
+                        }
+                    }) {
+                        Label("#\(post.string)", systemImage: "text.quote")
+                    }
+                }
+                Divider()
+            }
+        }
     }
     
     struct TextModifier: ViewModifier {

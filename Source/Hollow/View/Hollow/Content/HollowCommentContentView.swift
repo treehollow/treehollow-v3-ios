@@ -93,7 +93,8 @@ struct HollowCommentContentView: View {
                                 minRatio: UIDevice.isPad ? 1.3 : 0.7
                             )
                             .roundedCorner(4)
-                            .padding(.bottom, 10)
+                            .padding(.top, UIDevice.isMac ? 10 : 0)
+                            .padding(.bottom, UIDevice.isMac ? 13 : 10)
                             .fixedSize(horizontal: false, vertical: true)
                         }
                         Group {

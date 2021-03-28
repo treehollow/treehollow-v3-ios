@@ -55,8 +55,8 @@ struct WanderView: View {
                                 })
                             }
                     }}
-                    .gridStyle(columns: 2, spacing: 10, animation: nil)
-                    .padding(.horizontal, 15)
+                    .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: nil)
+                    .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : 15)
                     .padding(.bottom, 70)
                     .background(Color.background)
                 }

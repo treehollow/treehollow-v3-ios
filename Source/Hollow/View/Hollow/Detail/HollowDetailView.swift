@@ -59,6 +59,16 @@ struct HollowDetailView: View {
                                     
                                     Divider()
                                     
+                                    Button(action: {
+                                        let inputStore = HollowInputStore(presented: .constant(true), selfDismiss: true, refreshHandler: nil)
+                                        inputStore.text = "#\(store.postDataWrapper.post.postId.string)\n"
+                                        IntegrationUtilities.presentView(modalInPresentation: true, content: { HollowInputView(inputStore: inputStore) })
+                                    }) {
+                                        Label("DETAIL_MENU_QUOTE_LABEL", systemImage: "text.quote")
+                                    }
+                                    
+                                    Divider()
+                                    
                                     ReportMenuContent(
                                         store: store,
                                         permissions: store.postDataWrapper.post.permissions,
@@ -77,7 +87,7 @@ struct HollowDetailView: View {
 //                .modifier(GetFrame(frame: $headerFrame))
                 // Contents
                 CustomScrollView { proxy in
-                    VStack(spacing: 13) {
+                    VStack(spacing: UIDevice.isMac ? 20 : 13) {
                         Spacer(minLength: 5)
                             .fixedSize()
                         Group { if store.noSuchPost {
@@ -137,6 +147,8 @@ struct HollowDetailView: View {
                             }
                     }
                     .padding(.horizontal)
+                    .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
+                    .padding(.top, UIDevice.isMac ? 10 : 0)
                     .background(Color.hollowDetailBackground)
                     .coordinateSpace(name: "detail.scrollview.content")
                 }

@@ -41,11 +41,12 @@ struct IntegrationUtilities {
         return UIApplication.shared.windows.filter {$0.isKeyWindow}.first
     }
     
-    static func presentView<Content: View>(presentationStyle: UIModalPresentationStyle = .formSheet, transitionStyle: UIModalTransitionStyle = .coverVertical, @ViewBuilder content: () -> Content) {
+    static func presentView<Content: View>(presentationStyle: UIModalPresentationStyle = .formSheet, transitionStyle: UIModalTransitionStyle = .coverVertical, modalInPresentation: Bool = false, @ViewBuilder content: () -> Content) {
         let vc = UIHostingController(rootView: content())
         vc.view.backgroundColor = nil
         vc.modalPresentationStyle = presentationStyle
         vc.modalTransitionStyle = transitionStyle
+        vc.isModalInPresentation = modalInPresentation
         guard let topVC = IntegrationUtilities.topViewController() else { return }
         topVC.present(vc, animated: true)
     }

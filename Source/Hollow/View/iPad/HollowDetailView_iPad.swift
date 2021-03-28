@@ -12,7 +12,7 @@ struct HollowDetailView_iPad: View {
     @ObservedObject var store: HollowDetailStore
     
     @ScaledMetric(wrappedValue: 33, relativeTo: .body) var avatarWidth: CGFloat
-    @ScaledMetric(wrappedValue: 16, relativeTo: .body) var body16: CGFloat
+    @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     
     var body: some View {
         HollowDetailView(store: store, showHeader: false)
@@ -50,7 +50,7 @@ struct HollowDetailView_iPad: View {
                     let postData = store.postDataWrapper.post
                     
                     if store.isLoading {
-                        Spinner(color: .hollowCardStarUnselected, desiredWidth: body16)
+                        Spinner(color: .hollowCardStarUnselected, desiredWidth: body17)
                     } else {
                         let attention = postData.attention
                         Button(action: { store.star(!attention) }) {
@@ -72,6 +72,16 @@ struct HollowDetailView_iPad: View {
                         .disabled(store.isLoading)
                         
                         Divider()
+                        
+                        Button(action: {
+                            let inputStore = HollowInputStore(presented: .constant(true), selfDismiss: true, refreshHandler: nil)
+                            inputStore.text = "#\(postData.postId.string)\n"
+                            IntegrationUtilities.presentView(modalInPresentation: true, content: { HollowInputView(inputStore: inputStore) })
+                        }) {
+                            Label("DETAIL_MENU_QUOTE_LABEL", systemImage: "text.quote")
+                        }
+                        
+                        Divider()
                         ReportMenuContent(
                             store: store,
                             permissions: store.postDataWrapper.post.permissions,
@@ -82,7 +92,7 @@ struct HollowDetailView_iPad: View {
                     }, label: {
                         Image(systemName: "ellipsis")
                             .rotationEffect(.degrees(90))
-                            .frame(width: body16, height: body16)
+                            .frame(width: body17, height: body17)
                             .padding(5)
                             .padding(.vertical, 5)
                             .padding(.leading, 2)

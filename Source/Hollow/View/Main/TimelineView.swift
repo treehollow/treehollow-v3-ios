@@ -26,6 +26,9 @@ struct TimelineView: View {
     @Default(.hiddenAnnouncement) var hiddenAnnouncement
     private var searchBarHeight: CGFloat { searchBarSize.height }
     
+    private let cardCornerRadius: CGFloat = UIDevice.isMac ? 17 : 13
+    private let cardPadding: CGFloat? = UIDevice.isMac ? 25 : nil
+    
     /// Maximum cards to be displayed none-lazily.
     private let maxNoneLazyCards = 2
     
@@ -74,10 +77,11 @@ struct TimelineView: View {
                             }
                             .trailing()
                         }
-                        .padding()
+                        .padding(.all, cardPadding)
                         .background(Color.hollowCardBackground)
-                        .roundedCorner(13)
-                        .padding([.bottom, .horizontal])
+                        .roundedCorner(cardCornerRadius)
+                        .padding(.horizontal, UIDevice.isMac ? 0 : nil)
+                        .defaultPadding(.bottom)
                     }
                     
                     PostListView(
@@ -86,9 +90,10 @@ struct TimelineView: View {
                         voteHandler: viewModel.vote,
                         starHandler: viewModel.star
                     )
-                    .padding(.horizontal)
+                    .padding(.horizontal, UIDevice.isMac ? 0 : nil)
 
                 }
+                .padding(UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
                 
                 // Observe the change of the offset when the user finish scrolling,
                 // then decide where to scroll based on the offset value.

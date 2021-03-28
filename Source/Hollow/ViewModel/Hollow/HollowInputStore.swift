@@ -13,6 +13,7 @@ import Defaults
 
 class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStore {
     var presented: Binding<Bool>
+    var selfDismiss: Bool
     var refreshHandler: (() -> Void)?
     
     @Published var text: String = ""
@@ -29,8 +30,9 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
     
     var cancellables = Set<AnyCancellable>()
     
-    init(presented: Binding<Bool>, refreshHandler: (() -> Void)?) {
+    init(presented: Binding<Bool>, selfDismiss: Bool = false, refreshHandler: (() -> Void)?) {
         self.presented = presented
+        self.selfDismiss = selfDismiss
         self.refreshHandler = refreshHandler
     }
     
@@ -52,7 +54,11 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
             }, receiveValue: { result in
                 self.refreshHandler?()
                 self.presented.wrappedValue = false
-                // TODO: Show detail or refresh
+                if self.selfDismiss {
+                    if let vc = IntegrationUtilities.topViewController() {
+                        vc.dismiss(animated: true)
+                    }
+                }
             })
             .store(in: &cancellables)
     }

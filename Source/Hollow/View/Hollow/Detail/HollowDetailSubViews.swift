@@ -61,7 +61,7 @@ extension HollowDetailView {
                     }
                 }
             )
-            HollowCommentContentView(commentData: bindingComment, compact: false, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, postHash: store.postDataWrapper.post.hash, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
+            HollowCommentContentView(commentData: bindingComment, compact: false, contentVerticalPadding: UIDevice.isMac ? 13 : 10, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, postHash: store.postDataWrapper.post.hash, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
                 .id(index)
                 .contentShape(RoundedRectangle(cornerRadius: 10))
                 .background(

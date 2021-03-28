@@ -185,6 +185,7 @@
 		0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
+		0ED82F0026103FB600A799C0 /* View+defaultPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
@@ -377,6 +378,7 @@
 		0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalSizeCategory.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultPadding.swift"; sourceTree = "<group>"; };
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListStore.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				0E6BE3B3260ED1EC00B529F7 /* View+noNavigationItems.swift */,
 				0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */,
 				0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */,
+				0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */,
 				0E415B5825CD772200351672 /* MyTextField.swift in Sources */,
 				0E415B5925CD772200351672 /* ExpandedButton.swift in Sources */,
+				0ED82F0026103FB600A799C0 /* View+defaultPadding.swift in Sources */,
 				0E906D2925DCEADD0034053C /* DefaultsKeys.swift in Sources */,
 				0E415B4225CD772200351672 /* ViewConstants.swift in Sources */,
 				0E415B5125CD772200351672 /* View+topBar.swift in Sources */,

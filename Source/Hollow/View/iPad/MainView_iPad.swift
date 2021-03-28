@@ -50,7 +50,7 @@ struct MainView_iPad: View {
                 }
             }
             .conditionalTint(ios: .hollowContentVoteGradient1, mac: colorScheme == .dark ? .uiColor(.systemFill) : .hollowContentVoteGradient1)
-            .environment(\.defaultMinListRowHeight, rowHeight)
+            .conditionalRowHeight(rowHeight)
             .listStyle(SidebarListStyle())
             .navigationTitle(Defaults[.hollowConfig]?.name ?? Constants.Application.appLocalizedName)
         },
@@ -189,6 +189,14 @@ private extension View {
         return self.accentColor(mac)
         #else
         return self.accentColor(ios)
+        #endif
+    }
+    
+    func conditionalRowHeight(_ height: CGFloat) -> some View {
+        #if targetEnvironment(macCatalyst)
+        return self.environment(\.defaultMinListRowHeight, height)
+        #else
+        return self
         #endif
     }
 }

@@ -58,7 +58,7 @@ struct SearchView: View {
                         }
                         .padding(.top)
                     }
-                    .padding(.horizontal)
+                    .defaultPadding(.horizontal)
                     .edgesIgnoringSafeArea(.bottom)
                     .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }
@@ -66,6 +66,7 @@ struct SearchView: View {
                 Spacer()
             }
         }
+        .padding(UIDevice.isMac && !showPost ? ViewConstants.macAdditionalPadding : 0)
         .background(Group { if UIDevice.isPad {
             Color.background.ignoresSafeArea()
         }})

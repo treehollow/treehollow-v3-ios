@@ -27,6 +27,9 @@ struct PostListView: View {
     var starHandler: (Bool, Int) -> Void
     private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
     
+    private let cardCornerRadius: CGFloat = UIDevice.isMac ? 17 : 13
+    private let cardPadding: CGFloat? = UIDevice.isMac ? 25 : nil
+    
     private func hideComments(for post: PostData) -> Bool {
         if revealFoldedTags { return false }
         if let tag = post.tag {
@@ -44,7 +47,7 @@ struct PostListView: View {
             let post = postDataWrapper.post
             let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
 
-            VStack(spacing: 15) {
+            VStack(spacing: UIDevice.isMac ? 25 : 15) {
                 // TODO: Star actions
                 HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, disableAttention: false)
                 HollowContentView(
@@ -72,16 +75,17 @@ struct PostListView: View {
                                 
                                 .foregroundColor(.uiColor(.secondaryLabel))
                                 .padding(.top, 12)
+                                .padding(.vertical, UIDevice.isMac ? 5 : 0)
                         }
                     }
                 }
             }
-            .padding(.bottom, post.replyNumber > shownReplyNumber ? 12 : nil)
-            .padding([.horizontal, .top])
+            .padding(.bottom, post.replyNumber > shownReplyNumber ? 12 : cardPadding)
+            .padding([.horizontal, .top], cardPadding)
             .background(Color.hollowCardBackground)
-            .roundedCorner(13)
+            .roundedCorner(cardCornerRadius)
             .fixedSize(horizontal: false, vertical: true)
-            .padding(.bottom)
+            .defaultPadding(.bottom)
             .onClickGesture {
                 guard let index = postDataWrappers.firstIndex(where: { $0.id == postDataWrapper.id }) else { return }
                 IntegrationUtilities.conditionallyPresentView(content: {

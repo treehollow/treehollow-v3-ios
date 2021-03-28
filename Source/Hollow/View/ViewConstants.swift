@@ -20,4 +20,6 @@ struct ViewConstants {
     static let avatarTintColors: [Color] = (1...16).map({ Color("avatar." + String($0)) })
     
     static let inputViewVStackSpacing: CGFloat = 12
+    
+    static let macAdditionalPadding: CGFloat = 30
 }

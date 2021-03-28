@@ -44,7 +44,10 @@ struct HollowInputView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                BarButton(action: { withAnimation { inputStore.presented.wrappedValue = false }}, systemImageName: "xmark")
+                BarButton(action: {
+                    withAnimation { inputStore.presented.wrappedValue = false }
+                    if inputStore.selfDismiss { dismissSelf() }
+                }, systemImageName: "xmark")
                 Spacer()
                 
                 let sendingText = NSLocalizedString("INPUTVIEW_SEND_BUTTON_SENDING", comment: "")
