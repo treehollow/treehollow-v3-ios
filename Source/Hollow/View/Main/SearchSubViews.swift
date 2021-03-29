@@ -11,7 +11,7 @@ import Defaults
 
 extension SearchView {
     func performSearch() {
-        func performRealSearch() {
+        let performRealSearch: () -> Void = {
             withAnimation {
                 hideKeyboard()
                 showPost = true
@@ -24,23 +24,23 @@ extension SearchView {
         guard let config = Defaults[.hollowConfig] else { return }
         var containsKeywords = false
         for prompt in config.searchPrompts {
-            if prompt.keywords.contains(where: { $0.contains(store.searchString) }) {
+            let contains = prompt.keywords.reduce(false, { $0 || store.searchString.contains($1) })
+            if contains {
                 containsKeywords = true
-                let buttons: [StyledAlertButton] = prompt.urls.map({ pair in
-                    let button = StyledAlertButton(text: pair.key, action: {
-                        guard let url = URL(string: pair.value) else { return }
+                let buttons: [StyledAlertButton] = prompt.buttons.map({ buttonInfo in
+                    let button = StyledAlertButton(text: buttonInfo.text, action: {
+                        guard let url = URL(string: buttonInfo.url) else { return }
                         let helper = OpenURLHelper(openURL: openURL)
                         try? helper.tryOpen(url, method: .universal)
                     })
                     return button
                 })
-                let alert = StyledAlert(presented: .constant(true), selfDismiss: true, title: prompt.description, buttons: buttons + [
+                presentStyledAlert(title: prompt.description, buttons: buttons + [
                     .init(text: NSLocalizedString("SEARCHVIEW_SEARCH_INTERFERENCE_CONTINUE_SEARCH", comment: ""), style: .cancel, action: performRealSearch),
                     .cancel
                 ])
-                presentView(style: .overFullScreen, transitionStyle: .crossDissolve, content: { alert })
+                break
             }
-            break
         }
         if !containsKeywords { performRealSearch() }
     }

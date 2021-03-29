@@ -10,9 +10,13 @@ import Foundation
 
 struct HollowConfig: Codable {
     struct SearchPrompt: Codable {
+        struct ButtonInfo: Codable {
+            var text: String
+            var url: String
+        }
         var keywords: [String]
         var description: String
-        var urls: [String : String]
+        var buttons: [ButtonInfo]
     }
     var name: String
     var recaptchaUrl: String

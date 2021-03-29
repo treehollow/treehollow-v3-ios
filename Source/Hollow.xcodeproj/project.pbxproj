@@ -180,6 +180,7 @@
 		0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B5625E7694400904296 /* InfoPlist.strings */; };
 		0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */; };
 		0EAC359025E8CCA7000E9F36 /* HollowDetailSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */; };
+		0EB45E3E261209A300409227 /* View+presentStyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB45E3D261209A300409227 /* View+presentStyledAlert.swift */; };
 		0EB4F9A225F37A0E00BDAFF1 /* Text+highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */; };
 		0EB4F9A625F3837C00BDAFF1 /* Array+sortedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */; };
 		0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */; };
@@ -373,6 +374,7 @@
 		0EAA1B5725E7694400904296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+revertColorScheme.swift"; sourceTree = "<group>"; };
 		0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailSubViews.swift; sourceTree = "<group>"; };
+		0EB45E3D261209A300409227 /* View+presentStyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+presentStyledAlert.swift"; sourceTree = "<group>"; };
 		0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+highlight.swift"; sourceTree = "<group>"; };
 		0EB4F9A525F3837C00BDAFF1 /* Array+sortedRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+sortedRange.swift"; sourceTree = "<group>"; };
 		0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalSizeCategory.swift"; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */,
 				0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */,
 				0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */,
+				0EB45E3D261209A300409227 /* View+presentStyledAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1152,6 +1155,7 @@
 				0E906D0925DCEADD0034053C /* LoginRequest.swift in Sources */,
 				0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */,
 				0E906D1A25DCEADD0034053C /* Comment.swift in Sources */,
+				0EB45E3E261209A300409227 /* View+presentStyledAlert.swift in Sources */,
 				0E415B4C25CD772200351672 /* ViewLayouts.swift in Sources */,
 				0E3E694E260DFCE8005E8DA2 /* Text+dateText.swift in Sources */,
 				0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */,
@@ -1325,7 +1329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1350,7 +1354,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
