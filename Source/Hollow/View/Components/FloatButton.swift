@@ -29,6 +29,7 @@ struct FloatButton: View {
         }
         .frame(width: body50, height: body50)
         .clipShape(Circle())
+        .shadow(radius: 5)
         .opacity(isEnabled ? 1 : 0.5)
     }
 }

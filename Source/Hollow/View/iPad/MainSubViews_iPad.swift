@@ -18,13 +18,7 @@ extension MainView_iPad {
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_TIMELINE", displayMode: .inline)
                 .overlay(overlayFloatButton)
-                .navigationBarItems(leading: EmptyView(), trailing: Group {
-                    #if targetEnvironment(macCatalyst)
-                    Button(action: { sharedModel.timelineViewModel.refresh(finshHandler: {}) }) {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    #endif
-                })
+                .refreshNavigationItem(refreshAction: { sharedModel.timelineViewModel.refresh(finshHandler: {}) })
                 .onAppear {
                     if sharedModel.timelineViewModel.posts.isEmpty {
                         sharedModel.timelineViewModel.requestPosts(at: 1)
@@ -36,13 +30,7 @@ extension MainView_iPad {
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_WANDER", displayMode: .inline)
                 .overlay(overlayFloatButton)
-                .navigationBarItems(leading: EmptyView(), trailing: Group {
-                    #if targetEnvironment(macCatalyst)
-                    Button(action: { sharedModel.wanderViewModel.refresh(finshHandler: {}) }) {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    #endif
-                })
+                .refreshNavigationItem(refreshAction: { sharedModel.wanderViewModel.refresh(finshHandler: {}) })
                 .onAppear {
                     if sharedModel.wanderViewModel.posts.isEmpty {
                         sharedModel.wanderViewModel.requestPosts(at: 1)
@@ -67,7 +55,7 @@ extension MainView_iPad {
                 .padding(.leading)
                 .edgesIgnoringSafeArea(.bottom)
                 .background(Color.background.ignoresSafeArea())
-                .noNavigationItems()
+                .refreshNavigationItem(refreshAction: { sharedModel.messageStore.requestMessages() })
                 .onAppear {
                     if sharedModel.messageStore.messages.isEmpty {
                         sharedModel.messageStore.requestMessages()
@@ -130,7 +118,7 @@ extension MainView_iPad {
                         }
                     }
                 }
-                .noNavigationItems()
+                .refreshNavigationItem(refreshAction: { favouriteStore.refresh(finshHandler: {}) })
                 .onAppear {
                     isSearching = false
                     if favouriteStore.posts.isEmpty {

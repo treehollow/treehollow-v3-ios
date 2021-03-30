@@ -35,6 +35,8 @@
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
 		0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSize.swift */; };
 		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
+		0E386D8E2613101B000568B6 /* View+refreshNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E386D8D2613101B000568B6 /* View+refreshNavigationItem.swift */; };
+		0E386D91261312F7000568B6 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E386D90261312F7000568B6 /* ImageScrollView.swift */; };
 		0E3AC40025F7778400A4278A /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */; };
 		0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */; };
 		0E3E694B260DF2C8005E8DA2 /* HollowDetailView_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */; };
@@ -221,6 +223,8 @@
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
+		0E386D8D2613101B000568B6 /* View+refreshNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+refreshNavigationItem.swift"; sourceTree = "<group>"; };
+		0E386D90261312F7000568B6 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		0E3AC3FF25F7778400A4278A /* AvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGenerator.swift; sourceTree = "<group>"; };
 		0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderInfoView.swift; sourceTree = "<group>"; };
 		0E3E694A260DF2C8005E8DA2 /* HollowDetailView_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailView_iPad.swift; sourceTree = "<group>"; };
@@ -494,6 +498,7 @@
 		0E415AEC25CD772200351672 /* Integration */ = {
 			isa = PBXGroup;
 			children = (
+				0E386D90261312F7000568B6 /* ImageScrollView.swift */,
 				0E415AED25CD772200351672 /* CustomTabView.swift */,
 				0E415AEF25CD772200351672 /* CustomScrollView.swift */,
 				0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */,
@@ -536,6 +541,7 @@
 				0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */,
 				0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */,
 				0EB45E3D261209A300409227 /* View+presentStyledAlert.swift */,
+				0E386D8D2613101B000568B6 /* View+refreshNavigationItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1056,6 +1062,7 @@
 				0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */,
 				0E415B5E25CD772200351672 /* HollowCommentInputView.swift in Sources */,
 				0E906D0725DCEADD0034053C /* GetPushRequest.swift in Sources */,
+				0E386D91261312F7000568B6 /* ImageScrollView.swift in Sources */,
 				0E415B7325CD772200351672 /* SearchView.swift in Sources */,
 				0E906D1925DCEADD0034053C /* RequestError.swift in Sources */,
 				0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */,
@@ -1149,6 +1156,7 @@
 				0E3E695B260E166D005E8DA2 /* HollowDateFormatter.swift in Sources */,
 				0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */,
 				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,
+				0E386D8E2613101B000568B6 /* View+refreshNavigationItem.swift in Sources */,
 				0E415B6825CD772200351672 /* HollowTextView.swift in Sources */,
 				0E6EF31B25F9DFDE001293FE /* View+dynamicFont.swift in Sources */,
 				0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */,
@@ -1329,7 +1337,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1354,7 +1362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1449,7 +1457,7 @@
 			repositoryURL = "git://github.com/liang2kl/ImageScrollView.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.4;
+				minimumVersion = 2.0.5;
 			};
 		};
 		0E671AC7260F394500590736 /* XCRemoteSwiftPackageReference "Cache" */ = {

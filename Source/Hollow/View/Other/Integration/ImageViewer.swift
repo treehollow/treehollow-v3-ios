@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ImageScrollView
+//import ImageScrollView
 import Combine
 
 struct ImageViewer: View {
@@ -39,6 +39,19 @@ struct ImageViewer: View {
             })
 //            .ignoresSafeArea()
             VStack(spacing: 0) {
+                #if targetEnvironment(macCatalyst)
+                Button(action: dismiss) {
+                    Text("IMAGEVIEWER_DONE_BUTTON")
+                        .dynamicFont(size: 16, weight: .semibold)
+                        .foregroundColor(.primary)
+                        .padding(.horizontal, 13)
+                        .padding(.vertical, 6)
+                        .blurBackground()
+                        .roundedCorner(8)
+                }
+                .padding(.horizontal)
+                .trailing()
+                #endif
                 
                 Spacer()
                 
@@ -214,8 +227,8 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
             didPan = true
         }
         
-        func imageScrollViewDidChangeOrientation(imageScrollView: ImageScrollView) {
-            
+        func imageScrollViewDidChangeOrientation(imageScrollView: ImageScrollView) -> Bool {
+            return UIDevice.isPad
         }
         
         func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

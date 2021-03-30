@@ -309,10 +309,10 @@
 "REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "Are you sure to delete?";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "Are you sure to delete?";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "Enter the reason for the report.";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "Delete";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "Report (Delete)";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_DELETE" = "Delete";

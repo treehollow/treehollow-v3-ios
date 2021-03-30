@@ -300,10 +300,10 @@
 "REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "确定要删除？";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "确定要删除？";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "请输入举报理由。";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "删除";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "举报（删除）";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_DELETE" = "撤回";
