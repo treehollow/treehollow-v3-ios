@@ -411,10 +411,14 @@
 "TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "图片";
 
 /* No comment provided by engineer. */
-"TIMELINE_CARD_COMMENTS_HAIYOU" = "还有";
+"TIMELINE_CARD_COMMENTS_COUNT_PREFIX" = "还有";
+
+"TIMELINE_CARD_COMMENTS_COUNT_PREFIX_TOTAL" = "共";
 
 /* No comment provided by engineer. */
-"TIMELINE_CARD_COMMENTS_TIAOPINGLUN" = "条评论";
+"TIMELINE_CARD_COMMENTS_COUNT_SUFFIX" = "条评论";
+
+"TIMELINE_CARD_COMMENTS_COUNT_SUFFIX_TOTAL" = "条评论";
 
 /* No comment provided by engineer. */
 "TIMELINE_SEARCH_BAR_PLACEHOLDER" = "搜索";

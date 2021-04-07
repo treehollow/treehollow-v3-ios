@@ -38,6 +38,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var isSendingComment = false
     @Published var appModelState = AppModelState()
     
+    var bindingCancellable: AnyCancellable?
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: -
@@ -51,10 +52,9 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
         // Subscribe the changes in post data in the detail store
         // and update the upstream data source. This will be the
         // source of truth when the detail view exists.
-        $postDataWrapper
+        bindingCancellable = $postDataWrapper
             .receive(on: DispatchQueue.main)
             .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
-            .store(in: &cancellables)
 
         // When reconnect to the internet, fetch again.
         ConnectivityPublisher.networkConnectedStatusPublisher

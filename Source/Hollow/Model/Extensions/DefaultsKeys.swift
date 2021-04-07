@@ -14,7 +14,6 @@ import SwiftUI
 /// Store the keys for `Defaults` here, declaring them static const member of `Defaults.Keys`
 /// For example:
 /// `static let imageBaseURL = Key<String?>("image.base.url")`
-/// Remember to register the initial value before any call to fetch the data.
 
 // MARK: - Model Data
 extension Defaults.Keys {

@@ -46,7 +46,8 @@ struct PostListView: View {
         ForEach(postDataWrappers) { postDataWrapper in
             let post = postDataWrapper.post
             let shownReplyNumber = min(postDataWrapper.post.comments.count, 3)
-
+            
+            let hideComments = self.hideComments(for: post)
             VStack(spacing: UIDevice.isMac ? 25 : 15) {
                 // TODO: Star actions
                 HollowHeaderView(postData: post, compact: false, starAction: { starHandler($0, post.postId) }, disableAttention: false)
@@ -57,7 +58,7 @@ struct PostListView: View {
                 )
                 // Check if comments exist to avoid additional spacing
                 
-                if post.replyNumber > 0, !hideComments(for: post) {
+                if post.replyNumber > 0, !hideComments {
                     VStack(spacing: 0) {
                         ForEach(post.comments.prefix(3)) { commentData in
                             HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0, postHash: 0)
@@ -67,9 +68,13 @@ struct PostListView: View {
                                 Divider()
                                     .padding(.horizontal)
                             }
-                            // Localize the text based on chinese expression
-                            let text1 = NSLocalizedString("TIMELINE_CARD_COMMENTS_HAIYOU", comment: "")
-                            let text2 = NSLocalizedString("TIMELINE_CARD_COMMENTS_TIAOPINGLUN", comment: "")
+
+                            let text1 = shownReplyNumber == 0 ?
+                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_PREFIX_TOTAL", comment: "") :
+                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_PREFIX", comment: "")
+                            let text2 = shownReplyNumber == 0 ?
+                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_SUFFIX_TOTAL", comment: "") :
+                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_SUFFIX", comment: "")
                             Text(text1 + "\(post.replyNumber - shownReplyNumber)" + text2)
                                 .dynamicFont(size: 15).lineSpacing(post.comments.count == 0 ? 0 : 3)
                                 
@@ -80,7 +85,7 @@ struct PostListView: View {
                     }
                 }
             }
-            .padding(.bottom, post.replyNumber > shownReplyNumber ? 12 : cardPadding)
+            .padding(.bottom, post.replyNumber > shownReplyNumber && !hideComments ? 12 : cardPadding)
             .padding([.horizontal, .top], cardPadding)
             .background(Color.hollowCardBackground)
             .roundedCorner(cardCornerRadius)

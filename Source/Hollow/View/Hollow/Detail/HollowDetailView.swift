@@ -208,6 +208,10 @@ struct HollowDetailView: View {
                 }
             }
         }
+        
+        .onDisappear {
+            store.bindingCancellable?.cancel()
+        }
 
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         .modifier(AppModelBehaviour(state: store.appModelState))

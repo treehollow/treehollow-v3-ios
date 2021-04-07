@@ -188,6 +188,13 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         self.posts[index].post.hollowImage?.image = image
     }
     
+    private func sendImageLoadingError(_ error: String?, to postId: Int) {
+        guard let index = posts.firstIndex(where: { $0 .post.postId == postId }) else { return }
+        withAnimation {
+            self.posts[index].post.hollowImage?.loadingError = error
+        }
+    }
+    
     // MARK: - Load Cited Posts
     private func fetchCitedPosts() {
         let postsWrapperWithCitation = posts.filter { $0.citedPostID != nil }

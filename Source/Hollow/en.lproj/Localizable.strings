@@ -435,10 +435,14 @@
 "TEXTVIEW_PHOTO_PLACEHOLDER_TEXT" = "Image";
 
 /* No comment provided by engineer. */
-"TIMELINE_CARD_COMMENTS_HAIYOU" = "";
+"TIMELINE_CARD_COMMENTS_COUNT_PREFIX" = "";
+
+"TIMELINE_CARD_COMMENTS_COUNT_PREFIX_TOTAL" = "";
 
 /* No comment provided by engineer. */
-"TIMELINE_CARD_COMMENTS_TIAOPINGLUN" = " more comments";
+"TIMELINE_CARD_COMMENTS_COUNT_SUFFIX" = " more comments";
+
+"TIMELINE_CARD_COMMENTS_COUNT_SUFFIX_TOTAL" = " comments";
 
 /* No comment provided by engineer. */
 "TIMELINE_SEARCH_BAR_PLACEHOLDER" = "Search";

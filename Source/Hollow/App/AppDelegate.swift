@@ -123,8 +123,12 @@ extension AppDelegate {
 // MARK: - User Notifications
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let content = response.notification.request.content
-        if let type = content.userInfo["type"] as? Int, type == 1 {
+        let request = response.notification.request
+        let content = request.content
+        if let _ = content.userInfo["delete"] {
+            let identifier = request.identifier
+            center.removeDeliveredNotifications(withIdentifiers: [identifier])
+        } else if let type = content.userInfo["type"] as? Int, type == 1 {
             // System message for type 1
             let messageView = MessageView(presented: .constant(true), page: .message, selfDismiss: true)
             IntegrationUtilities.presentView(content: { messageView })
