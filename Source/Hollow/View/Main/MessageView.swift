@@ -91,7 +91,8 @@ extension MessageView {
                         postDataWrappers: $postListStore.posts,
                         detailStore: $detailStore,
                         voteHandler: postListStore.vote,
-                        starHandler: postListStore.star
+                        starHandler: postListStore.star,
+                        imageReloadHandler: { _ in postListStore.fetchImages() }
                     )
                 }
             }

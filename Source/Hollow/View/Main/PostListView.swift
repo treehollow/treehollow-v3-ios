@@ -25,6 +25,7 @@ struct PostListView: View {
     }
     var voteHandler: (Int, String) -> Void
     var starHandler: (Bool, Int) -> Void
+    var imageReloadHandler: ((HollowImage) -> Void)?
     private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
     
     private let cardCornerRadius: CGFloat = UIDevice.isMac ? 17 : 13
@@ -54,7 +55,8 @@ struct PostListView: View {
                 HollowContentView(
                     postDataWrapper: postDataWrapper,
                     options: contentViewDisplayOptions,
-                    voteHandler: { option in voteHandler(post.postId, option) }
+                    voteHandler: { option in voteHandler(post.postId, option) },
+                    imageReloadHandler: imageReloadHandler
                 )
                 // Check if comments exist to avoid additional spacing
                 

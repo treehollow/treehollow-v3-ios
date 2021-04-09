@@ -149,6 +149,7 @@ extension MainView {
                 NavigationView {
                     SettingsView(presented: $accountPresented)
                 }
+                .accentColor(.tint)
             })
 
         }

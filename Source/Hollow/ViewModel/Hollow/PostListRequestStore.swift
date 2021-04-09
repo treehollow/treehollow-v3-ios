@@ -158,7 +158,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     }
     
     // MARK: - Load Images
-    private func fetchImages() {
+    func fetchImages() {
         let postsWithNoImages: [PostData] = posts.compactMap {
             guard let _ = $0.post.hollowImage?.imageURL,
                   $0.post.hollowImage?.image == nil else { return nil }
@@ -172,10 +172,12 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
         
         FetchImageRequest.publisher(for: requests, retries: 2)?
             .sinkOnMainThread(receiveValue: { index, output in
+                let postId = postsWithNoImages[index].postId
                 switch output {
-                case .failure: break // handle error
+                case .failure(let error):
+                    self.sendImageLoadingError(error.description, to: postId)
                 case .success(let image):
-                    self.assignImage(image, to: postsWithNoImages[index].postId)
+                    self.assignImage(image, to: postId)
                 }
             })
             .store(in: &cancellables)

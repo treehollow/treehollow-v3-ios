@@ -75,7 +75,11 @@ extension DeviceListView {
                     // device in device list.
                     if !isCurrentDevice {
                         MyButton(
-                            action: { alertPresented = true },
+                            action: {
+                                // Not presenting alert as there're bugs with this.
+                                if UIDevice.isMac { logoutAction(device.deviceUUID) }
+                                else { alertPresented = true }
+                            },
                             gradient: .vertical(gradient: .button),
                             transitionAnimation: .default) {
                             Group {

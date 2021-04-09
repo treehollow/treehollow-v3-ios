@@ -24,7 +24,14 @@ struct AccountInfoView: View {
                 )
             }
             Section {
-                Button("ACCOUNTVIEW_LOGOUT_BUTTON", action: { logoutAlertPresented = true })
+                Button("ACCOUNTVIEW_LOGOUT_BUTTON", action: {
+                    #if targetEnvironment(macCatalyst)
+                    // Not presenting alert as there're bugs with this.
+                    viewModel.logout()
+                    #else
+                    logoutAlertPresented = true
+                    #endif
+                })
                     .foregroundColor(.red)
             }
         }

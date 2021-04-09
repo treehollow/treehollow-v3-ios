@@ -88,7 +88,8 @@ struct TimelineView: View {
                         postDataWrappers: $viewModel.posts,
                         detailStore: $detailStore,
                         voteHandler: viewModel.vote,
-                        starHandler: viewModel.star
+                        starHandler: viewModel.star,
+                        imageReloadHandler: { _ in viewModel.fetchImages() }
                     )
                     .padding(.horizontal, UIDevice.isMac ? 0 : nil)
 
