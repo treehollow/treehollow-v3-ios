@@ -106,6 +106,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
             })
             .store(in: &cancellables)
         
+        // Load the image and quote first
         loadComponents()
     }
     
@@ -318,7 +319,6 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
                 case .finished:
                     self.requestDetail()
                 case .failure(let error):
-                    // TODO: Handle user deletion
                     self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
                 }
             }, receiveValue: { _ in })

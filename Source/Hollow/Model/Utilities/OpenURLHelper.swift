@@ -45,12 +45,13 @@ struct OpenURLHelper {
     private func open(_ url: URL, method: OpenMethod) {
         #if targetEnvironment(macCatalyst)
         openURL(url)
-        #endif
+        #else
         switch method {
         case .inApp:
             IntegrationUtilities.presentSafariVC(url: url)
         case .universal:
             openURL(url)
         }
+        #endif
     }
 }

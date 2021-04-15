@@ -13,6 +13,6 @@ extension ConnectivityPublisher {
         .removeDuplicates(by: { $0 == $1 })
         .dropFirst()
     
-    static let networkChangePublisher = ConnectivityPublisher()
+    private static let networkChangePublisher = ConnectivityPublisher()
         .map { $0.status.isConnected }
 }

@@ -43,11 +43,3 @@ struct HollowDateFormatter {
     }
     
 }
-
-extension HollowDateFormatter {
-    static func publisher(for date: Date) -> AnyPublisher<String, Never> {
-        return Timer.timeChangePublisher
-            .map({ _ in HollowDateFormatter(date: date).formattedString() })
-            .eraseToAnyPublisher()
-    }
-}

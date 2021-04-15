@@ -140,7 +140,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print(notification.request.content.userInfo)
+
         if notification.request.content.userInfo["delete"] == nil {
             completionHandler([.banner, .sound, .list])
         } else {
