@@ -124,6 +124,8 @@
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_PHOTO_BUTTON" = "保存至系统相册";
 
+"IMAGEVIEW_SAVE_PHOTO_BUTTON_MAC" = "保存图像";
+
 /* No comment provided by engineer. */
 "IMAGEVIEWER_ACTION_SHEET_TITLE" = "图像";
 

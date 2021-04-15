@@ -133,6 +133,8 @@
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_PHOTO_BUTTON" = "Save to Photos";
 
+"IMAGEVIEW_SAVE_PHOTO_BUTTON_MAC" = "Save Image";
+
 /* No comment provided by engineer. */
 "IMAGEVIEWER_ACTION_SHEET_TITLE" = "Image";
 

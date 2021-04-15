@@ -22,7 +22,7 @@ struct WelcomeView: View {
                 PrimaryBackgroundShape()
                     .edgesIgnoringSafeArea(.all)
                     
-                    .frame(maxHeight: UIScreen.main.bounds.height * (UIDevice.isPad ? 0.5 : 0.23))
+                    .frame(maxHeight: UIScreen.main.bounds.height * (UIDevice.isPad ? 0.5 : 0.35))
                     .foregroundColor(.loginBackgroundPrimary)
                 Spacer()
 
@@ -54,18 +54,18 @@ struct WelcomeView: View {
                             // We are not localizing this
                             selectHollowButton(text: "T大树洞")
                         }}
-                    NavigationLink(
-                        destination: LoginView(),
-                        tag: HollowType.pku.rawValue,
-                        selection: $viewModel.hollowSelection) {
-                        MyButton(action: {
-                            Defaults[.hollowType] = .pku
-                            // Set to nil before request to avoid conflict
-                            Defaults[.hollowConfig] = nil
-                            viewModel.requestConfig(hollowType: .pku)
-                        }, gradient: buttonGradient) {
-                            selectHollowButton(text: "未名树洞")
-                        }}
+//                    NavigationLink(
+//                        destination: LoginView(),
+//                        tag: HollowType.pku.rawValue,
+//                        selection: $viewModel.hollowSelection) {
+//                        MyButton(action: {
+//                            Defaults[.hollowType] = .pku
+//                            // Set to nil before request to avoid conflict
+//                            Defaults[.hollowConfig] = nil
+//                            viewModel.requestConfig(hollowType: .pku)
+//                        }, gradient: buttonGradient) {
+//                            selectHollowButton(text: "未名树洞")
+//                        }}
                     
                     NavigationLink(
                         destination: CustomConfigConfigurationView(),

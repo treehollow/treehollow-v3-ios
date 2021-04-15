@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct HollowImageView: View {
     var hollowImage: HollowImage?
@@ -15,6 +16,7 @@ struct HollowImageView: View {
     @State private var showSavePhotoAlert = false
     @State private var savePhotoError: String? = nil
     @State private var showImageViewer = false
+    @State private var showFileExporter = false
     
     /// Handler to reload the current image if error occurs.
     ///
@@ -43,9 +45,7 @@ struct HollowImageView: View {
                             Image(uiImage: image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .contextMenu(ContextMenu(menuItems: {
-                                    contextMenu(image: image)
-                                }))
+                                .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                         } else {
                             ZStack {
                                 Image(uiImage: image)
@@ -54,9 +54,7 @@ struct HollowImageView: View {
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .contextMenu(ContextMenu(menuItems: {
-                                        contextMenu(image: image)
-                                    }))
+                                    .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                             }
                             .compositingGroup()
                             .aspectRatio(aspectRatio, contentMode: .fill)
@@ -108,15 +106,4 @@ struct HollowImageView: View {
             }
         }
     }
-    
-    func contextMenu(image: UIImage) -> some View {
-            Button(action:{
-                ImageSaver(finishHandler: { error in
-                    showSavePhotoAlert = true
-                    savePhotoError = error?.localizedDescription
-                }).saveImage(image)
-            }) {
-                Label("IMAGEVIEW_SAVE_PHOTO_BUTTON", systemImage: "square.and.arrow.down")
-            }
-        }
 }
