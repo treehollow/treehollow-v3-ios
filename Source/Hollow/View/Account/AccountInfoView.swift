@@ -10,7 +10,7 @@ import Combine
 import Defaults
 
 struct AccountInfoView: View {
-    @ObservedObject var viewModel = AccountInfoViewModel()
+    @ObservedObject var viewModel = AccountInfoStore()
     @State private var logoutAlertPresented = false
     var body: some View {
         List {
@@ -59,7 +59,7 @@ struct AccountInfoView: View {
 
 extension AccountInfoView {
     struct ChangePasswordView: View {
-        @EnvironmentObject var viewModel: AccountInfoViewModel
+        @EnvironmentObject var viewModel: AccountInfoStore
         @State private var email: String = ""
         @State private var originalPassword = ""
         @State private var newPassword = ""

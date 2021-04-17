@@ -63,13 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     #endif
 }
 
-// MARK: - Tree Hollow Configuration
+// MARK: - Tree Hollow Configuration & Setup
 extension AppDelegate {
     func setupRemoteNotifications(_ application: UIApplication) {
         // Request notification access
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [.badge, .alert, .sound]) { granted, error in
+        let authorizationOptions = Constants.Application.requestedNotificationOptions
+        center.requestAuthorization(options: authorizationOptions) { granted, error in
             guard granted else { return }
             // Register for APN
             DispatchQueue.main.async {

@@ -143,7 +143,7 @@ extension MainView {
                     }
                 }
                 .dynamicFont(size: 20, weight: .medium)
-                .foregroundColor(.mainBarButton)
+                .foregroundColor(.hollowContentText)
             }
             .fullScreenCover(isPresented: $accountPresented, content: {
                 NavigationView {
@@ -158,7 +158,7 @@ extension MainView {
             return Text(text)
                 .fontWeight(.heavy)
                 .dynamicFont(size: selected ? 22 : 18)
-                .foregroundColor(selected ? .mainPageSelected : .mainPageUnselected)
+                .foregroundColor(selected ? .hollowContentText : .mainPageUnselected)
                 .lineLimit(1)
         }
     }

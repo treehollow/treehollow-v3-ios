@@ -14,6 +14,8 @@ fileprivate let saveButtonLabel = UIDevice.isMac ?
     NSLocalizedString("IMAGEVIEW_SAVE_PHOTO_BUTTON", comment: "")
 
 extension View {
+    /// Store the given image. On iOS, the image will be stored in the photo library; on macOS, a file
+    /// exporter will appear.
     func imageSaver(image: UIImage, showSavePhotoAlert: Binding<Bool>, savePhotoError: Binding<String?>) -> some View {
         return self.modifier(ImageSaverModifier(image: image, showSavePhotoAlert: showSavePhotoAlert, savePhotoError: savePhotoError))
     }

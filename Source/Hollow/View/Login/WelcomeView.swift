@@ -14,7 +14,7 @@ import Defaults
 struct WelcomeView: View {
     @EnvironmentObject var appModel: AppModel
     
-    @ObservedObject var viewModel: Welcome = .init()
+    @ObservedObject var viewModel: WelcomeStore = .init()
 
     var body: some View {
         NavigationView {
@@ -119,7 +119,7 @@ struct WelcomeView: View {
     }
     
     struct CustomConfigConfigurationView: View {
-        @ObservedObject var viewModel: Welcome = .init()
+        @ObservedObject var viewModel: WelcomeStore = .init()
         #if DEBUG
         @State var text: String = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/config.txt"
         #else

@@ -1,5 +1,5 @@
 //
-//  Welcome.swift
+//  WelcomeStore.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/1/28.
@@ -12,7 +12,7 @@ import SwiftUI
 import Defaults
 
 /// View model for `WelcomeView`
-class Welcome: ObservableObject {
+class WelcomeStore: ObservableObject {
     @Published var hollowSelection: Int? = nil
     @Published var isLoadingConfig = false
     @Published var errorMessage: (title: String, message: String)? = nil

@@ -18,6 +18,7 @@ struct AppModelBehaviour: ViewModifier {
     // Fetch the app model in the environment inside
     // this modifier to get rid of doing so in every view.
     @EnvironmentObject var appModel: AppModel
+    
     var state: AppModelState
     
     func body(content: Content) -> some View {
@@ -30,12 +31,7 @@ struct AppModelBehaviour: ViewModifier {
             // Handle entering main view
             .onChange(of: state.shouldShowMainView) { show in
                 withAnimation { appModel.isInMainView = show }
-                if !show {
-                    #if targetEnvironment(macCatalyst)
-                    IntegrationUtilities.topSplitVC?.viewController(for: .primary)?.becomeFirstResponder()
-                    #endif
-                    restore()
-                }
+                if !show { restore() }
             }
         
             // Handle expired state

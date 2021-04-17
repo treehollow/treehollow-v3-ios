@@ -38,19 +38,18 @@ struct AttentionListRequest: DefaultRequest {
         let transformer: (PostListRequestResult) -> AttentionListRequestResultData? = { result in
             guard let resultData = result.data else { return nil }
             var postWrappers = [PostDataWrapper]()
-            postWrappers = resultData.map{ post in
-                
+            postWrappers = resultData.map ({ post in
                 // process comments of current post
                 
                 var commentData = [CommentData]()
                 if let comments = result.comments, let commentsOfPost = comments[post.pid.string]{
                     if let comments = commentsOfPost {
-                        commentData = comments.map{ $0.toCommentData() }
+                        commentData = comments.map { $0.toCommentData() }
                     }
                 }
                 
                 return PostDataWrapper(post: post.toPostData(comments: commentData))
-            }
+            })
             return postWrappers
         }
         

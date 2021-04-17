@@ -14,16 +14,6 @@ struct GetPushRequestConfiguration {
     var token: String
 }
 
-/*
- {
- "code":0,
- "data": {
- "push_system_msg": 1,
- "push_reply_me": 1,
- "push_favorited": 0,
- }
- }
- */
 struct GetPushRequestResult: DefaultRequestResult {
     struct PushNotificationResult: Codable {
         var pushSystemMsg: Int

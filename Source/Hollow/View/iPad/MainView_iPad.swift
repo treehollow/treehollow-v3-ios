@@ -84,7 +84,7 @@ struct MainView_iPad: View {
             titleBar?.titleVisibility = .hidden
             titleBar?.toolbar = nil
             #endif
-            guard let splitVC = IntegrationUtilities.getSplitViewController() else { return }
+            guard let splitVC = IntegrationUtilities.topSplitVC else { return }
             if let primaryNavVC = splitVC.viewController(for: .primary)?.parent as? UINavigationController {
                 DispatchQueue.main.async {
                     primaryNavVC.popToRootViewController(animated: false)

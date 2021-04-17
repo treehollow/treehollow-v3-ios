@@ -7,15 +7,26 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ImagePickerModifier: ViewModifier {
     @Binding var presented: Bool
     @Binding var image: UIImage?
     
-    func body(content: Content) -> some View {
+    @ViewBuilder func body(content: Content) -> some View {
+        #if targetEnvironment(macCatalyst)
+        content.fileImporter(isPresented: $presented, allowedContentTypes: [.image], onCompletion: { result in
+            switch result {
+            case .success(let url):
+                image = UIImage(contentsOfFile: url.path)
+            default: break
+            }
+        })
+        #else
         content.sheet(isPresented: $presented) {
             ImagePicker(presented: $presented, image: $image)
         }
+        #endif
     }
 }
 

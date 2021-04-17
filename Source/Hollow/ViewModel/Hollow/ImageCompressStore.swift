@@ -35,7 +35,8 @@ extension ImageCompressStore {
         }
         return false
     }
-    func cancel() {
+    
+    private func cancel() {
         if let image = self.image {
             // To be checked when current compression
             // is done.
@@ -46,6 +47,7 @@ extension ImageCompressStore {
         self.compressedImageBase64String = nil
         self.imageSizeInformation = nil
     }
+    
     func compressImage() {
         guard let image = image else { return }
         withAnimation { compressedImage = nil }

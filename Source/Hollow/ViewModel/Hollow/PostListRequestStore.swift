@@ -63,7 +63,11 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
             configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
         case .search, .searchTrending:
             let startTimestamp = startDate?.startOfDay.timeIntervalSince1970.int
-            let endTimestamp = endDate?.endOfDay.timeIntervalSince1970.int
+            var endTimestamp: Int? = nil
+            if let offsetTimestamp = endDate?.endOfDay.timeIntervalSince1970.int {
+                // Offset back. See `DateExtensions.swift`
+                endTimestamp = offsetTimestamp + 60
+            }
             configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, afterTimestamp: startTimestamp, beforeTimestamp: endTimestamp, includeComment: !excludeComments))
         case .wander:
             configuration = .wander(.init(apiRoot: config.apiRootUrls, token: token, page: page))

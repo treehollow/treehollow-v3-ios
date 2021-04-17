@@ -68,15 +68,15 @@ extension DefaultRequest {
                         let result = try jsonDecoder.decode(Result.self, from: data)
                         if result.code >= 0 {
                             // result code >= 0 valid!
-                                if let resultData = transformer(result) {
-                                    completion(resultData, nil)
-                                    // The current request has finished successfully
-                                    completion(nil, .loadingCompleted)
-                                    return
-                                } else {
-                                    completion(nil, .unknown)
-                                    return
-                                }
+                            if let resultData = transformer(result) {
+                                completion(resultData, nil)
+                                // The current request has finished successfully
+                                completion(nil, .loadingCompleted)
+                                return
+                            } else {
+                                completion(nil, .unknown)
+                                return
+                            }
                             
                         } else {
                             let error = DefaultRequestError(errorCode: result.code, description: result.msg)
@@ -90,7 +90,7 @@ extension DefaultRequest {
                     }
                     
                 case let .failure(error):
-        
+                    
                     if let errorCode = error.responseCode, errorCode == 413 {
                         completion(nil, .fileTooLarge)
                         return
@@ -99,9 +99,9 @@ extension DefaultRequest {
                         return
                     }
                 }
-
+                
             }
         }
     }
-
+    
 }

@@ -59,25 +59,28 @@ struct PostDetailRequest: DefaultRequest {
         
         let transformer: (Result) -> ResultData? = { result in
             var postWrapper: PostDataWrapper
-
+            
             guard let post = result.post else { return nil }
             
             if result.code == 1, let cachedPost = postCache.getPost(postId: configuration.postId) {
+                // The post has been cached and there's no update.
+                
                 // Update the color data in case of the change of the preset
                 var comments = cachedPost.comments
                 for index in comments.indices {
                     comments[index].updateHashAndColor()
                 }
                 // The only thing that is certain to remain unchanged is the comment data,
-                // thus we need to integrate the latest result
+                // thus we need to integrate other part of the latest result.
                 let postData = post.toPostData(comments: comments)
                 postWrapper = PostDataWrapper(post: postData)
-                completion(postWrapper, nil)
+                
             } else {
+                // The post has not been cached or there's update.
+                
                 let comments = result.data?.compactMap({ $0.toCommentData() }) ?? []
                 let postData = post.toPostData(comments: comments)
                 postWrapper = PostDataWrapper(post: postData)
-                completion(postWrapper, nil)
                 
                 // Only update time stamp when requesting comments
                 if configuration.includeComments {
@@ -89,13 +92,14 @@ struct PostDetailRequest: DefaultRequest {
             return postWrapper
         }
         
-        performRequest(urlBase: configuration.apiRoot,
-                       urlPath: urlPath,
-                       parameters: parameters,
-                       headers: headers,
-                       method: .get,
-                       transformer: transformer,
-                       completion: completion
+        performRequest(
+            urlBase: configuration.apiRoot,
+            urlPath: urlPath,
+            parameters: parameters,
+            headers: headers,
+            method: .get,
+            transformer: transformer,
+            completion: completion
         )
     }
 }

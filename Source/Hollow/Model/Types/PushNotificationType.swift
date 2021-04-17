@@ -14,6 +14,7 @@ struct PushNotificationType: Codable, Equatable {
     var pushReplyMe: Bool = true
     var pushFavorited: Bool = false
     
+    // Helper enum used to enumerate through all the cases.
     enum Enumeration: Int, CaseIterable, Identifiable, CustomStringConvertible {
         case pushSystemMsg
         case pushReplyMe

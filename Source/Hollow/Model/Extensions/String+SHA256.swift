@@ -4,7 +4,7 @@
 //
 //  Created by aliceinhollow on 3/2/2021.
 //  Copyright © 2021 treehollow. All rights reserved.
-// from `https://www.hackingwithswift.com/example-code/cryptokit/how-to-calculate-the-sha-hash-of-a-string-or-data-instance`
+//
 
 import Foundation
 import CryptoKit

@@ -9,6 +9,8 @@
 import SwiftUI
 
 extension View {
+    /// Apply a swipe gesture and a moving transition to the view to enable the capacity to
+    /// dismiss a view with a swiping gesture.
     func swipeToDismiss(presented: Binding<Bool>) -> some View {
         self.modifier(SwipeToDismiss(presented: presented))
     }

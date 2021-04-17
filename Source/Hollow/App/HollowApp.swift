@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import Defaults
-import Connectivity
 
 @main
 struct HollowApp: App {
@@ -22,7 +20,7 @@ struct HollowApp: App {
         WindowGroup {
             Group {
                 if appModel.isInMainView {
-                    if appModel.isPad {
+                    if UIDevice.isPad {
                         MainView_iPad()
                     } else {
                         MainView()

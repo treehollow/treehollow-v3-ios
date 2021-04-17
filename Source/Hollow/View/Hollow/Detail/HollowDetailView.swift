@@ -147,13 +147,13 @@ struct HollowDetailView: View {
                 .padding(.horizontal)
                 .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
                 .padding(.top, UIDevice.isMac ? 10 : 0)
-                .background(Color.hollowDetailBackground)
+                .background(Color.hollowCardBackground)
                 .coordinateSpace(name: "detail.scrollview.content")
             }
             .edgesIgnoringSafeArea(.bottom)
             .disabled(store.noSuchPost)
         }
-        .background(Color.hollowDetailBackground.ignoresSafeArea())
+        .background(Color.hollowCardBackground.ignoresSafeArea())
 
         .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
             FloatButton(

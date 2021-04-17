@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// A workround to use split view without the limited generic NavigationView.
 struct SplitView<Primary: View, Secondary: View, ViewModel>: UIViewControllerRepresentable {
     var sharedModel: ViewModel
     var primaryView: (ViewModel) -> Primary

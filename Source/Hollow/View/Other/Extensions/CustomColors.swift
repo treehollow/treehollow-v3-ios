@@ -11,7 +11,7 @@ import Defaults
 
 typealias ColorSet = HollowType
 
-/// Color extension for customized colors.
+/// Color extension for customized colors, adapting different themes.
 extension Color {
     
     static func customColor(prefix: String, colorSet: ColorSet? = nil) -> Color {
@@ -36,21 +36,9 @@ extension Color {
 
     static var mainPageUnselected: Color { customColor(prefix: "main.page.unselected") }
     
-    static var mainPageSelected: Color { hollowContentText }
-    
-    static var mainSearchBarBackground: Color = hollowCardBackground
-    
-    static var mainSearchBarText: Color { mainPageUnselected }
-    
-    static var mainBarButton: Color { mainPageSelected }
-    
-    static var hollowDetailBackground: Color { hollowCardBackground }
-    
     static var buttonGradient1: Color { customColor(prefix: "button.gradient.1") }
     
     static var buttonGradient2: Color { customColor(prefix: "button.gradient.2") }
-
-    static var plainButton: Color { hollowContentText }
     
     static var searchFill: Color { customColor(prefix: "search.fill") }
     

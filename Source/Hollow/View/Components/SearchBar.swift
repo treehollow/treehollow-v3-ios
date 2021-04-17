@@ -24,12 +24,12 @@ struct SearchBar: View {
                 Spacer()
             }
             .dynamicFont(size: 17)
-            .foregroundColor(.mainSearchBarText)
+            .foregroundColor(.mainPageUnselected)
             .padding(.vertical, 7)
             .padding(.horizontal, 15)
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color.mainSearchBarBackground.opacity(0.6))
+                    .foregroundColor(Color.hollowCardBackground.opacity(0.6))
             )
             
         }

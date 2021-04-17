@@ -28,7 +28,7 @@
 		0E28BC3525F4EFA400A97820 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E28BC3425F4EFA400A97820 /* ImageScrollView */; };
 		0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28BC4125F5E29D00A97820 /* CustomColorScheme.swift */; };
 		0E28BC4525F5F8A000A97820 /* View+defaultListStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */; };
-		0E28BC4A25F60EB400A97820 /* AccountInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28BC4925F60EB400A97820 /* AccountInfoViewModel.swift */; };
+		0E28BC4A25F60EB400A97820 /* AccountInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28BC4925F60EB400A97820 /* AccountInfoStore.swift */; };
 		0E294C0D25E2570D00A9875A /* HollowDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */; };
 		0E294E9725F1F448001E4C08 /* ReportRequestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */; };
 		0E294E9C25F2405C001E4C08 /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */; };
@@ -61,7 +61,6 @@
 		0E415B5125CD772200351672 /* View+topBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AFB25CD772200351672 /* View+topBar.swift */; };
 		0E415B5225CD772200351672 /* CustomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AFC25CD772200351672 /* CustomGradient.swift */; };
 		0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AFE25CD772200351672 /* ImageButtonModifier.swift */; };
-		0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AFF25CD772200351672 /* View+makeDivider.swift */; };
 		0E415B5725CD772200351672 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0225CD772200351672 /* Spinner.swift */; };
 		0E415B5825CD772200351672 /* MyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0325CD772200351672 /* MyTextField.swift */; };
 		0E415B5925CD772200351672 /* ExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B0425CD772200351672 /* ExpandedButton.swift */; };
@@ -91,7 +90,7 @@
 		0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3125CD772200351672 /* WelcomeView.swift */; };
 		0E415B8025CD772200351672 /* PostListRequestStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3C25CD772200351672 /* PostListRequestStore.swift */; };
 		0E415B8325CD772200351672 /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4025CD772200351672 /* LoginStore.swift */; };
-		0E415B8425CD772200351672 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* Welcome.swift */; };
+		0E415B8425CD772200351672 /* WelcomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B4125CD772200351672 /* WelcomeStore.swift */; };
 		0E415B9B25CD93C000351672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B9A25CD93C000351672 /* AppDelegate.swift */; };
 		0E4786C825E3A93E0004F8FA /* RequestPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */; };
 		0E4786D925E3E1870004F8FA /* FetchImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */; };
@@ -228,7 +227,7 @@
 		0E1DD7DE25DA4E5C000D27BA /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
 		0E28BC4125F5E29D00A97820 /* CustomColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorScheme.swift; sourceTree = "<group>"; };
 		0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultListStyle.swift"; sourceTree = "<group>"; };
-		0E28BC4925F60EB400A97820 /* AccountInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewModel.swift; sourceTree = "<group>"; };
+		0E28BC4925F60EB400A97820 /* AccountInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoStore.swift; sourceTree = "<group>"; };
 		0E294C0C25E2570D00A9875A /* HollowDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailStore.swift; sourceTree = "<group>"; };
 		0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRequestGroup.swift; sourceTree = "<group>"; };
 		0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorner.swift"; sourceTree = "<group>"; };
@@ -263,7 +262,6 @@
 		0E415AFB25CD772200351672 /* View+topBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+topBar.swift"; sourceTree = "<group>"; };
 		0E415AFC25CD772200351672 /* CustomGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradient.swift; sourceTree = "<group>"; };
 		0E415AFE25CD772200351672 /* ImageButtonModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageButtonModifier.swift; sourceTree = "<group>"; };
-		0E415AFF25CD772200351672 /* View+makeDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+makeDivider.swift"; sourceTree = "<group>"; };
 		0E415B0225CD772200351672 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		0E415B0325CD772200351672 /* MyTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTextField.swift; sourceTree = "<group>"; };
 		0E415B0425CD772200351672 /* ExpandedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedButton.swift; sourceTree = "<group>"; };
@@ -293,7 +291,7 @@
 		0E415B3125CD772200351672 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0E415B3C25CD772200351672 /* PostListRequestStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequestStore.swift; sourceTree = "<group>"; };
 		0E415B4025CD772200351672 /* LoginStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
-		0E415B4125CD772200351672 /* Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		0E415B4125CD772200351672 /* WelcomeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeStore.swift; sourceTree = "<group>"; };
 		0E415B9A25CD93C000351672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4284BC25CE2A96008F134A /* Hollow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hollow.entitlements; sourceTree = "<group>"; };
 		0E4786C725E3A93E0004F8FA /* RequestPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPublisher.swift; sourceTree = "<group>"; };
@@ -527,7 +525,6 @@
 				0E415AF925CD772200351672 /* CustomColors.swift */,
 				0E415AFB25CD772200351672 /* View+topBar.swift */,
 				0E415AFC25CD772200351672 /* CustomGradient.swift */,
-				0E415AFF25CD772200351672 /* View+makeDivider.swift */,
 				0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */,
 				0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */,
 				0EAA1B4A25E6562B00904296 /* View+flash.swift */,
@@ -686,7 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				0E415B4025CD772200351672 /* LoginStore.swift */,
-				0E415B4125CD772200351672 /* Welcome.swift */,
+				0E415B4125CD772200351672 /* WelcomeStore.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -706,6 +703,8 @@
 			isa = PBXGroup;
 			children = (
 				0E4786D825E3E1870004F8FA /* FetchImageRequest.swift */,
+				0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */,
+				0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -754,7 +753,6 @@
 				0E906CBA25DCEADC0034053C /* Contents */,
 				0E906CD425DCEADC0034053C /* Edit */,
 				0E906CD925DCEADC0034053C /* Send */,
-				0EFB54F225E92685001BC98A /* Groups */,
 				0E4786D725E3E11B0004F8FA /* Other */,
 			);
 			path = Net;
@@ -901,18 +899,9 @@
 			children = (
 				0EA2D50B25EF8125003D539E /* MessageStore.swift */,
 				0EDA262A25D22CBF00B67292 /* DeviceListStore.swift */,
-				0E28BC4925F60EB400A97820 /* AccountInfoViewModel.swift */,
+				0E28BC4925F60EB400A97820 /* AccountInfoStore.swift */,
 			);
 			path = Account;
-			sourceTree = "<group>";
-		};
-		0EFB54F225E92685001BC98A /* Groups */ = {
-			isa = PBXGroup;
-			children = (
-				0EFB54F325E926A1001BC98A /* PostListRequestGroup.swift */,
-				0E294E9625F1F448001E4C08 /* ReportRequestGroup.swift */,
-			);
-			path = Groups;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1026,7 +1015,6 @@
 				0E906CFF25DCEADD0034053C /* PostListRequest.swift in Sources */,
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
 				0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */,
-				0E415B5525CD772200351672 /* View+makeDivider.swift in Sources */,
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
 				0E415B8325CD772200351672 /* LoginStore.swift in Sources */,
@@ -1073,7 +1061,7 @@
 				0E1DD7D925DA4B91000D27BA /* AppModelBehaviour.swift in Sources */,
 				0E906D0125DCEADD0034053C /* AttentionListRequest.swift in Sources */,
 				0E1DD7D625D983BE000D27BA /* Avatar.swift in Sources */,
-				0E28BC4A25F60EB400A97820 /* AccountInfoViewModel.swift in Sources */,
+				0E28BC4A25F60EB400A97820 /* AccountInfoStore.swift in Sources */,
 				0E8CFBB8260B2E700050FDD2 /* HollowConfig.swift in Sources */,
 				0EAC358B25E8BE92000E9F36 /* View+revertColorScheme.swift in Sources */,
 				0EFB54EC25E90B55001BC98A /* ConnectivityStatus+isConnected.swift in Sources */,
@@ -1180,7 +1168,7 @@
 				0E415B6D25CD772200351672 /* HollowDetailView.swift in Sources */,
 				0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */,
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
-				0E415B8425CD772200351672 /* Welcome.swift in Sources */,
+				0E415B8425CD772200351672 /* WelcomeStore.swift in Sources */,
 				0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */,
 				0EDA262B25D22CBF00B67292 /* DeviceListStore.swift in Sources */,
 				0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */,
@@ -1342,7 +1330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1351,7 +1339,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -1368,7 +1356,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1377,7 +1365,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;

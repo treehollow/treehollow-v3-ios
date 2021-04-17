@@ -23,7 +23,6 @@ enum LogoutRequestResultData: Int {
     case success = 0
 }
 
-/// logout request same as devicetermination
 struct LogoutRequest: DefaultRequest {
     typealias Configuration = LogoutRequestConfiguration
     typealias Result = LogoutRequestResult

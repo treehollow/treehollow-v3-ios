@@ -609,3 +609,7 @@
 "DETAIL_MENU_QUOTE_LABEL" = "Quote in New Post";
 
 "SEARCHVIEW_SEARCH_INTERFERENCE_CONTINUE_SEARCH" = "Continue Search";
+
+"IMAGE_COMPRESSOR_IMAGE_TOO_LARGE" = "Image Too Large";
+
+"IMAGE_COMPRESSOR_IMAGE_TOO_LARGE_DESCRIPTION" = "The image cannot be compressed. Please select another image.";

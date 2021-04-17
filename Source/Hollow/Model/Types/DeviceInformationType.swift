@@ -18,7 +18,7 @@ struct DeviceInformationType: Codable {
         
         var description: String {
             switch self {
-            // TODO: Localization
+            // No Localization
             case .web: return "Web"
             case .android: return "Android"
             case .ios: return "iOS"

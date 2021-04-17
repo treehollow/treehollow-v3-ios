@@ -1,5 +1,5 @@
 //
-//  AccountInfoViewModel.swift
+//  AccountInfoStore.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/3/8.
@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 import Defaults
 
-class AccountInfoViewModel: ObservableObject, AppModelEnvironment {
+class AccountInfoStore: ObservableObject, AppModelEnvironment {
     @Published var appModelState = AppModelState()
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false

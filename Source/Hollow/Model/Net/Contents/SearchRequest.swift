@@ -15,8 +15,7 @@ struct SearchRequestConfiguration {
     var page: Int
     var afterTimestamp: Int?
     var beforeTimestamp: Int?
-    var includeComment: Bool = true
-    // TODO: Order
+    var includeComment: Bool
 }
 
 /// The result type is `PostListRequestResult`

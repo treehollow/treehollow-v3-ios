@@ -12,16 +12,7 @@ struct DeviceListRequestConfiguration {
     var token: String
     var apiRoot: [String]
 }
-/*
- "code":0,
- "data": [{
- "device_uuid": "2a6f855e-8f8d-4795-818b-50402dbcc60f",
- "login_date": "1926-08-17",
- "device_info": "HUAWEI P40, Android 11",
- "device_type": 0(0 for Web, 1 for Android, 2 for iOS)
- },..],
- "this_device": "uuid"
- */
+
 struct DeviceListRequestResult: DefaultRequestResult {
     struct DeviceListResult: Codable {
         var deviceUuid: String

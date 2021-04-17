@@ -53,8 +53,6 @@ struct PostData: Identifiable, Codable {
     }
 }
 
-typealias CitedPostData = PostData
-
 /// Wrapper to use when initializing a view for a post.
 struct PostDataWrapper: Identifiable {
     // Identifiable protocol

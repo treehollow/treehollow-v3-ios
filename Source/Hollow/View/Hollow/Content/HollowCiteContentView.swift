@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HollowCiteContentView: View {
     var placeholderPostId: Int
-    var postData: CitedPostData?
+    var postData: PostData?
     
     var displayedText: String {
         if let postData = self.postData {
