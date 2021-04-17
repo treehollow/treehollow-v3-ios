@@ -1,4 +1,4 @@
-# /Model/Net
+# Net
 
 The requests to communicate with backend and return the data received.
 
@@ -31,14 +31,13 @@ To better reuse our code, some additional protocols and types are defined to imp
 - `protocol DefaultRequestResult` - request result with `code` and `msg` constrains
 - `enum DefaultRequestError` - the default request error, covering common error cases
 
-Documentation for these protocols and types is available in the source code.
+### Publisher
 
-> Use `enum` for error, and use `struct` or `enum` for other types.
+Each request can access a publisher by its `publisher` computed property. The types that comforms to `Request` protocol can generate a combined publisher with multiple requests. For more, see [Request+publisher.swift](Request+publisher.swift).
 
 ## Naming Principle
 
 - Each file should be named  `XXXRequest`, which represents a single request.
-
 - Each `XXXRequest` file might consist of some of the four  `struct` below, with following format:
     - `XXXRequestConfiguration`
     - `XXXRequestResult`

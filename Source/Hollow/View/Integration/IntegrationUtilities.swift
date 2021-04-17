@@ -58,6 +58,12 @@ struct IntegrationUtilities {
         return nil
     }
     
+    /// Push the given view to the secondary side of the split vc.
+    static func pushViewOnSecondary<Content: View>(@ViewBuilder content: () -> Content) {
+        guard let navVC = getSecondaryNavigationVC() else { return }
+        pushView(navigationVC: navVC, content: content)
+    }
+
     /// On iPad, push the view on the secondary side of the split vc, otherwise present it modally.
     static func conditionallyPresentView<Content: View>(@ViewBuilder content: () -> Content) {
         if UIDevice.isPad {
@@ -97,11 +103,5 @@ extension IntegrationUtilities {
         let vc = UIHostingController(rootView: content())
         vc.view.backgroundColor = nil
         navigationVC.pushViewController(vc, animated: true)
-    }
-    
-    /// Push the given view to the secondary side of the split vc.
-    static private func pushViewOnSecondary<Content: View>(@ViewBuilder content: () -> Content) {
-        guard let navVC = getSecondaryNavigationVC() else { return }
-        pushView(navigationVC: navVC, content: content)
     }
 }
