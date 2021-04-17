@@ -32,6 +32,10 @@ git clone https://github.com/treehollow/treehollow-v3-ios.git
 3. 点击项目，在 TARGETS - Hollow - Signing & Capabilities 的 `Team` 中选择你的开发者账号
 4. 编译、运行
 
+## 文档
+
+有关应用架构的说明，参见 [architecture.md](Documentation/architecture.md)
+
 ## 贡献
 
 可以通过 Pull Request 和 Issues 参与到树洞 iOS 客户端的开发中。
@@ -40,7 +44,7 @@ git clone https://github.com/treehollow/treehollow-v3-ios.git
 
 涉及到代码修改的贡献应注意：
 
-- 遵循 Swift 的 [`API Design Guidelines`](https://swift.org/documentation/api-design-guidelines/)
+- 遵循 Swift 的 [API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
 - 在关键代码处添加必要的英文注释
 
 ## 开源许可
