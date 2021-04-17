@@ -40,28 +40,22 @@ protocol DefaultRequest: Request where Error == DefaultRequestError, Result: Def
 
 ```swift
 internal func performRequest(
-        urlBase: [String],
-        urlPath: String,
-        parameters: [String : Any]? = nil,
-        headers: HTTPHeaders? = nil,
-        method: HTTPMethod,
-        transformer: @escaping (Result) -> ResultData?,
-        completion: @escaping (ResultData?, DefaultRequestError?) -> Void
-    )
+    urlBase: [String],
+    urlPath: String,
+    parameters: [String : Any]? = nil,
+    headers: HTTPHeaders? = nil,
+    method: HTTPMethod,
+    transformer: @escaping (Result) -> ResultData?,
+    completion: @escaping (ResultData?, DefaultRequestError?) -> Void
+)
 ```
 
 使用 `protocol` 的优势在这里体现了出来：我们可以对协议相关的函数进行默认的实现，而无需知道类型的具体信息。在具体的类中，只需要提供以上参数，即可完成请求。例如，在 `LoginRequest` 中：
 
 ```swift
 func performRequest(completion: @escaping (LoginRequestResultData?, Error?) -> Void) {
-    let parameters = [
-            "email": self.configuration.email,
-            "password_hashed": self.configuration.password.sha256().sha256(),
-            "device_type": self.configuration.deviceType.string,
-            "device_info": self.configuration.deviceInfo,
-            "ios_device_token": self.configuration.deviceToken,
-        ]
-    let urlPath = "v3/security/login/login" + Constants.URLConstant.urlSuffix
+    let parameters = [...]
+    let urlPath = ...
     performRequest(
         urlBase: self.configuration.apiRoot,
         urlPath: urlPath,
@@ -93,29 +87,7 @@ var publisher: RequestPublisher<Self> {
 而针对多个同时进行的异步事件（如加载图片、加载引用），可以通过 `Request` 协议的一个默认实现来获取一个整合的 publisher：
 
 ```swift
-static func publisher(for requests: [Self], retries: Int = 0) -> AnyPublisher<(Int, OptionalOutput<ResultData, Error>), Never>? {
-    typealias OutputWrapper = OptionalOutput<ResultData, Error>
-    guard requests.count > 0 else { return nil }
-    let pubilsher = requests[0].publisher
-        .retry(retries)
-        .map { OutputWrapper.success($0) }
-        .catch { Just(.failure($0)) }
-        .map { (0, $0) }
-        .eraseToAnyPublisher()
-    if requests.count == 1 { return pubilsher }
-    var mergedPublisher = pubilsher
-    for index in 1..<requests.count {
-        mergedPublisher = mergedPublisher
-            .merge(with: requests[index].publisher
-                    .retry(retries)
-                    .map { OutputWrapper.success($0) }
-                    .catch { Just(.failure($0)) }
-                    .map { (index, $0) }
-            )
-            .eraseToAnyPublisher()
-    }
-    return mergedPublisher
-}
+static func publisher(for requests: [Self], retries: Int = 0) -> AnyPublisher<(Int, OptionalOutput<ResultData, Error>), Never>?
 ```
 
 其中，`OptionalOutput` 是一个以成功时的结果与失败时的错误作为 associated value 的 `enum`：
@@ -147,11 +119,9 @@ PostDetailRequest.publisher(for: requests)?
     .store(...)
 ```
 
-这在传统的依赖回调函数的代码中的实现是非常繁琐的。
-
 ## 处理相同结果的请求
 
-在树洞后端的 API 中，有一些 API 的结果是一样的（因此 `ResultData` 和 `Error` 的类型是一样的，对外接口除了 `Configuration` 也是一样的，处理其结果的 View Model 的结构也是类似的。为了重用 View Model 的代码，我们为这些 Request 制定了一个新的 Request，其 `Configuration` 类型为：
+在树洞后端的 API 中，有一些 API 的结果是一样的（因此 `ResultData` 和 `Error` 的类型是一样的，对外接口除了 `Configuration` 也是一样的，处理其结果的 View Model 的结构也是类似的）。为了重用 View Model 的代码，我们为这些 Request 制定了一个新的 Request，其 `Configuration` 类型为一个 `enum`。例如，`PostListRequestGroupConfiguration`：
 
 ```swift
 enum PostListRequestGroupConfiguration {

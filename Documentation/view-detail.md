@@ -2,7 +2,7 @@
 
 ## 数据流
 
-### 所有 View 共享数据的实现
+### 所有 View 共享数据
 
 由于采用了 SwiftUI 的生命周期（[App essentials in SwiftUI](https://developer.apple.com/videos/play/wwdc2020/10037/)），我们在 `HollowApp` 中初始化一个唯一的、在所有 View 中共享的对象 `appModel`，其类型 `AppModel` 中储存需要在应用内共享的数据（如：用户的 token 是否过期）：
 
@@ -39,7 +39,7 @@ struct AppModelBehaviour: ViewModifier {
 
 ![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggQlRcbnYxW1ZpZXddXG52bVtWaWV3IE1vZGVsXVxuZW8oW0Vudmlyb25tZW50IE9iamVjdF0pXG5cbnYxIC0tLT4gfFVwZGF0ZXwgZW9cbnYxIC0tPiB8T2JzZXJ2ZXwgdm1cblxuXG5zdWJncmFwaCBFbnZpcm9ubWVudFxuXHRlb1xuXHR2MVxuZW5kXG5cbnN0eWxlIEVudmlyb25tZW50IGZpbGw6I2ZmZmZkZSxzdHJva2U6I2FhYWEzMzsiLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
 
-### 子 View 作为（暂时的）唯一数据源的实现
+### 子 View 作为（暂时的）唯一数据源
 
 在 `HollowDetailView` 中，我们希望将其获取的 `postData` 作为唯一的数据源对传入的数据进行覆盖。其关系如下：
 
@@ -52,15 +52,16 @@ class HollowDetailStore: ObservableObject, ... {
     var bindingPostWrapper: Binding<PostDataWrapper>
     @Published var postDataWrapper: PostDataWrapper
     
-init(bindingPostWrapper: Binding<PostDataWrapper>, ...) {
-    self.postDataWrapper = bindingPostWrapper.wrappedValue
-    self.bindingPostWrapper = bindingPostWrapper
-    
-    $postDataWrapper
-        .receive(on: DispatchQueue.main)
-        .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
-        .store(...)
-    ...
+    init(bindingPostWrapper: Binding<PostDataWrapper>, ...) {
+        self.postDataWrapper = bindingPostWrapper.wrappedValue
+        self.bindingPostWrapper = bindingPostWrapper
+        
+        $postDataWrapper
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
+            .store(...)
+        ...
+    }
 }
 ```
 

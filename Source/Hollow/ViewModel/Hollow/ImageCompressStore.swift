@@ -56,7 +56,10 @@ extension ImageCompressStore {
             guard let result = compressor.compress() else {
                 DispatchQueue.main.async { withAnimation {
                     self.image = nil
-                    self.errorMessage = (title: "Image Too Large", message: "The image cannot be compressed. Please select another image.")
+                    self.errorMessage = (
+                        title: NSLocalizedString("IMAGE_COMPRESSOR_IMAGE_TOO_LARGE", comment: ""),
+                        message: NSLocalizedString("IMAGE_COMPRESSOR_IMAGE_TOO_LARGE_DESCRIPTION", comment: "")
+                    )
                 }}
                 return
             }
