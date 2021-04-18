@@ -16,9 +16,6 @@ class AppModel: ObservableObject {
     
     @Published var isInMainView = Defaults[.accessToken] != nil && Defaults[.hollowConfig] != nil
     
-    // Only for indicating expired state in `WelcomeView`
-    @Published var tokenExpired = false
-    
     var connectedToNetwork = Connectivity().status.isConnected
     
     init() {

@@ -109,7 +109,7 @@ struct ImageViewer: View {
             }
         })
         
-        .modifier(ErrorAlert(errorMessage: $savePhotoMessage))
+        .modifier(ErrorAlert(type: .success, errorMessage: $savePhotoMessage))
         .statusBar(hidden: true)
     }
     

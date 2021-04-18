@@ -10,9 +10,11 @@ import SwiftUI
 
 /// A workround to use split view without the limited generic NavigationView.
 struct SplitView<Primary: View, Secondary: View, ViewModel>: UIViewControllerRepresentable {
+    /// A view model that shares necessary information between two views.
     var sharedModel: ViewModel
     var primaryView: (ViewModel) -> Primary
     var secondaryView: (ViewModel) -> Secondary
+    /// Handler to modify the `SplitViewController` when it is initialized.
     var modifiers: ((SplitViewController<Primary, Secondary, ViewModel>) -> Void)?
     
     init(sharedModel: ViewModel, @ViewBuilder primaryView: @escaping (ViewModel) -> Primary, @ViewBuilder secondaryView: @escaping (ViewModel) -> Secondary, modifiers: ((SplitViewController<Primary, Secondary, ViewModel>) -> Void)? = nil) {
@@ -29,6 +31,7 @@ struct SplitView<Primary: View, Secondary: View, ViewModel>: UIViewControllerRep
     }
     
     func updateUIViewController(_ uiViewController: SplitViewController<Primary, Secondary, ViewModel>, context: Context) {
+        // Calculate the view again when the properties change.
         uiViewController.primaryController.rootView = primaryView(sharedModel)
         uiViewController.secondaryController.rootView = secondaryView(sharedModel)
     }

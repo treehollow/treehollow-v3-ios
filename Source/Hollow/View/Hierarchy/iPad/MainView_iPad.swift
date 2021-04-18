@@ -30,8 +30,9 @@ struct MainView_iPad: View {
                     ForEach(Page.allCases) { page in
                         
                         if page.section == section {
-                            // We need NavigationLink to keep the items
-                            // highlighted when selected
+                            // We need NavigationLink to keep the items highlighted
+                            // when selected. And we need to prevent them pushing
+                            // their destination views in the navigation controller.
                             NavigationLink(
                                 destination: EmptyView(),
                                 tag: page.rawValue,

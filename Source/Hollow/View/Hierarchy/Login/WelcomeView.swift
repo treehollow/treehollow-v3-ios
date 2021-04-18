@@ -77,13 +77,6 @@ struct WelcomeView: View {
                         }, gradient: buttonGradient) {
                             selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: ""))
                         }}
-                    
-                    if appModel.tokenExpired {
-                        Text("WELCOMVIEW_TOKEN_EXPIRED_LABEL")
-                            .font(.footnote)
-                            .padding(.vertical, 5)
-                            .layoutPriority(1)
-                    }
                 }
                 .padding(.bottom)
                 .padding(.bottom)
@@ -100,14 +93,6 @@ struct WelcomeView: View {
         .accentColor(.tint)
         .navigationViewStyle(StackNavigationViewStyle())
         
-        .onAppear {
-            // Don't use AppModelBehaviour modifier on this view.
-            if appModel.tokenExpired {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    withAnimation { appModel.tokenExpired = false }
-                }
-            }
-        }
     }
     
     func selectHollowButton(text: String) -> some View {

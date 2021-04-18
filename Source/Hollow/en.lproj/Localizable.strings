@@ -613,3 +613,5 @@
 "IMAGE_COMPRESSOR_IMAGE_TOO_LARGE" = "Image Too Large";
 
 "IMAGE_COMPRESSOR_IMAGE_TOO_LARGE_DESCRIPTION" = "The image cannot be compressed. Please select another image.";
+
+"IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\nPlease check your authorization settings.";

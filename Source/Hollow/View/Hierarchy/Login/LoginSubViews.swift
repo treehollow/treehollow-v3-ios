@@ -185,7 +185,7 @@ extension LoginView {
                         alertPresented = true
                     } else {
                         viewModel.errorMessage = (
-                            title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""),
+                            title: "",
                             message: NSLocalizedString("LOGINVIEW_NO_CONTACT_EMAIL_ERROR", comment: "")
                         )
                     }

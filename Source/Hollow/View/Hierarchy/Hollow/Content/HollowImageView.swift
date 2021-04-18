@@ -63,12 +63,23 @@ struct HollowImageView: View {
                     
                     .animation(.default)
                     .contentShape(RoundedRectangle(cornerRadius: 4))
-                    .styledAlert(
-                        presented: $showSavePhotoAlert,
-                        title: savePhotoError?.description ?? NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: ""),
-                        message: nil,
-                        buttons: [.ok]
-                    )
+                    .onChange(of: showSavePhotoAlert) { show in
+                        if show {
+                            if let error = savePhotoError {
+                                showErrorToast(
+                                    title: nil,
+                                    message: error.description +
+                                        NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE", comment: ""))
+                                savePhotoError = nil
+                            } else {
+                                showSuccessToast(
+                                    title: nil,
+                                    message: NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: "")
+                                )
+                            }
+                            showSavePhotoAlert = false
+                        }
+                    }
                     .onClickGesture(lightEffect: false) {
                         IntegrationUtilities.presentView(presentationStyle: .overFullScreen, transitionStyle: .crossDissolve, content: {
                             ImageViewer(image: image, footnote: description, presented: $showImageViewer, selfDismiss: true)

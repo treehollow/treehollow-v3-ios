@@ -17,7 +17,7 @@ struct IndicatorOverlay: ViewModifier {
         content
             .padding(.horizontal, body10)
             .padding(.vertical, body5)
-            .background(LinearGradient.vertical(gradient: .hollowContentVote))
+            .background(Color.hollowContentVoteGradient1)
             .clipShape(Capsule())
             .padding(.top)
             .top()

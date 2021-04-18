@@ -76,8 +76,7 @@ class LoginStore: ObservableObject, AppModelEnvironment {
     func register() {
         guard let config = Defaults[.hollowConfig] else { return }
         guard let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString() else {
-            errorMessage = (title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""),
-                            message: .retriveDeviceTokenFailedMessageLocalized)
+            errorMessage = (title: "", message: .retriveDeviceTokenFailedMessageLocalized)
             UIApplication.shared.registerForRemoteNotifications()
             return
         }

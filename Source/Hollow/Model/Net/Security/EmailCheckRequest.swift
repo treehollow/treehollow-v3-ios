@@ -68,7 +68,6 @@ struct EmailCheckRequest: DefaultRequest {
     }
     
     func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
-        // manually assigned parameter. better if it can be initialized automatically
         var parameters = ["email": self.configuration.email]
         if let reCAPTCHAInfo = self.configuration.reCAPTCHAInfo {
             parameters["recaptcha_version"] = reCAPTCHAInfo.version.rawValue

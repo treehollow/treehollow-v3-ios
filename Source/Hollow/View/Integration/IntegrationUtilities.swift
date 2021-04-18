@@ -14,6 +14,10 @@ import SafariServices
 struct IntegrationUtilities {
     // MARK: - Presentation
     
+    static func keyWindow() -> UIWindow? {
+        return UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+    }
+    
     /// Get the top view controller. Necessary when presenting a new view controller.
     static func topViewController() -> UIViewController? {
         let keyWindow = IntegrationUtilities.keyWindow()
@@ -93,10 +97,6 @@ extension IntegrationUtilities {
             if let vc = getSplitViewController(of: child) { return vc }
         }
         return nil
-    }
-    
-    static private func keyWindow() -> UIWindow? {
-        return UIApplication.shared.windows.filter {$0.isKeyWindow}.first
     }
     
     static private func pushView<Content: View>(navigationVC: UINavigationController, @ViewBuilder content: () -> Content) {

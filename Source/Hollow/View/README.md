@@ -4,5 +4,5 @@ The files are grouped by:
 - [Components](Components): reusable view components
 - [Modifiers](Modifiers): reusable view modifiers apply on the *appearance*
 - [Utilities](Utilities): utilities that extend the functionality
-- [Customization](Customization): predifined sets
+- [Customization](Customization): predefined sets
 - [Integration](Integration): integrating UIKit

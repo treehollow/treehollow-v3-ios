@@ -22,12 +22,3 @@ extension View {
         #endif
     }
 }
-
-fileprivate struct CustomButtonStyle: PrimitiveButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        print("herehere")
-        configuration.trigger()
-        return configuration.label
-    }
-    
-}

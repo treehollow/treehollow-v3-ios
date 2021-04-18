@@ -57,18 +57,16 @@ struct DeviceListRequest: DefaultRequest {
             method: .get,
             transformer: { result in
                 guard let data = result.data, let thisDeviceUUIDString = result.thisDevice else { return nil }
-                var devices = [DeviceInformationType]()
-                for device in data {
-                    devices.append(
-                        DeviceInformationType(
-                            deviceUUID: device.deviceUuid,
-                            loginDate: device.loginDate.toDate() ?? Date(),
-                            deviceInfo: device.deviceInfo,
-                            deviceType: DeviceInformationType.DeviceType(
-                                rawValue: device.deviceType) ?? DeviceInformationType.DeviceType.unknown
-                        )
+                let devices = data.map({
+                    DeviceInformationType(
+                        deviceUUID: $0.deviceUuid,
+                        loginDate: $0.loginDate.toDate() ?? Date(),
+                        deviceInfo: $0.deviceInfo,
+                        deviceType:
+                            DeviceInformationType.DeviceType(rawValue: $0.deviceType) ??
+                            DeviceInformationType.DeviceType.unknown
                     )
-                }
+                })
                 return ResultData(devices: devices, thisDeviceUUID: thisDeviceUUIDString)
             },
             completion: completion

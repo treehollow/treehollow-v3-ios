@@ -28,7 +28,7 @@ extension AppModelEnvironment {
         case .tokenExpiredError:
             Defaults[.accessToken] = nil
             appModelState.shouldShowMainView = false
-            appModelState.tokenExpired = true
+            ToastManager.shared.show(configuration: .error(title: nil, body: NSLocalizedString("WELCOMVIEW_TOKEN_EXPIRED_LABEL", comment: "")))
             return true
         default: return false
         }
@@ -38,7 +38,7 @@ extension AppModelEnvironment {
     func defaultErrorHandler(errorMessage: inout (title: String, message: String)?, error: DefaultRequestError) {
         if handleTokenExpireError(error) { return }
         if error.loadingCompleted() { return }
-        errorMessage = (title: NSLocalizedString("GLOBAL_ERROR_MSG_TITLE", comment: ""), message: error.description)
+        errorMessage = (title: "", message: error.description)
     }
 }
 
@@ -47,6 +47,4 @@ struct AppModelState {
     var errorMessage: (title: String, message: String)?
 
     var shouldShowMainView = Defaults[.accessToken] != nil
-    
-    var tokenExpired = false
 }

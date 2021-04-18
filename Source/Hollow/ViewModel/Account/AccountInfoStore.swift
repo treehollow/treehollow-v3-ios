@@ -50,7 +50,7 @@ class AccountInfoStore: ObservableObject, AppModelEnvironment {
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
             }, receiveValue: { _ in
                 withAnimation { self.isLoading = false }
-                self.errorMessage = (title: NSLocalizedString("CHANGE_PASSWORD_SUCCESS_ALERT_TITLE", comment: ""), message: "")
+                ToastManager.shared.show(configuration: .success(title: nil, body: NSLocalizedString("CHANGE_PASSWORD_SUCCESS_ALERT_TITLE", comment: "")))
                 self.appModelState.shouldShowMainView = false
                 Defaults[.accessToken] = nil
             })

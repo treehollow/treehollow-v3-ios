@@ -33,11 +33,6 @@ struct AppModelBehaviour: ViewModifier {
                 withAnimation { appModel.isInMainView = show }
                 if !show { restore() }
             }
-        
-            // Handle expired state
-            .onChange(of: state.tokenExpired) { tokenExpired in
-                withAnimation { appModel.tokenExpired = tokenExpired }
-            }
     }
     
     private func restore() {
