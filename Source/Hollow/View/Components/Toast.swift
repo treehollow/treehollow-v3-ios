@@ -36,6 +36,7 @@ class ToastManager {
         // Use auto layout to position the view.
         uiView.translatesAutoresizingMaskIntoConstraints = false
         uiView.centerXAnchor.constraint(equalTo: window.centerXAnchor).isActive = true
+        uiView.widthAnchor.constraint(lessThanOrEqualTo: window.widthAnchor).isActive = true
         if configuration.anchor == .bottom {
             uiView.bottomAnchor.constraint(equalTo: window.bottomAnchor).isActive = true
         } else {
