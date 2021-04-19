@@ -266,31 +266,31 @@
 "REPORT_MENU_ADMIN_UNDELETE_UNBAN" = "Undelete and Unban";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG" = "Enter the reason for the deletion and ban.";
+"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG" = "Enter the reason for the deletion and ban";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_TITLE" = "Delete and Ban";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG" = "Enter the reason for the deletion.";
+"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG" = "Enter the reason for the deletion";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_TITLE" = "Remove";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG" = "Enter the tag.";
+"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG" = "Enter the tag";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_TITLE" = "Set Custom Tag";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG" = "Enter message.";
+"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG" = "Enter message";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_TITLE" = "Unban";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG" = "Enter message.";
+"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG" = "Enter message";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_TITLE" = "Undelete and Unban";
@@ -311,7 +311,7 @@
 "REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "Are you sure to delete?";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "Enter the reason for the report.";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "Enter the reason for the report";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "Report (Delete)";
@@ -323,7 +323,7 @@
 "REPORT_MENU_REPORT_DELETE" = "Report Delete";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "Please enter the message for the operation.";
+"REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "Please enter the message for the operation";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_REPORT_REASON_ALERT_TITLE" = "Operation";
@@ -332,28 +332,28 @@
 "REPORT_MENU_REPORT_TAG" = "Report Tag";
 
 /* No comment provided by engineer. */
-"REQUEST_DECODE_FAILED_ERROR_MSG" = "Fail to decode result from the response.";
+"REQUEST_DECODE_FAILED_ERROR_MSG" = "Fail to decode result from the response";
 
 /* No comment provided by engineer. */
-"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "The URL for the image is invalid.";
+"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "The URL for the image is invalid";
 
 /* No comment provided by engineer. */
-"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "The uploaded file is too large and is refused by the server.";
+"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "The uploaded file is too large and is refused by the server";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "Fail to decode treehollow configuration from the response.";
+"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "Fail to decode treehollow configuration from the response";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "The format of the configuration is incorrect.";
+"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "The format of the configuration is incorrect";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "The treehollow configuration is invalid.";
+"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "The treehollow configuration is invalid";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "The URL for the configuration is invalid.";
+"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "The URL for the configuration is invalid";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "Received error from the server.";
+"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "Received error from the server";
 
 /* No comment provided by engineer. */
 "REQUEST_NO_SUCH_POST_ERROR_MSG" = "The requested post does not exist.";
@@ -365,7 +365,7 @@
 "REQUEST_TOKEN_EXPIRED_ERROR_MSG" = "The access token has expired. Please login again.";
 
 /* No comment provided by engineer. */
-"REQUEST_UNKNOWN_ERROR_MSG" = "An unknown message occured.";
+"REQUEST_UNKNOWN_ERROR_MSG" = "An unknown message occured";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_ADVANCED_BUTTON" = "Advanced";
@@ -480,7 +480,7 @@
 
 "SETTINGSVIEW_CONTENT_NAV_TITLE" = "Content";
 
-"SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER" = "Refresh the interface to apply the changes.";
+"SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER" = "Refresh to apply the changes.";
 
 "SETTINGSVIEW_CONTENT_FOLD_CELL" = "Fold Predefined Tags";
 
@@ -556,11 +556,11 @@
 
 "SETTINGSVIEW_NOTIFICATION_NO_ACCESS_LABEL" = "No Notification Access";
 
-"SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION" = "Go to Settings - Notification and turn on notification access for the app.";
+"SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION" = "Go to Settings - Notifications and turn on notification access for the app.";
 
 "SETTINGSVIEW_NOTIFICATION_NAV_TITLE" = "Notifications";
 
-"SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER" = "The changes will apply when restarting the app.";
+"SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER" = "The changes will apply on next startup.";
 
 "SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER" = "Themes";
 
@@ -614,4 +614,4 @@
 
 "IMAGE_COMPRESSOR_IMAGE_TOO_LARGE_DESCRIPTION" = "The image cannot be compressed. Please select another image.";
 
-"IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\nPlease check your authorization settings.";
+"IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\nPlease check your authorization settings";

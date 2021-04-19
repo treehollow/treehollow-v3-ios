@@ -98,7 +98,7 @@
 "ERROR_ALERT_OK_BUTTON" = "好";
 
 /* No comment provided by engineer. */
-"Fail to retrieve device token for remote notifications. Please try again." = "获取推送token失败，请退出应用后重试。";
+"Fail to retrieve device token for remote notifications. Please try again." = "获取推送token失败，请退出应用后重试";
 
 /* No comment provided by engineer. */
 "GLOBAL_ERROR_MSG_TITLE" = "错误";
@@ -257,31 +257,31 @@
 "REPORT_MENU_ADMIN_UNDELETE_UNBAN" = "恢复树洞并取消禁言";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG" = "输入原因。";
+"REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_MSG" = "输入原因";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_DELETE_BAN_ENTER_MSG_TITLE" = "删除并禁言";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG" = "输入删除原因。";
+"REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_MSG" = "输入删除原因";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_REMOVE_ENTER_MSG_TITLE" = "删除";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG" = "输入标签。";
+"REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_MSG" = "输入标签";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_SET_TAG_CUSTOM_ENTER_MSG_TITLE" = "设置自定义标签";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG" = "输入信息。";
+"REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_MSG" = "输入信息";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_UNBAN_ENTER_MSG_TITLE" = "取消禁言";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG" = "输入信息。";
+"REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_MSG" = "输入信息";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_ADMIN_UNDELETE_UNBAN_ENTER_MSG_TITLE" = "恢复树洞并取消禁言";
@@ -302,7 +302,7 @@
 "REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "确定要删除？";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "请输入举报理由。";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "请输入举报理由";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "举报（删除）";
@@ -314,7 +314,7 @@
 "REPORT_MENU_REPORT_DELETE" = "举报删除";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "请输入操作的文字信息。";
+"REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "请输入操作的文字信息";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_REPORT_REASON_ALERT_TITLE" = "操作";
@@ -323,28 +323,28 @@
 "REPORT_MENU_REPORT_TAG" = "举报标签";
 
 /* No comment provided by engineer. */
-"REQUEST_DECODE_FAILED_ERROR_MSG" = "解码失败。";
+"REQUEST_DECODE_FAILED_ERROR_MSG" = "解码失败";
 
 /* No comment provided by engineer. */
-"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "图片网址无效。";
+"REQUEST_FETCH_IMAGE_ERROR_INVALID_URL" = "图片网址无效";
 
 /* No comment provided by engineer. */
-"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "上传文件大小超过限制，被服务器拒绝。";
+"REQUEST_FILE_TOO_LARGE_ERROR_MSG" = "上传文件大小超过限制，被服务器拒绝";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "从当前网址无法解码树洞配置。";
+"REQUEST_GET_CONFIG_ERROR_DECODE_FAILED" = "从当前网址无法解码树洞配置";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "树洞配置格式不正确。";
+"REQUEST_GET_CONFIG_ERROR_INCORRECT_FORMAT" = "树洞配置格式不正确";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "树洞配置无效。";
+"REQUEST_GET_CONFIG_ERROR_INVALID_CONFIG" = "树洞配置无效";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "树洞配置网址无效。";
+"REQUEST_GET_CONFIG_ERROR_INVALID_URL" = "树洞配置网址无效";
 
 /* No comment provided by engineer. */
-"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "服务器返回错误。";
+"REQUEST_GET_CONFIG_ERROR_SERVER_ERROR" = "服务器返回错误";
 
 /* No comment provided by engineer. */
 "REQUEST_NO_SUCH_POST_ERROR_MSG" = "树洞不存在";
@@ -353,10 +353,10 @@
 "REQUEST_OTHER_ERROR_NO_DESCRIPTION_WITH_CODE_MSG" = "错误代码：";
 
 /* No comment provided by engineer. */
-"REQUEST_TOKEN_EXPIRED_ERROR_MSG" = "用户认证过期，请重新登录。";
+"REQUEST_TOKEN_EXPIRED_ERROR_MSG" = "用户认证过期，请重新登录";
 
 /* No comment provided by engineer. */
-"REQUEST_UNKNOWN_ERROR_MSG" = "发生未知错误。";
+"REQUEST_UNKNOWN_ERROR_MSG" = "发生未知错误";
 
 /* No comment provided by engineer. */
 "SEARCHVIEW_ADVANCED_BUTTON" = "Advanced";
@@ -450,7 +450,7 @@
 "WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "选择树洞";
 
 /* No comment provided by engineer. */
-"WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录。";
+"WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录";
 
 "HOLLOW_CONTENT_LINKS_MENU_LABEL" = "链接";
 
@@ -615,4 +615,4 @@
 
 "IMAGE_COMPRESSOR_IMAGE_TOO_LARGE_DESCRIPTION" = "图片尺寸过大，无法压缩。请选择其他图片。";
 
-"IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\n请检查权限设置。";
+"IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\n请检查权限设置";

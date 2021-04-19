@@ -148,6 +148,8 @@ struct WelcomeView: View {
             .padding()
             .padding(.horizontal)
             .background(Color.background.edgesIgnoringSafeArea(.all))
+            
+            .disabled(viewModel.isLoadingConfig)
             .navigationTitle(NSLocalizedString("WELCOMEVIEW_CUSTOM_CONFIG_NAV_TITLE", comment: ""))
         }
     }

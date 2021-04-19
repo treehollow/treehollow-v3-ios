@@ -13,9 +13,12 @@ class ToastManager {
     
     private init() {}
     
+    // Use an array to store the references if we are to support
+    // displaying multiple toasts at the same time
     var views = [(UUID, UIView)]()
     
     func show(configuration: Toast.Configuration) {
+        guard configuration.message.title != nil || configuration.message.body != nil else { return }
         let id = UUID()
         let toastView = Toast(
             configuration: configuration,
@@ -24,21 +27,30 @@ class ToastManager {
                 set: { presented in if !presented { self.removeFromScreen(id: id) }}
             )
         )
-        let uiView = UIHostingController(rootView: toastView).view!
-        guard let window = IntegrationUtilities.keyWindow() else { return }
+        guard let uiView = UIHostingController(rootView: toastView).view,
+              let window = IntegrationUtilities.keyWindow() else { return }
+        
         uiView.backgroundColor = nil
         window.addSubview(uiView)
         
         // Use auto layout to position the view.
         uiView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            uiView.leadingAnchor.constraint(equalTo: window.leadingAnchor),
-            uiView.bottomAnchor.constraint(equalTo: window.bottomAnchor),
-            uiView.widthAnchor.constraint(equalTo: window.widthAnchor),
-        ])
+        uiView.centerXAnchor.constraint(equalTo: window.centerXAnchor).isActive = true
+        if configuration.anchor == .bottom {
+            uiView.bottomAnchor.constraint(equalTo: window.bottomAnchor).isActive = true
+        } else {
+            uiView.topAnchor.constraint(equalTo: window.topAnchor).isActive = true
+        }
+        
         views.forEach({ $0.1.removeFromSuperview() })
-        views = []
-        views.append((id, uiView))
+        views = [(id, uiView)]
+        
+        // Feedback
+        switch configuration.type {
+        case .success: UINotificationFeedbackGenerator().notificationOccurred(.success)
+        case .error: UINotificationFeedbackGenerator().notificationOccurred(.error)
+        default: break
+        }
     }
     
     private func removeFromScreen(id: UUID) {
@@ -57,7 +69,7 @@ struct Toast: View {
     var body: some View {
         HStack {
             Image(systemName: configuration.style.systemImageName)
-                .dynamicFont(size: 22, weight: .semibold)
+                .dynamicFont(size: 20, weight: .semibold, design: .rounded)
             (
                 (configuration.message.title == nil || configuration.message.title == "" ?
                     Text("") : Text(configuration.message.title! + " ")
@@ -84,31 +96,25 @@ struct Toast: View {
         .animation(.default)
         .transition(.move(edge: .bottom))
         
-        .onClickGesture {
-            let title = configuration.message.title == nil || configuration.message.title == "" ?
-                configuration.message.body ?? "" :
-                configuration.message.title ?? ""
-            
-            let body = configuration.message.title == nil || configuration.message.title == "" ?
-                nil : configuration.message.body
-
-            presentStyledAlert(title: title, message: body, buttons: [.ok])
-        }
+        .onClickGesture(perform: configuration.onTap ?? dismiss)
         
         .onAppear {
             withAnimation(.spring()) {
                 opacity = 1
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                withAnimation(.spring()) {
-                    self.opacity = 0
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                    presented = false
-                }
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: dismiss)
         }
         
+    }
+    
+    func dismiss() {
+        guard presented else { return }
+        withAnimation(.spring()) {
+            self.opacity = 0
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            presented = false
+        }
     }
 }
 
@@ -122,16 +128,27 @@ extension Toast {
         static let success = Style(systemImageName: "checkmark.circle.fill", fontColor: .white, backgroundColor: .hollowContentVoteGradient1)
     }
     
+    enum ToastType: Int {
+        case success, error, plain
+    }
+    
+    enum Anchor: Int {
+        case top, bottom
+    }
+    
     struct Configuration {
         var message: (title: String?, body: String?)
         var style: Style
+        var type: ToastType
+        var anchor: Anchor
+        var onTap: (() -> Void)?
         
-        static func success(title: String?, body: String?) -> Configuration {
-            return Configuration(message: (title, body), style: .success)
+        static func success(title: String?, body: String?, anchor: Anchor = .bottom, onTap: (() -> Void)? = nil) -> Configuration {
+            return Configuration(message: (title, body), style: .success, type: .success, anchor: anchor, onTap: onTap)
         }
         
-        static func error(title: String?, body: String?) -> Configuration {
-            return Configuration(message: (title, body), style: .error)
+        static func error(title: String?, body: String?, anchor: Anchor = .bottom, onTap: (() -> Void)? = nil) -> Configuration {
+            return Configuration(message: (title, body), style: .error, type: .error, anchor: anchor, onTap: onTap)
         }
 
     }

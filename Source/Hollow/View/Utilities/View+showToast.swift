@@ -13,11 +13,11 @@ extension View {
         ToastManager.shared.show(configuration: configuration)
     }
     
-    func showSuccessToast(title: String?, message: String?) {
-        ToastManager.shared.show(configuration: .success(title: title, body: message))
+    func showSuccessToast(title: String?, message: String?, anchor: Toast.Anchor? = nil, onTap: (() -> Void)? = nil) {
+        ToastManager.shared.show(configuration: .success(title: title, body: message, anchor: anchor ?? .bottom, onTap: onTap))
     }
     
-    func showErrorToast(title: String?, message: String?) {
-        ToastManager.shared.show(configuration: .error(title: title, body: message))
+    func showErrorToast(title: String?, message: String?, anchor: Toast.Anchor? = nil, onTap: (() -> Void)? = nil) {
+        ToastManager.shared.show(configuration: .error(title: title, body: message, anchor: anchor ?? .bottom, onTap: onTap))
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ErrorAlert: ViewModifier {
     var type: AlertType = .error
+    var anchor: Toast.Anchor?
     @State private var presented: Bool = false
     @Binding var errorMessage: (title: String, message: String)?
     
@@ -17,7 +18,7 @@ struct ErrorAlert: ViewModifier {
         return content
             .onChange(of: errorMessage?.message) { message in
                 if let message = message {
-                    content.showToast(configuration: .init(message: (title: errorMessage?.title, body: message), style: type.style))
+                    content.showToast(configuration: .init(message: (title: errorMessage?.title, body: message), style: type.style, type: type.toastType, anchor: anchor ?? .bottom))
                     errorMessage = nil
                 }
             }
@@ -31,5 +32,12 @@ struct ErrorAlert: ViewModifier {
             case .error: return .error
             }
         }
+        var toastType: Toast.ToastType {
+            switch self {
+            case .success: return .success
+            case .error: return .error
+            }
+        }
+
     }
 }
