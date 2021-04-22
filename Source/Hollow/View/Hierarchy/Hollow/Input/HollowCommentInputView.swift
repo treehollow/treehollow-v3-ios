@@ -32,12 +32,10 @@ struct HollowCommentInputView: View {
     
     var contentValid: Bool { store.text != "" || store.compressedImage != nil }
     
-
-    
     var body: some View {
         VStack(spacing: vstackSpacing) {
             HStack {
-                BarButton(action: { withAnimation { store.replyToIndex = -2 }}, systemImageName: "xmark")
+                BarButton(action: { withAnimation(transitionAnimation) { store.replyToIndex = -2 }}, systemImageName: "xmark")
 
                 Spacer()
                 let sendingText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SENDING", comment: "")
@@ -106,7 +104,9 @@ struct HollowCommentInputView: View {
                 }
                 .onEnded { value in
                     if value.predictedEndTranslation.height > viewSize.height * 2 / 3 {
-                        store.replyToIndex = -2
+                        withAnimation(transitionAnimation) {
+                            store.replyToIndex = -2
+                        }
                     }
                 }
         )

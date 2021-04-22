@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import Defaults
 
 struct HollowImageView: View {
     var hollowImage: HollowImage?
@@ -35,6 +36,7 @@ struct HollowImageView: View {
     }
     
     @ScaledMetric private var reloadButtonSize: CGFloat = 50
+    @Default(.enableEfficientMode) var enableEfficientMode
     
     var body: some View {
         Group {
@@ -44,15 +46,18 @@ struct HollowImageView: View {
                         if imageAspectRatio >= aspectRatio - 0.001 {
                             Image(uiImage: image)
                                 .resizable()
+                                .interpolation(enableEfficientMode ? .none : .low)
                                 .aspectRatio(contentMode: .fit)
                                 .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                         } else {
                             ZStack {
                                 Image(uiImage: image)
                                     .resizable()
+                                    .interpolation(.none)
                                 Blur().ignoresSafeArea()
                                 Image(uiImage: image)
                                     .resizable()
+                                    .interpolation(enableEfficientMode ? .none : .low)
                                     .aspectRatio(contentMode: .fit)
                                     .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                             }

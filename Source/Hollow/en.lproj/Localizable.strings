@@ -562,7 +562,7 @@
 
 "SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER" = "The changes will apply on next startup.";
 
-"SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER" = "Themes";
+"SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER" = "Theme";
 
 "SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL" = "Default";
 
@@ -615,3 +615,9 @@
 "IMAGE_COMPRESSOR_IMAGE_TOO_LARGE_DESCRIPTION" = "The image cannot be compressed. Please select another image.";
 
 "IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\nPlease check your authorization settings";
+
+"SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_HEADER" = "Performance";
+
+"SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_FOOTER" = "Enabling efficient mode may result in lower rendering quality.";
+
+"SETTINGSVIEW_OTHER_EFFICIENT_MODE_ENABLE" = "Efficient Mode";

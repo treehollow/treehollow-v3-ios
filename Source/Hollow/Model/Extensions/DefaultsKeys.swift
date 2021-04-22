@@ -66,4 +66,6 @@ extension Defaults.Keys {
     static let tempCustomColorSet = Key<ColorSet?>("user.settings.temp.custom.color.set", default: nil)
     /// The method to handle links.
     static let openURLMethod = Key<OpenURLHelper.OpenMethod>("user.settings.open.url.method", default: .inApp)
+
+    static let enableEfficientMode = Key<Bool>("user.settings.enable.efficient.mode", default: false)
 }

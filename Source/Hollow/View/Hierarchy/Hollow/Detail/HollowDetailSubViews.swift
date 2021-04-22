@@ -18,27 +18,17 @@ extension HollowDetailView {
             .leading()
             .padding(.top)
             .padding(.bottom, 5)
-
-        if postData.comments.count > 30 {
-            LazyVStack {
-                ForEach(postData.comments) { comment in
-                    commentView(for: comment)
-                }
-            }
-        } else {
-            VStack {
-                ForEach(postData.comments) { comment in
-                    commentView(for: comment)
-                }
-            }
-            
+            .padding(.bottom, UIDevice.isMac ? 20 : 13)
+        
+        ForEach(postData.comments) { comment in
+            commentView(for: comment)
         }
         
         if store.isLoading, postData.replyNumber > postData.comments.count {
-            LazyVStack(spacing: 10) {
-                ForEach(0..<postData.replyNumber - postData.comments.count, id: \.self) { _ in
-                    PlaceholderComment()
-                }
+            ForEach(0..<postData.replyNumber - postData.comments.count, id: \.self) { _ in
+                PlaceholderComment()
+                    .padding(.top, postData.comments.isEmpty ? 0 : 15)
+                    .padding(.bottom, postData.comments.isEmpty ? 15 : 0)
             }
         }
 
@@ -70,13 +60,16 @@ extension HollowDetailView {
                             Color.background : nil
                     }
                     .roundedCorner(10)
-                    .animation(.none)
+//                    .animation(.none)
+                    .transition(.opacity)
                 )
                 .onClickGesture {
                     guard !store.isSendingComment && !store.isLoading else { return }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    store.replyToIndex = index
-                    jumpedToIndex = nil
+                    withAnimation(scrollAnimation) {
+                        store.replyToIndex = index
+                        jumpedToIndex = nil
+                    }
                 }
                 .contextMenu {
                     if comment.text != "" {

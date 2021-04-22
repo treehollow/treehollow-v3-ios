@@ -19,6 +19,7 @@ struct HollowDetailView: View {
     @State private var showHeaderContent = false
     
     private let scrollToAnchor = UnitPoint(x: 0.5, y: 0.1)
+    let scrollAnimation = Animation.easeInOut(duration: 0.25)
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
@@ -83,44 +84,46 @@ struct HollowDetailView: View {
                 }
             }
 
+                
             // Contents
-            CustomScrollView { proxy in
-                VStack(spacing: UIDevice.isMac ? 20 : 13) {
+            ScrollView { ScrollViewReader { proxy in
+                let spacing: CGFloat = UIDevice.isMac ? 20 : 13
+                LazyVStack(spacing: 0) {
                     Spacer(minLength: 5)
                         .fixedSize()
+                        .padding(.bottom, spacing)
                     Group { if store.noSuchPost {
                         Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
                             .modifier(HollowTextView.TextModifier(inDetail: true))
                     } else {
-                        HollowContentView(
-                            postDataWrapper: store.postDataWrapper,
-                            options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
-                            voteHandler: store.vote,
-                            imageReloadHandler: { _ in store.loadPostImage() }
-                        )
-                        .fixedSize(horizontal: false, vertical: true)
-                        .id(-1)
+                        VStack(spacing: spacing) {
+                            HollowContentView(
+                                postDataWrapper: store.postDataWrapper,
+                                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
+                                voteHandler: store.vote,
+                                imageReloadHandler: { _ in store.loadPostImage() }
+                            )
+                            .fixedSize(horizontal: false, vertical: true)
+                            .id(-1)
+                        }
                     }}
-                    
-                    Spacer().frame(height: 0)
-                    // Get the frame of the comment view.
-                    //                            .modifier(GetFrame(frame: $commentViewFrame))
+                    .padding(.bottom, spacing * 2)
                     
                     commentView
                         .onChange(of: store.replyToIndex) { index in
-                            withAnimation(.easeInOut(duration: 0.25)) {
+                            withAnimation(scrollAnimation) {
                                 proxy.scrollTo(index, anchor: scrollToAnchor)
                             }
                         }
                         .onChange(of: jumpedIndexFromComment) { index in
                             if index != nil {
-                                withAnimation {
+                                withAnimation(scrollAnimation) {
                                     jumpedIndexFromComment = nil
                                     proxy.scrollTo(index, anchor: scrollToAnchor)
                                     jumpedToIndex = index
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    withAnimation { jumpedToIndex = nil }
+                                    withAnimation(scrollAnimation) { jumpedToIndex = nil }
                                 }
                             }
                         }
@@ -131,12 +134,12 @@ struct HollowDetailView: View {
                                 // when finish loading
                                 if let jumpToCommentId = store.jumpToCommentId {
                                     if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == jumpToCommentId }) {
-                                        withAnimation {
+                                        withAnimation(scrollAnimation) {
                                             proxy.scrollTo(index, anchor: scrollToAnchor)
                                             jumpedToIndex = index
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                            withAnimation { jumpedToIndex = nil }
+                                            withAnimation(scrollAnimation) { jumpedToIndex = nil }
                                         }
                                     }
                                     store.jumpToCommentId = nil
@@ -149,7 +152,8 @@ struct HollowDetailView: View {
                 .padding(.top, UIDevice.isMac ? 10 : 0)
                 .background(Color.hollowCardBackground)
                 .coordinateSpace(name: "detail.scrollview.content")
-            }
+            }}
+
             .edgesIgnoringSafeArea(.bottom)
             .disabled(store.noSuchPost)
         }
@@ -158,7 +162,7 @@ struct HollowDetailView: View {
         .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
             FloatButton(
                 action: {
-                    withAnimation { store.replyToIndex = -1 }
+                    withAnimation(scrollAnimation) { store.replyToIndex = -1 }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 },
                 systemImageName: "text.bubble.fill",
@@ -179,10 +183,9 @@ struct HollowDetailView: View {
             let name = store.replyToIndex == -1 ?
                 NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
                 post.comments[store.replyToIndex].name
-            let animation: Animation = .easeInOut(duration: 0.25)
             HollowCommentInputView(
                 store: store,
-                transitionAnimation: animation,
+                transitionAnimation: scrollAnimation,
                 replyToName: name
             )
             .edgesIgnoringSafeArea([])
@@ -193,16 +196,16 @@ struct HollowDetailView: View {
         
         .onChange(of: store.replyToIndex) { index in
             if index >= -1 {
-                withAnimation { inputPresented = true }
+                withAnimation(scrollAnimation) { inputPresented = true }
             }
         }
         .onChange(of: inputPresented) { presented in
-            if !presented { withAnimation { store.replyToIndex = -2 }}
+            if !presented { withAnimation(scrollAnimation) { store.replyToIndex = -2 }}
         }
         
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                withAnimation {
+                withAnimation(scrollAnimation) {
                     showHeaderContent = true
                 }
             }

@@ -351,6 +351,8 @@ struct OtherSettingsView: View {
             #if !targetEnvironment(macCatalyst)
             OpenURLSettingsView()
             #endif
+            
+            EfficientModeSettingsView()
         }
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""))
@@ -441,6 +443,23 @@ struct OtherSettingsView: View {
                             self.getSize()
                         }}
                     })
+                }
+            }
+        }
+    }
+    
+    private struct EfficientModeSettingsView: View {
+        @Default(.enableEfficientMode) var enableEfficientMode
+        var body: some View {
+            Section(
+                header: Text("SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_HEADER").padding(.horizontal),
+                footer: Text("SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_FOOTER").padding(.horizontal)) {
+                HStack {
+                    Text("SETTINGSVIEW_OTHER_EFFICIENT_MODE_ENABLE")
+                    Spacer()
+                    Toggle("", isOn: $enableEfficientMode)
+                        .toggleStyle(SwitchToggleStyle(tint: .tint))
+                        .labelsHidden()
                 }
             }
         }

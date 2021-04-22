@@ -101,6 +101,8 @@ struct MainView_iPad: View {
             }))
             .transition(.move(edge: .bottom))
         }})
+        
+        .environment(\.horizontalSizeClass, .regular)
     }
     
     class SharedModel: NSObject, ObservableObject, UINavigationControllerDelegate {

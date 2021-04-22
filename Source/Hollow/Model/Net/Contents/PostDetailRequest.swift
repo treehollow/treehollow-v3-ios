@@ -53,8 +53,26 @@ struct PostDetailRequest: DefaultRequest {
         let postCache = PostCache()
         
         if let oldUpdated = postCache.getTimestamp(postId: configuration.postId),
-           postCache.existPost(postId: configuration.postId) {
-            parameters["old_updated_at"] = oldUpdated
+           postCache.existPost(postId: configuration.postId),
+           let cachedPost = postCache.getPost(postId: configuration.postId) {
+            // If at least one of the comments has `delete` permission
+            // but no `delete_ban` permission, then we should not rely
+            // on cache because that permission has a fixed timeout and
+            // the backend will not update `update_at` on permissions change.
+            var canRemoveButCannotBan = false
+            if !cachedPost.comments.isEmpty {
+                for comment in cachedPost.comments {
+                    if comment.permissions.contains(.delete) &&
+                        !comment.permissions.contains(.deleteBan) {
+                        canRemoveButCannotBan = true
+                        break
+                    }
+                }
+            }
+            
+            if !canRemoveButCannotBan {
+                parameters["old_updated_at"] = oldUpdated
+            }
         }
         
         let transformer: (Result) -> ResultData? = { result in
