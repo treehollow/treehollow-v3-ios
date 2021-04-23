@@ -89,7 +89,11 @@ struct ImageViewer: View {
                 .default(Text("IMAGEVIEW_SAVE_PHOTO_BUTTON"), action: {
                     let saver = ImageSaver(finishHandler: { error in
                         savePhotoMessage =
-                            (error?.localizedDescription ?? NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: ""), "")
+                            (error?.localizedDescription ??
+                                (UIDevice.isMac ?
+                                    NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE_MAC", comment: "") :
+                                    NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: "")),
+                             "")
                     })
                     saver.saveImage(image)
                 })

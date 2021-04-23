@@ -121,6 +121,8 @@
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "成功保存至系统相册";
 
+"IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE_MAC" = "成功保存图片";
+
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_PHOTO_BUTTON" = "保存至系统相册";
 

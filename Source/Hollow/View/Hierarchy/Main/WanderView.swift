@@ -41,18 +41,16 @@ struct WanderView: View {
                         let postData = postDataWrapper.post
                         cardView(for: postData)
                             .onClickGesture {
-                                IntegrationUtilities.conditionallyPresentView(content: {
-                                    HollowDetailView.conditionalDetailView(store: HollowDetailStore(
-                                        bindingPostWrapper: Binding(
-                                            get: { postDataWrapper },
-                                            set: {
-                                                guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
-                                                self.viewModel.posts[index] = $0
-                                            }
-                                        )
-                                    ))
-                                    
-                                })
+                                let detailStore = HollowDetailStore(
+                                    bindingPostWrapper: Binding(
+                                        get: { postDataWrapper },
+                                        set: {
+                                            guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
+                                            self.viewModel.posts[index] = $0
+                                        }
+                                    )
+                                )
+                                IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
                             }
                     }}
                     .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: nil)

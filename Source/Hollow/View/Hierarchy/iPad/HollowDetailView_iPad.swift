@@ -45,6 +45,7 @@ struct HollowDetailView_iPad: View {
                         .leading()
                     }
                     .padding(.trailing),
+
                 trailing: HStack {
                     
                     let postData = store.postDataWrapper.post
@@ -62,7 +63,7 @@ struct HollowDetailView_iPad: View {
                             .padding(.vertical, 5)
                             .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
                         }
-                        .disabled(store.isEditingAttention)
+                        .disabled(store.isEditingAttention || store.noSuchPost)
                     }
                     
                     Menu(content: {
@@ -99,7 +100,7 @@ struct HollowDetailView_iPad: View {
                             .foregroundColor(.hollowCardStarUnselected)
                             .modifier(HollowButtonStyle())
                     })
-                    
+                    .disabled(store.noSuchPost)
                 }
                 .padding(.leading)
             )

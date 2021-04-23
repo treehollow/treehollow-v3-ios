@@ -130,6 +130,8 @@
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE" = "Successfully saved to Photos";
 
+"IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE_MAC" = "The image has been successfully saved";
+
 /* No comment provided by engineer. */
 "IMAGEVIEW_SAVE_PHOTO_BUTTON" = "Save to Photos";
 

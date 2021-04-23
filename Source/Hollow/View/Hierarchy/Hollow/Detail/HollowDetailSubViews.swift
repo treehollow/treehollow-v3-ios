@@ -107,9 +107,7 @@ extension HollowDetailView {
                         ForEach(citedPosts, id: \.self) { post in
                             let wrapper = PostDataWrapper.templatePost(for: post)
                             Button(action: {
-                                IntegrationUtilities.conditionallyPresentView {
-                                    HollowDetailView.conditionalDetailView(store: .init(bindingPostWrapper: .constant(wrapper)))
-                                }
+                                IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
                             }) {
                                 Label("#\(post.string)", systemImage: "text.quote")
                             }

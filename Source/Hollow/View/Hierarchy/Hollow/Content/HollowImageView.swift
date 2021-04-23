@@ -79,7 +79,9 @@ struct HollowImageView: View {
                             } else {
                                 showSuccessToast(
                                     title: nil,
-                                    message: NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: "")
+                                    message: UIDevice.isMac ?
+                                        NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE_MAC", comment: "") :
+                                        NSLocalizedString("IMAGEVIEW_SAVE_IMAGE_SUCCESS_ALERT_TITLE", comment: "")
                                 )
                             }
                             showSavePhotoAlert = false

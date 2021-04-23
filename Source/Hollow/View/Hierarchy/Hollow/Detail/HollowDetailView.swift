@@ -85,19 +85,19 @@ struct HollowDetailView: View {
                 }
             }
 
-                
+            
             // Contents
             ScrollView { ScrollViewReader { proxy in
                 let spacing: CGFloat = UIDevice.isMac ? 20 : 13
                 LazyVStack(spacing: 0) {
-                    Spacer(minLength: 5)
-                        .fixedSize()
-                        .padding(.bottom, spacing)
-                    Group { if store.noSuchPost {
-                        Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
-                            .modifier(HollowTextView.TextModifier(inDetail: true))
-                    } else {
-                        VStack(spacing: spacing) {
+                    VStack(spacing: spacing) {
+                        Spacer(minLength: 5)
+                            .fixedSize()
+                        
+                        Group { if store.noSuchPost {
+                            Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
+                                .modifier(HollowTextView.TextModifier(inDetail: true))
+                        } else {
                             HollowContentView(
                                 postDataWrapper: store.postDataWrapper,
                                 options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
@@ -106,47 +106,49 @@ struct HollowDetailView: View {
                             )
                             .fixedSize(horizontal: false, vertical: true)
                             .id(-1)
-                        }
-                    }}
-                    .padding(.bottom, spacing * 2)
+                        }}
+                        .padding(.bottom, spacing)
+                    }
                     
-                    commentView
-                        .onChange(of: store.replyToIndex) { index in
-                            withAnimation(scrollAnimation) {
-                                proxy.scrollTo(index, anchor: scrollToAnchor)
-                            }
-                        }
-                        .onChange(of: jumpedIndexFromComment) { index in
-                            if index != nil {
+                    if !store.noSuchPost {
+                        commentView
+                            .onChange(of: store.replyToIndex) { index in
                                 withAnimation(scrollAnimation) {
-                                    jumpedIndexFromComment = nil
                                     proxy.scrollTo(index, anchor: scrollToAnchor)
-                                    jumpedToIndex = index
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    withAnimation(scrollAnimation) { jumpedToIndex = nil }
                                 }
                             }
-                        }
-                        // Jump to certain comment
-                        .onChange(of: store.isLoading) { loading in
-                            if !loading {
-                                // Check if there is any comment to jump to
-                                // when finish loading
-                                if let jumpToCommentId = store.jumpToCommentId {
-                                    if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == jumpToCommentId }) {
-                                        withAnimation(scrollAnimation) {
-                                            proxy.scrollTo(index, anchor: scrollToAnchor)
-                                            jumpedToIndex = index
-                                        }
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                            withAnimation(scrollAnimation) { jumpedToIndex = nil }
-                                        }
+                            .onChange(of: jumpedIndexFromComment) { index in
+                                if index != nil {
+                                    withAnimation(scrollAnimation) {
+                                        jumpedIndexFromComment = nil
+                                        proxy.scrollTo(index, anchor: scrollToAnchor)
+                                        jumpedToIndex = index
                                     }
-                                    store.jumpToCommentId = nil
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        withAnimation(scrollAnimation) { jumpedToIndex = nil }
+                                    }
                                 }
                             }
-                        }
+                            // Jump to certain comment
+                            .onChange(of: store.isLoading) { loading in
+                                if !loading {
+                                    // Check if there is any comment to jump to
+                                    // when finish loading
+                                    if let jumpToCommentId = store.jumpToCommentId {
+                                        if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == jumpToCommentId }) {
+                                            withAnimation(scrollAnimation) {
+                                                proxy.scrollTo(index, anchor: scrollToAnchor)
+                                                jumpedToIndex = index
+                                            }
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                withAnimation(scrollAnimation) { jumpedToIndex = nil }
+                                            }
+                                        }
+                                        store.jumpToCommentId = nil
+                                    }
+                                }
+                            }
+                    }
                 }
                 .padding(.horizontal)
                 .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)

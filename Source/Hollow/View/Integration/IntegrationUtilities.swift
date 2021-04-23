@@ -68,13 +68,57 @@ struct IntegrationUtilities {
         pushView(navigationVC: navVC, content: content)
     }
 
-    /// On iPad, push the view on the secondary side of the split vc, otherwise present it modally.
-    static func conditionallyPresentView<Content: View>(@ViewBuilder content: () -> Content) {
+    // MARK: - Presenting Detail View
+    
+    /// Refresh the current detail view or present a new detail view based on the context.
+    static func openTemplateDetailView(postId: Int, jumpToComment commentId: Int?) {
+        var store: HollowDetailStore? = nil
         if UIDevice.isPad {
-            pushViewOnSecondary(content: content)
+            if let navVC = getSecondaryNavigationVC(),
+               let detailVC = navVC.topViewController as? HollowDetailViewController_iPad {
+                store = detailVC.store
+            }
         } else {
-            presentView(content: content)
+            if let detailVC = topViewController() as? HollowDetailViewController {
+                store = detailVC.store
+            }
         }
+        
+        // If the currently presented view controller is `HollowDetailViewController(_iPad)`
+        // and its postId is the same as the destination post, then we just refresh it, otherwise
+        // we present a new view controller.
+        if let store = store, store.postDataWrapper.post.postId == postId {
+            store.jumpToCommentId = commentId
+            store.requestDetail()
+        } else {
+            let templateWrapper = PostDataWrapper.templatePost(for: postId)
+            IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(templateWrapper), jumpToComment: commentId))
+        }
+    }
+    
+    /// On iPad, push the view on the secondary side of the split vc, otherwise present it modally.
+    static func conditionallyPresentDetail(store: HollowDetailStore) {
+        if UIDevice.isPad {
+            pushDetailVCOnSecondary(store: store)
+        } else {
+            presentDetailView(store: store)
+        }
+    }
+    
+    static func presentDetailView(store: HollowDetailStore) {
+        let detailVC = HollowDetailViewController(store: store)
+        topViewController()?.present(detailVC, animated: true)
+    }
+    
+    static func pushDetailVCOnSecondary(store: HollowDetailStore) {
+        guard let navVC = getSecondaryNavigationVC() else { return }
+        let vc = HollowDetailViewController_iPad(store: store)
+        vc.view.backgroundColor = nil
+        navVC.pushViewController(vc, animated: true)
+    }
+    
+    static func topDetailVC() -> HollowDetailViewController? {
+        return topViewController() as? HollowDetailViewController
     }
 
     // MARK: - Other

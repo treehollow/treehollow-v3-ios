@@ -85,9 +85,7 @@ struct HollowContentView: View {
             if let citedPost = postDataWrapper.citedPost,
                citedPost.loadingError == nil {
                 Button(action: {
-                    IntegrationUtilities.conditionallyPresentView(content: {
-                        HollowDetailView.conditionalDetailView(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))))
-                    })
+                    IntegrationUtilities.conditionallyPresentDetail(store: HollowDetailStore(bindingPostWrapper: .constant(.init(post: citedPost, citedPost: nil))))
                 }) {
                     HollowCiteContentView(placeholderPostId: citedPid, postData: postDataWrapper.citedPost)
                 }
