@@ -218,7 +218,7 @@
 "LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON" = "复制邮箱地址";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE" = "用当前邮箱发送邮件到指定邮箱以重置密码。";
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE" = "发送邮件到指定邮箱以重置密码。";
 
 /* No comment provided by engineer. */
 "LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON" = "发送邮件";

@@ -10,11 +10,13 @@ import Foundation
 import Cache
 
 struct PostCache {
-        
+    
+    static let shared = PostCache()
+    
     var timestampStorage: Storage<Int, Int>?
     var postStorage: Storage<Int, PostData>?
     
-    init() {
+    private init() {
         
         self.timestampStorage = try? Storage<Int, Int>(
             diskConfig: DiskConfig(name: "HollowCommentsTimestamp"),
@@ -66,6 +68,11 @@ struct PostCache {
     /// - Returns: true if exist
     func existPost(postId: Int) -> Bool {
         return (try? postStorage?.existsObject(forKey: postId)) ?? false
+    }
+    
+    func remove(postId: Int) {
+        try? postStorage?.removeObject(forKey: postId)
+        try? timestampStorage?.removeObject(forKey: postId)
     }
     
     func clear() {

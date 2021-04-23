@@ -436,7 +436,7 @@ struct OtherSettingsView: View {
                     isClearing = true
                 }
                 DispatchQueue.global(qos: .background).async {
-                    PostCache().clear()
+                    PostCache.shared.clear()
                     KingfisherManager.shared.cache.clearCache(completion: {
                         DispatchQueue.main.async { withAnimation {
                             self.isClearing = false

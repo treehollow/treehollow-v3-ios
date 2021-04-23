@@ -50,7 +50,7 @@ struct PostDetailRequest: DefaultRequest {
             "include_comment" : configuration.includeComments.int.string
         ]
         
-        let postCache = PostCache()
+        let postCache = PostCache.shared
         
         if let oldUpdated = postCache.getTimestamp(postId: configuration.postId),
            postCache.existPost(postId: configuration.postId),

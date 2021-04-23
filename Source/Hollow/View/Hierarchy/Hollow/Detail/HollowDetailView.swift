@@ -76,6 +76,7 @@ struct HollowDetailView: View {
                                 .disabled(store.isLoading)
                             }}
                         )
+                        .onTapGesture(count: 2, perform: store.requestDetail)
                         .disabled(store.noSuchPost)
                     }
                     .padding(.horizontal)

@@ -87,6 +87,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
                     switch error {
                     case .noSuchPost:
                         withAnimation { self.noSuchPost = true }
+                        PostCache.shared.remove(postId: configuration.postId)
                     default: break
                     }
                     self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
