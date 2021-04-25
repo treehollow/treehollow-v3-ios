@@ -1,8 +1,8 @@
 //
 //  AppModelBehaviour.swift
-//  Hollow
+//  HollowMac
 //
-//  Created by liang2kl on 2021/2/15.
+//  Created by liang2kl on 2021/4/24.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
@@ -34,6 +34,12 @@ struct AppModelBehaviour: ViewModifier {
                 withAnimation { appModel.isInMainView = show }
                 if !show { restore() }
             }
+        
+//            .onChange(of: state.isLoggingIn) { loggingIn in
+//                withAnimation { appModel.isLoggingIn = loggingIn }
+//                print(appModel.isLoggingIn)
+//            }
+            
     }
     
     private func restore() {

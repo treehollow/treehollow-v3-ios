@@ -70,9 +70,10 @@ struct HollowVoteContentView: View {
                 Spacer()
                 // Not displaying the vote result if not voted
                 if voted {
-                    let percentage = Int(Double(100 * voteData.voteCount) / Double(totalCount))
+                    let percentage = Double(100 * voteData.voteCount) / Double(totalCount)
+                    let percentageString = String(format: "%.1f", percentage)
                     let text = showProportion ?
-                        percentage.string + (voteData.voteCount == 0 ? "" : "%") :
+                        percentageString + (voteData.voteCount == 0 ? "" : "%") :
                         voteData.voteCount.string
                     
                     Text(text).bold()

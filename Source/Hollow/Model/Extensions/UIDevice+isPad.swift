@@ -10,9 +10,5 @@ import UIKit
 
 extension UIDevice {
     static let isPad = UIDevice.current.userInterfaceIdiom == .pad
-    #if targetEnvironment(macCatalyst)
-    static let isMac = true
-    #else
     static let isMac = false
-    #endif
 }

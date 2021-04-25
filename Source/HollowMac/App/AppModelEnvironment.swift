@@ -1,19 +1,14 @@
 //
 //  AppModelEnvironment.swift
-//  Hollow
+//  HollowMac
 //
-//  Created by liang2kl on 2021/2/15.
+//  Created by liang2kl on 2021/4/24.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import SwiftUI
 import Defaults
 
-/// Protocol for a view model to internally define states of the app.
-///
-/// Conform this protocol to the view model whose corresponding view is (and must be)
-/// modified by `.modifier(AppModelBehaviour(appModelState: viewModel.appModelState))`.
-/// Change the variables inside `appModelState` will automatically update the app model.
 protocol AppModelEnvironment: ObservableObject {
     var appModelState: AppModelState { get set }
 }
@@ -28,10 +23,7 @@ extension AppModelEnvironment {
         case .tokenExpiredError:
             Defaults[.accessToken] = nil
             appModelState.shouldShowMainView = false
-            // FIXME: Show Alert in macOS
-            #if !os(macOS)
-            ToastManager.shared.show(configuration: .error(title: nil, body: NSLocalizedString("WELCOMVIEW_TOKEN_EXPIRED_LABEL", comment: "")))
-            #endif
+            // TODO: Show Alert
 
             return true
         default: return false
