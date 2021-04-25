@@ -34,6 +34,7 @@ struct Avatar: View {
                 }
             }
         }
+        .drawingGroup()
         .aspectRatio(1, contentMode: .fill)
         .padding(padding)
         .background(paddingColor)
