@@ -49,10 +49,12 @@ struct Avatar: View {
             ZStack {
                 Rectangle()
                     .foregroundColor(paddingColor)
-                Text(String(name.first ?? " "))
+                Text(name)
                     .fontWeight(.heavy)
                     .font(.system(.body, design: .rounded))
                     .foregroundColor(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.3)
             }
             .aspectRatio(1, contentMode: .fill)
         }

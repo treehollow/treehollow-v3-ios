@@ -65,6 +65,18 @@ extension Comment {
         }
         
         let hash = AvatarGenerator.hash(postId: pid, name: isDz ? "" : name)
+        
+        let components = name.split(separator: " ")
+        var abbreviation = isDz ? name : ""
+        if !isDz {
+            for component in components {
+                if Int(component) != nil {
+                    abbreviation = String(component)
+                    break
+                }
+                abbreviation += component.first == nil ? "" : String(component.first!)
+            }
+        }
 
         return CommentData(
             commentId: cid,
@@ -81,7 +93,8 @@ extension Comment {
             hasURL: (text?.links().count ?? 0) > 0,
             hasCitedNumbers: (text?.citations().count ?? 0) > 0,
             hash: hash,
-            colorIndex: AvatarGenerator.colorIndex(hash: hash)
+            colorIndex: AvatarGenerator.colorIndex(hash: hash),
+            abbreviation: abbreviation
         )
     }
 }

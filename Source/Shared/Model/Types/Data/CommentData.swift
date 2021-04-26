@@ -34,9 +34,10 @@ struct CommentData: Identifiable, Codable {
     var hasCitedNumbers = false
     var renderHighlight: Bool { hasURL || hasCitedNumbers }
     
-    // Color data used in avatar
+    // Data used in avatar
     var hash: Int
     var colorIndex: Int
+    var abbreviation: String
     
     mutating func updateHashAndColor() {
         hash = AvatarGenerator.hash(postId: postId, name: name)

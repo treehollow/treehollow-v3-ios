@@ -77,6 +77,6 @@ extension Defaults.Keys {
 extension Defaults.Keys {
     static let reduceImageQuality = Key<Bool>("user.settings.reduce.image.quality", default: false)
     static let usingOffscreenRender = Key<Bool>("user.settings.using.offscreen.render", default: false)
-    static let usingSimpleAvatar = Key<Bool>("user.settings.using.simple.avatar", default: false)
+    static let usingSimpleAvatar = Key<Bool>("user.settings.using.simple.avatar", default: true)
 }
 #endif

@@ -950,6 +950,7 @@
 		0EC2452B26340311001AFC4B /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				0EC2453426340311001AFC4B /* Data */,
 				0EC2452C26340311001AFC4B /* HollowConfig.swift */,
 				0EC2452D26340311001AFC4B /* Comment.swift */,
 				0EC2452E26340311001AFC4B /* ImageMetadata.swift */,
@@ -958,7 +959,6 @@
 				0EC2453126340311001AFC4B /* Post.swift */,
 				0EC2453226340311001AFC4B /* Vote.swift */,
 				0EC2453326340311001AFC4B /* DeviceInformationType.swift */,
-				0EC2453426340311001AFC4B /* Data */,
 				0EC2453926340311001AFC4B /* HollowType.swift */,
 			);
 			path = Types;
@@ -978,18 +978,18 @@
 		0EC2453A26340311001AFC4B /* Net */ = {
 			isa = PBXGroup;
 			children = (
-				0EC2453B26340311001AFC4B /* Contents */,
+				0EC2455626340311001AFC4B /* README.md */,
+				0EC2455B26340311001AFC4B /* Request.swift */,
+				0EC2456226340311001AFC4B /* RequestError.swift */,
 				0EC2454426340311001AFC4B /* DefaultRequest.swift */,
+				0EC2456026340311001AFC4B /* Request+publisher.swift */,
+				0EC2456126340311001AFC4B /* RequestPublisher.swift */,
+				0EC2453B26340311001AFC4B /* Contents */,
 				0EC2454526340311001AFC4B /* Config */,
 				0EC2454926340311001AFC4B /* Security */,
 				0EC2455226340311001AFC4B /* Other */,
-				0EC2455626340311001AFC4B /* README.md */,
 				0EC2455726340311001AFC4B /* Edit */,
-				0EC2455B26340311001AFC4B /* Request.swift */,
 				0EC2455C26340311001AFC4B /* Send */,
-				0EC2456026340311001AFC4B /* Request+publisher.swift */,
-				0EC2456126340311001AFC4B /* RequestPublisher.swift */,
-				0EC2456226340311001AFC4B /* RequestError.swift */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -1803,7 +1803,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1829,7 +1829,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;

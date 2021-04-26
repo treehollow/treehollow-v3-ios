@@ -630,7 +630,7 @@
 
 "SETTINGSVIEW_OTHER_EXP_AVATAR_HEADER" = "Avatar";
 
-"SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER" = "Avatar rendering has some issues on few devices. Turn on the options if you have encountered hitch problems when scrolling. Noted that enabling Off-Screen Render might result in even lower refresh rate.";
+"SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER" = "Avatar rendering has some issues on a few devices. Turn on the options if you have encountered hitch problems when scrolling. Noted that enabling Off-Screen Render might result in even lower refresh rate.";
 
 "SETTINGSVIEW_OTHER_EXP_AVATAR_OFFSCREEN_LABEL" = "Enable Off-Screen Render";
 

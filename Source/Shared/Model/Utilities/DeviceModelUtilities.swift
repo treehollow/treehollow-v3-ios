@@ -10,6 +10,9 @@ import Foundation
 
 struct DeviceModelUtilities {
     static var modelIdentifier: String {
+        #if targetEnvironment(macCatalyst)
+        return "Mac"
+        #else
         var systemInfo = utsname()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -18,5 +21,6 @@ struct DeviceModelUtilities {
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         return identifier
+        #endif
     }
 }
