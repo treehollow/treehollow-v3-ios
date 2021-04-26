@@ -352,7 +352,9 @@ struct OtherSettingsView: View {
             OpenURLSettingsView()
             #endif
             
-            EfficientModeSettingsView()
+            Section(header: Text("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE").padding(.horizontal)) {
+                NavigationLink("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", destination: ExperimentalFeaturesView())
+            }
         }
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""))
@@ -448,20 +450,69 @@ struct OtherSettingsView: View {
         }
     }
     
-    private struct EfficientModeSettingsView: View {
-        @Default(.enableEfficientMode) var enableEfficientMode
+    private struct ExperimentalFeaturesView: View {
+        @Default(.reduceImageQuality) var reduceImageQuality
+        @Default(.usingOffscreenRender) var usingOffscreenRender
+        @Default(.usingSimpleAvatar) var usingSimpleAvatar
+
         var body: some View {
-            Section(
-                header: Text("SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_HEADER").padding(.horizontal),
-                footer: Text("SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_FOOTER").padding(.horizontal)) {
-                HStack {
-                    Text("SETTINGSVIEW_OTHER_EFFICIENT_MODE_ENABLE")
-                    Spacer()
-                    Toggle("", isOn: $enableEfficientMode)
-                        .toggleStyle(SwitchToggleStyle(tint: .tint))
-                        .labelsHidden()
+            List {
+                Text("SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION")
+                    .listRowBackground(Color.clear)
+                
+                Section(
+                    header: Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_HEADER").padding(.horizontal),
+                    footer: Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_FOOTER").padding(.horizontal)) {
+                    HStack {
+                        Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL")
+                        Spacer()
+                        
+                        Toggle("", isOn: $reduceImageQuality)
+                            .toggleStyle(SwitchToggleStyle(tint: .tint))
+                            .labelsHidden()
+                    }
                 }
+                
+                Section(
+                    header: Text("SETTINGSVIEW_OTHER_EXP_AVATAR_HEADER").padding(.horizontal),
+                    footer: Text("SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER").padding(.horizontal)) {
+                    HStack {
+                        Text("SETTINGSVIEW_OTHER_EXP_AVATAR_OFFSCREEN_LABEL")
+                        Spacer()
+                        let isOn = Binding(
+                            get: { usingOffscreenRender },
+                            set: { on in withAnimation {
+                                if on { usingSimpleAvatar = false }
+                                usingOffscreenRender = on
+                            }}
+                        )
+
+                        Toggle("", isOn: isOn)
+                            .toggleStyle(SwitchToggleStyle(tint: .tint))
+                            .labelsHidden()
+                    }
+                    
+                    HStack {
+                        Text("SETTINGSVIEW_OTHER_EXP_AVATAR_SIMPLE_LABEL")
+                        Spacer()
+                        
+                        let isOn = Binding(
+                            get: { usingSimpleAvatar },
+                            set: { on in withAnimation {
+                                if on { usingOffscreenRender = false }
+                                usingSimpleAvatar = on
+                            }}
+                        )
+                        Toggle("", isOn: isOn)
+                            .toggleStyle(SwitchToggleStyle(tint: .tint))
+                            .labelsHidden()
+                    }
+
+                }
+
             }
+            .defaultListStyle()
+            .navigationTitle(NSLocalizedString("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", comment: ""))
         }
     }
 }

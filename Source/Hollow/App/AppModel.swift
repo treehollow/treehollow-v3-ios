@@ -8,7 +8,11 @@
 
 import Combine
 import Defaults
+
+#if canImport(Rechability)
 import Connectivity
+#endif
+
 import SwiftUI
 
 class AppModel: ObservableObject {
@@ -16,6 +20,7 @@ class AppModel: ObservableObject {
     
     @Published var isInMainView = Defaults[.accessToken] != nil && Defaults[.hollowConfig] != nil
     
+    #if canImport(Rechability)
     var connectedToNetwork = Connectivity().status.isConnected
     
     init() {
@@ -27,4 +32,5 @@ class AppModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    #endif
 }

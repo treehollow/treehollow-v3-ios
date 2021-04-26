@@ -163,7 +163,8 @@ struct HollowCommentContentView: View {
             backgroundColor: .white,
             resolution: resolution,
             padding: avatarWidth * 0.1,
-            hashValue: hash
+            hashValue: hash,
+            name: commentData.name
         )
         .frame(width: avatarWidth)
         .clipShape(Circle())

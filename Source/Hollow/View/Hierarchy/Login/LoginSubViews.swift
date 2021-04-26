@@ -11,43 +11,7 @@ import Defaults
 
 // Sub views of `LoginView`, we put them here to
 // improve code hightlight and completion performance.
-extension LoginView {
-    struct ReCAPTCHAPageView: View {
-        @Binding var presented: Bool
-        let successHandler: (String) -> Void
-        @State private var pageLoadingFinish = false
-
-        var body: some View {
-            VStack {
-                Button(action: {
-                    withAnimation {
-                        presented = false
-                    }
-                }) {
-                    Image(systemName: "xmark")
-                        .modifier(ImageButtonModifier())
-                        .padding(.bottom)
-                }
-                .leading()
-                ReCAPTCHAWebView(onFinishLoading: {
-                    withAnimation {
-                        pageLoadingFinish = true
-                    }
-                }, successHandler: successHandler)
-                .onAppear {
-                    pageLoadingFinish = false
-                }
-            }
-            .padding()
-            .overlay(Group {
-                if !pageLoadingFinish {
-                    Spinner(color: .buttonGradient1, desiredWidth: 30)
-                }
-            })
-            
-        }
-    }
-    
+extension LoginView {    
     struct RegisterTextFields: View {
         @EnvironmentObject var viewModel: LoginStore
         @Environment(\.openURL) var openURL

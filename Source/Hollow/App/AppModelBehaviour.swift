@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import UserNotifications
 
 /// Modifier for views that take control of the behaviour of the app
 /// using the model injected in the environment.
