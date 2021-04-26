@@ -71,7 +71,12 @@ extension Defaults.Keys {
     static let tempCustomColorSet = Key<ColorSet?>("user.settings.temp.custom.color.set", default: nil)
     /// The method to handle links.
     static let openURLMethod = Key<OpenURLHelper.OpenMethod>("user.settings.open.url.method", default: .inApp)
+}
 
-    static let enableEfficientMode = Key<Bool>("user.settings.enable.efficient.mode", default: false)
+// MARK: - Experimental Features
+extension Defaults.Keys {
+    static let reduceImageQuality = Key<Bool>("user.settings.reduce.image.quality", default: false)
+    static let usingOffscreenRender = Key<Bool>("user.settings.using.offscreen.render", default: false)
+    static let usingSimpleAvatar = Key<Bool>("user.settings.using.simple.avatar", default: false)
 }
 #endif

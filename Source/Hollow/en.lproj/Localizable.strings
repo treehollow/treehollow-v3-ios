@@ -618,8 +618,20 @@
 
 "IMAGEVIEW_SAVE_IMAGE_FAIL_ALERT_NOTE" = "\nPlease check your authorization settings";
 
-"SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_HEADER" = "Performance";
+"SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE" = "Experimental Features";
 
-"SETTINGSVIEW_OTHER_PERFORMANCE_SECTION_FOOTER" = "Enabling efficient mode may result in lower rendering quality.";
+"SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION" = "Options listed below are some experimental features that are not fully tested, so use them at your own risk. File a report if any error occured.";
 
-"SETTINGSVIEW_OTHER_EFFICIENT_MODE_ENABLE" = "Efficient Mode";
+"SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_HEADER" = "Image Render";
+
+"SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_FOOTER" = "Reduce the render quality in photo previews. Detailed image viewing are not affected.";
+
+"SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL" = "Reduce Image Render Quality";
+
+"SETTINGSVIEW_OTHER_EXP_AVATAR_HEADER" = "Avatar";
+
+"SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER" = "Avatar rendering has some issues on few devices. Turn on the options if you have encountered hitch problems when scrolling. Noted that enabling Off-Screen Render might result in even lower refresh rate.";
+
+"SETTINGSVIEW_OTHER_EXP_AVATAR_OFFSCREEN_LABEL" = "Enable Off-Screen Render";
+
+"SETTINGSVIEW_OTHER_EXP_AVATAR_SIMPLE_LABEL" = "Use Simple Avatars";

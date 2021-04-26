@@ -36,7 +36,7 @@ struct HollowImageView: View {
     }
     
     @ScaledMetric private var reloadButtonSize: CGFloat = 50
-    @Default(.enableEfficientMode) var enableEfficientMode
+    @Default(.reduceImageQuality) var reduceImageQuality
     
     var body: some View {
         Group {
@@ -46,7 +46,7 @@ struct HollowImageView: View {
                         if imageAspectRatio >= aspectRatio - 0.001 {
                             Image(uiImage: image)
                                 .resizable()
-                                .interpolation(enableEfficientMode ? .none : .low)
+                                .interpolation(reduceImageQuality ? .none : .low)
                                 .aspectRatio(contentMode: .fit)
                                 .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                         } else {
@@ -57,7 +57,7 @@ struct HollowImageView: View {
                                 Blur().ignoresSafeArea()
                                 Image(uiImage: image)
                                     .resizable()
-                                    .interpolation(enableEfficientMode ? .none : .low)
+                                    .interpolation(reduceImageQuality ? .none : .low)
                                     .aspectRatio(contentMode: .fit)
                                     .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                             }
