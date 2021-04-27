@@ -31,6 +31,8 @@ extension Defaults.Keys {
     static let orderdLineStorage = Key<LineSwitchManager.OrderedLineStorage?>("net.hollow.lineswitch.orderdlinestorage")
     /// Announcement explictly hidden by the user.
     static let hiddenAnnouncement = Key<String>("user.hidden.announcement", default: "")
+    
+    static let latestViewedUpdateVersion = Key<String?>("user.latest.viewed.update.version")
 }
 
 
@@ -42,11 +44,10 @@ extension Defaults.Keys {
 
 
 // MARK: - Cache
-// We store some result from the requests in the defaults to
-// cache the lastest results, but just for placeholder use.
 extension Defaults.Keys {
     static let deviceListCache = Key<DeviceListRequestResultData?>("cache.device.list")
     static let notificationTypeCache = Key<PushNotificationType>("cache.push.notification.type", default: .init())
+    static let versionUpdateInfoCache = Key<UpdateAvailabilityRequestResult.Result?>("cache.version.update.info")
 }
 
 

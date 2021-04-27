@@ -94,7 +94,7 @@ struct HollowDetailView: View {
                         Spacer(minLength: 5)
                             .fixedSize()
                         
-                        Group { if store.noSuchPost {
+                        if store.noSuchPost {
                             Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
                                 .modifier(HollowTextView.TextModifier(inDetail: true))
                         } else {
@@ -106,9 +106,9 @@ struct HollowDetailView: View {
                             )
                             .fixedSize(horizontal: false, vertical: true)
                             .id(-1)
-                        }}
-                        .padding(.bottom, spacing)
+                        }
                     }
+                    .padding(.bottom, spacing * 2)
                     
                     if !store.noSuchPost {
                         commentView

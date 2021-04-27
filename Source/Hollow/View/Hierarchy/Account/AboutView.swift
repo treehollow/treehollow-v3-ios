@@ -10,6 +10,7 @@ import Defaults
 
 struct AboutView: View {
     @Environment(\.openURL) var openURL
+    @Default(.versionUpdateInfoCache) var versionUpdateInfoCache
 
     var body: some View {
         List {
@@ -46,6 +47,14 @@ struct AboutView: View {
                     Text(Constants.Application.buildVersion)
                         .font(.system(.body, design: .monospaced))
                         .foregroundColor(.secondary)
+                }
+
+                if let cache = versionUpdateInfoCache, UIDevice.isPad {
+                    NavigationLink(
+                        destination: VersionUpdateView(info: cache, showItem: false),
+                        label: {
+                            Text("VERSION_UPDATE_VIEW_NAV_TITLE")
+                        })
                 }
 
             }

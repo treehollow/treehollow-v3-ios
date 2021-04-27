@@ -35,6 +35,11 @@ struct HollowApp: App {
             .environmentObject(appModel)
             // Set the color scheme when appear
             .onAppear { IntegrationUtilities.setCustomColorScheme() }
+            // Chcek for version update
+            .onReceive(UpdateAvailabilityRequest.defaultPublisher) { data in
+                guard let data = data else { return }
+                VersionUpdateUtilities.handleUpdateAvailabilityResult(data: data)
+            }
         }
     }
 }

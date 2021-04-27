@@ -10,6 +10,7 @@ import Defaults
 
 struct SettingsView: View {
     @Binding var presented: Bool
+    @Default(.versionUpdateInfoCache) var versionUpdateInfoCache
     
     var appInfo: String {
         let info = Constants.Application.appLocalizedName +
@@ -63,6 +64,14 @@ struct SettingsView: View {
                         label: {
                             Text("ACCOUNTVIEW_ABOUT_CELL")
                         })
+                    
+                    if let cache = versionUpdateInfoCache {
+                        NavigationLink(
+                            destination: VersionUpdateView(info: cache, showItem: false),
+                            label: {
+                                Text("VERSION_UPDATE_VIEW_NAV_TITLE")
+                            })
+                    }
                 }
             }
             
