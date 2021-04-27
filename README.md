@@ -2,7 +2,7 @@
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/ecb32276-29a0-4925-a8aa-f46d00effd10/branches/main/badge)](https://appcenter.ms)
 
-树洞 iOS / macOS 客户端，使用 SwiftUI 开发，支持 [T大树洞](https://thuhole.com)。
+树洞 iOS / macOS 客户端，使用 SwiftUI 开发，支持 [T大树洞](https://thuhole.com)、[未名树洞](https://www.pkuhollow.com)。
 
 ## 下载
 
@@ -34,7 +34,13 @@ git clone https://github.com/treehollow/treehollow-v3-ios.git
 
 ## 文档
 
-有关应用架构的说明，参见 [architecture.md](Documentation/architecture.md)
+有关应用架构的说明，参见 [architecture.md](Documentation/architecture.md)。
+
+当前项目源文件目录结构如下：
+
+- [Hollow](https://github.com/treehollow/treehollow-v3-ios/tree/main/Source/Hollow)：iOS Target（包括 Catalyst 版 macOS app）
+- [HollowMac](https://github.com/treehollow/treehollow-v3-ios/tree/main/Source/HollowMac)：macOS Target（原生版本，开发中）
+- [Shared](https://github.com/treehollow/treehollow-v3-ios/tree/main/Source/Shared)：上述两个 Target 共用的源文件 
 
 ## 贡献
 
