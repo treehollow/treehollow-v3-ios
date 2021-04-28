@@ -62,7 +62,7 @@ extension HAppDelegate {
         })
     }
 
-    private func fetchConfig() {
+    func fetchConfig() {
         guard let hollowType = Defaults[.hollowType] else { return }
         var configURL: String? {
             switch hollowType {

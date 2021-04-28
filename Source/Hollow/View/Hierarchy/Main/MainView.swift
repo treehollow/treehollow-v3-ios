@@ -16,6 +16,9 @@ struct MainView: View {
     @State private var showCreatePost = false
     @State private var showMessage = false
         
+    // Get notification of the scene state
+    @Environment(\.scenePhase) var scenePhase
+    
     // Initialize time line view model here to avoid creating repeatedly
     let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly

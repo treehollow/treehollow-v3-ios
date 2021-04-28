@@ -36,10 +36,15 @@ struct HollowApp: App {
             // Set the color scheme when appear
             .onAppear { IntegrationUtilities.setCustomColorScheme() }
             // Chcek for version update
-            .onReceive(UpdateAvailabilityRequest.defaultPublisher) { data in
-                guard let data = data else { return }
-                VersionUpdateUtilities.handleUpdateAvailabilityResult(data: data)
-            }
+            .onReceive(
+                UpdateAvailabilityRequest.defaultPublisher,
+                perform: VersionUpdateUtilities.handleUpdateAvailabilityResult
+            )
+            // Fetch config when re-entering foreground
+            .onReceive(
+                NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
+                perform: { _ in appDelegate.fetchConfig() }
+            )
         }
     }
 }

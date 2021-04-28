@@ -11,7 +11,8 @@ import Defaults
 import SwiftUI
 
 struct VersionUpdateUtilities {
-    static func handleUpdateAvailabilityResult(data: UpdateAvailabilityRequest.ResultData) {
+    static func handleUpdateAvailabilityResult(data: UpdateAvailabilityRequest.ResultData?) {
+        guard let data = data else { return }
         if !data.0 {
             Defaults[.latestViewedUpdateVersion] = nil
             Defaults[.versionUpdateInfoCache] = nil

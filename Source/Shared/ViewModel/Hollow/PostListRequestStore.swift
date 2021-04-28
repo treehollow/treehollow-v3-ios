@@ -203,7 +203,7 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     
     // MARK: - Load Cited Posts
     private func fetchCitedPosts() {
-        let postsWrapperWithCitation = posts.filter { $0.citedPostID != nil }
+        let postsWrapperWithCitation = posts.filter { $0.citedPostID != nil && $0.citedPost == nil }
         let citedPostId = postsWrapperWithCitation.compactMap { $0.citedPostID }
         
         guard let config = Defaults[.hollowConfig],

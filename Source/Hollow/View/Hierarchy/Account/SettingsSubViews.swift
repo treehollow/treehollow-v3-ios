@@ -194,15 +194,21 @@ struct ContentSettingsView: View {
 struct PushNotificationSettingsView: View {
     @State private var granted: Bool = false
     @State private var isEditing = false
+    @State private var isCheckingAuthorization = true
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         List {
-            if !granted {
-                Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_LABEL")
-                Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+            if !granted && !isCheckingAuthorization {
+                ImageTitledStack(spacing: 5, systemImageName: "bell.slash") {
+                    Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_LABEL")
+                        .font(.headline)
+                        .padding(.bottom, 3)
+                    Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION")
+                    Link("Go to Settings", destination: URL(string: UIApplication.openSettingsURLString)!)
+                        .padding(.top, 10)
+                }
+                .padding(.vertical)
             } else {
                 ForEach(PushNotificationType.Enumeration.allCases) { type in
                     // Read only mode
@@ -241,11 +247,6 @@ struct PushNotificationSettingsView: View {
             }}
         )
         .navigationBarItems(
-            leading: Group { if granted && isEditing {
-                Button("SETTINGSVIEW_NOTIFICATION_EDIT_CANCEL") {
-                    withAnimation { self.isEditing = false }
-                }
-            }},
             trailing: Group { if granted {
                 Button(
                     self.isEditing ?
@@ -272,6 +273,10 @@ struct PushNotificationSettingsView: View {
         .modifier(AppModelBehaviour(state: viewModel.appModelState))
         .modifier(LoadingIndicator(isLoading: viewModel.isLoading, disableWhenLoading: true))
         .onAppear { checkForPermissions() }
+        .onReceive(
+            NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
+            perform: { _ in checkForPermissions() }
+        )
     }
     
     func checkForPermissions() {
@@ -279,8 +284,9 @@ struct PushNotificationSettingsView: View {
             options: Constants.Application.requestedNotificationOptions,
             completionHandler: { granted, _ in
                 DispatchQueue.main.async {
+                    if granted && !self.granted { self.viewModel.getPushTypes() }
                     self.granted = granted
-                    self.viewModel.getPushTypes()
+                    self.isCheckingAuthorization = false
                 }
             })
     }
@@ -457,13 +463,7 @@ struct OtherSettingsView: View {
 
         var body: some View {
             List {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(Image(systemName: "curlybraces"))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.tint)
-                        .font(.largeTitle)
-                        .padding(.bottom)
-
+                ImageTitledStack(systemImageName: "curlybraces") {
                     Text("SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION")
                 }
                 .padding(.vertical)

@@ -16,45 +16,22 @@ struct VersionUpdateView: View {
     
     var body: some View {
         List {
-            Section { VStack(alignment: .leading, spacing: 5) {
-                Text(Image(systemName: "app.badge"))
-                    .fontWeight(.semibold)
-                    .foregroundColor(.tint)
-                    .font(.largeTitle)
-                    .padding(.bottom)
+            Section {
+                ImageTitledStack(systemImageName: "app.badge") {
+                    Text("VERSION_UPDATE_VIEW_WHATS_NEW")
+                        .font(.headline)
+                        .padding(.bottom, 5)
+                    Text(verbatim: info.releaseNotes)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.vertical)
                 
-                Text("VERSION_UPDATE_VIEW_VERSION")
-                    .foregroundColor(.tint)
-                    .font(.system(.headline, design: .rounded))
-                
-                Text(verbatim: info.version)
-                    .font(.system(.body, design: .monospaced))
-                    .padding(.bottom, 10)
-                
-                Text("VERSION_UPDATE_VIEW_RELEASE_DATE")
-                    .foregroundColor(.tint)
-                    .font(.system(.headline, design: .rounded))
-                
-                Text(info.currentVersionReleaseDate.prefix(10))
-                    .font(.system(.body, design: .monospaced))
-                    .padding(.bottom, 10)
-                
-                Text("VERSION_UPDATE_VIEW_WHATS_NEW")
-                    .foregroundColor(.tint)
-                    .font(.system(.headline, design: .rounded))
-                
-                Text(verbatim: info.releaseNotes)
-                    .padding(.bottom, 10)
-                
-                Text("VERSION_UPDATE_VIEW_MIN_OS_VERSION")
-                    .foregroundColor(.tint)
-                    .font(.system(.headline, design: .rounded))
-                
-                Text(verbatim: info.minimumOsVersion)
-                    .font(.system(.body, design: .monospaced))
-            }}
-            .padding(.vertical)
-            
+                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_VERSION", secondaryText: info.version)
+                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_RELEASE_DATE", secondaryText: String(info.currentVersionReleaseDate.prefix(10)))
+                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_MIN_OS_VERSION", secondaryText: info.minimumOsVersion)
+
+            }
+
             Button("VERSION_UPDATE_VIEW_GO") {
                 if let url = URL(string: info.trackViewUrl) {
                     openURL(url)

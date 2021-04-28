@@ -104,7 +104,7 @@ struct HollowDetailView: View {
                                 voteHandler: store.vote,
                                 imageReloadHandler: { _ in store.loadPostImage() }
                             )
-                            .fixedSize(horizontal: false, vertical: true)
+//                            .fixedSize(horizontal: false, vertical: true)
                             .id(-1)
                         }
                     }

@@ -558,7 +558,7 @@
 
 "SETTINGSVIEW_NOTIFICATION_NO_ACCESS_LABEL" = "No Notification Access";
 
-"SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION" = "Go to Settings - Notifications and turn on notification access for the app.";
+"SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION" = "Go to Settings and turn on notification access for the app.";
 
 "SETTINGSVIEW_NOTIFICATION_NAV_TITLE" = "Notifications";
 
@@ -620,7 +620,7 @@
 
 "SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE" = "Experimental Features";
 
-"SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION" = "Options listed below are some experimental features that are not fully tested, so use them at your own risk. File a report if any error occured.";
+"SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION" = "These are some experimental features that are not fully tested, so use them at your own risk. File a report if any error occurs.";
 
 "SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_HEADER" = "Image Render";
 
@@ -630,19 +630,19 @@
 
 "SETTINGSVIEW_OTHER_EXP_AVATAR_HEADER" = "Avatar";
 
-"SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER" = "Avatar rendering has some issues on a few devices. Turn on the options if you have encountered hitch problems when scrolling. Noted that enabling Off-Screen Render might result in even lower refresh rate.";
+"SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER" = "Avatar rendering has some issues on a few devices. Turn on the options if you have encountered hitch problems during scrolling. Noted that enabling Off-Screen Render might result in even lower refresh rate.";
 
 "SETTINGSVIEW_OTHER_EXP_AVATAR_OFFSCREEN_LABEL" = "Enable Off-Screen Render";
 
 "SETTINGSVIEW_OTHER_EXP_AVATAR_SIMPLE_LABEL" = "Use Simple Avatars";
 
-"VERSION_UPDATE_VIEW_VERSION" = "VERSION";
+"VERSION_UPDATE_VIEW_VERSION" = "Version";
 
-"VERSION_UPDATE_VIEW_RELEASE_DATE" = "RELEASE DATE";
+"VERSION_UPDATE_VIEW_RELEASE_DATE" = "Release Date";
 
-"VERSION_UPDATE_VIEW_WHATS_NEW" = "WHAT'S NEW";
+"VERSION_UPDATE_VIEW_WHATS_NEW" = "What's New";
 
-"VERSION_UPDATE_VIEW_MIN_OS_VERSION" = "MIN OS VERSION";
+"VERSION_UPDATE_VIEW_MIN_OS_VERSION" = "Minimum OS Version";
 
 "VERSION_UPDATE_VIEW_GO" = "Update";
 
