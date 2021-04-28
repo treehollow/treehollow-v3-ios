@@ -44,7 +44,7 @@ struct UpdateAvailabilityRequest: Request {
     
     func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
         #if targetEnvironment(macCatalyst)
-        // FIXME: Seems cannot get macOS version info.
+        // FIXME: Seems that we cannot get macOS version info with the same bundle id.
         completion(nil, nil)
         #endif
         guard let info = Bundle.main.infoDictionary,

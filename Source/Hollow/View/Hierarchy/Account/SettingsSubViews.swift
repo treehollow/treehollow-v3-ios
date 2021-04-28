@@ -352,7 +352,7 @@ struct OtherSettingsView: View {
             OpenURLSettingsView()
             #endif
             
-            Section(header: Text("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE").padding(.horizontal)) {
+            Section {
                 NavigationLink("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", destination: ExperimentalFeaturesView())
             }
         }
@@ -457,8 +457,16 @@ struct OtherSettingsView: View {
 
         var body: some View {
             List {
-                Text("SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION")
-                    .listRowBackground(Color.clear)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(Image(systemName: "curlybraces"))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.tint)
+                        .font(.largeTitle)
+                        .padding(.bottom)
+
+                    Text("SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION")
+                }
+                .padding(.vertical)
                 
                 Section(
                     header: Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_HEADER").padding(.horizontal),

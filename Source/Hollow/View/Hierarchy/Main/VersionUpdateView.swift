@@ -17,7 +17,8 @@ struct VersionUpdateView: View {
     var body: some View {
         List {
             Section { VStack(alignment: .leading, spacing: 5) {
-                Image(systemName: "app.badge")
+                Text(Image(systemName: "app.badge"))
+                    .fontWeight(.semibold)
                     .foregroundColor(.tint)
                     .font(.largeTitle)
                     .padding(.bottom)
