@@ -72,7 +72,7 @@ struct HollowContentView: View {
             HollowImageView(hollowImage: postDataWrapper.post.hollowImage,
                             description: postDataWrapper.post.text,
                             reloadImage: imageReloadHandler,
-                            minRatio: (options.contains(.lowerImageAspectRatio) ? 0.2 : 0.7) * (UIDevice.isPad ? 2.3 : 1)
+                            minRatio: (options.contains(.lowerImageAspectRatio) ? 0.2 : 0.8) * (UIDevice.isPad ? 2 : 1)
             )
             .roundedCorner(4)
             .frame(maxHeight: maxImageHeight)

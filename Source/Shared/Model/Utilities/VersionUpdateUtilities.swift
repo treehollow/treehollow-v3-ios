@@ -12,7 +12,10 @@ import SwiftUI
 
 struct VersionUpdateUtilities {
     static func handleUpdateAvailabilityResult(data: UpdateAvailabilityRequest.ResultData?) {
-        guard let data = data else { return }
+        guard let data = data else {
+            Defaults[.versionUpdateInfoCache] = nil
+            return
+        }
         if !data.0 {
             Defaults[.latestViewedUpdateVersion] = nil
             Defaults[.versionUpdateInfoCache] = nil

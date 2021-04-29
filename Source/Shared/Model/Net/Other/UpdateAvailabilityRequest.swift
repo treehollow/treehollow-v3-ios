@@ -10,6 +10,7 @@ import Foundation
 import Defaults
 import Alamofire
 import Combine
+import UIKit
 
 struct UpdateAvailabilityRequestResult: Codable {
     struct Result: Codable {
@@ -43,10 +44,11 @@ struct UpdateAvailabilityRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
-        #if targetEnvironment(macCatalyst)
-        // FIXME: Seems that we cannot get macOS version info with the same bundle id.
-        completion(nil, nil)
-        #endif
+        if UIDevice.isMac {
+            // FIXME: Seems that we cannot get macOS version info with the same bundle id.
+            completion(nil, nil)
+            return
+        }
         guard let info = Bundle.main.infoDictionary,
               let currentVersion = info["CFBundleShortVersionString"] as? String,
               let identifier = info["CFBundleIdentifier"] as? String,
