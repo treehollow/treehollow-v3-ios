@@ -205,7 +205,7 @@ struct PushNotificationSettingsView: View {
                         .font(.headline)
                         .padding(.bottom, 3)
                     Text("SETTINGSVIEW_NOTIFICATION_NO_ACCESS_DESCRIPTION")
-                    Link("Go to Settings", destination: URL(string: UIApplication.openSettingsURLString)!)
+                    Link("SETTINGSVIEW_NOTIFICATION_GO_TO_SETTINGS", destination: URL(string: UIApplication.openSettingsURLString)!)
                         .padding(.top, 10)
                 }
                 .padding(.vertical)

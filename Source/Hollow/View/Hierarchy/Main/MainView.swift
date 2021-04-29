@@ -15,9 +15,6 @@ struct MainView: View {
     @State private var showTrending = false
     @State private var showCreatePost = false
     @State private var showMessage = false
-        
-    // Get notification of the scene state
-    @Environment(\.scenePhase) var scenePhase
     
     // Initialize time line view model here to avoid creating repeatedly
     let timelineViewModel = PostListRequestStore(type: .postList)
@@ -31,7 +28,6 @@ struct MainView: View {
                 HeaderView(page: $page, isSearching: $isSearching, showTrending: $showTrending, showMessage: $showMessage)
                     .padding(.horizontal)
                     .padding(.top, 10)
-//                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 3 : 0)
                 
                 // Use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`

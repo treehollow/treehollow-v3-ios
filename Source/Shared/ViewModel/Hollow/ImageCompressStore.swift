@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 /// Protocol for stores which handle image compression.
-protocol ImageCompressStore: class {
+protocol ImageCompressStore: AnyObject {
     var image: HImage? { get set }
     var compressedImage: HImage? { get set }
     var compressedImageBase64String: String? { get set }
@@ -22,17 +22,19 @@ protocol ImageCompressStore: class {
 extension ImageCompressStore {
     func handleDrop(providers: [NSItemProvider]) -> Bool {
         guard providers.count == 1 else { return false }
-//        if let _ = providers.first?.loadObject(ofClass: HImage.self, completionHandler: { image, error in
-//            guard let image = image else { return }
-//            DispatchQueue.main.async {
-//                withAnimation {
-//                    self.cancel()
-//                    self.image = image as? HImage
-//                }
-//            }
-//        }) {
-//            return true
-//        }
+        #if !os(macOS)
+        if let _ = providers.first?.loadObject(ofClass: HImage.self, completionHandler: { image, error in
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.cancel()
+                    self.image = image as? HImage
+                }
+            }
+        }) {
+            return true
+        }
+        #endif
         return false
     }
     

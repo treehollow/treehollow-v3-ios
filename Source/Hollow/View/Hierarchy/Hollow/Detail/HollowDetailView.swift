@@ -90,25 +90,24 @@ struct HollowDetailView: View {
             ScrollView { ScrollViewReader { proxy in
                 let spacing: CGFloat = UIDevice.isMac ? 20 : 13
                 LazyVStack(spacing: 0) {
-                    VStack(spacing: spacing) {
-                        Spacer(minLength: 5)
-                            .fixedSize()
-                        
-                        if store.noSuchPost {
-                            Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
-                                .modifier(HollowTextView.TextModifier(inDetail: true))
-                        } else {
-                            HollowContentView(
-                                postDataWrapper: store.postDataWrapper,
-                                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
-                                voteHandler: store.vote,
-                                imageReloadHandler: { _ in store.loadPostImage() }
-                            )
-//                            .fixedSize(horizontal: false, vertical: true)
-                            .id(-1)
-                        }
+                    Spacer(minLength: 5).fixedSize()
+                    
+                    if store.noSuchPost {
+                        Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
+                            .padding(.top, spacing)
+                            .modifier(HollowTextView.TextModifier(inDetail: true))
+                    } else {
+                        HollowContentView(
+                            postDataWrapper: store.postDataWrapper,
+                            options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
+                            voteHandler: store.vote,
+                            imageReloadHandler: { _ in store.loadPostImage() }
+                        )
+                        .padding(.top, spacing)
+                        .id(-1)
                     }
-                    .padding(.bottom, spacing * 2)
+                    
+                    Spacer(minLength: spacing * 2).fixedSize()
                     
                     if !store.noSuchPost {
                         commentView
