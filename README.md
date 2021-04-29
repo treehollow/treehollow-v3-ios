@@ -19,18 +19,14 @@
 
 树洞客户端使用 iOS 14 SDK，需要 `macOS 11.0+`、`Xcode 12+`。
 
-### 克隆
-
-```
-git clone https://github.com/treehollow/treehollow-v3-ios.git
-```
-
 ### 编译安装
 
 1. 用 Xcode 打开 `Hollow.xcodeproj` 文件
 2. 等待 Swift Package Manager 加载依赖库
 3. 点击项目，在 TARGETS - Hollow - Signing & Capabilities 的 `Team` 中选择你的开发者账号
 4. 编译、运行
+
+加载依赖库可能会由于网络环境的问题出现失败的情况，可以参考 [这篇文章](https://gist.github.com/liang2kl/15237e23b06e737f036b8c1c3e5c0102)。
 
 ## 文档
 
