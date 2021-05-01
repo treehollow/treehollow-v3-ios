@@ -92,21 +92,33 @@ struct AboutView: View {
                     })
             }
             
-            Section(
-                footer:
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(NSLocalizedString("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE", comment: ""))
-                            .bold()
-                        Text("@Cris\n@Elio\n@liang2kl\n@pkuhollow")
-                            .font(.system(.footnote, design: .monospaced))
-                            .lineSpacing(2)
-                    }
-                    .padding([.horizontal, .top])
-            ) {
-
+            Section {
                 NavigationLink(
                     NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
                     destination: DependenciesView()
+                )
+            }
+            
+            Section {
+                NavigationLink(
+                    "ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE",
+                    destination: List {
+                        let contributors = ["@Cris", "@Elio", "@liang2kl", "@pkuhollow"]
+                        ImageTitledStack(spacing: 5, systemImageName: "point.topleft.down.curvedto.point.bottomright.up") {
+                            Text("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE")
+                                .fontWeight(.bold)
+                                .foregroundColor(.tint)
+                                .padding(.bottom, 5)
+                            ForEach(contributors, id: \.self) { name in
+                                Text(verbatim: name)
+                                    .dynamicFont(size: 16, design: .monospaced)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding(.vertical)
+                    }
+                    .defaultListStyle()
+                    .navigationTitle("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE")
                 )
             }
             

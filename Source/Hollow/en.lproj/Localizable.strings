@@ -628,13 +628,11 @@
 
 "SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL" = "Reduce Image Render Quality";
 
-"SETTINGSVIEW_OTHER_EXP_AVATAR_HEADER" = "Avatar";
+"SETTINGSVIEW_APPEARANCE_AVATAR_HDR" = "Avatar Style";
 
-"SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER" = "Avatar rendering has some issues on a few devices. Turn on the options if you have encountered hitch problems during scrolling. Noted that enabling Off-Screen Render might result in even lower refresh rate.";
+"SETTINGSVIEW_APPEARANCE_GRAPHICAL_AVATAR_STYLE" = "Graphical";
 
-"SETTINGSVIEW_OTHER_EXP_AVATAR_OFFSCREEN_LABEL" = "Enable Off-Screen Render";
-
-"SETTINGSVIEW_OTHER_EXP_AVATAR_SIMPLE_LABEL" = "Use Simple Avatars";
+"SETTINGSVIEW_APPEARANCE_TEXTUAL_AVATAR_STYLE" = "Textual";
 
 "VERSION_UPDATE_VIEW_VERSION" = "Version";
 
@@ -651,3 +649,5 @@
 "VERSION_UPDATE_VIEW_CLOSE" = "Close";
 
 "SETTINGSVIEW_NOTIFICATION_GO_TO_SETTINGS" = "Go to Settings";
+
+"SETTINGSVIEW_NOTIFICATION_UPDATE_NOTIFICATION" = "Version Updates";

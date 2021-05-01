@@ -15,19 +15,26 @@ struct Avatar: View {
     var resolution: Int
     var padding: CGFloat
     var name: String
+    var options: Options
     @Default(.usingSimpleAvatar) var usingSimpleAvatar
-    @Default(.usingOffscreenRender) var usingOffscreenRender
     
-    init(foregroundColor: Color, backgroundColor: Color, resolution: Int, padding: CGFloat, hashValue: Int, name: String) {
+    private var showGraphical: Bool {
+        if options.contains(.forceGraphical) { return true }
+        if options.contains(.forceTextual) { return false }
+        return !usingSimpleAvatar
+    }
+    
+    init(foregroundColor: Color, backgroundColor: Color, resolution: Int, padding: CGFloat, hashValue: Int, name: String, options: Options = []) {
         self.paddingColor = foregroundColor
         self.colors = AvatarGenerator.colorData(foregroundColor: foregroundColor, backgroundColor: backgroundColor, resolution: resolution, hashValue: hashValue)
         self.resolution = resolution
         self.padding = padding
         self.name = name
+        self.options = options
     }
     
     var body: some View {
-        if !usingSimpleAvatar {
+        if showGraphical {
             VStack(spacing: 0) {
                 ForEach(0..<resolution) { x in
                     HStack(spacing: 0) {
@@ -40,7 +47,7 @@ struct Avatar: View {
                     }
                 }
             }
-            .conditionalDrawingGroup(usingOffscreenRender)
+            .drawingGroup()
             .aspectRatio(1, contentMode: .fill)
             .padding(padding)
             .background(paddingColor)
@@ -61,9 +68,10 @@ struct Avatar: View {
     }
 }
 
-private extension View {
-    @ViewBuilder func conditionalDrawingGroup(_ apply: Bool) -> some View {
-        if apply { self.drawingGroup() }
-        else { self }
+extension Avatar {
+    struct Options: OptionSet {
+        let rawValue: Int
+        static let forceGraphical = Options(rawValue: 1 << 1)
+        static let forceTextual = Options(rawValue: 1 << 2)
     }
 }

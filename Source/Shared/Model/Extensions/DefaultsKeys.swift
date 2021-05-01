@@ -72,12 +72,14 @@ extension Defaults.Keys {
     static let tempCustomColorSet = Key<ColorSet?>("user.settings.temp.custom.color.set", default: nil)
     /// The method to handle links.
     static let openURLMethod = Key<OpenURLHelper.OpenMethod>("user.settings.open.url.method", default: .inApp)
+    /// Whether to show an alert when the update is available.
+    static let showUpdateAlert = Key<Bool>("user.settings.show.update.alert", default: true)
+    
+    static let usingSimpleAvatar = Key<Bool>("user.settings.using.simple.avatar", default: true)
 }
 
 // MARK: - Experimental Features
 extension Defaults.Keys {
     static let reduceImageQuality = Key<Bool>("user.settings.reduce.image.quality", default: false)
-    static let usingOffscreenRender = Key<Bool>("user.settings.using.offscreen.render", default: false)
-    static let usingSimpleAvatar = Key<Bool>("user.settings.using.simple.avatar", default: true)
 }
 #endif

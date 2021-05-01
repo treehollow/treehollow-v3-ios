@@ -7,35 +7,28 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct DeviceListView: View {
     @ObservedObject var deviceListStore = DeviceListStore()
-
+    
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                ForEach(deviceListStore.deviceData.devices, id: \.deviceUUID) { device in
-                    DeviceCardView(
-                        device: device,
-                        isCurrentDevice:
-                            deviceListStore.deviceData.thisDeviceUUID ==
-                            device.deviceUUID,
-                        isLoggingout:
-                            deviceListStore.loggingoutUUID ==
-                            device.deviceUUID,
-                        logoutAction: deviceListStore.logout
-                    )
-                    .padding(.horizontal)
-                    .padding(.top)
-                    .disabled(deviceListStore.isLoading)
-                }
-                
-                // Placeholder
-                Spacer().horizontalCenter()
+        List {
+            ForEach(deviceListStore.deviceData.devices, id: \.deviceUUID) { device in
+                DeviceCardView(
+                    device: device,
+                    isCurrentDevice:
+                        deviceListStore.deviceData.thisDeviceUUID ==
+                        device.deviceUUID,
+                    isLoggingout:
+                        deviceListStore.loggingoutUUID ==
+                        device.deviceUUID,
+                    logoutAction: deviceListStore.logout
+                )
+                .padding(.vertical)
+                .disabled(deviceListStore.isLoading)
             }
-            .padding(.bottom)
         }
-        .background(Color.background.ignoresSafeArea())
         .navigationBarTitle(NSLocalizedString("DEVICELISTVIEW_NAV_TITLE", comment: ""), displayMode: .large)
         .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))
@@ -51,12 +44,12 @@ struct DeviceListView: View {
 extension DeviceListView {
     private struct DeviceCardView: View {
         @State private var alertPresented: Bool = false
-
+        
         var device: DeviceInformationType
         var isCurrentDevice: Bool
         var isLoggingout: Bool
         var logoutAction: (String) -> Void
-
+        
         @ScaledMetric(wrappedValue: 14, relativeTo: .body) var body14: CGFloat
         @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
         @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize
@@ -96,36 +89,30 @@ extension DeviceListView {
                     }
                 }
             }
-            .padding()
             .background(
-                Color.hollowCardBackground.overlay(
-                    Text(device.deviceType.description)
-                        .fontWeight(.semibold)
-                        .font(.system(.title, design: .monospaced))
-                        .foregroundColor(.uiColor(.systemFill))
-                        .padding(.top)
-                        .padding(.trailing)
-                        .trailing()
-                        .top()
-                )
+                Text(device.deviceType.description)
+                    .fontWeight(.semibold)
+                    .font(.system(.title, design: .monospaced))
+                    .foregroundColor(.uiColor(.systemFill))
+                    .trailing()
+                    .top()
             )
-            .roundedCorner(15)
             
             .styledAlert(
                 presented: $alertPresented,
                 title: NSLocalizedString("DEVICE_LIST_LOGOUT_ALERT_TITLE", comment: ""),
                 message: "\(device.deviceInfo)",
                 buttons: [
-                .init(text: NSLocalizedString("DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON", comment: ""), style: .destructive, action: { logoutAction(device.deviceUUID) }),
-                .cancel
-            ])
+                    .init(text: NSLocalizedString("DEVICE_LIST_LOGOUT_ALERT_CONFIRM_BUTTON", comment: ""), style: .destructive, action: { logoutAction(device.deviceUUID) }),
+                    .cancel
+                ])
         }
         
         private func section(header: String, content: String) -> some View {
             VStack(alignment: .leading, spacing: body5) {
                 Text(header.uppercased())
                     .dynamicFont(size: 15, weight: .semibold)
-                    .foregroundColor(.hollowContentText)
+                    .foregroundColor(.tint)
                 Text(content)
                     .font(.system(.body, design: .monospaced))
             }

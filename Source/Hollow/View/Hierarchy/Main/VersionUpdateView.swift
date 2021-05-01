@@ -17,18 +17,19 @@ struct VersionUpdateView: View {
     var body: some View {
         List {
             Section {
-                ImageTitledStack(systemImageName: "app.badge") {
+                ImageTitledStack(systemImageName: "rays") {
                     Text("VERSION_UPDATE_VIEW_WHATS_NEW")
                         .font(.headline)
                         .padding(.bottom, 5)
                     Text(verbatim: info.releaseNotes)
                         .foregroundColor(.secondary)
+                        .dynamicFont(size: 16)
                 }
                 .padding(.vertical)
                 
-                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_VERSION", secondaryText: info.version)
-                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_RELEASE_DATE", secondaryText: String(info.currentVersionReleaseDate.prefix(10)))
-                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_MIN_OS_VERSION", secondaryText: info.minimumOsVersion)
+                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_VERSION", secondaryText: info.version, options: .monospaced)
+                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_RELEASE_DATE", secondaryText: String(info.currentVersionReleaseDate.prefix(10)), options: .monospaced)
+                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_MIN_OS_VERSION", secondaryText: info.minimumOsVersion, options: .monospaced)
 
             }
 

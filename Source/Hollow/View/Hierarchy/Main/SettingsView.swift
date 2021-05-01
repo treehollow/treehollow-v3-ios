@@ -12,17 +12,8 @@ struct SettingsView: View {
     @Binding var presented: Bool
     @Default(.versionUpdateInfoCache) var versionUpdateInfoCache
     
-    var appInfo: String {
-        let info = Constants.Application.appLocalizedName +
-            NSLocalizedString("APPINFO_VERSION_PREFIX", comment: "") +
-            Constants.Application.appVersion +
-            " (\(Constants.Application.buildVersion))"
-        #if DEBUG
-        return "DEBUG VERSION\n" + info
-        #else
-        return info
-        #endif
-    }
+    @State private var date = Date().startOfDay
+    @ScaledMetric(wrappedValue: 20) var avatarWidth: CGFloat
     
     var body: some View {
         List {
@@ -55,21 +46,19 @@ struct SettingsView: View {
                         }
                     })
                 
-                Section(
-                    footer: Text(appInfo)
-                        .padding(.horizontal)
-                ) {
+                Section {
                     NavigationLink(
                         destination: AboutView(),
                         label: {
-                            Text("ACCOUNTVIEW_ABOUT_CELL")
+                            let appInfo = "\(Constants.Application.appVersion) (\(Constants.Application.buildVersion))"
+                            TextualLabel(primaryText: "ACCOUNTVIEW_ABOUT_CELL", secondaryText: appInfo)
                         })
                     
                     if let cache = versionUpdateInfoCache {
                         NavigationLink(
                             destination: VersionUpdateView(info: cache, showItem: false),
                             label: {
-                                Text("VERSION_UPDATE_VIEW_NAV_TITLE")
+                                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_NAV_TITLE", secondaryText: cache.version)
                             })
                     }
                 }

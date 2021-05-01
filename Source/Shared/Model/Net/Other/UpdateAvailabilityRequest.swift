@@ -73,6 +73,7 @@ struct UpdateAvailabilityRequest: Request {
                 
                 let updateAvailable = currentVersion != result.results.first!.version
                 completion((updateAvailable, result.results.first!), nil)
+                completion(nil, .loadingCompleted)
             }
     }
 }

@@ -8,11 +8,6 @@
 
 import Combine
 import Defaults
-
-#if canImport(Rechability)
-import Connectivity
-#endif
-
 import SwiftUI
 
 class AppModel: ObservableObject {
@@ -20,17 +15,10 @@ class AppModel: ObservableObject {
     
     @Published var isInMainView = Defaults[.accessToken] != nil && Defaults[.hollowConfig] != nil
     
-    #if canImport(Rechability)
-    var connectedToNetwork = Connectivity().status.isConnected
-    
     init() {
-        ConnectivityPublisher()
-            .map { $0.status.isConnected }
-            .removeDuplicates(by: { $0 == $1 })
-            .sinkOnMainThread(receiveValue: { connected in
-                if connected { LineSwitchManager.testAll() }
-            })
+        // Chcek for version update
+        UpdateAvailabilityRequest.defaultPublisher
+            .sinkOnMainThread(receiveValue: VersionUpdateUtilities.handleUpdateAvailabilityResult)
             .store(in: &cancellables)
     }
-    #endif
 }

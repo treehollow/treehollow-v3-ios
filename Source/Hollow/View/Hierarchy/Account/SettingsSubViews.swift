@@ -15,8 +15,10 @@ struct AppearanceSettingsView: View {
     @Default(.colorScheme) var customColorScheme
     @Default(.customColorSet) var customColorSet
     @Default(.tempCustomColorSet) var tempColorSet
+    @Default(.usingSimpleAvatar) var usingSimpleAvatar
     
     @ScaledMetric(wrappedValue: 17) var colorHeight: CGFloat
+    @ScaledMetric(wrappedValue: 30) var avatarHeight: CGFloat
     
     var body: some View {
         List {
@@ -85,6 +87,30 @@ struct AppearanceSettingsView: View {
                         }
                     }
                 }
+            }
+            
+            Section(header: Text("SETTINGSVIEW_APPEARANCE_AVATAR_HDR").padding(.horizontal)) {
+                Button(action: { usingSimpleAvatar = false }) { HStack {
+                    Avatar(foregroundColor: .hollowContentVoteGradient1, backgroundColor: .white, resolution: 4, padding: avatarHeight * 0.1, hashValue: 2021, name: "", options: .forceGraphical)
+                        .frame(width: avatarHeight)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.hollowContentVoteGradient1))
+                    Text("SETTINGSVIEW_APPEARANCE_GRAPHICAL_AVATAR_STYLE")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    CheckmarkButtonImage(isOn: !usingSimpleAvatar)
+                }}
+                
+                Button(action: { usingSimpleAvatar = true }) { HStack {
+                    Avatar(foregroundColor: .hollowContentVoteGradient1, backgroundColor: .white, resolution: 4, padding: avatarHeight * 0.1, hashValue: 0, name: "TH", options: .forceTextual)
+                        .frame(width: avatarHeight)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.hollowContentVoteGradient1))
+                    Text("SETTINGSVIEW_APPEARANCE_TEXTUAL_AVATAR_STYLE")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    CheckmarkButtonImage(isOn: usingSimpleAvatar)
+                }}
             }
         }
         .defaultListStyle()
@@ -197,6 +223,8 @@ struct PushNotificationSettingsView: View {
     @State private var isCheckingAuthorization = true
     @ObservedObject var viewModel: ViewModel
     
+    @Default(.showUpdateAlert) var showUpdateAlert
+    
     var body: some View {
         List {
             if !granted && !isCheckingAuthorization {
@@ -210,29 +238,41 @@ struct PushNotificationSettingsView: View {
                 }
                 .padding(.vertical)
             } else {
-                ForEach(PushNotificationType.Enumeration.allCases) { type in
-                    // Read only mode
-                    Button(
-                        action: {
-                            viewModel.tempNotificationType[keyPath: type.keyPath].toggle()
-                        }) {
-                        HStack {
-                            Text(type.description)
-                            Spacer()
-                            if isEditing || viewModel.isLoading {
-                                let selected = viewModel.tempNotificationType[keyPath: type.keyPath]
-                                CheckmarkButtonImage(isOn: selected)
-                            } else {
-                                if viewModel.notificationType[keyPath: type.keyPath] {
-                                    Image(systemName: "checkmark")
-                                        .imageScale(.medium)
+                Section {
+                    ForEach(PushNotificationType.Enumeration.allCases) { type in
+                        // Read only mode
+                        Button(
+                            action: {
+                                viewModel.tempNotificationType[keyPath: type.keyPath].toggle()
+                            }) {
+                            HStack {
+                                Text(type.description)
+                                Spacer()
+                                if isEditing || viewModel.isLoading {
+                                    let selected = viewModel.tempNotificationType[keyPath: type.keyPath]
+                                    CheckmarkButtonImage(isOn: selected)
+                                } else {
+                                    if viewModel.notificationType[keyPath: type.keyPath] {
+                                        Image(systemName: "checkmark")
+                                            .imageScale(.medium)
+                                    }
                                 }
                             }
                         }
+                        .foregroundColor(.primary)
+                        .disabled(!isEditing || viewModel.isLoading)
+                        
                     }
-                    .foregroundColor(.primary)
-                    .disabled(!isEditing)
-                    
+                }
+                
+                Section {
+                    HStack {
+                        Text("SETTINGSVIEW_NOTIFICATION_UPDATE_NOTIFICATION")
+                        Spacer()
+                        Toggle("", isOn: $showUpdateAlert)
+                            .toggleStyle(SwitchToggleStyle(tint: .tint))
+                            .labelsHidden()
+                    }
                 }
             }
         }
@@ -271,7 +311,7 @@ struct PushNotificationSettingsView: View {
         )
         .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
         .modifier(AppModelBehaviour(state: viewModel.appModelState))
-        .modifier(LoadingIndicator(isLoading: viewModel.isLoading, disableWhenLoading: true))
+        .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
         .onAppear { checkForPermissions() }
         .onReceive(
             NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
@@ -458,8 +498,6 @@ struct OtherSettingsView: View {
     
     private struct ExperimentalFeaturesView: View {
         @Default(.reduceImageQuality) var reduceImageQuality
-        @Default(.usingOffscreenRender) var usingOffscreenRender
-        @Default(.usingSimpleAvatar) var usingSimpleAvatar
 
         var body: some View {
             List {
@@ -481,43 +519,6 @@ struct OtherSettingsView: View {
                     }
                 }
                 
-                Section(
-                    header: Text("SETTINGSVIEW_OTHER_EXP_AVATAR_HEADER").padding(.horizontal),
-                    footer: Text("SETTINGSVIEW_OTHER_EXP_AVATAR_FOOTER").padding(.horizontal)) {
-                    HStack {
-                        Text("SETTINGSVIEW_OTHER_EXP_AVATAR_OFFSCREEN_LABEL")
-                        Spacer()
-                        let isOn = Binding(
-                            get: { usingOffscreenRender },
-                            set: { on in withAnimation {
-                                if on { usingSimpleAvatar = false }
-                                usingOffscreenRender = on
-                            }}
-                        )
-
-                        Toggle("", isOn: isOn)
-                            .toggleStyle(SwitchToggleStyle(tint: .tint))
-                            .labelsHidden()
-                    }
-                    
-                    HStack {
-                        Text("SETTINGSVIEW_OTHER_EXP_AVATAR_SIMPLE_LABEL")
-                        Spacer()
-                        
-                        let isOn = Binding(
-                            get: { usingSimpleAvatar },
-                            set: { on in withAnimation {
-                                if on { usingOffscreenRender = false }
-                                usingSimpleAvatar = on
-                            }}
-                        )
-                        Toggle("", isOn: isOn)
-                            .toggleStyle(SwitchToggleStyle(tint: .tint))
-                            .labelsHidden()
-                    }
-
-                }
-
             }
             .defaultListStyle()
             .navigationTitle(NSLocalizedString("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", comment: ""))

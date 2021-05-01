@@ -23,7 +23,7 @@ struct HollowDetailView: View {
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
-    @ScaledMetric var commentViewBottomPadding: CGFloat = 50
+    @ScaledMetric var commentViewBottomPadding: CGFloat = 100
     
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme

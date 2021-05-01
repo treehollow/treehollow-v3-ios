@@ -35,11 +35,6 @@ struct HollowApp: App {
             .environmentObject(appModel)
             // Set the color scheme when appear
             .onAppear { IntegrationUtilities.setCustomColorScheme() }
-            // Chcek for version update
-            .onReceive(
-                UpdateAvailabilityRequest.defaultPublisher,
-                perform: VersionUpdateUtilities.handleUpdateAvailabilityResult
-            )
             // Fetch config when re-entering foreground
             .onReceive(
                 NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),

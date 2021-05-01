@@ -107,9 +107,18 @@ extension HAppDelegate {
 
 extension HAppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let content = response.notification.request.content
+        let request = response.notification.request
+        let content = request.content
         
-        if let type = content.userInfo["type"] as? Int, type == 1 {
+        if request.identifier == "VERSION_UPDATE",
+           let urlString = content.userInfo["url"] as? String,
+           let url = URL(string: urlString) {
+            #if os(macOS)
+            NSWorkspace.shared.open(url)
+            #else
+            UIApplication.shared.open(url)
+            #endif
+        } else if let type = content.userInfo["type"] as? Int, type == 1 {
             // System message for type 1
             presentMessageView()
         } else if let postId = content.userInfo["pid"] as? Int {
