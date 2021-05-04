@@ -84,7 +84,6 @@ class UnregisterStore: ObservableObject, AppModelEnvironment {
         
         request.publisher
             .sinkOnMainThread(receiveError: {
-                print($0)
                 withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: $0)
             }, receiveValue: { _ in

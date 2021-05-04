@@ -34,11 +34,6 @@ struct AppModelBehaviour: ViewModifier {
                 withAnimation { appModel.isInMainView = show }
                 if !show { restore() }
             }
-        
-//            .onChange(of: state.isLoggingIn) { loggingIn in
-//                withAnimation { appModel.isLoggingIn = loggingIn }
-//                print(appModel.isLoggingIn)
-//            }
             
     }
     

@@ -45,7 +45,6 @@ extension DefaultRequest {
         transformer: @escaping (Result) -> ResultData?,
         completion: @escaping (ResultData?, DefaultRequestError?) -> Void
     ) {
-        print(parameters)
         let urlRoot = LineSwitchManager.lineSelection(for: urlBase, type: .apiRoot)
         AF.request(
             urlRoot + urlPath,
@@ -67,7 +66,6 @@ extension DefaultRequest {
                             return
                         }
                         let result = try jsonDecoder.decode(Result.self, from: data)
-                        print(result)
                         if result.code >= 0 {
                             // result code >= 0 valid!
                             if let resultData = transformer(result) {

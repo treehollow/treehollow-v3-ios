@@ -136,7 +136,6 @@ struct IntegrationUtilities {
 extension IntegrationUtilities {
     static private func getSplitViewController(of parent: UIViewController) -> UISplitViewController? {
         for child in parent.children {
-            print(child)
             if let child = child as? UISplitViewController { return child }
             if let vc = getSplitViewController(of: child) { return vc }
         }
