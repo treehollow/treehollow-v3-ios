@@ -23,7 +23,9 @@ struct AccountInfoView: View {
                     destination: ChangePasswordView().environmentObject(viewModel)
                 )
                 
+                #if !targetEnvironment(macCatalyst)
                 NavigationLink(NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_UNREGISTER_BUTTON", comment: ""), destination: UnregisterView())
+                #endif
             }
             
             Section {

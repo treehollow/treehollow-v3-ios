@@ -24,4 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
     }
+    
+    #if targetEnvironment(macCatalyst)
+    override func buildMenu(with builder: UIMenuBuilder) {
+        builder.remove(menu: .file)
+        builder.remove(menu: .edit)
+        builder.remove(menu: .format)
+        builder.remove(menu: .help)
+        builder.remove(menu: .services)
+        builder.remove(menu: .toolbar)
+    }
+    #endif
 }

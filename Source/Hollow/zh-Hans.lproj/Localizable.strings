@@ -234,6 +234,8 @@
 
 "UNREGISTERVIEW_BUTTON_UNREGISTER" = "注销";
 
+"UNREGISTERVIEW_NOT_SUPPORT_MAC_NOTICE" = "注销账户在macOS上暂时不支持。";
+
 /* No comment provided by engineer. */
 "LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE" = "重置密码";
 

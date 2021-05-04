@@ -31,6 +31,11 @@ struct UnregisterView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            #if targetEnvironment(macCatalyst)
+            Text("UNREGISTERVIEW_NOT_SUPPORT_MAC_NOTICE")
+                .horizontalCenter()
+                .verticalCenter()
+            #else
             ScrollView(showsIndicators: false) {
                 VStack(spacing: ViewConstants.listVStackSpacing) {
                     MyTextField<EmptyView>(
@@ -80,6 +85,7 @@ struct UnregisterView: View {
                 text: buttonText
             )
             .disabled(disableButton)
+            #endif
         }
         .padding(.horizontal)
         .padding(.horizontal)

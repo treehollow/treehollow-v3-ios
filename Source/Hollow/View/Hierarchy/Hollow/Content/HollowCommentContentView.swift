@@ -25,7 +25,7 @@ struct HollowCommentContentView: View {
     static let avatarWidth: CGFloat = 45
     static let avatarProportion: CGFloat = 0.7
     
-    @ScaledMetric(wrappedValue: 50, relativeTo: .body) var labelWidth: CGFloat
+    @ScaledMetric(wrappedValue: UIDevice.isPad ? 60 : 50, relativeTo: .body) var labelWidth: CGFloat
     @ScaledMetric(wrappedValue: avatarWidth, relativeTo: .body) var body45: CGFloat
     @ScaledMetric(wrappedValue: 5, relativeTo: .body) var body5: CGFloat
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
@@ -34,6 +34,17 @@ struct HollowCommentContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
+        // View created by view builder in macOS is HStack by default, so
+        // we can only explictly wrap them inside a VStack. The scrolling
+        // issue does not appear on macOS so this trick is OK.
+        #if targetEnvironment(macCatalyst)
+        VStack(spacing: 0) { content }
+        #else
+        content
+        #endif
+    }
+    
+    @ViewBuilder var content: some View {
         if let padding = contentVerticalPadding {
             Spacer(minLength: padding)
                 .fixedSize()

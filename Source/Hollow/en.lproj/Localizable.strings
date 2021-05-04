@@ -243,6 +243,8 @@
 
 "UNREGISTERVIEW_BUTTON_UNREGISTER" = "Unregister";
 
+"UNREGISTERVIEW_NOT_SUPPORT_MAC_NOTICE" = "Unregistering is not support on macOS.";
+
 /* No comment provided by engineer. */
 "LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE" = "Restore Password";
 
