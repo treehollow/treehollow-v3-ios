@@ -13,7 +13,7 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 typealias HAppDelegate = AppDelegate
 typealias HApplication = NSApplication
 #else
@@ -99,7 +99,9 @@ extension HAppDelegate {
             guard granted else { return }
             // Register for APN
             DispatchQueue.main.async {
+                #if !targetEnvironment(simulator)
                 application.registerForRemoteNotifications()
+                #endif
             }
         }
     }
@@ -113,7 +115,7 @@ extension HAppDelegate: UNUserNotificationCenterDelegate {
         if request.identifier == "VERSION_UPDATE",
            let urlString = content.userInfo["url"] as? String,
            let url = URL(string: urlString) {
-            #if os(macOS)
+            #if os(macOS) && !targetEnvironment(macCatalyst)
             NSWorkspace.shared.open(url)
             #else
             UIApplication.shared.open(url)
@@ -141,7 +143,7 @@ extension HAppDelegate: UNUserNotificationCenterDelegate {
     
 }
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 extension AppDelegate {
     // TODO: Implementation
     private func presentDetail(postId: Int, commentId: Int?) {

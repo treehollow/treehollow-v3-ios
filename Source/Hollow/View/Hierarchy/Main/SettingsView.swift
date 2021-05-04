@@ -56,10 +56,9 @@ struct SettingsView: View {
                     
                     if let cache = versionUpdateInfoCache {
                         NavigationLink(
-                            destination: VersionUpdateView(info: cache, showItem: false),
-                            label: {
-                                TextualLabel(primaryText: "VERSION_UPDATE_VIEW_NAV_TITLE", secondaryText: cache.version)
-                            })
+                            "VERSION_UPDATE_VIEW_NAV_TITLE",
+                            destination: VersionUpdateView(info: cache, showItem: false)
+                        )
                     }
                 }
             }

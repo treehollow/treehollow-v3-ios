@@ -46,7 +46,7 @@ struct MyTextField<Content>: View where Content: View {
             .background(backgroundColor)
             .roundedCorner(10)
             
-            if let footer = footer {
+            if let footer = footer, footer != "" {
                 Text(footer)
                     .dynamicFont(size: 12)
                     .foregroundColor(.secondary)

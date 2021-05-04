@@ -10,17 +10,19 @@ import SwiftUI
 
 struct ReCAPTCHAPageView: View {
     @Binding var presented: Bool
+    var selfDismiss = false
     let successHandler: (String) -> Void
     @State private var pageLoadingFinish = false
 
     var body: some View {
         VStack {
             Button(action: {
+                if selfDismiss { dismissSelf() }
                 withAnimation {
                     presented = false
                 }
             }) {
-                #if !os(macOS)
+                #if !os(macOS) || targetEnvironment(macCatalyst)
                 Image(systemName: "xmark")
                     .foregroundColor(.hollowContentText)
                     .dynamicFont(size: 20, weight: .medium)
@@ -37,7 +39,10 @@ struct ReCAPTCHAPageView: View {
                 withAnimation {
                     pageLoadingFinish = true
                 }
-            }, successHandler: successHandler)
+            }, successHandler: {
+                successHandler($0)
+                if selfDismiss { dismissSelf() }
+            })
             .onAppear {
                 pageLoadingFinish = false
             }
@@ -45,7 +50,7 @@ struct ReCAPTCHAPageView: View {
         .padding()
         .overlay(Group {
             if !pageLoadingFinish {
-                #if !os(macOS)
+                #if !os(macOS) || targetEnvironment(macCatalyst)
                 Spinner(color: .buttonGradient1, desiredWidth: 30)
                 #else
                 ProgressView("Loading")

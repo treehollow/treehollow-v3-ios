@@ -21,7 +21,7 @@ struct AccountCreationRequestConfiguration {
     /// Email valid code, optional, but one of `oldToken` and `validCode` must be present.
     var validCode: String?
     // TODO: Device token for APNs
-    var deviceToken: String
+    var deviceToken: String?
     /// See `AccountCreationConfiguration`
     ///
     var apiRoot: [String]
@@ -68,8 +68,11 @@ struct AccountCreationRequest: DefaultRequest {
             "password_hashed": self.configuration.password.sha256().sha256(),
             "device_type": self.configuration.deviceType.string,
             "device_info": self.configuration.deviceInfo,
-            "ios_device_token": self.configuration.deviceToken,
         ]
+        
+        if let token = configuration.deviceToken {
+            parameters["ios_device_token"] = token
+        }
         
         if let validCode = self.configuration.validCode {
             parameters["valid_code"] = validCode

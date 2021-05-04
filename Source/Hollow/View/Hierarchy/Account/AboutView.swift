@@ -59,24 +59,18 @@ struct AboutView: View {
 
             }
             
-            Section(
-                footer:
+            Section {
+                ImageTitledStack(systemImageName: "point.topleft.down.curvedto.point.bottomright.up") {
                     Text("ABOUTVIEW_OPENSOURCE_NOTICE")
-                    .padding(.horizontal)
-            ) {
-                Button(action: {
-                    openURL(URL(string: "https://github.com/treehollow/treehollow-v3-ios")!)
-                }) {
-                    Image("github-icon")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxHeight: 15)
-                        .foregroundColor(.primary)
                 }
-                Button("ABOUTVIEW_OPENSOURCE_NOTICE_LICENSE", action: {
-                    openURL(URL(string: "https://www.gnu.org/licenses/agpl-3.0.html")!)
-                })
-                .accentColor(.primary)
+                .padding(.vertical)
+                Button("ABOUTVIEW_GITHUB_REPO_LABEL") {
+                    openURL(URL(string: "https://github.com/treehollow/treehollow-v3-ios")!)
+                }
+                NavigationLink(
+                    NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
+                    destination: DependenciesView()
+                )
             }
             
             if UIDevice.isPad {
@@ -94,17 +88,10 @@ struct AboutView: View {
             
             Section {
                 NavigationLink(
-                    NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
-                    destination: DependenciesView()
-                )
-            }
-            
-            Section {
-                NavigationLink(
                     "ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE",
                     destination: List {
                         let contributors = ["@Cris", "@Elio", "@liang2kl", "@pkuhollow"]
-                        ImageTitledStack(spacing: 5, systemImageName: "point.topleft.down.curvedto.point.bottomright.up") {
+                        ImageTitledStack(spacing: 5, systemImageName: "person.3") {
                             Text("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE")
                                 .fontWeight(.bold)
                                 .foregroundColor(.tint)
@@ -117,14 +104,15 @@ struct AboutView: View {
                         }
                         .padding(.vertical)
                     }
+                    .navigationBarTitleDisplayMode(.inline)
                     .defaultListStyle()
                     .navigationTitle("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE")
                 )
             }
             
         }
+        .navigationTitle("ACCOUNTVIEW_ABOUT_CELL")
         .defaultListStyle()
-        .navigationBarTitle(NSLocalizedString("ACCOUNTVIEW_ABOUT_CELL", comment: ""))
     }
 }
 

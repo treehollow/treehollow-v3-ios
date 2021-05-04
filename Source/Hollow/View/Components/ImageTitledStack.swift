@@ -29,6 +29,7 @@ struct ImageTitledStack<Content: View>: View {
                 .font(.largeTitle)
                 .padding(.bottom)
             content()
+                .lineSpacing(5)
         }
     }
 }

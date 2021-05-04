@@ -51,7 +51,7 @@ class AccountInfoStore: ObservableObject, AppModelEnvironment {
             }, receiveValue: { _ in
                 withAnimation { self.isLoading = false }
                 // FIXME: macOS
-                #if !os(macOS)
+                #if !os(macOS) || targetEnvironment(macCatalyst)
                 ToastManager.shared.show(configuration: .success(title: nil, body: NSLocalizedString("CHANGE_PASSWORD_SUCCESS_ALERT_TITLE", comment: "")))
                 #endif
 

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 private extension NSBitmapImageRep {
     var png: Data? { representation(using: .png, properties: [:]) }
 }

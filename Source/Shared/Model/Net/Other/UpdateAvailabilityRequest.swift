@@ -57,23 +57,42 @@ struct UpdateAvailabilityRequest: Request {
             return
         }
         
-        AF.request(url.absoluteString, method: .get)
-            .validate()
-            .responseJSON { response in
-                guard let data = response.data else {
-                    completion(nil, .unknown)
-                    return
-                }
-                
-                guard let result = try? JSONDecoder().decode(Result.self, from: data),
-                      !result.results.isEmpty else {
-                    completion(nil, .decodeFailed)
-                    return
-                }
-                
-                let updateAvailable = currentVersion != result.results.first!.version
-                completion((updateAvailable, result.results.first!), nil)
-                completion(nil, .loadingCompleted)
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        let session = URLSession(configuration: configuration)
+        
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                completion(nil, .unknown)
+                return
             }
+            
+            guard let result = try? JSONDecoder().decode(Result.self, from: data),
+                  !result.results.isEmpty else {
+                completion(nil, .decodeFailed)
+                return
+            }
+            
+            let updateAvailable = isUpdateAvailable(currentVersion: currentVersion, fetchedVersion: result.results.first!.version)
+            completion((updateAvailable, result.results.first!), nil)
+            completion(nil, .loadingCompleted)
+        }
+        task.resume()
     }
+    
+    private func isUpdateAvailable(currentVersion: String, fetchedVersion: String) -> Bool {
+        let currentNumbers = currentVersion.split(separator: ".").compactMap({ Int($0) })
+        let fetchedNumbers = fetchedVersion.split(separator: ".").compactMap({ Int($0) })
+        let minDigits = min(currentNumbers.count, fetchedNumbers.count)
+        
+        // e.g. 3.0.1 > 3.0.0; 3.1.0 > 3.0
+        for index in 0..<minDigits {
+            if currentNumbers[index] < fetchedNumbers[index] { return true }
+            if currentNumbers[index] > fetchedNumbers[index] { return false }
+        }
+        
+        // e.g. 3.0.1 > 3.0
+        return fetchedNumbers.count > currentNumbers.count
+    }
+
 }

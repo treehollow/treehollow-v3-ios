@@ -57,7 +57,7 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
                 self.refreshHandler?()
                 self.presented.wrappedValue = false
                 if self.selfDismiss {
-                    #if !os(macOS)
+                    #if !os(macOS) || targetEnvironment(macCatalyst)
                     if let vc = IntegrationUtilities.topViewController() {
                         vc.dismiss(animated: true)
                     }

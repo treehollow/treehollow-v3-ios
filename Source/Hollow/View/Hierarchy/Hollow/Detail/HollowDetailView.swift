@@ -45,7 +45,6 @@ struct HollowDetailView: View {
                             postData: store.postDataWrapper.post,
                             compact: false,
                             // Show text on header when the text is not visible
-                            //                            showContent: headerFrame.maxY > commentViewFrame.minY,
                             showContent: showHeaderContent,
                             starAction: store.star,
                             isLoading: store.isLoading,
@@ -87,6 +86,8 @@ struct HollowDetailView: View {
 
             
             // Contents
+            // In order to preserve space for the comments, we don't apply padding around
+            // the container but instead, each individual component.
             ScrollView { ScrollViewReader { proxy in
                 let spacing: CGFloat = UIDevice.isMac ? 20 : 13
                 LazyVStack(spacing: 0) {
@@ -95,6 +96,7 @@ struct HollowDetailView: View {
                     if store.noSuchPost {
                         Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
                             .padding(.top, spacing)
+                            .padding(.horizontal)
                             .modifier(HollowTextView.TextModifier(inDetail: true))
                     } else {
                         HollowContentView(
@@ -104,10 +106,17 @@ struct HollowDetailView: View {
                             imageReloadHandler: { _ in store.loadPostImage() }
                         )
                         .padding(.top, spacing)
+                        .padding(.horizontal)
                         .id(-1)
                     }
                     
                     Spacer(minLength: spacing * 2).fixedSize()
+                        // Get the frame in the scroll view content
+                        .modifier(GetFrame(coordinateSpace: .named("detail.scrollview"), handler: { frame in
+                            guard showHeader else { return }
+                            if frame.maxY > 0 && showHeaderContent { withAnimation { showHeaderContent = false }}
+                            if frame.maxY <= 0 && !showHeaderContent { withAnimation { showHeaderContent = true }}
+                        }))
                     
                     if !store.noSuchPost {
                         commentView
@@ -149,13 +158,11 @@ struct HollowDetailView: View {
                             }
                     }
                 }
-                .padding(.horizontal)
                 .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
                 .padding(.top, UIDevice.isMac ? 10 : 0)
                 .background(Color.hollowCardBackground)
-                .coordinateSpace(name: "detail.scrollview.content")
             }}
-
+            .coordinateSpace(name: "detail.scrollview")
             .edgesIgnoringSafeArea(.bottom)
             .disabled(store.noSuchPost)
         }
@@ -203,14 +210,6 @@ struct HollowDetailView: View {
         }
         .onChange(of: inputPresented) { presented in
             if !presented { withAnimation(scrollAnimation) { store.replyToIndex = -2 }}
-        }
-        
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                withAnimation(scrollAnimation) {
-                    showHeaderContent = true
-                }
-            }
         }
         
         .onDisappear {

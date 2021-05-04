@@ -22,7 +22,10 @@ struct AccountInfoView: View {
                     NSLocalizedString("ACCOUNTINFOVIEW_CHANGE_PASSWORD_CELL_LABEL", comment: ""),
                     destination: ChangePasswordView().environmentObject(viewModel)
                 )
+                
+                NavigationLink(NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_UNREGISTER_BUTTON", comment: ""), destination: UnregisterView())
             }
+            
             Section {
                 Button("ACCOUNTVIEW_LOGOUT_BUTTON", action: {
                     #if targetEnvironment(macCatalyst)
@@ -83,7 +86,7 @@ extension AccountInfoView {
                 
                 SecureField("CHANGEPASSWORDVIEW_ENTER_ORI_PASSWORD_PLACEHOLDER", text: $originalPassword)
 
-                Section(footer: Text("LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER").padding(.horizontal)) {
+                Section(footer: Text("LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER")) {
                     HStack {
                         SecureField("CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER", text: $newPassword)
                         if (newPassword.count < 8 && !newPassword.isEmpty) || newPassword.contains(" ") {

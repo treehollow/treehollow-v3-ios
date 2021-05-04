@@ -91,7 +91,7 @@ struct ImageCompressor {
     }
 }
 
-#if !os(macOS)
+#if !os(macOS) || targetEnvironment(macCatalyst)
 private extension UIImage {
     func resizeTo(scaleFactor: CGFloat) -> UIImage {
         let destinationSize = CGSize(width: self.size.width * scaleFactor, height: self.size.height * scaleFactor)

@@ -70,6 +70,7 @@ fileprivate struct _StyledAlert<Content: View>: View {
     @ScaledMetric private var spacing: CGFloat = 14
     
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.presentationMode) private var presentationMode
 
     var title: String
     var message: String?

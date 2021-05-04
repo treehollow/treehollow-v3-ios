@@ -25,7 +25,7 @@ struct DeviceListView: View {
                         device.deviceUUID,
                     logoutAction: deviceListStore.logout
                 )
-                .padding(.vertical)
+                .padding(.vertical, 10)
                 .disabled(deviceListStore.isLoading)
             }
         }

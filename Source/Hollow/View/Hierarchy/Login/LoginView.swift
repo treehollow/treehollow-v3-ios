@@ -74,6 +74,7 @@ struct LoginView: View {
             // Button
             ExpandedButton(
                 action: {
+                    hideKeyboard()
                     if shouldCheckEmail { viewModel.checkEmail() }
                     if shouldRegister { viewModel.register() }
                     if shouldLogin { viewModel.login() }

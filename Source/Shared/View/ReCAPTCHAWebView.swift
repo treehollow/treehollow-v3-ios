@@ -10,14 +10,14 @@ import SwiftUI
 import WebKit
 import Defaults
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 fileprivate typealias HViewRepresentable = NSViewRepresentable
 #else
 fileprivate typealias HViewRepresentable = UIViewRepresentable
 #endif
 
 struct ReCAPTCHAWebView: HViewRepresentable {
-    #if os(macOS)
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     typealias NSViewType = WKWebView
     #else
     typealias UIViewType = WKWebView
@@ -26,7 +26,7 @@ struct ReCAPTCHAWebView: HViewRepresentable {
     // TODO: Handler including parameter representing error.
     var successHandler: (String) -> Void
     
-    #if os(macOS)
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     func makeNSView(context: Context) -> WKWebView {
         return setupWebView(context: context)
     }

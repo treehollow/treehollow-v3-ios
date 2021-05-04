@@ -226,13 +226,22 @@
 "LOGINVIEW_PASSWORD_TEXTFIELD_TITLE" = "Password";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON" = "Copy Email Address";
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE" = "You should unregister first to restore your password.";
 
 /* No comment provided by engineer. */
-"LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE" = "Send an email to the contact email to restore your password.";
+"LOGINVIEW_RESTORE_PASSWORD_ALERT_UNREGISTER_BUTTON" = "Unregister";
 
-/* No comment provided by engineer. */
-"LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON" = "Send Email";
+"UNREGISTERVIEW_NONCE_FOOTER" = "Enter the secret received by your email after registration.";
+
+"UNREGISTERVIEW_NONCE_TEXTFIELD_PLACEHOLDER" = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+
+"UNREGISTERVIEW_NONCE_TEXTFIELD_TITLE" = "Nonce";
+
+"UNREGISTERVIEW_ALERT_MSG" = "After unregistering, the posts and comments posted by the original account will be remained, but the associated data, including attention list and comment nicknames, will be lost.";
+
+"UNREGISTERVIEW_ALERT_CONFIRM" = "Confirm";
+
+"UNREGISTERVIEW_BUTTON_UNREGISTER" = "Unregister";
 
 /* No comment provided by engineer. */
 "LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE" = "Restore Password";
@@ -540,8 +549,6 @@
 
 "ABOUTVIEW_OPENSOURCE_NOTICE" = "The source code of this app is open-sourced on GitHub under AGPL-3.0 License.";
 
-"ABOUTVIEW_OPENSOURCE_NOTICE_LICENSE" = "AGPL-3.0 License";
-
 "TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON" = "Hide";
 
 "SETTINGSVIEW_NOTIFICATION_EDIT_CANCEL" = "Cancel";
@@ -628,7 +635,7 @@
 
 "SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL" = "Reduce Image Render Quality";
 
-"SETTINGSVIEW_APPEARANCE_AVATAR_HDR" = "Avatar Style";
+"SETTINGSVIEW_APPEARANCE_AVATAR_HDR" = "Avatar";
 
 "SETTINGSVIEW_APPEARANCE_GRAPHICAL_AVATAR_STYLE" = "Graphical";
 
@@ -651,3 +658,7 @@
 "SETTINGSVIEW_NOTIFICATION_GO_TO_SETTINGS" = "Go to Settings";
 
 "SETTINGSVIEW_NOTIFICATION_UPDATE_NOTIFICATION" = "Version Updates";
+
+"ABOUTVIEW_GITHUB_REPO_LABEL" = "GitHub Repository";
+
+"SETTINGSVIEW_APPEARANCE_BLURRED_IMG_BG" = "Blurred Image Background";

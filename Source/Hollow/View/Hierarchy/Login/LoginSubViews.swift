@@ -134,6 +134,7 @@ extension LoginView {
         @EnvironmentObject var viewModel: LoginStore
         @State private var alertPresented = false
         @State private var contactEmailURL: URL!
+        @State private var unregister: Bool = false
         @Environment(\.openURL) var openURL
 
         var body: some View {
@@ -142,23 +143,14 @@ extension LoginView {
                                        placeHolder: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER", comment: ""),
                                        title: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_TITLE", comment: ""),
                                        isSecureContent: true)
-                Button(action: {
-                    if let mailString = Defaults[.hollowConfig]?.contactEmail,
-                       let url = URL(string: "mailto:\(mailString)") {
-                        contactEmailURL = url
-                        alertPresented = true
-                    } else {
-                        viewModel.errorMessage = (
-                            title: "",
-                            message: NSLocalizedString("LOGINVIEW_NO_CONTACT_EMAIL_ERROR", comment: "")
-                        )
-                    }
-                }) {
+                Button(action: { alertPresented = true }) {
                     Text("LOGINVIEW_FORGET_PASSWORD_BUTTON")
                         .underline()
                         .dynamicFont(size: 12)
                         .foregroundColor(.secondary)
                 }
+                
+                NavigationLink(destination: UnregisterView(store: .init(email: viewModel.fullEmail, presented: $unregister)), isActive: $unregister, label: {})
             }
             
             .styledAlert(
@@ -166,8 +158,7 @@ extension LoginView {
                 title: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_TITLE", comment: ""),
                 message: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_MESSAGE", comment: ""),
                 buttons: [
-                    .init(text: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_SEND_EMAIL_BUTTON", comment: ""), action: { openURL(contactEmailURL) }),
-                    .init(text: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_COPY_EMAIL_BUTTON", comment: ""), action: { UIPasteboard.general.string = Defaults[.hollowConfig]?.contactEmail ?? "" }),
+                    .init(text: NSLocalizedString("LOGINVIEW_RESTORE_PASSWORD_ALERT_UNREGISTER_BUTTON", comment: ""), action: { unregister = true }),
                     .cancel
                 ]
             )

@@ -11,13 +11,30 @@ import SwiftUI
 /// Get the frame of the view in given coordinate space.
 struct GetFrame: ViewModifier {
     @Binding var frame: CGRect
-    var coordinateSpace: CoordinateSpace = .global
+    var handler: ((CGRect) -> Void)?
+    var coordinateSpace: CoordinateSpace
+    
+    init(frame: Binding<CGRect>, coordinateSpace: CoordinateSpace = .global) {
+        self._frame = frame
+        self.coordinateSpace = coordinateSpace
+    }
+    
+    init(coordinateSpace: CoordinateSpace = .global, handler: @escaping (CGRect) -> Void) {
+        self.handler = handler
+        self.coordinateSpace = coordinateSpace
+        self._frame = .constant(.zero)
+    }
+    
     func body(content: Content) -> some View {
         content
             .background(GeometryReader { proxy in
                 Color.clear.preference(key: ViewFrameKey.self, value: proxy.frame(in: coordinateSpace))
                     .onPreferenceChange(ViewFrameKey.self) { frame in
-                        self.frame = frame
+                        if let handler = handler {
+                            handler(frame)
+                        } else {
+                            self.frame = frame
+                        }
                     }
             })
     }

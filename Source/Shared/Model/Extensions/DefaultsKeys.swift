@@ -53,7 +53,7 @@ extension Defaults.Keys {
 
 // MARK: - User Settings
 // Defaults for user settings
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 extension Defaults.Keys {
     
 }

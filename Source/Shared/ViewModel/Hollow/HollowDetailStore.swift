@@ -93,6 +93,15 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
                     case .noSuchPost:
                         withAnimation { self.noSuchPost = true }
                         PostCache.shared.remove(postId: configuration.postId)
+                        #if !os(macOS) || targetEnvironment(macCatalyst)
+                        if UIDevice.isPad {
+                            let navVC = IntegrationUtilities.getSecondaryNavigationVC()
+                            navVC?.popViewController(animated: true)
+                        } else {
+                            let topVC = IntegrationUtilities.topViewController()
+                            topVC?.dismiss(animated: true)
+                        }
+                        #endif
                     default: break
                     }
                     self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)

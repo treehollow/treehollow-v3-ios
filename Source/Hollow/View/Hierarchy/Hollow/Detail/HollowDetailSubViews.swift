@@ -19,6 +19,7 @@ extension HollowDetailView {
             .padding(.top)
             .padding(.bottom, 5)
             .padding(.bottom, UIDevice.isMac ? 20 : 13)
+            .padding(.horizontal)
         
         ForEach(postData.comments) { comment in
             commentView(for: comment)
@@ -27,6 +28,7 @@ extension HollowDetailView {
         if store.isLoading, postData.replyNumber > postData.comments.count {
             ForEach(0..<postData.replyNumber - postData.comments.count, id: \.self) { _ in
                 PlaceholderComment()
+                    .padding(.horizontal)
                     .padding(.top, postData.comments.isEmpty ? 0 : 15)
                     .padding(.bottom, postData.comments.isEmpty ? 15 : 0)
             }
@@ -53,16 +55,17 @@ extension HollowDetailView {
             )
             HollowCommentContentView(commentData: bindingComment, compact: false, contentVerticalPadding: UIDevice.isMac ? 13 : 10, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, postHash: store.postDataWrapper.post.hash, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
                 .id(index)
-                .contentShape(RoundedRectangle(cornerRadius: 10))
+                .padding(.horizontal)
                 .background(
                     Group {
                         store.replyToIndex == index || jumpedToIndex == index ?
-                            Color.background : nil
+                            Color.background : Color.hollowCardBackground
                     }
                     .roundedCorner(10)
-//                    .animation(.none)
+                    .padding(.horizontal, store.replyToIndex == index || jumpedToIndex == index ? 10 : 0)
                     .transition(.opacity)
                 )
+                .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .onClickGesture {
                     guard !store.isSendingComment && !store.isLoading else { return }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -86,7 +89,7 @@ extension HollowDetailView {
                             guard let index = comments.firstIndex(where: {$0.commentId == comment.replyTo}) else { return }
                             jumpedIndexFromComment = index
                         }) {
-                            Label("COMMENT_VIEW_JUMP_LABEL", systemImage: "text.quote")
+                            Label("COMMENT_VIEW_JUMP_LABEL", systemImage: "text.insert")
                         }
                     }
                     if comment.hasURL {

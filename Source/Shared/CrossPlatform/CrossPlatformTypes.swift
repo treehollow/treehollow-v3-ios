@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 typealias HImage = NSImage
 typealias HView = NSView
 typealias HColor = NSColor

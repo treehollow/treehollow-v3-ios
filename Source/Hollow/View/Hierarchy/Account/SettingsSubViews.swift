@@ -78,7 +78,7 @@ struct AppearanceSettingsView: View {
                                     .frame(maxHeight: colorHeight)
                                     .aspectRatio(1, contentMode: .fit)
                                     .clipShape(Circle())
-
+                                
                                 Text(type.name)
                                     .foregroundColor(.primary)
                                 Spacer()
@@ -95,6 +95,8 @@ struct AppearanceSettingsView: View {
                         .frame(width: avatarHeight)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.hollowContentVoteGradient1))
+                        .padding(.trailing, 5)
+
                     Text("SETTINGSVIEW_APPEARANCE_GRAPHICAL_AVATAR_STYLE")
                         .foregroundColor(.primary)
                     Spacer()
@@ -106,6 +108,8 @@ struct AppearanceSettingsView: View {
                         .frame(width: avatarHeight)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.hollowContentVoteGradient1))
+                        .padding(.trailing, 5)
+
                     Text("SETTINGSVIEW_APPEARANCE_TEXTUAL_AVATAR_STYLE")
                         .foregroundColor(.primary)
                     Spacer()
@@ -132,8 +136,7 @@ struct ContentSettingsView: View {
                     Text("SETTINGSVIEW_CONTENT_FOLD_CELL")
                     Spacer()
                     Toggle(isOn: $fold, label: {})
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: .tint))
+                        .defaultToggleStyle()
                 }
                 let tags = Defaults[.hollowConfig]?.foldTags ?? []
                 if !tags.isEmpty {
@@ -155,7 +158,7 @@ struct ContentSettingsView: View {
                         Text(tag)
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.uiColor(.systemFill))
+                            .foregroundColor(.tint)
                             .imageScale(.medium)
                             .onClickGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
                                 _ = withAnimation { blockedTags.remove(at: index) }
@@ -187,7 +190,7 @@ struct ContentSettingsView: View {
                             .disableAutocorrection(true)
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.tint)
+                            .foregroundColor(.uiColor(.systemFill))
                             .imageScale(.medium)
                             .onClickGesture { withAnimation {
                                 newTag = ""
@@ -270,8 +273,7 @@ struct PushNotificationSettingsView: View {
                         Text("SETTINGSVIEW_NOTIFICATION_UPDATE_NOTIFICATION")
                         Spacer()
                         Toggle("", isOn: $showUpdateAlert)
-                            .toggleStyle(SwitchToggleStyle(tint: .tint))
-                            .labelsHidden()
+                            .defaultToggleStyle()
                     }
                 }
             }
@@ -514,8 +516,7 @@ struct OtherSettingsView: View {
                         Spacer()
                         
                         Toggle("", isOn: $reduceImageQuality)
-                            .toggleStyle(SwitchToggleStyle(tint: .tint))
-                            .labelsHidden()
+                            .defaultToggleStyle()
                     }
                 }
                 

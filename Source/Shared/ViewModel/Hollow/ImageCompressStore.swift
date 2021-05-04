@@ -22,7 +22,7 @@ protocol ImageCompressStore: AnyObject {
 extension ImageCompressStore {
     func handleDrop(providers: [NSItemProvider]) -> Bool {
         guard providers.count == 1 else { return false }
-        #if !os(macOS)
+        #if !os(macOS) || targetEnvironment(macCatalyst)
         if let _ = providers.first?.loadObject(ofClass: HImage.self, completionHandler: { image, error in
             guard let image = image else { return }
             DispatchQueue.main.async {

@@ -35,7 +35,7 @@ class LoginStore: ObservableObject, AppModelEnvironment {
     
     @Published var isLoading = false
     
-    private var fullEmail: String { email + "@" + emailSuffix }
+    var fullEmail: String { email + "@" + emailSuffix }
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -75,11 +75,7 @@ class LoginStore: ObservableObject, AppModelEnvironment {
     
     func register() {
         guard let config = Defaults[.hollowConfig] else { return }
-        guard let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString() else {
-            errorMessage = (title: "", message: .retriveDeviceTokenFailedMessageLocalized)
-            HApplication.shared.registerForRemoteNotifications()
-            return
-        }
+        let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString()
         
         // It is a UI error that we allow the user to continue
         // when the two passwords don't match.

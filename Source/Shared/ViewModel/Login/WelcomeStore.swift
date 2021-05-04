@@ -16,7 +16,7 @@ class WelcomeStore: ObservableObject {
     @Published var hollowSelection: Int? = nil
     @Published var isLoadingConfig = false
     @Published var errorMessage: (title: String, message: String)? = nil
-    #if os(macOS)
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     @Published var showLogin = false
     #endif
     
@@ -59,7 +59,7 @@ class WelcomeStore: ObservableObject {
                 withAnimation {
                     self.hollowSelection = hollowType.rawValue
                 }
-                #if os(macOS)
+                #if os(macOS) && !targetEnvironment(macCatalyst)
                 self.showLogin = true
                 #endif
             })
