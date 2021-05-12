@@ -138,7 +138,9 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
                 var found = false
                 for index in posts.indices {
                     if newPost.id == posts[index].id {
+                        let citedPost = posts[index].citedPost
                         posts[index] = newPost
+                        posts[index].citedPost = citedPost
                         found = true
                     }
                 }
