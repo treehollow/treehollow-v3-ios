@@ -12,17 +12,52 @@ import Defaults
 extension HollowDetailView {
     @ViewBuilder var commentView: some View {
         let postData = store.postDataWrapper.post
+        let originalComments = reverseComments ? postData.comments.reversed() : postData.comments
+        let comments = showOnlyName == nil ? originalComments : originalComments.filter({ $0.name == showOnlyName })
         
-        (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
-            .fontWeight(.heavy)
-            .leading()
-            .padding(.top)
-            .padding(.bottom, 5)
-            .padding(.bottom, UIDevice.isMac ? 20 : 13)
-            .padding(.horizontal)
+        HStack {
+            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+                .fontWeight(.heavy)
+                .padding(.top)
+                .padding(.bottom, 5)
+                .padding(.bottom, UIDevice.isMac ? 20 : 13)
+                .layoutPriority(1)
+            
+            Spacer()
+            
+            if let name = showOnlyName {
+                Button(action: { withAnimation { showOnlyName = nil }}) {
+                    HStack(spacing: 5) {
+                        Text(verbatim: "\(name) (\(comments.count))")
+                        Image(systemName: "xmark")
+                    }
+                    .foregroundColor(.hollowCardStarUnselected)
+                    .dynamicFont(size: 14, weight: .medium)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.background)
+                    .clipShape(Capsule())
+                }
+                .padding(.trailing, 10)
+            }
+            
+            Button(action: { withAnimation { reverseComments.toggle() }}) {
+                HStack(spacing: 5) {
+                    Text(reverseComments ? "HOLLOWDETAIL_COMMENTS_ORDER_NEW_TO_OLD" : "HOLLOWDETAIL_COMMENTS_ORDER_OLD_TO_NEW")
+                    Image(systemName: "arrowtriangle.up")
+                        .rotationEffect(Angle(degrees: reverseComments ? 180 : 0))
+                }
+                .dynamicFont(size: 15, weight: .medium)
+                .foregroundColor(.hollowCardStarUnselected)
+            }
+        }
+        .background(Color.hollowCardBackground)
+        .padding(.horizontal)
+        .lineLimit(1)
         
-        ForEach(postData.comments) { comment in
+        ForEach(comments) { comment in
             commentView(for: comment)
+                .fixedSize(horizontal: false, vertical: true)
         }
         
         if store.isLoading, postData.replyNumber > postData.comments.count {
@@ -34,16 +69,24 @@ extension HollowDetailView {
             }
         }
 
-        Spacer(minLength: commentViewBottomPadding)
+        // To hide the last seperator
+        Color.hollowCardBackground
+            .frame(height: commentViewBottomPadding)
     }
     
     func commentView(for comment: CommentData) -> some View {
         var hideLabel: Bool = false
         let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == comment.commentId })
-        if index == 0 { hideLabel = false }
-        else if let index = index {
-            hideLabel = comment.name == store.postDataWrapper.post.comments[index - 1].name
+        
+        if showOnlyName != comment.name {
+            let firstIndex = reverseComments ? store.postDataWrapper.post.comments.count - 1 : 0
+            if index == firstIndex { hideLabel = false }
+            else if let index = index {
+                let nextIndex = reverseComments ? index + 1 : index - 1
+                hideLabel = comment.name == store.postDataWrapper.post.comments[nextIndex].name
+            }
         }
+        
         return Group { if let index = index {
             let bindingComment = Binding(
                 get: { comment },
@@ -53,6 +96,9 @@ extension HollowDetailView {
                     }
                 }
             )
+            
+            let highlighted = store.replyToIndex == index || jumpedToIndex == index
+            
             HollowCommentContentView(commentData: bindingComment, compact: false, contentVerticalPadding: UIDevice.isMac ? 13 : 10, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, postHash: store.postDataWrapper.post.hash, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
                 .id(index)
                 .padding(.horizontal)
@@ -61,8 +107,8 @@ extension HollowDetailView {
                         store.replyToIndex == index || jumpedToIndex == index ?
                             Color.background : Color.hollowCardBackground
                     }
-                    .roundedCorner(10)
-                    .padding(.horizontal, store.replyToIndex == index || jumpedToIndex == index ? 10 : 0)
+                    .roundedCorner(highlighted ? 10 : 0)
+                    .padding(.horizontal, highlighted ? 10 : 0)
                     .transition(.opacity)
                 )
                 .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -83,7 +129,15 @@ extension HollowDetailView {
                         })
                         Divider()
                     }
-                    if comment.replyTo != -1 {
+                    
+                    if showOnlyName == nil {
+                        Button(action: { withAnimation { showOnlyName = comment.name } }) {
+                            Label("COMMENT_VIEW_SHOW_ONLY_LABEL", systemImage: "person.crop.circle.badge.checkmark")
+                        }
+                    }
+                    
+                    // FIXME: Remove !useListInDetail
+                    if comment.replyTo != -1 && !useListInDetail {
                         Button(action: {
                             let comments = store.postDataWrapper.post.comments
                             guard let index = comments.firstIndex(where: {$0.commentId == comment.replyTo}) else { return }

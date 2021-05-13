@@ -500,6 +500,7 @@ struct OtherSettingsView: View {
     
     private struct ExperimentalFeaturesView: View {
         @Default(.reduceImageQuality) var reduceImageQuality
+        @Default(.useListInDetail) var useListInDetail
 
         var body: some View {
             List {
@@ -509,7 +510,6 @@ struct OtherSettingsView: View {
                 .padding(.vertical)
                 
                 Section(
-                    header: Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_HEADER").padding(.horizontal),
                     footer: Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_FOOTER").padding(.horizontal)) {
                     HStack {
                         Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL")
@@ -518,8 +518,20 @@ struct OtherSettingsView: View {
                         Toggle("", isOn: $reduceImageQuality)
                             .defaultToggleStyle()
                     }
+
                 }
                 
+                Section(footer: Text("SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_FOOTER").padding(.horizontal)) {
+                    HStack {
+                        Text("SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_LABEL")
+                        Spacer()
+                        
+                        Toggle("", isOn: $useListInDetail)
+                            .defaultToggleStyle()
+                    }
+
+                }
+
             }
             .defaultListStyle()
             .navigationTitle(NSLocalizedString("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", comment: ""))

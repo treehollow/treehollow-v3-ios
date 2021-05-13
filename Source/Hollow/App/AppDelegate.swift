@@ -6,7 +6,7 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 import Defaults
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Defaults[.customColorSet] = Defaults[.tempCustomColorSet]
         Defaults[.applyCustomColorSet] = Defaults[.customColorSet] != nil
         setupApplication(application)
+        let appearance = UITableView.appearance(whenContainedInInstancesOf: [HollowDetailViewController.self])
+        appearance.backgroundColor = UIColor(Color.hollowCardBackground)
         return true
     }
     

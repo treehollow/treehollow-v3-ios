@@ -96,10 +96,15 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
                         #if !os(macOS) || targetEnvironment(macCatalyst)
                         if UIDevice.isPad {
                             let navVC = IntegrationUtilities.getSecondaryNavigationVC()
-                            navVC?.popViewController(animated: true)
+                            if let detailVC = navVC?.topViewController as? HollowDetailViewController_iPad,
+                               detailVC.store.postDataWrapper.post.postId == self.postDataWrapper.post.postId {
+                                navVC?.popViewController(animated: true)
+                            }
                         } else {
-                            let topVC = IntegrationUtilities.topViewController()
-                            topVC?.dismiss(animated: true)
+                            if let topVC = IntegrationUtilities.topViewController() as? HollowDetailViewController,
+                               topVC.store.postDataWrapper.post.postId == self.postDataWrapper.post.postId {
+                                topVC.dismiss(animated: true)
+                            }
                         }
                         #endif
                     default: break

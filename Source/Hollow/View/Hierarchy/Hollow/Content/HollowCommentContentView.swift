@@ -34,129 +34,119 @@ struct HollowCommentContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        // View created by view builder in macOS is HStack by default, so
-        // we can only explictly wrap them inside a VStack. The scrolling
-        // issue does not appear on macOS so this trick is OK.
-        #if targetEnvironment(macCatalyst)
-        VStack(spacing: 0) { content }
-        #else
-        content
-        #endif
-    }
-    
-    @ViewBuilder var content: some View {
-        if let padding = contentVerticalPadding {
-            Spacer(minLength: padding)
-                .fixedSize()
-        }
-        HStack {
-            HStack(alignment: .top) {
-                Group { if hideLabel {
-                    Spacer(minLength: nameLabelWidth)
-                } else {
-                    if compact {
-                        Text(commentData.name)
-                            .bold()
-                            .allowsTightening(true)
-                            .minimumScaleFactor(0.3)
-                            .lineLimit(compact ? 2 : nil)
-                            .leading()
-                            .frame(width: nameLabelWidth)
-                            .fixedSize()
+        VStack(spacing: 0) {
+            if let padding = contentVerticalPadding {
+                Spacer(minLength: padding)
+                    .fixedSize()
+            }
+            HStack {
+                HStack(alignment: .top) {
+                    Group { if hideLabel {
+                        Spacer(minLength: nameLabelWidth)
                     } else {
-                        avatarView
-                    }
-                }}
-                VStack(alignment: .leading, spacing: compact ? 0 : body5) {
-                    if !compact {
-                        let nameTextView: Text = commentData.isDz ?
-                            Text(commentData.name + " ") + Text(Image(systemName: "person.fill")) :
+                        if compact {
                             Text(commentData.name)
-                        HStack {
-                            nameTextView
                                 .bold()
-                                .lineLimit(1)
-                            
-                            if commentData.tag != nil || commentData.deleted {
-                                if commentData.deleted {
-                                    tagView(text: NSLocalizedString("HOLLOW_CONTENT_DELETED_TAG", comment: ""), removed: true)
-                                }
+                                .allowsTightening(true)
+                                .minimumScaleFactor(0.3)
+                                .lineLimit(compact ? 2 : nil)
+                                .leading()
+                                .frame(width: nameLabelWidth)
+                                .fixedSize()
+                        } else {
+                            avatarView
+                        }
+                    }}
+                    VStack(alignment: .leading, spacing: compact ? 0 : body5) {
+                        if !compact {
+                            let nameTextView: Text = commentData.isDz ?
+                                Text(commentData.name + " ") + Text(Image(systemName: "person.fill")) :
+                                Text(commentData.name)
+                            HStack {
+                                nameTextView
+                                    .bold()
+                                    .lineLimit(1)
                                 
-                                if let tag = commentData.tag {
-                                    tagView(text: tag, removed: false)
+                                if commentData.tag != nil || commentData.deleted {
+                                    if commentData.deleted {
+                                        tagView(text: NSLocalizedString("HOLLOW_CONTENT_DELETED_TAG", comment: ""), removed: true)
+                                    }
+                                    
+                                    if let tag = commentData.tag {
+                                        tagView(text: tag, removed: false)
+                                    }
                                 }
+                                Spacer()
+                                
+                                Text.dateText(commentData.date)
+                                    .dynamicFont(size: 14, weight: .medium)
+                                    .foregroundColor(.hollowCardStarUnselected)
+                                    .lineLimit(1)
                             }
-                            Spacer()
-                            
-                            Text.dateText(commentData.date)
-                                .dynamicFont(size: 14, weight: .medium)
-                                .foregroundColor(.hollowCardStarUnselected)
-                                .lineLimit(1)
                         }
-                    }
-                    
-                    if commentData.image != nil && !compact {
-                        HollowImageView(
-                            hollowImage: commentData.image,
-                            description: commentData.text,
-                            reloadImage: imageReloadHandler,
-                            minRatio: UIDevice.isPad ? 1.3 : 0.7
-                        )
-                        .roundedCorner(4)
-                        .padding(.top, UIDevice.isMac ? 10 : 5)
-                        .padding(.bottom, UIDevice.isMac ? 13 : 10)
-                        .fixedSize(horizontal: false, vertical: true)
-                    }
-                    Group {
-                        let replyText = (commentData.replyTo != -1 ?
-                                            Text(Image(systemName: "arrow.turn.up.right")) + Text(" ") :
-                                            Text("")
-                        )
-                        .foregroundColor(Color.hollowCardStarUnselected.opacity(colorScheme == .light ? 0.3 : 0.8))
                         
-                        if commentData.text != "" {
-                            
-                            if compact || !commentData.renderHighlight {
-                                replyText + Text(commentData.text)
-                            } else {
-                                replyText + Text.highlightLinksAndCitation(commentData.text, modifiers: {
-                                    $0.underline()
-                                        .foregroundColor(.hollowContentText)
-                                })
-                            }
-                        } else if commentData.image != nil && compact {
-                            (replyText + Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
-                                .foregroundColor(.uiColor(.secondaryLabel))
+                        if commentData.image != nil && !compact {
+                            HollowImageView(
+                                hollowImage: commentData.image,
+                                description: commentData.text,
+                                reloadImage: imageReloadHandler,
+                                minRatio: UIDevice.isPad ? 1.3 : 0.7
+                            )
+                            .roundedCorner(4)
+                            .padding(.top, UIDevice.isMac ? 10 : 5)
+                            .padding(.bottom, UIDevice.isMac ? 13 : 10)
+                            .fixedSize(horizontal: false, vertical: true)
                         }
+                        Group {
+                            let replyText = (commentData.replyTo != -1 ?
+                                                Text(Image(systemName: "arrow.turn.up.right")) + Text(" ") :
+                                                Text("")
+                            )
+                            .foregroundColor(Color.hollowCardStarUnselected.opacity(colorScheme == .light ? 0.3 : 0.8))
+                            
+                            if commentData.text != "" {
+                                
+                                if compact || !commentData.renderHighlight {
+                                    replyText + Text(commentData.text)
+                                } else {
+                                    replyText + Text.highlightLinksAndCitation(commentData.text, modifiers: {
+                                        $0.underline()
+                                            .foregroundColor(.hollowContentText)
+                                    })
+                                }
+                            } else if commentData.image != nil && compact {
+                                (replyText + Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
+                                    .foregroundColor(.uiColor(.secondaryLabel))
+                            }
+                        }
+                        .leading()
+                        .lineLimit(compact ? compactLineLimit : nil)
+                        .layoutPriority(1)
                     }
-                    .leading()
-                    .lineLimit(compact ? compactLineLimit : nil)
-                    .layoutPriority(1)
+                }
+                
+                if commentData.image != nil && compact {
+                    Image(systemName: "photo")
+                        .dynamicFont(size: 15)
+                        .layoutPriority(1)
+                }
+                
+            }
+            .dynamicFont(size: 15)
+            .lineSpacing(3)
+            .foregroundColor(compact ? .hollowContentText : .primary)
+            if let padding = contentVerticalPadding {
+                Spacer(minLength: padding)
+                    .fixedSize()
+            }
+            HStack {
+                Spacer(minLength: nameLabelWidth)
+                VStack {
+                    Divider()
                 }
             }
-            
-            if commentData.image != nil && compact {
-                Image(systemName: "photo")
-                    .dynamicFont(size: 15)
-                    .layoutPriority(1)
-            }
-            
-        }
-        .dynamicFont(size: 15)
-        .lineSpacing(3)
-        .foregroundColor(compact ? .hollowContentText : .primary)
-        if let padding = contentVerticalPadding {
-            Spacer(minLength: padding)
-                .fixedSize()
-        }
-        HStack {
-            Spacer(minLength: nameLabelWidth)
-            VStack {
-                Divider()
-            }
         }
     }
-    
     
     @ViewBuilder var avatarView: some View {
         let avatarWidth = nameLabelWidth * HollowCommentContentView.avatarProportion

@@ -6,14 +6,32 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct HollowCiteContentView: View {
     var placeholderPostId: Int
     var postData: PostData?
     
+    private var foldTags: [String] { Defaults[.hollowConfig]?.foldTags ?? [] }
+
+    @Default(.blockedTags) var customBlockedTags
+    @Default(.foldPredefinedTags) var foldPredefinedTags
+    
+    private var hideContent: Bool {
+        if let tag = postData?.tag {
+            if !foldPredefinedTags {
+                return customBlockedTags.contains(tag)
+            }
+            return foldTags.contains(tag) || customBlockedTags.contains(tag)
+        }
+        return false
+    }
+
+    
     var displayedText: String {
         if let postData = self.postData {
-            if postData.text != "" { return postData.text }
+            if hideContent { return "#" + (postData.tag ?? "") }
+            if postData.text != "" { return postData.text.removeLineBreak() }
             if postData.hollowImage != nil { return "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]" }
             return ""
         }

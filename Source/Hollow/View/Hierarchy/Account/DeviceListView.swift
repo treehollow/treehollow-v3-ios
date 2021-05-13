@@ -29,6 +29,7 @@ struct DeviceListView: View {
                 .disabled(deviceListStore.isLoading)
             }
         }
+        .buttonStyle(BorderlessButtonStyle())
         .navigationBarTitle(NSLocalizedString("DEVICELISTVIEW_NAV_TITLE", comment: ""), displayMode: .large)
         .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))

@@ -21,8 +21,8 @@ struct HollowContentView: View {
     
     var imageReloadHandler: ((HollowImage) -> Void)? = nil
     
-    private let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
-    
+    private var foldTags: [String] { Defaults[.hollowConfig]?.foldTags ?? [] }
+
     private var hasVote: Bool { postDataWrapper.post.vote != nil }
     private var showVote: Bool { hasVote && !hideContent }
     private var hasImage: Bool { postDataWrapper.post.hollowImage != nil }
