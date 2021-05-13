@@ -521,6 +521,7 @@ struct OtherSettingsView: View {
 
                 }
                 
+                #if !targetEnvironment(macCatalyst)
                 Section(footer: Text("SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_FOOTER").padding(.horizontal)) {
                     HStack {
                         Text("SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_LABEL")
@@ -531,6 +532,7 @@ struct OtherSettingsView: View {
                     }
 
                 }
+                #endif
 
             }
             .defaultListStyle()

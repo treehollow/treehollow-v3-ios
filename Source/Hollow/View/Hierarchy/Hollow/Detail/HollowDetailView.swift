@@ -101,6 +101,10 @@ struct HollowDetailView: View {
                     LazyVStack(spacing: 0) {
                         content
                     }
+                    .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
+                    .padding(.top, UIDevice.isMac ? 10 : 0)
+                    .edgesIgnoringSafeArea(.bottom)
+
                     .onChange(of: store.replyToIndex) { index in
                         withAnimation(scrollAnimation) {
                             proxy.scrollTo(index, anchor: scrollToAnchor)
@@ -144,9 +148,6 @@ struct HollowDetailView: View {
             
         }
         
-        .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
-        .padding(.top, UIDevice.isMac ? 10 : 0)
-        .edgesIgnoringSafeArea(.bottom)
         .disabled(store.noSuchPost)
         
         .background(Color.hollowCardBackground.ignoresSafeArea())
