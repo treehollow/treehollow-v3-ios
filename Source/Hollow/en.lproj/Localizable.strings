@@ -670,3 +670,5 @@
 "SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_LABEL" = "Fix Scrolling Issue in Detail View";
 
 "SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_FOOTER" = "Jump to certain comment is not supported in this mode.";
+
+"COMMENT_VIEW_SHOW_ONLY_LABEL" = "Show this Person Only";
