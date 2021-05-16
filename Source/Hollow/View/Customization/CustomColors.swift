@@ -48,4 +48,5 @@ extension Color {
     
     static var tint: Color { customColor(prefix: "tint") }
 
+    static let hollowCommentQuoteText = Color("hollow.content.comment.quote.text")
 }

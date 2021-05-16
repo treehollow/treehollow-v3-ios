@@ -39,8 +39,19 @@ struct CommentData: Identifiable, Codable {
     var colorIndex: Int
     var abbreviation: String
     
+    // Additional replying to comment info
+    var replyToCommentInfo: ReplyToCommentInfo?
+    
     mutating func updateHashAndColor() {
         hash = AvatarGenerator.hash(postId: postId, name: name)
         colorIndex = AvatarGenerator.colorIndex(hash: hash)
+    }
+}
+
+extension CommentData {
+    struct ReplyToCommentInfo: Codable {
+        var name: String
+        var text: String
+        var hasImage: Bool
     }
 }

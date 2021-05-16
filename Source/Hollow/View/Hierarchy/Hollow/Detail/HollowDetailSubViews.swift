@@ -44,7 +44,7 @@ extension HollowDetailView {
             Button(action: { withAnimation { reverseComments.toggle() }}) {
                 HStack(spacing: 5) {
                     Text(reverseComments ? "HOLLOWDETAIL_COMMENTS_ORDER_NEW_TO_OLD" : "HOLLOWDETAIL_COMMENTS_ORDER_OLD_TO_NEW")
-                    Image(systemName: "arrowtriangle.up")
+                    Image(systemName: "arrow.up")
                         .rotationEffect(Angle(degrees: reverseComments ? 180 : 0))
                 }
                 .dynamicFont(size: 15, weight: .medium)
@@ -68,7 +68,7 @@ extension HollowDetailView {
                     .padding(.bottom, postData.comments.isEmpty ? 15 : 0)
             }
         }
-
+        
         // To hide the last seperator
         Color.hollowCardBackground
             .frame(height: commentViewBottomPadding)
@@ -97,87 +97,93 @@ extension HollowDetailView {
                 }
             )
             
-            let highlighted = store.replyToIndex == index || jumpedToIndex == index
+            let highlighted = store.replyToIndex == index || jumpedToCommentId == comment.commentId
             
-            HollowCommentContentView(commentData: bindingComment, compact: false, contentVerticalPadding: UIDevice.isMac ? 13 : 10, hideLabel: hideLabel, postColorIndex: store.postDataWrapper.post.colorIndex, postHash: store.postDataWrapper.post.hash, imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) })
-                .id(index)
-                .padding(.horizontal)
-                .background(
-                    Group {
-                        store.replyToIndex == index || jumpedToIndex == index ?
-                            Color.background : Color.hollowCardBackground
-                    }
-                    .roundedCorner(highlighted ? 10 : 0)
-                    .padding(.horizontal, highlighted ? 10 : 0)
-                    .transition(.opacity)
-                )
-                .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .onClickGesture {
-                    guard !store.isSendingComment && !store.isLoading else { return }
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    withAnimation(scrollAnimation) {
-                        store.replyToIndex = index
-                        jumpedToIndex = nil
-                    }
+            HollowCommentContentView(
+                commentData: bindingComment,
+                compact: false,
+                contentVerticalPadding: UIDevice.isMac ? 13 : 10,
+                hideLabel: hideLabel,
+                postColorIndex: store.postDataWrapper.post.colorIndex,
+                postHash: store.postDataWrapper.post.hash,
+                imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) },
+                jumpToReplyingHandler: { jumpToComment(commentId: comment.replyTo) }
+            )
+            .padding(.horizontal)
+            .background(
+                Group {
+                    highlighted ? Color.background : Color.hollowCardBackground
                 }
-                .contextMenu {
-                    if comment.text != "" {
-                        Button(action: {
-                            UIPasteboard.general.string = comment.text
-                        }, label: {
-                            Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
-                        })
-                        Divider()
+                .roundedCorner(highlighted ? 10 : 0)
+                .padding(.horizontal, highlighted ? 10 : 0)
+                .transition(.opacity)
+            )
+            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .onClickGesture {
+                guard !store.isSendingComment && !store.isLoading else { return }
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                withAnimation(scrollAnimation) {
+                    store.replyToIndex = index
+                    jumpedToCommentId = nil
+                }
+            }
+            .contextMenu {
+                if comment.text != "" {
+                    Button(action: {
+                        UIPasteboard.general.string = comment.text
+                    }, label: {
+                        Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
+                    })
+                }
+                
+                if showOnlyName == nil {
+                    Button(action: { withAnimation { showOnlyName = comment.name } }) {
+                        Label("COMMENT_VIEW_SHOW_ONLY_LABEL", systemImage: "line.horizontal.3.decrease.circle")
                     }
-                    
-                    if showOnlyName == nil {
-                        Button(action: { withAnimation { showOnlyName = comment.name } }) {
-                            Label("COMMENT_VIEW_SHOW_ONLY_LABEL", systemImage: "person.crop.circle.badge.checkmark")
-                        }
-                    }
-                    
-                    // FIXME: Remove !useListInDetail
-                    if comment.replyTo != -1 && !useListInDetail {
+                    Divider()
+                }
+                
+                if comment.hasURL {
+                    let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
+                    Divider()
+                    ForEach(links, id: \.self) { link in
                         Button(action: {
-                            let comments = store.postDataWrapper.post.comments
-                            guard let index = comments.firstIndex(where: {$0.commentId == comment.replyTo}) else { return }
-                            jumpedIndexFromComment = index
+                            let helper = OpenURLHelper(openURL: openURL)
+                            try? helper.tryOpen(link, method: Defaults[.openURLMethod])
                         }) {
-                            Label("COMMENT_VIEW_JUMP_LABEL", systemImage: "text.insert")
+                            Label(link.absoluteString, systemImage: "link")
                         }
                     }
-                    if comment.hasURL {
-                        let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
-                        Divider()
-                        ForEach(links, id: \.self) { link in
-                            Button(action: {
-                                let helper = OpenURLHelper(openURL: openURL)
-                                try? helper.tryOpen(link, method: Defaults[.openURLMethod])
-                            }) {
-                                Label(link.absoluteString, systemImage: "link")
-                            }
-                        }
-                        Divider()
-                    }
-                    if comment.hasCitedNumbers {
-                        let citedPosts = comment.text.citationNumbers()
-                        ForEach(citedPosts, id: \.self) { post in
-                            let wrapper = PostDataWrapper.templatePost(for: post)
-                            Button(action: {
-                                IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
-                            }) {
-                                Label("#\(post.string)", systemImage: "text.quote")
-                            }
-                        }
-                        Divider()
-                    }
-                    ReportMenuContent(
-                        store: store,
-                        permissions: comment.permissions,
-                        commentId: comment.commentId
-                    )
+                    Divider()
                 }
+                if comment.hasCitedNumbers {
+                    let citedPosts = comment.text.citationNumbers()
+                    Divider()
+                    ForEach(citedPosts, id: \.self) { post in
+                        let wrapper = PostDataWrapper.templatePost(for: post)
+                        Button(action: {
+                            IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
+                        }) {
+                            Label("#\(post.string)", systemImage: "text.quote")
+                        }
+                    }
+                    Divider()
+                }
+                ReportMenuContent(
+                    store: store,
+                    permissions: comment.permissions,
+                    commentId: comment.commentId
+                )
+            }
+            .id(comment.commentId)
+
         }}
+
+    }
+    
+    func jumpToComment(commentId: Int) {
+        withAnimation(scrollAnimation) { store.replyToIndex = -2 }
+        jumpedFromCommentId = commentId
     }
     
     struct PlaceholderComment: View {

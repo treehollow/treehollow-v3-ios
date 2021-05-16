@@ -10,7 +10,9 @@ import Foundation
 import Defaults
 import Alamofire
 import Combine
+#if canImport(UIKit)
 import UIKit
+#endif
 
 struct UpdateAvailabilityRequestResult: Codable {
     struct Result: Codable {
@@ -44,7 +46,7 @@ struct UpdateAvailabilityRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
-        if UIDevice.isMac {
+        if UIDevice.isMac && !UIDevice.isGenericMac {
             // FIXME: Seems that we cannot get macOS version info with the same bundle id.
             completion(nil, nil)
             return

@@ -16,6 +16,7 @@ extension View {
                 Button(action: refreshAction) {
                     Image(systemName: "arrow.clockwise")
                 }
+                .keyboardShortcut("r")
                 #endif
             })
     }

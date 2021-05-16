@@ -15,8 +15,8 @@ struct HollowDetailView: View {
     @State private var headerFrame: CGRect = .zero
     @State private var commentViewFrame: CGRect = .zero
     @State var inputPresented = false
-    @State var jumpedToIndex: Int?
-    @State var jumpedIndexFromComment: Int?
+    @State var jumpedToCommentId: Int?
+    @State var jumpedFromCommentId: Int?
     @State private var showHeaderContent = Defaults[.useListInDetail]
     @State var reverseComments = false
     @State var showOnlyName: String?
@@ -106,19 +106,22 @@ struct HollowDetailView: View {
                     .edgesIgnoringSafeArea(.bottom)
 
                     .onChange(of: store.replyToIndex) { index in
+                        guard index != -2 else { return }
+                        let id = index >= 0 ? store.postDataWrapper.post.comments[index].commentId : -1
                         withAnimation(scrollAnimation) {
-                            proxy.scrollTo(index, anchor: scrollToAnchor)
+                            proxy.scrollTo(id, anchor: scrollToAnchor)
                         }
                     }
-                    .onChange(of: jumpedIndexFromComment) { index in
-                        if index != nil {
+                    .onChange(of: jumpedFromCommentId) { commentId in
+                        if commentId != nil {
                             withAnimation(scrollAnimation) {
-                                jumpedIndexFromComment = nil
-                                proxy.scrollTo(index, anchor: scrollToAnchor)
-                                jumpedToIndex = index
+                                jumpedFromCommentId = nil
+                                proxy.scrollTo(commentId, anchor: scrollToAnchor)
+                                jumpedToCommentId = commentId
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                withAnimation(scrollAnimation) { jumpedToIndex = nil }
+                                guard self.jumpedToCommentId == commentId else { return }
+                                withAnimation(scrollAnimation) { jumpedToCommentId = nil }
                             }
                         }
                     }
@@ -128,15 +131,15 @@ struct HollowDetailView: View {
                             // Check if there is any comment to jump to
                             // when finish loading
                             if let jumpToCommentId = store.jumpToCommentId {
-                                if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == jumpToCommentId }) {
                                     withAnimation(scrollAnimation) {
-                                        proxy.scrollTo(index, anchor: scrollToAnchor)
-                                        jumpedToIndex = index
+                                        proxy.scrollTo(jumpToCommentId, anchor: scrollToAnchor)
+                                        jumpedToCommentId = jumpToCommentId
                                     }
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                        withAnimation(scrollAnimation) { jumpedToIndex = nil }
+                                        guard self.jumpedToCommentId == jumpToCommentId else { return }
+                                        withAnimation(scrollAnimation) {
+                                            self.jumpedToCommentId = nil }
                                     }
-                                }
                                 store.jumpToCommentId = nil
                             }
                         }
@@ -229,6 +232,7 @@ extension HollowDetailView {
         
         Spacer(minLength: 5).fixedSize()
             .background(Color.hollowCardBackground)
+            .id(-1)
         
         if store.noSuchPost {
             Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
@@ -245,7 +249,6 @@ extension HollowDetailView {
             )
             .padding(.top, spacing)
             .padding(.horizontal)
-            .id(-1)
         }
         
         Spacer(minLength: spacing * 2).fixedSize()

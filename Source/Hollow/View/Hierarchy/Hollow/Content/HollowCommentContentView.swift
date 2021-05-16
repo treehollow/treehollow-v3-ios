@@ -17,6 +17,7 @@ struct HollowCommentContentView: View {
     var postColorIndex: Int
     var postHash: Int
     var imageReloadHandler: ((HollowImage) -> Void)? = nil
+    var jumpToReplyingHandler: (() -> Void)? = nil
     private let compactLineLimit = 3
     private var nameLabelWidth: CGFloat {
         return compact ? labelWidth : body45
@@ -85,6 +86,31 @@ struct HollowCommentContentView: View {
                             }
                         }
                         
+                        if let commentInfo = commentData.replyToCommentInfo, !compact {
+                            let nameText = Text(verbatim: "\(commentInfo.name) ").bold()
+                            Group {
+                                if commentInfo.text != "" {
+                                    nameText + Text(commentInfo.text)
+                                } else if commentInfo.hasImage {
+                                    nameText + Text(Image(systemName: "photo"))
+                                } else {
+                                    nameText
+                                }
+                            }
+                            .leading()
+                            .dynamicFont(size: 14)
+                            .lineLimit(3)
+                            .lineSpacing(0.8)
+                            .padding(4)
+                            .padding(.horizontal, 2)
+                            .foregroundColor(.hollowCommentQuoteText)
+                            .background(Color.hollowCommentQuoteText.opacity(0.09))
+                            .cornerRadius(3)
+                            .padding(.vertical, 2)
+                            .makeButton(action: { jumpToReplyingHandler?() })
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        
                         if commentData.image != nil && !compact {
                             HollowImageView(
                                 hollowImage: commentData.image,
@@ -94,34 +120,33 @@ struct HollowCommentContentView: View {
                             )
                             .roundedCorner(4)
                             .padding(.top, UIDevice.isMac ? 10 : 5)
-                            .padding(.bottom, UIDevice.isMac ? 13 : 10)
                             .fixedSize(horizontal: false, vertical: true)
                         }
-                        Group {
-                            let replyText = (commentData.replyTo != -1 ?
-                                                Text(Image(systemName: "arrow.turn.up.right")) + Text(" ") :
-                                                Text("")
-                            )
-                            .foregroundColor(Color.hollowCardStarUnselected.opacity(colorScheme == .light ? 0.3 : 0.8))
-                            
-                            if commentData.text != "" {
-                                
-                                if compact || !commentData.renderHighlight {
-                                    replyText + Text(commentData.text)
-                                } else {
-                                    replyText + Text.highlightLinksAndCitation(commentData.text, modifiers: {
-                                        $0.underline()
-                                            .foregroundColor(.hollowContentText)
-                                    })
-                                }
-                            } else if commentData.image != nil && compact {
-                                (replyText + Text("[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text("]"))
-                                    .foregroundColor(.uiColor(.secondaryLabel))
+                        
+                        if commentData.text != "" || (commentData.image != nil && compact) {
+                            if commentData.image != nil && !compact {
+                                Spacer(minLength: UIDevice.isMac ? 10 : 5).fixedSize()
                             }
+                            Group {
+                                if commentData.text != "" {
+                                    if compact || !commentData.renderHighlight {
+                                        Text(commentData.text)
+                                    } else {
+                                    Text.highlightLinksAndCitation(commentData.text, modifiers: {
+                                            $0.underline()
+                                                .foregroundColor(.hollowContentText)
+                                        })
+                                    }
+                                } else if commentData.image != nil && compact {
+                                    (Text(verbatim: "[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text(verbatim: "]"))
+                                        .foregroundColor(.uiColor(.secondaryLabel))
+                                }
+                            }
+                            .leading()
+                            .lineLimit(compact ? compactLineLimit : nil)
+                            .layoutPriority(1)
                         }
-                        .leading()
-                        .lineLimit(compact ? compactLineLimit : nil)
-                        .layoutPriority(1)
+                        
                     }
                 }
                 

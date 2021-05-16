@@ -137,7 +137,7 @@ struct ImageScrollViewWrapper: UIViewRepresentable {
         let view = ImageScrollView()
         view.setup()
         view.display(image: image)
-        view.maxScaleFromMinScale = 4
+        view.maxScaleFromMinScale = 1.5 * max(2.5, image.size.height / image.size.width)
         view.imageScrollViewDelegate = context.coordinator
         view.imageContentMode = .aspectFit
         view.alwaysBounceVertical = true

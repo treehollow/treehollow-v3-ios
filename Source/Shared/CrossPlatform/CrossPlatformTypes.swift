@@ -11,8 +11,15 @@ import SwiftUI
 typealias HImage = NSImage
 typealias HView = NSView
 typealias HColor = NSColor
+struct UIDevice {
+    static let isMac = true
+    static let isGenericMac = true
+}
 #else
 typealias HImage = UIImage
 typealias HColor = UIColor
 typealias HView = UIView
+extension UIDevice {
+    static let isGenericMac = false
+}
 #endif

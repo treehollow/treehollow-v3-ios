@@ -64,6 +64,7 @@ struct HollowDetailView_iPad: View {
                             .padding(.vertical, 5)
                             .foregroundColor(attention ? .hollowCardStarSelected : .hollowCardStarUnselected)
                         }
+                        .keyboardShortcut("d")
                         .disabled(store.isEditingAttention || store.noSuchPost)
                     }
                     
@@ -105,6 +106,6 @@ struct HollowDetailView_iPad: View {
                 }
                 .padding(.leading)
             )
-
+            .keyboardShortcut("r", action: store.requestDetail)
     }
 }

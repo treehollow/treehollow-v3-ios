@@ -88,6 +88,7 @@ extension MainView_iPad {
                 },
                 systemImageName: "plus"
             )
+            .keyboardShortcut("n")
             .bottom()
             .trailing()
             .padding()

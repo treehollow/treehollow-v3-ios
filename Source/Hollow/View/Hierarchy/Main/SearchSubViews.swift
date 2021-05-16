@@ -69,6 +69,7 @@ extension SearchView {
         }
         .disabled(store.isLoading || !searchStringValid)
         .opacity(presented ? 1 : 0)
+        .keyboardShortcut("r")
     }
     
     var closeButton: some View {

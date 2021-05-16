@@ -67,6 +67,15 @@ extension Post {
             text.removeLast()
         }
         
+        // Process replying to comment info
+        var comments = comments
+        for index in comments.indices {
+            if comments[index].replyTo != -1,
+               let replyToComment = comments.first(where: { $0.commentId == comments[index].replyTo }) {
+                comments[index].replyToCommentInfo = .init(name: replyToComment.name, text: replyToComment.text, hasImage: replyToComment.image != nil)
+            }
+        }
+        
         let hash = AvatarGenerator.hash(postId: pid, name: "")
         return PostData(
             attention: attention,
