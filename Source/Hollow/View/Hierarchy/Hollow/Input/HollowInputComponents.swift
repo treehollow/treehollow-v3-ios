@@ -34,7 +34,8 @@ struct HollowInputAvatar: View {
             resolution: 6,
             padding: avatarWidth * 0.1,
             hashValue: hash,
-            name: "N"
+            name: "N",
+            options: .forceGraphical
         )
 
         .frame(width: avatarWidth)

@@ -28,7 +28,8 @@ struct HollowDetailView_iPad: View {
                             resolution: 6,
                             padding: avatarWidth * 0.1,
                             hashValue: postData.hash,
-                            name: String(store.postDataWrapper.post.postId.string.last ?? " ")
+                            name: String(store.postDataWrapper.post.postId.string.last ?? " "),
+                            options: .forceGraphical
                         )
                         // Scale the avatar relative to the font scaling.
                         .frame(width: avatarWidth, height: avatarWidth)

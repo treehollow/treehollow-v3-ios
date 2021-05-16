@@ -51,7 +51,7 @@ struct HollowImageView: View {
                                 .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                         } else {
                             ZStack {
-                                Color.uiColor(.tertiarySystemFill).ignoresSafeArea()
+                                Color.hollowCommentQuoteText.opacity(0.09).ignoresSafeArea()
                                 Image(uiImage: image)
                                     .resizable()
                                     .interpolation(reduceImageQuality ? .none : .low)

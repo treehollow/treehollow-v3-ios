@@ -87,7 +87,7 @@ struct HollowCommentContentView: View {
                         }
                         
                         if let commentInfo = commentData.replyToCommentInfo, !compact {
-                            let nameText = Text(verbatim: "\(commentInfo.name) ").bold()
+                            let nameText = Text(verbatim: "\(commentInfo.name): ").bold()
                             Group {
                                 if commentInfo.text != "" {
                                     nameText + Text(commentInfo.text)
@@ -101,12 +101,12 @@ struct HollowCommentContentView: View {
                             .dynamicFont(size: 14)
                             .lineLimit(3)
                             .lineSpacing(0.8)
-                            .padding(4)
+                            .padding(4.5)
                             .padding(.horizontal, 2)
                             .foregroundColor(.hollowCommentQuoteText)
                             .background(Color.hollowCommentQuoteText.opacity(0.09))
-                            .cornerRadius(3)
-                            .padding(.vertical, 2)
+                            .cornerRadius(4)
+                            .padding(.vertical, 4)
                             .makeButton(action: { jumpToReplyingHandler?() })
                             .buttonStyle(PlainButtonStyle())
                         }

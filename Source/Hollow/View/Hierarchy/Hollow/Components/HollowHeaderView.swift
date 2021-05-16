@@ -46,7 +46,8 @@ struct _HollowHeaderView<MenuContent: View>: View {
                     resolution: 6,
                     padding: body37 * 0.1,
                     hashValue: postData.hash,
-                    name: String(postData.postId.string.last ?? " ")
+                    name: String(postData.postId.string.last ?? " "),
+                    options: .forceGraphical
                 )
                 // Scale the avatar relative to the font scaling.
                 .frame(width: body37, height: body37)
