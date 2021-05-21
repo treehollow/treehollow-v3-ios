@@ -108,7 +108,6 @@ struct HollowWidgetEntryView : View {
     struct HollowView: View {
         var post: PostData
         var rank: Int
-        @ScaledMetric(wrappedValue: 14) var fontSize: CGFloat
         
         var body: some View {
             Link(destination: URL(string: "HollowWidget://\(post.postId.string)")!) {
@@ -130,7 +129,7 @@ struct HollowWidgetEntryView : View {
             }
             .lineLimit(1)
             .foregroundColor(.contentText)
-            .font(.system(size: fontSize, design: .monospaced))
+            .font(.system(size: 14, design: .monospaced))
         }
     }
 }
