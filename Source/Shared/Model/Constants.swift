@@ -38,7 +38,7 @@ struct Constants {
 }
 
 extension Constants.Application {
-    #if !os(macOS) || targetEnvironment(macCatalyst)
+    #if (!os(macOS) || targetEnvironment(macCatalyst)) && !WIDGET
     static let deviceInfo = DeviceModelUtilities.modelIdentifier +
         " (\(UIDevice.isMac ? "Mac Catalyst" : UIDevice.current.systemName) " +
         UIDevice.current.systemVersion + ")"

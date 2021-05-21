@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 @main
 struct HollowApp: App {
@@ -34,12 +35,26 @@ struct HollowApp: App {
             // Inject the app model into the environment
             .environmentObject(appModel)
             // Set the color scheme when appear
-            .onAppear { IntegrationUtilities.setCustomColorScheme() }
+            .onAppear {
+                IntegrationUtilities.setCustomColorScheme()
+                WidgetCenter.shared.reloadAllTimelines()
+            }
             // Fetch config when re-entering foreground
             .onReceive(
                 NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
-                perform: { _ in appDelegate.fetchConfig() }
+                perform: { _ in
+                    appDelegate.fetchConfig()
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
             )
+            .onOpenURL { url in
+                var urlString = url.absoluteString
+                guard urlString.prefix(15) == "HollowWidget://" else { return }
+                urlString.removeSubrange(urlString.range(of: urlString.prefix(15))!)
+                if let postId = Int(urlString) {
+                    IntegrationUtilities.openTemplateDetailView(postId: postId)
+                }
+            }
         }
     }
 }

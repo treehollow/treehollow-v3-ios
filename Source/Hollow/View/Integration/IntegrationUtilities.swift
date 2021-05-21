@@ -71,7 +71,7 @@ struct IntegrationUtilities {
     // MARK: - Presenting Detail View
     
     /// Refresh the current detail view or present a new detail view based on the context.
-    static func openTemplateDetailView(postId: Int, jumpToComment commentId: Int?) {
+    static func openTemplateDetailView(postId: Int, jumpToComment commentId: Int? = nil) {
         var store: HollowDetailStore? = nil
         if UIDevice.isPad {
             if let navVC = getSecondaryNavigationVC(),

@@ -33,6 +33,9 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     @Published var excludeComments = false
     @Published var startDate: Date?
     @Published var endDate: Date?
+    
+    // MARK: Widget
+    @Published var invalidToken = false
 
     // MARK: -
     init(type: PostListRequestGroupType, options: Options = []) {
@@ -52,7 +55,10 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     func requestPosts(at page: Int, completion: (() -> Void)? = nil) {
         guard !self.noMorePosts else { return }
         guard let config = Defaults[.hollowConfig],
-              let token = Defaults[.accessToken] else { return }
+              let token = Defaults[.accessToken] else {
+            withAnimation { invalidToken = true }
+            return
+        }
         let configuration: PostListRequestGroupConfiguration
         switch type {
         case .attentionList:

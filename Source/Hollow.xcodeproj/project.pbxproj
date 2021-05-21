@@ -89,6 +89,10 @@
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
 		0E6BE3B4260ED1EC00B529F7 /* View+noNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE3B3260ED1EC00B529F7 /* View+noNavigationItems.swift */; };
+		0E6D12A526581CA400D5C813 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4D25E6971500904296 /* Localizable.strings */; };
+		0E6D12AB26581FBB00D5C813 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452A26340311001AFC4B /* Constants.swift */; };
+		0E6D12AD26581FEB00D5C813 /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453E26340311001AFC4B /* SearchRequest.swift */; };
+		0E6D12AE2658200000D5C813 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453F26340311001AFC4B /* PostListRequest.swift */; };
 		0E6D500F2638414000C8FB68 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D500E2638414000C8FB68 /* VersionUpdateView.swift */; };
 		0E6D501326384B3100C8FB68 /* VersionUpdateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D501226384B3100C8FB68 /* VersionUpdateUtilities.swift */; };
 		0E6D501426384B3100C8FB68 /* VersionUpdateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D501226384B3100C8FB68 /* VersionUpdateUtilities.swift */; };
@@ -98,6 +102,53 @@
 		0E6EF31825F9C3D2001293FE /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EF31725F9C3D2001293FE /* FloatButton.swift */; };
 		0E6EF31B25F9DFDE001293FE /* View+dynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */; };
 		0E6EF32B25FB6C05001293FE /* dependencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EF32A25FB6C05001293FE /* dependencies.json */; };
+		0E7795BC2657E6FC002F70C2 /* HollowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7795BB2657E6FC002F70C2 /* HollowWidget.swift */; };
+		0E7795BE2657E6FE002F70C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7795BD2657E6FE002F70C2 /* Assets.xcassets */; };
+		0E7795C22657E6FE002F70C2 /* HollowWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E7795C72657E723002F70C2 /* CrossPlatformTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DE26340172001AFC4B /* CrossPlatformTypes.swift */; };
+		0E7795C82657E723002F70C2 /* CrossPlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */; };
+		0E7795CB2657E727002F70C2 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453726340311001AFC4B /* CommentData.swift */; };
+		0E7795CC2657E727002F70C2 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453226340311001AFC4B /* Vote.swift */; };
+		0E7795CD2657E727002F70C2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452D26340311001AFC4B /* Comment.swift */; };
+		0E7795CE2657E727002F70C2 /* HollowConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452C26340311001AFC4B /* HollowConfig.swift */; };
+		0E7795CF2657E727002F70C2 /* VoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453526340311001AFC4B /* VoteData.swift */; };
+		0E7795D02657E727002F70C2 /* ImageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452E26340311001AFC4B /* ImageMetadata.swift */; };
+		0E7795D12657E727002F70C2 /* HollowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453926340311001AFC4B /* HollowType.swift */; };
+		0E7795D22657E727002F70C2 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452F26340311001AFC4B /* SystemMessage.swift */; };
+		0E7795D32657E727002F70C2 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453826340311001AFC4B /* PostData.swift */; };
+		0E7795D42657E727002F70C2 /* DeviceInformationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453326340311001AFC4B /* DeviceInformationType.swift */; };
+		0E7795D52657E727002F70C2 /* HollowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453626340311001AFC4B /* HollowImage.swift */; };
+		0E7795D62657E727002F70C2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453126340311001AFC4B /* Post.swift */; };
+		0E7795D72657E727002F70C2 /* PushNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453026340311001AFC4B /* PushNotificationType.swift */; };
+		0E7795D82657E72B002F70C2 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455B26340311001AFC4B /* Request.swift */; };
+		0E7795D92657E72B002F70C2 /* DefaultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2454426340311001AFC4B /* DefaultRequest.swift */; };
+		0E7795DA2657E72B002F70C2 /* RequestPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456126340311001AFC4B /* RequestPublisher.swift */; };
+		0E7795DB2657E72B002F70C2 /* Request+publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456026340311001AFC4B /* Request+publisher.swift */; };
+		0E7795DC2657E72B002F70C2 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456226340311001AFC4B /* RequestError.swift */; };
+		0E7795FC2657E74A002F70C2 /* Array+removeDuplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456A26340311001AFC4B /* Array+removeDuplicates.swift */; };
+		0E7795FD2657E74A002F70C2 /* Array+sortedRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456D26340311001AFC4B /* Array+sortedRange.swift */; };
+		0E7795FE2657E74A002F70C2 /* PublisherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457126340311001AFC4B /* PublisherExtensions.swift */; };
+		0E7795FF2657E74A002F70C2 /* Int+bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456726340311001AFC4B /* Int+bool.swift */; };
+		0E7796002657E74A002F70C2 /* Double+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456C26340311001AFC4B /* Double+int.swift */; };
+		0E7796012657E74A002F70C2 /* String+regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456B26340311001AFC4B /* String+regex.swift */; };
+		0E7796022657E74A002F70C2 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457026340311001AFC4B /* DateExtensions.swift */; };
+		0E7796032657E74A002F70C2 /* Bool+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456E26340311001AFC4B /* Bool+int.swift */; };
+		0E7796042657E74A002F70C2 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456F26340311001AFC4B /* String+Date.swift */; };
+		0E7796052657E74A002F70C2 /* String+removeLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456826340311001AFC4B /* String+removeLineBreak.swift */; };
+		0E7796062657E74A002F70C2 /* String+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456426340311001AFC4B /* String+SHA256.swift */; };
+		0E7796072657E74A002F70C2 /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456926340311001AFC4B /* Int+string.swift */; };
+		0E7796082657E74A002F70C2 /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */; };
+		0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456626340311001AFC4B /* DefaultsKeys.swift */; };
+		0E77960B2657E74E002F70C2 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457326340311001AFC4B /* HollowDateFormatter.swift */; };
+		0E77960C2657E74E002F70C2 /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457426340311001AFC4B /* AvatarGenerator.swift */; };
+		0E7796102657E74E002F70C2 /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457826340311001AFC4B /* PostCache.swift */; };
+		0E7796172657EB30002F70C2 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796162657EB30002F70C2 /* Defaults */; };
+		0E7796192657EB30002F70C2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796182657EB30002F70C2 /* Alamofire */; };
+		0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
+		0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
+		0E7796212657EC7E002F70C2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796202657EC7E002F70C2 /* Kingfisher */; };
+		0E7796232657EC7E002F70C2 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796222657EC7E002F70C2 /* Cache */; };
+		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
 		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
@@ -331,6 +382,16 @@
 		0EFE1405262AF768007B0045 /* View+makeDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE1404262AF768007B0045 /* View+makeDivider.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0E7795C02657E6FE002F70C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E415A6825CD769B00351672 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E7795B42657E6FC002F70C2;
+			remoteInfo = HollowWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		0EBA1DF02613493B00B9619F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -338,6 +399,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				0E7795C22657E6FE002F70C2 /* HollowWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +484,12 @@
 		0E6EF31725F9C3D2001293FE /* FloatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButton.swift; sourceTree = "<group>"; };
 		0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+dynamicFont.swift"; sourceTree = "<group>"; };
 		0E6EF32A25FB6C05001293FE /* dependencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dependencies.json; sourceTree = "<group>"; };
+		0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HollowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E7795BB2657E6FC002F70C2 /* HollowWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowWidget.swift; sourceTree = "<group>"; };
+		0E7795BD2657E6FE002F70C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E7795BF2657E6FE002F70C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HollowWidgetExtension.entitlements; sourceTree = "<group>"; };
+		0E779624265800DD002F70C2 /* WidgetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetColors.swift; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
@@ -589,6 +657,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E7795B22657E6FC002F70C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E7796212657EC7E002F70C2 /* Kingfisher in Frameworks */,
+				0E7796232657EC7E002F70C2 /* Cache in Frameworks */,
+				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
+				0E7796192657EB30002F70C2 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EC244BF263400C5001AFC4B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -609,11 +688,12 @@
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
+				0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */,
 				0EC244DA26340156001AFC4B /* Shared */,
 				0E415A7225CD769B00351672 /* Hollow */,
 				0EC244C3263400C6001AFC4B /* HollowMac */,
+				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
 				0E415A7125CD769B00351672 /* Products */,
-				0EC245072634029D001AFC4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -622,6 +702,7 @@
 			children = (
 				0E415A7025CD769B00351672 /* Hollow.app */,
 				0EC244C2263400C5001AFC4B /* HollowMac.app */,
+				0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -839,6 +920,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0E7795BA2657E6FC002F70C2 /* HollowWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0E7795BB2657E6FC002F70C2 /* HollowWidget.swift */,
+				0E7795BD2657E6FE002F70C2 /* Assets.xcassets */,
+				0E7795BF2657E6FE002F70C2 /* Info.plist */,
+				0E779624265800DD002F70C2 /* WidgetColors.swift */,
+			);
+			path = HollowWidget;
+			sourceTree = "<group>";
+		};
 		0E8BCFE525E0A45F0056D809 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -935,13 +1027,6 @@
 				0EC245022634022C001AFC4B /* AppDelegate.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		0EC245072634029D001AFC4B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0EC2451A26340301001AFC4B /* Model */ = {
@@ -1282,6 +1367,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0E7795C12657E6FE002F70C2 /* PBXTargetDependency */,
 			);
 			name = Hollow;
 			packageProductDependencies = (
@@ -1298,6 +1384,29 @@
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0E7795B42657E6FC002F70C2 /* HollowWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E7795C62657E6FE002F70C2 /* Build configuration list for PBXNativeTarget "HollowWidgetExtension" */;
+			buildPhases = (
+				0E7795B12657E6FC002F70C2 /* Sources */,
+				0E7795B22657E6FC002F70C2 /* Frameworks */,
+				0E7795B32657E6FC002F70C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HollowWidgetExtension;
+			packageProductDependencies = (
+				0E7796162657EB30002F70C2 /* Defaults */,
+				0E7796182657EB30002F70C2 /* Alamofire */,
+				0E7796202657EC7E002F70C2 /* Kingfisher */,
+				0E7796222657EC7E002F70C2 /* Cache */,
+			);
+			productName = HollowWidgetExtension;
+			productReference = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		0EC244C1263400C5001AFC4B /* HollowMac */ = {
 			isa = PBXNativeTarget;
@@ -1331,12 +1440,15 @@
 		0E415A6825CD769B00351672 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = treehollow;
 				TargetAttributes = {
 					0E415A6F25CD769B00351672 = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					0E7795B42657E6FC002F70C2 = {
+						CreatedOnToolsVersion = 12.5;
 					};
 					0EC244C1263400C5001AFC4B = {
 						CreatedOnToolsVersion = 12.4;
@@ -1369,6 +1481,7 @@
 			targets = (
 				0E415A6F25CD769B00351672 /* Hollow */,
 				0EC244C1263400C5001AFC4B /* HollowMac */,
+				0E7795B42657E6FC002F70C2 /* HollowWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1383,6 +1496,15 @@
 				0EC245C326340312001AFC4B /* README.md in Resources */,
 				0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */,
 				0E415A7825CD769F00351672 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E7795B32657E6FC002F70C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E7795BE2657E6FE002F70C2 /* Assets.xcassets in Resources */,
+				0E6D12A526581CA400D5C813 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,6 +1725,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E7795B12657E6FC002F70C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E7795C82657E723002F70C2 /* CrossPlatformImage.swift in Sources */,
+				0E6D12AD26581FEB00D5C813 /* SearchRequest.swift in Sources */,
+				0E7795FD2657E74A002F70C2 /* Array+sortedRange.swift in Sources */,
+				0E7795CB2657E727002F70C2 /* CommentData.swift in Sources */,
+				0E7795FE2657E74A002F70C2 /* PublisherExtensions.swift in Sources */,
+				0E7796042657E74A002F70C2 /* String+Date.swift in Sources */,
+				0E7796002657E74A002F70C2 /* Double+int.swift in Sources */,
+				0E7795DB2657E72B002F70C2 /* Request+publisher.swift in Sources */,
+				0E7795D22657E727002F70C2 /* SystemMessage.swift in Sources */,
+				0E7795D62657E727002F70C2 /* Post.swift in Sources */,
+				0E7796052657E74A002F70C2 /* String+removeLineBreak.swift in Sources */,
+				0E7796062657E74A002F70C2 /* String+SHA256.swift in Sources */,
+				0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */,
+				0E7795D92657E72B002F70C2 /* DefaultRequest.swift in Sources */,
+				0E7795D52657E727002F70C2 /* HollowImage.swift in Sources */,
+				0E7795D42657E727002F70C2 /* DeviceInformationType.swift in Sources */,
+				0E7796032657E74A002F70C2 /* Bool+int.swift in Sources */,
+				0E7795D02657E727002F70C2 /* ImageMetadata.swift in Sources */,
+				0E7796012657E74A002F70C2 /* String+regex.swift in Sources */,
+				0E6D12AE2658200000D5C813 /* PostListRequest.swift in Sources */,
+				0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */,
+				0E7795D32657E727002F70C2 /* PostData.swift in Sources */,
+				0E7795CD2657E727002F70C2 /* Comment.swift in Sources */,
+				0E7795CC2657E727002F70C2 /* Vote.swift in Sources */,
+				0E7796082657E74A002F70C2 /* Data+hexEncodedString.swift in Sources */,
+				0E7795CF2657E727002F70C2 /* VoteData.swift in Sources */,
+				0E7795DA2657E72B002F70C2 /* RequestPublisher.swift in Sources */,
+				0E7795D82657E72B002F70C2 /* Request.swift in Sources */,
+				0E7796072657E74A002F70C2 /* Int+string.swift in Sources */,
+				0E7795FC2657E74A002F70C2 /* Array+removeDuplicates.swift in Sources */,
+				0E7795D72657E727002F70C2 /* PushNotificationType.swift in Sources */,
+				0E7795BC2657E6FC002F70C2 /* HollowWidget.swift in Sources */,
+				0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */,
+				0E77960C2657E74E002F70C2 /* AvatarGenerator.swift in Sources */,
+				0E7795DC2657E72B002F70C2 /* RequestError.swift in Sources */,
+				0E7796022657E74A002F70C2 /* DateExtensions.swift in Sources */,
+				0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */,
+				0E7795C72657E723002F70C2 /* CrossPlatformTypes.swift in Sources */,
+				0E7796102657E74E002F70C2 /* PostCache.swift in Sources */,
+				0E7795CE2657E727002F70C2 /* HollowConfig.swift in Sources */,
+				0E7795D12657E727002F70C2 /* HollowType.swift in Sources */,
+				0E77960B2657E74E002F70C2 /* HollowDateFormatter.swift in Sources */,
+				0E7795FF2657E74A002F70C2 /* Int+bool.swift in Sources */,
+				0E6D12AB26581FBB00D5C813 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EC244BE263400C5001AFC4B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1712,6 +1885,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E7795C12657E6FE002F70C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E7795B42657E6FC002F70C2 /* HollowWidgetExtension */;
+			targetProxy = 0E7795C02657E6FE002F70C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0EAA1B4D25E6971500904296 /* Localizable.strings */ = {
@@ -1861,7 +2042,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1870,7 +2051,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.10;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -1887,7 +2068,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1896,9 +2077,65 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.10;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0E7795C42657E6FE002F70C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HollowWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 51;
+				DEVELOPMENT_TEAM = C5UH93T368;
+				INFOPLIST_FILE = HollowWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
+				OTHER_SWIFT_FLAGS = "-DWIDGET";
+				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0E7795C52657E6FE002F70C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HollowWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 51;
+				DEVELOPMENT_TEAM = C5UH93T368;
+				INFOPLIST_FILE = HollowWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
+				OTHER_SWIFT_FLAGS = "-DWIDGET";
+				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1974,6 +2211,15 @@
 			buildConfigurations = (
 				0E415A8025CD769F00351672 /* Debug */,
 				0E415A8125CD769F00351672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E7795C62657E6FE002F70C2 /* Build configuration list for PBXNativeTarget "HollowWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E7795C42657E6FE002F70C2 /* Debug */,
+				0E7795C52657E6FE002F70C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2133,6 +2379,26 @@
 			productName = Kingfisher;
 		};
 		0E429082263A8584008DA046 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
+		0E7796162657EB30002F70C2 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+		0E7796182657EB30002F70C2 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		0E7796202657EC7E002F70C2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		0E7796222657EC7E002F70C2 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;

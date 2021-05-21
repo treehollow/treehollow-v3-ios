@@ -673,3 +673,11 @@
 "SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_FOOTER" = "此模式打开时无法进行评论跳转。";
 
 "COMMENT_VIEW_SHOW_ONLY_LABEL" = "仅显示此人评论";
+
+"WIDGET_DISPLAY_NAME" = "热榜";
+
+"WIDGET_DESCRIPTION" = "显示热榜中的树洞。";
+
+"WIDGET_EMPTY_LABEL" = "无内容";
+
+"WIDGET_EMPTY_MSG" = "网络连接失败或登录状态失效";
