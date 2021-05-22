@@ -34,9 +34,10 @@
 
 当前项目源文件目录结构如下：
 
-- [Hollow](https://github.com/treehollow/treehollow-v3-ios/tree/main/Source/Hollow)：iOS Target（包括 Catalyst 版 macOS app）
-- [HollowMac](https://github.com/treehollow/treehollow-v3-ios/tree/main/Source/HollowMac)：macOS Target（原生版本，开发中）
-- [Shared](https://github.com/treehollow/treehollow-v3-ios/tree/main/Source/Shared)：上述两个 Target 共用的源文件 
+- [Hollow](Source/Hollow)：iOS Target（包括 Catalyst 版 macOS app）
+- [HollowMac](Source/HollowMac)：macOS Target（原生版本，开发中）
+- [Shared](Source/Shared)：上述两个 Target 共用的源文件
+- [HollowWidget](Source/HollowWidget)：iOS主屏幕小组件
 
 ## 贡献
 

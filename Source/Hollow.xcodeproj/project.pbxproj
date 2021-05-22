@@ -688,7 +688,6 @@
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
-				0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */,
 				0EC244DA26340156001AFC4B /* Shared */,
 				0E415A7225CD769B00351672 /* Hollow */,
 				0EC244C3263400C6001AFC4B /* HollowMac */,
@@ -696,6 +695,7 @@
 				0E415A7125CD769B00351672 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		0E415A7125CD769B00351672 /* Products */ = {
 			isa = PBXGroup;
@@ -923,6 +923,7 @@
 		0E7795BA2657E6FC002F70C2 /* HollowWidget */ = {
 			isa = PBXGroup;
 			children = (
+				0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */,
 				0E7795BB2657E6FC002F70C2 /* HollowWidget.swift */,
 				0E7795BD2657E6FE002F70C2 /* Assets.xcassets */,
 				0E7795BF2657E6FE002F70C2 /* Info.plist */,
@@ -2091,7 +2092,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = HollowWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = C5UH93T368;
@@ -2119,7 +2120,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = HollowWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = C5UH93T368;

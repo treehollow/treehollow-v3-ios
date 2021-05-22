@@ -34,13 +34,14 @@ struct Provider: TimelineProvider {
             completion(entry)
             Defaults[.lastLoadDate] = Date()
         }
+        let minInterval = 60.0
         let lastLoadDate = Defaults[.lastLoadDate] ?? .distantPast
-        if Date().timeIntervalSince1970 - lastLoadDate.timeIntervalSince1970 > 5 {
+        if Date().timeIntervalSince1970 - lastLoadDate.timeIntervalSince1970 > minInterval {
             fetchPosts(completion: completion)
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + minInterval) {
                 let lastLoadDate = Defaults[.lastLoadDate] ?? .distantPast
-                if Date().timeIntervalSince1970 - lastLoadDate.timeIntervalSince1970 > 5 {
+                if Date().timeIntervalSince1970 - lastLoadDate.timeIntervalSince1970 > minInterval {
                     fetchPosts(completion: completion)
                 }
             }
