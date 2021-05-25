@@ -31,6 +31,8 @@ struct HollowDetailView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
     
+    @Namespace var buttonAnimationNamespace
+    
     @Default(.useListInDetail) var useListInDetail
     
     var body: some View {
@@ -162,8 +164,10 @@ struct HollowDetailView: View {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 },
                 systemImageName: "text.bubble.fill",
-                imageScaleFactor: 0.8
+                imageScaleFactor: 0.8,
+                buttonAnimationNamespace: buttonAnimationNamespace
             )
+//            .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
             .edgesIgnoringSafeArea(.bottom)
             .bottom()
             .trailing()
@@ -181,12 +185,13 @@ struct HollowDetailView: View {
                 post.comments[store.replyToIndex].name
             HollowCommentInputView(
                 store: store,
+                buttonAnimationNamespace: buttonAnimationNamespace,
                 transitionAnimation: scrollAnimation,
                 replyToName: name
             )
             .edgesIgnoringSafeArea([])
             .bottom()
-            .transition(.move(edge: .bottom))
+//            .transition(.move(edge: .bottom))
             
         }})
         

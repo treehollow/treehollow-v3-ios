@@ -12,6 +12,7 @@ struct FloatButton: View {
     var action: () -> Void
     var systemImageName: String
     var imageScaleFactor: CGFloat = 1
+    let buttonAnimationNamespace: Namespace.ID
     
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 50, relativeTo: .body) var body50: CGFloat
@@ -21,14 +22,16 @@ struct FloatButton: View {
     var body: some View {
         Button(action: action) {
             ZStack {
-                LinearGradient.vertical(gradient: .hollowContentVote)
+                RoundedRectangle(cornerRadius: body50 / 2, style: .continuous)
+                    .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+                    .frame(width: body50, height: body50)
+                    .foregroundColor(.hollowContentVoteGradient1)
+
                 Image(systemName: systemImageName)
                     .font(.system(size: body30 * imageScaleFactor))
                     .foregroundColor(.white)
             }
         }
-        .frame(width: body50, height: body50)
-        .clipShape(Circle())
         .shadow(radius: 5)
         .opacity(isEnabled ? 1 : 0.5)
     }

@@ -18,8 +18,15 @@ struct Provider: TimelineProvider {
             return
         }
         let request = SearchRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, keywords: config.searchTrending, page: 1, includeComment: false))
-        request.performRequest(completion: { result, _ in
-            guard let result = result else { completion([]); return }
+        request.performRequest(completion: { result, error in
+            guard let result = result else {
+                switch error {
+                // Only show no posts when token expired
+                case .tokenExpiredError: completion([])
+                default: break
+                }
+                return
+            }
             completion(result.map({ $0.post }))
         })
     }
@@ -34,7 +41,7 @@ struct Provider: TimelineProvider {
             completion(entry)
             Defaults[.lastLoadDate] = Date()
         }
-        let minInterval = 60.0
+        let minInterval = 20.0
         let lastLoadDate = Defaults[.lastLoadDate] ?? .distantPast
         if Date().timeIntervalSince1970 - lastLoadDate.timeIntervalSince1970 > minInterval {
             fetchPosts(completion: completion)
@@ -117,7 +124,9 @@ struct HollowWidgetEntryView : View {
                         .fontWeight(.heavy)
                         .foregroundColor(.gradient1)
                         .frame(minWidth: 20)
-                    Text("\(post.text.removeLineBreak())")
+                    if post.text != "" {
+                        Text("\(post.text.removeLineBreak())")
+                    }
                     if post.hollowImage != nil {
                         Text(Image(systemName: "photo"))
                     }

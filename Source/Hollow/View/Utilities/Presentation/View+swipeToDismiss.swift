@@ -22,9 +22,16 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     @State var disableScroll = false
     let screenWidth = UIScreen.main.bounds.size.width
     
+    var transition: AnyTransition {
+//        AnyTransition.move(edge: .trailing).combined(with: .scale(scale: 0, anchor: .bottomTrailing))
+            return AnyTransition.scale(scale: 0, anchor: .bottomTrailing)
+                .combined(with: .opacity)
+    }
+    
     func body(content: Content) -> some View {
         content
-            .transition(.move(edge: .trailing))
+            .transition(transition)
+//            .cornerRadius(min(offset / 5, UIScreen.main.displayCornerRadius ?? 20))
             .offset(x: offset)
             .gesture(
                 DragGesture()
@@ -42,7 +49,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                             let speed = Double((predictedPosition - value.location.x) / screenWidth)
                             withAnimation(Animation.easeOut(duration: 0.1).speed(min(max(speed, 0.4), 0.7))) {
                                 presented = false
-                                offset = 0
+//                                offset = 0
                             }
                         } else {
                             withAnimation(.spring(response: 0.2)) {

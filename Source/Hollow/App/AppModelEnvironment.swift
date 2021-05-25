@@ -29,7 +29,7 @@ extension AppModelEnvironment {
             Defaults[.accessToken] = nil
             appModelState.shouldShowMainView = false
             // FIXME: Show Alert in macOS
-            #if (!os(macOS) || targetEnvironment(macCatalyst)) && !WIDGET
+            #if !os(macOS) || targetEnvironment(macCatalyst)
             ToastManager.shared.show(configuration: .error(title: nil, body: NSLocalizedString("WELCOMVIEW_TOKEN_EXPIRED_LABEL", comment: "")))
             #endif
 

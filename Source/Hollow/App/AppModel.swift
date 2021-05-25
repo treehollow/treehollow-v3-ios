@@ -17,10 +17,8 @@ class AppModel: ObservableObject {
     
     init() {
         // Chcek for version update
-        #if !WIDGET
         UpdateAvailabilityRequest.defaultPublisher
             .sinkOnMainThread(receiveValue: VersionUpdateUtilities.handleUpdateAvailabilityResult)
             .store(in: &cancellables)
-        #endif
     }
 }

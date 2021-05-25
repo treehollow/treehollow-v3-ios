@@ -15,8 +15,8 @@ struct MainView_iPad: View {
     @ObservedObject var sharedModel = SharedModel()
     
     @ScaledMetric(wrappedValue: 40) var rowHeight: CGFloat
-    
     @Environment(\.colorScheme) var colorScheme
+    @Namespace var buttonAnimationNamespace
     
     var body: some View {
         SplitView(sharedModel: sharedModel, primaryView: { _ in

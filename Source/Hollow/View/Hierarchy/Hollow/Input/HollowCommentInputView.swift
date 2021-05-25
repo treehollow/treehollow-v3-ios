@@ -22,7 +22,8 @@ struct HollowCommentInputView: View {
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var editorFontSize: CGFloat
     
-    @Namespace var animation
+    @Namespace var photoAnimtaion
+    let buttonAnimationNamespace: Namespace.ID
     
     var transitionAnimation: Animation?
     var replyToName: String
@@ -79,10 +80,15 @@ struct HollowCommentInputView: View {
             }
         }
         .padding()
-        .background(Color.hollowCardBackground)
-        .roundedCorner(12)
+        .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace, isSource: false)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .foregroundColor(.hollowCardBackground)
+                .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+                .shadow(radius: 12)
+        )
+//        .roundedCorner(12)
         .padding()
-        .shadow(radius: 12)
         .animation(transitionAnimation)
         
         .onDrop(of: ["public.image"], isTargeted: nil) { providers in
@@ -134,7 +140,7 @@ extension HollowCommentInputView {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .blur(radius: 1)
-                            .matchedGeometryEffect(id: "photo", in: animation)
+                            .matchedGeometryEffect(id: "photo", in: photoAnimtaion)
                     } else {
                         Image(systemName: "photo")
                             .foregroundColor(Color.hollowContentText)
@@ -186,7 +192,7 @@ extension HollowCommentInputView {
                     .trailing()
                 )
                 .zIndex(1)
-                .matchedGeometryEffect(id: "photo", in: animation)
+                .matchedGeometryEffect(id: "photo", in: photoAnimtaion)
         } else if let image = store.image, !hideComponents {
             RoundedRectangle(cornerRadius: 4)
                 .foregroundColor(.uiColor(.systemFill))

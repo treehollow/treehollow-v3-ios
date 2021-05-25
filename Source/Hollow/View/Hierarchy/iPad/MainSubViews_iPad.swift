@@ -86,7 +86,8 @@ extension MainView_iPad {
                     withAnimation { sharedModel.showCreatePost = true }
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 },
-                systemImageName: "plus"
+                systemImageName: "plus",
+                buttonAnimationNamespace: buttonAnimationNamespace
             )
             .keyboardShortcut("n")
             .bottom()

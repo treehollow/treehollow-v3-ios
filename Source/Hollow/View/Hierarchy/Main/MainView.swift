@@ -20,6 +20,7 @@ struct MainView: View {
     let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly
     let wanderViewModel = PostListRequestStore(type: .wander, options: [.ignoreCitedPost, .ignoreComments, .unordered])
+    @Namespace var buttonAnimationNamespace
 
     var body: some View {
         ZStack {
@@ -52,7 +53,8 @@ struct MainView: View {
                                 withAnimation { showCreatePost = true }
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             },
-                            systemImageName: "plus"
+                            systemImageName: "plus",
+                            buttonAnimationNamespace: buttonAnimationNamespace
                         )
                         .bottom()
                         .trailing()

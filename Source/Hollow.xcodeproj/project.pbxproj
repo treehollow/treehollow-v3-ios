@@ -25,6 +25,9 @@
 		0E3E694E260DFCE8005E8DA2 /* Text+dateText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E694D260DFCE8005E8DA2 /* Text+dateText.swift */; };
 		0E3E6958260E1312005E8DA2 /* MainSubViews_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */; };
 		0E3E6960260E3676005E8DA2 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E695F260E3676005E8DA2 /* SplitView.swift */; };
+		0E3FEEDF265BA46C00842B98 /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457426340311001AFC4B /* AvatarGenerator.swift */; };
+		0E3FEEE0265BA4A900842B98 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453F26340311001AFC4B /* PostListRequest.swift */; };
+		0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E3FEEE6265BA5D400842B98 /* Cache */; };
 		0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */; };
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
 		0E415B4225CD772200351672 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
@@ -92,7 +95,6 @@
 		0E6D12A526581CA400D5C813 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EAA1B4D25E6971500904296 /* Localizable.strings */; };
 		0E6D12AB26581FBB00D5C813 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452A26340311001AFC4B /* Constants.swift */; };
 		0E6D12AD26581FEB00D5C813 /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453E26340311001AFC4B /* SearchRequest.swift */; };
-		0E6D12AE2658200000D5C813 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453F26340311001AFC4B /* PostListRequest.swift */; };
 		0E6D500F2638414000C8FB68 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D500E2638414000C8FB68 /* VersionUpdateView.swift */; };
 		0E6D501326384B3100C8FB68 /* VersionUpdateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D501226384B3100C8FB68 /* VersionUpdateUtilities.swift */; };
 		0E6D501426384B3100C8FB68 /* VersionUpdateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D501226384B3100C8FB68 /* VersionUpdateUtilities.swift */; };
@@ -139,15 +141,10 @@
 		0E7796072657E74A002F70C2 /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456926340311001AFC4B /* Int+string.swift */; };
 		0E7796082657E74A002F70C2 /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */; };
 		0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456626340311001AFC4B /* DefaultsKeys.swift */; };
-		0E77960B2657E74E002F70C2 /* HollowDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457326340311001AFC4B /* HollowDateFormatter.swift */; };
-		0E77960C2657E74E002F70C2 /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457426340311001AFC4B /* AvatarGenerator.swift */; };
-		0E7796102657E74E002F70C2 /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457826340311001AFC4B /* PostCache.swift */; };
 		0E7796172657EB30002F70C2 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796162657EB30002F70C2 /* Defaults */; };
 		0E7796192657EB30002F70C2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796182657EB30002F70C2 /* Alamofire */; };
 		0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
 		0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
-		0E7796212657EC7E002F70C2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796202657EC7E002F70C2 /* Kingfisher */; };
-		0E7796232657EC7E002F70C2 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796222657EC7E002F70C2 /* Cache */; };
 		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
@@ -661,8 +658,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7796212657EC7E002F70C2 /* Kingfisher in Frameworks */,
-				0E7796232657EC7E002F70C2 /* Cache in Frameworks */,
+				0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */,
 				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
 				0E7796192657EB30002F70C2 /* Alamofire in Frameworks */,
 			);
@@ -685,6 +681,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E3FEEE5265BA5D400842B98 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
@@ -693,6 +696,7 @@
 				0EC244C3263400C6001AFC4B /* HollowMac */,
 				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
 				0E415A7125CD769B00351672 /* Products */,
+				0E3FEEE5265BA5D400842B98 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -1402,8 +1406,7 @@
 			packageProductDependencies = (
 				0E7796162657EB30002F70C2 /* Defaults */,
 				0E7796182657EB30002F70C2 /* Alamofire */,
-				0E7796202657EC7E002F70C2 /* Kingfisher */,
-				0E7796222657EC7E002F70C2 /* Cache */,
+				0E3FEEE6265BA5D400842B98 /* Cache */,
 			);
 			productName = HollowWidgetExtension;
 			productReference = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */;
@@ -1735,11 +1738,13 @@
 				0E7795FD2657E74A002F70C2 /* Array+sortedRange.swift in Sources */,
 				0E7795CB2657E727002F70C2 /* CommentData.swift in Sources */,
 				0E7795FE2657E74A002F70C2 /* PublisherExtensions.swift in Sources */,
+				0E3FEEDF265BA46C00842B98 /* AvatarGenerator.swift in Sources */,
 				0E7796042657E74A002F70C2 /* String+Date.swift in Sources */,
 				0E7796002657E74A002F70C2 /* Double+int.swift in Sources */,
 				0E7795DB2657E72B002F70C2 /* Request+publisher.swift in Sources */,
 				0E7795D22657E727002F70C2 /* SystemMessage.swift in Sources */,
 				0E7795D62657E727002F70C2 /* Post.swift in Sources */,
+				0E3FEEE0265BA4A900842B98 /* PostListRequest.swift in Sources */,
 				0E7796052657E74A002F70C2 /* String+removeLineBreak.swift in Sources */,
 				0E7796062657E74A002F70C2 /* String+SHA256.swift in Sources */,
 				0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */,
@@ -1749,7 +1754,6 @@
 				0E7796032657E74A002F70C2 /* Bool+int.swift in Sources */,
 				0E7795D02657E727002F70C2 /* ImageMetadata.swift in Sources */,
 				0E7796012657E74A002F70C2 /* String+regex.swift in Sources */,
-				0E6D12AE2658200000D5C813 /* PostListRequest.swift in Sources */,
 				0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */,
 				0E7795D32657E727002F70C2 /* PostData.swift in Sources */,
 				0E7795CD2657E727002F70C2 /* Comment.swift in Sources */,
@@ -1763,15 +1767,12 @@
 				0E7795D72657E727002F70C2 /* PushNotificationType.swift in Sources */,
 				0E7795BC2657E6FC002F70C2 /* HollowWidget.swift in Sources */,
 				0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */,
-				0E77960C2657E74E002F70C2 /* AvatarGenerator.swift in Sources */,
 				0E7795DC2657E72B002F70C2 /* RequestError.swift in Sources */,
 				0E7796022657E74A002F70C2 /* DateExtensions.swift in Sources */,
 				0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */,
 				0E7795C72657E723002F70C2 /* CrossPlatformTypes.swift in Sources */,
-				0E7796102657E74E002F70C2 /* PostCache.swift in Sources */,
 				0E7795CE2657E727002F70C2 /* HollowConfig.swift in Sources */,
 				0E7795D12657E727002F70C2 /* HollowType.swift in Sources */,
-				0E77960B2657E74E002F70C2 /* HollowDateFormatter.swift in Sources */,
 				0E7795FF2657E74A002F70C2 /* Int+bool.swift in Sources */,
 				0E6D12AB26581FBB00D5C813 /* Constants.swift in Sources */,
 			);
@@ -2304,6 +2305,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E3FEEE6265BA5D400842B98 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
 		0E42905B263A742D008DA046 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E42905A263A742D008DA046 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
@@ -2393,16 +2399,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		0E7796202657EC7E002F70C2 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		0E7796222657EC7E002F70C2 /* Cache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
-			productName = Cache;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

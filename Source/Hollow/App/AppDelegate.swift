@@ -15,8 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Defaults[.customColorSet] = Defaults[.tempCustomColorSet]
         Defaults[.applyCustomColorSet] = Defaults[.customColorSet] != nil
         setupApplication(application)
-        let appearance = UITableView.appearance(whenContainedInInstancesOf: [HollowDetailViewController.self])
+        let appearance = UITableView.appearance(whenContainedInInstancesOf: [HollowDetailViewController.self, HollowDetailViewController_iPad.self])
         appearance.backgroundColor = UIColor(Color.hollowCardBackground)
+        UNUserNotificationCenter.current().getDeliveredNotifications(completionHandler: { notifications in
+            print(notifications.map({ ($0.request.identifier, $0.request.content.title) }))
+        })
         return true
     }
     
