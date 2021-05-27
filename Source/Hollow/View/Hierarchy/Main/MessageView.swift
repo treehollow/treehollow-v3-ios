@@ -97,7 +97,6 @@ extension MessageView {
                 }
             }
             .padding(.trailing)
-            .modifier(AppModelBehaviour(state: postListStore.appModelState))
             .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
             .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))
         }
@@ -131,7 +130,6 @@ extension MessageView {
             }}
             .padding(.trailing)
             .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
-            .modifier(AppModelBehaviour(state: messageStore.appModelState))
             .modifier(LoadingIndicator(isLoading: messageStore.isLoading))
         }
     }

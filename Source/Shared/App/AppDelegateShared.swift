@@ -54,12 +54,7 @@ extension HAppDelegate {
         let configuration = UpdateDeviceTokenRequestConfiguration(deviceToken: deviceToken, token: accessToken, apiRoot: config.apiRootUrls)
         let request = UpdateDeviceTokenRequest(configuration: configuration)
         
-        request.performRequest(completion: { result, error in
-            if let error = error {
-                print(error)
-                // TODO: Handle error
-            }
-        })
+        request.performRequest(completion: { _, _ in })
     }
 
     func fetchConfig() {

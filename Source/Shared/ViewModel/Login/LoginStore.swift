@@ -13,7 +13,6 @@ import Defaults
 
 /// View model for `LoginView`
 class LoginStore: ObservableObject, AppModelEnvironment {
-    @Published var appModelState = AppModelState()
 
     @Published var showsRecaptcha = false
     @Published var reCAPTCHAToken: String = ""
@@ -102,7 +101,7 @@ class LoginStore: ObservableObject, AppModelEnvironment {
                 withAnimation { self.isLoading = false }
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
-                self.appModelState.shouldShowMainView = true
+                AppModel.shared.isInMainView = true
             })
             .store(in: &cancellables)
     }
@@ -131,7 +130,7 @@ class LoginStore: ObservableObject, AppModelEnvironment {
                 withAnimation { self.isLoading = false }
                 // We've got the token, it's time to enter the main interface.
                 Defaults[.accessToken] = result.token
-                self.appModelState.shouldShowMainView = true
+                AppModel.shared.isInMainView = true
             })
             .store(in: &cancellables)
     }

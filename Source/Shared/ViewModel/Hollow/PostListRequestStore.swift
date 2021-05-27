@@ -23,7 +23,6 @@ class PostListRequestStore: ObservableObject, AppModelEnvironment {
     @Published var isLoading = false
     @Published var isEditingAttention = false
     @Published var errorMessage: (title: String, message: String)?
-    @Published var appModelState = AppModelState()
     @Published var allowLoadMorePosts = false
 
     var cancellables = Set<AnyCancellable>()

@@ -39,7 +39,6 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
     @Published var isSendingComment = false
-    @Published var appModelState = AppModelState()
     
     var bindingCancellable: AnyCancellable?
     private var cancellables = Set<AnyCancellable>()

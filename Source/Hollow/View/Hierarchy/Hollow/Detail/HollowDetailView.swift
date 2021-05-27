@@ -209,7 +209,6 @@ struct HollowDetailView: View {
         }
         
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
-        .modifier(AppModelBehaviour(state: store.appModelState))
         
     }
 }
@@ -235,8 +234,8 @@ extension HollowDetailView {
     @ViewBuilder var mainContent: some View {
         let spacing: CGFloat = UIDevice.isMac ? 20 : 13
         
-        Spacer(minLength: 5).fixedSize()
-            .background(Color.hollowCardBackground)
+        Color.hollowCardBackground
+            .frame(height: 5)
             .id(-1)
         
         if store.noSuchPost {
@@ -252,13 +251,13 @@ extension HollowDetailView {
                 voteHandler: store.vote,
                 imageReloadHandler: { _ in store.loadPostImage() }
             )
-            .compositingGroup()
             .padding(.top, spacing)
             .padding(.horizontal)
             .background(Color.hollowCardBackground)
         }
         
-        Spacer(minLength: spacing * 2).fixedSize()
+        Color.hollowCardBackground
+            .frame(height: spacing * 2)
             // Get the frame in the scroll view content
             .modifier(GetFrame(coordinateSpace: .named("detail.scrollview"), handler: { frame in
                 guard showHeader && !useListInDetail else { return }

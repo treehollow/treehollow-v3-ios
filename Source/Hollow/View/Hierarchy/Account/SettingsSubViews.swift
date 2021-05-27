@@ -312,7 +312,6 @@ struct PushNotificationSettingsView: View {
             }}
         )
         .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
-        .modifier(AppModelBehaviour(state: viewModel.appModelState))
         .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
         .onAppear { checkForPermissions() }
         .onReceive(
@@ -338,7 +337,6 @@ struct PushNotificationSettingsView: View {
         @Published var notificationType = Defaults[.notificationTypeCache]
         @Published var tempNotificationType = Defaults[.notificationTypeCache]
         @Published var errorMessage: (title: String, message: String)?
-        @Published var appModelState = AppModelState()
         
         var cancellables = Set<AnyCancellable>()
         

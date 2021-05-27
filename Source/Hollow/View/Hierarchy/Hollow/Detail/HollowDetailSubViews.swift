@@ -51,8 +51,8 @@ extension HollowDetailView {
                 .foregroundColor(.hollowCardStarUnselected)
             }
         }
-        .background(Color.hollowCardBackground)
         .padding(.horizontal)
+        .background(Color.hollowCardBackground)
         .lineLimit(1)
         
         ForEach(comments) { comment in

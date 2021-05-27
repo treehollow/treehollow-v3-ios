@@ -16,7 +16,6 @@ class DeviceListStore: ObservableObject, AppModelEnvironment {
     @Published var isLoading: Bool = false
     @Published var loggingoutUUID: String?
     @Published var errorMessage: (title: String, message: String)?
-    @Published var appModelState = AppModelState()
     
     private var cancellables = Set<AnyCancellable>()
 

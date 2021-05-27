@@ -4,40 +4,15 @@
 
 ### 所有 View 共享数据
 
-由于采用了 SwiftUI 的生命周期（[App essentials in SwiftUI](https://developer.apple.com/videos/play/wwdc2020/10037/)），我们在 `HollowApp` 中初始化一个唯一的、在所有 View 中共享的对象 `appModel`，其类型 `AppModel` 中储存需要在应用内共享的数据（如：用户的 token 是否过期）：
+定义一个类型 `AppModel`，初始化单例 `shared`，在 `HollowApp` 中使用 `@StateObject` 监测其变化，即可实现应用状态的共享。
 
 ```swift
 struct HollowApp: App {
     ...
-    @StateObject var appModel = AppModel()
+    @StateObject var appModel = AppModel.shared
     ...
 }
 ```
-
-然后，通过 `.environmentObject()` 向环境注入此变量。我们便可以在 View 中通过 `@EnvironmentObject` 获取这个对象（的引用），并对其进行更改。
-
-![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggQlRcbnYxW1ZpZXddXG52MltWaWV3XVxudjNbVmlld11cbmVvKFtFbnZpcm9ubWVudCBPYmplY3RdKVxuXG52MSAtLT4gZW9cbnYyIC0tPiBlb1xudjMgLS0-IGVvXG5cblxuc3ViZ3JhcGggQXBwXG5cdGVvXG5cdHYxXG5cdHYyXG5cdHYzXG5lbmRcblxuc3R5bGUgQXBwIGZpbGw6I2ZmZmZkZSxzdHJva2U6I2FhYWEzMzsiLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
-
-在开发中，更多时候是由 View Model 来改变这个变量，而 View Model 本身是无法访问环境变量的。为了解决这一问题，我们定义一个 modifier，和一个与 `AppModel` 对应的结构 `AppModelState`。
-
-```swift
-struct AppModelBehaviour: ViewModifier {
-    @EnvironmentObject var appModel: AppModel
-    var state: AppModelState
-    
-    func body(content: Content) -> some View {
-        content
-            .onChange(of: state.shouldShowMainView) {
-                withAnimation { appModel.isInMainView = $0 }
-            }
-        	...
-    }
-}
-```
-
-在 View Model 中，我们初始化一个 `AppModelState` 变量（`@Published`），当需要更改 `appModel` 中的变量时，我们改变这个 `AppModelState` 变量。在其对应的 View 中，我们应用上面的 modifier，监测 View Model 中 `AppModelState` 变量的改变，并将改变应用到共享的 `appModel` 中。这样，便实现了 View Model 对环境变量的间接修改。
-
-![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggQlRcbnYxW1ZpZXddXG52bVtWaWV3IE1vZGVsXVxuZW8oW0Vudmlyb25tZW50IE9iamVjdF0pXG5cbnYxIC0tLT4gfFVwZGF0ZXwgZW9cbnYxIC0tPiB8T2JzZXJ2ZXwgdm1cblxuXG5zdWJncmFwaCBFbnZpcm9ubWVudFxuXHRlb1xuXHR2MVxuZW5kXG5cbnN0eWxlIEVudmlyb25tZW50IGZpbGw6I2ZmZmZkZSxzdHJva2U6I2FhYWEzMzsiLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
 
 ### 子 View 作为（暂时的）唯一数据源
 

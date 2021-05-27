@@ -108,6 +108,5 @@ struct UnregisterView: View {
         .navigationBarTitleDisplayMode(.large)
         .navigationTitle("LOGINVIEW_RESTORE_PASSWORD_ALERT_UNREGISTER_BUTTON")
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
-        .modifier(AppModelBehaviour(state: store.appModelState))
     }
 }

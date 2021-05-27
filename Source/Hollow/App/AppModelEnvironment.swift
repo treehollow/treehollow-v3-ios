@@ -9,14 +9,8 @@
 import SwiftUI
 import Defaults
 
-/// Protocol for a view model to internally define states of the app.
-///
-/// Conform this protocol to the view model whose corresponding view is (and must be)
-/// modified by `.modifier(AppModelBehaviour(appModelState: viewModel.appModelState))`.
-/// Change the variables inside `appModelState` will automatically update the app model.
-protocol AppModelEnvironment: ObservableObject {
-    var appModelState: AppModelState { get set }
-}
+/// Protocol for a view model which protentially modify the shared `AppModel` instance.
+protocol AppModelEnvironment: ObservableObject {}
 
 extension AppModelEnvironment {
     /// Default implementation to handle token expire error.
@@ -26,13 +20,7 @@ extension AppModelEnvironment {
     func handleTokenExpireError(_ error: DefaultRequestError) -> Bool {
         switch error {
         case .tokenExpiredError:
-            Defaults[.accessToken] = nil
-            appModelState.shouldShowMainView = false
-            // FIXME: Show Alert in macOS
-            #if !os(macOS) || targetEnvironment(macCatalyst)
-            ToastManager.shared.show(configuration: .error(title: nil, body: NSLocalizedString("WELCOMVIEW_TOKEN_EXPIRED_LABEL", comment: "")))
-            #endif
-
+            tokenExpiredHandler()
             return true
         default: return false
         }
@@ -44,11 +32,28 @@ extension AppModelEnvironment {
         if error.loadingCompleted() { return }
         errorMessage = (title: "", message: error.description)
     }
-}
-
-/// State definition reflecting the view model.
-struct AppModelState {
-    var errorMessage: (title: String, message: String)?
-
-    var shouldShowMainView = Defaults[.accessToken] != nil
+    
+    func tokenExpiredHandler() {
+        restore()
+        withAnimation {
+            AppModel.shared.isInMainView = false
+        }
+        // FIXME: Show Alert in macOS
+        #if !os(macOS) || targetEnvironment(macCatalyst)
+        ToastManager.shared.show(configuration: .error(title: nil, body: NSLocalizedString("WELCOMVIEW_TOKEN_EXPIRED_LABEL", comment: "")))
+        #endif
+    }
+    
+    private func restore() {
+        Defaults[.accessToken] = nil
+        restoreDefaults()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
+    
+    private func restoreDefaults() {
+        Defaults.Keys.customConfigURL.reset()
+        Defaults.Keys.accessToken.reset()
+        Defaults.Keys.hiddenAnnouncement.reset()
+        Defaults.Keys.deviceListCache.reset()
+    }
 }

@@ -11,7 +11,6 @@ import Combine
 import Defaults
 
 class AccountInfoStore: ObservableObject, AppModelEnvironment {
-    @Published var appModelState = AppModelState()
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
     
@@ -29,8 +28,7 @@ class AccountInfoStore: ObservableObject, AppModelEnvironment {
             }, receiveValue: { _ in
                 withAnimation {
                     self.isLoading = false
-                    self.appModelState.shouldShowMainView = false
-                    Defaults[.accessToken] = nil
+                    self.tokenExpiredHandler()
                 }
             })
             .store(in: &cancellables)
@@ -55,8 +53,7 @@ class AccountInfoStore: ObservableObject, AppModelEnvironment {
                 ToastManager.shared.show(configuration: .success(title: nil, body: NSLocalizedString("CHANGE_PASSWORD_SUCCESS_ALERT_TITLE", comment: "")))
                 #endif
 
-                self.appModelState.shouldShowMainView = false
-                Defaults[.accessToken] = nil
+                self.tokenExpiredHandler()
             })
             .store(in: &cancellables)
     }

@@ -65,7 +65,6 @@ struct WanderView: View {
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
             
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
-            .modifier(AppModelBehaviour(state: viewModel.appModelState))
     }
     
     func cardView(for postData: PostData) -> some View {

@@ -124,7 +124,6 @@ struct TimelineView: View {
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
             
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
-            .modifier(AppModelBehaviour(state: viewModel.appModelState))
     }
     
 }

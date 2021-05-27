@@ -12,8 +12,6 @@ import Defaults
 ///
 /// Color set for this view is fixed to `other`.
 struct WelcomeView: View {
-    @EnvironmentObject var appModel: AppModel
-    
     @ObservedObject var viewModel: WelcomeStore = .init()
 
     var body: some View {

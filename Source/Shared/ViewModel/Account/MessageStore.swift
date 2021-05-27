@@ -11,7 +11,6 @@ import Defaults
 import SwiftUI
 
 class MessageStore: ObservableObject, AppModelEnvironment {
-    var appModelState = AppModelState()
     @Published var messages: [SystemMessage] = []
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false

@@ -41,7 +41,7 @@ View 部分的主要难点是数据流的实现。根据设计，本应用的数
 
 #### 整个应用的数据共享
 
-由于采用了 SwiftUI 的生命周期（[App Essentials in SwiftUI](https://developer.apple.com/videos/play/wwdc2020/10037/)），我们在 `HollowApp` 中初始化一个唯一的、在所有 View 中共享的对象 ，储存需要在应用内共享的数据（如：用户的 token 是否过期），然后，通过向环境注入此对象来实现共享。
+由于采用了 SwiftUI 的生命周期（[App Essentials in SwiftUI](https://developer.apple.com/videos/play/wwdc2020/10037/)），我们定义一个表示应用状态的类型 `AppModel`，在 `HollowApp` 中监测其变化，在其他位置通过修改单例实现数据共享。
 
 #### 父 View 与子 View 绑定数据 / 传递只读数据
 

@@ -12,7 +12,6 @@ import SwiftUI
 
 class UnregisterStore: ObservableObject, AppModelEnvironment {
     var presented: Binding<Bool>
-    @Published var appModelState = AppModelState()
     @Published var email = "" {
         didSet { if email != oldValue { restore() } }
     }

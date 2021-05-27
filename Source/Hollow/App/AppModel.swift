@@ -11,11 +11,13 @@ import Defaults
 import SwiftUI
 
 class AppModel: ObservableObject {
+    static let shared = AppModel()
+    
     private var cancellables = Set<AnyCancellable>()
     
     @Published var isInMainView = Defaults[.accessToken] != nil && Defaults[.hollowConfig] != nil
     
-    init() {
+    private init() {
         // Chcek for version update
         UpdateAvailabilityRequest.defaultPublisher
             .sinkOnMainThread(receiveValue: VersionUpdateUtilities.handleUpdateAvailabilityResult)

@@ -15,7 +15,7 @@ struct HollowApp: App {
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     
     // Singleton reflecting the actual state of the app.
-    @StateObject var appModel = AppModel()
+    @StateObject var appModel = AppModel.shared
     
     var body: some Scene {
         WindowGroup {
@@ -32,8 +32,8 @@ struct HollowApp: App {
             }
             // Set larger size category for macOS
             .conditionalSizeCategory()
-            // Inject the app model into the environment
-            .environmentObject(appModel)
+//            // Inject the app model into the environment
+//            .environmentObject(appModel)
             // Set the color scheme when appear
             .onAppear {
                 IntegrationUtilities.setCustomColorScheme()

@@ -178,7 +178,6 @@
 		0EC244E226340172001AFC4B /* CrossPlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */; };
 		0EC244E326340172001AFC4B /* CrossPlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */; };
 		0EC244EB263401E4001AFC4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244EA263401E4001AFC4B /* AppDelegate.swift */; };
-		0EC244F626340211001AFC4B /* AppModelBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F226340211001AFC4B /* AppModelBehaviour.swift */; };
 		0EC244F826340211001AFC4B /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F326340211001AFC4B /* AppModelEnvironment.swift */; };
 		0EC244FA26340211001AFC4B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F426340211001AFC4B /* AppModel.swift */; };
 		0EC244FC26340211001AFC4B /* AppDelegateShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F526340211001AFC4B /* AppDelegateShared.swift */; };
@@ -520,7 +519,6 @@
 		0EC244DE26340172001AFC4B /* CrossPlatformTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossPlatformTypes.swift; sourceTree = "<group>"; };
 		0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossPlatformImage.swift; sourceTree = "<group>"; };
 		0EC244EA263401E4001AFC4B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0EC244F226340211001AFC4B /* AppModelBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelBehaviour.swift; sourceTree = "<group>"; };
 		0EC244F326340211001AFC4B /* AppModelEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
 		0EC244F426340211001AFC4B /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0EC244F526340211001AFC4B /* AppDelegateShared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateShared.swift; sourceTree = "<group>"; };
@@ -1032,7 +1030,6 @@
 			isa = PBXGroup;
 			children = (
 				0EC245012634022C001AFC4B /* HollowApp.swift */,
-				0EC244F226340211001AFC4B /* AppModelBehaviour.swift */,
 				0EC244F326340211001AFC4B /* AppModelEnvironment.swift */,
 				0EC244F426340211001AFC4B /* AppModel.swift */,
 				0EC245022634022C001AFC4B /* AppDelegate.swift */,
@@ -1710,7 +1707,6 @@
 				0E415B5825CD772200351672 /* MyTextField.swift in Sources */,
 				0E415B5925CD772200351672 /* ExpandedButton.swift in Sources */,
 				0ED82F0026103FB600A799C0 /* View+defaultPadding.swift in Sources */,
-				0EC244F626340211001AFC4B /* AppModelBehaviour.swift in Sources */,
 				0E415B4225CD772200351672 /* ViewConstants.swift in Sources */,
 				0E6E4E26263EF14E007BBCFC /* UnregisterView.swift in Sources */,
 				0EC245D726340312001AFC4B /* RequestError.swift in Sources */,
