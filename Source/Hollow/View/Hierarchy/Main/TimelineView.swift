@@ -60,22 +60,25 @@ struct TimelineView: View {
                     if let announcement = hollowConfig?.announcement,
                        announcement != hiddenAnnouncement {
                         VStack(alignment: .leading) {
-                            Label(
-                                NSLocalizedString("TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE", comment: ""),
-                                systemImage: "megaphone"
-                            )
-                            .padding(.bottom, 10)
-                            .dynamicFont(size: 17, weight: .bold)
-                            .foregroundColor(.hollowContentText)
-                            HollowTextView(text: announcement, inDetail: true, highlight: true)
-                            MyButton(action: { withAnimation {
-                                hiddenAnnouncement = announcement
-                            }}) {
-                                Text("TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON")
-                                    .dynamicFont(size: ViewConstants.plainButtonFontSize, weight: .bold)
-                                    .foregroundColor(.white)
+                            HStack {
+                                Label(
+                                    NSLocalizedString("TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE", comment: ""),
+                                    systemImage: "megaphone"
+                                )
+                                .dynamicFont(size: 17, weight: .bold)
+                                .foregroundColor(.hollowContentText)
+                                .layoutPriority(1)
+                                Spacer()
+                                Button("TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON") { withAnimation {
+                                    hiddenAnnouncement = announcement
+                                }}
+                                .dynamicFont(size: 17, weight: .medium)
+                                .accentColor(.tint)
                             }
-                            .trailing()
+                            .lineLimit(1)
+                            .padding(.bottom, 10)
+                            
+                            HollowTextView(text: announcement, inDetail: true, highlight: true)
                         }
                         .padding(.all, cardPadding)
                         .background(Color.hollowCardBackground)

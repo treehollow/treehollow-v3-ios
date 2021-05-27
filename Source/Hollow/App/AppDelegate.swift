@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Defaults[.customColorSet] = Defaults[.tempCustomColorSet]
         Defaults[.applyCustomColorSet] = Defaults[.customColorSet] != nil
         setupApplication(application)
-        let appearance = UITableView.appearance(whenContainedInInstancesOf: [HollowDetailViewController.self, HollowDetailViewController_iPad.self])
-        appearance.backgroundColor = UIColor(Color.hollowCardBackground)
         return true
     }
     

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Defaults
+import Introspect
 
 struct HollowDetailView: View {
     @ObservedObject var store: HollowDetailStore
@@ -17,11 +18,9 @@ struct HollowDetailView: View {
     @State var inputPresented = false
     @State var jumpedToCommentId: Int?
     @State var jumpedFromCommentId: Int?
-    @State private var showHeaderContent = Defaults[.useListInDetail]
     @State var reverseComments = false
     @State var showOnlyName: String?
     
-    private let scrollToAnchor = UnitPoint(x: 0.5, y: 0.1)
     let scrollAnimation = Animation.spring(response: 0.3)
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
@@ -32,8 +31,6 @@ struct HollowDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @Namespace var buttonAnimationNamespace
-    
-    @Default(.useListInDetail) var useListInDetail
     
     var body: some View {
         VStack(spacing: 0) {
@@ -90,65 +87,90 @@ struct HollowDetailView: View {
                 }
             }
             
-            if useListInDetail {
+            ScrollViewReader { proxy in
                 List {
-                    content
-                        .listRowInsets(EdgeInsets())
-                        .background(Color.hollowCardBackground)
-                }
-                .buttonStyle(BorderlessButtonStyle())
-
-            } else {
-                ScrollView { ScrollViewReader { proxy in
-                    LazyVStack(spacing: 0) {
-                        content
-                    }
-                    .padding([.horizontal, .bottom], UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
-                    .padding(.top, UIDevice.isMac ? 10 : 0)
-                    .edgesIgnoringSafeArea(.bottom)
-
-                    .onChange(of: store.replyToIndex) { index in
-                        guard index != -2 else { return }
-                        let id = index >= 0 ? store.postDataWrapper.post.comments[index].commentId : -1
-                        withAnimation(scrollAnimation) {
-                            proxy.scrollTo(id, anchor: scrollToAnchor)
+                    VStack(spacing: 0) {
+                        let spacing: CGFloat = UIDevice.isMac ? 20 : 13
+                        
+                        Spacer().fixedSize()
+                            .id(-1)
+                        
+                        if store.noSuchPost {
+                            Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
+                                .padding(.top, spacing)
+                                .padding(.horizontal)
+                                .modifier(HollowTextView.TextModifier(inDetail: true))
+                            
+                        } else {
+                            HollowContentView(
+                                postDataWrapper: store.postDataWrapper,
+                                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
+                                voteHandler: store.vote,
+                                imageReloadHandler: { _ in store.loadPostImage() }
+                            )
+                            .padding(.top, spacing)
+                            .padding(.horizontal)
+                            .background(Color.hollowCardBackground)
                         }
+                        
+                        Spacer(minLength: spacing * 2).fixedSize()
+                        
                     }
-                    .onChange(of: jumpedFromCommentId) { commentId in
-                        if commentId != nil {
-                            withAnimation(scrollAnimation) {
-                                jumpedFromCommentId = nil
-                                proxy.scrollTo(commentId, anchor: scrollToAnchor)
-                                jumpedToCommentId = commentId
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                guard self.jumpedToCommentId == commentId else { return }
-                                withAnimation(scrollAnimation) { jumpedToCommentId = nil }
-                            }
-                        }
-                    }
-                    // Jump to certain comment
-                    .onChange(of: store.isLoading) { loading in
-                        if !loading {
-                            // Check if there is any comment to jump to
-                            // when finish loading
-                            if let jumpToCommentId = store.jumpToCommentId {
-                                    withAnimation(scrollAnimation) {
-                                        proxy.scrollTo(jumpToCommentId, anchor: scrollToAnchor)
-                                        jumpedToCommentId = jumpToCommentId
-                                    }
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                        guard self.jumpedToCommentId == jumpToCommentId else { return }
-                                        withAnimation(scrollAnimation) {
-                                            self.jumpedToCommentId = nil }
-                                    }
-                                store.jumpToCommentId = nil
-                            }
-                        }
+                    .listRowBackground(Color.hollowCardBackground)
+                    .listRowInsets(EdgeInsets())
+                    .background(Color.hollowCardBackground)
+                    .id(-1)
+                    
+                    if !store.noSuchPost {
+                        commentView
+                            .listRowInsets(EdgeInsets())
                     }
                     
-                }}
+                }
+                .introspectTableView(customize: { $0.backgroundColor = nil })
+                .background(Color.hollowCardBackground)
                 .coordinateSpace(name: "detail.scrollview")
+                .buttonStyle(BorderlessButtonStyle())
+                .onChange(of: store.replyToIndex) { index in
+                    guard index != -2 else { return }
+                    let id = index >= 0 ? store.postDataWrapper.post.comments[index].commentId : -1
+                    withAnimation(scrollAnimation) {
+                        proxy.scrollTo(id, anchor: .top)
+                    }
+                }
+                .onChange(of: jumpedFromCommentId) { commentId in
+                    if commentId != nil {
+                        withAnimation(scrollAnimation) {
+                            jumpedFromCommentId = nil
+                            proxy.scrollTo(commentId, anchor: .top)
+                            jumpedToCommentId = commentId
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            guard self.jumpedToCommentId == commentId else { return }
+                            withAnimation(scrollAnimation) { jumpedToCommentId = nil }
+                        }
+                    }
+                }
+                // Jump to certain comment
+                .onChange(of: store.isLoading) { loading in
+                    if !loading {
+                        // Check if there is any comment to jump to
+                        // when finish loading
+                        if let jumpToCommentId = store.jumpToCommentId {
+                            withAnimation(scrollAnimation) {
+                                proxy.scrollTo(jumpToCommentId, anchor: .top)
+                                jumpedToCommentId = jumpToCommentId
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                guard self.jumpedToCommentId == jumpToCommentId else { return }
+                                withAnimation(scrollAnimation) {
+                                    self.jumpedToCommentId = nil }
+                            }
+                            store.jumpToCommentId = nil
+                        }
+                    }
+                }
+                
             }
             
         }
@@ -167,7 +189,7 @@ struct HollowDetailView: View {
                 imageScaleFactor: 0.8,
                 buttonAnimationNamespace: buttonAnimationNamespace
             )
-//            .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+            //            .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
             .edgesIgnoringSafeArea(.bottom)
             .bottom()
             .trailing()
@@ -210,54 +232,6 @@ struct HollowDetailView: View {
         
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
         
-    }
-}
-
-extension HollowDetailView {
-    
-    @ViewBuilder var content: some View {
-        
-        if useListInDetail {
-            VStack(spacing: 0) {
-                mainContent
-            }
-        } else {
-            mainContent
-        }
-        
-        if !store.noSuchPost {
-            commentView
-                .listRowInsets(EdgeInsets())
-        }
-    }
-    
-    @ViewBuilder var mainContent: some View {
-        let spacing: CGFloat = UIDevice.isMac ? 20 : 13
-        
-        Color.hollowCardBackground
-            .frame(height: 5)
-            .id(-1)
-        
-        if store.noSuchPost {
-            Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
-                .padding(.top, spacing)
-                .padding(.horizontal)
-                .modifier(HollowTextView.TextModifier(inDetail: true))
-            
-        } else {
-            HollowContentView(
-                postDataWrapper: store.postDataWrapper,
-                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
-                voteHandler: store.vote,
-                imageReloadHandler: { _ in store.loadPostImage() }
-            )
-            .padding(.top, spacing)
-            .padding(.horizontal)
-            .background(Color.hollowCardBackground)
-        }
-        
-        Color.hollowCardBackground
-            .frame(height: spacing * 2)
     }
 }
 

@@ -15,6 +15,7 @@ struct MyTextField<Content>: View where Content: View {
     var footer: String? = nil
     var isSecureContent = false
     var backgroundColor: Color = .hollowCardBackground
+    var disabled = false
     var content: (() -> Content)? = nil
 
     var body: some View {
@@ -36,6 +37,8 @@ struct MyTextField<Content>: View where Content: View {
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .dynamicFont(size: 16)
+                .foregroundColor(disabled ? .secondary : nil)
+                .disabled(disabled)
                 Spacer()
                 if let content = content {
                     content()

@@ -631,10 +631,6 @@
 
 "SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION" = "These are some experimental features that are not fully tested, so use them at your own risk. File a report if any error occurs.";
 
-"SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_FOOTER" = "Reduce the render quality in photo previews. Detailed image viewing are not affected.";
-
-"SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL" = "Reduce Image Render Quality";
-
 "SETTINGSVIEW_APPEARANCE_AVATAR_HDR" = "Avatar";
 
 "SETTINGSVIEW_APPEARANCE_GRAPHICAL_AVATAR_STYLE" = "Graphical";
@@ -666,10 +662,6 @@
 "HOLLOWDETAIL_COMMENTS_ORDER_OLD_TO_NEW" = "Old to New";
 
 "HOLLOWDETAIL_COMMENTS_ORDER_NEW_TO_OLD" = "New to Old";
-
-"SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_LABEL" = "Fix Scrolling Issue in Detail View";
-
-"SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_FOOTER" = "Jump to certain comment is not supported in this mode.";
 
 "COMMENT_VIEW_SHOW_ONLY_LABEL" = "Show this Person Only";
 

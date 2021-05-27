@@ -32,7 +32,7 @@ struct WelcomeView: View {
                             .foregroundColor(Color("hollow.content.text.other"))
 
                         if viewModel.isLoadingConfig {
-                            Spinner(color: Color("hollow.content.text.other"), desiredWidth: 20)
+                            Spinner(color: Color("hollow.content.text.other"), desiredWidth: 16)
                         }
                     }
                     .padding(.top, 70)

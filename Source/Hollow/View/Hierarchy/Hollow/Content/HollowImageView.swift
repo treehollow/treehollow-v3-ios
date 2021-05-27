@@ -36,7 +36,6 @@ struct HollowImageView: View {
     }
     
     @ScaledMetric private var reloadButtonSize: CGFloat = 50
-    @Default(.reduceImageQuality) var reduceImageQuality
     
     var body: some View {
         Group {
@@ -46,7 +45,7 @@ struct HollowImageView: View {
                         if imageAspectRatio >= aspectRatio - 0.001 {
                             Image(uiImage: image)
                                 .resizable()
-                                .interpolation(reduceImageQuality ? .none : .low)
+                                .interpolation(.low)
                                 .aspectRatio(contentMode: .fit)
                                 .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                         } else {
@@ -54,7 +53,7 @@ struct HollowImageView: View {
                                 Color.hollowCommentQuoteText.opacity(0.09).ignoresSafeArea()
                                 Image(uiImage: image)
                                     .resizable()
-                                    .interpolation(reduceImageQuality ? .none : .low)
+                                    .interpolation(.low)
                                     .aspectRatio(contentMode: .fit)
                                     .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
                             }
@@ -63,7 +62,6 @@ struct HollowImageView: View {
                         }
                     }
                     
-                    .animation(.default)
                     .contentShape(RoundedRectangle(cornerRadius: 4))
                     .onChange(of: showSavePhotoAlert) { show in
                         if show {

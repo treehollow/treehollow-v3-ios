@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import Introspect
 
 struct HollowTextView: View {
     var text: String
@@ -56,12 +57,15 @@ struct HollowTextView: View {
             if highlight {
                 Text.highlightLinksAndCitation(text, modifiers: {
                     $0.underline()
-                        .foregroundColor(.tint)
+                        .foregroundColor(.hollowContentText)
                 })
+
             } else {
                 Text(text)
+
             }
         }
+
         .modifier(TextModifier(inDetail: inDetail, compactLineLimit: compactLineLimit))
     }
     

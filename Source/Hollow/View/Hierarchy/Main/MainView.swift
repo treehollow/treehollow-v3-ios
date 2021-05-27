@@ -111,17 +111,18 @@ extension MainView {
         var body: some View {
             HStack(spacing: 2) {
                 Group {
-                    Button(action: { withAnimation { page = .wander }}) {
+                    Button(action: { page = .wander }) {
                         mainTabText(text: NSLocalizedString("GLOBAL_WANDER", comment: ""), selected: page == .wander)
-                            .animation(.defaultSpring)
+                            .animation(.spring())
                     }
                     .disabled(page == .wander)
                     mainTabText(text: "/", selected: true)
                         .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
-                        .animation(.defaultSpring)
-                    Button(action: { withAnimation { page = .timeline }}) {
+                        .animation(.spring())
+
+                    Button(action: { page = .timeline }) {
                         mainTabText(text: NSLocalizedString("GLOBAL_TIMELINE", comment: ""), selected: page == .timeline)
-                            .animation(.defaultSpring)
+                            .animation(.spring())
                     }
                     .disabled(page == .timeline)
                 }

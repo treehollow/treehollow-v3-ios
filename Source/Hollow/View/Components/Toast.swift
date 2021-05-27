@@ -82,6 +82,7 @@ struct Toast: View {
             .lineSpacing(2)
             .lineLimit(4)
         }
+        .animation(.none)
         .foregroundColor(configuration.style.fontColor)
         .padding()
         .padding(.horizontal, 5)
@@ -94,13 +95,11 @@ struct Toast: View {
         .opacity(opacity)
         .padding()
         .padding(.horizontal)
-        .animation(.default)
-        .transition(.move(edge: .bottom))
         
         .onClickGesture(perform: configuration.onTap ?? dismiss)
         
         .onAppear {
-            withAnimation(.spring()) {
+            withAnimation(.easeInOut) {
                 opacity = 1
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: dismiss)
@@ -110,7 +109,7 @@ struct Toast: View {
     
     func dismiss() {
         guard presented else { return }
-        withAnimation(.spring()) {
+        withAnimation(.easeInOut) {
             self.opacity = 0
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {

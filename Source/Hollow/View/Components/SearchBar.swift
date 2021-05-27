@@ -14,7 +14,7 @@ struct SearchBar: View {
     var body: some View {
         Button(action:{
             // Navigate to search view
-            withAnimation(.defaultSpring) {
+            withAnimation {
                 isSearching = true
             }
         }) {

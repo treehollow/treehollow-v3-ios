@@ -87,7 +87,6 @@ struct HollowCommentInputView: View {
                 .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
                 .shadow(radius: 12)
         )
-//        .roundedCorner(12)
         .padding()
         .animation(transitionAnimation)
         

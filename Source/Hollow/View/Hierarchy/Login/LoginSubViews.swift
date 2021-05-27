@@ -103,30 +103,45 @@ extension LoginView {
     struct EmailTextField: View {
         @EnvironmentObject var viewModel: LoginStore
         private let configuration = Defaults[.hollowConfig]!
+        var disabled: Bool { viewModel.emailCheckType == .oldUser }
 
         var body: some View {
-            MyTextField(text: $viewModel.email,
-                        placeHolder: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER", comment: ""),
-                        title: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_TITLE", comment: "")) {
-                // Accessory view for selecting email suffix
-                Menu(content: {
-                    ForEach(configuration.emailSuffixes.indices, id: \.self) { index in
-                        Button(configuration.emailSuffixes[index], action: {
-                            viewModel.emailSuffix = configuration.emailSuffixes[index]
+            HStack {
+                MyTextField(text: disabled ? .constant(viewModel.email + "@" + viewModel.emailSuffix) : $viewModel.email,
+                            placeHolder: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_PLACEHOLDER", comment: ""),
+                            title: NSLocalizedString("LOGINVIEW_EMAIL_TEXTFIELD_TITLE", comment: ""),
+                            disabled: viewModel.emailCheckType == .oldUser) { Group {
+                    // Accessory view for selecting email suffix
+                    if !disabled {
+                        Menu(content: {
+                            ForEach(configuration.emailSuffixes.indices, id: \.self) { index in
+                                Button(configuration.emailSuffixes[index], action: {
+                                    viewModel.emailSuffix = configuration.emailSuffixes[index]
+                                })
+                            }
+                        }, label: {
+                            HStack {
+                                Text("@" + viewModel.emailSuffix)
+                                Image(systemName: "chevron.down")
+                                    .layoutPriority(1)
+                            }
+                            .lineLimit(1)
+                            .dynamicFont(size: 14)
+                            .foregroundColor(.hollowContentText)
+                            
+                            
                         })
+                    } else {
+                        Button(action: { viewModel.restore(); viewModel.email = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                        }
+                        .foregroundColor(.uiColor(.systemFill))
                     }
-                }, label: {
-                    HStack {
-                        Text("@" + viewModel.emailSuffix)
-                        Image(systemName: "chevron.down")
-                            .layoutPriority(1)
-                    }
-                    .lineLimit(1)
-                    .dynamicFont(size: 14)
-                    .foregroundColor(.hollowContentText)
-                })
+
+                }}
+                .keyboardType(.emailAddress)
+                
             }
-            .keyboardType(.emailAddress)
         }
     }
     

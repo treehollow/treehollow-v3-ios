@@ -86,8 +86,7 @@ extension Defaults.Keys {
 
 // MARK: - Experimental Features
 extension Defaults.Keys {
-    static let reduceImageQuality = Key<Bool>("user.settings.reduce.image.quality", default: false)
-    static let useListInDetail = Key<Bool>("user.settings.use.list.in.detail", default: false)
+
 }
 #endif
 

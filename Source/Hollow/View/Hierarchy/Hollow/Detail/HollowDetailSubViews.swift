@@ -55,9 +55,10 @@ extension HollowDetailView {
         .background(Color.hollowCardBackground)
         .lineLimit(1)
         
-        ForEach(comments) { comment in
+        ForEach(comments, id: \.commentId) { comment in
             commentView(for: comment)
                 .fixedSize(horizontal: false, vertical: true)
+                .id(comment.commentId)
         }
         
         if store.isLoading, postData.replyNumber > postData.comments.count {
@@ -66,6 +67,7 @@ extension HollowDetailView {
                     .padding(.horizontal)
                     .padding(.top, postData.comments.isEmpty ? 0 : 15)
                     .padding(.bottom, postData.comments.isEmpty ? 15 : 0)
+                    .background(Color.hollowCardBackground)
             }
         }
         
@@ -114,11 +116,7 @@ extension HollowDetailView {
                 Group {
                     highlighted ? Color.background : Color.hollowCardBackground
                 }
-                .roundedCorner(highlighted ? 10 : 0)
-                .padding(.horizontal, highlighted ? 10 : 0)
-//                .transition(.opacity)
             )
-            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .onClickGesture {
                 guard !store.isSendingComment && !store.isLoading else { return }
                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -175,8 +173,6 @@ extension HollowDetailView {
                     commentId: comment.commentId
                 )
             }
-            .id(comment.commentId)
-
         }}
 
     }

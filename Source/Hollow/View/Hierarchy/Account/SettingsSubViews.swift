@@ -497,8 +497,6 @@ struct OtherSettingsView: View {
     }
     
     private struct ExperimentalFeaturesView: View {
-        @Default(.reduceImageQuality) var reduceImageQuality
-        @Default(.useListInDetail) var useListInDetail
 
         var body: some View {
             List {
@@ -506,31 +504,6 @@ struct OtherSettingsView: View {
                     Text("SETTINGSVIEW_OTHER_EXP_FEAT_DESCRIPTION")
                 }
                 .padding(.vertical)
-                
-                Section(
-                    footer: Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_FOOTER").padding(.horizontal)) {
-                    HStack {
-                        Text("SETTINGSVIEW_OTHER_EXP_REDUCE_IMG_QUALITY_LABEL")
-                        Spacer()
-                        
-                        Toggle("", isOn: $reduceImageQuality)
-                            .defaultToggleStyle()
-                    }
-
-                }
-                
-                #if !targetEnvironment(macCatalyst)
-                Section(footer: Text("SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_FOOTER").padding(.horizontal)) {
-                    HStack {
-                        Text("SETTINGSVIEW_OTHER_EXP_FIX_SCROLL_LABEL")
-                        Spacer()
-                        
-                        Toggle("", isOn: $useListInDetail)
-                            .defaultToggleStyle()
-                    }
-
-                }
-                #endif
 
             }
             .defaultListStyle()
