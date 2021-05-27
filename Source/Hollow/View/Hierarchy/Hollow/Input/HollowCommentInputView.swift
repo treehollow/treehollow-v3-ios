@@ -23,7 +23,7 @@ struct HollowCommentInputView: View {
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var editorFontSize: CGFloat
     
     @Namespace var photoAnimtaion
-    let buttonAnimationNamespace: Namespace.ID
+    var buttonAnimationNamespace: Namespace.ID?
     
     var transitionAnimation: Animation?
     var replyToName: String
@@ -80,11 +80,11 @@ struct HollowCommentInputView: View {
             }
         }
         .padding()
-        .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace, isSource: false)
+        .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace, isSource: false)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .foregroundColor(.hollowCardBackground)
-                .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+                .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
                 .shadow(radius: 12)
         )
 //        .roundedCorner(12)

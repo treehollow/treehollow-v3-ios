@@ -31,6 +31,7 @@ struct FloatButton: View {
                     .font(.system(size: body30 * imageScaleFactor))
                     .foregroundColor(.white)
             }
+            .compositingGroup()
         }
         .shadow(radius: 5)
         .opacity(isEnabled ? 1 : 0.5)

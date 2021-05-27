@@ -146,6 +146,8 @@
 		0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
 		0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
 		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
+		0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */; };
+		0E79AF51265E45B600BFDABD /* withAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF50265E45B600BFDABD /* withAnimation.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
 		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
@@ -487,6 +489,8 @@
 		0E7795BF2657E6FE002F70C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HollowWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0E779624265800DD002F70C2 /* WidgetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetColors.swift; sourceTree = "<group>"; };
+		0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalMatchedGeometryEffect.swift"; sourceTree = "<group>"; };
+		0E79AF50265E45B600BFDABD /* withAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withAnimation.swift; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
@@ -954,6 +958,8 @@
 				0E186C38262C60A1001A5855 /* View+showToast.swift */,
 				0ED1BF57264E664C005483C1 /* View+keyboardShortCut.swift */,
 				0EDEC0E42650E5A6003112BA /* View+makeButton.swift */,
+				0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */,
+				0E79AF50265E45B600BFDABD /* withAnimation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1564,6 +1570,7 @@
 				0EC2457926340311001AFC4B /* Constants.swift in Sources */,
 				0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */,
 				0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */,
+				0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */,
 				0EC2452426340301001AFC4B /* ConnectivityStatus+isConnected.swift in Sources */,
 				0EC245D526340312001AFC4B /* RequestPublisher.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsSubViews.swift in Sources */,
@@ -1649,6 +1656,7 @@
 				0E415B7925CD772200351672 /* LoginView.swift in Sources */,
 				0EC244E026340172001AFC4B /* CrossPlatformTypes.swift in Sources */,
 				0EC245ED26340312001AFC4B /* Bool+int.swift in Sources */,
+				0E79AF51265E45B600BFDABD /* withAnimation.swift in Sources */,
 				0EA2D51D25F11EA9003D539E /* ReportMenuContent.swift in Sources */,
 				0EC2458926340311001AFC4B /* DeviceInformationType.swift in Sources */,
 				0EC245B526340311001AFC4B /* UpdateDeviceTokenRequest.swift in Sources */,

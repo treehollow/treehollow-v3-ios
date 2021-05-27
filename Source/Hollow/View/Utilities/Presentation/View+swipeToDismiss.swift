@@ -11,8 +11,8 @@ import SwiftUI
 extension View {
     /// Apply a swipe gesture and a moving transition to the view to enable the capacity to
     /// dismiss a view with a swiping gesture.
-    func swipeToDismiss(presented: Binding<Bool>) -> some View {
-        self.modifier(SwipeToDismiss(presented: presented))
+    func swipeToDismiss(presented: Binding<Bool>, transition: AnyTransition = .move(edge: .trailing)) -> some View {
+        self.modifier(SwipeToDismiss(presented: presented, transition: transition))
     }
 }
 
@@ -21,16 +21,10 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     @State var offset: CGFloat = 0
     @State var disableScroll = false
     let screenWidth = UIScreen.main.bounds.size.width
-    
-    var transition: AnyTransition {
-//        AnyTransition.move(edge: .trailing).combined(with: .scale(scale: 0, anchor: .bottomTrailing))
-            return AnyTransition.scale(scale: 0, anchor: .bottomTrailing)
-                .combined(with: .opacity)
-    }
+    let transition: AnyTransition
     
     func body(content: Content) -> some View {
         content
-            .transition(transition)
 //            .cornerRadius(min(offset / 5, UIScreen.main.displayCornerRadius ?? 20))
             .offset(x: offset)
             .gesture(
@@ -60,5 +54,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                     }
             )
             .onAppear { offset = 0 }
+            .transition(transition)
+
     }
 }

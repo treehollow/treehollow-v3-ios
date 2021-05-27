@@ -26,6 +26,7 @@ struct HollowInputView: View {
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     
     @Namespace var animation
+    var buttonAnimationNamespace: Namespace.ID?
     
     var hasVote: Bool { inputStore.voteInformation != nil }
     var hasImage: Bool { inputStore.compressedImage != nil }
@@ -80,10 +81,14 @@ struct HollowInputView: View {
                 footerView
             }
             .padding()
-            .background(Color.hollowCardBackground)
-            .roundedCorner(12)
+            .background(
+                Color.hollowCardBackground
+                    .roundedCorner(12)
+                    .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+            )
             .padding()
         }
+
         .onDrop(of: ["public.image"], isTargeted: nil) { providers in
             return inputStore.handleDrop(providers: providers)
         }

@@ -98,8 +98,8 @@ struct MainView_iPad: View {
             HollowInputView(inputStore: HollowInputStore(presented: $sharedModel.showCreatePost, refreshHandler: {
                 page = .timeline
                 sharedModel.timelineViewModel.refresh(finshHandler: {})
-            }))
-            .transition(.move(edge: .bottom))
+            }), buttonAnimationNamespace: buttonAnimationNamespace)
+//            .transition(.move(edge: .bottom))
         }})
         
         .environment(\.horizontalSizeClass, .regular)

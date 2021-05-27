@@ -22,7 +22,7 @@ struct HollowDetailView: View {
     @State var showOnlyName: String?
     
     private let scrollToAnchor = UnitPoint(x: 0.5, y: 0.1)
-    let scrollAnimation = Animation.easeInOut(duration: 0.25)
+    let scrollAnimation = Animation.spring(response: 0.3)
     
     @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
@@ -185,13 +185,13 @@ struct HollowDetailView: View {
                 post.comments[store.replyToIndex].name
             HollowCommentInputView(
                 store: store,
-                buttonAnimationNamespace: buttonAnimationNamespace,
+                buttonAnimationNamespace: UIDevice.isPad ? nil : buttonAnimationNamespace,
                 transitionAnimation: scrollAnimation,
                 replyToName: name
             )
             .edgesIgnoringSafeArea([])
             .bottom()
-//            .transition(.move(edge: .bottom))
+            .transition(UIDevice.isPad ? .move(edge: .bottom) : .opacity)
             
         }})
         
@@ -252,8 +252,10 @@ extension HollowDetailView {
                 voteHandler: store.vote,
                 imageReloadHandler: { _ in store.loadPostImage() }
             )
+            .compositingGroup()
             .padding(.top, spacing)
             .padding(.horizontal)
+            .background(Color.hollowCardBackground)
         }
         
         Spacer(minLength: spacing * 2).fixedSize()
