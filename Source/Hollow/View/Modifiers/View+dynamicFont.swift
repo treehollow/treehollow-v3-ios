@@ -14,7 +14,7 @@ extension View {
     }
 }
 
-struct DynamicFont: ViewModifier {
+fileprivate struct DynamicFont: ViewModifier {
     @ScaledMetric var size: CGFloat
     var weight: Font.Weight
     var design: Font.Design

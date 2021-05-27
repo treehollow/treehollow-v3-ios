@@ -13,7 +13,7 @@ struct HollowCommentInputView: View {
     @State var showImagePicker = false
     @State private var viewSize: CGSize = .zero
     
-    @GestureState var dragOffset: CGFloat = 0
+    @State var dragOffset: CGFloat = 0
     
     @ScaledMetric var vstackSpacing: CGFloat = ViewConstants.inputViewVStackSpacing
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
@@ -103,16 +103,18 @@ struct HollowCommentInputView: View {
         .offset(y: dragOffset)
         .gesture(
             DragGesture()
-                .updating($dragOffset) { value, state, _ in
+                .onChanged({ value in
                     if value.translation.height > 0 {
-                        state = value.translation.height
+                        dragOffset = value.translation.height
                     }
-                }
+                })
                 .onEnded { value in
                     if value.predictedEndTranslation.height > viewSize.height * 2 / 3 {
                         withAnimation(transitionAnimation) {
                             store.replyToIndex = -2
                         }
+                    } else {
+                        dragOffset = 0
                     }
                 }
         )

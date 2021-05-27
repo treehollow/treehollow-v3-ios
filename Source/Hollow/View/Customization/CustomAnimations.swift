@@ -9,5 +9,5 @@
 import SwiftUI
 
 extension Animation {
-    static let searchViewTransition = Animation.easeInOut(duration: 0.3)
+    static let defaultSpring = Animation.spring(response: 0.35)
 }

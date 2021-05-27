@@ -53,7 +53,9 @@ class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStor
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
             }, receiveValue: { result in
                 self.refreshHandler?()
-                self.presented.wrappedValue = false
+                withAnimation(.defaultSpring) {
+                    self.presented.wrappedValue = false
+                }
                 if self.selfDismiss {
                     #if !os(macOS) || targetEnvironment(macCatalyst)
                     if let vc = IntegrationUtilities.topViewController() {

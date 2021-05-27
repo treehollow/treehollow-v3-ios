@@ -50,7 +50,7 @@ struct MainView: View {
                     Group { if !showCreatePost {
                         FloatButton(
                             action: {
-                                withAnimation { showCreatePost = true }
+                                withAnimation(.defaultSpring) { showCreatePost = true }
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             },
                             systemImageName: "plus",
@@ -113,15 +113,15 @@ extension MainView {
                 Group {
                     Button(action: { withAnimation { page = .wander }}) {
                         mainTabText(text: NSLocalizedString("GLOBAL_WANDER", comment: ""), selected: page == .wander)
-                            .animation(.spring())
+                            .animation(.defaultSpring)
                     }
                     .disabled(page == .wander)
                     mainTabText(text: "/", selected: true)
                         .rotationEffect(.init(degrees: page == .wander ? 360 : 0))
-                        .animation(.spring())
+                        .animation(.defaultSpring)
                     Button(action: { withAnimation { page = .timeline }}) {
                         mainTabText(text: NSLocalizedString("GLOBAL_TIMELINE", comment: ""), selected: page == .timeline)
-                            .animation(.spring())
+                            .animation(.defaultSpring)
                     }
                     .disabled(page == .timeline)
                 }

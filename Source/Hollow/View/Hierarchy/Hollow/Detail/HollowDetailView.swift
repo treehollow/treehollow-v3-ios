@@ -51,7 +51,7 @@ struct HollowDetailView: View {
                             postData: store.postDataWrapper.post,
                             compact: false,
                             // Show text on header when the text is not visible
-                            showContent: showHeaderContent,
+                            showContent: true,
                             starAction: store.star,
                             isLoading: store.isLoading,
                             disableAttention: store.isEditingAttention || store.isLoading,
@@ -258,12 +258,6 @@ extension HollowDetailView {
         
         Color.hollowCardBackground
             .frame(height: spacing * 2)
-            // Get the frame in the scroll view content
-            .modifier(GetFrame(coordinateSpace: .named("detail.scrollview"), handler: { frame in
-                guard showHeader && !useListInDetail else { return }
-                if frame.maxY > 0 && showHeaderContent { withAnimation { showHeaderContent = false }}
-                if frame.maxY <= 0 && !showHeaderContent { withAnimation { showHeaderContent = true }}
-            }))
     }
 }
 

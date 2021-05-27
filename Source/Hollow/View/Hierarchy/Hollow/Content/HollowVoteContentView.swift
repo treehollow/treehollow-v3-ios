@@ -37,7 +37,7 @@ struct HollowVoteContentView: View {
                             withAnimation { showProportion.toggle() }
                         }
                     }
-
+                    
                 } else {
                     // Not display the vote options as buttons
                     // specifically for WanderView.
@@ -56,7 +56,7 @@ struct HollowVoteContentView: View {
         var selectedButNotFinish: Bool
         var selected: Bool
         var showProportion: Bool
-
+        
         var body: some View {
             HStack {
                 Text(voteData.title)
@@ -74,7 +74,7 @@ struct HollowVoteContentView: View {
                     let text = showProportion ?
                         percentage.string + (voteData.voteCount == 0 ? "" : "%") :
                         voteData.voteCount.string
-
+                    
                     Text(text).bold()
                         .layoutPriority(1)
                 }
@@ -109,29 +109,29 @@ struct HollowVoteContentView: View {
         }
     }
     
-        private struct VotePortionCapsule: Shape, Animatable {
-            var proportion: Double
-            func path(in rect: CGRect) -> Path {
-                let endX = rect.minX + rect.width * CGFloat(proportion)
-                let minY = rect.minY + 0 * rect.height
-                let radius = rect.height / 2
-                let firstPoint = CGPoint(x: rect.minX, y: minY)
-                let secondPoint = CGPoint(x: endX - radius, y: minY)
-                let fourthPoint = CGPoint(x: rect.minX, y: rect.maxY)
-    
-                return Path { path in
-                    path.move(to: firstPoint)
-                    path.addLine(to: secondPoint)
-                    path.move(to: secondPoint)
-                    path.addRelativeArc(center: CGPoint(x: secondPoint.x, y: rect.midY), radius: radius, startAngle: Angle(degrees: -90), delta: Angle(degrees: 180))
-                    path.addLine(to: fourthPoint)
-                    path.addLine(to: firstPoint)
-                }
-            }
+    private struct VotePortionCapsule: Shape, Animatable {
+        var proportion: Double
+        func path(in rect: CGRect) -> Path {
+            let endX = rect.minX + rect.width * CGFloat(proportion)
+            let minY = rect.minY + 0 * rect.height
+            let radius = rect.height / 2
+            let firstPoint = CGPoint(x: rect.minX, y: minY)
+            let secondPoint = CGPoint(x: endX - radius, y: minY)
+            let fourthPoint = CGPoint(x: rect.minX, y: rect.maxY)
             
-            var animatableData: Double {
-                get { proportion }
-                set { proportion = newValue }
+            return Path { path in
+                path.move(to: firstPoint)
+                path.addLine(to: secondPoint)
+                path.move(to: secondPoint)
+                path.addRelativeArc(center: CGPoint(x: secondPoint.x, y: rect.midY), radius: radius, startAngle: Angle(degrees: -90), delta: Angle(degrees: 180))
+                path.addLine(to: fourthPoint)
+                path.addLine(to: firstPoint)
             }
         }
+        
+        var animatableData: Double {
+            get { proportion }
+            set { proportion = newValue }
+        }
+    }
 }

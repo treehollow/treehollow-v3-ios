@@ -47,7 +47,7 @@ struct HollowInputView: View {
         VStack(spacing: 0) {
             HStack {
                 BarButton(action: {
-                    withAnimation { inputStore.presented.wrappedValue = false }
+                    withAnimation(.defaultSpring) { inputStore.presented.wrappedValue = false }
                     if inputStore.selfDismiss { dismissSelf() }
                 }, systemImageName: "xmark")
                 Spacer()

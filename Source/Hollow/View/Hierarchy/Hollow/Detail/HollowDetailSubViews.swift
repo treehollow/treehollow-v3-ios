@@ -116,7 +116,7 @@ extension HollowDetailView {
                 }
                 .roundedCorner(highlighted ? 10 : 0)
                 .padding(.horizontal, highlighted ? 10 : 0)
-                .transition(.opacity)
+//                .transition(.opacity)
             )
             .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .onClickGesture {

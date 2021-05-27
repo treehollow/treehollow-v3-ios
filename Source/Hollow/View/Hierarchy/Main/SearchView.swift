@@ -18,7 +18,7 @@ struct SearchView: View {
 
     @State var showPost = false
     var showAdvancedOptions = true
-    let transitionAnimation = Animation.searchViewTransition
+    let transitionAnimation = Animation.defaultSpring
     
     @Namespace var animation
     

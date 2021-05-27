@@ -10,5 +10,5 @@ import SwiftUI
 
 /// Overriding the default `withAnimation` call with custom animation.
 func withAnimation<Result>(_ body: () throws -> Result) rethrows -> Result {
-    try SwiftUI.withAnimation(/*.spring(response: 0.4, dampingFraction: 0.88)*/.easeInOut, body)
+    try SwiftUI.withAnimation(/*.spring(response: 0.4, dampingFraction: 0.88)*/.defaultSpring, body)
 }

@@ -56,7 +56,7 @@ struct HollowTextView: View {
             if highlight {
                 Text.highlightLinksAndCitation(text, modifiers: {
                     $0.underline()
-                        .foregroundColor(.hollowContentText)
+                        .foregroundColor(.tint)
                 })
             } else {
                 Text(text)
