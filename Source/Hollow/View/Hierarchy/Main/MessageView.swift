@@ -105,9 +105,9 @@ extension MessageView {
     struct SystemMessageView: View {
         @ObservedObject var messageStore: MessageStore
         var body: some View {
-            CustomScrollView(refresh: messageStore.requestMessages) { proxy in VStack(spacing: 0) {
+            CustomScrollView(refresh: messageStore.requestMessages) { proxy in LazyVStack(spacing: 0) {
                 ForEach(messageStore.messages) { message in
-                    LazyVStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
                         HStack {
                             Text(message.title)
                                 .bold()

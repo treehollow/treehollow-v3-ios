@@ -21,6 +21,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     @State var offset: (x: CGFloat, y: CGFloat) = (0, 0)
     @State var scale: CGFloat = 1
     @State var disableScroll = false
+    @GestureState private var isPressed = false
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
 
@@ -32,32 +33,40 @@ fileprivate struct SwipeToDismiss: ViewModifier {
             .compositingGroup()
             .scaleEffect(scale)
             .offset(x: offset.x, y: offset.y)
+            .allowsHitTesting(!isPressed)
+            .onChange(of: isPressed, perform: { pressed in
+                if !pressed {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 1)) {
+                        offset = (0, 0)
+                        scale = 1
+                    }
+                }
+            })
             .gesture(
                 DragGesture()
+                    // Track gesture ending and failure
+                    .updating($isPressed) { _, state, _ in state = true }
                     .onChanged { value in
                         // 12 is less than the standard padding
-                        if value.translation.width >= 0 && value.startLocation.x <= 12 {
+                        if value.startLocation.x <= 12 {
                             withAnimation(offset == (0, 0) ? .defaultSpring : nil) {
                                 offset.x = offset(for: value.translation.width)
                                 offset.y = offset(for: value.translation.height)
                                 scale = scale(for: sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2)))
                             }
                         }
+                        if !isPressed { print("end")}
                     }
                     .onEnded { value in
+                        guard value.startLocation.x <= 12 else { return }
                         if offsetExceeded(with: value) {
                             withAnimation {
                                 presented = false
                                 offset = (0, 0)
                                 scale = 1
-                            }
-                        } else {
-                            withAnimation(.spring(response: 0.35, dampingFraction: 1)) {
-                                offset = (0, 0)
-                                scale = 1
+                                content.hideKeyboard()
                             }
                         }
-                        
                     }
             )
             .onAppear {
