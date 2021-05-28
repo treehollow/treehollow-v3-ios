@@ -72,7 +72,7 @@ struct TimelineView: View {
                                 Button("TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON") { withAnimation {
                                     hiddenAnnouncement = announcement
                                 }}
-                                .dynamicFont(size: 17, weight: .medium)
+                                .dynamicFont(size: 15)
                                 .accentColor(.tint)
                             }
                             .lineLimit(1)

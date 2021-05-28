@@ -51,6 +51,7 @@ extension LoginView {
                 }
                 .dynamicFont(size: 14)
             }
+            .textContentType(.newPassword)
             
             VStack(alignment: .leading) {
                 // Confirmed password text field
@@ -71,6 +72,7 @@ extension LoginView {
                     }
                     .dynamicFont(size: 14)
                 }
+                .textContentType(.newPassword)
                 
                 // Policies
                 VStack(alignment: .leading, spacing: 6) {
@@ -139,6 +141,7 @@ extension LoginView {
                     }
 
                 }}
+                .textContentType(.username)
                 .keyboardType(.emailAddress)
                 
             }
@@ -158,6 +161,7 @@ extension LoginView {
                                        placeHolder: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_PLACEHOLDER", comment: ""),
                                        title: NSLocalizedString("LOGINVIEW_PASSWORD_TEXTFIELD_TITLE", comment: ""),
                                        isSecureContent: true)
+                    .textContentType(.password)
                 Button(action: { alertPresented = true }) {
                     Text("LOGINVIEW_FORGET_PASSWORD_BUTTON")
                         .underline()

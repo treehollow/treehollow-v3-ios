@@ -92,12 +92,9 @@ struct HollowDetailView: View {
                     VStack(spacing: 0) {
                         let spacing: CGFloat = UIDevice.isMac ? 20 : 13
                         
-                        Spacer().fixedSize()
-                            .id(-1)
-                        
                         if store.noSuchPost {
                             Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
-                                .padding(.top, spacing)
+                                .padding(.bottom, spacing)
                                 .padding(.horizontal)
                                 .modifier(HollowTextView.TextModifier(inDetail: true))
                             
@@ -108,14 +105,15 @@ struct HollowDetailView: View {
                                 voteHandler: store.vote,
                                 imageReloadHandler: { _ in store.loadPostImage() }
                             )
-                            .padding(.top, spacing)
+                            .padding(.bottom, spacing)
                             .padding(.horizontal)
                             .background(Color.hollowCardBackground)
                         }
                         
-                        Spacer(minLength: spacing * 2).fixedSize()
+                        Spacer(minLength: spacing).fixedSize()
                         
                     }
+                    .padding(.top)
                     .listRowBackground(Color.hollowCardBackground)
                     .listRowInsets(EdgeInsets())
                     .background(Color.hollowCardBackground)
@@ -213,7 +211,7 @@ struct HollowDetailView: View {
             )
             .edgesIgnoringSafeArea([])
             .bottom()
-            .transition(UIDevice.isPad ? .move(edge: .bottom) : .opacity)
+            .transition(UIDevice.isPad ? .move(edge: .bottom) : .hideToBottomTrailing)
             
         }})
         

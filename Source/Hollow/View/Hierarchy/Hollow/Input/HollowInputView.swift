@@ -25,6 +25,7 @@ struct HollowInputView: View {
     @ScaledMetric(wrappedValue: 30, relativeTo: .body) var body30: CGFloat
     @ScaledMetric(wrappedValue: ViewConstants.plainButtonFontSize) var buttonFontSize: CGFloat
     
+    @Environment(\.proposedRadius) var proposedRadius
     @Namespace var animation
     var buttonAnimationNamespace: Namespace.ID?
     
@@ -94,7 +95,7 @@ struct HollowInputView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in withAnimation { keyboardShown = true }}
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in withAnimation { keyboardShown = false }}
-        .background(Color.background.ignoresSafeArea())
+        .background(Color.background.roundedCorner(proposedRadius ?? 0).ignoresSafeArea())
         .modifier(ImagePickerModifier(presented: $showImagePicker, image: $inputStore.image))
         .onChange(of: inputStore.image) { _ in inputStore.compressImage() }
         .styledAlert(

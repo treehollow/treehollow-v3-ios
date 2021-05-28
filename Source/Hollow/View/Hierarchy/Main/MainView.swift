@@ -70,22 +70,22 @@ struct MainView: View {
             Group {
                 if isSearching {
                     SearchView(presented: $isSearching, store: .init(type: .search, options: [.unordered]))
-                        .swipeToDismiss(presented: $isSearching)
+                        .swipeToDismiss(presented: $isSearching, transition: .hide(to: UnitPoint(x: 0.5, y: 0.07)))
                 }
                 if showCreatePost {
                     HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost, refreshHandler: {
                         timelineViewModel.refresh(finshHandler: {})
                     }), buttonAnimationNamespace: buttonAnimationNamespace)
-                    .swipeToDismiss(presented: $showCreatePost, transition: .opacity)
+                    .swipeToDismiss(presented: $showCreatePost)
                 }
                 if showTrending {
                     SearchView(presented: $showTrending, store: .init(type: .searchTrending, options: [.unordered]))
-                        .swipeToDismiss(presented: $showTrending)
+                        .swipeToDismiss(presented: $showTrending, transition: .hide(to: UnitPoint(x: 0.8, y: 0.02)))
                 }
                 
                 if showMessage {
                     MessageView(presented: $showMessage)
-                        .swipeToDismiss(presented: $showMessage)
+                        .swipeToDismiss(presented: $showMessage, transition: .hide(to: UnitPoint(x: 0.9, y: 0.02)))
                 }
             }
         )
@@ -137,6 +137,7 @@ extension MainView {
                         Image(systemName: "bell")
                             .padding(.horizontal, 7)
                     }
+
                     Button(action:{
                         accountPresented = true
                     }) {

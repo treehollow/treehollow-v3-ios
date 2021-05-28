@@ -16,6 +16,7 @@ extension View {
 
 fileprivate struct DefaultBlurBackground: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.proposedRadius) var proposedRadius
     let hasPost: Bool
     
     func body(content: Content) -> some View {
@@ -24,9 +25,13 @@ fileprivate struct DefaultBlurBackground: ViewModifier {
             .background(
                 Color.background
                     .opacity(hasPost && colorScheme == .dark ? 1 : 0.4)
-                    .edgesIgnoringSafeArea(.all)
+                    .roundedCorner(proposedRadius ?? 0)
+                    .ignoresSafeArea()
             )
-            // Blur background
-            .blurBackground()
+            .background(
+                Blur(style: .regular)
+                    .roundedCorner(proposedRadius ?? 0)
+                    .ignoresSafeArea()
+            )
     }
 }
