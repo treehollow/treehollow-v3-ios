@@ -29,7 +29,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .cornerRadiusEnvironment(radius: min(25, 400 * (1 - scale)))
+            .draggingEnvironment(isPressed)
             .compositingGroup()
             .scaleEffect(scale)
             .offset(x: offset.x, y: offset.y)
@@ -46,11 +46,14 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                 DragGesture()
                     // Track gesture completion and failure
                     .updating($isPressed) { value, state, _ in
-                        if value.startLocation.x <= 12 { state = true }
+                        guard !state else { return }
+                        if value.startLocation.x <= 12 && value.location.x - value.startLocation.x > 10 {
+                            withAnimation { state = true }
+                        }
                     }
                     .onChanged { value in
                         // 12 is less than the standard padding
-                        if value.startLocation.x <= 12 {
+                        if value.startLocation.x <= 12 && value.location.x - value.startLocation.x > 10 {
                             withAnimation(offset == (0, 0) ? .defaultSpring : nil) {
                                 offset.x = offset(for: value.translation.width)
                                 offset.y = offset(for: value.translation.height)
@@ -59,7 +62,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                         }
                     }
                     .onEnded { value in
-                        guard value.startLocation.x <= 12 else { return }
+                        guard value.startLocation.x <= 12 && value.location.x - value.startLocation.x > 10 else { return }
                         if offsetExceeded(with: value) {
                             withAnimation {
                                 presented = false
@@ -105,4 +108,6 @@ fileprivate struct SwipeToDismiss: ViewModifier {
         
         return false
     }
+    
+    
 }

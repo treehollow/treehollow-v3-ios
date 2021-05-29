@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E00D79726628615009E4B44 /* View+proposedOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E00D79626628615009E4B44 /* View+proposedOverlay.swift */; };
+		0E00D79B26628B43009E4B44 /* DragEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E00D79A26628B43009E4B44 /* DragEnvironment.swift */; };
 		0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7A925D4D73100DC5615 /* ImageViewer.swift */; };
 		0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */; };
 		0E17B9852661FB03008773E6 /* View+withPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */; };
@@ -91,7 +93,6 @@
 		0E4E4BC52634619A00B32F7F /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E4BC42634619A00B32F7F /* View+roundedCorner.swift */; };
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E593F152660AD4A001213E1 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E593F142660AD4A001213E1 /* CustomTransitions.swift */; };
-		0E593F172660B257001213E1 /* View+stackedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E593F162660B257001213E1 /* View+stackedBackground.swift */; };
 		0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */; };
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
@@ -410,6 +411,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E00D79626628615009E4B44 /* View+proposedOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+proposedOverlay.swift"; sourceTree = "<group>"; };
+		0E00D79A26628B43009E4B44 /* DragEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragEnvironment.swift; sourceTree = "<group>"; };
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
 		0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+withPlaceholder.swift"; sourceTree = "<group>"; };
@@ -479,7 +482,6 @@
 		0E58811925EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E58811A25EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E593F142660AD4A001213E1 /* CustomTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
-		0E593F162660B257001213E1 /* View+stackedBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+stackedBackground.swift"; sourceTree = "<group>"; };
 		0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onClickGesture.swift"; sourceTree = "<group>"; };
 		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
@@ -693,6 +695,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E00D795266285E6009E4B44 /* Drag */ = {
+			isa = PBXGroup;
+			children = (
+				0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */,
+				0E48DB632660BBAE007C5755 /* View+cornerRadiusEnvironment.swift */,
+				0E00D79626628615009E4B44 /* View+proposedOverlay.swift */,
+				0E00D79A26628B43009E4B44 /* DragEnvironment.swift */,
+			);
+			path = Drag;
+			sourceTree = "<group>";
+		};
 		0E3FEEE5265BA5D400842B98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -969,8 +982,6 @@
 				0EDEC0E42650E5A6003112BA /* View+makeButton.swift */,
 				0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */,
 				0E79AF50265E45B600BFDABD /* withAnimation.swift */,
-				0E593F162660B257001213E1 /* View+stackedBackground.swift */,
-				0E48DB632660BBAE007C5755 /* View+cornerRadiusEnvironment.swift */,
 				0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */,
 			);
 			path = Utilities;
@@ -1354,10 +1365,10 @@
 		0EFE13FE262AF2D6007B0045 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				0E00D795266285E6009E4B44 /* Drag */,
 				0EB45E3D261209A300409227 /* View+presentStyledAlert.swift */,
 				0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */,
 				0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */,
-				0EA2D51125F0A53F003D539E /* View+swipeToDismiss.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1548,6 +1559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */,
+				0E00D79726628615009E4B44 /* View+proposedOverlay.swift in Sources */,
 				0EC246282634040D001AFC4B /* DeviceListStore.swift in Sources */,
 				0EC2458B26340311001AFC4B /* VoteData.swift in Sources */,
 				0EC245A926340311001AFC4B /* GetPushRequest.swift in Sources */,
@@ -1589,6 +1601,7 @@
 				0EC245D526340312001AFC4B /* RequestPublisher.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsSubViews.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
+				0E00D79B26628B43009E4B44 /* DragEnvironment.swift in Sources */,
 				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
 				0EFE13F4262876FE007B0045 /* View+imageSaver.swift in Sources */,
 				0EDEC0E52650E5A6003112BA /* View+makeButton.swift in Sources */,
@@ -1643,7 +1656,6 @@
 				0EC245A326340311001AFC4B /* AttentionListSearchRequest.swift in Sources */,
 				0EC2452526340301001AFC4B /* ImageCompressor.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
-				0E593F172660B257001213E1 /* View+stackedBackground.swift in Sources */,
 				0EFB550525E93E24001BC98A /* PostListView.swift in Sources */,
 				0EC245D126340312001AFC4B /* SendVoteRequest.swift in Sources */,
 				0EC245AB26340311001AFC4B /* SetPushRequest.swift in Sources */,
@@ -2068,7 +2080,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 63;
+				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -2077,7 +2089,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.1;
+				MARKETING_VERSION = 3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -2094,7 +2106,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 63;
+				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -2103,7 +2115,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.1;
+				MARKETING_VERSION = 3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -2119,7 +2131,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 63;
+				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -2129,7 +2141,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.1.1;
+				MARKETING_VERSION = 3.2;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2147,7 +2159,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 63;
+				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -2157,7 +2169,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.1.1;
+				MARKETING_VERSION = 3.2;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";

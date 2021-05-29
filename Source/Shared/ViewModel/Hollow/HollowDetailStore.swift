@@ -100,9 +100,14 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
                                 navVC?.popViewController(animated: true)
                             }
                         } else {
-                            if let topVC = IntegrationUtilities.topViewController() as? HollowDetailViewController,
+                            if let navVC = IntegrationUtilities.topViewController() as? UINavigationController,
+                               let topVC = navVC.topViewController as? HollowDetailViewController,
                                topVC.store.postDataWrapper.post.postId == self.postDataWrapper.post.postId {
-                                topVC.dismiss(animated: true)
+                                if navVC.viewControllers.count > 1 {
+                                    navVC.popViewController(animated: true)
+                                } else {
+                                    navVC.dismiss(animated: true)
+                                }
                             }
                         }
                         #endif

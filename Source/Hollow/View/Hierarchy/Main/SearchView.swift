@@ -67,7 +67,7 @@ struct SearchView: View {
                         .padding(.top)
                     }
                     .defaultPadding(.horizontal)
-                    .edgesIgnoringSafeArea(.bottom)
+                    .proposedIgnoringSafeArea(edges: .bottom)
                     .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }
             } else {
@@ -79,7 +79,7 @@ struct SearchView: View {
             Color.background.ignoresSafeArea()
         }})
         .defaultBlurBackground(hasPost: showPost)
-        .edgesIgnoringSafeArea(.bottom)
+        .proposedIgnoringSafeArea(edges: .bottom)
         .overlay(
             Group {
                 if startPickerPresented {

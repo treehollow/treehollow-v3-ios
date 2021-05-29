@@ -27,7 +27,7 @@ struct MessageView: View {
                 SystemMessageView(messageStore: messageStore)
                     .tag(Page.message)
             }
-            .ignoresSafeArea()
+            .proposedIgnoringSafeArea()
             // To avoid conflict with swipe gesture
             .padding(.leading)
         }

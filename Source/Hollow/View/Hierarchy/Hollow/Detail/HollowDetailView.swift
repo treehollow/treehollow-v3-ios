@@ -23,12 +23,14 @@ struct HollowDetailView: View {
     
     let scrollAnimation = Animation.spring(response: 0.3)
     
-    @ScaledMetric(wrappedValue: 10) var headerVerticalPadding: CGFloat
+    @ScaledMetric(wrappedValue: 8) var headerVerticalPadding: CGFloat
     @ScaledMetric(wrappedValue: 16) var newCommentLabelSize: CGFloat
     @ScaledMetric var commentViewBottomPadding: CGFloat = 100
     
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
+    
+    @Environment(\.popHandler) var popHandler
     
     @Namespace var buttonAnimationNamespace
     
@@ -37,8 +39,8 @@ struct HollowDetailView: View {
             if showHeader {
                 VStack(spacing: 0) {
                     HStack {
-                        Button(action: dismissSelf) {
-                            Image(systemName: "xmark")
+                        Button(action: popHandler ?? dismissSelf) {
+                            Image(systemName: popHandler == nil ? "xmark" : "chevron.left")
                                 .modifier(ImageButtonModifier())
                                 .padding(.trailing, 5)
                         }
@@ -170,12 +172,16 @@ struct HollowDetailView: View {
                 }
                 
             }
-            
+            .proposedCornerRadius()
+
         }
         
         .disabled(store.noSuchPost)
-        
-        .background(Color.hollowCardBackground.ignoresSafeArea())
+        .background(
+            Color.hollowCardBackground
+                .proposedCornerRadius()
+                .proposedIgnoringSafeArea()
+        )
         
         .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
             FloatButton(
@@ -188,7 +194,7 @@ struct HollowDetailView: View {
                 buttonAnimationNamespace: buttonAnimationNamespace
             )
             //            .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
-            .edgesIgnoringSafeArea(.bottom)
+            .proposedIgnoringSafeArea(edges: .bottom)
             .bottom()
             .trailing()
             .padding()
@@ -196,7 +202,7 @@ struct HollowDetailView: View {
             .padding(.bottom, 7)
             .disabled(store.isSendingComment || store.isLoading)
         }})
-        .edgesIgnoringSafeArea(.bottom)
+        .proposedIgnoringSafeArea(edges: .bottom)
         
         .overlay(Group { if store.replyToIndex >= -1 {
             let post = store.postDataWrapper.post
@@ -229,7 +235,6 @@ struct HollowDetailView: View {
         }
         
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
-        
     }
 }
 

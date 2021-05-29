@@ -213,7 +213,7 @@ extension SearchView {
         }
         .background(
             Blur(style: .systemUltraThinMaterial)
-                .edgesIgnoringSafeArea(.all)
+                .proposedIgnoringSafeArea()
         )
     }
 }

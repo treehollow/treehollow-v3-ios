@@ -106,8 +106,20 @@ struct IntegrationUtilities {
     }
     
     static func presentDetailView(store: HollowDetailStore) {
-        let detailVC = HollowDetailViewController(store: store)
-        topViewController()?.present(detailVC, animated: true)
+        if let navVC = topViewController() as? UINavigationController,
+           navVC.topViewController is HollowDetailViewController {
+            let detailVC = HollowDetailViewController(store: store, isRoot: false)
+            detailVC.view.backgroundColor = nil
+            navVC.pushViewController(detailVC, animated: true)
+        } else {
+            let detailVC = HollowDetailViewController(store: store, isRoot: true)
+            detailVC.view.backgroundColor = nil
+            let navVC = UINavigationController(rootViewController: detailVC)
+            navVC.modalPresentationStyle = .overFullScreen
+            navVC.setNavigationBarHidden(true, animated: false)
+            navVC.view.backgroundColor = nil
+            topViewController()?.present(navVC, animated: true)
+        }
     }
     
     static func pushDetailVCOnSecondary(store: HollowDetailStore) {
