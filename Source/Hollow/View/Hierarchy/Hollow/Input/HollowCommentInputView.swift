@@ -80,11 +80,11 @@ struct HollowCommentInputView: View {
             }
         }
         .padding()
-        .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace, isSource: false)
+        .conditionalMatchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace, isSource: false)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .foregroundColor(.hollowCardBackground)
-                .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+                .conditionalMatchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace)
                 .shadow(radius: 12)
         )
         .padding()

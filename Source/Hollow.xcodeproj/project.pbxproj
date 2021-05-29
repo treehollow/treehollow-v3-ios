@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7A925D4D73100DC5615 /* ImageViewer.swift */; };
 		0E09B7B125D4E7E800DC5615 /* BarImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */; };
+		0E17B9852661FB03008773E6 /* View+withPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */; };
 		0E186C39262C60A1001A5855 /* View+showToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E186C38262C60A1001A5855 /* View+showToast.swift */; };
 		0E1DD7D625D983BE000D27BA /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1DD7D525D983BE000D27BA /* Avatar.swift */; };
 		0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28BC4125F5E29D00A97820 /* CustomColorScheme.swift */; };
@@ -411,6 +412,7 @@
 /* Begin PBXFileReference section */
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
+		0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+withPlaceholder.swift"; sourceTree = "<group>"; };
 		0E186C38262C60A1001A5855 /* View+showToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+showToast.swift"; sourceTree = "<group>"; };
 		0E1DD7D525D983BE000D27BA /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		0E28BC4125F5E29D00A97820 /* CustomColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorScheme.swift; sourceTree = "<group>"; };
@@ -969,6 +971,7 @@
 				0E79AF50265E45B600BFDABD /* withAnimation.swift */,
 				0E593F162660B257001213E1 /* View+stackedBackground.swift */,
 				0E48DB632660BBAE007C5755 /* View+cornerRadiusEnvironment.swift */,
+				0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1709,6 +1712,7 @@
 				0E186C39262C60A1001A5855 /* View+showToast.swift in Sources */,
 				0EC245E126340312001AFC4B /* String+removeLineBreak.swift in Sources */,
 				0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */,
+				0E17B9852661FB03008773E6 /* View+withPlaceholder.swift in Sources */,
 				0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */,
 				0EFB4F222639790000530B5F /* ImageTitledStack.swift in Sources */,
 				0EB45E3E261209A300409227 /* View+presentStyledAlert.swift in Sources */,

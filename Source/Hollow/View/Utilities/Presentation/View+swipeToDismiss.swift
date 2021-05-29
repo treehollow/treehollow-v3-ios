@@ -44,8 +44,10 @@ fileprivate struct SwipeToDismiss: ViewModifier {
             })
             .gesture(
                 DragGesture()
-                    // Track gesture ending and failure
-                    .updating($isPressed) { _, state, _ in state = true }
+                    // Track gesture completion and failure
+                    .updating($isPressed) { value, state, _ in
+                        if value.startLocation.x <= 12 { state = true }
+                    }
                     .onChanged { value in
                         // 12 is less than the standard padding
                         if value.startLocation.x <= 12 {
@@ -55,7 +57,6 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                                 scale = scale(for: sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2)))
                             }
                         }
-                        if !isPressed { print("end")}
                     }
                     .onEnded { value in
                         guard value.startLocation.x <= 12 else { return }

@@ -211,7 +211,7 @@ struct HollowDetailView: View {
             )
             .edgesIgnoringSafeArea([])
             .bottom()
-            .transition(UIDevice.isPad ? .move(edge: .bottom) : .hideToBottomTrailing)
+            .transition(UIDevice.isPad ? .move(edge: .bottom) : .floatButton)
             
         }})
         

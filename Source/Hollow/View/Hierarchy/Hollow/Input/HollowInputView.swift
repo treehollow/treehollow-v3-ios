@@ -85,7 +85,7 @@ struct HollowInputView: View {
             .background(
                 Color.hollowCardBackground
                     .roundedCorner(12)
-                    .conditionalMatchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+                    .conditionalMatchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace)
             )
             .padding()
         }

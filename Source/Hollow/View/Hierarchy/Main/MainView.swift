@@ -20,15 +20,18 @@ struct MainView: View {
     let timelineViewModel = PostListRequestStore(type: .postList)
     // Initialize wander view model here to avoid creating repeatedly
     let wanderViewModel = PostListRequestStore(type: .wander, options: [.ignoreCitedPost, .ignoreComments, .unordered])
-    @Namespace var buttonAnimationNamespace
+    
+    let overlayTransition = AnyTransition.asymmetric(insertion: .opacity, removal: .scaleAndOpacity)
+    @Namespace var namespace
 
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             VStack(spacing: 12) {
-                HeaderView(page: $page, isSearching: $isSearching, showTrending: $showTrending, showMessage: $showMessage)
+                HeaderView(page: $page, isSearching: $isSearching, showTrending: $showTrending, showMessage: $showMessage, namespace: namespace)
                     .padding(.horizontal)
                     .padding(.top, 10)
+                    .zIndex(2)
                 
                 // Use our modified TabView to avoid default background color when using
                 // `CustomScrollView` in `TabView`
@@ -54,7 +57,7 @@ struct MainView: View {
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             },
                             systemImageName: "plus",
-                            buttonAnimationNamespace: buttonAnimationNamespace
+                            buttonAnimationNamespace: namespace
                         )
                         .bottom()
                         .trailing()
@@ -70,22 +73,24 @@ struct MainView: View {
             Group {
                 if isSearching {
                     SearchView(presented: $isSearching, store: .init(type: .search, options: [.unordered]))
-                        .swipeToDismiss(presented: $isSearching, transition: .hide(to: UnitPoint(x: 0.5, y: 0.07)))
+                        .swipeToDismiss(presented: $isSearching, transition: .hide(to: .init(x: 0.8, y: 0.1)))
                 }
                 if showCreatePost {
                     HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost, refreshHandler: {
                         timelineViewModel.refresh(finshHandler: {})
-                    }), buttonAnimationNamespace: buttonAnimationNamespace)
-                    .swipeToDismiss(presented: $showCreatePost)
+                    }), buttonAnimationNamespace: namespace)
+                    .swipeToDismiss(presented: $showCreatePost, transition: .floatButton)
                 }
                 if showTrending {
                     SearchView(presented: $showTrending, store: .init(type: .searchTrending, options: [.unordered]))
-                        .swipeToDismiss(presented: $showTrending, transition: .hide(to: UnitPoint(x: 0.8, y: 0.02)))
+                        .matchedGeometryEffect(id: "trending", in: namespace)
+                        .swipeToDismiss(presented: $showTrending, transition: overlayTransition)
                 }
                 
                 if showMessage {
                     MessageView(presented: $showMessage)
-                        .swipeToDismiss(presented: $showMessage, transition: .hide(to: UnitPoint(x: 0.9, y: 0.02)))
+                        .matchedGeometryEffect(id: "message", in: namespace)
+                        .swipeToDismiss(presented: $showMessage, transition: overlayTransition)
                 }
             }
         )
@@ -107,6 +112,8 @@ extension MainView {
         @Binding var showMessage: Bool
 
         @State private var accountPresented = false
+        
+        let namespace: Namespace.ID
 
         var body: some View {
             HStack(spacing: 2) {
@@ -133,10 +140,13 @@ extension MainView {
                         Image(systemName: "flame")
                             .padding(.horizontal, 10)
                     }
+                    .withPlaceholder(showTrending, namespace: namespace, id: "trending")
+
                     Button(action:{ withAnimation { showMessage = true } }) {
                         Image(systemName: "bell")
                             .padding(.horizontal, 7)
                     }
+                    .withPlaceholder(showMessage, namespace: namespace, id: "message")
 
                     Button(action:{
                         accountPresented = true

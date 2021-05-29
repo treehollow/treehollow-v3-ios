@@ -23,7 +23,7 @@ struct FloatButton: View {
         Button(action: action) {
             ZStack {
                 RoundedRectangle(cornerRadius: body50 / 2, style: .continuous)
-                    .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
+                    .matchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace)
                     .frame(width: body50, height: body50)
                     .foregroundColor(.hollowContentVoteGradient1)
 
