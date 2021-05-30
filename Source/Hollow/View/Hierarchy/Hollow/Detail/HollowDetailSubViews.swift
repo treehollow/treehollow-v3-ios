@@ -77,109 +77,99 @@ extension HollowDetailView {
     }
     
     func commentView(for comment: CommentData) -> some View {
-        var hideLabel: Bool = false
-        let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == comment.commentId })
+        let hideLabel: Bool = showOnlyName == comment.name ?
+            false :
+            (reverseComments ? !comment.showAvatarWhenReversed : !comment.showAvatar)
         
-        if showOnlyName != comment.name {
-            let firstIndex = reverseComments ? store.postDataWrapper.post.comments.count - 1 : 0
-            if index == firstIndex { hideLabel = false }
-            else if let index = index {
-                let nextIndex = reverseComments ? index + 1 : index - 1
-                hideLabel = comment.name == store.postDataWrapper.post.comments[nextIndex].name
+        let bindingComment = Binding(
+            get: { comment },
+            set: { comment in
+                if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == comment.commentId  }) {
+                    store.postDataWrapper.post.comments[index] = comment
+                }
+            }
+        )
+        
+        let highlighted = store.replyToId == comment.commentId || jumpedToCommentId == comment.commentId
+        
+        return HollowCommentContentView(
+            commentData: bindingComment,
+            compact: false,
+            contentVerticalPadding: UIDevice.isMac ? 13 : 10,
+            hideLabel: hideLabel,
+            postColorIndex: store.postDataWrapper.post.colorIndex,
+            postHash: store.postDataWrapper.post.hash,
+            imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) },
+            jumpToReplyingHandler: { jumpToComment(commentId: comment.replyTo) }
+        )
+        .padding(.horizontal)
+        .background(
+            Group {
+                highlighted ? Color.background : Color.hollowCardBackground
+            }
+        )
+        .onClickGesture {
+            guard !store.isSendingComment && !store.isLoading else { return }
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            withAnimation(scrollAnimation) {
+                store.replyToId = comment.commentId
+                jumpedToCommentId = nil
             }
         }
-        
-        return Group { if let index = index {
-            let bindingComment = Binding(
-                get: { comment },
-                set: { comment in
-                    if let index = store.postDataWrapper.post.comments.firstIndex(where: { $0.commentId == comment.commentId  }) {
-                        store.postDataWrapper.post.comments[index] = comment
-                    }
-                }
-            )
-            
-            let highlighted = store.replyToIndex == index || jumpedToCommentId == comment.commentId
-            
-            HollowCommentContentView(
-                commentData: bindingComment,
-                compact: false,
-                contentVerticalPadding: UIDevice.isMac ? 13 : 10,
-                hideLabel: hideLabel,
-                postColorIndex: store.postDataWrapper.post.colorIndex,
-                postHash: store.postDataWrapper.post.hash,
-                imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) },
-                jumpToReplyingHandler: { jumpToComment(commentId: comment.replyTo) }
-            )
-            .padding(.horizontal)
-            .background(
-                Group {
-                    highlighted ? Color.background : Color.hollowCardBackground
-                }
-            )
-            .onClickGesture {
-                guard !store.isSendingComment && !store.isLoading else { return }
-                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                withAnimation(scrollAnimation) {
-                    store.replyToIndex = index
-                    jumpedToCommentId = nil
-                }
+        .contextMenu {
+            if comment.text != "" {
+                Button(action: {
+                    UIPasteboard.general.string = comment.text
+                }, label: {
+                    Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
+                })
             }
-            .contextMenu {
-                if comment.text != "" {
+            
+            if showOnlyName == nil {
+                Button(action: { withAnimation { showOnlyName = comment.name } }) {
+                    Label("COMMENT_VIEW_SHOW_ONLY_LABEL", systemImage: "line.horizontal.3.decrease.circle")
+                }
+                Divider()
+            }
+            
+            let links = Array(comment.url.compactMap({ URL(string: $0) }))
+            if !links.isEmpty {
+                Divider()
+                ForEach(links, id: \.self) { link in
                     Button(action: {
-                        UIPasteboard.general.string = comment.text
-                    }, label: {
-                        Label(NSLocalizedString("COMMENT_VIEW_COPY_TEXT_LABEL", comment: ""), systemImage: "doc.on.doc")
-                    })
-                }
-                
-                if showOnlyName == nil {
-                    Button(action: { withAnimation { showOnlyName = comment.name } }) {
-                        Label("COMMENT_VIEW_SHOW_ONLY_LABEL", systemImage: "line.horizontal.3.decrease.circle")
+                        let helper = OpenURLHelper(openURL: openURL)
+                        try? helper.tryOpen(link, method: Defaults[.openURLMethod])
+                    }) {
+                        Label(link.absoluteString, systemImage: "link")
                     }
-                    Divider()
                 }
-                
-                if comment.hasURL {
-                    let links = Array(comment.text.links().compactMap({ URL(string: $0) }))
-                    Divider()
-                    ForEach(links, id: \.self) { link in
-                        Button(action: {
-                            let helper = OpenURLHelper(openURL: openURL)
-                            try? helper.tryOpen(link, method: Defaults[.openURLMethod])
-                        }) {
-                            Label(link.absoluteString, systemImage: "link")
-                        }
-                    }
-                    Divider()
-                }
-                if comment.hasCitedNumbers {
-                    let citedPosts = comment.text.citationNumbers()
-                    Divider()
-                    ForEach(citedPosts, id: \.self) { post in
-                        let wrapper = PostDataWrapper.templatePost(for: post)
-                        Button(action: {
-                            IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
-                        }) {
-                            Label("#\(post.string)", systemImage: "text.quote")
-                        }
-                    }
-                    Divider()
-                }
-                ReportMenuContent(
-                    store: store,
-                    permissions: comment.permissions,
-                    commentId: comment.commentId
-                )
+                Divider()
             }
-        }}
-
+            let citedPosts = comment.citedNumbers
+            if !citedPosts.isEmpty {
+                Divider()
+                ForEach(citedPosts, id: \.self) { post in
+                    let wrapper = PostDataWrapper.templatePost(for: post)
+                    Button(action: {
+                        IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
+                    }) {
+                        Label("#\(post.string)", systemImage: "text.quote")
+                    }
+                }
+                Divider()
+            }
+            ReportMenuContent(
+                store: store,
+                permissions: comment.permissions,
+                commentId: comment.commentId
+            )
+        }
+        
     }
     
     func jumpToComment(commentId: Int) {
-        withAnimation(scrollAnimation) { store.replyToIndex = -2 }
-        jumpedFromCommentId = commentId
+        withAnimation(scrollAnimation) { store.replyToId = -2 }
+        withAnimation(scrollAnimation) { jumpedFromCommentId = commentId }
     }
     
     struct PlaceholderComment: View {

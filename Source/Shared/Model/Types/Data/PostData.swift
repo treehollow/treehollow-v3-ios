@@ -34,15 +34,10 @@ struct PostData: Identifiable, Codable {
     // Pre fetched cited post id
     var citedPostId: Int?
     
-    // To avoid scanning the text over and over when the
-    // text does not has components that needed to be
-    // rendered as hyperlink, set the variable when initialize
-    // comment data, and check them to decide whether to call
-    // the methods to scan the text.
-    var hasURL = false
-    var hasCitedNumbers = false
-    var renderHighlight: Bool { hasURL || hasCitedNumbers }
-    
+    var url: [String]
+    var citedNumbers: [Int]
+    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
+
     // Color data used in avatar
     var hash: Int
     var colorIndex: Int
@@ -84,6 +79,8 @@ extension PostDataWrapper {
             vote: nil,
             comments: [],
             loadingError: nil,
+            url: [],
+            citedNumbers: [],
             hash: hash,
             colorIndex: colorIndex
         )

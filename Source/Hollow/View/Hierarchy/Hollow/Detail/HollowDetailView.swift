@@ -34,6 +34,8 @@ struct HollowDetailView: View {
     
     @Namespace var buttonAnimationNamespace
     
+    let hasTopSafeAreaInset = UIApplication.shared.windows[0].safeAreaInsets.top > 0
+    
     var body: some View {
         VStack(spacing: 0) {
             if showHeader {
@@ -131,9 +133,8 @@ struct HollowDetailView: View {
                 .background(Color.hollowCardBackground)
                 .coordinateSpace(name: "detail.scrollview")
                 .buttonStyle(BorderlessButtonStyle())
-                .onChange(of: store.replyToIndex) { index in
-                    guard index != -2 else { return }
-                    let id = index >= 0 ? store.postDataWrapper.post.comments[index].commentId : -1
+                .onChange(of: store.replyToId) { id in
+                    guard id != -2 else { return }
                     withAnimation(scrollAnimation) {
                         proxy.scrollTo(id, anchor: .top)
                     }
@@ -183,17 +184,16 @@ struct HollowDetailView: View {
                 .proposedIgnoringSafeArea()
         )
         
-        .overlay(Group { if store.replyToIndex < -1 && !store.noSuchPost {
+        .overlay(Group { if store.replyToId < -1 && !store.noSuchPost {
             FloatButton(
                 action: {
-                    withAnimation(scrollAnimation) { store.replyToIndex = -1 }
+                    withAnimation(scrollAnimation) { store.replyToId = -1 }
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 },
                 systemImageName: "text.bubble.fill",
                 imageScaleFactor: 0.8,
                 buttonAnimationNamespace: buttonAnimationNamespace
             )
-            //            .matchedGeometryEffect(id: "button", in: buttonAnimationNamespace)
             .proposedIgnoringSafeArea(edges: .bottom)
             .bottom()
             .trailing()
@@ -204,11 +204,11 @@ struct HollowDetailView: View {
         }})
         .proposedIgnoringSafeArea(edges: .bottom)
         
-        .overlay(Group { if store.replyToIndex >= -1 {
+        .overlay(Group { if store.replyToId >= -1 {
             let post = store.postDataWrapper.post
-            let name = store.replyToIndex == -1 ?
+            let name = store.replyToId == -1 ?
                 NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
-                post.comments[store.replyToIndex].name
+                post.comments.first(where: { $0.commentId == store.replyToId })?.name ?? ""
             HollowCommentInputView(
                 store: store,
                 buttonAnimationNamespace: UIDevice.isPad ? nil : buttonAnimationNamespace,
@@ -221,13 +221,13 @@ struct HollowDetailView: View {
             
         }})
         
-        .onChange(of: store.replyToIndex) { index in
-            if index >= -1 {
+        .onChange(of: store.replyToId) { id in
+            if id >= -1 {
                 withAnimation(scrollAnimation) { inputPresented = true }
             }
         }
         .onChange(of: inputPresented) { presented in
-            if !presented { withAnimation(scrollAnimation) { store.replyToIndex = -2 }}
+            if !presented { withAnimation(scrollAnimation) { store.replyToId = -2 }}
         }
         
         .onDisappear {

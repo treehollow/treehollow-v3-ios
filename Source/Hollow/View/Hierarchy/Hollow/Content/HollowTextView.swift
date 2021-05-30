@@ -12,28 +12,28 @@ import Introspect
 
 struct HollowTextView: View {
     var text: String
-    var hasURL: Bool
-    var hasCitedNumbers: Bool
     var inDetail: Bool
     var highlight: Bool
+    var links: [String] = []
+    var citedNumbers: [Int] = []
     
     var compactLineLimit: Int? = nil
     
-    init(postData: PostData, inDetail: Bool, highlight: Bool, compactLineLimit: Int? = nil) {
+    init(postData: PostData, inDetail: Bool, highlight: Bool, links: [String], citedNumbers: [Int], compactLineLimit: Int? = nil) {
         self.text = postData.text
-        self.hasURL = postData.hasURL
-        self.hasCitedNumbers = postData.hasCitedNumbers
         self.inDetail = inDetail
         self.highlight = highlight
+        self.links = links
+        self.citedNumbers = citedNumbers
         self.compactLineLimit = compactLineLimit
     }
     
     init(text: String, hasURL: Bool = true, hasCitedNumbers: Bool = true, inDetail: Bool, highlight: Bool, compactLineLimit: Int? = nil) {
         self.text = text
-        self.hasURL = hasURL
-        self.hasCitedNumbers = hasCitedNumbers
         self.inDetail = inDetail
         self.highlight = highlight
+        self.links = text.links()
+        self.citedNumbers = text.citationNumbers()
         self.compactLineLimit = compactLineLimit
     }
     
@@ -59,13 +59,13 @@ struct HollowTextView: View {
                     $0.underline()
                         .foregroundColor(.hollowContentText)
                 })
-
+                
             } else {
                 Text(text)
-
+                
             }
         }
-
+        
         .modifier(TextModifier(inDetail: inDetail, compactLineLimit: compactLineLimit))
     }
     
@@ -78,34 +78,31 @@ struct HollowTextView: View {
             })
             Divider()
         }
-        if hasURL {
-            let links = Array(text.links().compactMap({ URL(string: $0) }))
-            if !links.isEmpty {
-                Divider()
-                ForEach(links, id: \.self) { link in
-                    Button(action: {
-                        let helper = OpenURLHelper(openURL: openURL)
-                        try? helper.tryOpen(link, method: Defaults[.openURLMethod])
-                    }) {
-                        Label(link.absoluteString, systemImage: "link")
-                    }
+        let links = Array(links.compactMap({ URL(string: $0) }))
+        if !links.isEmpty {
+            Divider()
+            ForEach(links, id: \.self) { link in
+                Button(action: {
+                    let helper = OpenURLHelper(openURL: openURL)
+                    try? helper.tryOpen(link, method: Defaults[.openURLMethod])
+                }) {
+                    Label(link.absoluteString, systemImage: "link")
                 }
-                Divider()
             }
+            Divider()
         }
-        if hasCitedNumbers {
-            let citedPosts = text.citationNumbers()
-            if !citedPosts.isEmpty {
-                ForEach(citedPosts, id: \.self) { post in
-                    let wrapper = PostDataWrapper.templatePost(for: post)
-                    Button(action: {
-                        IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
-                    }) {
-                        Label("#\(post.string)", systemImage: "text.quote")
-                    }
+        
+        let citedPosts = citedNumbers
+        if !citedPosts.isEmpty {
+            ForEach(citedPosts, id: \.self) { post in
+                let wrapper = PostDataWrapper.templatePost(for: post)
+                Button(action: {
+                    IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
+                }) {
+                    Label("#\(post.string)", systemImage: "text.quote")
                 }
-                Divider()
             }
+            Divider()
         }
     }
     

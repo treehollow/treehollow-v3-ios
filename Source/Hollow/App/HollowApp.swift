@@ -44,7 +44,10 @@ struct HollowApp: App {
                 NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
                 perform: { _ in
                     appDelegate.fetchConfig()
-                    WidgetCenter.shared.reloadAllTimelines()
+                    if appModel.widgetReloadCount % 3 == 0 {
+                        WidgetCenter.shared.reloadAllTimelines()
+                        appModel.widgetReloadCount += 1
+                    }
                 }
             )
             .onOpenURL { url in

@@ -68,3 +68,25 @@ fileprivate struct ProposedIgnoringSafeArea: ViewModifier {
             .ignoresSafeArea(edges: internalIsDragging ? [] : edges)
     }
 }
+
+// MARK: - Padding
+
+extension View {
+    func respectivePadding(_ edges: Edge.Set, whenDragging: CGFloat?, whenNot: CGFloat?) -> some View {
+        self.modifier(RespectivePadding(edges: edges, whenDragging: whenDragging, whenNot: whenNot))
+    }
+}
+
+fileprivate struct RespectivePadding: ViewModifier {
+    let edges: Edge.Set
+    let whenDragging: CGFloat?
+    let whenNot: CGFloat?
+    @State private var internalIsDragging = false
+    @Environment(\.dragging) var dragging
+    
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: dragging) { dragging in withAnimation { internalIsDragging = dragging  } }
+            .padding(edges, internalIsDragging ? whenDragging : whenNot)
+    }
+}

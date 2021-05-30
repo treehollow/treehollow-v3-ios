@@ -56,9 +56,9 @@ struct PostListRequest: DefaultRequest {
                 // process comments of current post
                 
                 var commentData = [CommentData]()
-                if let comments = result.comments, let commentsOfPost = comments[post.pid.string]{
+                if let comments = result.comments, let commentsOfPost = comments[post.pid.string] {
                     if let comments = commentsOfPost {
-                        commentData = comments.map{ $0.toCommentData() }
+                        commentData = comments.toCommentData()
                     }
                 }
                 

@@ -25,16 +25,13 @@ struct CommentData: Identifiable, Codable {
     var replyTo: Int
     var image: HollowImage?
     
-    // To avoid scanning the text over and over when the
-    // text does not has components that needed to be
-    // rendered as hyperlink, set the variable when initialize
-    // comment data, and check them to decide whether to call
-    // the methods to scan the text.
-    var hasURL = false
-    var hasCitedNumbers = false
-    var renderHighlight: Bool { hasURL || hasCitedNumbers }
+    var url: [String]
+    var citedNumbers: [Int]
+    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
     
     // Data used in avatar
+    var showAvatar: Bool
+    var showAvatarWhenReversed: Bool
     var hash: Int
     var colorIndex: Int
     var abbreviation: String

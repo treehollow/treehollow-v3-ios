@@ -23,7 +23,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     @Published var noSuchPost = false
     
     // MARK: Input Variables
-    @Published var replyToIndex: Int = -2
+    @Published var replyToId: Int = -2
     @Published var imageSizeInformation: String?
     var text: String = "" {
         didSet { if text == "" || oldValue == "" {
@@ -285,9 +285,14 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     func sendComment() {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let replyTo = replyToIndex == -1 ? -1 : postDataWrapper.post.comments[replyToIndex].commentId
+        let replyTo = replyToId == -1 ? -1 : replyToId
         var text = self.text
-        if replyToIndex >= 0 {
+        if replyTo >= 0 {
+            guard let replyToIndex = postDataWrapper.post.comments.firstIndex(where: { $0.commentId == replyToId }) else {
+                withAnimation { self.isSendingComment = false }
+                self.errorMessage = (title: DefaultRequestError.unknown.description, message: "")
+                return
+            }
             text = "Re \(postDataWrapper.post.comments[replyToIndex].name): " + text
         }
         let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls, token: token, text: text, imageData: compressedImageBase64String, postId: postDataWrapper.post.postId, replyCommentId: replyTo)
@@ -310,7 +315,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironme
     
     private func restoreInput() {
         self.text = ""
-        self.replyToIndex = -2
+        self.replyToId = -2
         self.image = nil
         self.compressedImage = nil
         self.imageSizeInformation = nil

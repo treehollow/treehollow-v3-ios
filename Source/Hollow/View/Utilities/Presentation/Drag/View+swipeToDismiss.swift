@@ -20,7 +20,6 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     @Binding var presented: Bool
     @State var offset: (x: CGFloat, y: CGFloat) = (0, 0)
     @State var scale: CGFloat = 1
-    @State var disableScroll = false
     @GestureState private var isPressed = false
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
@@ -47,13 +46,13 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                     // Track gesture completion and failure
                     .updating($isPressed) { value, state, _ in
                         guard !state else { return }
-                        if value.startLocation.x <= 12 && value.location.x - value.startLocation.x > 10 {
+                        if dragValid(with: value) {
                             withAnimation { state = true }
                         }
                     }
                     .onChanged { value in
                         // 12 is less than the standard padding
-                        if value.startLocation.x <= 12 && value.location.x - value.startLocation.x > 10 {
+                        if dragValid(with: value) {
                             withAnimation(offset == (0, 0) ? .defaultSpring : nil) {
                                 offset.x = offset(for: value.translation.width)
                                 offset.y = offset(for: value.translation.height)
@@ -62,7 +61,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                         }
                     }
                     .onEnded { value in
-                        guard value.startLocation.x <= 12 && value.location.x - value.startLocation.x > 10 else { return }
+                        guard dragValid(with: value) else { return }
                         if offsetExceeded(with: value) {
                             withAnimation {
                                 presented = false
@@ -81,15 +80,15 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     }
     
     private func offset(for value: CGFloat) -> CGFloat {
-        // y = \sqrt{a*(x+a/4)} - a/2, where a > 0
-        // y' = 1 && y(0) = 0
+        // y = sqrt(a*(x+a/4)) - a/2, where a > 0
+        // y'(0) = 1 && y(0) = 0
         let a: CGFloat = 200
         let offset = sqrt(a * (abs(value) + a / 4)) - a / 2
         return value > 0 ? offset : -offset
     }
     
     private func scale(for value: CGFloat) -> CGFloat {
-        return exp(-0.0003 * value)
+        return value < 20 ? 1 : exp(-0.0003 * (value - 20))
     }
     
     private func offsetExceeded(with value: DragGesture.Value) -> Bool {
@@ -109,5 +108,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
         return false
     }
     
-    
+    private func dragValid(with value: DragGesture.Value) -> Bool {
+        return value.startLocation.x <= 20 && (value.translation.width > 10 || abs(value.translation.height) > 10 || offset != (0, 0))
+    }
 }

@@ -114,7 +114,7 @@ struct HollowContentView: View {
             options.contains(.replaceForImageOnly) {
             text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
         }
-        return HollowTextView(postData: postDataWrapper.post, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight && options.contains(.showHyperlinks), compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+        return HollowTextView(postData: postDataWrapper.post, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight && options.contains(.showHyperlinks), links: postDataWrapper.post.url, citedNumbers: postDataWrapper.post.citedNumbers, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
     }
     
     private func tagView(text: String, deleted: Bool) -> some View {

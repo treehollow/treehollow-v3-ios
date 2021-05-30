@@ -29,7 +29,7 @@ fileprivate struct ProposedOverlay: ViewModifier {
             }
             .overlay(Group {
                 if showOverlay {
-                    Color.black.opacity(colorScheme == .dark ? 0.2 : 0.1).ignoresSafeArea()
+                    Color.black.opacity(0.2).ignoresSafeArea()
                 }
             })
     }

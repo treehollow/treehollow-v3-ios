@@ -16,6 +16,7 @@ class AppModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var isInMainView = Defaults[.accessToken] != nil && Defaults[.hollowConfig] != nil
+    var widgetReloadCount = 0
     
     private init() {
         // Chcek for version update

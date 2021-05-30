@@ -96,7 +96,7 @@ struct PostDetailRequest: DefaultRequest {
             } else {
                 // The post has not been cached or there's update.
                 
-                let comments = result.data?.compactMap({ $0.toCommentData() }) ?? []
+                let comments = result.data?.toCommentData() ?? []
                 let postData = post.toPostData(comments: comments)
                 postWrapper = PostDataWrapper(post: postData)
                 

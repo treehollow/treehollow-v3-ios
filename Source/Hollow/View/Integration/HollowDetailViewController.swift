@@ -65,13 +65,11 @@ struct HollowDetailViewWrapper: View {
     fileprivate let wrapper: ViewModelWrapper
     let isRoot: Bool
     @State var presented = true
-    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         if isRoot {
             HollowDetailView(store: wrapper.store)
-                // Prevent being interrupted by scroll view's gesture
-                .overlay(Color.black.opacity(0.0001).frame(width: 12).leading())
+                .overlay(Color.black.opacity(0.0001).frame(width: 14).leading())
                 .swipeToDismiss(
                     presented: .init(
                         get: { true },

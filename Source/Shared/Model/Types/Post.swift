@@ -90,8 +90,8 @@ extension Post {
             hollowImage: image,
             vote: vote?.toVoteData(),
             comments: comments,
-            citedPostId: text.findCitedPostID(), hasURL: text.links().count > 0,
-            hasCitedNumbers: text.citations().count > 0,
+            citedPostId: text.findCitedPostID(), url: text.links(),
+            citedNumbers: text.citationNumbers(),
             hash: hash,
             colorIndex: AvatarGenerator.colorIndex(hash: hash)
         )
