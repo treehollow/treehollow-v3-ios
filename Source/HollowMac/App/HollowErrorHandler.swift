@@ -1,5 +1,5 @@
 //
-//  AppModelEnvironment.swift
+//  HollowErrorHandler.swift
 //  HollowMac
 //
 //  Created by liang2kl on 2021/4/24.
@@ -9,11 +9,10 @@
 import SwiftUI
 import Defaults
 
-protocol AppModelEnvironment: ObservableObject {
-    var appModelState: AppModelState { get set }
+protocol HollowErrorHandler: ObservableObject {
 }
 
-extension AppModelEnvironment {
+extension HollowErrorHandler {
     /// Default implementation to handle token expire error.
     ///
     /// - parameter error: The request error

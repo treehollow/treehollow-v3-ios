@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Defaults
-import Introspect
 
 struct HollowDetailView: View {
     @ObservedObject var store: HollowDetailStore
@@ -129,7 +128,6 @@ struct HollowDetailView: View {
                     }
                     
                 }
-                .introspectTableView(customize: { $0.backgroundColor = nil })
                 .background(Color.hollowCardBackground)
                 .coordinateSpace(name: "detail.scrollview")
                 .buttonStyle(BorderlessButtonStyle())

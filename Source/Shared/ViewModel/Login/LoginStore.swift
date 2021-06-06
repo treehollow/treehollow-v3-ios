@@ -12,7 +12,7 @@ import SwiftUI
 import Defaults
 
 /// View model for `LoginView`
-class LoginStore: ObservableObject, AppModelEnvironment {
+class LoginStore: ObservableObject, HollowErrorHandler {
 
     @Published var showsRecaptcha = false
     @Published var reCAPTCHAToken: String = ""

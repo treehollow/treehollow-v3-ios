@@ -23,8 +23,6 @@ struct MainView: View {
     
     let overlayTransition = AnyTransition.asymmetric(insertion: .opacity, removal: .scaleAndOpacity)
     @Namespace var namespace
-    
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {

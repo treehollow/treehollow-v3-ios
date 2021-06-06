@@ -79,7 +79,7 @@ struct IntegrationUtilities {
                 store = detailVC.store
             }
         } else {
-            if let detailVC = topViewController() as? HollowDetailViewController {
+            if let detailVC = getDetailVC() {
                 store = detailVC.store
             }
         }
@@ -157,5 +157,9 @@ extension IntegrationUtilities {
         let vc = UIHostingController(rootView: content())
         vc.view.backgroundColor = nil
         navigationVC.pushViewController(vc, animated: true)
+    }
+    
+    static private func getDetailVC() -> HollowDetailViewController? {
+        return (topViewController() as? UINavigationController)?.topViewController as? HollowDetailViewController
     }
 }

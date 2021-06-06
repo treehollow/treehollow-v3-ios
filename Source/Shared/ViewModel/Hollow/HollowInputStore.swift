@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 import Defaults
 
-class HollowInputStore: ObservableObject, AppModelEnvironment, ImageCompressStore {
+class HollowInputStore: ObservableObject, HollowErrorHandler, ImageCompressStore {
     var presented: Binding<Bool>
     var selfDismiss: Bool
     var refreshHandler: (() -> Void)?

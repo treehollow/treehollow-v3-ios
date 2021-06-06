@@ -1,5 +1,5 @@
 //
-//  AppModelEnvironment.swift
+//  HollowErrorHandler.swift
 //  Hollow
 //
 //  Created by liang2kl on 2021/2/15.
@@ -10,9 +10,9 @@ import SwiftUI
 import Defaults
 
 /// Protocol for a view model which protentially modify the shared `AppModel` instance.
-protocol AppModelEnvironment: ObservableObject {}
+protocol HollowErrorHandler: ObservableObject {}
 
-extension AppModelEnvironment {
+extension HollowErrorHandler {
     /// Default implementation to handle token expire error.
     ///
     /// - parameter error: The request error

@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Defaults
-import Introspect
 
 struct HollowTextView: View {
     var text: String

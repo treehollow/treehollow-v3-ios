@@ -10,7 +10,7 @@ import Combine
 import Defaults
 import SwiftUI
 
-class UnregisterStore: ObservableObject, AppModelEnvironment {
+class UnregisterStore: ObservableObject, HollowErrorHandler {
     var presented: Binding<Bool>
     @Published var email = "" {
         didSet { if email != oldValue { restore() } }

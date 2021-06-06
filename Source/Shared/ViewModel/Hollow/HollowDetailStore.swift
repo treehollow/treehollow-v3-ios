@@ -14,7 +14,7 @@ import Defaults
 import Connectivity
 #endif
 
-class HollowDetailStore: ObservableObject, ImageCompressStore, AppModelEnvironment {
+class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandler {
     // MARK: Post Variables
     var bindingPostWrapper: Binding<PostDataWrapper>
     @Published var postDataWrapper: PostDataWrapper

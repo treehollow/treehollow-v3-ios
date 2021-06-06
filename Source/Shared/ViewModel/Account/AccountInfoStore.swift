@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 import Defaults
 
-class AccountInfoStore: ObservableObject, AppModelEnvironment {
+class AccountInfoStore: ObservableObject, HollowErrorHandler {
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
     

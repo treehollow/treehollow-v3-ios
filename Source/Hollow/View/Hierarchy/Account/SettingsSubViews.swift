@@ -332,7 +332,7 @@ struct PushNotificationSettingsView: View {
             })
     }
     
-    class ViewModel: ObservableObject, AppModelEnvironment {
+    class ViewModel: ObservableObject, HollowErrorHandler {
         @Published var isLoading = false
         @Published var notificationType = Defaults[.notificationTypeCache]
         @Published var tempNotificationType = Defaults[.notificationTypeCache]

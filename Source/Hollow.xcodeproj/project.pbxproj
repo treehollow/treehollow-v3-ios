@@ -183,7 +183,6 @@
 		0EC244E226340172001AFC4B /* CrossPlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */; };
 		0EC244E326340172001AFC4B /* CrossPlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */; };
 		0EC244EB263401E4001AFC4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244EA263401E4001AFC4B /* AppDelegate.swift */; };
-		0EC244F826340211001AFC4B /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F326340211001AFC4B /* AppModelEnvironment.swift */; };
 		0EC244FA26340211001AFC4B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F426340211001AFC4B /* AppModel.swift */; };
 		0EC244FC26340211001AFC4B /* AppDelegateShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F526340211001AFC4B /* AppDelegateShared.swift */; };
 		0EC244FD26340211001AFC4B /* AppDelegateShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244F526340211001AFC4B /* AppDelegateShared.swift */; };
@@ -353,12 +352,13 @@
 		0EC2463F26340770001AFC4B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2463E26340770001AFC4B /* AppModel.swift */; };
 		0EC24649263407D3001AFC4B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC24648263407D3001AFC4B /* WelcomeView.swift */; };
 		0EC2464D263407E4001AFC4B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2464C263407E4001AFC4B /* LoginView.swift */; };
-		0EC24651263408CC001AFC4B /* AppModelEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC24650263408CC001AFC4B /* AppModelEnvironment.swift */; };
+		0EC24651263408CC001AFC4B /* HollowErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC24650263408CC001AFC4B /* HollowErrorHandler.swift */; };
 		0EC2465626340B71001AFC4B /* View+showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2465526340B71001AFC4B /* View+showAlert.swift */; };
 		0EC2465C2634116A001AFC4B /* AppModelBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2465B2634116A001AFC4B /* AppModelBehaviour.swift */; };
 		0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
+		0ECA796E26652C4200736096 /* HollowErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA796D26652C4200736096 /* HollowErrorHandler.swift */; };
 		0ED087BF263480C9003C2E11 /* LoginSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED087BE263480C9003C2E11 /* LoginSubViews.swift */; };
 		0ED087D126354556003C2E11 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED087D026354556003C2E11 /* PostListView.swift */; };
 		0ED1A16026346C37001453A7 /* ReCAPTCHAWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1A15F26346C37001453A7 /* ReCAPTCHAWebView.swift */; };
@@ -373,7 +373,6 @@
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
 		0EDEC0E52650E5A6003112BA /* View+makeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDEC0E42650E5A6003112BA /* View+makeButton.swift */; };
 		0EE60EFD25FCCCD700D97E7A /* CheckmarkButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */; };
-		0EEA957B265FE11400689E78 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0EEA957A265FE11400689E78 /* Introspect */; };
 		0EF10F6626330F29004D6538 /* HollowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
 		0EFB4F222639790000530B5F /* ImageTitledStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB4F212639790000530B5F /* ImageTitledStack.swift */; };
@@ -530,7 +529,6 @@
 		0EC244DE26340172001AFC4B /* CrossPlatformTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossPlatformTypes.swift; sourceTree = "<group>"; };
 		0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossPlatformImage.swift; sourceTree = "<group>"; };
 		0EC244EA263401E4001AFC4B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0EC244F326340211001AFC4B /* AppModelEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
 		0EC244F426340211001AFC4B /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0EC244F526340211001AFC4B /* AppDelegateShared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateShared.swift; sourceTree = "<group>"; };
 		0EC245012634022C001AFC4B /* HollowApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowApp.swift; sourceTree = "<group>"; };
@@ -620,12 +618,13 @@
 		0EC2463E26340770001AFC4B /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0EC24648263407D3001AFC4B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0EC2464C263407E4001AFC4B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		0EC24650263408CC001AFC4B /* AppModelEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelEnvironment.swift; sourceTree = "<group>"; };
+		0EC24650263408CC001AFC4B /* HollowErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowErrorHandler.swift; sourceTree = "<group>"; };
 		0EC2465526340B71001AFC4B /* View+showAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+showAlert.swift"; sourceTree = "<group>"; };
 		0EC2465B2634116A001AFC4B /* AppModelBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelBehaviour.swift; sourceTree = "<group>"; };
 		0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalSizeCategory.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0ECA796D26652C4200736096 /* HollowErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowErrorHandler.swift; sourceTree = "<group>"; };
 		0ED087BE263480C9003C2E11 /* LoginSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSubViews.swift; sourceTree = "<group>"; };
 		0ED087D026354556003C2E11 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		0ED1A15F26346C37001453A7 /* ReCAPTCHAWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReCAPTCHAWebView.swift; sourceTree = "<group>"; };
@@ -662,7 +661,6 @@
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
 				0E429070263A8557008DA046 /* ImageScrollView in Frameworks */,
 				0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */,
-				0EEA957B265FE11400689E78 /* Introspect in Frameworks */,
 				0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */,
 				0E42906D263A853E008DA046 /* Connectivity in Frameworks */,
 			);
@@ -739,6 +737,7 @@
 		0E415A7225CD769B00351672 /* Hollow */ = {
 			isa = PBXGroup;
 			children = (
+				0ECA796C26652C3400736096 /* ViewModel */,
 				0EC245002634022C001AFC4B /* App */,
 				0EC2451A26340301001AFC4B /* Model */,
 				0E415AE825CD772200351672 /* View */,
@@ -1037,7 +1036,7 @@
 				0EC244C4263400C6001AFC4B /* HollowMacApp.swift */,
 				0EC244EA263401E4001AFC4B /* AppDelegate.swift */,
 				0EC2463E26340770001AFC4B /* AppModel.swift */,
-				0EC24650263408CC001AFC4B /* AppModelEnvironment.swift */,
+				0EC24650263408CC001AFC4B /* HollowErrorHandler.swift */,
 				0EC2465B2634116A001AFC4B /* AppModelBehaviour.swift */,
 			);
 			path = App;
@@ -1055,7 +1054,6 @@
 			isa = PBXGroup;
 			children = (
 				0EC245012634022C001AFC4B /* HollowApp.swift */,
-				0EC244F326340211001AFC4B /* AppModelEnvironment.swift */,
 				0EC244F426340211001AFC4B /* AppModel.swift */,
 				0EC245022634022C001AFC4B /* AppDelegate.swift */,
 			);
@@ -1346,6 +1344,14 @@
 			path = Integration;
 			sourceTree = "<group>";
 		};
+		0ECA796C26652C3400736096 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0ECA796D26652C4200736096 /* HollowErrorHandler.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0ED087C2263485E1003C2E11 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1413,7 +1419,6 @@
 				0E42906C263A853E008DA046 /* Connectivity */,
 				0E42906F263A8557008DA046 /* ImageScrollView */,
 				0E429072263A8572008DA046 /* Cache */,
-				0EEA957A265FE11400689E78 /* Introspect */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -1507,7 +1512,6 @@
 				0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */,
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
-				0EEA9579265FE11400689E78 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -1581,6 +1585,7 @@
 				0EC2458526340311001AFC4B /* Post.swift in Sources */,
 				0EC245042634022C001AFC4B /* AppDelegate.swift in Sources */,
 				0EC245E526340312001AFC4B /* Array+removeDuplicates.swift in Sources */,
+				0ECA796E26652C4200736096 /* HollowErrorHandler.swift in Sources */,
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
 				0EC245C526340312001AFC4B /* ReportPostRequest.swift in Sources */,
 				0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */,
@@ -1652,7 +1657,6 @@
 				0E6E4E28263EF1CB007BBCFC /* UnregisterStore.swift in Sources */,
 				0EC245C126340312001AFC4B /* ReportRequestGroup.swift in Sources */,
 				0EC245FD26340312001AFC4B /* DeviceModelUtilities.swift in Sources */,
-				0EC244F826340211001AFC4B /* AppModelEnvironment.swift in Sources */,
 				0EC245A326340311001AFC4B /* AttentionListSearchRequest.swift in Sources */,
 				0EC2452526340301001AFC4B /* ImageCompressor.swift in Sources */,
 				0E415B6425CD772200351672 /* HollowCiteContentView.swift in Sources */,
@@ -1858,7 +1862,7 @@
 				0EC2462D2634040D001AFC4B /* WelcomeStore.swift in Sources */,
 				0EC2459226340311001AFC4B /* PostData.swift in Sources */,
 				0EC245F226340312001AFC4B /* DateExtensions.swift in Sources */,
-				0EC24651263408CC001AFC4B /* AppModelEnvironment.swift in Sources */,
+				0EC24651263408CC001AFC4B /* HollowErrorHandler.swift in Sources */,
 				0EC245F426340312001AFC4B /* PublisherExtensions.swift in Sources */,
 				0EC245E426340312001AFC4B /* Int+string.swift in Sources */,
 				0EC245D026340312001AFC4B /* SendCommentRequest.swift in Sources */,
@@ -2080,7 +2084,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -2089,7 +2093,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -2106,7 +2110,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -2115,7 +2119,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -2131,7 +2135,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -2141,7 +2145,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.2.1;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2159,7 +2163,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -2169,7 +2173,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2;
+				MARKETING_VERSION = 3.2.1;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2338,14 +2342,6 @@
 				minimumVersion = 6.0.1;
 			};
 		};
-		0EEA9579265FE11400689E78 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2443,11 +2439,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		0EEA957A265FE11400689E78 /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0EEA9579265FE11400689E78 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -12,7 +12,7 @@ import Combine
 
 /// Shared view model for views that request `PostList`, `Search`, `AttentionList`
 /// and `AttentionListSearch`.
-class PostListRequestStore: ObservableObject, AppModelEnvironment {
+class PostListRequestStore: ObservableObject, HollowErrorHandler {
     
     // MARK: - Shared Variables
     let type: PostListRequestGroupType

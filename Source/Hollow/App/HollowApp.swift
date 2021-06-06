@@ -32,8 +32,6 @@ struct HollowApp: App {
             }
             // Set larger size category for macOS
             .conditionalSizeCategory()
-//            // Inject the app model into the environment
-//            .environmentObject(appModel)
             // Set the color scheme when appear
             .onAppear {
                 IntegrationUtilities.setCustomColorScheme()
@@ -44,7 +42,7 @@ struct HollowApp: App {
                 NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
                 perform: { _ in
                     appDelegate.fetchConfig()
-                    if appModel.widgetReloadCount % 3 == 0 {
+                    if appModel.widgetReloadCount % 3 == 1 {
                         WidgetCenter.shared.reloadAllTimelines()
                         appModel.widgetReloadCount += 1
                     }

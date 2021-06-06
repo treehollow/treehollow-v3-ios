@@ -116,8 +116,6 @@ struct LoginView: View {
             .disabled(disableButton)
         }
         .errorAlert($store.errorMessage)
-        
-        .modifier(AppModelBehaviour(state: store.appModelState))
     }
 }
 

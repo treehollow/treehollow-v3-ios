@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 import Defaults
 
-class DeviceListStore: ObservableObject, AppModelEnvironment {
+class DeviceListStore: ObservableObject, HollowErrorHandler {
     @Published var deviceData: DeviceListRequestResultData
     @Published var isLoading: Bool = false
     @Published var loggingoutUUID: String?
