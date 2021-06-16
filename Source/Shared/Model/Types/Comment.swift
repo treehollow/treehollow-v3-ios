@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Down
 
 /// deprecated! dont use this to judge
 enum CommentType: String, Codable {
@@ -56,12 +57,12 @@ extension Comment {
                 image: nil,
                 imageURL: imageURL)
         }
-        var text = self.text
-        while text?.first == "\n" {
-            text?.removeFirst()
+        var text = self.text ?? ""
+        while text.first == "\n" {
+            text.removeFirst()
         }
-        while text?.last == "\n" {
-            text?.removeLast()
+        while text.last == "\n" {
+            text.removeLast()
         }
         
         let hash = AvatarGenerator.hash(postId: pid, name: isDz ? "" : name)
@@ -77,6 +78,8 @@ extension Comment {
                 abbreviation += component.first == nil ? "" : String(component.first!)
             }
         }
+        
+        let attributedString = text.attributedForCitationAndLink()
 
         return CommentData(
             commentId: cid,
@@ -85,13 +88,14 @@ extension Comment {
             permissions: permissions,
             postId: pid,
             tag: tag,
-            text: text ?? "",
+            text: text,
             date: Date(timeIntervalSince1970: TimeInterval(timestamp)),
             isDz: isDz,
             replyTo: replyTo,
             image: image,
-            url: text?.links() ?? [],
-            citedNumbers: text?.citationNumbers() ?? [],
+//            url: text.links(),
+//            citedNumbers: text.citationNumbers(),
+            attributedString: attributedString,
             showAvatar: showAvatar,
             showAvatarWhenReversed: showAvatarWhenReversed,
             hash: hash,

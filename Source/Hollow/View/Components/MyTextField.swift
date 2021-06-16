@@ -28,9 +28,9 @@ struct MyTextField<Content>: View where Content: View {
             HStack(spacing: 0) {
                 Group {
                     if isSecureContent {
-                        SecureField(placeHolder ?? "", text: $text)
+                        SecureField("", text: $text, prompt: Text(placeHolder ?? ""))
                     } else {
-                        TextField(placeHolder ?? "", text: $text)
+                        TextField("", text: $text, prompt: Text(placeHolder ?? ""))
                     }
                 }
                 .labelsHidden()

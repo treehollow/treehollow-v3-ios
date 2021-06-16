@@ -129,14 +129,9 @@ struct HollowCommentContentView: View {
                             }
                             Group {
                                 if commentData.text != "" {
-                                    if compact || !commentData.renderHighlight {
-                                        Text(commentData.text)
-                                    } else {
-                                    Text.highlightLinksAndCitation(commentData.text, modifiers: {
-                                            $0.underline()
-                                                .foregroundColor(.hollowContentText)
-                                        })
-                                    }
+                                    Text(commentData.attributedString)
+                                        .accentColor(.hollowContentVoteGradient1)
+
                                 } else if commentData.image != nil && compact {
                                     (Text(verbatim: "[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text(verbatim: "]"))
                                         .foregroundColor(.uiColor(.secondaryLabel))
@@ -194,7 +189,6 @@ struct HollowCommentContentView: View {
         .leading()
         .frame(width: nameLabelWidth)
         .fixedSize()
-        
     }
     
     func tagView(text: String, removed: Bool) -> some View {

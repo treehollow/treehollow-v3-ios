@@ -26,7 +26,7 @@ extension LoginView {
 
         var body: some View {
             GroupBox(label: Text("Verification Code"), content: {
-                    TextField("123456", text: $store.emailVerificationCode)
+                TextField("", text: $store.emailVerificationCode, prompt: Text(verbatim: "123456"))
             })
             
             GroupBox(label: Text("Password"), content: {

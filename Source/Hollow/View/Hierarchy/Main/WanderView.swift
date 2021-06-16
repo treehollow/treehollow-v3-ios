@@ -37,19 +37,11 @@ struct WanderView: View {
             refresh: viewModel.refresh,
             content: { proxy in
                 Group {
-                    WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
+                    WaterfallGrid($viewModel.posts) { $postDataWrapper in Group {
                         let postData = postDataWrapper.post
                         cardView(for: postData)
                             .onClickGesture {
-                                let detailStore = HollowDetailStore(
-                                    bindingPostWrapper: Binding(
-                                        get: { postDataWrapper },
-                                        set: {
-                                            guard let index = viewModel.posts.firstIndex(where: { $0.post.id == postData.id }) else { return }
-                                            self.viewModel.posts[index] = $0
-                                        }
-                                    )
-                                )
+                                let detailStore = HollowDetailStore(bindingPostWrapper: $postDataWrapper)
                                 IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
                             }
                     }}
@@ -59,9 +51,8 @@ struct WanderView: View {
                     .background(Color.background)
                 }
             })
-            
+            .ignoresSafeArea(edges: .bottom)
             // Show loading indicator when no posts are loaded or refresh on top
-            // TODO: refresh on top logic
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
             
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))

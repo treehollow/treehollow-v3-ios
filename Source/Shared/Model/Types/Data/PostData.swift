@@ -34,9 +34,10 @@ struct PostData: Identifiable, Codable {
     // Pre fetched cited post id
     var citedPostId: Int?
     
-    var url: [String]
-    var citedNumbers: [Int]
-    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
+    var attributedString: AttributedString
+//    var url: [String]
+//    var citedNumbers: [Int]
+//    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
 
     // Color data used in avatar
     var hash: Int
@@ -79,8 +80,9 @@ extension PostDataWrapper {
             vote: nil,
             comments: [],
             loadingError: nil,
-            url: [],
-            citedNumbers: [],
+            attributedString: .init(),
+//            url: [],
+//            citedNumbers: [],
             hash: hash,
             colorIndex: colorIndex
         )

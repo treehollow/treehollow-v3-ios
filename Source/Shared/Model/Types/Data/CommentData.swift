@@ -25,9 +25,11 @@ struct CommentData: Identifiable, Codable {
     var replyTo: Int
     var image: HollowImage?
     
-    var url: [String]
-    var citedNumbers: [Int]
-    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
+//    var url: [String]
+//    var citedNumbers: [Int]
+//    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
+    
+    var attributedString: AttributedString
     
     // Data used in avatar
     var showAvatar: Bool

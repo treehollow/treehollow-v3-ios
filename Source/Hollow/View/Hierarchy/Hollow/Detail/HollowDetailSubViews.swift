@@ -35,7 +35,6 @@ extension HollowDetailView {
                     .dynamicFont(size: 14, weight: .medium)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
-                    .background(Color.background)
                     .clipShape(Capsule())
                 }
                 .padding(.trailing, 10)
@@ -67,13 +66,10 @@ extension HollowDetailView {
                     .padding(.horizontal)
                     .padding(.top, postData.comments.isEmpty ? 0 : 15)
                     .padding(.bottom, postData.comments.isEmpty ? 15 : 0)
-                    .background(Color.hollowCardBackground)
             }
         }
         
-        // To hide the last seperator
-        Color.hollowCardBackground
-            .frame(height: commentViewBottomPadding)
+        Spacer(minLength: commentViewBottomPadding)
     }
     
     func commentView(for comment: CommentData) -> some View {
@@ -128,33 +124,6 @@ extension HollowDetailView {
             if showOnlyName == nil {
                 Button(action: { withAnimation { showOnlyName = comment.name } }) {
                     Label("COMMENT_VIEW_SHOW_ONLY_LABEL", systemImage: "line.horizontal.3.decrease.circle")
-                }
-                Divider()
-            }
-            
-            let links = Array(comment.url.compactMap({ URL(string: $0) }))
-            if !links.isEmpty {
-                Divider()
-                ForEach(links, id: \.self) { link in
-                    Button(action: {
-                        let helper = OpenURLHelper(openURL: openURL)
-                        try? helper.tryOpen(link, method: Defaults[.openURLMethod])
-                    }) {
-                        Label(link.absoluteString, systemImage: "link")
-                    }
-                }
-                Divider()
-            }
-            let citedPosts = comment.citedNumbers
-            if !citedPosts.isEmpty {
-                Divider()
-                ForEach(citedPosts, id: \.self) { post in
-                    let wrapper = PostDataWrapper.templatePost(for: post)
-                    Button(action: {
-                        IntegrationUtilities.conditionallyPresentDetail(store: .init(bindingPostWrapper: .constant(wrapper)))
-                    }) {
-                        Label("#\(post.string)", systemImage: "text.quote")
-                    }
                 }
                 Divider()
             }

@@ -33,8 +33,6 @@ struct HollowDetailView: View {
     
     @Namespace var buttonAnimationNamespace
     
-    let hasTopSafeAreaInset = UIApplication.shared.windows[0].safeAreaInsets.top > 0
-    
     var body: some View {
         VStack(spacing: 0) {
             if showHeader {
@@ -96,15 +94,14 @@ struct HollowDetailView: View {
                         let spacing: CGFloat = UIDevice.isMac ? 20 : 13
                         
                         if store.noSuchPost {
-                            Text("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER")
+                            HollowTextView(text: "DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", highlight: false)
                                 .padding(.bottom, spacing)
                                 .padding(.horizontal)
-                                .modifier(HollowTextView.TextModifier(inDetail: true))
                             
                         } else {
                             HollowContentView(
                                 postDataWrapper: store.postDataWrapper,
-                                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags, .showHyperlinks],
+                                options: [.displayVote, .displayImage, .displayCitedPost, .revealFoldTags],
                                 voteHandler: store.vote,
                                 imageReloadHandler: { _ in store.loadPostImage() }
                             )
@@ -119,15 +116,20 @@ struct HollowDetailView: View {
                     .padding(.top)
                     .listRowBackground(Color.hollowCardBackground)
                     .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
                     .background(Color.hollowCardBackground)
                     .id(-1)
                     
                     if !store.noSuchPost {
                         commentView
                             .listRowInsets(EdgeInsets())
+                            .listRowSeparator(.hidden)
+                            .listSectionSeparator(.hidden)
                     }
                     
                 }
+                .listStyle(PlainListStyle())
                 .background(Color.hollowCardBackground)
                 .coordinateSpace(name: "detail.scrollview")
                 .buttonStyle(BorderlessButtonStyle())
@@ -172,7 +174,6 @@ struct HollowDetailView: View {
                 
             }
             .proposedCornerRadius()
-
         }
         
         .disabled(store.noSuchPost)
@@ -200,8 +201,9 @@ struct HollowDetailView: View {
             .padding(.bottom, 7)
             .disabled(store.isSendingComment || store.isLoading)
         }})
-        .proposedIgnoringSafeArea(edges: .bottom)
         
+        .proposedIgnoringSafeArea(edges: .bottom)
+
         .overlay(Group { if store.replyToId >= -1 {
             let post = store.postDataWrapper.post
             let name = store.replyToId == -1 ?

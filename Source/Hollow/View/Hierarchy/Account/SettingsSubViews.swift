@@ -25,7 +25,6 @@ struct AppearanceSettingsView: View {
             Section(
                 header: Text("SETTINGSVIEW_APPEARENCE_COLOR_SCHEME")
                     .padding(.top)
-                    .padding(.horizontal)
             ) {
                 ForEach(CustomColorScheme.allCases) { colorScheme in
                     Button(action: {
@@ -46,8 +45,8 @@ struct AppearanceSettingsView: View {
             }
             
             Section(
-                header: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER").padding(.horizontal),
-                footer: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER").padding(.horizontal)
+                header: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER"),
+                footer: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER")
             ) {
                 Button(action: {
                     tempColorSet = nil
@@ -89,7 +88,7 @@ struct AppearanceSettingsView: View {
                 }
             }
             
-            Section(header: Text("SETTINGSVIEW_APPEARANCE_AVATAR_HDR").padding(.horizontal)) {
+            Section(header: Text("SETTINGSVIEW_APPEARANCE_AVATAR_HDR")) {
                 Button(action: { usingSimpleAvatar = false }) { HStack {
                     Avatar(foregroundColor: .hollowContentVoteGradient1, backgroundColor: .white, resolution: 4, padding: avatarHeight * 0.1, hashValue: 2021, name: "", options: .forceGraphical)
                         .frame(width: avatarHeight)
@@ -147,11 +146,9 @@ struct ContentSettingsView: View {
             }
             Section(
                 header:
-                    Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_HEADER")
-                    .padding(.horizontal),
+                    Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_HEADER"),
                 footer:
                     Text("SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER")
-                    .padding(.horizontal)
             ) {
                 ForEach(blockedTags, id: \.self) { tag in
                     HStack {
@@ -159,7 +156,6 @@ struct ContentSettingsView: View {
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.tint)
-                            .imageScale(.medium)
                             .onClickGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
                                 _ = withAnimation { blockedTags.remove(at: index) }
                             }}
@@ -168,10 +164,8 @@ struct ContentSettingsView: View {
                 
                 if showTextField {
                     HStack {
-                        TextField(
-                            NSLocalizedString("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER", comment: ""),
-                            text: $newTag,
-                            onCommit: {
+                        TextField("", text: $newTag, prompt: Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER"))
+                            .onSubmit {
                                 if newTag == "" {
                                     showAlert = true
                                     return
@@ -185,13 +179,12 @@ struct ContentSettingsView: View {
                                 blockedTags.append(newTag)
                                 newTag = ""
                                 showTextField = false
-                            })
+                            }
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                         Spacer()
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.uiColor(.systemFill))
-                            .imageScale(.medium)
                             .onClickGesture { withAnimation {
                                 newTag = ""
                                 showTextField = false
@@ -257,7 +250,6 @@ struct PushNotificationSettingsView: View {
                                 } else {
                                     if viewModel.notificationType[keyPath: type.keyPath] {
                                         Image(systemName: "checkmark")
-                                            .imageScale(.medium)
                                     }
                                 }
                             }
@@ -411,7 +403,7 @@ struct OtherSettingsView: View {
         
         var body: some View {
             Section(
-                header: Text("SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE").padding(.horizontal)
+                header: Text("SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE")
             ) {
                 ForEach(OpenURLHelper.OpenMethod.allCases) { method in
                     Button(action: {
@@ -437,7 +429,7 @@ struct OtherSettingsView: View {
         
         var body: some View {
             Section(
-                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER").padding(.horizontal).padding(.top)) {
+                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER").padding(.top)) {
                 Button(action: viewModel.clearCache) {
                     HStack {
                         Text(

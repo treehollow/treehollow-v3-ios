@@ -71,13 +71,11 @@ struct SettingsView: View {
                 Button(action: { presented = false }) {
                     Image(systemName: "xmark")
                         .padding(5)
-                        .imageScale(.medium)
                         .foregroundColor(.hollowContentText)
                 }
             }
         })
         .navigationViewStyle(StackNavigationViewStyle())
-        .environment(\.imageScale, .large)
         .accentColor(.tint)
     }
 }

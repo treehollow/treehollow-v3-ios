@@ -118,9 +118,3 @@ struct LoginView: View {
         .errorAlert($store.errorMessage)
     }
 }
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}

@@ -14,7 +14,6 @@ extension View {
             .modifier(DefaultListStyle())
             .listStyle(InsetGroupedListStyle())
             .accentColor(.tint)
-            .imageScale(.large)
     }
 }
 

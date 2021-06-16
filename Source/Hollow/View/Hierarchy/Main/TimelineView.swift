@@ -78,7 +78,10 @@ struct TimelineView: View {
                             .lineLimit(1)
                             .padding(.bottom, 10)
                             
-                            HollowTextView(text: announcement, inDetail: true, highlight: true)
+                            HollowTextView(text: announcement, highlight: true)
+                                .foregroundColor(.hollowContentText)
+                                .accentColor(.hollowContentVoteGradient1)
+
                         }
                         .padding(.all, cardPadding)
                         .background(Color.hollowCardBackground)
@@ -120,7 +123,7 @@ struct TimelineView: View {
                 }
                 
             })
-
+            .ignoresSafeArea(edges: .bottom)
             
             // Show loading indicator when no posts are loaded or refresh on top
             // TODO: refresh on top logic

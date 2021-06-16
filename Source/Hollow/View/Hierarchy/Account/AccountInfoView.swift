@@ -79,7 +79,7 @@ extension AccountInfoView {
         var body: some View {
             List {
                 Section {
-                    TextField("CHANGEPASSWORDVIEW_ENTER_EMAIL_PLACEHOLDER", text: $email)
+                    TextField("", text: $email, prompt: Text("CHANGEPASSWORDVIEW_ENTER_EMAIL_PLACEHOLDER"))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .keyboardType(.emailAddress)
@@ -92,7 +92,6 @@ extension AccountInfoView {
                         SecureField("CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER", text: $newPassword)
                         if (newPassword.count < 8 && !newPassword.isEmpty) || newPassword.contains(" ") {
                             Image(systemName: "xmark")
-                                .imageScale(.medium)
                                 .foregroundColor(.red)
                         }
                     }
@@ -100,7 +99,6 @@ extension AccountInfoView {
                         SecureField("CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER", text: $confirmedPassword)
                         if confirmedPassword != newPassword && confirmedPassword != "" {
                             Image(systemName: "xmark")
-                                .imageScale(.medium)
                                 .foregroundColor(.red)
                         }
                     }

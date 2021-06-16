@@ -99,6 +99,7 @@ extension MessageView {
             .padding(.trailing)
             .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
             .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))
+            .ignoresSafeArea(edges: .bottom)
         }
     }
     
@@ -131,6 +132,7 @@ extension MessageView {
             .padding(.trailing)
             .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
             .modifier(LoadingIndicator(isLoading: messageStore.isLoading))
+            .ignoresSafeArea(edges: .bottom)
         }
     }
 }

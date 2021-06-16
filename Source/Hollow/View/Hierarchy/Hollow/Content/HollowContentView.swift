@@ -105,16 +105,18 @@ struct HollowContentView: View {
     }
     
     private func textView() -> some View {
-        var text: String = postDataWrapper.post.text
-        if options.contains(.addTextForImage) && postDataWrapper.post.hollowImage != nil {
-            text += "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "] "
-        }
+        var attributedString = postDataWrapper.post.attributedString
+        
         if postDataWrapper.post.text == "" &&
             postDataWrapper.post.hollowImage != nil &&
             options.contains(.replaceForImageOnly) {
-            text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
+            let text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
+            attributedString = AttributedString(text)
         }
-        return HollowTextView(postData: postDataWrapper.post, inDetail: !options.contains(.compactText), highlight: postDataWrapper.post.renderHighlight && options.contains(.showHyperlinks), links: postDataWrapper.post.url, citedNumbers: postDataWrapper.post.citedNumbers, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+        let view = HollowTextView(attributedString: attributedString, highlight: true, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+            .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
+            .accentColor(.hollowContentVoteGradient1)
+        return view
     }
     
     private func tagView(text: String, deleted: Bool) -> some View {
@@ -136,10 +138,9 @@ extension HollowContentView {
         static let displayCitedPost = DisplayOptions(rawValue: 1 << 3)
         static let compactText = DisplayOptions(rawValue: 1 << 4)
         static let replaceForImageOnly = DisplayOptions(rawValue: 1 << 5)
-        static let addTextForImage = DisplayOptions(rawValue: 1 << 6)
         static let disableVote = DisplayOptions(rawValue: 1 << 7)
         static let revealFoldTags = DisplayOptions(rawValue: 1 << 8)
-        static let showHyperlinks = DisplayOptions(rawValue: 1 << 9)
+//        static let showHyperlinks = DisplayOptions(rawValue: 1 << 9)
         static let lowerImageAspectRatio = DisplayOptions(rawValue: 1 << 10)
     }
 }

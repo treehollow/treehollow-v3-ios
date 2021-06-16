@@ -50,10 +50,11 @@ struct HollowApp: App {
             )
             .onOpenURL { url in
                 var urlString = url.absoluteString
-                guard urlString.prefix(15) == "HollowWidget://" else { return }
-                urlString.removeSubrange(urlString.range(of: urlString.prefix(15))!)
-                if let postId = Int(urlString) {
-                    IntegrationUtilities.openTemplateDetailView(postId: postId)
+                if urlString.prefix(15) == "HollowWidget://" || urlString.prefix(15) == "Hollow://post-#" {
+                    urlString.removeSubrange(urlString.range(of: urlString.prefix(15))!)
+                    if let postId = Int(urlString) {
+                        IntegrationUtilities.openTemplateDetailView(postId: postId)
+                    }
                 }
             }
         }

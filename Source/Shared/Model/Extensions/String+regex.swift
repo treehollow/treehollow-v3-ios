@@ -76,4 +76,26 @@ extension String {
     func rangeForCitation() -> [Range<String.Index>] {
         return self.range(matches: #"#\d{1,7}"#)
     }
+    
+    func attributedForCitationAndLink() -> AttributedString {
+        // Directly generating attributed string from `self` will result
+        // in incorrect ranges, and the reason is a mystery.
+        let data = self.data(using: .utf8)!
+        let str = String(data: data, encoding: .utf8)!
+        var attrStr = AttributedString(str)
+        let links = str.rangeForLink().map { range in
+            (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: String(str[range])))
+        }
+        let citations = str.rangeForCitation().map({ range in
+            (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: "Hollow://post-\(String(str[range]))"))
+        })
+        
+        for range in links {
+            attrStr[range.0].link = range.1
+        }
+        for range in citations {
+            attrStr[range.0].link = range.1
+        }
+        return attrStr
+    }
 }

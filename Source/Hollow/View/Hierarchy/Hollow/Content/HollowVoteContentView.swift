@@ -62,7 +62,7 @@ struct HollowVoteContentView: View {
                 Text(voteData.title)
                     .layoutPriority(0)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+//                    .minimumScaleFactor(0.5)
                 if selected {
                     Image(systemName: "checkmark")
                         .layoutPriority(0.1)

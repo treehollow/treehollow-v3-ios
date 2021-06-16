@@ -76,6 +76,8 @@ extension Post {
             }
         }
         
+        let attributedString = text.attributedForCitationAndLink()
+        
         let hash = AvatarGenerator.hash(postId: pid, name: "")
         return PostData(
             attention: attention,
@@ -90,8 +92,10 @@ extension Post {
             hollowImage: image,
             vote: vote?.toVoteData(),
             comments: comments,
-            citedPostId: text.findCitedPostID(), url: text.links(),
-            citedNumbers: text.citationNumbers(),
+            citedPostId: text.findCitedPostID(),
+            attributedString: attributedString,
+//            url: text.links(),
+//            citedNumbers: text.citationNumbers(),
             hash: hash,
             colorIndex: AvatarGenerator.colorIndex(hash: hash)
         )

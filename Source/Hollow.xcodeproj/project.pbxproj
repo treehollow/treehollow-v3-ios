@@ -93,6 +93,9 @@
 		0E4E4BC52634619A00B32F7F /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E4BC42634619A00B32F7F /* View+roundedCorner.swift */; };
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E593F152660AD4A001213E1 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E593F142660AD4A001213E1 /* CustomTransitions.swift */; };
+		0E60189D2677169400C74114 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 0E60189C2677169400C74114 /* Down */; };
+		0E60189F2677169F00C74114 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 0E60189E2677169F00C74114 /* Down */; };
+		0E6018A1267716A400C74114 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6018A0267716A400C74114 /* Down */; };
 		0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */; };
 		0E6721D625DE2DDB00A84311 /* GetSafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */; };
 		0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */; };
@@ -656,6 +659,7 @@
 			files = (
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E42906A263A8524008DA046 /* Kingfisher in Frameworks */,
+				0E60189D2677169400C74114 /* Down in Frameworks */,
 				0E429062263A7568008DA046 /* Alamofire in Frameworks */,
 				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
@@ -670,6 +674,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6018A1267716A400C74114 /* Down in Frameworks */,
 				0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */,
 				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
 				0E7796192657EB30002F70C2 /* Alamofire in Frameworks */,
@@ -684,6 +689,7 @@
 				0E429083263A8584008DA046 /* Cache in Frameworks */,
 				0E42907B263A8584008DA046 /* AppCenterAnalytics in Frameworks */,
 				0E42907D263A8584008DA046 /* AppCenterCrashes in Frameworks */,
+				0E60189F2677169F00C74114 /* Down in Frameworks */,
 				0E429079263A8584008DA046 /* Alamofire in Frameworks */,
 				0E429077263A8584008DA046 /* Defaults in Frameworks */,
 				0E429075263A8584008DA046 /* WaterfallGrid in Frameworks */,
@@ -1419,6 +1425,7 @@
 				0E42906C263A853E008DA046 /* Connectivity */,
 				0E42906F263A8557008DA046 /* ImageScrollView */,
 				0E429072263A8572008DA046 /* Cache */,
+				0E60189C2677169400C74114 /* Down */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -1441,6 +1448,7 @@
 				0E7796162657EB30002F70C2 /* Defaults */,
 				0E7796182657EB30002F70C2 /* Alamofire */,
 				0E3FEEE6265BA5D400842B98 /* Cache */,
+				0E6018A0267716A400C74114 /* Down */,
 			);
 			productName = HollowWidgetExtension;
 			productReference = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */;
@@ -1467,6 +1475,7 @@
 				0E42907C263A8584008DA046 /* AppCenterCrashes */,
 				0E42907E263A8584008DA046 /* Kingfisher */,
 				0E429082263A8584008DA046 /* Cache */,
+				0E60189E2677169F00C74114 /* Down */,
 			);
 			productName = HollowMac;
 			productReference = 0EC244C2263400C5001AFC4B /* HollowMac.app */;
@@ -1512,6 +1521,7 @@
 				0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */,
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
+				0E60189B2677169400C74114 /* XCRemoteSwiftPackageReference "Down" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -2084,11 +2094,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2110,11 +2120,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2135,11 +2145,10 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2163,11 +2172,10 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2342,6 +2350,14 @@
 				minimumVersion = 6.0.1;
 			};
 		};
+		0E60189B2677169400C74114 /* XCRemoteSwiftPackageReference "Down" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnxnguyen/Down.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2429,6 +2445,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		0E60189C2677169400C74114 /* Down */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E60189B2677169400C74114 /* XCRemoteSwiftPackageReference "Down" */;
+			productName = Down;
+		};
+		0E60189E2677169F00C74114 /* Down */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E60189B2677169400C74114 /* XCRemoteSwiftPackageReference "Down" */;
+			productName = Down;
+		};
+		0E6018A0267716A400C74114 /* Down */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E60189B2677169400C74114 /* XCRemoteSwiftPackageReference "Down" */;
+			productName = Down;
 		};
 		0E7796162657EB30002F70C2 /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
