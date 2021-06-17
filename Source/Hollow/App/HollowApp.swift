@@ -16,6 +16,7 @@ struct HollowApp: App {
     
     // Singleton reflecting the actual state of the app.
     @StateObject var appModel = AppModel.shared
+    @Environment(\.openURL) var openURL
     
     var body: some Scene {
         WindowGroup {
@@ -48,15 +49,7 @@ struct HollowApp: App {
                     }
                 }
             )
-            .onOpenURL { url in
-                var urlString = url.absoluteString
-                if urlString.prefix(15) == "HollowWidget://" || urlString.prefix(15) == "Hollow://post-#" {
-                    urlString.removeSubrange(urlString.range(of: urlString.prefix(15))!)
-                    if let postId = Int(urlString) {
-                        IntegrationUtilities.openTemplateDetailView(postId: postId)
-                    }
-                }
-            }
+            .onOpenURL { appModel.handleURL($0, with: openURL) }
         }
     }
 }

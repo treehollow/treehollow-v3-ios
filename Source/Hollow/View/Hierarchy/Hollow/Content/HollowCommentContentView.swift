@@ -50,7 +50,7 @@ struct HollowCommentContentView: View {
                                 .bold()
                                 .allowsTightening(true)
                                 .minimumScaleFactor(0.3)
-                                .lineLimit(compact ? 2 : nil)
+                                .lineLimit(compact ? 1 : nil)
                                 .leading()
                                 .frame(width: nameLabelWidth)
                                 .fixedSize()

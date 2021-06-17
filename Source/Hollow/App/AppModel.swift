@@ -24,4 +24,19 @@ class AppModel: ObservableObject {
             .sinkOnMainThread(receiveValue: VersionUpdateUtilities.handleUpdateAvailabilityResult)
             .store(in: &cancellables)
     }
+    
+    func handleURL(_ url: URL, with openURL: OpenURLAction) {
+        var urlString = url.absoluteString
+        if urlString.prefix(15) == "HollowWidget://" || urlString.prefix(15) == "Hollow://post-#" {
+            urlString.removeSubrange(urlString.range(of: urlString.prefix(15))!)
+            if let postId = Int(urlString) {
+                IntegrationUtilities.openTemplateDetailView(postId: postId)
+            }
+        } else if urlString.prefix(13) == "Hollow://url-" {
+            urlString.removeSubrange(urlString.range(of: urlString.prefix(13))!)
+            if let url = URL(string: urlString) {
+                try? OpenURLHelper(openURL: openURL).tryOpen(url, method: Defaults[.openURLMethod])
+            }
+        }
+    }
 }

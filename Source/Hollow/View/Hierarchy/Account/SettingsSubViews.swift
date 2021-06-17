@@ -52,14 +52,13 @@ struct AppearanceSettingsView: View {
                     tempColorSet = nil
                 }) {
                     HStack {
-                        Color.customColor(prefix: "button.gradient.1", colorSet: Defaults[.hollowType])
-                            .colorScheme(.light)
-                            .frame(maxHeight: colorHeight)
-                            .aspectRatio(1, contentMode: .fit)
-                            .clipShape(Circle())
-
                         Text("\(Defaults[.hollowType]?.name ?? "")")
-                            .foregroundColor(.primary)
+                            .dynamicFont(size: 15, weight: .bold, design: .rounded)
+                            .foregroundColor(.white)
+                            .padding(3)
+                            .padding(.horizontal, 2)
+                            .background(Color.customColor(prefix: "button.gradient.1", colorSet: Defaults[.hollowType]).colorScheme(.light))
+                            .roundedCorner(6)
                         Spacer()
                         Text("SETTINGSVIEW_APPEARENCE_THEMES_DEFAULT_CELL")
                             .foregroundColor(.secondary)
@@ -72,14 +71,13 @@ struct AppearanceSettingsView: View {
                             tempColorSet = type
                         }) {
                             HStack {
-                                Color.customColor(prefix: "button.gradient.1", colorSet: type)
-                                    .colorScheme(.light)
-                                    .frame(maxHeight: colorHeight)
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .clipShape(Circle())
-                                
                                 Text(type.name)
-                                    .foregroundColor(.primary)
+                                    .dynamicFont(size: 15, weight: .bold, design: .rounded)
+                                    .foregroundColor(.white)
+                                    .padding(3)
+                                    .padding(.horizontal, 2)
+                                    .background(Color.customColor(prefix: "button.gradient.1", colorSet: type).colorScheme(.light))
+                                    .roundedCorner(6)
                                 Spacer()
                                 CheckmarkButtonImage(isOn: tempColorSet == type)
                             }

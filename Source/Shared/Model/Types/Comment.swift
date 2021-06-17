@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Down
 
 /// deprecated! dont use this to judge
 enum CommentType: String, Codable {

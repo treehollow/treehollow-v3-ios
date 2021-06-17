@@ -14,5 +14,6 @@ struct CheckmarkButtonImage: View {
     var body: some View {
         Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
             .foregroundColor(isOn ? .tint : .uiColor(.systemFill))
+            .imageScale(.large)
     }
 }

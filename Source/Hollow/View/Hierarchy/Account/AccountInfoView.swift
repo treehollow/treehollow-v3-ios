@@ -85,18 +85,18 @@ extension AccountInfoView {
                         .keyboardType(.emailAddress)
                 }
                 
-                SecureField("CHANGEPASSWORDVIEW_ENTER_ORI_PASSWORD_PLACEHOLDER", text: $originalPassword)
+                SecureField("", text: $originalPassword, prompt: Text("CHANGEPASSWORDVIEW_ENTER_ORI_PASSWORD_PLACEHOLDER"))
 
                 Section(footer: Text("LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER")) {
                     HStack {
-                        SecureField("CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER", text: $newPassword)
+                        SecureField("", text: $newPassword, prompt: Text("CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER"))
                         if (newPassword.count < 8 && !newPassword.isEmpty) || newPassword.contains(" ") {
                             Image(systemName: "xmark")
                                 .foregroundColor(.red)
                         }
                     }
                     HStack {
-                        SecureField("CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER", text: $confirmedPassword)
+                        SecureField("", text: $confirmedPassword, prompt: Text("CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER"))
                         if confirmedPassword != newPassword && confirmedPassword != "" {
                             Image(systemName: "xmark")
                                 .foregroundColor(.red)

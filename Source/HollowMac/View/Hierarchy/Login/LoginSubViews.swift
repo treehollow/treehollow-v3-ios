@@ -31,7 +31,7 @@ extension LoginView {
             
             GroupBox(label: Text("Password"), content: {
                 HStack {
-                    SecureField(passwordRequirements, text: $store.originalPassword)
+                    SecureField("", text: $store.originalPassword, prompt: Text(passwordRequirements))
 
                     Group {
                         if store.originalPassword != "" && !passwordValid {

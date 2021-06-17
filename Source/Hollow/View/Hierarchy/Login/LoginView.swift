@@ -13,7 +13,7 @@ struct LoginView: View {
     @State private var password = ""
     
     @ScaledMetric(wrappedValue: ViewConstants.navigationBarSpinnerWidth) var spinnerWidth
-
+    
     // Determine when we should check user's email.
     private var shouldCheckEmail: Bool { viewModel.emailCheckType == nil || viewModel.emailCheckType == .reCAPTCHANeeded }
     
@@ -43,48 +43,46 @@ struct LoginView: View {
             viewModel.confirmedPassword != viewModel.originalPassword ||
             // Invalid original password
             viewModel.originalPassword.count < 8 ||
-            viewModel.originalPassword.contains(" ")
+                                                viewModel.originalPassword.contains(" ")
         }
         if shouldLogin { return viewModel.loginPassword == "" }
         return true
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: ViewConstants.listVStackSpacing) {
-                    // Enter email text field
-                    EmailTextField()
-                        .padding(.top)
-                    
-                    // Text fields for entering register information
-                    if shouldRegister {
-                        RegisterTextFields()
-                    }
-                    
-                    // Login text field
-                    if shouldLogin {
-                        LoginTextField()
-                    }
-                    
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: ViewConstants.listVStackSpacing) {
+                // Enter email text field
+                EmailTextField()
+                    .padding(.top)
+                
+                // Text fields for entering register information
+                if shouldRegister {
+                    RegisterTextFields()
                 }
-                .disabled(disableInteraction)
+                
+                // Login text field
+                if shouldLogin {
+                    LoginTextField()
+                }
+                
             }
-            
-            // Button
+            .disabled(disableInteraction)
+        }
+        .safeAreaInset(edge: .bottom) {
             ExpandedButton(
                 action: {
-                    hideKeyboard()
-                    if shouldCheckEmail { viewModel.checkEmail() }
-                    if shouldRegister { viewModel.register() }
-                    if shouldLogin { viewModel.login() }
-                },
+                hideKeyboard()
+                if shouldCheckEmail { viewModel.checkEmail() }
+                if shouldRegister { viewModel.register() }
+                if shouldLogin { viewModel.login() }
+            },
                 transitionAnimation: .default,
                 text: buttonText
             )
-            .disabled(disableButton)
-            
+                .disabled(disableButton)
         }
+        
         .padding(.horizontal)
         .padding(.horizontal)
         .padding(.bottom)
@@ -102,13 +100,13 @@ struct LoginView: View {
             ReCAPTCHAPageView(
                 presented: $viewModel.showsRecaptcha,
                 successHandler: { token in
-                    withAnimation {
-                        viewModel.showsRecaptcha = false
-                        viewModel.reCAPTCHAToken = token
-                        // Check again with the token
-                        viewModel.checkEmail()
-                    }
+                withAnimation {
+                    viewModel.showsRecaptcha = false
+                    viewModel.reCAPTCHAToken = token
+                    // Check again with the token
+                    viewModel.checkEmail()
                 }
+            }
             )
         }
         

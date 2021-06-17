@@ -84,7 +84,8 @@ extension String {
         let str = String(data: data, encoding: .utf8)!
         var attrStr = AttributedString(str)
         let links = str.rangeForLink().map { range in
-            (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: String(str[range])))
+            // Handle the url on our own based on the open-url settings
+            (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: String("Hollow://url-" + str[range])))
         }
         let citations = str.rangeForCitation().map({ range in
             (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: "Hollow://post-\(String(str[range]))"))
