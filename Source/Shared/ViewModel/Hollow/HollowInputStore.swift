@@ -36,6 +36,12 @@ class HollowInputStore: ObservableObject, HollowErrorHandler, ImageCompressStore
         self.refreshHandler = refreshHandler
     }
     
+    func removeImage() {
+        compressedImage = nil
+        image = nil
+        compressedImageBase64String = nil
+    }
+    
     func newVote() {
         self.voteInformation = .init(options: ["", "", ""])
     }

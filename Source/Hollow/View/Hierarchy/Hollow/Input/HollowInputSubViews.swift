@@ -19,7 +19,7 @@ extension HollowInputView {
                 .roundedCorner(4)
                 .overlay(
                     VStack(alignment: .trailing) {
-                        Button(action: { withAnimation { inputStore.compressedImage = nil }}) {
+                        Button(action: { withAnimation { inputStore.removeImage() }}) {
                             ZStack {
                                 Blur().frame(width: body30, height: body30).clipShape(Circle())
                                 Image(systemName: "xmark")
@@ -133,7 +133,7 @@ extension HollowInputView {
         HStack(spacing: body12) {
             Menu(content: {
                 Button(NSLocalizedString("INPUTVIEW_SELECT_TAG_MENU_NO_TAG_BUTTON_LABEL", comment: ""), action: { withAnimation { inputStore.selectedTag = nil }})
-                
+                Divider()
                 ForEach(inputStore.availableTags, id: \.self) { tag in
                     Button(tag, action: { withAnimation { inputStore.selectedTag = tag }})
                 }

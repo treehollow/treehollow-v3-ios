@@ -168,7 +168,7 @@ extension HollowCommentInputView {
                 .roundedCorner(4)
                 .overlay(
                     VStack(alignment: .trailing) {
-                        Button(action: { withAnimation { store.compressedImage = nil }}) {
+                        Button(action: { withAnimation { store.removeImage() }}) {
                             ZStack {
                                 Blur().frame(width: body30, height: body30).clipShape(Circle())
                                 Image(systemName: "xmark")
