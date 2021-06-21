@@ -6,15 +6,18 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
-import Kingfisher
 import Foundation
+import Kingfisher
+import HollowCore
+
+typealias FetchImageRequest = DefaultGenericRequest<_FetchImageRequest>
 
 struct FetchImageRequestConfiguration {
     var urlBase: [String]
     var urlString: String
 }
 
-enum FetchImageRequestError: RequestError {
+enum FetchImageRequestError: Error {
     case invalidURL
     case loadingCompleted
     case failed(description: String)
@@ -35,7 +38,7 @@ enum FetchImageRequestError: RequestError {
 }
 
 
-struct FetchImageRequest: Request {
+struct _FetchImageRequest: Request {
     typealias Configuration = FetchImageRequestConfiguration
     typealias Result = HImage
     typealias ResultData = Result
@@ -47,11 +50,11 @@ struct FetchImageRequest: Request {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (Result?, FetchImageRequestError?) -> Void) {
+    func performRequest(completion: @escaping (ResultType<Result, FetchImageRequestError>) -> Void) {
         let urlBase = LineSwitchManager.lineSelection(for: configuration.urlBase, type: .imageBaseURL)
         let urlString = urlBase + configuration.urlString
         guard let url = URL(string: urlString) else {
-            completion(nil, .invalidURL)
+            completion(.failure(.invalidURL))
             return
         }
         let resource = ImageResource(downloadURL: url, cacheKey: urlString)
@@ -60,10 +63,9 @@ struct FetchImageRequest: Request {
             KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
                 switch result {
                 case .success(let value):
-                    completion(value.image, nil)
-                    completion(nil, .loadingCompleted)
+                    completion(.success(value.image))
                 case .failure(let error):
-                    completion(nil, .failed(description: error.errorDescription ?? ""))
+                    completion(.failure(.failed(description: error.errorDescription ?? "")))
                 }
             }
         }

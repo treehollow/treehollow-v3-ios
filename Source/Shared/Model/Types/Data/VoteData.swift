@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HollowCore
 
 /// Vote Data Type
 struct VoteData: Codable {
@@ -19,5 +20,19 @@ struct VoteData: Codable {
         
         var title: String
         var voteCount: Int
+    }
+}
+
+extension Vote {
+    func toVoteData() -> VoteData? {
+        guard let voteOptions = self.voteOptions, let vote = self.voteData, let voted = self.voted else {
+            return nil
+        }
+        var voteData = [VoteData.Data]()
+        for voteOption in voteOptions {
+            guard let voteNumber = vote[voteOption] else { continue }
+            voteData.append(VoteData.Data(title: voteOption, voteCount: voteNumber))
+        }
+        return VoteData(votedOption: voted, voteData: voteData)
     }
 }

@@ -17,7 +17,7 @@ struct Provider: TimelineProvider {
             completion([])
             return
         }
-        let request = SearchRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, keywords: config.searchTrending, page: 1, includeComment: false))
+        let request = SearchRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, keywords: config.searchTrending, page: 1, includeComment: false))
         request.performRequest(completion: { result, error in
             guard let result = result else {
                 switch error {

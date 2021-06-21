@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import HollowCore
 
 struct DeviceListView: View {
     @ObservedObject var deviceListStore = DeviceListStore()
@@ -44,7 +45,7 @@ extension DeviceListView {
     private struct DeviceCardView: View {
         @State private var alertPresented: Bool = false
         
-        var device: DeviceInformationType
+        var device: DeviceInformation
         var isCurrentDevice: Bool
         var isLoggingout: Bool
         var logoutAction: (String) -> Void

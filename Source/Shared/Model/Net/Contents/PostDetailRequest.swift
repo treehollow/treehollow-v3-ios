@@ -6,31 +6,20 @@
 //
 
 import Foundation
-import Alamofire
+import HollowCore
 
 struct PostDetailRequestConfiguration {
-    var apiRoot: [String]
+    var apiRoot: String
     var token: String
     var postId: Int
     /// when don't need comments, only need main post, set `needComments` to false
     var includeComments: Bool
 }
 
-struct PostDetailRequestResult: DefaultRequestResult {
-    var code: Int
-    var msg: String?
-    var post: Post?
-    var data: [Comment]?
-}
-
-typealias PostDetailRequestResultData = PostDataWrapper
-
-struct PostDetailRequest: DefaultRequest {
-    
+struct PostDetailRequest: RequestAdaptor {
+    typealias R = HollowCore.PostDetailRequest
     typealias Configuration = PostDetailRequestConfiguration
-    typealias Result = PostDetailRequestResult
-    typealias ResultData = PostDetailRequestResultData
-    typealias Error = DefaultRequestError
+    typealias FinalResult = PostDataWrapper
     
     var configuration: PostDetailRequestConfiguration
     
@@ -38,86 +27,57 @@ struct PostDetailRequest: DefaultRequest {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (PostDetailRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/post/detail" + Constants.Net.urlSuffix
-        let headers: HTTPHeaders = [
-            "TOKEN": self.configuration.token,
-            "Accept": "application/json"
-        ]
+    func transformConfiguration(_ configuration: PostDetailRequestConfiguration) -> HollowCore.PostDetailRequestConfiguration {
+        let postCache = PostCache.shared
+        var config = HollowCore.PostDetailRequestConfiguration(
+            // FIXME: Auto switch
+            apiRoot: configuration.apiRoot,
+            token: configuration.token,
+            postId: configuration.postId,
+            includeComments: configuration.includeComments
+        )
         
-        var parameters: [String : Encodable] = [
-            "pid" : configuration.postId.string,
-            "include_comment" : configuration.includeComments.int.string
-        ]
+        if let oldUpdatedAt = postCache.getTimestamp(postId: configuration.postId),
+           let postWrapper = postCache.getPost(postId: configuration.postId) {
+            config.lastUpdateTimestamp = oldUpdatedAt
+            config.cachedPost = postWrapper
+        }
         
+        return config
+    }
+    
+    func transformResult(_ result: PostDetailRequestResultData) -> PostDataWrapper {
         let postCache = PostCache.shared
         
-        if let oldUpdated = postCache.getTimestamp(postId: configuration.postId),
-           postCache.existPost(postId: configuration.postId),
-           let cachedPost = postCache.getPost(postId: configuration.postId) {
-            // If at least one of the comments has `delete` permission
-            // but no `delete_ban` permission, then we should not rely
-            // on cache because that permission has a fixed timeout and
-            // the backend will not update `update_at` on permissions change.
-            var canRemoveButCannotBan = false
-            if !cachedPost.comments.isEmpty {
-                for comment in cachedPost.comments {
-                    if comment.permissions.contains(.delete) &&
-                        !comment.permissions.contains(.deleteBan) {
-                        canRemoveButCannotBan = true
-                        break
-                    }
-                }
+        var postWrapper: PostWrapper
+        var postDataWrapper: PostDataWrapper
+        
+        switch result {
+        case .cached(let data):
+            postWrapper = data
+        case .new(let data):
+            postWrapper = data
+        }
+        
+        if let cachedPost = postCache.getPost(postId: configuration.postId),
+           cachedPost.post.updatedAt == postWrapper.post.updatedAt {
+            var comments = cachedPost.comments.toCommentData()
+            for index in comments.indices {
+                comments[index].updateHashAndColor()
             }
+            let postData = postWrapper.post.toPostData(comments: comments)
+            postDataWrapper = PostDataWrapper(post: postData)
+        } else {
+            let comments = postWrapper.comments.toCommentData()
+            let postData = postWrapper.post.toPostData(comments: comments)
+            postDataWrapper = PostDataWrapper(post: postData)
             
-            if !canRemoveButCannotBan {
-                parameters["old_updated_at"] = oldUpdated
+            if configuration.includeComments {
+                postCache.updatePost(postId: configuration.postId, postWrapper: postWrapper)
+                postCache.updateTimestamp(postId: configuration.postId, timestamp: postWrapper.post.updatedAt)
             }
         }
         
-        let transformer: (Result) -> ResultData? = { result in
-            var postWrapper: PostDataWrapper
-            
-            guard let post = result.post else { return nil }
-            
-            if result.code == 1, let cachedPost = postCache.getPost(postId: configuration.postId) {
-                // The post has been cached and there's no update.
-                
-                // Update the color data in case of the change of the preset
-                var comments = cachedPost.comments
-                for index in comments.indices {
-                    comments[index].updateHashAndColor()
-                }
-                // The only thing that is certain to remain unchanged is the comment data,
-                // thus we need to integrate other part of the latest result.
-                let postData = post.toPostData(comments: comments)
-                postWrapper = PostDataWrapper(post: postData)
-                
-            } else {
-                // The post has not been cached or there's update.
-                
-                let comments = result.data?.toCommentData() ?? []
-                let postData = post.toPostData(comments: comments)
-                postWrapper = PostDataWrapper(post: postData)
-                
-                // Only update time stamp when requesting comments
-                if configuration.includeComments {
-                    postCache.updatePost(postId: configuration.postId, postdata: postWrapper.post)
-                    postCache.updateTimestamp(postId: configuration.postId, timestamp: post.updatedAt)
-                }
-            }
-            
-            return postWrapper
-        }
-        
-        performRequest(
-            urlBase: configuration.apiRoot,
-            urlPath: urlPath,
-            parameters: parameters,
-            headers: headers,
-            method: .get,
-            transformer: transformer,
-            completion: completion
-        )
+        return postDataWrapper
     }
 }

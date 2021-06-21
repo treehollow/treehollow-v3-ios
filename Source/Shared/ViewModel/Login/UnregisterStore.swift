@@ -18,7 +18,7 @@ class UnregisterStore: ObservableObject, HollowErrorHandler {
     @Published var nonce = ""
     @Published var validCode = ""
     @Published var recaptchaToken: String?
-    @Published var emailCheckType: UnregisterCheckEmailRequestResultData?
+    @Published var emailCheckType: UnregisterCheckEmailRequest.FinalResult?
 
     @Published var errorMessage: (title: String, message: String)?
     @Published var isLoading = false
@@ -38,7 +38,7 @@ class UnregisterStore: ObservableObject, HollowErrorHandler {
     func checkEmail() {
         guard email != "" else { return }
         guard let apiRoot = Defaults[.hollowConfig]?.apiRootUrls else { return }
-        let configuration = UnregisterCheckEmailRequestConfiguration(email: email, recaptchaToken: recaptchaToken, apiRoot: apiRoot)
+        let configuration = UnregisterCheckEmailRequest.Configuration(apiRoot: apiRoot.first!, email: email, recaptchaToken: recaptchaToken)
         let request = UnregisterCheckEmailRequest(configuration: configuration)
         
         withAnimation { isLoading = true }
@@ -76,7 +76,7 @@ class UnregisterStore: ObservableObject, HollowErrorHandler {
     
     func unregister() {
         guard let config = Defaults[.hollowConfig] else { return }
-        let configuration = UnregisterRequestConfiguration(email: email, nonce: nonce, validCode: validCode, apiRoot: config.apiRootUrls)
+        let configuration = UnregisterRequest.Configuration(apiRoot: config.apiRootUrls.first!, email: email, nonce: nonce, validCode: validCode)
         let request = UnregisterRequest(configuration: configuration)
         
         withAnimation { isLoading = true }

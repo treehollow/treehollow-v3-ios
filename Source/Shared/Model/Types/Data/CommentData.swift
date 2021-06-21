@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HollowCore
 
 /// Data wrapper representing a single comment.
 struct CommentData: Identifiable, Codable {
@@ -52,5 +53,95 @@ extension CommentData {
         var name: String
         var text: String
         var hasImage: Bool
+    }
+}
+
+extension Comment {
+    func toCommentData(showAvatar: Bool, showAvatarWhenReversed: Bool) -> CommentData {
+        var image: HollowImage? = nil
+        if let imageMetadata = self.imageMetadata, let imageURL = self.url,
+           let w = imageMetadata.w, let h = imageMetadata.h {
+            image = HollowImage(
+                placeholder: (
+                    width: w,
+                    height: h
+                ),
+                image: nil,
+                imageURL: imageURL)
+        }
+        var text = self.text ?? ""
+        while text.first == "\n" {
+            text.removeFirst()
+        }
+        while text.last == "\n" {
+            text.removeLast()
+        }
+        
+        let hash = AvatarGenerator.hash(postId: pid, name: isDz ? "" : name)
+        
+        let components = name.split(separator: " ")
+        var abbreviation = isDz ? name : ""
+        if !isDz {
+            for component in components {
+                if Int(component) != nil {
+                    abbreviation = String(component)
+                    break
+                }
+                abbreviation += component.first == nil ? "" : String(component.first!)
+            }
+        }
+        
+        let attributedString = text.attributedForCitationAndLink()
+
+        return CommentData(
+            commentId: cid,
+            deleted: deleted,
+            name: name,
+            permissions: permissions,
+            postId: pid,
+            tag: tag,
+            text: text,
+            date: Date(timeIntervalSince1970: TimeInterval(timestamp)),
+            isDz: isDz,
+            replyTo: replyTo,
+            image: image,
+//            url: text.links(),
+//            citedNumbers: text.citationNumbers(),
+            attributedString: attributedString,
+            showAvatar: showAvatar,
+            showAvatarWhenReversed: showAvatarWhenReversed,
+            hash: hash,
+            colorIndex: AvatarGenerator.colorIndex(hash: hash),
+            abbreviation: abbreviation
+        )
+
+    }
+}
+
+extension Array where Element == Comment {
+    func toCommentData() -> [CommentData] {
+        var commentData = [CommentData]()
+        for index in self.indices {
+            if index == 0 {
+                commentData.append(
+                    self[index].toCommentData(
+                        showAvatar: true,
+                        showAvatarWhenReversed: self.count <= 1 ? true : self[index].name != self[index + 1].name
+                    )
+                )
+            } else if index == self.count - 1 {
+                commentData.append(
+                    self[index].toCommentData(
+                        showAvatar: self.count <= 1 ? true : self[index].name != self[index - 1].name,
+                        showAvatarWhenReversed: true
+                    )
+                )
+            } else {
+                commentData.append(self[index].toCommentData(showAvatar: self[index].name != self[index - 1].name, showAvatarWhenReversed: self[index].name != self[index + 1].name))
+            }
+            
+        }
+        
+        return commentData
     }
 }

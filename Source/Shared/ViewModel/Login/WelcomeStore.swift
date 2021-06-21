@@ -40,7 +40,15 @@ class WelcomeStore: ObservableObject {
             self.isLoadingConfig = true
         }
         
-        let request = GetConfigRequest(configuration: GetConfigRequestConfiguration(hollowType: hollowType, customAPIRoot: customConfigURL)!)
+        var url: String {
+            switch hollowType {
+            case .thu: return Constants.HollowConfig.thuConfigURL
+            case .pku: return Constants.HollowConfig.pkuConfigURL
+            case .other: return customConfigURL ?? ""
+            }
+        }
+        
+        let request = GetConfigRequest(configuration: GetConfigRequest.Configuration(configUrl: url))
         
         request.publisher
             .sinkOnMainThread(receiveCompletion: { completion in

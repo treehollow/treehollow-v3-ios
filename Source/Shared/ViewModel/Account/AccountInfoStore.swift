@@ -21,7 +21,7 @@ class AccountInfoStore: ObservableObject, HollowErrorHandler {
               let token = Defaults[.accessToken] else { return }
 
         withAnimation { isLoading = true }
-        LogoutRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls)).publisher
+        LogoutRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token)).publisher
             .sinkOnMainThread(receiveError: { error in
                 withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
@@ -38,7 +38,7 @@ class AccountInfoStore: ObservableObject, HollowErrorHandler {
         guard let config = Defaults[.hollowConfig] else { return }
 
         withAnimation { isLoading = true }
-        let configuration = ChangePasswordRequestConfiguration(email: email, oldPassword: originalPassword, newPassword: newPassword, apiRoot: config.apiRootUrls)
+        let configuration = ChangePasswordRequest.Configuration(apiRoot: config.apiRootUrls.first!, email: email, oldPassword: originalPassword, newPassword: newPassword)
         let request = ChangePasswordRequest(configuration: configuration)
         
         withAnimation { isLoading = true }

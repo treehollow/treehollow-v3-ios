@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import HollowCore
 
 struct ReportMenuContent: View {
     @ObservedObject var store: HollowDetailStore

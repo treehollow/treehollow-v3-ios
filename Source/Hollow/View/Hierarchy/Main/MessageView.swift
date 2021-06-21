@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HollowCore
 
 struct MessageView: View {
     @Binding var presented: Bool
@@ -139,4 +140,9 @@ extension MessageView {
 
 extension MessageView {
     enum Page: Int, Hashable { case message, attention }
+}
+
+extension SystemMessage: Identifiable {
+    public var id: Int { timestamp }
+    var date: Date { Date(timeIntervalSince1970: TimeInterval(timestamp)) }
 }

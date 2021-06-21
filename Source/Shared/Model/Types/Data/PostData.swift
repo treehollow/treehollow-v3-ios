@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HollowCore
 
 /// Data wrapper representing a single post.
 struct PostData: Identifiable, Codable {
@@ -63,6 +64,12 @@ struct PostDataWrapper: Identifiable {
     var citedPost: PostData?
 }
 
+extension PostWrapper {
+    func toPostDataWrapper() -> PostDataWrapper {
+        return PostDataWrapper(post: post.toPostData(comments: comments.toCommentData()))
+    }
+}
+
 extension PostDataWrapper {
     static func templatePost(for postId: Int) -> PostDataWrapper {
         let hash = AvatarGenerator.hash(postId: postId, name: "")
@@ -89,3 +96,57 @@ extension PostDataWrapper {
         return PostDataWrapper(post: post, citedPost: nil)
     }
 }
+
+extension Post {
+    func toPostData(comments: [CommentData]) -> PostData {
+        // precess post image
+        var image: HollowImage? = nil
+        if let imageurl = self.url, let imageMetadata = self.imageMetadata,
+           let w = imageMetadata.w, let h = imageMetadata.h {
+            image = HollowImage(placeholder: (width: w, height: h), image: nil, imageURL: imageurl)
+        }
+        
+        var text = self.text
+        
+        while text.first == "\n" {
+            text.removeFirst()
+        }
+        while text.last == "\n" {
+            text.removeLast()
+        }
+        
+        // Process replying to comment info
+        var comments = comments
+        for index in comments.indices {
+            if comments[index].replyTo != -1,
+               let replyToComment = comments.first(where: { $0.commentId == comments[index].replyTo }) {
+                comments[index].replyToCommentInfo = .init(name: replyToComment.name, text: replyToComment.text, hasImage: replyToComment.image != nil)
+            }
+        }
+        
+        let attributedString = text.attributedForCitationAndLink()
+        
+        let hash = AvatarGenerator.hash(postId: pid, name: "")
+        return PostData(
+            attention: attention,
+            deleted: deleted,
+            likeNumber: likenum,
+            permissions: permissions,
+            postId: pid,
+            replyNumber: reply,
+            timestamp: Date(timeIntervalSince1970: TimeInterval(self.timestamp)),
+            tag: tag,
+            text: text,
+            hollowImage: image,
+            vote: vote?.toVoteData(),
+            comments: comments,
+            citedPostId: text.findCitedPostID(),
+            attributedString: attributedString,
+//            url: text.links(),
+//            citedNumbers: text.citationNumbers(),
+            hash: hash,
+            colorIndex: AvatarGenerator.colorIndex(hash: hash)
+        )
+    }
+}
+

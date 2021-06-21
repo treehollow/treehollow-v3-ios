@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Defaults
+import HollowCore
 
 /// Protocol for a view model which protentially modify the shared `AppModel` instance.
 protocol HollowErrorHandler: ObservableObject {}
@@ -29,7 +30,6 @@ extension HollowErrorHandler {
     /// Error handler for default requests.
     func defaultErrorHandler(errorMessage: inout (title: String, message: String)?, error: DefaultRequestError) {
         if handleTokenExpireError(error) { return }
-        if error.loadingCompleted() { return }
         errorMessage = (title: "", message: error.description)
     }
     

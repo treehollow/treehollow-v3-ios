@@ -51,7 +51,7 @@ extension HAppDelegate {
     
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
         guard let config = Defaults[.hollowConfig] else { return }
-        let configuration = UpdateDeviceTokenRequestConfiguration(deviceToken: deviceToken, token: accessToken, apiRoot: config.apiRootUrls)
+        let configuration = UpdateDeviceTokenRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: accessToken, deviceToken: deviceToken)
         let request = UpdateDeviceTokenRequest(configuration: configuration)
         
         request.performRequest(completion: { _, _ in })
@@ -69,7 +69,7 @@ extension HAppDelegate {
         }
         
         guard let urlString = configURL else { return }
-        let request = GetConfigRequest(configuration: GetConfigRequestConfiguration(hollowType: hollowType, customAPIRoot: urlString)!)
+        let request = GetConfigRequest(configuration: GetConfigRequest.Configuration(configUrl: urlString))
         
         request.performRequest(completion: { result, error in
             if let _ = error {

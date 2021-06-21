@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 import Defaults
+import HollowCore
 
 #if canImport(Rechability)
 import Connectivity
@@ -76,7 +77,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
     func requestDetail() {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, includeComments: true)
+        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, postId: postDataWrapper.post.postId, includeComments: true)
         let request = PostDetailRequest(configuration: configuration)
         
         withAnimation { self.isLoading = true }
@@ -175,7 +176,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
                 postDataWrapper.citedPost?.loadingError != nil  else { return }
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: citedPid, includeComments: false)
+        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, postId: citedPid, includeComments: false)
         let request = PostDetailRequest(configuration: configuration)
         
         request.publisher
@@ -249,7 +250,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
     func vote(for option: String) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postDataWrapper.post.postId))
+        let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, option: option, postId: postDataWrapper.post.postId))
         
         request.publisher
             .retry(2)
@@ -264,7 +265,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
     func star(_ star: Bool) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, postId: postDataWrapper.post.postId, switchToAttention: star))
+        let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, postId: postDataWrapper.post.postId, switchToAttention: star))
         withAnimation { isEditingAttention = true }
         
         request.publisher
@@ -295,7 +296,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
             }
             text = "Re \(postDataWrapper.post.comments[replyToIndex].name): " + text
         }
-        let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls, token: token, text: text, imageData: compressedImageBase64String, postId: postDataWrapper.post.postId, replyCommentId: replyTo)
+        let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, text: text, imageData: compressedImageBase64String, postId: postDataWrapper.post.postId, replyCommentId: replyTo)
         
         let request = SendCommentRequest(configuration: configuration)
         
@@ -331,9 +332,9 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         let configuration: ReportRequestGroupConfiguration
         
         if let commentId = commentId {
-            configuration = .comment(.init(apiRoot: config.apiRootUrls, token: token, commentId: commentId, type: type, reason: reason))
+            configuration = .comment(.init(apiRoot: config.apiRootUrls.first!, token: token, commentId: commentId, type: type, reason: reason))
         } else {
-            configuration = .post(.init(apiRoot: config.apiRootUrls, token: token, postId: postId, type: type, reason: reason))
+            configuration = .post(.init(apiRoot: config.apiRootUrls.first!, token: token, postId: postId, type: type, reason: reason))
         }
         
         let request = ReportRequestGroup(configuration: configuration)

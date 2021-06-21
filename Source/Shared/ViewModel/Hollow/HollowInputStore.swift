@@ -51,7 +51,7 @@ class HollowInputStore: ObservableObject, HollowErrorHandler, ImageCompressStore
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
 
-        let request = SendPostRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, text: text, tag: selectedTag, imageData: compressedImageBase64String, voteData: voteInformation?.options))
+        let request = SendPostRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, text: text, tag: selectedTag, imageData: compressedImageBase64String, voteData: voteInformation?.options))
         
         request.publisher
             .sinkOnMainThread(receiveError: { error in

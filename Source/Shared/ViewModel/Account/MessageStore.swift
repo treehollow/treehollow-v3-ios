@@ -9,6 +9,7 @@
 import Combine
 import Defaults
 import SwiftUI
+import HollowCore
 
 class MessageStore: ObservableObject, HollowErrorHandler {
     @Published var messages: [SystemMessage] = []
@@ -26,7 +27,7 @@ class MessageStore: ObservableObject, HollowErrorHandler {
     func requestMessages(completion: (() -> Void)? = nil) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = SystemMessageRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
+        let request = SystemMessageRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token))
         
         withAnimation { isLoading = true }
         request.publisher

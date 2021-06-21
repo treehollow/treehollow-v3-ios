@@ -12,7 +12,7 @@ import SwiftUI
 import Defaults
 
 class DeviceListStore: ObservableObject, HollowErrorHandler {
-    @Published var deviceData: DeviceListRequestResultData
+    @Published var deviceData: DeviceListRequest.FinalResult
     @Published var isLoading: Bool = false
     @Published var loggingoutUUID: String?
     @Published var errorMessage: (title: String, message: String)?
@@ -27,7 +27,7 @@ class DeviceListStore: ObservableObject, HollowErrorHandler {
     func requestDeviceList() {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = DeviceListRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
+        let request = DeviceListRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token))
         withAnimation {
             isLoading = true
         }
@@ -62,7 +62,7 @@ class DeviceListStore: ObservableObject, HollowErrorHandler {
     func logout(deviceUUID: String) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = DeviceTerminationRequest(configuration: .init(deviceUUID: deviceUUID, token: token, apiRoot: config.apiRootUrls))
+        let request = DeviceTerminationRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, deviceUUID: deviceUUID))
         
         withAnimation {
             isLoading = true

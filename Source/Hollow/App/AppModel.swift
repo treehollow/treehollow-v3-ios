@@ -20,7 +20,7 @@ class AppModel: ObservableObject {
     
     private init() {
         // Chcek for version update
-        UpdateAvailabilityRequest.defaultPublisher
+        _UpdateAvailabilityRequest.defaultPublisher
             .sinkOnMainThread(receiveValue: VersionUpdateUtilities.handleUpdateAvailabilityResult)
             .store(in: &cancellables)
     }

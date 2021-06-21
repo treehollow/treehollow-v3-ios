@@ -9,6 +9,7 @@
 import SwiftUI
 import Defaults
 import Combine
+import HollowCore
 
 /// Shared view model for views that request `PostList`, `Search`, `AttentionList`
 /// and `AttentionListSearch`.
@@ -61,11 +62,11 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         let configuration: PostListRequestGroupConfiguration
         switch type {
         case .attentionList:
-            configuration = .attentionList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
+            configuration = .attentionList(.init(apiRoot: config.apiRootUrls.first!, token: token, page: page))
         case .attentionListSearch:
-            configuration = .attentionListSearch(.init(apiRoot: config.apiRootUrls, imageBaseURL: config.imgBaseUrls, token: token, keywords: searchString, page: page))
+            configuration = .attentionListSearch(.init(apiRoot: config.apiRootUrls.first!, token: token, keywords: searchString, page: page))
         case .postList:
-            configuration = .postList(.init(apiRoot: config.apiRootUrls, token: token, page: page))
+            configuration = .postList(.init(apiRoot: config.apiRootUrls.first!, token: token, page: page))
         case .search, .searchTrending:
             let startTimestamp = startDate?.startOfDay.timeIntervalSince1970.int
             var endTimestamp: Int? = nil
@@ -73,9 +74,9 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                 // Offset back. See `DateExtensions.swift`
                 endTimestamp = offsetTimestamp + 60
             }
-            configuration = .search(.init(apiRoot: config.apiRootUrls, token: token, keywords: searchString, page: page, afterTimestamp: startTimestamp, beforeTimestamp: endTimestamp, includeComment: !excludeComments))
+            configuration = .search(.init(apiRoot: config.apiRootUrls.first!, token: token, keywords: searchString, page: page, afterTimestamp: startTimestamp, beforeTimestamp: endTimestamp, includeComment: !excludeComments))
         case .wander:
-            configuration = .wander(.init(apiRoot: config.apiRootUrls, token: token, page: page))
+            configuration = .wander(.init(apiRoot: config.apiRootUrls.first!, token: token, page: page))
         }
         let request = PostListRequestGroup(configuration: configuration)
         withAnimation {
@@ -216,7 +217,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
         let requests: [PostDetailRequest] = citedPostId.map {
-            let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls, token: token, postId: $0, includeComments: false)
+            let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, postId: $0, includeComments: false)
             return PostDetailRequest(configuration: configuration)
         }
         PostDetailRequest.publisher(for: requests)?
@@ -258,7 +259,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
     func vote(postId: Int, for option: String) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, option: option, postId: postId))
+        let request = SendVoteRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, option: option, postId: postId))
         
         request.publisher
             .sinkOnMainThread(receiveError: { error in
@@ -277,7 +278,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         guard !isEditingAttention else { return }
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token, postId: postId, switchToAttention: star))
+        let request = EditAttentionRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, postId: postId, switchToAttention: star))
         withAnimation { isEditingAttention = true }
         
         request.publisher

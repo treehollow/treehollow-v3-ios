@@ -8,13 +8,14 @@
 
 import Foundation
 import Cache
+import HollowCore
 
 struct PostCache {
     
     static let shared = PostCache()
     
     var timestampStorage: Storage<Int, Int>?
-    var postStorage: Storage<Int, PostData>?
+    var postStorage: Storage<Int, PostWrapper>?
     
     private init() {
         
@@ -24,10 +25,10 @@ struct PostCache {
             transformer: TransformerFactory.forCodable(ofType: Int.self)
         )
         
-        self.postStorage = try? Storage<Int,PostData>(
+        self.postStorage = try? Storage<Int,PostWrapper>(
             diskConfig: DiskConfig(name: "HollowComments"),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: PostData.self)
+            transformer: TransformerFactory.forCodable(ofType: PostWrapper.self)
         )
     }
     
@@ -50,7 +51,7 @@ struct PostCache {
     /// get PostData from cache
     /// - Parameter postId: postID
     /// - Returns: PostData from cache `nil` for not found
-    func getPost(postId: Int) -> PostData? {
+    func getPost(postId: Int) -> PostWrapper? {
         guard let postData = try? postStorage?.object(forKey: postId) else { return nil }
         return postData
     }
@@ -59,8 +60,8 @@ struct PostCache {
     /// - Parameters:
     ///   - postId: postID
     ///   - postdata: postData
-    func updatePost(postId: Int, postdata: PostData) {
-        try? postStorage?.setObject(postdata, forKey: postId)
+    func updatePost(postId: Int, postWrapper: PostWrapper) {
+        try? postStorage?.setObject(postWrapper, forKey: postId)
     }
     
     /// Check post exist

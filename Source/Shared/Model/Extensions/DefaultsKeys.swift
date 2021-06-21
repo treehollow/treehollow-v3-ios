@@ -9,6 +9,7 @@
 import Defaults
 import Foundation
 import SwiftUI
+import HollowCore
 
 /// Store default's key here when firstly introduce it.
 /// Store the keys for `Defaults` here, declaring them static const member of `Defaults.Keys`
@@ -49,7 +50,7 @@ extension Defaults.Keys {
 extension Defaults.Keys {
     #if !WIDGET
     static let deviceListCache = Key<DeviceListRequestResultData?>("cache.device.list")
-    static let notificationTypeCache = Key<PushNotificationType>("cache.push.notification.type", default: .init())
+    static let notificationTypeCache = Key<PushNotificationType>("cache.push.notification.type", default: .init(pushSystemMsg: true, pushReplyMe: true, pushFavorited: false))
     static let versionUpdateInfoCache = Key<UpdateAvailabilityRequestResult.Result?>("cache.version.update.info")
     #endif
 }

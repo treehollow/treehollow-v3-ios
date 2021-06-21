@@ -10,6 +10,7 @@ import Defaults
 import Kingfisher
 import Cache
 import Combine
+import HollowCore
 
 struct AppearanceSettingsView: View {
     @Default(.colorScheme) var customColorScheme
@@ -333,7 +334,7 @@ struct PushNotificationSettingsView: View {
         func getPushTypes() {
             guard let config = Defaults[.hollowConfig],
                   let token = Defaults[.accessToken] else { return }
-            let request = GetPushRequest(configuration: .init(apiRoot: config.apiRootUrls, token: token))
+            let request = GetPushRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token))
             withAnimation { self.isLoading = true }
             request.publisher
                 .sinkOnMainThread(receiveError: { error in
@@ -352,7 +353,7 @@ struct PushNotificationSettingsView: View {
             guard tempNotificationType != Defaults[.notificationTypeCache] else { return }
             guard let config = Defaults[.hollowConfig],
                   let token = Defaults[.accessToken] else { return }
-            let request = SetPushRequest(configuration: .init(type: tempNotificationType, apiRoot: config.apiRootUrls, token: token))
+            let request = SetPushRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token, type: tempNotificationType))
             withAnimation { self.isLoading = true }
             
             request.publisher
@@ -500,4 +501,32 @@ struct OtherSettingsView: View {
             .navigationTitle(NSLocalizedString("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", comment: ""))
         }
     }
+}
+
+extension PushNotificationType {
+    // Helper enum used to enumerate through all the cases.
+    enum Enumeration: Int, CaseIterable, Identifiable, CustomStringConvertible {
+        case pushSystemMsg
+        case pushReplyMe
+        case pushFavorited
+        
+        var id: Int { rawValue }
+        
+        var keyPath: WritableKeyPath<PushNotificationType, Bool> {
+            switch self {
+            case .pushFavorited: return \.pushFavorited
+            case .pushReplyMe: return \.pushReplyMe
+            case .pushSystemMsg: return \.pushSystemMsg
+            }
+        }
+        
+        var description: String {
+            switch self {
+            case .pushFavorited: return NSLocalizedString("PUSH_NOTIFICATION_TYPE_FAVOURITE", comment: "")
+            case .pushReplyMe: return NSLocalizedString("PUSH_NOTIFICATION_TYPE_REPLY_ME", comment: "")
+            case .pushSystemMsg: return NSLocalizedString("PUSH_NOTIFICATION_TYPE_SYSTEM_MSG", comment: "")
+            }
+        }
+    }
+
 }

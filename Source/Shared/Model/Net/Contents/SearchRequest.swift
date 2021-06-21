@@ -6,88 +6,22 @@
 //
 
 import Foundation
-import Alamofire
+import HollowCore
 
-struct SearchRequestConfiguration {
-    var apiRoot: [String]
-    var token: String
-    var keywords: String
-    var page: Int
-    var afterTimestamp: Int?
-    var beforeTimestamp: Int?
-    var includeComment: Bool
-}
+typealias SearchRequestConfiguration = HollowCore.SearchRequestConfiguration
 
-/// The result type is `PostListRequestResult`
-
-typealias SearchRequestResult = PostListRequestResult
-
-typealias SearchRequestResultData = [PostDataWrapper]
-
-struct SearchRequest: DefaultRequest {
-
-
+struct SearchRequest: DefaultConfigurationRequestAdaptor {
+    typealias R = HollowCore.SearchRequest
     typealias Configuration = SearchRequestConfiguration
-    typealias Result = PostListRequestResult
-    typealias ResultData = SearchRequestResultData
-    typealias Error = DefaultRequestError
-    
-    var configuration: SearchRequestConfiguration
-    
-    init(configuration: SearchRequestConfiguration) {
+    typealias FinalResult = [PostDataWrapper]
+//
+    init(configuration: HollowCore.SearchRequest.Configuration) {
         self.configuration = configuration
     }
+
+    var configuration: HollowCore.SearchRequest.Configuration
     
-    func performRequest(completion: @escaping (SearchRequestResultData?, DefaultRequestError?) -> Void) {
-        let urlPath = "v3/contents/search" + Constants.Net.urlSuffix
-        let headers: HTTPHeaders = [
-            "TOKEN": self.configuration.token,
-            "Accept": "application/json"
-        ]
-        
-        var parameters: [String : Encodable] = [
-            "keywords" : configuration.keywords,
-            "page" : configuration.page,
-            "include_comment" : configuration.includeComment ? "true" : "false"
-        ]
-        
-        if let before = configuration.beforeTimestamp {
-            parameters["before"] = before
-        }
-        
-        if let after = configuration.afterTimestamp {
-            parameters["after"] = after
-        }
-        
-        let transformer: (PostListRequestResult) -> SearchRequestResultData? = { result in
-            guard let resultData = result.data else { return nil }
-            var postWrappers = [PostDataWrapper]()
-            postWrappers = resultData.map{ post in
-                
-                // process comments of current post
-                
-                var commentData = [CommentData]()
-                if let commentsOfPost = result.comments?[post.pid.string] {
-                    if let comments = commentsOfPost {
-                        commentData = comments.toCommentData()
-                    }
-                }
-                
-                return PostDataWrapper(post: post.toPostData(comments: commentData))
-            }
-            
-            return postWrappers
-        }
-        
-        performRequest(
-            urlBase: configuration.apiRoot,
-            urlPath: urlPath,
-            parameters: parameters,
-            headers: headers,
-            method: .get,
-            transformer: transformer,
-            completion: completion)
-        
+    func transformResult(_ result: [PostWrapper]) -> [PostDataWrapper] {
+        return result.map { $0.toPostDataWrapper() }
     }
-    
 }

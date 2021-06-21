@@ -8,11 +8,14 @@
 
 import Foundation
 import Defaults
-import Alamofire
+import HollowCore
 import Combine
+import HollowCore
 #if canImport(UIKit)
 import UIKit
 #endif
+
+typealias UpdateAvailabilityRequest = DefaultGenericRequest<_UpdateAvailabilityRequest>
 
 struct UpdateAvailabilityRequestResult: Codable {
     struct Result: Codable {
@@ -25,7 +28,7 @@ struct UpdateAvailabilityRequestResult: Codable {
     var results: [Result]
 }
 
-struct UpdateAvailabilityRequest: Request {
+struct _UpdateAvailabilityRequest: Request {
     typealias Configuration = Void
     typealias Result = UpdateAvailabilityRequestResult
     typealias ResultData = (Bool, UpdateAvailabilityRequestResult.Result)
@@ -45,17 +48,12 @@ struct UpdateAvailabilityRequest: Request {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (ResultData?, DefaultRequestError?) -> Void) {
-        if UIDevice.isMac && !UIDevice.isGenericMac {
-            // FIXME: Seems that we cannot get macOS version info with the same bundle id.
-            completion(nil, nil)
-            return
-        }
+    func performRequest(completion: @escaping (ResultType<ResultData, DefaultRequestError>) -> Void) {
         guard let info = Bundle.main.infoDictionary,
               let currentVersion = info["CFBundleShortVersionString"] as? String,
               let identifier = info["CFBundleIdentifier"] as? String,
               let url = URL(string: "http://itunes.apple.com/cn/lookup?bundleId=\(identifier)") else {
-            completion(nil, .unknown)
+                  completion(.failure(.unknown))
             return
         }
         
@@ -65,19 +63,18 @@ struct UpdateAvailabilityRequest: Request {
         
         let task = session.dataTask(with: url) { data, response, error in
             guard let data = data else {
-                completion(nil, .unknown)
+                completion(.failure(.unknown))
                 return
             }
             
             guard let result = try? JSONDecoder().decode(Result.self, from: data),
                   !result.results.isEmpty else {
-                completion(nil, .decodeFailed)
+                      completion(.failure(.decodeFailed))
                 return
             }
             
             let updateAvailable = isUpdateAvailable(currentVersion: currentVersion, fetchedVersion: result.results.first!.version)
-            completion((updateAvailable, result.results.first!), nil)
-            completion(nil, .loadingCompleted)
+            completion(.success((updateAvailable, result.results.first!)))
         }
         task.resume()
     }

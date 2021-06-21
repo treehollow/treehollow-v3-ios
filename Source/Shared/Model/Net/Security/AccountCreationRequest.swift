@@ -1,12 +1,11 @@
 //
-//  AccountCreation.swift
+//  AccountCreationRequest.swift
 //  Hollow
 //
 //  Created on 2021/1/17.
 //
 
-import Alamofire
-import Foundation
+import HollowCore
 
 /// Configuraions for creating an account.
 struct AccountCreationRequestConfiguration {
@@ -24,71 +23,21 @@ struct AccountCreationRequestConfiguration {
     var deviceToken: String?
     /// See `AccountCreationConfiguration`
     ///
-    var apiRoot: [String]
+    var apiRoot: String
 }
 
-/// Result of account creation attempt.
-struct AccountCreationRequestResultData {
-    /// Access token.
-    var token: String
-    /// Device UUID
-    var uuid: UUID
-    /// Error mssage.
-    //var message: String?
-}
-
-struct AccountCreationRequestResult: DefaultRequestResult {
-    /// The type of result received.
-    var code: Int
-    /// Access token.
-    var token: String?
-    /// Device UUID
-    var uuid: UUID?
-    /// Error mssage.
-    var msg: String?
-}
-
-struct AccountCreationRequest: DefaultRequest {
+struct AccountCreationRequest: DefaultResultRequestAdaptor {
+    typealias R = HollowCore.AccountCreationRequest
     typealias Configuration = AccountCreationRequestConfiguration
-    typealias Result = AccountCreationRequestResult
-    typealias ResultData = AccountCreationRequestResultData
-    typealias Error = DefaultRequestError
-    
-    var configuration: AccountCreationRequestConfiguration
-    
-    init(configuration: AccountCreationRequestConfiguration) {
+    typealias FinalResult = HollowCore.AccountCreationRequest.ResultData
+
+    init(configuration: AccountCreationRequest.Configuration) {
         self.configuration = configuration
     }
     
-    func performRequest(
-        completion: @escaping (ResultData?, Error?) -> Void
-    ) {
-        var parameters = [
-            "email": self.configuration.email,
-            "password_hashed": self.configuration.password.sha256().sha256(),
-            "device_type": self.configuration.deviceType.string,
-            "device_info": self.configuration.deviceInfo,
-        ]
-        
-        if let token = configuration.deviceToken {
-            parameters["ios_device_token"] = token
-        }
-        
-        if let validCode = self.configuration.validCode {
-            parameters["valid_code"] = validCode
-        }
-        
-        let urlPath = "v3/security/login/create_account" + Constants.Net.urlSuffix
-        performRequest(
-            urlBase: self.configuration.apiRoot,
-            urlPath: urlPath,
-            parameters: parameters,
-            method: .post,
-            transformer: { result in
-                guard let token = result.token, let uuid = result.uuid else { return nil }
-                return ResultData(token: token, uuid: uuid)
-            },
-            completion: completion
-        )
+    var configuration: AccountCreationRequest.Configuration
+    
+    func transformConfiguration(_ configuration: AccountCreationRequestConfiguration) -> R.Configuration {
+        return .init(apiRoot: configuration.apiRoot, email: configuration.email, password: configuration.password, deviceInfo: configuration.deviceInfo, deviceToken: configuration.deviceToken)
     }
 }

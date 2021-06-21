@@ -10,6 +10,7 @@ import Combine
 import Foundation
 import SwiftUI
 import Defaults
+import HollowCore
 
 /// View model for `LoginView`
 class LoginStore: ObservableObject, HollowErrorHandler {
@@ -19,7 +20,7 @@ class LoginStore: ObservableObject, HollowErrorHandler {
     @Published var email: String = "" {
         didSet { if email != oldValue { restore() }}
     }
-    @Published var emailCheckType: EmailCheckRequestResultData.ResultType?
+    @Published var emailCheckType: EmailCheckRequest.FinalResult?
     // Set to "" first because `WelcomeView` will load the initializer of `LoginView`
     // before we fetch the config.
     @Published var emailSuffix: String = Defaults[.hollowConfig]?.emailSuffixes.first ?? "" {
@@ -44,16 +45,15 @@ class LoginStore: ObservableObject, HollowErrorHandler {
             isLoading = true
         }
 
-        var reCAPTCHAInfo: (String, EmailCheckRequestConfiguration.ReCAPTCHAVersion)? = nil
+        var reCAPTCHAInfo: (String, EmailCheckRequest.Configuration.ReCAPTCHAVersion)? = nil
         if reCAPTCHAToken != "" {
             reCAPTCHAInfo = (reCAPTCHAToken, .v2)
         }
         
         let request = EmailCheckRequest(
             configuration: .init(
-                email: fullEmail,
-                reCAPTCHAInfo: reCAPTCHAInfo,
-                apiRoot: config.apiRootUrls)
+                apiRoot: config.apiRootUrls.first!, email: fullEmail,
+                reCAPTCHAInfo: reCAPTCHAInfo)
         )
         
         request.publisher
@@ -63,7 +63,7 @@ class LoginStore: ObservableObject, HollowErrorHandler {
             }, receiveValue: { resultData in
                 withAnimation {
                     self.isLoading = false
-                    self.emailCheckType = resultData.result
+                    self.emailCheckType = resultData
                     if self.emailCheckType == .reCAPTCHANeeded {
                         self.showsRecaptcha = true
                     }
@@ -90,7 +90,7 @@ class LoginStore: ObservableObject, HollowErrorHandler {
                 password: originalPassword,
                 validCode: emailVerificationCode,
                 deviceToken: deviceTokenString,
-                apiRoot: config.apiRootUrls)
+                apiRoot: config.apiRootUrls.first!)
         )
         
         request.publisher
@@ -119,7 +119,7 @@ class LoginStore: ObservableObject, HollowErrorHandler {
                 email: fullEmail,
                 password: loginPassword,
                 deviceToken: deviceTokenString,
-                apiRoot: config.apiRootUrls)
+                apiRoot: config.apiRootUrls.first!)
         )
         
         request.publisher

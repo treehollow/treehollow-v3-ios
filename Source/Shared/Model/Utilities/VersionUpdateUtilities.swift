@@ -12,7 +12,7 @@ import SwiftUI
 import UserNotifications
 
 struct VersionUpdateUtilities {
-    static func handleUpdateAvailabilityResult(data: UpdateAvailabilityRequest.ResultData?) {
+    static func handleUpdateAvailabilityResult(data: UpdateAvailabilityRequest.FinalResult?) {
         guard let data = data else {
             Defaults[.versionUpdateInfoCache] = nil
             return
