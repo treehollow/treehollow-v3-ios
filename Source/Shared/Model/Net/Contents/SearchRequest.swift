@@ -8,11 +8,9 @@
 import Foundation
 import HollowCore
 
-typealias SearchRequestConfiguration = HollowCore.SearchRequestConfiguration
-
 struct SearchRequest: DefaultConfigurationRequestAdaptor {
     typealias R = HollowCore.SearchRequest
-    typealias Configuration = SearchRequestConfiguration
+    typealias Configuration = HollowCore.SearchRequest.Configuration
     typealias FinalResult = [PostDataWrapper]
 //
     init(configuration: HollowCore.SearchRequest.Configuration) {

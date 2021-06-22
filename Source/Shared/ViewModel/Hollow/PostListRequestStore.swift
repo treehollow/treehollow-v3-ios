@@ -16,7 +16,7 @@ import HollowCore
 class PostListRequestStore: ObservableObject, HollowErrorHandler {
     
     // MARK: - Shared Variables
-    let type: PostListRequestGroupType
+    let type: PostListRequestGroup.R.RequestType
     var page = 1
     var noMorePosts = false
     var options: Options = []
@@ -38,7 +38,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
     @Published var invalidToken = false
 
     // MARK: -
-    init(type: PostListRequestGroupType, options: Options = []) {
+    init(type: PostListRequestGroup.R.RequestType, options: Options = []) {
         self.type = type
         self.posts = []
         self.options = options
@@ -59,7 +59,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
             withAnimation { invalidToken = true }
             return
         }
-        let configuration: PostListRequestGroupConfiguration
+        let configuration: PostListRequestGroup.Configuration
         switch type {
         case .attentionList:
             configuration = .attentionList(.init(apiRoot: config.apiRootUrls.first!, token: token, page: page))
@@ -178,7 +178,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         }
         let requests: [FetchImageRequest] = postsWithNoImages.compactMap {
             let imageURL = $0.hollowImage!.imageURL
-            let configuration = FetchImageRequestConfiguration(urlBase: Defaults[.hollowConfig]?.imgBaseUrls ?? [], urlString: imageURL)
+            let configuration = FetchImageRequest.Configuration(urlBase: Defaults[.hollowConfig]?.imgBaseUrls ?? [], urlString: imageURL)
             return FetchImageRequest(configuration: configuration)
         }
         
@@ -217,7 +217,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
         let requests: [PostDetailRequest] = citedPostId.map {
-            let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, postId: $0, includeComments: false)
+            let configuration = PostDetailRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: token, postId: $0, includeComments: false)
             return PostDetailRequest(configuration: configuration)
         }
         PostDetailRequest.publisher(for: requests)?

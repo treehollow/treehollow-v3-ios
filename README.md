@@ -4,6 +4,8 @@
 
 树洞 iOS / macOS 客户端，使用 SwiftUI 开发，支持 [T大树洞](https://thuhole.com)、[未名树洞](https://www.pkuhollow.com)。
 
+与树洞 HTTP API 相关的实现使用独立的依赖库 [HollowCore](https://github.com/liang2kl/HollowCore)。
+
 ## 下载
 
 <a href='https://apps.apple.com/cn/app/treehollow/id1556835658'>
@@ -37,7 +39,7 @@
 - [Hollow](Source/Hollow)：iOS Target（包括 Catalyst 版 macOS app）
 - [HollowMac](Source/HollowMac)：macOS Target（原生版本，开发中）
 - [Shared](Source/Shared)：上述两个 Target 共用的源文件
-- [HollowWidget](Source/HollowWidget)：iOS主屏幕小组件
+- [HollowWidget](Source/HollowWidget)：iOS 主屏幕小组件
 
 ## 贡献
 

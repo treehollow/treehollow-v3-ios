@@ -49,9 +49,9 @@ extension Defaults.Keys {
 // MARK: - Cache
 extension Defaults.Keys {
     #if !WIDGET
-    static let deviceListCache = Key<DeviceListRequestResultData?>("cache.device.list")
+    static let deviceListCache = Key<DeviceListRequest.FinalResult?>("cache.device.list")
     static let notificationTypeCache = Key<PushNotificationType>("cache.push.notification.type", default: .init(pushSystemMsg: true, pushReplyMe: true, pushFavorited: false))
-    static let versionUpdateInfoCache = Key<UpdateAvailabilityRequestResult.Result?>("cache.version.update.info")
+    static let versionUpdateInfoCache = Key<_UpdateAvailabilityRequest.Result._Result?>("cache.version.update.info")
     #endif
 }
 

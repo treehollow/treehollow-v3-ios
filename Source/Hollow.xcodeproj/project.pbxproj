@@ -31,8 +31,6 @@
 		0E3FEEDF265BA46C00842B98 /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457426340311001AFC4B /* AvatarGenerator.swift */; };
 		0E3FEEE0265BA4A900842B98 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453F26340311001AFC4B /* PostListRequest.swift */; };
 		0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E3FEEE6265BA5D400842B98 /* Cache */; };
-		0E40CF52267F6724009819EF /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E40CF51267F6724009819EF /* HollowCore */; };
-		0E40CF54267F6728009819EF /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E40CF53267F6728009819EF /* HollowCore */; };
 		0E40CF56267F6775009819EF /* RequestAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40CF55267F6775009819EF /* RequestAdaptor.swift */; };
 		0E40CF57267F6775009819EF /* RequestAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40CF55267F6775009819EF /* RequestAdaptor.swift */; };
 		0E40CF58267F6775009819EF /* RequestAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40CF55267F6775009819EF /* RequestAdaptor.swift */; };
@@ -101,6 +99,9 @@
 		0E429083263A8584008DA046 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429082263A8584008DA046 /* Cache */; };
 		0E48DB642660BBAE007C5755 /* View+cornerRadiusEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48DB632660BBAE007C5755 /* View+cornerRadiusEnvironment.swift */; };
 		0E4E4BC52634619A00B32F7F /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E4BC42634619A00B32F7F /* View+roundedCorner.swift */; };
+		0E514D1D26819040008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D1C26819040008D4301 /* HollowCore */; };
+		0E514D1F2681904A008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D1E2681904A008D4301 /* HollowCore */; };
+		0E514D2126819050008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D2026819050008D4301 /* HollowCore */; };
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E593F152660AD4A001213E1 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E593F142660AD4A001213E1 /* CustomTransitions.swift */; };
 		0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */; };
@@ -242,8 +243,6 @@
 		0EC245BE26340312001AFC4B /* PostListRequestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455326340311001AFC4B /* PostListRequestGroup.swift */; };
 		0EC245BF26340312001AFC4B /* FetchImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455426340311001AFC4B /* FetchImageRequest.swift */; };
 		0EC245C026340312001AFC4B /* FetchImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455426340311001AFC4B /* FetchImageRequest.swift */; };
-		0EC245C326340312001AFC4B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0EC2455626340311001AFC4B /* README.md */; };
-		0EC245C426340312001AFC4B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0EC2455626340311001AFC4B /* README.md */; };
 		0EC245C526340312001AFC4B /* ReportPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455826340311001AFC4B /* ReportPostRequest.swift */; };
 		0EC245C626340312001AFC4B /* ReportPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455826340311001AFC4B /* ReportPostRequest.swift */; };
 		0EC245C726340312001AFC4B /* ReportCommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455926340311001AFC4B /* ReportCommentRequest.swift */; };
@@ -397,7 +396,6 @@
 		0E3E694D260DFCE8005E8DA2 /* Text+dateText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+dateText.swift"; sourceTree = "<group>"; };
 		0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSubViews_iPad.swift; sourceTree = "<group>"; };
 		0E3E695F260E3676005E8DA2 /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
-		0E40CF50267F6700009819EF /* HollowCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = HollowCore; path = ../../HollowCore; sourceTree = "<group>"; };
 		0E40CF55267F6775009819EF /* RequestAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAdaptor.swift; sourceTree = "<group>"; };
 		0E40CF59267F7839009819EF /* DefaultRequestAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestAdaptor.swift; sourceTree = "<group>"; };
 		0E40CF61267F880C009819EF /* ReportRequestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRequestGroup.swift; sourceTree = "<group>"; };
@@ -535,7 +533,6 @@
 		0EC2455126340311001AFC4B /* ChangePasswordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequest.swift; sourceTree = "<group>"; };
 		0EC2455326340311001AFC4B /* PostListRequestGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListRequestGroup.swift; sourceTree = "<group>"; };
 		0EC2455426340311001AFC4B /* FetchImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchImageRequest.swift; sourceTree = "<group>"; };
-		0EC2455626340311001AFC4B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EC2455826340311001AFC4B /* ReportPostRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportPostRequest.swift; sourceTree = "<group>"; };
 		0EC2455926340311001AFC4B /* ReportCommentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCommentRequest.swift; sourceTree = "<group>"; };
 		0EC2455A26340311001AFC4B /* EditAttentionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAttentionRequest.swift; sourceTree = "<group>"; };
@@ -612,7 +609,7 @@
 			files = (
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E42906A263A8524008DA046 /* Kingfisher in Frameworks */,
-				0E40CF52267F6724009819EF /* HollowCore in Frameworks */,
+				0E514D1D26819040008D4301 /* HollowCore in Frameworks */,
 				0E429062263A7568008DA046 /* Alamofire in Frameworks */,
 				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
@@ -627,7 +624,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E40CF54267F6728009819EF /* HollowCore in Frameworks */,
+				0E514D1F2681904A008D4301 /* HollowCore in Frameworks */,
 				0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */,
 				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
 				0E7796192657EB30002F70C2 /* Alamofire in Frameworks */,
@@ -638,6 +635,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E514D2126819050008D4301 /* HollowCore in Frameworks */,
 				0E42907F263A8584008DA046 /* Kingfisher in Frameworks */,
 				0E429083263A8584008DA046 /* Cache in Frameworks */,
 				0E42907B263A8584008DA046 /* AppCenterAnalytics in Frameworks */,
@@ -669,18 +667,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0E40CF49267F636F009819EF /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				0E40CF50267F6700009819EF /* HollowCore */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
-				0E40CF49267F636F009819EF /* Packages */,
 				0EC244DA26340156001AFC4B /* Shared */,
 				0E415A7225CD769B00351672 /* Hollow */,
 				0EC244C3263400C6001AFC4B /* HollowMac */,
@@ -1089,7 +1078,6 @@
 		0EC2453A26340311001AFC4B /* Net */ = {
 			isa = PBXGroup;
 			children = (
-				0EC2455626340311001AFC4B /* README.md */,
 				0E40CF55267F6775009819EF /* RequestAdaptor.swift */,
 				0E40CF59267F7839009819EF /* DefaultRequestAdaptor.swift */,
 				0EC2453B26340311001AFC4B /* Contents */,
@@ -1374,7 +1362,7 @@
 				0E42906C263A853E008DA046 /* Connectivity */,
 				0E42906F263A8557008DA046 /* ImageScrollView */,
 				0E429072263A8572008DA046 /* Cache */,
-				0E40CF51267F6724009819EF /* HollowCore */,
+				0E514D1C26819040008D4301 /* HollowCore */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -1397,7 +1385,7 @@
 				0E7796162657EB30002F70C2 /* Defaults */,
 				0E7796182657EB30002F70C2 /* Alamofire */,
 				0E3FEEE6265BA5D400842B98 /* Cache */,
-				0E40CF53267F6728009819EF /* HollowCore */,
+				0E514D1E2681904A008D4301 /* HollowCore */,
 			);
 			productName = HollowWidgetExtension;
 			productReference = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */;
@@ -1424,6 +1412,7 @@
 				0E42907C263A8584008DA046 /* AppCenterCrashes */,
 				0E42907E263A8584008DA046 /* Kingfisher */,
 				0E429082263A8584008DA046 /* Cache */,
+				0E514D2026819050008D4301 /* HollowCore */,
 			);
 			productName = HollowMac;
 			productReference = 0EC244C2263400C5001AFC4B /* HollowMac.app */;
@@ -1469,6 +1458,7 @@
 				0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */,
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
+				0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -1488,7 +1478,6 @@
 			files = (
 				0E6EF32B25FB6C05001293FE /* dependencies.json in Resources */,
 				0EAA1B5825E7694400904296 /* InfoPlist.strings in Resources */,
-				0EC245C326340312001AFC4B /* README.md in Resources */,
 				0EAA1B4F25E6971500904296 /* Localizable.strings in Resources */,
 				0E415A7825CD769F00351672 /* Assets.xcassets in Resources */,
 			);
@@ -1507,7 +1496,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EC245C426340312001AFC4B /* README.md in Resources */,
 				0EC244C9263400C7001AFC4B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2262,6 +2250,14 @@
 				minimumVersion = 6.0.1;
 			};
 		};
+		0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/liang2kl/HollowCore.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2269,14 +2265,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
-		};
-		0E40CF51267F6724009819EF /* HollowCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = HollowCore;
-		};
-		0E40CF53267F6728009819EF /* HollowCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = HollowCore;
 		};
 		0E42905B263A742D008DA046 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2357,6 +2345,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		0E514D1C26819040008D4301 /* HollowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
+			productName = HollowCore;
+		};
+		0E514D1E2681904A008D4301 /* HollowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
+			productName = HollowCore;
+		};
+		0E514D2026819050008D4301 /* HollowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
+			productName = HollowCore;
 		};
 		0E7796162657EB30002F70C2 /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;

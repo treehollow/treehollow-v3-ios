@@ -8,28 +8,26 @@
 import Foundation
 import HollowCore
 
-struct PostDetailRequestConfiguration {
-    var apiRoot: String
-    var token: String
-    var postId: Int
-    /// when don't need comments, only need main post, set `needComments` to false
-    var includeComments: Bool
-}
-
 struct PostDetailRequest: RequestAdaptor {
     typealias R = HollowCore.PostDetailRequest
-    typealias Configuration = PostDetailRequestConfiguration
+    struct Configuration {
+        var apiRoot: String
+        var token: String
+        var postId: Int
+        /// when don't need comments, only need main post, set `needComments` to false
+        var includeComments: Bool
+    }
     typealias FinalResult = PostDataWrapper
     
-    var configuration: PostDetailRequestConfiguration
+    var configuration: Configuration
     
-    init(configuration: PostDetailRequestConfiguration) {
+    init(configuration: Configuration) {
         self.configuration = configuration
     }
     
-    func transformConfiguration(_ configuration: PostDetailRequestConfiguration) -> HollowCore.PostDetailRequestConfiguration {
+    func transformConfiguration(_ configuration: Configuration) -> R.Configuration {
         let postCache = PostCache.shared
-        var config = HollowCore.PostDetailRequestConfiguration(
+        var config = R.Configuration(
             // FIXME: Auto switch
             apiRoot: configuration.apiRoot,
             token: configuration.token,
@@ -46,7 +44,7 @@ struct PostDetailRequest: RequestAdaptor {
         return config
     }
     
-    func transformResult(_ result: PostDetailRequestResultData) -> PostDataWrapper {
+    func transformResult(_ result: R.ResultData) -> PostDataWrapper {
         let postCache = PostCache.shared
         
         var postWrapper: PostWrapper

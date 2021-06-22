@@ -8,6 +8,4 @@
 import Foundation
 import HollowCore
 
-typealias PostListRequestConfiguration = HollowCore.PostListRequestConfiguration
-
 typealias PostListRequest = PostListGenericRequest<HollowCore.PostListRequest>

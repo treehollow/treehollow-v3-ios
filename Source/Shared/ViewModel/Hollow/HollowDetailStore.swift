@@ -77,7 +77,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
     func requestDetail() {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, postId: postDataWrapper.post.postId, includeComments: true)
+        let configuration = PostDetailRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: token, postId: postDataWrapper.post.postId, includeComments: true)
         let request = PostDetailRequest(configuration: configuration)
         
         withAnimation { self.isLoading = true }
@@ -157,7 +157,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         }
     }
     
-    private func loadImage(for imageURL: String, receiveValue: @escaping (HImage) -> Void, receiveError: @escaping (FetchImageRequestError) -> Void) {
+    private func loadImage(for imageURL: String, receiveValue: @escaping (HImage) -> Void, receiveError: @escaping (FetchImageRequest.R.Error) -> Void) {
         guard let config = Defaults[.hollowConfig] else { return }
         let imageRequest = FetchImageRequest(configuration: .init(urlBase: config.imgBaseUrls, urlString: imageURL))
 
@@ -176,7 +176,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
                 postDataWrapper.citedPost?.loadingError != nil  else { return }
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-        let configuration = PostDetailRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, postId: citedPid, includeComments: false)
+        let configuration = PostDetailRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: token, postId: citedPid, includeComments: false)
         let request = PostDetailRequest(configuration: configuration)
         
         request.publisher
@@ -202,7 +202,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         guard let config = Defaults[.hollowConfig] else { return }
         let requests: [FetchImageRequest] = commentsWithNoImages.compactMap {
             let imageURL = $0.image!.imageURL
-            let configuration = FetchImageRequestConfiguration(urlBase: config.imgBaseUrls, urlString: imageURL)
+            let configuration = FetchImageRequest.Configuration(urlBase: config.imgBaseUrls, urlString: imageURL)
             return FetchImageRequest(configuration: configuration)
         }
         
@@ -296,7 +296,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
             }
             text = "Re \(postDataWrapper.post.comments[replyToIndex].name): " + text
         }
-        let configuration = SendCommentRequestConfiguration(apiRoot: config.apiRootUrls.first!, token: token, text: text, imageData: compressedImageBase64String, postId: postDataWrapper.post.postId, replyCommentId: replyTo)
+        let configuration = SendCommentRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: token, text: text, imageData: compressedImageBase64String, postId: postDataWrapper.post.postId, replyCommentId: replyTo)
         
         let request = SendCommentRequest(configuration: configuration)
         
@@ -329,7 +329,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
               let token = Defaults[.accessToken] else { return }
         let postId = postDataWrapper.post.postId
         
-        let configuration: ReportRequestGroupConfiguration
+        let configuration: ReportRequestGroup.Configuration
         
         if let commentId = commentId {
             configuration = .comment(.init(apiRoot: config.apiRootUrls.first!, token: token, commentId: commentId, type: type, reason: reason))

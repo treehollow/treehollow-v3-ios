@@ -17,21 +17,20 @@ import UIKit
 
 typealias UpdateAvailabilityRequest = DefaultGenericRequest<_UpdateAvailabilityRequest>
 
-struct UpdateAvailabilityRequestResult: Codable {
-    struct Result: Codable {
-        var minimumOsVersion: String
-        var trackViewUrl: String
-        var currentVersionReleaseDate: String
-        var releaseNotes: String
-        var version: String
-    }
-    var results: [Result]
-}
-
 struct _UpdateAvailabilityRequest: Request {
     typealias Configuration = Void
-    typealias Result = UpdateAvailabilityRequestResult
-    typealias ResultData = (Bool, UpdateAvailabilityRequestResult.Result)
+    struct Result: Codable {
+        struct _Result: Codable {
+            var minimumOsVersion: String
+            var trackViewUrl: String
+            var currentVersionReleaseDate: String
+            var releaseNotes: String
+            var version: String
+        }
+        var results: [_Result]
+    }
+
+    typealias ResultData = (Bool, Result._Result)
     typealias Error = DefaultRequestError
     
     static var defaultPublisher: AnyPublisher<ResultData?, Never> {

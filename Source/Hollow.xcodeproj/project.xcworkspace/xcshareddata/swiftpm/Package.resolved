@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "HollowCore",
+        "repositoryURL": "https://github.com/liang2kl/HollowCore.git",
+        "state": {
+          "branch": null,
+          "revision": "51372e04d685d31bf56944819465d67aeda67e2c",
+          "version": "0.1.1"
+        }
+      },
+      {
         "package": "ImageScrollView",
         "repositoryURL": "https://github.com/liang2kl/ImageScrollView.git",
         "state": {

@@ -9,7 +9,3 @@ import Foundation
 import HollowCore
 
 typealias SystemMessageRequest = DefaultGenericRequest<HollowCore.SystemMessageRequest>
-
-typealias SystemMessageRequestConfiguration = HollowCore.SystemMessageRequestConfiguration
-
-typealias SystemMessageRequestResultData = HollowCore.SystemMessageRequest.ResultData

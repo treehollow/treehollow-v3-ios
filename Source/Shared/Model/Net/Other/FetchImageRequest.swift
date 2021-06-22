@@ -12,45 +12,37 @@ import HollowCore
 
 typealias FetchImageRequest = DefaultGenericRequest<_FetchImageRequest>
 
-struct FetchImageRequestConfiguration {
-    var urlBase: [String]
-    var urlString: String
-}
-
-enum FetchImageRequestError: Error {
-    case invalidURL
-    case loadingCompleted
-    case failed(description: String)
-    
-    func loadingCompleted() -> Bool {
-        switch self {
-        case .loadingCompleted: return true
-        default: return false
-        }
-    }
-    var description: String {
-        switch self {
-        case .invalidURL: return NSLocalizedString("REQUEST_FETCH_IMAGE_ERROR_INVALID_URL", comment: "")
-        case .loadingCompleted: return ""
-        case .failed(let description): return description
-        }
-    }
-}
-
 
 struct _FetchImageRequest: Request {
-    typealias Configuration = FetchImageRequestConfiguration
+    struct Configuration {
+        var urlBase: [String]
+        var urlString: String
+    }
+
     typealias Result = HImage
     typealias ResultData = Result
-    typealias Error = FetchImageRequestError
     
-    var configuration: FetchImageRequestConfiguration
+    enum Error: Swift.Error {
+        case invalidURL
+        case loadingCompleted
+        case failed(description: String)
+
+        var description: String {
+            switch self {
+            case .invalidURL: return NSLocalizedString("REQUEST_FETCH_IMAGE_ERROR_INVALID_URL", comment: "")
+            case .loadingCompleted: return ""
+            case .failed(let description): return description
+            }
+        }
+    }
+
+    var configuration: Configuration
     
-    init(configuration: FetchImageRequestConfiguration) {
+    init(configuration: Configuration) {
         self.configuration = configuration
     }
     
-    func performRequest(completion: @escaping (ResultType<Result, FetchImageRequestError>) -> Void) {
+    func performRequest(completion: @escaping (ResultType<Result, Error>) -> Void) {
         let urlBase = LineSwitchManager.lineSelection(for: configuration.urlBase, type: .imageBaseURL)
         let urlString = urlBase + configuration.urlString
         guard let url = URL(string: urlString) else {

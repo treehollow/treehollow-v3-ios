@@ -10,7 +10,7 @@ import SwiftUI
 import Defaults
 
 struct VersionUpdateView: View {
-    let info: UpdateAvailabilityRequestResult.Result
+    let info: _UpdateAvailabilityRequest.Result._Result
     var showItem: Bool
     @Environment(\.openURL) var openURL
     

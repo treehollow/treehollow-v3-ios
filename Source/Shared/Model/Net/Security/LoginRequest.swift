@@ -9,18 +9,16 @@
 import Alamofire
 import HollowCore
 
-struct LoginRequestConfiguration {
-    var email: String
-    var password: String
-    let deviceType = 2
-    let deviceInfo = Constants.Application.deviceInfo
-    var deviceToken: String?
-    var apiRoot: String
-}
-
 struct LoginRequest: DefaultResultRequestAdaptor {
     typealias R = HollowCore.LoginRequest
-    typealias Configuration = LoginRequestConfiguration
+    struct Configuration {
+        var email: String
+        var password: String
+        let deviceType = 2
+        let deviceInfo = Constants.Application.deviceInfo
+        var deviceToken: String?
+        var apiRoot: String
+    }
     typealias FinalResult = HollowCore.LoginRequest.ResultData
 
     init(configuration: LoginRequest.Configuration) {
@@ -29,7 +27,7 @@ struct LoginRequest: DefaultResultRequestAdaptor {
     
     var configuration: LoginRequest.Configuration
     
-    func transformConfiguration(_ configuration: LoginRequestConfiguration) -> R.Configuration {
+    func transformConfiguration(_ configuration: Configuration) -> R.Configuration {
         return .init(apiRoot: configuration.apiRoot, email: configuration.email, password: configuration.password, deviceInfo: configuration.deviceInfo, deviceToken: configuration.deviceToken)
     }
 }
