@@ -139,9 +139,7 @@
 		0E7796032657E74A002F70C2 /* Bool+int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456E26340311001AFC4B /* Bool+int.swift */; };
 		0E7796042657E74A002F70C2 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456F26340311001AFC4B /* String+Date.swift */; };
 		0E7796052657E74A002F70C2 /* String+removeLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456826340311001AFC4B /* String+removeLineBreak.swift */; };
-		0E7796062657E74A002F70C2 /* String+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456426340311001AFC4B /* String+SHA256.swift */; };
 		0E7796072657E74A002F70C2 /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456926340311001AFC4B /* Int+string.swift */; };
-		0E7796082657E74A002F70C2 /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */; };
 		0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456626340311001AFC4B /* DefaultsKeys.swift */; };
 		0E7796172657EB30002F70C2 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796162657EB30002F70C2 /* Defaults */; };
 		0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
@@ -252,10 +250,6 @@
 		0EC245D026340312001AFC4B /* SendCommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455E26340311001AFC4B /* SendCommentRequest.swift */; };
 		0EC245D126340312001AFC4B /* SendVoteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455F26340311001AFC4B /* SendVoteRequest.swift */; };
 		0EC245D226340312001AFC4B /* SendVoteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2455F26340311001AFC4B /* SendVoteRequest.swift */; };
-		0EC245D926340312001AFC4B /* String+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456426340311001AFC4B /* String+SHA256.swift */; };
-		0EC245DA26340312001AFC4B /* String+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456426340311001AFC4B /* String+SHA256.swift */; };
-		0EC245DB26340312001AFC4B /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */; };
-		0EC245DC26340312001AFC4B /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */; };
 		0EC245DD26340312001AFC4B /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456626340311001AFC4B /* DefaultsKeys.swift */; };
 		0EC245DE26340312001AFC4B /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456626340311001AFC4B /* DefaultsKeys.swift */; };
 		0EC245DF26340312001AFC4B /* Int+bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456726340311001AFC4B /* Int+bool.swift */; };
@@ -534,8 +528,6 @@
 		0EC2455D26340311001AFC4B /* SendPostRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPostRequest.swift; sourceTree = "<group>"; };
 		0EC2455E26340311001AFC4B /* SendCommentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCommentRequest.swift; sourceTree = "<group>"; };
 		0EC2455F26340311001AFC4B /* SendVoteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendVoteRequest.swift; sourceTree = "<group>"; };
-		0EC2456426340311001AFC4B /* String+SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SHA256.swift"; sourceTree = "<group>"; };
-		0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hexEncodedString.swift"; sourceTree = "<group>"; };
 		0EC2456626340311001AFC4B /* DefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		0EC2456726340311001AFC4B /* Int+bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+bool.swift"; sourceTree = "<group>"; };
 		0EC2456826340311001AFC4B /* String+removeLineBreak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+removeLineBreak.swift"; sourceTree = "<group>"; };
@@ -1157,8 +1149,6 @@
 		0EC2456326340311001AFC4B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0EC2456426340311001AFC4B /* String+SHA256.swift */,
-				0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */,
 				0EC2456626340311001AFC4B /* DefaultsKeys.swift */,
 				0EC2456726340311001AFC4B /* Int+bool.swift */,
 				0EC2456826340311001AFC4B /* String+removeLineBreak.swift */,
@@ -1561,7 +1551,6 @@
 				0E95A1E6262C7F9300079050 /* Toast.swift in Sources */,
 				0EC245BD26340312001AFC4B /* PostListRequestGroup.swift in Sources */,
 				0E415B7325CD772200351672 /* SearchView.swift in Sources */,
-				0EC245DB26340312001AFC4B /* Data+hexEncodedString.swift in Sources */,
 				0EC245FF26340312001AFC4B /* PostCache.swift in Sources */,
 				0E1DD7D625D983BE000D27BA /* Avatar.swift in Sources */,
 				0ED1BF58264E664C005483C1 /* View+keyboardShortCut.swift in Sources */,
@@ -1632,7 +1621,6 @@
 				0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */,
 				0EC245F926340312001AFC4B /* OpenURLHelper.swift in Sources */,
 				0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */,
-				0EC245D926340312001AFC4B /* String+SHA256.swift in Sources */,
 				0EC245B926340311001AFC4B /* AccountCreationRequest.swift in Sources */,
 				0E28BC4525F5F8A000A97820 /* View+defaultListStyle.swift in Sources */,
 				0E415B4425CD772200351672 /* CustomTabView.swift in Sources */,
@@ -1705,13 +1693,11 @@
 				0E40CF5C267F7839009819EF /* DefaultRequestAdaptor.swift in Sources */,
 				0E3FEEE0265BA4A900842B98 /* PostListRequest.swift in Sources */,
 				0E7796052657E74A002F70C2 /* String+removeLineBreak.swift in Sources */,
-				0E7796062657E74A002F70C2 /* String+SHA256.swift in Sources */,
 				0E7795D52657E727002F70C2 /* HollowImage.swift in Sources */,
 				0E7796032657E74A002F70C2 /* Bool+int.swift in Sources */,
 				0E7796012657E74A002F70C2 /* String+regex.swift in Sources */,
 				0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */,
 				0E7795D32657E727002F70C2 /* PostData.swift in Sources */,
-				0E7796082657E74A002F70C2 /* Data+hexEncodedString.swift in Sources */,
 				0E7795CF2657E727002F70C2 /* VoteData.swift in Sources */,
 				0E7796072657E74A002F70C2 /* Int+string.swift in Sources */,
 				0E7795FC2657E74A002F70C2 /* Array+removeDuplicates.swift in Sources */,
@@ -1746,7 +1732,6 @@
 				0EC246252634040D001AFC4B /* HollowDetailStore.swift in Sources */,
 				0EC2465C2634116A001AFC4B /* AppModelBehaviour.swift in Sources */,
 				0EC2459626340311001AFC4B /* PostDetailRequest.swift in Sources */,
-				0EC245DC26340312001AFC4B /* Data+hexEncodedString.swift in Sources */,
 				0EC244E326340172001AFC4B /* CrossPlatformImage.swift in Sources */,
 				0EC2459426340311001AFC4B /* HollowType.swift in Sources */,
 				0E40CF57267F6775009819EF /* RequestAdaptor.swift in Sources */,
@@ -1776,7 +1761,6 @@
 				0EC245F026340312001AFC4B /* String+Date.swift in Sources */,
 				0EC245E626340312001AFC4B /* Array+removeDuplicates.swift in Sources */,
 				0ED1A16B26346D28001453A7 /* ViewLayouts.swift in Sources */,
-				0EC245DA26340312001AFC4B /* String+SHA256.swift in Sources */,
 				0EC245CE26340312001AFC4B /* SendPostRequest.swift in Sources */,
 				0E6E4E29263EF1D4007BBCFC /* UnregisterStore.swift in Sources */,
 				0EC245B026340311001AFC4B /* LogoutRequest.swift in Sources */,
@@ -2232,7 +2216,7 @@
 			repositoryURL = "https://github.com/liang2kl/HollowCore.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
+				minimumVersion = 0.1.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -6,6 +6,7 @@
 //
 
 import HollowCore
+import Foundation
 
 struct AccountCreationRequest: DefaultResultRequestAdaptor {
     typealias R = HollowCore.AccountCreationRequest
@@ -21,7 +22,7 @@ struct AccountCreationRequest: DefaultResultRequestAdaptor {
         /// Email valid code, optional, but one of `oldToken` and `validCode` must be present.
         var validCode: String?
         // TODO: Device token for APNs
-        var deviceToken: String?
+        var deviceToken: Data?
         /// See `AccountCreationConfiguration`
         ///
         var apiRoot: String

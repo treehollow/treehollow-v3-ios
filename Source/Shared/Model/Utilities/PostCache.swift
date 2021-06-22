@@ -14,38 +14,15 @@ struct PostCache {
     
     static let shared = PostCache()
     
-    var timestampStorage: Storage<Int, Int>?
     var postStorage: Storage<Int, PostWrapper>?
     
     private init() {
-        
-        self.timestampStorage = try? Storage<Int, Int>(
-            diskConfig: DiskConfig(name: "HollowCommentsTimestamp"),
-            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: Int.self)
-        )
         
         self.postStorage = try? Storage<Int,PostWrapper>(
             diskConfig: DiskConfig(name: "HollowComments"),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
             transformer: TransformerFactory.forCodable(ofType: PostWrapper.self)
         )
-    }
-    
-    /// find Timestamp using postID
-    /// - Parameter postId: ID of post
-    /// - Returns: timestamp  of post
-    func getTimestamp(postId: Int) -> Int? {
-        guard let timestamp = try? timestampStorage?.object(forKey: postId) else { return nil }
-        return timestamp
-    }
-    
-    /// Update Timestamp using postId and timestamp
-    /// - Parameters:
-    ///   - postId: postID
-    ///   - timestamp: lastest updated timestamp for comments of postID
-    func updateTimestamp(postId: Int, timestamp: Int) {
-        try? timestampStorage?.setObject(timestamp, forKey: postId)
     }
     
     /// get PostData from cache
@@ -73,13 +50,10 @@ struct PostCache {
     
     func remove(postId: Int) {
         try? postStorage?.removeObject(forKey: postId)
-        try? timestampStorage?.removeObject(forKey: postId)
     }
     
     func clear() {
         try? postStorage?.removeAll()
-        try? timestampStorage?.removeAll()
         try? postStorage?.removeExpiredObjects()
-        try? timestampStorage?.removeExpiredObjects()
     }
 }

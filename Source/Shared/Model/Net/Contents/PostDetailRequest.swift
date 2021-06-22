@@ -35,9 +35,7 @@ struct PostDetailRequest: RequestAdaptor {
             includeComments: configuration.includeComments
         )
         
-        if let oldUpdatedAt = postCache.getTimestamp(postId: configuration.postId),
-           let postWrapper = postCache.getPost(postId: configuration.postId) {
-            config.lastUpdateTimestamp = oldUpdatedAt
+        if let postWrapper = postCache.getPost(postId: configuration.postId) {
             config.cachedPost = postWrapper
         }
         
@@ -72,7 +70,6 @@ struct PostDetailRequest: RequestAdaptor {
             
             if configuration.includeComments {
                 postCache.updatePost(postId: configuration.postId, postWrapper: postWrapper)
-                postCache.updateTimestamp(postId: configuration.postId, timestamp: postWrapper.post.updatedAt)
             }
         }
         

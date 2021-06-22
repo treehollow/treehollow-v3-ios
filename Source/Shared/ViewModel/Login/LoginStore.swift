@@ -74,7 +74,6 @@ class LoginStore: ObservableObject, HollowErrorHandler {
     
     func register() {
         guard let config = Defaults[.hollowConfig] else { return }
-        let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString()
         
         // It is a UI error that we allow the user to continue
         // when the two passwords don't match.
@@ -89,7 +88,7 @@ class LoginStore: ObservableObject, HollowErrorHandler {
                 email: fullEmail,
                 password: originalPassword,
                 validCode: emailVerificationCode,
-                deviceToken: deviceTokenString,
+                deviceToken: Defaults[.deviceToken],
                 apiRoot: config.apiRootUrls.first!)
         )
         
@@ -108,7 +107,6 @@ class LoginStore: ObservableObject, HollowErrorHandler {
     
     func login() {
         guard let config = Defaults[.hollowConfig] else { return }
-        let deviceTokenString = Defaults[.deviceToken]?.hexEncodedString()
 
         withAnimation {
             isLoading = true
@@ -118,7 +116,7 @@ class LoginStore: ObservableObject, HollowErrorHandler {
             configuration: .init(
                 email: fullEmail,
                 password: loginPassword,
-                deviceToken: deviceTokenString,
+                deviceToken: Defaults[.deviceToken],
                 apiRoot: config.apiRootUrls.first!)
         )
         

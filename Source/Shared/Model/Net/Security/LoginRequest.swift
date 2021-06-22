@@ -7,6 +7,7 @@
 //
 
 import HollowCore
+import Foundation
 
 struct LoginRequest: DefaultResultRequestAdaptor {
     typealias R = HollowCore.LoginRequest
@@ -15,7 +16,7 @@ struct LoginRequest: DefaultResultRequestAdaptor {
         var password: String
         let deviceType = 2
         let deviceInfo = Constants.Application.deviceInfo
-        var deviceToken: String?
+        var deviceToken: Data?
         var apiRoot: String
     }
     typealias FinalResult = HollowCore.LoginRequest.ResultData
