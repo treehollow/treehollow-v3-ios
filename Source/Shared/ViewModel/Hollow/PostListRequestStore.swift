@@ -226,7 +226,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                 case .failure(let error):
                     let description: String
                     switch error {
-                    case .noSuchPost: description = error.description
+                    case .noSuchPost: description = error.localizedDescription
                     default: description = NSLocalizedString("CITED_POST_LOADING_ERROR", comment: "")
                     }
                     self.assignCitedPostError(

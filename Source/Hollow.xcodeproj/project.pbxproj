@@ -99,9 +99,10 @@
 		0E429083263A8584008DA046 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429082263A8584008DA046 /* Cache */; };
 		0E48DB642660BBAE007C5755 /* View+cornerRadiusEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48DB632660BBAE007C5755 /* View+cornerRadiusEnvironment.swift */; };
 		0E4E4BC52634619A00B32F7F /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4E4BC42634619A00B32F7F /* View+roundedCorner.swift */; };
-		0E514D1D26819040008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D1C26819040008D4301 /* HollowCore */; };
-		0E514D1F2681904A008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D1E2681904A008D4301 /* HollowCore */; };
-		0E514D2126819050008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D2026819050008D4301 /* HollowCore */; };
+		0E514D2526819BCA008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D2426819BCA008D4301 /* HollowCore */; };
+		0E514D2726819BCD008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D2626819BCD008D4301 /* HollowCore */; };
+		0E514D2A26819CD4008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D2926819CD4008D4301 /* HollowCore */; };
+		0E514D2C26819CE0008D4301 /* HollowCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0E514D2B26819CE0008D4301 /* HollowCore */; };
 		0E58810F25EA0F47006F6A94 /* View+presentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E58810E25EA0F47006F6A94 /* View+presentPopover.swift */; };
 		0E593F152660AD4A001213E1 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E593F142660AD4A001213E1 /* CustomTransitions.swift */; };
 		0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */; };
@@ -609,7 +610,7 @@
 			files = (
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E42906A263A8524008DA046 /* Kingfisher in Frameworks */,
-				0E514D1D26819040008D4301 /* HollowCore in Frameworks */,
+				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
 				0E429062263A7568008DA046 /* Alamofire in Frameworks */,
 				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
@@ -617,6 +618,7 @@
 				0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */,
 				0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */,
 				0E42906D263A853E008DA046 /* Connectivity in Frameworks */,
+				0E514D2A26819CD4008D4301 /* HollowCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +626,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E514D1F2681904A008D4301 /* HollowCore in Frameworks */,
+				0E514D2726819BCD008D4301 /* HollowCore in Frameworks */,
 				0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */,
 				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
 				0E7796192657EB30002F70C2 /* Alamofire in Frameworks */,
@@ -635,7 +637,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E514D2126819050008D4301 /* HollowCore in Frameworks */,
+				0E514D2C26819CE0008D4301 /* HollowCore in Frameworks */,
 				0E42907F263A8584008DA046 /* Kingfisher in Frameworks */,
 				0E429083263A8584008DA046 /* Cache in Frameworks */,
 				0E42907B263A8584008DA046 /* AppCenterAnalytics in Frameworks */,
@@ -1362,7 +1364,8 @@
 				0E42906C263A853E008DA046 /* Connectivity */,
 				0E42906F263A8557008DA046 /* ImageScrollView */,
 				0E429072263A8572008DA046 /* Cache */,
-				0E514D1C26819040008D4301 /* HollowCore */,
+				0E514D2426819BCA008D4301 /* HollowCore */,
+				0E514D2926819CD4008D4301 /* HollowCore */,
 			);
 			productName = Hollow;
 			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
@@ -1385,7 +1388,7 @@
 				0E7796162657EB30002F70C2 /* Defaults */,
 				0E7796182657EB30002F70C2 /* Alamofire */,
 				0E3FEEE6265BA5D400842B98 /* Cache */,
-				0E514D1E2681904A008D4301 /* HollowCore */,
+				0E514D2626819BCD008D4301 /* HollowCore */,
 			);
 			productName = HollowWidgetExtension;
 			productReference = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */;
@@ -1412,7 +1415,7 @@
 				0E42907C263A8584008DA046 /* AppCenterCrashes */,
 				0E42907E263A8584008DA046 /* Kingfisher */,
 				0E429082263A8584008DA046 /* Cache */,
-				0E514D2026819050008D4301 /* HollowCore */,
+				0E514D2B26819CE0008D4301 /* HollowCore */,
 			);
 			productName = HollowMac;
 			productReference = 0EC244C2263400C5001AFC4B /* HollowMac.app */;
@@ -1458,7 +1461,7 @@
 				0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */,
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
-				0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
+				0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
 			);
 			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
 			projectDirPath = "";
@@ -2250,12 +2253,12 @@
 				minimumVersion = 6.0.1;
 			};
 		};
-		0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */ = {
+		0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/liang2kl/HollowCore.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 0.1.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2346,19 +2349,22 @@
 			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
 		};
-		0E514D1C26819040008D4301 /* HollowCore */ = {
+		0E514D2426819BCA008D4301 /* HollowCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
 			productName = HollowCore;
 		};
-		0E514D1E2681904A008D4301 /* HollowCore */ = {
+		0E514D2626819BCD008D4301 /* HollowCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
 			productName = HollowCore;
 		};
-		0E514D2026819050008D4301 /* HollowCore */ = {
+		0E514D2926819CD4008D4301 /* HollowCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E514D1B26819040008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
+			package = 0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
+			productName = HollowCore;
+		};
+		0E514D2B26819CE0008D4301 /* HollowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
 			productName = HollowCore;
 		};
 		0E7796162657EB30002F70C2 /* Defaults */ = {

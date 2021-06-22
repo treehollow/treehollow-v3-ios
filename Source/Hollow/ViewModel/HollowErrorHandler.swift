@@ -30,7 +30,7 @@ extension HollowErrorHandler {
     /// Error handler for default requests.
     func defaultErrorHandler(errorMessage: inout (title: String, message: String)?, error: DefaultRequestError) {
         if handleTokenExpireError(error) { return }
-        errorMessage = (title: "", message: error.description)
+        errorMessage = (title: "", message: error.localizedDescription)
     }
     
     func tokenExpiredHandler() {

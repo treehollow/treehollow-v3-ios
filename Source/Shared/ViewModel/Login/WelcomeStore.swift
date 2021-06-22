@@ -55,7 +55,7 @@ class WelcomeStore: ObservableObject {
                 self.isLoadingConfig = false
                 switch completion {
                 case .failure(let error):
-                    self.errorMessage = ("", error.description)
+                    self.errorMessage = ("", error.localizedDescription)
                 case .finished: break
                 }
             }, receiveValue: { result in

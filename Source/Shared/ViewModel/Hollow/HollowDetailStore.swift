@@ -184,7 +184,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
             .sinkOnMainThread(receiveError: { error in
                 let description: String
                 switch error {
-                case .noSuchPost: description = error.description
+                case .noSuchPost: description = error.localizedDescription
                 default: description = NSLocalizedString("CITED_POST_LOADING_ERROR", comment: "")
                 }
                 self.postDataWrapper.citedPost?.loadingError = description
@@ -291,7 +291,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         if replyTo >= 0 {
             guard let replyToIndex = postDataWrapper.post.comments.firstIndex(where: { $0.commentId == replyToId }) else {
                 withAnimation { self.isSendingComment = false }
-                self.errorMessage = (title: DefaultRequestError.unknown.description, message: "")
+                self.errorMessage = (title: DefaultRequestError.unknown.localizedDescription, message: "")
                 return
             }
             text = "Re \(postDataWrapper.post.comments[replyToIndex].name): " + text

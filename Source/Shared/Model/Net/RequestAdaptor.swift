@@ -64,9 +64,3 @@ extension RequestAdaptor {
             .eraseToAnyPublisher()
     }
 }
-
-// FIXME: Localize in the module
-
-extension Error {
-    var description: String { "FIXME" }
-}
