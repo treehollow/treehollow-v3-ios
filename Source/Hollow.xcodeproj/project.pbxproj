@@ -83,7 +83,6 @@
 		0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3125CD772200351672 /* WelcomeView.swift */; };
 		0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42905B263A742D008DA046 /* WaterfallGrid */; };
 		0E42905F263A7447008DA046 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42905E263A7447008DA046 /* Defaults */; };
-		0E429062263A7568008DA046 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429061263A7568008DA046 /* Alamofire */; };
 		0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429064263A84CA008DA046 /* AppCenterCrashes */; };
 		0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429066263A84CA008DA046 /* AppCenterAnalytics */; };
 		0E42906A263A8524008DA046 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429069263A8524008DA046 /* Kingfisher */; };
@@ -92,7 +91,6 @@
 		0E429073263A8572008DA046 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429072263A8572008DA046 /* Cache */; };
 		0E429075263A8584008DA046 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429074263A8584008DA046 /* WaterfallGrid */; };
 		0E429077263A8584008DA046 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429076263A8584008DA046 /* Defaults */; };
-		0E429079263A8584008DA046 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429078263A8584008DA046 /* Alamofire */; };
 		0E42907B263A8584008DA046 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42907A263A8584008DA046 /* AppCenterAnalytics */; };
 		0E42907D263A8584008DA046 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42907C263A8584008DA046 /* AppCenterCrashes */; };
 		0E42907F263A8584008DA046 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42907E263A8584008DA046 /* Kingfisher */; };
@@ -146,8 +144,6 @@
 		0E7796082657E74A002F70C2 /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456526340311001AFC4B /* Data+hexEncodedString.swift */; };
 		0E7796092657E74A002F70C2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456626340311001AFC4B /* DefaultsKeys.swift */; };
 		0E7796172657EB30002F70C2 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796162657EB30002F70C2 /* Defaults */; };
-		0E7796192657EB30002F70C2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796182657EB30002F70C2 /* Alamofire */; };
-		0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
 		0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
 		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
 		0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */; };
@@ -290,8 +286,6 @@
 		0EC245F826340312001AFC4B /* AvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457426340311001AFC4B /* AvatarGenerator.swift */; };
 		0EC245F926340312001AFC4B /* OpenURLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457526340311001AFC4B /* OpenURLHelper.swift */; };
 		0EC245FA26340312001AFC4B /* OpenURLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457526340311001AFC4B /* OpenURLHelper.swift */; };
-		0EC245FB26340312001AFC4B /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
-		0EC245FC26340312001AFC4B /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
 		0EC245FD26340312001AFC4B /* DeviceModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457726340311001AFC4B /* DeviceModelUtilities.swift */; };
 		0EC245FE26340312001AFC4B /* DeviceModelUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457726340311001AFC4B /* DeviceModelUtilities.swift */; };
 		0EC245FF26340312001AFC4B /* PostCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457826340311001AFC4B /* PostCache.swift */; };
@@ -557,7 +551,6 @@
 		0EC2457326340311001AFC4B /* HollowDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowDateFormatter.swift; sourceTree = "<group>"; };
 		0EC2457426340311001AFC4B /* AvatarGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarGenerator.swift; sourceTree = "<group>"; };
 		0EC2457526340311001AFC4B /* OpenURLHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLHelper.swift; sourceTree = "<group>"; };
-		0EC2457626340311001AFC4B /* LineSwitchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineSwitchManager.swift; sourceTree = "<group>"; };
 		0EC2457726340311001AFC4B /* DeviceModelUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceModelUtilities.swift; sourceTree = "<group>"; };
 		0EC2457826340311001AFC4B /* PostCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCache.swift; sourceTree = "<group>"; };
 		0EC246112634040D001AFC4B /* ImageCompressStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCompressStore.swift; sourceTree = "<group>"; };
@@ -611,7 +604,6 @@
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E42906A263A8524008DA046 /* Kingfisher in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
-				0E429062263A7568008DA046 /* Alamofire in Frameworks */,
 				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
 				0E429070263A8557008DA046 /* ImageScrollView in Frameworks */,
@@ -629,7 +621,6 @@
 				0E514D2726819BCD008D4301 /* HollowCore in Frameworks */,
 				0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */,
 				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
-				0E7796192657EB30002F70C2 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,7 +633,6 @@
 				0E429083263A8584008DA046 /* Cache in Frameworks */,
 				0E42907B263A8584008DA046 /* AppCenterAnalytics in Frameworks */,
 				0E42907D263A8584008DA046 /* AppCenterCrashes in Frameworks */,
-				0E429079263A8584008DA046 /* Alamofire in Frameworks */,
 				0E429077263A8584008DA046 /* Defaults in Frameworks */,
 				0E429075263A8584008DA046 /* WaterfallGrid in Frameworks */,
 			);
@@ -1192,7 +1182,6 @@
 				0EC2457326340311001AFC4B /* HollowDateFormatter.swift */,
 				0EC2457426340311001AFC4B /* AvatarGenerator.swift */,
 				0EC2457526340311001AFC4B /* OpenURLHelper.swift */,
-				0EC2457626340311001AFC4B /* LineSwitchManager.swift */,
 				0EC2457726340311001AFC4B /* DeviceModelUtilities.swift */,
 				0EC2457826340311001AFC4B /* PostCache.swift */,
 				0E6D501226384B3100C8FB68 /* VersionUpdateUtilities.swift */,
@@ -1357,7 +1346,6 @@
 			packageProductDependencies = (
 				0E42905B263A742D008DA046 /* WaterfallGrid */,
 				0E42905E263A7447008DA046 /* Defaults */,
-				0E429061263A7568008DA046 /* Alamofire */,
 				0E429064263A84CA008DA046 /* AppCenterCrashes */,
 				0E429066263A84CA008DA046 /* AppCenterAnalytics */,
 				0E429069263A8524008DA046 /* Kingfisher */,
@@ -1386,7 +1374,6 @@
 			name = HollowWidgetExtension;
 			packageProductDependencies = (
 				0E7796162657EB30002F70C2 /* Defaults */,
-				0E7796182657EB30002F70C2 /* Alamofire */,
 				0E3FEEE6265BA5D400842B98 /* Cache */,
 				0E514D2626819BCD008D4301 /* HollowCore */,
 			);
@@ -1410,7 +1397,6 @@
 			packageProductDependencies = (
 				0E429074263A8584008DA046 /* WaterfallGrid */,
 				0E429076263A8584008DA046 /* Defaults */,
-				0E429078263A8584008DA046 /* Alamofire */,
 				0E42907A263A8584008DA046 /* AppCenterAnalytics */,
 				0E42907C263A8584008DA046 /* AppCenterCrashes */,
 				0E42907E263A8584008DA046 /* Kingfisher */,
@@ -1455,7 +1441,6 @@
 			packageReferences = (
 				0E42905A263A742D008DA046 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 				0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */,
-				0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */,
@@ -1563,7 +1548,6 @@
 				0EC245F526340312001AFC4B /* HollowDateFormatter.swift in Sources */,
 				0EA2D50F25EF9F41003D539E /* SearchBar.swift in Sources */,
 				0E415B4F25CD772200351672 /* CustomColors.swift in Sources */,
-				0EC245FB26340312001AFC4B /* LineSwitchManager.swift in Sources */,
 				0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */,
 				0EA2D51225F0A53F003D539E /* View+swipeToDismiss.swift in Sources */,
 				0E6D501326384B3100C8FB68 /* VersionUpdateUtilities.swift in Sources */,
@@ -1722,7 +1706,6 @@
 				0E3FEEE0265BA4A900842B98 /* PostListRequest.swift in Sources */,
 				0E7796052657E74A002F70C2 /* String+removeLineBreak.swift in Sources */,
 				0E7796062657E74A002F70C2 /* String+SHA256.swift in Sources */,
-				0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */,
 				0E7795D52657E727002F70C2 /* HollowImage.swift in Sources */,
 				0E7796032657E74A002F70C2 /* Bool+int.swift in Sources */,
 				0E7796012657E74A002F70C2 /* String+regex.swift in Sources */,
@@ -1756,7 +1739,6 @@
 				0EC2462B2634040D001AFC4B /* MessageStore.swift in Sources */,
 				0E3DB20C2638384C0090206F /* UpdateAvailabilityRequest.swift in Sources */,
 				0EC245A026340311001AFC4B /* AttentionListRequest.swift in Sources */,
-				0EC245FC26340312001AFC4B /* LineSwitchManager.swift in Sources */,
 				0ED087D126354556003C2E11 /* PostListView.swift in Sources */,
 				0EC2461F2634040D001AFC4B /* ImageCompressStore.swift in Sources */,
 				0EC245A226340311001AFC4B /* RandomListRequest.swift in Sources */,
@@ -2205,14 +2187,6 @@
 				minimumVersion = 4.2.2;
 			};
 		};
-		0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.3;
-			};
-		};
 		0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
@@ -2279,11 +2253,6 @@
 			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
 		};
-		0E429061263A7568008DA046 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		0E429064263A84CA008DA046 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
@@ -2323,11 +2292,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
-		};
-		0E429078263A8584008DA046 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		0E42907A263A8584008DA046 /* AppCenterAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2371,11 +2335,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
-		};
-		0E7796182657EB30002F70C2 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429060263A7568008DA046 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

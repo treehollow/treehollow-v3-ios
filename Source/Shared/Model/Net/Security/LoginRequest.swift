@@ -6,7 +6,6 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
-import Alamofire
 import HollowCore
 
 struct LoginRequest: DefaultResultRequestAdaptor {

@@ -30,8 +30,6 @@ extension Defaults.Keys {
     static let deviceToken = Key<Data?>("user.device.token")
     /// User access token
     static let accessToken = Key<String?>("user.access.token", suite: sharedDefaults)
-    /// Auto line switch result
-    static let orderdLineStorage = Key<LineSwitchManager.OrderedLineStorage?>("net.hollow.lineswitch.orderdlinestorage")
     /// Announcement explictly hidden by the user.
     static let hiddenAnnouncement = Key<String>("user.hidden.announcement", default: "")
     

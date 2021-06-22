@@ -80,7 +80,6 @@ extension HAppDelegate {
             if let result = result {
                 // Update the config and test connectivity
                 Defaults[.hollowConfig] = result
-                LineSwitchManager.testAll()
             }
         })
     }

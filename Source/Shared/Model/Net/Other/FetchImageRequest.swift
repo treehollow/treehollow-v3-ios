@@ -9,6 +9,7 @@
 import Foundation
 import Kingfisher
 import HollowCore
+import Defaults
 
 typealias FetchImageRequest = DefaultGenericRequest<_FetchImageRequest>
 
@@ -43,7 +44,7 @@ struct _FetchImageRequest: Request {
     }
     
     func performRequest(completion: @escaping (ResultType<Result, Error>) -> Void) {
-        let urlBase = LineSwitchManager.lineSelection(for: configuration.urlBase, type: .imageBaseURL)
+        guard let urlBase = Defaults[.hollowConfig]?.imgBaseUrls.first else { return }
         let urlString = urlBase + configuration.urlString
         guard let url = URL(string: urlString) else {
             completion(.failure(.invalidURL))
