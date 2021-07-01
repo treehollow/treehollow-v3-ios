@@ -29,15 +29,6 @@
         }
       },
       {
-        "package": "Connectivity",
-        "repositoryURL": "https://github.com/rwbutler/Connectivity.git",
-        "state": {
-          "branch": null,
-          "revision": "19f08ea4f25efe44cceea2ed5c52a0ca1bb567b5",
-          "version": "5.0.1"
-        }
-      },
-      {
         "package": "Defaults",
         "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
         "state": {
@@ -51,8 +42,8 @@
         "repositoryURL": "https://github.com/liang2kl/HollowCore.git",
         "state": {
           "branch": null,
-          "revision": "b2210f4de28717d94e4abac09c661ae899e1cafb",
-          "version": "0.1.3"
+          "revision": "bc055c8d8cc9234e122a0db19f8c655754db19cd",
+          "version": "0.1.4"
         }
       },
       {

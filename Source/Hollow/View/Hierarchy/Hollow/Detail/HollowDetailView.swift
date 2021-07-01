@@ -94,10 +94,13 @@ struct HollowDetailView: View {
                         let spacing: CGFloat = UIDevice.isMac ? 20 : 13
                         
                         if store.noSuchPost {
-                            HollowTextView(text: "DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", highlight: false)
+                            HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), highlight: false)
                                 .padding(.bottom, spacing)
                                 .padding(.horizontal)
-                            
+#if targetEnvironment(macCatalyst)
+                                .textSelection(.enabled)
+#endif
+
                         } else {
                             HollowContentView(
                                 postDataWrapper: store.postDataWrapper,
@@ -107,23 +110,22 @@ struct HollowDetailView: View {
                             )
                             .padding(.bottom, spacing)
                             .padding(.horizontal)
-                            .background(Color.hollowCardBackground)
                         }
                         
                         Spacer(minLength: spacing).fixedSize()
                         
                     }
                     .padding(.top)
-                    .listRowBackground(Color.hollowCardBackground)
+                    .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
-                    .background(Color.hollowCardBackground)
                     .id(-1)
                     
                     if !store.noSuchPost {
                         commentView
                             .listRowInsets(EdgeInsets())
+                            .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .listSectionSeparator(.hidden)
                     }

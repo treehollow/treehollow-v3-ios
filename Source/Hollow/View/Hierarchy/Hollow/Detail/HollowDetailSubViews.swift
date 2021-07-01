@@ -16,7 +16,7 @@ extension HollowDetailView {
         let comments = showOnlyName == nil ? originalComments : originalComments.filter({ $0.name == showOnlyName })
         
         HStack {
-            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+            Text("\(postData.replyNumber) \(Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))")
                 .fontWeight(.heavy)
                 .padding(.top)
                 .padding(.bottom, 5)
@@ -35,6 +35,7 @@ extension HollowDetailView {
                     .dynamicFont(size: 14, weight: .medium)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
+                    .background(Color.background)
                     .clipShape(Capsule())
                 }
                 .padding(.trailing, 10)
@@ -51,7 +52,6 @@ extension HollowDetailView {
             }
         }
         .padding(.horizontal)
-        .background(Color.hollowCardBackground)
         .lineLimit(1)
         
         ForEach(comments, id: \.commentId) { comment in

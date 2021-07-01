@@ -41,7 +41,7 @@ struct HollowCommentContentView: View {
                     .fixedSize()
             }
             HStack {
-                HStack(alignment: .top) {
+                HStack(alignment: .top, spacing: 0) {
                     Group { if hideLabel {
                         Spacer(minLength: nameLabelWidth)
                     } else {

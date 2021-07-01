@@ -12,7 +12,7 @@ import Defaults
 import HollowCore
 
 #if canImport(Rechability)
-import Connectivity
+//import Connectivity
 #endif
 
 class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandler {
@@ -59,14 +59,16 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
             .receive(on: DispatchQueue.main)
             .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
 
-        #if canImport(Rechability)
-        // When reconnect to the internet, fetch again.
-        ConnectivityPublisher.networkConnectedStatusPublisher
-            .sink(receiveValue: { connected in
-                if connected { self.requestDetail() }
-            })
-            .store(in: &cancellables)
-        #endif
+        // FIXME: Rebuild when available
+
+//        #if canImport(Rechability)
+//        // When reconnect to the internet, fetch again.
+//        ConnectivityPublisher.networkConnectedStatusPublisher
+//            .sink(receiveValue: { connected in
+//                if connected { self.requestDetail() }
+//            })
+//            .store(in: &cancellables)
+//        #endif
     }
     
     func cancelAll() {

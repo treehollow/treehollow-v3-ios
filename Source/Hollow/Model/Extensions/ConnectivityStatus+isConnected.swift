@@ -6,15 +6,17 @@
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
-import Connectivity
+// FIXME: Rebuild when available
 
-extension ConnectivityStatus {
-    var isConnected: Bool {
-        switch self {
-        case .connected,
-             .connectedViaCellular,
-             .connectedViaWiFi: return true
-        default: return false
-        }
-    }
-}
+//import Connectivity
+//
+//extension ConnectivityStatus {
+//    var isConnected: Bool {
+//        switch self {
+//        case .connected,
+//             .connectedViaCellular,
+//             .connectedViaWiFi: return true
+//        default: return false
+//        }
+//    }
+//}

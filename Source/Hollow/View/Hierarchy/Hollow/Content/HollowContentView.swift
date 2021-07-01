@@ -116,6 +116,10 @@ struct HollowContentView: View {
         let view = HollowTextView(attributedString: attributedString, highlight: true, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
             .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
             .accentColor(.hollowContentVoteGradient1)
+#if targetEnvironment(macCatalyst)
+            .textSelection(.enabled)
+#endif
+
         return view
     }
     

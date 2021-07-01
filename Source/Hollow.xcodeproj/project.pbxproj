@@ -85,8 +85,6 @@
 		0E42905F263A7447008DA046 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42905E263A7447008DA046 /* Defaults */; };
 		0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429064263A84CA008DA046 /* AppCenterCrashes */; };
 		0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429066263A84CA008DA046 /* AppCenterAnalytics */; };
-		0E42906A263A8524008DA046 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429069263A8524008DA046 /* Kingfisher */; };
-		0E42906D263A853E008DA046 /* Connectivity in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42906C263A853E008DA046 /* Connectivity */; };
 		0E429070263A8557008DA046 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42906F263A8557008DA046 /* ImageScrollView */; };
 		0E429073263A8572008DA046 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429072263A8572008DA046 /* Cache */; };
 		0E429075263A8584008DA046 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429074263A8584008DA046 /* WaterfallGrid */; };
@@ -121,7 +119,6 @@
 		0E6EF32B25FB6C05001293FE /* dependencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EF32A25FB6C05001293FE /* dependencies.json */; };
 		0E7795BC2657E6FC002F70C2 /* HollowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7795BB2657E6FC002F70C2 /* HollowWidget.swift */; };
 		0E7795BE2657E6FE002F70C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7795BD2657E6FE002F70C2 /* Assets.xcassets */; };
-		0E7795C22657E6FE002F70C2 /* HollowWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E7795C72657E723002F70C2 /* CrossPlatformTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DE26340172001AFC4B /* CrossPlatformTypes.swift */; };
 		0E7795C82657E723002F70C2 /* CrossPlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC244DF26340172001AFC4B /* CrossPlatformImage.swift */; };
 		0E7795CB2657E727002F70C2 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453726340311001AFC4B /* CommentData.swift */; };
@@ -357,7 +354,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0E7795C22657E6FE002F70C2 /* HollowWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +367,9 @@
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
 		0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+withPlaceholder.swift"; sourceTree = "<group>"; };
 		0E186C38262C60A1001A5855 /* View+showToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+showToast.swift"; sourceTree = "<group>"; };
+		0E19063B268B9830002181E3 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Hollow.app; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/Hollow.app"; sourceTree = "<absolute>"; };
+		0E19063C268B9830002181E3 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = HollowWidgetExtension.appex; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/HollowWidgetExtension.appex"; sourceTree = "<absolute>"; };
+		0E19063D268B9830002181E3 /* HollowMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HollowMac.app; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug/HollowMac.app"; sourceTree = "<absolute>"; };
 		0E1DD7D525D983BE000D27BA /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		0E28BC4125F5E29D00A97820 /* CustomColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorScheme.swift; sourceTree = "<group>"; };
 		0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultListStyle.swift"; sourceTree = "<group>"; };
@@ -389,7 +388,6 @@
 		0E40CF59267F7839009819EF /* DefaultRequestAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestAdaptor.swift; sourceTree = "<group>"; };
 		0E40CF61267F880C009819EF /* ReportRequestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRequestGroup.swift; sourceTree = "<group>"; };
 		0E40F74725D7C997003A2342 /* HollowInputSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowInputSubViews.swift; sourceTree = "<group>"; };
-		0E415A7025CD769B00351672 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E415A7725CD769F00351672 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E415A7C25CD769F00351672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E415AE925CD772200351672 /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
@@ -450,7 +448,6 @@
 		0E6EF31725F9C3D2001293FE /* FloatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButton.swift; sourceTree = "<group>"; };
 		0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+dynamicFont.swift"; sourceTree = "<group>"; };
 		0E6EF32A25FB6C05001293FE /* dependencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dependencies.json; sourceTree = "<group>"; };
-		0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HollowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7795BB2657E6FC002F70C2 /* HollowWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowWidget.swift; sourceTree = "<group>"; };
 		0E7795BD2657E6FE002F70C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E7795BF2657E6FE002F70C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -478,7 +475,6 @@
 		0EAC358F25E8CCA7000E9F36 /* HollowDetailSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailSubViews.swift; sourceTree = "<group>"; };
 		0EB45E3D261209A300409227 /* View+presentStyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+presentStyledAlert.swift"; sourceTree = "<group>"; };
 		0EB4F9A125F37A0E00BDAFF1 /* Text+highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+highlight.swift"; sourceTree = "<group>"; };
-		0EC244C2263400C5001AFC4B /* HollowMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HollowMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EC244C4263400C6001AFC4B /* HollowMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowMacApp.swift; sourceTree = "<group>"; };
 		0EC244C6263400C6001AFC4B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0EC244C8263400C7001AFC4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -594,14 +590,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
-				0E42906A263A8524008DA046 /* Kingfisher in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
 				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
 				0E429070263A8557008DA046 /* ImageScrollView in Frameworks */,
 				0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */,
 				0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */,
-				0E42906D263A853E008DA046 /* Connectivity in Frameworks */,
 				0E514D2A26819CD4008D4301 /* HollowCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,13 +638,6 @@
 			path = Drag;
 			sourceTree = "<group>";
 		};
-		0E3FEEE5265BA5D400842B98 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		0E415A6725CD769B00351672 = {
 			isa = PBXGroup;
 			children = (
@@ -658,21 +645,9 @@
 				0E415A7225CD769B00351672 /* Hollow */,
 				0EC244C3263400C6001AFC4B /* HollowMac */,
 				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
-				0E415A7125CD769B00351672 /* Products */,
-				0E3FEEE5265BA5D400842B98 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
-		};
-		0E415A7125CD769B00351672 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0E415A7025CD769B00351672 /* Hollow.app */,
-				0EC244C2263400C5001AFC4B /* HollowMac.app */,
-				0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */,
-			);
-			name = Products;
-			sourceTree = "<group>";
 		};
 		0E415A7225CD769B00351672 /* Hollow */ = {
 			isa = PBXGroup;
@@ -1338,15 +1313,13 @@
 				0E42905E263A7447008DA046 /* Defaults */,
 				0E429064263A84CA008DA046 /* AppCenterCrashes */,
 				0E429066263A84CA008DA046 /* AppCenterAnalytics */,
-				0E429069263A8524008DA046 /* Kingfisher */,
-				0E42906C263A853E008DA046 /* Connectivity */,
 				0E42906F263A8557008DA046 /* ImageScrollView */,
 				0E429072263A8572008DA046 /* Cache */,
 				0E514D2426819BCA008D4301 /* HollowCore */,
 				0E514D2926819CD4008D4301 /* HollowCore */,
 			);
 			productName = Hollow;
-			productReference = 0E415A7025CD769B00351672 /* Hollow.app */;
+			productReference = 0E19063B268B9830002181E3 /* Hollow.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E7795B42657E6FC002F70C2 /* HollowWidgetExtension */ = {
@@ -1368,7 +1341,7 @@
 				0E514D2626819BCD008D4301 /* HollowCore */,
 			);
 			productName = HollowWidgetExtension;
-			productReference = 0E7795B52657E6FC002F70C2 /* HollowWidgetExtension.appex */;
+			productReference = 0E19063C268B9830002181E3 /* HollowWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		0EC244C1263400C5001AFC4B /* HollowMac */ = {
@@ -1394,7 +1367,7 @@
 				0E514D2B26819CE0008D4301 /* HollowCore */,
 			);
 			productName = HollowMac;
-			productReference = 0EC244C2263400C5001AFC4B /* HollowMac.app */;
+			productReference = 0E19063D268B9830002181E3 /* HollowMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1433,12 +1406,11 @@
 				0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */,
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
 				0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
 			);
-			productRefGroup = 0E415A7125CD769B00351672 /* Products */;
+			productRefGroup = 0E415A6725CD769B00351672;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1972,7 +1944,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -1998,7 +1970,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -2023,7 +1995,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.3;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2050,7 +2022,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.3;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2187,14 +2159,6 @@
 				minimumVersion = 6.3.0;
 			};
 		};
-		0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rwbutler/Connectivity.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
-			};
-		};
 		0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/liang2kl/ImageScrollView.git";
@@ -2216,7 +2180,7 @@
 			repositoryURL = "https://github.com/liang2kl/HollowCore.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
+				minimumVersion = 0.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2246,16 +2210,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterAnalytics;
-		};
-		0E429069263A8524008DA046 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		0E42906C263A853E008DA046 /* Connectivity */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E42906B263A853E008DA046 /* XCRemoteSwiftPackageReference "Connectivity" */;
-			productName = Connectivity;
 		};
 		0E42906F263A8557008DA046 /* ImageScrollView */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import Kingfisher
+//import Kingfisher
 import HollowCore
 import Defaults
+import UIKit
 
 typealias FetchImageRequest = DefaultGenericRequest<_FetchImageRequest>
 
@@ -25,13 +26,11 @@ struct _FetchImageRequest: Request {
     
     enum Error: Swift.Error {
         case invalidURL
-        case loadingCompleted
         case failed(description: String)
 
         var description: String {
             switch self {
             case .invalidURL: return NSLocalizedString("REQUEST_FETCH_IMAGE_ERROR_INVALID_URL", comment: "")
-            case .loadingCompleted: return ""
             case .failed(let description): return description
             }
         }
@@ -50,18 +49,33 @@ struct _FetchImageRequest: Request {
             completion(.failure(.invalidURL))
             return
         }
-        let resource = ImageResource(downloadURL: url, cacheKey: urlString)
         
-        DispatchQueue.global(qos: .background).async {
-            KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
-                switch result {
-                case .success(let value):
-                    completion(.success(value.image))
-                case .failure(let error):
-                    completion(.failure(.failed(description: error.errorDescription ?? "")))
+        async {
+            do {
+                let data = try await URLSession(configuration: .default).data(from: url).0
+                if let image = HImage(data: data) {
+                    completion(.success(image))
+                } else {
+                    completion(.failure(.invalidURL))
                 }
+            } catch {
+                completion(.failure(.failed(description: error.localizedDescription)))
             }
         }
+        
+        // FIXME: Rebuild when available
+//        let resource = ImageResource(downloadURL: url, cacheKey: urlString)
+//
+//        DispatchQueue.global(qos: .background).async {
+//            KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
+//                switch result {
+//                case .success(let value):
+//                    completion(.success(value.image))
+//                case .failure(let error):
+//                    completion(.failure(.failed(description: error.errorDescription ?? "")))
+//                }
+//            }
+//        }
 
     }
 }
