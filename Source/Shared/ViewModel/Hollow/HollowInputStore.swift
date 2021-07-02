@@ -59,7 +59,7 @@ class HollowInputStore: ObservableObject, HollowErrorHandler, ImageCompressStore
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
             }, receiveValue: { result in
                 self.refreshHandler?()
-                withAnimation(.defaultSpring) {
+                withAnimation {
                     self.presented.wrappedValue = false
                 }
                 if self.selfDismiss {

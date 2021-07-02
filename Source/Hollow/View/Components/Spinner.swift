@@ -47,7 +47,7 @@ struct Spinner: View {
                 .trim(from: 0, to: CGFloat(progress))
                 .rotation(.init(degrees: -90), anchor: .center)
                 .stroke(color, style: .init(lineWidth: lineWidth, lineCap: .round))
-                .animation(.linear)
+                .animation(.linear, value: progress)
         }
     }
     

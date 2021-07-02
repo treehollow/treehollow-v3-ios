@@ -32,7 +32,9 @@ struct HollowApp: App {
                 }
             }
             // Set larger size category for macOS
-            .conditionalSizeCategory()
+#if targetEnvironment(macCatalyst)
+            .environment(\.sizeCategory, .extraLarge)
+#endif
             // Set the color scheme when appear
             .onAppear {
                 IntegrationUtilities.setCustomColorScheme()

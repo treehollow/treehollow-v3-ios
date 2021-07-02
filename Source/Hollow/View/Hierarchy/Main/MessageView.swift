@@ -29,8 +29,6 @@ struct MessageView: View {
                     .tag(Page.message)
             }
             .proposedIgnoringSafeArea()
-            // To avoid conflict with swipe gesture
-            .padding(.leading)
         }
         .defaultBlurBackground(hasPost: true)
         .overlay(Group { if isSearching {
@@ -96,8 +94,8 @@ extension MessageView {
                         imageReloadHandler: { _ in postListStore.fetchImages() }
                     )
                 }
+                .padding(.horizontal)
             }
-            .padding(.trailing)
             .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
             .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))
             .ignoresSafeArea(edges: .bottom)
@@ -108,29 +106,31 @@ extension MessageView {
         @ObservedObject var messageStore: MessageStore
         var body: some View {
             CustomScrollView(refresh: messageStore.requestMessages) { proxy in LazyVStack(spacing: 0) {
-                ForEach(messageStore.messages) { message in
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(message.title)
-                                .bold()
-                                .foregroundColor(.hollowContentText)
-                                .dynamicFont(size: 16)
-                            Spacer()
-                            Text.dateText(message.date)
-                                .foregroundColor(.secondary)
-                                .font(.footnote)
+                    ForEach(messageStore.messages) { message in
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(message.title)
+                                    .bold()
+                                    .foregroundColor(.hollowContentText)
+                                    .dynamicFont(size: 16)
+                                Spacer()
+                                Text.dateText(message.date)
+                                    .foregroundColor(.secondary)
+                                    .font(.footnote)
+                            }
+                            .padding(.bottom, 7)
+                            Text(message.content)
+                                .dynamicFont(size: 15)
                         }
-                        .padding(.bottom, 7)
-                        Text(message.content)
-                            .dynamicFont(size: 15)
+                        .padding()
+                        .background(Color.hollowCardBackground)
+                        .roundedCorner(15)
                     }
-                    .padding()
-                    .background(Color.hollowCardBackground)
-                    .roundedCorner(15)
-                }
-                .padding(.top)
-            }}
-            .padding(.trailing)
+                    .padding(.top)
+            }
+            .padding(.horizontal)
+                
+            }
             .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
             .modifier(LoadingIndicator(isLoading: messageStore.isLoading))
             .ignoresSafeArea(edges: .bottom)

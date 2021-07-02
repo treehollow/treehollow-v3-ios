@@ -64,16 +64,14 @@ class HollowDetailViewController: UIHostingController<HollowDetailViewWrapper> {
 struct HollowDetailViewWrapper: View {
     fileprivate let wrapper: ViewModelWrapper
     let isRoot: Bool
-    @State var presented = true
     
     var body: some View {
         if isRoot {
             HollowDetailView(store: wrapper.store)
-                .overlay(Color.black.opacity(0.0001).frame(width: 14).leading())
                 .swipeToDismiss(
                     presented: .init(
                         get: { true },
-                        set: { if !$0 { dismissSelf(); withAnimation { presented = false }} }
+                        set: { if !$0 { dismissSelf() }}
                     )
                 )
         } else {

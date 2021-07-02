@@ -41,37 +41,43 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                     }
                 }
             })
-            .gesture(
-                DragGesture()
-                    // Track gesture completion and failure
-                    .updating($isPressed) { value, state, _ in
-                        guard !state else { return }
-                        if dragValid(with: value) {
-                            withAnimation { state = true }
-                        }
-                    }
-                    .onChanged { value in
-                        // 12 is less than the standard padding
-                        if dragValid(with: value) {
-                            withAnimation(offset == (0, 0) ? .defaultSpring : nil) {
-                                offset.x = offset(for: value.translation.width)
-                                offset.y = offset(for: value.translation.height)
-                                scale = scale(for: sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2)))
+        
+            // Add the gesture on an overlay to avoid conflict
+            .overlay(
+                Color.black.opacity(0.0001).frame(width: 20)
+                    .gesture(
+                        DragGesture()
+                            // Track gesture completion and failure
+                            .updating($isPressed) { value, state, _ in
+                                guard !state else { return }
+                                if dragValid(with: value) {
+                                    withAnimation { state = true }
+                                }
                             }
-                        }
-                    }
-                    .onEnded { value in
-                        guard dragValid(with: value) else { return }
-                        if offsetExceeded(with: value) {
-                            withAnimation {
-                                presented = false
-                                offset = (0, 0)
-                                scale = 1
-                                content.hideKeyboard()
+                            .onChanged { value in
+                                if dragValid(with: value) {
+                                    withAnimation(offset == (0, 0) ? .defaultSpring : nil) {
+                                        offset.x = offset(for: value.translation.width)
+                                        offset.y = offset(for: value.translation.height)
+                                        scale = scale(for: sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2)))
+                                    }
+                                }
                             }
-                        }
-                    }
+                            .onEnded { value in
+                                guard dragValid(with: value) else { return }
+                                if offsetExceeded(with: value) {
+                                    withAnimation {
+                                        presented = false
+                                        offset = (0, 0)
+                                        scale = 1
+                                        content.hideKeyboard()
+                                    }
+                                }
+                            }
+                    )
+                    .leading()
             )
+
             .onAppear {
                 offset = (0, 0)
                 scale = 1
@@ -109,6 +115,6 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     }
     
     private func dragValid(with value: DragGesture.Value) -> Bool {
-        return value.startLocation.x <= 20 && (value.translation.width > 10 || abs(value.translation.height) > 10 || offset != (0, 0))
+        return value.translation.width > 10 || abs(value.translation.height) > 10 || offset != (0, 0)
     }
 }

@@ -53,6 +53,7 @@ extension HollowDetailView {
         }
         .padding(.horizontal)
         .lineLimit(1)
+        .listRowBackground(Color.hollowCardBackground)
         
         ForEach(comments, id: \.commentId) { comment in
             commentView(for: comment)

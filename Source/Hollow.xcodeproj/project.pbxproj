@@ -307,7 +307,6 @@
 		0EC24651263408CC001AFC4B /* HollowErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC24650263408CC001AFC4B /* HollowErrorHandler.swift */; };
 		0EC2465626340B71001AFC4B /* View+showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2465526340B71001AFC4B /* View+showAlert.swift */; };
 		0EC2465C2634116A001AFC4B /* AppModelBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2465B2634116A001AFC4B /* AppModelBehaviour.swift */; };
-		0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */; };
 		0EC4B67825D644CA0065BB82 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */; };
 		0EC4B67F25D670070065BB82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4B67E25D670070065BB82 /* ImagePicker.swift */; };
 		0ECA796E26652C4200736096 /* HollowErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA796D26652C4200736096 /* HollowErrorHandler.swift */; };
@@ -365,11 +364,11 @@
 		0E00D79A26628B43009E4B44 /* DragEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragEnvironment.swift; sourceTree = "<group>"; };
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
+		0E09C107268F5F510005AB64 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hollow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E09C108268F5F510005AB64 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HollowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E09C109268F5F510005AB64 /* HollowMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HollowMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+withPlaceholder.swift"; sourceTree = "<group>"; };
 		0E186C38262C60A1001A5855 /* View+showToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+showToast.swift"; sourceTree = "<group>"; };
-		0E19063B268B9830002181E3 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Hollow.app; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/Hollow.app"; sourceTree = "<absolute>"; };
-		0E19063C268B9830002181E3 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = HollowWidgetExtension.appex; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/HollowWidgetExtension.appex"; sourceTree = "<absolute>"; };
-		0E19063D268B9830002181E3 /* HollowMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HollowMac.app; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug/HollowMac.app"; sourceTree = "<absolute>"; };
 		0E1DD7D525D983BE000D27BA /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		0E28BC4125F5E29D00A97820 /* CustomColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorScheme.swift; sourceTree = "<group>"; };
 		0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultListStyle.swift"; sourceTree = "<group>"; };
@@ -556,7 +555,6 @@
 		0EC24650263408CC001AFC4B /* HollowErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowErrorHandler.swift; sourceTree = "<group>"; };
 		0EC2465526340B71001AFC4B /* View+showAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+showAlert.swift"; sourceTree = "<group>"; };
 		0EC2465B2634116A001AFC4B /* AppModelBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelBehaviour.swift; sourceTree = "<group>"; };
-		0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalSizeCategory.swift"; sourceTree = "<group>"; };
 		0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		0EC4B67E25D670070065BB82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0ECA796D26652C4200736096 /* HollowErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HollowErrorHandler.swift; sourceTree = "<group>"; };
@@ -645,6 +643,9 @@
 				0E415A7225CD769B00351672 /* Hollow */,
 				0EC244C3263400C6001AFC4B /* HollowMac */,
 				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
+				0E09C107268F5F510005AB64 /* Hollow.app */,
+				0E09C108268F5F510005AB64 /* HollowWidgetExtension.appex */,
+				0E09C109268F5F510005AB64 /* HollowMac.app */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -691,7 +692,6 @@
 				0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */,
 				0EA3C15D25FEFBAA00865B4D /* View+singleLineText.swift */,
 				0E6BE3B3260ED1EC00B529F7 /* View+noNavigationItems.swift */,
-				0EC2AE35260F761A0099B500 /* View+conditionalSizeCategory.swift */,
 				0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */,
 				0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */,
 				0E386D8D2613101B000568B6 /* View+refreshNavigationItem.swift */,
@@ -1319,7 +1319,7 @@
 				0E514D2926819CD4008D4301 /* HollowCore */,
 			);
 			productName = Hollow;
-			productReference = 0E19063B268B9830002181E3 /* Hollow.app */;
+			productReference = 0E09C107268F5F510005AB64 /* Hollow.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E7795B42657E6FC002F70C2 /* HollowWidgetExtension */ = {
@@ -1341,7 +1341,7 @@
 				0E514D2626819BCD008D4301 /* HollowCore */,
 			);
 			productName = HollowWidgetExtension;
-			productReference = 0E19063C268B9830002181E3 /* HollowWidgetExtension.appex */;
+			productReference = 0E09C108268F5F510005AB64 /* HollowWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		0EC244C1263400C5001AFC4B /* HollowMac */ = {
@@ -1367,7 +1367,7 @@
 				0E514D2B26819CE0008D4301 /* HollowCore */,
 			);
 			productName = HollowMac;
-			productReference = 0E19063D268B9830002181E3 /* HollowMac.app */;
+			productReference = 0E09C109268F5F510005AB64 /* HollowMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1457,7 +1457,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EC2AE36260F761A0099B500 /* View+conditionalSizeCategory.swift in Sources */,
 				0E00D79726628615009E4B44 /* View+proposedOverlay.swift in Sources */,
 				0EC246282634040D001AFC4B /* DeviceListStore.swift in Sources */,
 				0EC2458B26340311001AFC4B /* VoteData.swift in Sources */,
@@ -1935,7 +1934,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 69;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1961,7 +1960,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 69;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1986,7 +1985,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 69;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -2013,7 +2012,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 69;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -2051,7 +2050,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.HollowMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2077,7 +2076,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.HollowMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

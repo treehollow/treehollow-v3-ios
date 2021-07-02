@@ -116,7 +116,7 @@ struct HollowDetailView: View {
                         
                     }
                     .padding(.top)
-                    .listRowBackground(Color.clear)
+                    .listRowBackground(Color.hollowCardBackground)
                     .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
