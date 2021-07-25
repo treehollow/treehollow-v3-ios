@@ -19,7 +19,7 @@
 
 ### 环境要求
 
-树洞客户端使用 iOS 14 SDK，需要 `macOS 11.0+`、`Xcode 12+`。
+树洞客户端使用 iOS 15 SDK，需要 `macOS 11.3+`、`Xcode 13+`。
 
 ### 编译安装
 
@@ -37,9 +37,9 @@
 当前项目源文件目录结构如下：
 
 - [Hollow](Source/Hollow)：iOS Target（包括 Catalyst 版 macOS app）
-- [HollowMac](Source/HollowMac)：macOS Target（原生版本，开发中）
-- [Shared](Source/Shared)：上述两个 Target 共用的源文件
-- [HollowWidget](Source/HollowWidget)：iOS 主屏幕小组件
+- [HollowWidget](Source/HollowWidget)：iOS 主屏幕小组件，环境变量 `WIDGET`
+
+原有的 macOS Target 已被删除。
 
 ## 贡献
 

@@ -45,9 +45,9 @@ struct HollowApp: App {
                 NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
                 perform: { _ in
                     appDelegate.fetchConfig()
+                    appModel.widgetReloadCount += 1
                     if appModel.widgetReloadCount % 3 == 1 {
                         WidgetCenter.shared.reloadAllTimelines()
-                        appModel.widgetReloadCount += 1
                     }
                 }
             )
