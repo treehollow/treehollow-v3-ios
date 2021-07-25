@@ -29,7 +29,9 @@ class DeviceListStore: ObservableObject, HollowErrorHandler {
               let token = Defaults[.accessToken] else { return }
         let request = DeviceListRequest(configuration: .init(token: token, apiRoot: config.apiRootUrls))
         withAnimation {
-            isLoading = true
+            DispatchQueue.main.async {
+                self.isLoading = true
+            }
         }
         
         request.publisher

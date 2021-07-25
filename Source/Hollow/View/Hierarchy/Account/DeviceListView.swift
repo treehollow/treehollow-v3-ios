@@ -30,7 +30,7 @@ struct DeviceListView: View {
             }
         }
         .buttonStyle(BorderlessButtonStyle())
-        .navigationBarTitle(NSLocalizedString("DEVICELISTVIEW_NAV_TITLE", comment: ""), displayMode: .large)
+        .navigationBarTitle(NSLocalizedString("DEVICELISTVIEW_NAV_TITLE", comment: ""), displayMode: .inline)
         .modifier(LoadingIndicator(isLoading: deviceListStore.isLoading))
         .modifier(ErrorAlert(errorMessage: $deviceListStore.errorMessage))
         .navigationBarItems(trailing: Button(action: deviceListStore.requestDeviceList) {
