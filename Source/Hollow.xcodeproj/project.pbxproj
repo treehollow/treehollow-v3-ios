@@ -254,8 +254,6 @@
 		0E00D79A26628B43009E4B44 /* DragEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragEnvironment.swift; sourceTree = "<group>"; };
 		0E09B7A925D4D73100DC5615 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		0E09B7B025D4E7E800DC5615 /* BarImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarImageButton.swift; sourceTree = "<group>"; };
-		0E09C107268F5F510005AB64 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Hollow.app; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/Hollow.app"; sourceTree = "<absolute>"; };
-		0E09C108268F5F510005AB64 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = HollowWidgetExtension.appex; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/HollowWidgetExtension.appex"; sourceTree = "<absolute>"; };
 		0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+withPlaceholder.swift"; sourceTree = "<group>"; };
 		0E186C38262C60A1001A5855 /* View+showToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+showToast.swift"; sourceTree = "<group>"; };
 		0E1DD7D525D983BE000D27BA /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
@@ -324,6 +322,8 @@
 		0E58811925EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0E58811A25EA674B006F6A94 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E593F142660AD4A001213E1 /* CustomTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
+		0E59CD6626ADCB6100574F34 /* Hollow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Hollow.app; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/Hollow.app"; sourceTree = "<absolute>"; };
+		0E59CD6726ADCB6100574F34 /* HollowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = HollowWidgetExtension.appex; path = "/Users/liang2kl/Developer/treehollow-v3-ios/Source/build/Debug-iphoneos/HollowWidgetExtension.appex"; sourceTree = "<absolute>"; };
 		0E671AD4260F6E8C00590736 /* View+onClickGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onClickGesture.swift"; sourceTree = "<group>"; };
 		0E6721D525DE2DDB00A84311 /* GetSafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSafeAreaInsets.swift; sourceTree = "<group>"; };
 		0E6721DC25DE326400A84311 /* View+conditionalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalPadding.swift"; sourceTree = "<group>"; };
@@ -498,6 +498,7 @@
 			children = (
 				0E415A7225CD769B00351672 /* Hollow */,
 				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
+				0E59CD6826ADCDC500574F34 /* Products */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -700,6 +701,15 @@
 				0E6E4E25263EF14E007BBCFC /* UnregisterView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		0E59CD6826ADCDC500574F34 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+                0E59CD6626ADCB6100574F34 /* Hollow.app */,
+                0E59CD6726ADCB6100574F34 /* HollowWidgetExtension.appex */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		0E6EF32925FB6962001293FE /* Resources */ = {
@@ -1019,7 +1029,7 @@
 				0E514D2926819CD4008D4301 /* HollowCore */,
 			);
 			productName = Hollow;
-			productReference = 0E09C107268F5F510005AB64 /* Hollow.app */;
+			productReference = 0E59CD6626ADCB6100574F34 /* Hollow.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E7795B42657E6FC002F70C2 /* HollowWidgetExtension */ = {
@@ -1041,7 +1051,7 @@
 				0E514D2626819BCD008D4301 /* HollowCore */,
 			);
 			productName = HollowWidgetExtension;
-			productReference = 0E09C108268F5F510005AB64 /* HollowWidgetExtension.appex */;
+			productReference = 0E59CD6726ADCB6100574F34 /* HollowWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1081,7 +1091,7 @@
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
 				0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
 			);
-			productRefGroup = 0E415A6725CD769B00351672;
+			productRefGroup = 0E59CD6826ADCDC500574F34;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
