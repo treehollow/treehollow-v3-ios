@@ -152,7 +152,7 @@ extension HollowDetailView {
             // keep in sync with HollowCommentContentView
             let avatarWidth = HollowCommentContentView.avatarWidth
             let circleWidth = avatarWidth * HollowCommentContentView.avatarProportion + 4
-            HStack(alignment: .top) {
+            HStack(alignment: .top, spacing: 0) {
                 Circle()
                     .frame(width: circleWidth, height: circleWidth)
                     .leading()

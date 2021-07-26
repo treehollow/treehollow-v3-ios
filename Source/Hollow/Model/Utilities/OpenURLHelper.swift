@@ -29,7 +29,6 @@ struct OpenURLHelper {
     
     var openURL: OpenURLAction
     
-    #if !os(macOS) || targetEnvironment(macCatalyst)
     func tryOpen(_ url: URL, method: OpenMethod) throws {
         if UIApplication.shared.canOpenURL(url) {
             open(url, method: method)
@@ -51,11 +50,5 @@ struct OpenURLHelper {
             openURL(url)
         }
     }
-    
-    #else
-    func tryOpen(_ url: URL, method: OpenMethod) throws {
-        openURL(url)
-    }
-    #endif
     
 }
