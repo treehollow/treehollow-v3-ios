@@ -33,9 +33,7 @@ struct MainView: View {
                     .padding(.top, 10)
                     .zIndex(2)
                 
-                // Use our modified TabView to avoid default background color when using
-                // `CustomScrollView` in `TabView`
-                CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
+                TabView(selection: $page) {
                     WanderView(
                         showCreatePost: $showCreatePost,
                         viewModel: wanderViewModel
@@ -47,6 +45,7 @@ struct MainView: View {
                     )
                     .tag(Page.timeline)
                 }
+                .tabViewStyle(.page(indexDisplayMode: .never))
                 
                 // Overlay circular buttons
                 .overlay(

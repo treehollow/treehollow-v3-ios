@@ -120,6 +120,9 @@
 		0E8FD83F26ADCAB1008875EE /* String+removeLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456826340311001AFC4B /* String+removeLineBreak.swift */; };
 		0E8FD84026ADCAB1008875EE /* Int+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2456926340311001AFC4B /* Int+string.swift */; };
 		0E95A1E6262C7F9300079050 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E95A1E5262C7F9300079050 /* Toast.swift */; };
+		0E97D0B526B45F4E0031BC75 /* ScrollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E97D0B426B45F4E0031BC75 /* ScrollViewModel.swift */; };
+		0E97D0B826B45F960031BC75 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0E97D0B726B45F960031BC75 /* Introspect */; };
+		0E97D0BA26B465550031BC75 /* View+defaultListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E97D0B926B465550031BC75 /* View+defaultListRow.swift */; };
 		0EA24E4A263DB7720061100C /* UnregisterCheckEmailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA24E49263DB7720061100C /* UnregisterCheckEmailRequest.swift */; };
 		0EA24E4D263DBA2E0061100C /* UnregisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA24E4C263DBA2E0061100C /* UnregisterRequest.swift */; };
 		0EA2D50F25EF9F41003D539E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA2D50E25EF9F41003D539E /* SearchBar.swift */; };
@@ -344,6 +347,8 @@
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
 		0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationUtilities.swift; sourceTree = "<group>"; };
 		0E95A1E5262C7F9300079050 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		0E97D0B426B45F4E0031BC75 /* ScrollViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewModel.swift; sourceTree = "<group>"; };
+		0E97D0B926B465550031BC75 /* View+defaultListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultListRow.swift"; sourceTree = "<group>"; };
 		0EA24E49263DB7720061100C /* UnregisterCheckEmailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterCheckEmailRequest.swift; sourceTree = "<group>"; };
 		0EA24E4C263DBA2E0061100C /* UnregisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterRequest.swift; sourceTree = "<group>"; };
 		0EA2D50E25EF9F41003D539E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -455,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
+				0E97D0B826B45F960031BC75 /* Introspect in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
 				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
@@ -550,6 +556,7 @@
 				0EAC358A25E8BE92000E9F36 /* View+revertColorScheme.swift */,
 				0EFE1404262AF768007B0045 /* View+makeDivider.swift */,
 				0ED81A24263D4C2300939B82 /* View+defaultToggleStyle.swift */,
+				0E97D0B926B465550031BC75 /* View+defaultListRow.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -963,6 +970,7 @@
 		0ECA796C26652C3400736096 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0E97D0B426B45F4E0031BC75 /* ScrollViewModel.swift */,
 				0ECA796D26652C4200736096 /* HollowErrorHandler.swift */,
 				0EC246102634040D001AFC4B /* Hollow */,
 				0EC246152634040D001AFC4B /* Account */,
@@ -1021,6 +1029,7 @@
 				0E429072263A8572008DA046 /* Cache */,
 				0E514D2426819BCA008D4301 /* HollowCore */,
 				0E514D2926819CD4008D4301 /* HollowCore */,
+				0E97D0B726B45F960031BC75 /* Introspect */,
 			);
 			productName = Hollow;
 			productReference = 0E59CD6626ADCB6100574F34 /* Hollow.app */;
@@ -1084,6 +1093,7 @@
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
 				0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
+				0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 0E59CD6826ADCDC500574F34 /* Products */;
 			projectDirPath = "";
@@ -1150,6 +1160,7 @@
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
 				0EC245C726340312001AFC4B /* ReportCommentRequest.swift in Sources */,
 				0EC245E326340312001AFC4B /* Int+string.swift in Sources */,
+				0E97D0B526B45F4E0031BC75 /* ScrollViewModel.swift in Sources */,
 				0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */,
 				0EC2452226340301001AFC4B /* UIDevice+isPad.swift in Sources */,
 				0EC245DD26340312001AFC4B /* DefaultsKeys.swift in Sources */,
@@ -1160,6 +1171,7 @@
 				0E40CF62267F880C009819EF /* ReportRequestGroup.swift in Sources */,
 				0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */,
 				0EFB54DA25E8CF4B001BC98A /* HollowInputComponents.swift in Sources */,
+				0E97D0BA26B465550031BC75 /* View+defaultListRow.swift in Sources */,
 				0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */,
 				0EC2452426340301001AFC4B /* ConnectivityStatus+isConnected.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsSubViews.swift in Sources */,
@@ -1676,6 +1688,14 @@
 				minimumVersion = 0.1.4;
 			};
 		};
+		0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1731,6 +1751,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
+		};
+		0E97D0B726B45F960031BC75 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
