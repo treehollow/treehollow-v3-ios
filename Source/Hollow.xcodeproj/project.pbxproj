@@ -1681,7 +1681,7 @@
 			repositoryURL = "https://github.com/liang2kl/HollowCore.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
+				minimumVersion = 0.2.0;
 			};
 		};
 		0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
