@@ -20,6 +20,7 @@
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
 		0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSize.swift */; };
 		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
+		0E37528426B79E86000A3DC5 /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37528326B79E86000A3DC5 /* CustomList.swift */; };
 		0E386D8E2613101B000568B6 /* View+refreshNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E386D8D2613101B000568B6 /* View+refreshNavigationItem.swift */; };
 		0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */; };
 		0E3DB20B2638384C0090206F /* UpdateAvailabilityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DB20A2638384C0090206F /* UpdateAvailabilityRequest.swift */; };
@@ -38,8 +39,6 @@
 		0E415A7825CD769F00351672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E415A7725CD769F00351672 /* Assets.xcassets */; };
 		0E415B4225CD772200351672 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
 		0E415B4325CD772200351672 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AEB25CD772200351672 /* ErrorAlert.swift */; };
-		0E415B4425CD772200351672 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AED25CD772200351672 /* CustomTabView.swift */; };
-		0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AEF25CD772200351672 /* CustomScrollView.swift */; };
 		0E415B4725CD772200351672 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AF025CD772200351672 /* Blur.swift */; };
 		0E415B4A25CD772200351672 /* Color+uiColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AF425CD772200351672 /* Color+uiColor.swift */; };
 		0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AF525CD772200351672 /* CustomAnimations.swift */; };
@@ -264,6 +263,7 @@
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
+		0E37528326B79E86000A3DC5 /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
 		0E386D8D2613101B000568B6 /* View+refreshNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+refreshNavigationItem.swift"; sourceTree = "<group>"; };
 		0E3DA2A725FF379000ECEFAC /* ProviderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderInfoView.swift; sourceTree = "<group>"; };
 		0E3DB20A2638384C0090206F /* UpdateAvailabilityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAvailabilityRequest.swift; sourceTree = "<group>"; };
@@ -279,8 +279,6 @@
 		0E415A7C25CD769F00351672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E415AE925CD772200351672 /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		0E415AEB25CD772200351672 /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
-		0E415AED25CD772200351672 /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
-		0E415AEF25CD772200351672 /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0E415AF025CD772200351672 /* Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0E415AF425CD772200351672 /* Color+uiColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+uiColor.swift"; sourceTree = "<group>"; };
 		0E415AF525CD772200351672 /* CustomAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnimations.swift; sourceTree = "<group>"; };
@@ -566,8 +564,6 @@
 			children = (
 				0ED1A16626346CB1001453A7 /* ReCAPTCHAPageView.swift */,
 				0E8BCFE625E0A4720056D809 /* IntegrationUtilities.swift */,
-				0E415AED25CD772200351672 /* CustomTabView.swift */,
-				0E415AEF25CD772200351672 /* CustomScrollView.swift */,
 				0EC4B67725D644CA0065BB82 /* CustomTextEditor.swift */,
 				0E415AF025CD772200351672 /* Blur.swift */,
 				0E09B7A925D4D73100DC5615 /* ImageViewer.swift */,
@@ -756,6 +752,7 @@
 				0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */,
 				0E79AF50265E45B600BFDABD /* withAnimation.swift */,
 				0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */,
+				0E37528326B79E86000A3DC5 /* CustomList.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1268,7 +1265,6 @@
 				0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */,
 				0EC245B926340311001AFC4B /* AccountCreationRequest.swift in Sources */,
 				0E28BC4525F5F8A000A97820 /* View+defaultListStyle.swift in Sources */,
-				0E415B4425CD772200351672 /* CustomTabView.swift in Sources */,
 				0EF10F6626330F29004D6538 /* HollowDetailViewController.swift in Sources */,
 				0E58810F25EA0F47006F6A94 /* View+presentView.swift in Sources */,
 				0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */,
@@ -1282,7 +1278,6 @@
 				0E6EF31B25F9DFDE001293FE /* View+dynamicFont.swift in Sources */,
 				0E186C39262C60A1001A5855 /* View+showToast.swift in Sources */,
 				0EC245E126340312001AFC4B /* String+removeLineBreak.swift in Sources */,
-				0E415B4625CD772200351672 /* CustomScrollView.swift in Sources */,
 				0E17B9852661FB03008773E6 /* View+withPlaceholder.swift in Sources */,
 				0E28BC4225F5E29D00A97820 /* CustomColorScheme.swift in Sources */,
 				0EFB4F222639790000530B5F /* ImageTitledStack.swift in Sources */,
@@ -1311,6 +1306,7 @@
 				0E415B4B25CD772200351672 /* CustomAnimations.swift in Sources */,
 				0EC245DF26340312001AFC4B /* Int+bool.swift in Sources */,
 				0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */,
+				0E37528426B79E86000A3DC5 /* CustomList.swift in Sources */,
 				0EC245C926340312001AFC4B /* EditAttentionRequest.swift in Sources */,
 				0E09B7AA25D4D73100DC5615 /* ImageViewer.swift in Sources */,
 				0EA3C15E25FEFBAA00865B4D /* View+singleLineText.swift in Sources */,
@@ -1501,7 +1497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1527,7 +1523,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;

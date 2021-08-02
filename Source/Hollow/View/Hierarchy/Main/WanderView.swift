@@ -21,7 +21,7 @@ struct WanderView: View {
     
     
     var body: some View {
-        CustomScrollView(
+        CustomList(
             didScrollToBottom: {
                 // We won't allow updating when the detail
                 // view is presenting
@@ -35,21 +35,19 @@ struct WanderView: View {
                 viewModel.loadMorePosts()
             },
             refresh: viewModel.refresh,
-            content: { proxy in
-                Group {
-                    WaterfallGrid($viewModel.posts) { $postDataWrapper in Group {
-                        let postData = postDataWrapper.post
-                        cardView(for: postData)
-                            .onClickGesture {
-                                let detailStore = HollowDetailStore(bindingPostWrapper: $postDataWrapper)
-                                IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
-                            }
-                    }}
-                    .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: nil)
-                    .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : 15)
-                    .padding(.bottom, 70)
-                    .background(Color.background)
-                }
+            content: {
+                WaterfallGrid($viewModel.posts) { $postDataWrapper in Group {
+                    let postData = postDataWrapper.post
+                    cardView(for: postData)
+                        .onClickGesture {
+                            let detailStore = HollowDetailStore(bindingPostWrapper: $postDataWrapper)
+                            IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
+                        }
+                }}
+                .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: nil)
+                .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : 15)
+                .padding(.bottom, 70)
+                .background(Color.background)
             })
             .ignoresSafeArea(edges: .bottom)
             // Show loading indicator when no posts are loaded or refresh on top

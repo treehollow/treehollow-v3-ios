@@ -53,20 +53,18 @@ struct SearchView: View {
                         .verticalCenter()
                         .horizontalCenter()
                 } else {
-                    CustomScrollView(didScrollToBottom: store.loadMorePosts) { proxy in
-                        LazyVStack(spacing: 0) {
-                            PostListView(
-                                postDataWrappers: $store.posts,
-                                detailStore: $detailStore,
-                                revealFoldedTags: store.type != .searchTrending,
-                                voteHandler: store.vote,
-                                starHandler: store.star,
-                                imageReloadHandler: { _ in store.fetchImages() }
-                            )
-                        }
-                        .padding(.top)
+                    CustomList(didScrollToBottom: store.loadMorePosts) {
+                        PostListView(
+                            postDataWrappers: $store.posts,
+                            detailStore: $detailStore,
+                            revealFoldedTags: store.type != .searchTrending,
+                            voteHandler: store.vote,
+                            starHandler: store.star,
+                            imageReloadHandler: { _ in store.fetchImages() }
+                        )
+                            .defaultPadding(.horizontal)
                     }
-                    .defaultPadding(.horizontal)
+//                    .defaultPadding(.horizontal)
                     .proposedIgnoringSafeArea(edges: .bottom)
                     .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }

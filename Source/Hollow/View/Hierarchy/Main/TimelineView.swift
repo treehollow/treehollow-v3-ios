@@ -13,8 +13,6 @@ struct TimelineView: View {
     @Binding var isSearching: Bool
     
     @ObservedObject var viewModel: PostListRequestStore
-    @ObservedObject var scrollViewModel = ScrollViewModel()
-//    @State var offset: CGFloat = 0
     var body14: CGFloat = 14
     
     @State var detailStore: HollowDetailStore? = nil
@@ -25,7 +23,11 @@ struct TimelineView: View {
     private let cardPadding: CGFloat? = UIDevice.isMac ? 25 : nil
     
     var body: some View {
-        List {
+        CustomList(didScrollToBottom: {
+            if viewModel.allowLoadMorePosts {
+                viewModel.loadMorePosts()
+            }
+        }, refresh: viewModel.refresh) {
             if !UIDevice.isPad {
                 SearchBar(isSearching: $isSearching)
                     .padding(.horizontal)
@@ -82,28 +84,6 @@ struct TimelineView: View {
         .listStyle(.plain)
         // FIXME: macOS padding
         //                .padding(UIDevice.isMac ? ViewConstants.macAdditionalPadding : 0)
-        
-        // Introspect UITableView rather than UIScrollView to
-        // avoid unexpectedly discovering TabView's underlying
-        // UIScrollView as our scroll view.
-        .introspectTableView { tableView in
-            print(tableView)
-            (tableView as UIScrollView).delegate = scrollViewModel
-        }
-        // Refresh control on top.
-        .refreshable {
-            await withCheckedContinuation { continuation in
-                viewModel.refresh(finshHandler: {
-                    continuation.resume()
-                })
-            }
-        }
-        
-        .onChange(of: scrollViewModel.scrolledToBottom) { scrolledToBottom in
-            if scrolledToBottom && viewModel.allowLoadMorePosts {
-                viewModel.loadMorePosts()
-            }
-        }
         
         .ignoresSafeArea(edges: .bottom)
         

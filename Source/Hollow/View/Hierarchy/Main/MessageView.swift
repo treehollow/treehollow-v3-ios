@@ -22,13 +22,15 @@ struct MessageView: View {
     var body: some View {
         VStack(spacing: 0) {
             topBar
-            CustomTabView(selection: $page, ignoreSafeAreaEdges: .bottom) {
+            TabView(selection: $page) {
                 AttentionListView(postListStore: postListStore, isSearching: $isSearching)
                     .tag(Page.attention)
                 SystemMessageView(messageStore: messageStore)
                     .tag(Page.message)
             }
+            .ignoresSafeArea(edges: .bottom)
             .proposedIgnoringSafeArea()
+            .tabViewStyle(.page(indexDisplayMode: .never))
         }
         .defaultBlurBackground(hasPost: true)
         .overlay(Group { if isSearching {
@@ -78,23 +80,22 @@ extension MessageView {
         @State var detailStore: HollowDetailStore?
 
         var body: some View {
-            CustomScrollView(
+            CustomList(
                 didScrollToBottom: postListStore.loadMorePosts,
                 refresh: postListStore.refresh
-            ) { proxy in
-                LazyVStack(spacing: 0) {
-                    SearchBar(isSearching: $isSearching)
-                        .padding(.bottom)
-
-                    PostListView(
-                        postDataWrappers: $postListStore.posts,
-                        detailStore: $detailStore,
-                        voteHandler: postListStore.vote,
-                        starHandler: postListStore.star,
-                        imageReloadHandler: { _ in postListStore.fetchImages() }
-                    )
-                }
-                .padding(.horizontal)
+            ) {
+                SearchBar(isSearching: $isSearching)
+                    .padding(.bottom)
+                    .padding(.horizontal)
+                
+                PostListView(
+                    postDataWrappers: $postListStore.posts,
+                    detailStore: $detailStore,
+                    voteHandler: postListStore.vote,
+                    starHandler: postListStore.star,
+                    imageReloadHandler: { _ in postListStore.fetchImages() }
+                )
+                    .padding(.horizontal)
             }
             .modifier(LoadingIndicator(isLoading: postListStore.isLoading))
             .modifier(ErrorAlert(errorMessage: $postListStore.errorMessage))
@@ -105,30 +106,29 @@ extension MessageView {
     struct SystemMessageView: View {
         @ObservedObject var messageStore: MessageStore
         var body: some View {
-            CustomScrollView(refresh: messageStore.requestMessages) { proxy in LazyVStack(spacing: 0) {
-                    ForEach(messageStore.messages) { message in
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(message.title)
-                                    .bold()
-                                    .foregroundColor(.hollowContentText)
-                                    .dynamicFont(size: 16)
-                                Spacer()
-                                Text.dateText(message.date)
-                                    .foregroundColor(.secondary)
-                                    .font(.footnote)
-                            }
-                            .padding(.bottom, 7)
-                            Text(message.content)
-                                .dynamicFont(size: 15)
+            CustomList(refresh: messageStore.requestMessages) {
+                ForEach(messageStore.messages) { message in
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(message.title)
+                                .bold()
+                                .foregroundColor(.hollowContentText)
+                                .dynamicFont(size: 16)
+                            Spacer()
+                            Text.dateText(message.date)
+                                .foregroundColor(.secondary)
+                                .font(.footnote)
                         }
-                        .padding()
-                        .background(Color.hollowCardBackground)
-                        .roundedCorner(15)
+                        .padding(.bottom, 7)
+                        Text(message.content)
+                            .dynamicFont(size: 15)
                     }
-                    .padding(.top)
-            }
-            .padding(.horizontal)
+                    .padding()
+                    .background(Color.hollowCardBackground)
+                    .roundedCorner(15)
+                }
+                .padding(.top)
+                .padding(.horizontal)
                 
             }
             .modifier(ErrorAlert(errorMessage: $messageStore.errorMessage))
