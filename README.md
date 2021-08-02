@@ -37,7 +37,7 @@
 当前项目源文件目录结构如下：
 
 - [Hollow](Source/Hollow)：iOS Target（包括 Catalyst 版 macOS app）
-- [HollowWidget](Source/HollowWidget)：iOS 主屏幕小组件，环境变量 `WIDGET`
+- [HollowWidget](Source/HollowWidget)：iOS 主屏幕小组件，编译 flag 为 `WIDGET`
 
 原有的 macOS Target 已被删除。
 
