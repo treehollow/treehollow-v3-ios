@@ -32,8 +32,10 @@ struct CustomList<Content: View>: View {
         }
         // Refresh control on top.
         .refreshable {
-            await withCheckedContinuation { continuation in
-                refresh? { continuation.resume() }
+            if let refresh = refresh {
+                await withCheckedContinuation { continuation in
+                    refresh { continuation.resume() }
+                }
             }
         }
         .onChange(of: scrollViewModel.scrolledToBottom) {
