@@ -82,7 +82,6 @@ struct Toast: View {
             .lineSpacing(2)
             .lineLimit(4)
         }
-        .animation(.none)
         .foregroundColor(configuration.style.fontColor)
         .padding()
         .padding(.horizontal, 5)

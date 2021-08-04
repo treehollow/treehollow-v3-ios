@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import Kingfisher
+import Kingfisher
 import HollowCore
 import Defaults
 import UIKit
@@ -50,7 +50,7 @@ struct _FetchImageRequest: Request {
             return
         }
         
-        async {
+        Task {
             do {
                 let data = try await URLSession(configuration: .default).data(from: url).0
                 if let image = UIImage(data: data) {
@@ -63,19 +63,18 @@ struct _FetchImageRequest: Request {
             }
         }
         
-        // FIXME: Rebuild when available
-//        let resource = ImageResource(downloadURL: url, cacheKey: urlString)
-//
-//        DispatchQueue.global(qos: .background).async {
-//            KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
-//                switch result {
-//                case .success(let value):
-//                    completion(.success(value.image))
-//                case .failure(let error):
-//                    completion(.failure(.failed(description: error.errorDescription ?? "")))
-//                }
-//            }
-//        }
+        let resource = ImageResource(downloadURL: url, cacheKey: urlString)
+
+        DispatchQueue.global(qos: .background).async {
+            KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
+                switch result {
+                case .success(let value):
+                    completion(.success(value.image))
+                case .failure(let error):
+                    completion(.failure(.failed(description: error.errorDescription ?? "")))
+                }
+            }
+        }
 
     }
 }

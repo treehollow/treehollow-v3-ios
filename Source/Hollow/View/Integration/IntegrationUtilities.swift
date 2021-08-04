@@ -15,7 +15,11 @@ struct IntegrationUtilities {
     // MARK: - Presentation
     
     static func keyWindow() -> UIWindow? {
-        return UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        UIApplication.shared.connectedScenes
+                .map { $0 as? UIWindowScene }
+                .compactMap {$0}
+                .first?.windows
+                .filter { $0.isKeyWindow }.first
     }
     
     /// Get the top view controller. Necessary when presenting a new view controller.

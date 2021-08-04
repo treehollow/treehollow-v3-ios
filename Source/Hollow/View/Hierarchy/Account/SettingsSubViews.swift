@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Defaults
-//import Kingfisher
+import Kingfisher
 import Cache
 import Combine
 import HollowCore
@@ -456,20 +456,18 @@ struct OtherSettingsView: View {
             }
             
             func getSize() {
-                cacheSize = "🚫"
-                // FIXME: Rebuild when available
-//                DispatchQueue.global(qos: .background).async {
-//                    KingfisherManager.shared.cache.calculateDiskStorageSize(completion: { result in
-//                        if let count = try? result.get() {
-//                            let formatter = ByteCountFormatter()
-//                            formatter.allowedUnits = [.useMB]
-//                            formatter.countStyle = .file
-//                            DispatchQueue.main.async {
-//                                self.cacheSize = formatter.string(fromByteCount: Int64(count))
-//                            }
-//                        }
-//                    })
-//                }
+                DispatchQueue.global(qos: .background).async {
+                    KingfisherManager.shared.cache.calculateDiskStorageSize(completion: { result in
+                        if let count = try? result.get() {
+                            let formatter = ByteCountFormatter()
+                            formatter.allowedUnits = [.useMB]
+                            formatter.countStyle = .file
+                            DispatchQueue.main.async {
+                                self.cacheSize = formatter.string(fromByteCount: Int64(count))
+                            }
+                        }
+                    })
+                }
             }
             
             func clearCache() {
@@ -478,12 +476,12 @@ struct OtherSettingsView: View {
                 }
                 DispatchQueue.global(qos: .background).async {
                     PostCache.shared.clear()
-//                    KingfisherManager.shared.cache.clearCache(completion: {
-//                        DispatchQueue.main.async { withAnimation {
-//                            self.isClearing = false
-//                            self.getSize()
-//                        }}
-//                    })
+                    KingfisherManager.shared.cache.clearCache(completion: {
+                        DispatchQueue.main.async { withAnimation {
+                            self.isClearing = false
+                            self.getSize()
+                        }}
+                    })
                 }
             }
         }

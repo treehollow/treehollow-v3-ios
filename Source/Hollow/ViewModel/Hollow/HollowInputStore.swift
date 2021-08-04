@@ -63,12 +63,9 @@ class HollowInputStore: ObservableObject, HollowErrorHandler, ImageCompressStore
                     self.presented.wrappedValue = false
                 }
                 if self.selfDismiss {
-                    #if !os(macOS) || targetEnvironment(macCatalyst)
                     if let vc = IntegrationUtilities.topViewController() {
                         vc.dismiss(animated: true)
                     }
-                    #endif
-                    // FIXME: macOS
                 }
             })
             .store(in: &cancellables)
