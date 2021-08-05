@@ -21,6 +21,8 @@
 
 树洞客户端使用 iOS 15 SDK，需要 `macOS 11.3+`、`Xcode 13+`。
 
+> 因 SwiftUI API 变动较大，`v3.2.1` 之后的新版本不再支持 iOS 14。若需编译适配 iOS 14 的版本，请从 `3c11bd7` 创建分支。
+
 ### 编译安装
 
 1. 用 Xcode 打开 `Hollow.xcodeproj` 文件
