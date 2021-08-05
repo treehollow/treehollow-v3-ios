@@ -10,7 +10,7 @@ import SwiftUI
 import Cache
 
 /// Image wrapper for displaying in a hollow with support for placeholder.
-struct HollowImage: Codable{
+struct HollowImage: Codable {
     
     struct ImagePlaceHolder: Codable {
         var width: CGFloat
@@ -20,7 +20,7 @@ struct HollowImage: Codable{
     var placeholder: ImagePlaceHolder
     /// The image to display.
     /// store image here
-    private var imageWrapper: ImageWrapper?
+    private var imageWrapper: UIImageWrapper?
     /// image url
     var imageURL: String
     
@@ -30,7 +30,7 @@ struct HollowImage: Codable{
         get { imageWrapper?.image }
         set {
             if let image = newValue {
-                imageWrapper = ImageWrapper(image: image)
+                imageWrapper = UIImageWrapper(image: image)
             }
         }
     }

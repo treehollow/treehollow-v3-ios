@@ -18,6 +18,8 @@
 		0E28BC4525F5F8A000A97820 /* View+defaultListStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */; };
 		0E294E9C25F2405C001E4C08 /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */; };
 		0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */; };
+		0E2CAA3F26BC478000A129A7 /* UIImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2CAA3E26BC478000A129A7 /* UIImageWrapper.swift */; };
+		0E2CAA4026BC49DD00A129A7 /* UIImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2CAA3E26BC478000A129A7 /* UIImageWrapper.swift */; };
 		0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F53F25D0E02F001AE852 /* GetSize.swift */; };
 		0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36F54525D0F0FB001AE852 /* GetFrame.swift */; };
 		0E37528426B79E86000A3DC5 /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37528326B79E86000A3DC5 /* CustomList.swift */; };
@@ -29,7 +31,6 @@
 		0E3E6958260E1312005E8DA2 /* MainSubViews_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E6957260E1312005E8DA2 /* MainSubViews_iPad.swift */; };
 		0E3E6960260E3676005E8DA2 /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E695F260E3676005E8DA2 /* SplitView.swift */; };
 		0E3FEEE0265BA4A900842B98 /* PostListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453F26340311001AFC4B /* PostListRequest.swift */; };
-		0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 0E3FEEE6265BA5D400842B98 /* Cache */; };
 		0E40CF56267F6775009819EF /* RequestAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40CF55267F6775009819EF /* RequestAdaptor.swift */; };
 		0E40CF58267F6775009819EF /* RequestAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40CF55267F6775009819EF /* RequestAdaptor.swift */; };
 		0E40CF5A267F7839009819EF /* DefaultRequestAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40CF59267F7839009819EF /* DefaultRequestAdaptor.swift */; };
@@ -261,6 +262,7 @@
 		0E28BC4425F5F8A000A97820 /* View+defaultListStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+defaultListStyle.swift"; sourceTree = "<group>"; };
 		0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorner.swift"; sourceTree = "<group>"; };
 		0E2C1EE325D7A04C00A296E9 /* MyButtonDefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonDefaultStyle.swift; sourceTree = "<group>"; };
+		0E2CAA3E26BC478000A129A7 /* UIImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageWrapper.swift; sourceTree = "<group>"; };
 		0E36F53F25D0E02F001AE852 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
 		0E36F54525D0F0FB001AE852 /* GetFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFrame.swift; sourceTree = "<group>"; };
 		0E37528326B79E86000A3DC5 /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
@@ -475,7 +477,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E514D2726819BCD008D4301 /* HollowCore in Frameworks */,
-				0E3FEEE7265BA5D400842B98 /* Cache in Frameworks */,
 				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -814,6 +815,7 @@
 		0EC2451F26340301001AFC4B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0E2CAA3E26BC478000A129A7 /* UIImageWrapper.swift */,
 				0EC2452026340301001AFC4B /* ImageCompressor.swift */,
 				0EC2457326340311001AFC4B /* HollowDateFormatter.swift */,
 				0EC2457426340311001AFC4B /* AvatarGenerator.swift */,
@@ -1056,7 +1058,6 @@
 			name = HollowWidgetExtension;
 			packageProductDependencies = (
 				0E7796162657EB30002F70C2 /* Defaults */,
-				0E3FEEE6265BA5D400842B98 /* Cache */,
 				0E514D2626819BCD008D4301 /* HollowCore */,
 			);
 			productName = HollowWidgetExtension;
@@ -1214,6 +1215,7 @@
 				0E415B6725CD772200351672 /* HollowImageView.swift in Sources */,
 				0E36F54625D0F0FB001AE852 /* GetFrame.swift in Sources */,
 				0EC245EB26340312001AFC4B /* Array+sortedRange.swift in Sources */,
+				0E2CAA3F26BC478000A129A7 /* UIImageWrapper.swift in Sources */,
 				0E671AD5260F6E8C00590736 /* View+onClickGesture.swift in Sources */,
 				0E3DB20B2638384C0090206F /* UpdateAvailabilityRequest.swift in Sources */,
 				0E3E694B260DF2C8005E8DA2 /* HollowDetailView_iPad.swift in Sources */,
@@ -1329,6 +1331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E6D12AD26581FEB00D5C813 /* SearchRequest.swift in Sources */,
+				0E2CAA4026BC49DD00A129A7 /* UIImageWrapper.swift in Sources */,
 				0E7795CB2657E727002F70C2 /* CommentData.swift in Sources */,
 				0E40CF58267F6775009819EF /* RequestAdaptor.swift in Sources */,
 				0E40CF5C267F7839009819EF /* DefaultRequestAdaptor.swift in Sources */,
@@ -1702,11 +1705,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0E3FEEE6265BA5D400842B98 /* Cache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */;
-			productName = Cache;
-		};
 		0E42905B263A742D008DA046 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E42905A263A742D008DA046 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;

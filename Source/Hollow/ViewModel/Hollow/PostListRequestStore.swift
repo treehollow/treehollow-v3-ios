@@ -87,6 +87,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
             .sinkOnMainThread(
                 receiveCompletion: { _completion in
                     withAnimation { self.isLoading = false }
+                    completion?()
                     switch _completion {
                     case .finished: break
                     // We handle the completion on receiving value. The only output
@@ -103,7 +104,6 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                         self.page = 1
                         return
                     }
-                    completion?()
                     withAnimation {
                         self.integratePosts(postWrappers)
                     }
