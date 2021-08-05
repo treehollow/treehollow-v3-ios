@@ -13,17 +13,13 @@ struct HollowTextView: View {
     var attributedString: AttributedString
     var highlight: Bool
     
-    var compactLineLimit: Int? = nil
-    
-    init(text: String, highlight: Bool, compactLineLimit: Int? = nil) {
+    init(text: String, highlight: Bool) {
         self.highlight = highlight
-        self.compactLineLimit = compactLineLimit
         self.attributedString = highlight ? text.attributedForCitationAndLink() : AttributedString(text)
     }
     
-    init(attributedString: AttributedString, highlight: Bool, compactLineLimit: Int? = nil) {
+    init(attributedString: AttributedString, highlight: Bool) {
         self.highlight = highlight
-        self.compactLineLimit = compactLineLimit
         self.attributedString = attributedString
     }
     
@@ -32,6 +28,5 @@ struct HollowTextView: View {
             .dynamicFont(size: 16)
             .lineSpacing(3)
             .leading()
-            .lineLimit(compactLineLimit)
     }
 }

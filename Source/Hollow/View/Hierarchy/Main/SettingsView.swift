@@ -18,13 +18,11 @@ struct SettingsView: View {
     var body: some View {
         List {
             if !UIDevice.isPad {
-                Section(header: Text("")) {
-                    NavigationLink(
-                        destination: AccountInfoView(),
-                        label: {
-                            Text("ACCOUNTVIEW_ACCOUNT_CELL")
-                        })
-                }
+                NavigationLink(
+                    destination: AccountInfoView(),
+                    label: {
+                        Text("ACCOUNTVIEW_ACCOUNT_CELL")
+                    })
             }
             
             Section {

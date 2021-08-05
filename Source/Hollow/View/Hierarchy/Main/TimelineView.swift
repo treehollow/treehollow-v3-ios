@@ -19,6 +19,8 @@ struct TimelineView: View {
     @Default(.hollowConfig) var hollowConfig
     @Default(.hiddenAnnouncement) var hiddenAnnouncement
     
+    @State private var announcementSheetPresented = false
+    
     private let cardCornerRadius: CGFloat = UIDevice.isMac ? 17 : 13
     private let cardPadding: CGFloat? = UIDevice.isMac ? 25 : nil
     
@@ -60,11 +62,18 @@ struct TimelineView: View {
                     HollowTextView(text: announcement, highlight: true)
                         .foregroundColor(.hollowContentText)
                         .accentColor(.hollowContentVoteGradient1)
+                        .lineLimit(UIDevice.isPad ? nil : 10)
+                        .fixedSize(horizontal: false, vertical: true)
                     
                 }
                 .padding(.all, cardPadding)
                 .background(Color.hollowCardBackground)
                 .roundedCorner(cardCornerRadius)
+                .onTapGesture {
+                    if !UIDevice.isPad {
+                        announcementSheetPresented = true
+                    }
+                }
                 .padding(.horizontal, UIDevice.isMac ? 0 : nil)
                 .defaultPadding(.bottom)
                 .defaultListRow(backgroundColor: .background)
@@ -91,10 +100,38 @@ struct TimelineView: View {
         .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
         
         .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
+        
+        .sheet(isPresented: $announcementSheetPresented) {
+            AnnouncementView(announcement: hollowConfig?.announcement ?? "")
+        }
     }
     
 }
 
-extension Int: Identifiable {
-    public var id: Int { self }
+extension TimelineView {
+    private struct AnnouncementView: View {
+        let announcement: String
+        @Environment(\.presentationMode) var presentationMode
+        
+        var body: some View {
+            NavigationView {
+                ScrollView {
+                    HollowTextView(text: announcement, highlight: true)
+                        .padding()
+                        .foregroundColor(.primary)
+                        .accentColor(.hollowContentVoteGradient1)
+                        .navigationBarTitle("TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE")
+                        .navigationBarItems(
+                            trailing:
+                                Button("VERSION_UPDATE_VIEW_CLOSE") {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                        )
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .background(Color.background.ignoresSafeArea())
+            }
+            .accentColor(.tint)
+        }
+    }
 }

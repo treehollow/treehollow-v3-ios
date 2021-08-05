@@ -113,7 +113,8 @@ struct HollowContentView: View {
             let text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
             attributedString = AttributedString(text)
         }
-        let view = HollowTextView(attributedString: attributedString, highlight: true, compactLineLimit: options.contains(.compactText) ? lineLimit : nil)
+        let view = HollowTextView(attributedString: attributedString, highlight: true)
+            .lineLimit(options.contains(.compactText) ? lineLimit : nil)
             .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
             .accentColor(.hollowContentVoteGradient1)
 #if targetEnvironment(macCatalyst)
