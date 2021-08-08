@@ -327,13 +327,13 @@
 "REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_MSG" = "Enter the reason for the report";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "Report (Delete)";
+"REPORT_MENU_ALERT_REPORT_DELETE_ENTER_MSG_TITLE" = "Report (Removal)";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_DELETE" = "Delete";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_REPORT_DELETE" = "Report Delete";
+"REPORT_MENU_REPORT_DELETE" = "Report for Removal";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_REPORT_REASON_ALERT_MESSAGE" = "Please enter the message for the operation";
@@ -549,7 +549,7 @@
 
 "ABOUTVIEW_COPYRIGHT_NOTICE" = "Copyright © 2021 treehollow";
 
-"ABOUTVIEW_OPENSOURCE_NOTICE" = "The source code of this app is open-sourced on GitHub under AGPL-3.0 License.";
+"ABOUTVIEW_OPENSOURCE_NOTICE" = "The source code of this app is open-sourced on [GitHub](Hollow://url-https://github.com/treehollow/treehollow-v3-ios) under AGPL-3.0 License.";
 
 "TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON" = "Hide";
 
@@ -672,3 +672,5 @@
 "WIDGET_EMPTY_LABEL" = "No Content";
 
 "WIDGET_EMPTY_MSG" = "Internet connection or login status has failed.";
+
+"SEARCHVIEW_TRENDING_TITLE" = "Trending";

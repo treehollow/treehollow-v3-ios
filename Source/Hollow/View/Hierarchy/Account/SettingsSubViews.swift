@@ -25,7 +25,6 @@ struct AppearanceSettingsView: View {
         List {
             Section(
                 header: Text("SETTINGSVIEW_APPEARENCE_COLOR_SCHEME")
-                    .padding(.top)
             ) {
                 ForEach(CustomColorScheme.allCases) { colorScheme in
                     Button(action: {
@@ -428,7 +427,7 @@ struct OtherSettingsView: View {
         
         var body: some View {
             Section(
-                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER").padding(.top)) {
+                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER")) {
                 Button(action: viewModel.clearCache) {
                     HStack {
                         Text(
@@ -444,7 +443,6 @@ struct OtherSettingsView: View {
                 .disabled(viewModel.isClearing)
             }
             .accentColor(.tint)
-            .disabled(true)
         }
         
         private class ViewModel: ObservableObject {

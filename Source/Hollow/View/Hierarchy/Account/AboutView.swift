@@ -62,11 +62,11 @@ struct AboutView: View {
             Section {
                 ImageTitledStack(systemImageName: "point.topleft.down.curvedto.point.bottomright.up") {
                     Text("ABOUTVIEW_OPENSOURCE_NOTICE")
+                        .accentColor(.hollowContentVoteGradient1)
+                        .frame(maxHeight: .infinity)
                 }
                 .padding(.vertical)
-                Button("ABOUTVIEW_GITHUB_REPO_LABEL") {
-                    openURL(URL(string: "https://github.com/treehollow/treehollow-v3-ios")!)
-                }
+
                 NavigationLink(
                     NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
                     destination: DependenciesView()

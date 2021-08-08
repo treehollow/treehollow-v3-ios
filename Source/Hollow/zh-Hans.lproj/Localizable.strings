@@ -550,7 +550,7 @@
 
 "ABOUTVIEW_COPYRIGHT_NOTICE" = "版权所有 © 2021 treehollow";
 
-"ABOUTVIEW_OPENSOURCE_NOTICE" = "本应用基于AGPL-3.0协议在GitHub开源。";
+"ABOUTVIEW_OPENSOURCE_NOTICE" = "本应用基于 AGPL-3.0 协议在 [GitHub](Hollow://url-https://github.com/treehollow/treehollow-v3-ios) 开源。";
 
 "TIMELINEVIEW_ANNOUNCEMENT_HIDE_BUTTON" = "隐藏";
 
@@ -673,3 +673,5 @@
 "WIDGET_EMPTY_LABEL" = "无内容";
 
 "WIDGET_EMPTY_MSG" = "网络连接失败或登录状态失效";
+
+"SEARCHVIEW_TRENDING_TITLE" = "热榜";

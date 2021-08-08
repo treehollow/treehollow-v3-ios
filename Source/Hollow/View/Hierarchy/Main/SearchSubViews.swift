@@ -91,6 +91,11 @@ extension SearchView {
     func topBar() -> some View {
         HStack {
             closeButton
+            if store.type == .searchTrending {
+                Text("SEARCHVIEW_TRENDING_TITLE")
+                    .bold()
+                    .foregroundColor(.hollowContentText)
+            }
             if showPost && store.type != .searchTrending {
                 searchField()
             } else {

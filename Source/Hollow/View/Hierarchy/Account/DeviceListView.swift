@@ -81,6 +81,7 @@ extension DeviceListView {
                         }
                         .dynamicFont(size: 15)
                         .buttonStyle(.bordered)
+                        .buttonBorderShape(.capsule)
                         .tint(.hollowContentVoteGradient1)
                     }
                 }

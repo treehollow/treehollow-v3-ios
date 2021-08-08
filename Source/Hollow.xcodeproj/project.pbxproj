@@ -221,7 +221,6 @@
 		0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */; };
 		0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */; };
 		0EFB550525E93E24001BC98A /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB550425E93E24001BC98A /* PostListView.swift */; };
-		0EFD8B4826BAB69700A3ACFA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EFD8B4726BAB69700A3ACFA /* CoreTelephony.framework */; };
 		0EFD8B4A26BAB72C00A3ACFA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0EFD8B4926BAB72C00A3ACFA /* Kingfisher */; };
 		0EFE13F4262876FE007B0045 /* View+imageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE13F3262876FE007B0045 /* View+imageSaver.swift */; };
 		0EFE1405262AF768007B0045 /* View+makeDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE1404262AF768007B0045 /* View+makeDivider.swift */; };
@@ -447,7 +446,6 @@
 		0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+modalPresent.swift"; sourceTree = "<group>"; };
 		0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubViews.swift; sourceTree = "<group>"; };
 		0EFB550425E93E24001BC98A /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
-		0EFD8B4726BAB69700A3ACFA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		0EFE13F3262876FE007B0045 /* View+imageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+imageSaver.swift"; sourceTree = "<group>"; };
 		0EFE1404262AF768007B0045 /* View+makeDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+makeDivider.swift"; sourceTree = "<group>"; };
 		0EFE1408262AF7E1007B0045 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EFD8B4826BAB69700A3ACFA /* CoreTelephony.framework in Frameworks */,
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E97D0B826B45F960031BC75 /* Introspect in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
@@ -500,7 +497,6 @@
 				0E415A7225CD769B00351672 /* Hollow */,
 				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
 				0E59CD6826ADCDC500574F34 /* Products */,
-				0EFD8B4626BAB69700A3ACFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -976,14 +972,6 @@
 				0EC246192634040D001AFC4B /* Login */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0EFD8B4626BAB69700A3ACFA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0EFD8B4726BAB69700A3ACFA /* CoreTelephony.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0EFE13FE262AF2D6007B0045 /* Presentation */ = {
