@@ -214,6 +214,7 @@
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
 		0EDEC0E52650E5A6003112BA /* View+makeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDEC0E42650E5A6003112BA /* View+makeButton.swift */; };
+		0EDF0AAC26BFDF5C0047933C /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */; };
 		0EE60EFD25FCCCD700D97E7A /* CheckmarkButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */; };
 		0EF10F6626330F29004D6538 /* HollowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
@@ -441,6 +442,7 @@
 		0EDA262625D22C8600B67292 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		0EDEC0E42650E5A6003112BA /* View+makeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+makeButton.swift"; sourceTree = "<group>"; };
+		0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButtonImage.swift; sourceTree = "<group>"; };
 		0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailViewController.swift; sourceTree = "<group>"; };
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
@@ -758,6 +760,7 @@
 				0E79AF50265E45B600BFDABD /* withAnimation.swift */,
 				0E17B9842661FB03008773E6 /* View+withPlaceholder.swift */,
 				0E37528326B79E86000A3DC5 /* CustomList.swift */,
+				0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1268,6 +1271,7 @@
 				0EC245A126340311001AFC4B /* RandomListRequest.swift in Sources */,
 				0E36F54025D0E02F001AE852 /* GetSize.swift in Sources */,
 				0EC245F926340312001AFC4B /* OpenURLHelper.swift in Sources */,
+				0EDF0AAC26BFDF5C0047933C /* CustomScrollView.swift in Sources */,
 				0E2C1EE425D7A04C00A296E9 /* MyButtonDefaultStyle.swift in Sources */,
 				0EC245B926340311001AFC4B /* AccountCreationRequest.swift in Sources */,
 				0E28BC4525F5F8A000A97820 /* View+defaultListStyle.swift in Sources */,

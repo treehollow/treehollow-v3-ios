@@ -18,7 +18,7 @@ extension MainView_iPad {
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_TIMELINE", displayMode: .inline)
                 .overlay(overlayFloatButton)
-                .refreshNavigationItem(refreshAction: { sharedModel.timelineViewModel.refresh(finshHandler: {}) })
+                .refreshNavigationItem(refreshAction: { sharedModel.timelineViewModel.refresh(finishHandler: {}) })
                 .onAppear {
                     if sharedModel.timelineViewModel.posts.isEmpty {
                         sharedModel.timelineViewModel.requestPosts(at: 1)
@@ -30,7 +30,7 @@ extension MainView_iPad {
                 .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_WANDER", displayMode: .inline)
                 .overlay(overlayFloatButton)
-                .refreshNavigationItem(refreshAction: { sharedModel.wanderViewModel.refresh(finshHandler: {}) })
+                .refreshNavigationItem(refreshAction: { sharedModel.wanderViewModel.refresh(finishHandler: {}) })
                 .onAppear {
                     if sharedModel.wanderViewModel.posts.isEmpty {
                         sharedModel.wanderViewModel.requestPosts(at: 1)
@@ -120,7 +120,7 @@ extension MainView_iPad {
                         }
                     }
                 }
-                .refreshNavigationItem(refreshAction: { favouriteStore.refresh(finshHandler: {}) })
+                .refreshNavigationItem(refreshAction: { favouriteStore.refresh(finishHandler: {}) })
                 .onAppear {
                     isSearching = false
                     if favouriteStore.posts.isEmpty {

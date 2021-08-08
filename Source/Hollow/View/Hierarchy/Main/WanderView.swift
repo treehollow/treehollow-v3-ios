@@ -21,7 +21,7 @@ struct WanderView: View {
     
     
     var body: some View {
-        CustomList(
+        CustomScrollView(
             didScrollToBottom: {
                 // We won't allow updating when the detail
                 // view is presenting

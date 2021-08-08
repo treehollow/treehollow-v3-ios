@@ -141,9 +141,12 @@ struct HollowDetailView: View {
                 .listStyle(PlainListStyle())
                 .background(Color.hollowCardBackground)
                 .buttonStyle(BorderlessButtonStyle())
-                .refreshable { await withCheckedContinuation { continuation in
-                    store.requestDetail { continuation.resume() }
-                }}
+                .refreshable {
+                    guard !store.isLoading else { return }
+                    await withCheckedContinuation { continuation in
+                        store.requestDetail { continuation.resume() }
+                    }
+                }
 
                 .onChange(of: store.replyToId) { id in
                     guard id != -2 else { return }
@@ -229,7 +232,10 @@ struct HollowDetailView: View {
                         .padding(.vertical)
 
                     Button(action: {
-                        withAnimation { searchBarPresented = false }
+                        withAnimation {
+                            searchBarPresented = false
+                            searchString = ""
+                        }
                         hideKeyboard()
                     }) {
                         Text("VERSION_UPDATE_VIEW_CLOSE")

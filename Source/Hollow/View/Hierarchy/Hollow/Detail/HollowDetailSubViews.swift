@@ -13,10 +13,20 @@ extension HollowDetailView {
     @ViewBuilder var commentView: some View {
         let postData = store.postDataWrapper.post
         let originalComments = reverseComments ? postData.comments.reversed() : postData.comments
-        let comments = showOnlyName == nil ? originalComments : originalComments.filter({ $0.name == showOnlyName })
         
+        let filteredCommentsByName = showOnlyName == nil ?
+        originalComments :
+        originalComments.filter({ $0.name == showOnlyName })
+        
+        let comments = searchString.isEmpty ?
+        filteredCommentsByName :
+        filteredCommentsByName.filter { $0.text.uppercased().contains(searchString.uppercased()) }
+
         HStack {
-            Text("\(postData.replyNumber) \(Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))")
+            if showOnlyName != nil || !searchString.isEmpty {
+                
+            }
+            Text("\(showOnlyName != nil || !searchString.isEmpty ? String(comments.count) + " / " : "")\(postData.replyNumber) \(Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))")
                 .fontWeight(.heavy)
                 .padding(.top)
                 .padding(.bottom, 5)
@@ -26,15 +36,17 @@ extension HollowDetailView {
             Spacer()
             
             if let name = showOnlyName {
-                xmarkCapsuleButton(title: "\(name) (\(comments.count))", image: "person") {
-                    withAnimation { showOnlyName = nil }
-                }
-                .padding(.trailing, 6)
-            }
-            
-            if !searchString.isEmpty && !searchBarPresented {
-                xmarkCapsuleButton(title: searchString, image: "magnifyingglass") {
-                    withAnimation { searchString = "" }
+                Button(action: { withAnimation { showOnlyName = nil }}) {
+                    HStack(spacing: 5) {
+                        Text("\(Image(systemName: "person")) \(name)")
+                        Image(systemName: "xmark")
+                    }
+                    .foregroundColor(.hollowCardStarUnselected)
+                    .dynamicFont(size: 14, weight: .medium)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.background)
+                    .clipShape(Capsule())
                 }
                 .padding(.trailing, 6)
             }
@@ -55,11 +67,9 @@ extension HollowDetailView {
         .id(-3)
         
         ForEach(comments, id: \.commentId) { comment in
-            if searchString.isEmpty || comment.text.uppercased().contains(searchString.uppercased()) {
-                commentView(for: comment)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .id(comment.commentId)
-            }
+            commentView(for: comment)
+                .fixedSize(horizontal: false, vertical: true)
+                .id(comment.commentId)
         }
         
         if store.isLoading, postData.replyNumber > postData.comments.count {
@@ -141,21 +151,6 @@ extension HollowDetailView {
     func jumpToComment(commentId: Int) {
         withAnimation(scrollAnimation) { store.replyToId = -2 }
         withAnimation(scrollAnimation) { jumpedFromCommentId = commentId }
-    }
-    
-    private func xmarkCapsuleButton(title: String, image: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack(spacing: 5) {
-                Text("\(Image(systemName: image)) \(title)")
-                Image(systemName: "xmark")
-            }
-            .foregroundColor(.hollowCardStarUnselected)
-            .dynamicFont(size: 14, weight: .medium)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
-            .background(Color.background)
-            .clipShape(Capsule())
-        }
     }
     
     struct PlaceholderComment: View {

@@ -36,7 +36,10 @@ struct HollowCommentInputView: View {
     var body: some View {
         VStack(spacing: vstackSpacing) {
             HStack {
-                BarButton(action: { withAnimation(transitionAnimation) { store.replyToId = -2 }}, systemImageName: "xmark")
+                BarButton(action: { withAnimation(transitionAnimation) {
+                    store.replyToId = -2
+                    hideKeyboard()
+                }}, systemImageName: "xmark")
 
                 Spacer()
                 let sendingText = NSLocalizedString("COMMENT_INPUT_SEND_BUTTON_SENDING", comment: "")
@@ -60,7 +63,7 @@ struct HollowCommentInputView: View {
                 get: { store.text },
                 set: { store.text = $0 }
             )
-            HollowInputTextEditor(text: bindingText, editorEditing: .constant(false), placeholder: placeholder, receiveCallback: false)
+            HollowInputTextEditor(text: bindingText, editorEditing: .constant(false), placeholder: placeholder, startEditingOnAppear: true, receiveCallback: false)
                 .accentColor(.tint)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)

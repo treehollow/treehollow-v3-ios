@@ -97,7 +97,7 @@ struct MainView_iPad: View {
         .overlay(Group { if sharedModel.showCreatePost {
             HollowInputView(inputStore: HollowInputStore(presented: $sharedModel.showCreatePost, refreshHandler: {
                 page = .timeline
-                sharedModel.timelineViewModel.refresh(finshHandler: {})
+                sharedModel.timelineViewModel.refresh(finishHandler: {})
             }), buttonAnimationNamespace: buttonAnimationNamespace)
 //            .transition(.move(edge: .bottom))
         }})

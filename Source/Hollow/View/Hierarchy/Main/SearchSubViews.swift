@@ -18,7 +18,7 @@ extension SearchView {
             }
             updateHistoryDefaults(with: store.searchString)
             store.posts.removeAll()
-            store.refresh(finshHandler: {})
+            store.refresh(finishHandler: {})
         }
         guard searchStringValid else { return }
         guard let config = Defaults[.hollowConfig] else { return }

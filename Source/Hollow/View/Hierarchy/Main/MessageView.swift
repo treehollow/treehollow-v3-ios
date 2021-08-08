@@ -127,6 +127,7 @@ extension MessageView {
                     .padding()
                     .background(Color.hollowCardBackground)
                     .roundedCorner(15)
+                    .padding(.top)
                 }
                 .padding(.horizontal)
                 

@@ -83,7 +83,7 @@ struct MainView: View {
                 }
                 if showCreatePost {
                     HollowInputView(inputStore: HollowInputStore(presented: $showCreatePost, refreshHandler: {
-                        timelineViewModel.refresh(finshHandler: {})
+                        timelineViewModel.refresh(finishHandler: {})
                     }), buttonAnimationNamespace: namespace)
                     .swipeToDismiss(presented: $showCreatePost, transition: .floatButton)
                 }

@@ -122,16 +122,13 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         })
     }
     
-    func refresh(finshHandler: @escaping () -> Void) {
+    func refresh(finishHandler: @escaping () -> Void) {
         page = 1
         withAnimation {
             noMorePosts = false
             allowLoadMorePosts = false
         }
-        let completion = {
-            finshHandler()
-        }
-        requestPosts(at: 1, completion: completion)
+        requestPosts(at: 1, completion: finishHandler)
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {
