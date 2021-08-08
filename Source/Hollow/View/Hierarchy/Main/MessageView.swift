@@ -123,11 +123,11 @@ extension MessageView {
                         Text(message.content)
                             .dynamicFont(size: 15)
                     }
+                    .frame(maxHeight: .infinity)
                     .padding()
                     .background(Color.hollowCardBackground)
                     .roundedCorner(15)
                 }
-                .padding(.top)
                 .padding(.horizontal)
                 
             }

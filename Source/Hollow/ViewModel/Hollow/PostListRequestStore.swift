@@ -104,9 +104,8 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                         self.page = 1
                         return
                     }
-                    withAnimation {
-                        self.integratePosts(postWrappers)
-                    }
+
+                    self.integratePosts(postWrappers)
                 }
             )
             .store(in: &cancellables)
@@ -131,7 +130,6 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         }
         let completion = {
             finshHandler()
-            self.posts.removeAll()
         }
         requestPosts(at: 1, completion: completion)
     }
@@ -157,7 +155,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                 posts.sort(by: { $0.post.postId > $1.post.postId })
             }
             DispatchQueue.main.async {
-                self.posts = posts
+                withAnimation { self.posts = posts }
                 // Fetch other components after we assign the posts.
                 self.fetchImages()
                 self.fetchCitedPosts()

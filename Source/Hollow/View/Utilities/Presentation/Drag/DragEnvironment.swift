@@ -41,7 +41,7 @@ extension View {
         if !UIDevice.isPad {
             self.modifier(ProposedIgnoringSafeArea(edges: edges))
         } else {
-            self.ignoresSafeArea(edges: edges)
+            self.ignoresSafeArea(.container, edges: edges)
         }
     }
 }
@@ -65,7 +65,7 @@ fileprivate struct ProposedIgnoringSafeArea: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onChange(of: dragging) { dragging in withAnimation { internalIsDragging = dragging  } }
-            .ignoresSafeArea(edges: internalIsDragging ? [] : edges)
+            .ignoresSafeArea(.container, edges: internalIsDragging ? [] : edges)
     }
 }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Defaults
+import Introspect
 
 struct HollowDetailView: View {
     @ObservedObject var store: HollowDetailStore
@@ -19,6 +20,8 @@ struct HollowDetailView: View {
     @State var jumpedFromCommentId: Int?
     @State var reverseComments = false
     @State var showOnlyName: String?
+    @State var searchString = ""
+    @State var searchBarPresented = false
     
     let scrollAnimation = Animation.spring(response: 0.3)
     
@@ -59,6 +62,11 @@ struct HollowDetailView: View {
                                 }
                                 .disabled(store.isLoading)
                                 
+                                Button(action: { withAnimation { searchBarPresented = true }}) {
+                                    Label("DETAILVIEW_SEARCH_MENU_TITLE", systemImage: "magnifyingglass")
+                                }
+                                .disabled(store.postDataWrapper.post.comments.isEmpty)
+                                
                                 Divider()
                                 
                                 Button(action: {
@@ -97,9 +105,6 @@ struct HollowDetailView: View {
                             HollowTextView(text: NSLocalizedString("DETAILVIEW_NO_SUCH_POST_PLACEHOLDER", comment: ""), highlight: false)
                                 .padding(.bottom, spacing)
                                 .padding(.horizontal)
-#if targetEnvironment(macCatalyst)
-                                .textSelection(.enabled)
-#endif
 
                         } else {
                             HollowContentView(
@@ -131,10 +136,15 @@ struct HollowDetailView: View {
                     }
                     
                 }
+                // FIXME: Corner Radius
+
                 .listStyle(PlainListStyle())
                 .background(Color.hollowCardBackground)
-                .coordinateSpace(name: "detail.scrollview")
                 .buttonStyle(BorderlessButtonStyle())
+                .refreshable { await withCheckedContinuation { continuation in
+                    store.requestDetail { continuation.resume() }
+                }}
+
                 .onChange(of: store.replyToId) { id in
                     guard id != -2 else { return }
                     withAnimation(scrollAnimation) {
@@ -173,9 +183,13 @@ struct HollowDetailView: View {
                         }
                     }
                 }
-                
+
+                .onChange(of: searchString) {
+                    if !$0.isEmpty { withAnimation { proxy.scrollTo(-3, anchor: .top) }}
+                }
+
             }
-            .proposedCornerRadius()
+
         }
         
         .disabled(store.noSuchPost)
@@ -184,8 +198,8 @@ struct HollowDetailView: View {
                 .proposedCornerRadius()
                 .proposedIgnoringSafeArea()
         )
-        
-        .overlay(Group { if store.replyToId < -1 && !store.noSuchPost {
+
+        .overlay(Group { if store.replyToId < -1 && !store.noSuchPost && !searchBarPresented {
             FloatButton(
                 action: {
                     withAnimation(scrollAnimation) { store.replyToId = -1 }
@@ -200,11 +214,34 @@ struct HollowDetailView: View {
             .trailing()
             .padding()
             .padding(7)
-            .padding(.bottom, 7)
             .disabled(store.isSendingComment || store.isLoading)
         }})
         
         .proposedIgnoringSafeArea(edges: .bottom)
+
+        // FIXME: Safe Area bug in beta versions
+        .safeAreaInset(edge: .bottom, spacing: 0) { if searchBarPresented {
+            VStack(spacing: 0) {
+                Divider()
+                HStack {
+                    UIKitSearchBar(text: $searchString, prompt: NSLocalizedString("DETAILVIEW_SEARCH_BAR_PROMPT", comment: ""))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.vertical)
+
+                    Button(action: {
+                        withAnimation { searchBarPresented = false }
+                        hideKeyboard()
+                    }) {
+                        Text("VERSION_UPDATE_VIEW_CLOSE")
+                            .padding(.vertical)
+                    }
+                }
+                .padding(.horizontal)
+                .blurBackground()
+            }
+            .accentColor(.tint)
+            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity))
+        }}
 
         .overlay(Group { if store.replyToId >= -1 {
             let post = store.postDataWrapper.post
@@ -220,9 +257,9 @@ struct HollowDetailView: View {
             .edgesIgnoringSafeArea([])
             .bottom()
             .transition(UIDevice.isPad ? .move(edge: .bottom) : .floatButton)
-            
+
         }})
-        
+
         .onChange(of: store.replyToId) { id in
             if id >= -1 {
                 withAnimation(scrollAnimation) { inputPresented = true }
@@ -235,7 +272,7 @@ struct HollowDetailView: View {
         .onDisappear {
             store.bindingCancellable?.cancel()
         }
-        
+
         .modifier(ErrorAlert(errorMessage: $store.errorMessage))
     }
 }

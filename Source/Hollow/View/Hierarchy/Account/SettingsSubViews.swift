@@ -23,8 +23,9 @@ struct AppearanceSettingsView: View {
     
     var body: some View {
         List {
-            Section(
-                header: Text("SETTINGSVIEW_APPEARENCE_COLOR_SCHEME")
+            ListSection(
+                header: "SETTINGSVIEW_APPEARENCE_COLOR_SCHEME",
+                headerImage: "circle.righthalf.filled"
             ) {
                 ForEach(CustomColorScheme.allCases) { colorScheme in
                     Button(action: {
@@ -44,9 +45,10 @@ struct AppearanceSettingsView: View {
                 }
             }
             
-            Section(
-                header: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER"),
-                footer: Text("SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER")
+            ListSection(
+                header: "SETTINGSVIEW_APPEARENCE_THEMES_SECTION_HEADER",
+                headerImage: "paintpalette",
+                footer: "SETTINGSVIEW_APPEARENCE_THEMES_SECTION_FOOTER"
             ) {
                 Button(action: {
                     tempColorSet = nil
@@ -86,7 +88,10 @@ struct AppearanceSettingsView: View {
                 }
             }
             
-            Section(header: Text("SETTINGSVIEW_APPEARANCE_AVATAR_HDR")) {
+            ListSection(
+                header: "SETTINGSVIEW_APPEARANCE_AVATAR_HDR",
+                headerImage: "person"
+            ) {
                 Button(action: { usingSimpleAvatar = false }) { HStack {
                     Avatar(foregroundColor: .hollowContentVoteGradient1, backgroundColor: .white, resolution: 4, padding: avatarHeight * 0.1, hashValue: 2021, name: "", options: .forceGraphical)
                         .frame(width: avatarHeight)
@@ -142,11 +147,10 @@ struct ContentSettingsView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            Section(
-                header:
-                    Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_HEADER"),
-                footer:
-                    Text("SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER")
+            ListSection(
+                header: "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_HEADER",
+                headerImage: "tag",
+                footer: "SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER"
             ) {
                 ForEach(blockedTags, id: \.self) { tag in
                     HStack {
@@ -400,8 +404,9 @@ struct OtherSettingsView: View {
         @Default(.openURLMethod) var openMethod
         
         var body: some View {
-            Section(
-                header: Text("SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE")
+            ListSection(
+                header: "SETTINGSVIEW_OTHER_OPEN_URL_SECTION_TITLE",
+                headerImage: "link"
             ) {
                 ForEach(OpenURLHelper.OpenMethod.allCases) { method in
                     Button(action: {
@@ -426,8 +431,10 @@ struct OtherSettingsView: View {
         @ObservedObject private var viewModel = ViewModel()
         
         var body: some View {
-            Section(
-                header: Text("SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER")) {
+            ListSection(
+                header: "SETTINGSVIEW_OTHER_CACHE_SECTION_HEADER",
+                headerImage: "cylinder.split.1x2"
+            ) {
                 Button(action: viewModel.clearCache) {
                     HStack {
                         Text(

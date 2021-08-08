@@ -26,19 +26,17 @@ extension HollowDetailView {
             Spacer()
             
             if let name = showOnlyName {
-                Button(action: { withAnimation { showOnlyName = nil }}) {
-                    HStack(spacing: 5) {
-                        Text(verbatim: "\(name) (\(comments.count))")
-                        Image(systemName: "xmark")
-                    }
-                    .foregroundColor(.hollowCardStarUnselected)
-                    .dynamicFont(size: 14, weight: .medium)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(Color.background)
-                    .clipShape(Capsule())
+                xmarkCapsuleButton(title: "\(name) (\(comments.count))", image: "person") {
+                    withAnimation { showOnlyName = nil }
                 }
-                .padding(.trailing, 10)
+                .padding(.trailing, 6)
+            }
+            
+            if !searchString.isEmpty && !searchBarPresented {
+                xmarkCapsuleButton(title: searchString, image: "magnifyingglass") {
+                    withAnimation { searchString = "" }
+                }
+                .padding(.trailing, 6)
             }
             
             Button(action: { withAnimation { reverseComments.toggle() }}) {
@@ -54,11 +52,14 @@ extension HollowDetailView {
         .padding(.horizontal)
         .lineLimit(1)
         .listRowBackground(Color.hollowCardBackground)
+        .id(-3)
         
         ForEach(comments, id: \.commentId) { comment in
-            commentView(for: comment)
-                .fixedSize(horizontal: false, vertical: true)
-                .id(comment.commentId)
+            if searchString.isEmpty || comment.text.uppercased().contains(searchString.uppercased()) {
+                commentView(for: comment)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .id(comment.commentId)
+            }
         }
         
         if store.isLoading, postData.replyNumber > postData.comments.count {
@@ -140,6 +141,21 @@ extension HollowDetailView {
     func jumpToComment(commentId: Int) {
         withAnimation(scrollAnimation) { store.replyToId = -2 }
         withAnimation(scrollAnimation) { jumpedFromCommentId = commentId }
+    }
+    
+    private func xmarkCapsuleButton(title: String, image: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 5) {
+                Text("\(Image(systemName: image)) \(title)")
+                Image(systemName: "xmark")
+            }
+            .foregroundColor(.hollowCardStarUnselected)
+            .dynamicFont(size: 14, weight: .medium)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(Color.background)
+            .clipShape(Capsule())
+        }
     }
     
     struct PlaceholderComment: View {

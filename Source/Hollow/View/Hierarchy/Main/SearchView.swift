@@ -53,7 +53,10 @@ struct SearchView: View {
                         .verticalCenter()
                         .horizontalCenter()
                 } else {
-                    CustomList(didScrollToBottom: store.loadMorePosts) {
+                    CustomList(
+                        didScrollToBottom: store.loadMorePosts,
+                        refresh: store.refresh
+                    ) {
                         PostListView(
                             postDataWrappers: $store.posts,
                             detailStore: $detailStore,

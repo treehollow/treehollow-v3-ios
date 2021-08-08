@@ -115,8 +115,9 @@ extension SearchView {
                     .foregroundColor(showPost ? .primary : foregroundColor)
                 TextField("", text: $store.searchString, prompt: Text("SEARCHVIEW_TEXTFIELD_PLACEHOLDER"))
                     .onSubmit(performSearch)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
+                    .accentColor(.tint)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
             .matchedGeometryEffect(id: "searchview.searchbar", in: animation)
             .dynamicFont(size: 16)

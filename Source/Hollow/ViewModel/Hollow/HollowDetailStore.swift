@@ -61,7 +61,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
     }
     
     // MARK: - Load Post Detail
-    func requestDetail() {
+    func requestDetail(_completion: @escaping () -> Void) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
         let configuration = PostDetailRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: token, postId: postDataWrapper.post.postId, includeComments: true)
@@ -72,6 +72,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         request.publisher
             .sinkOnMainThread(receiveCompletion: { completion in
                 withAnimation { self.isLoading = false }
+                _completion()
                 switch completion {
                 case .finished:
                     self.loadComponents()
@@ -120,6 +121,10 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         
         // Load the image and quote first
         loadComponents()
+    }
+    
+    func requestDetail() {
+        requestDetail(_completion: {})
     }
     
     private func loadComponents() {
