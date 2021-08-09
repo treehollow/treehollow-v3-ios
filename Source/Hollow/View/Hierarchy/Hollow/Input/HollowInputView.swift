@@ -70,7 +70,7 @@ struct HollowInputView: View {
                 VStack(spacing: 0) {
                     let text = NSLocalizedString("INPUT_EDITOR_PLACEHOLDER", comment: "")
                     
-                    HollowInputTextEditor(text: $inputStore.text, editorEditing: $editorEditing, placeholder: text)
+                    HollowInputTextEditor(text: $inputStore.text, placeholder: text)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .frame(minHeight: 40)
@@ -88,7 +88,6 @@ struct HollowInputView: View {
             )
             .padding()
         }
-
         .onDrop(of: ["public.image"], isTargeted: nil) { providers in
             return inputStore.handleDrop(providers: providers)
         }

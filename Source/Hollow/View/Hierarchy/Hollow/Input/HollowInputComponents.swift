@@ -7,16 +7,15 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct HollowInputTextEditor: View {
+    
     @Binding var text: String
-    @Binding var editorEditing: Bool
     var placeholder: String
-    var startEditingOnAppear = false
-    var receiveCallback = false
     
     var body: some View {
-        CustomTextEditor(text: $text, editing: $editorEditing, receiveCallback: receiveCallback, editOnAppear: startEditingOnAppear, modifiers: { $0 })
+        TextEditor(text: $text)
             .background(Group { if text == "" {
                 Text(placeholder)
                     .foregroundColor(.uiColor(.systemFill))

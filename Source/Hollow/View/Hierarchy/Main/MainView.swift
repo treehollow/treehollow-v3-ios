@@ -68,6 +68,8 @@ struct MainView: View {
             }
             .edgesIgnoringSafeArea(.bottom)
         }
+        .keyboardBar()
+
         .proposedOverlay()
 
         .overlay(Group {

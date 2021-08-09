@@ -63,24 +63,11 @@ struct HollowCommentInputView: View {
                 get: { store.text },
                 set: { store.text = $0 }
             )
-            HollowInputTextEditor(text: bindingText, editorEditing: .constant(false), placeholder: placeholder, startEditingOnAppear: true, receiveCallback: false)
+            HollowInputTextEditor(text: bindingText, placeholder: placeholder)
                 .accentColor(.tint)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .frame(height: editorFontSize * (UIDevice.isPad ? 20 : 10))
-            
-            HStack {
-                if !keyboardShown { Spacer() }
-                imageButton
-                if keyboardShown {
-                    Spacer()
-                    MyButton(action: self.hideKeyboard, transitionAnimation: transitionAnimation) {
-                        Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
-                            .font(.system(size: buttonFontSize, weight: .bold))
-                            .foregroundColor(.white)
-                    }
-                }
-            }
         }
         .padding()
         .conditionalMatchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace, isSource: false)

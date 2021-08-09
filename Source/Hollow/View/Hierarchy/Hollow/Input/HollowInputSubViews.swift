@@ -55,7 +55,7 @@ extension HollowInputView {
     }
     
     var editorAccessoryView: some View {
-        HStack {
+        Group {
             if !textValid { HStack(spacing: 0) {
                 Text("\(inputStore.text.count)")
                     .font(.footnote)
@@ -63,14 +63,6 @@ extension HollowInputView {
                 Text(" / \(10000)")
                     .font(.footnote)
             }}
-            
-            if keyboardShown {
-                MyButton(action: hideKeyboard) {
-                    Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
-                        .font(.system(size: buttonFontSize, weight: .bold))
-                        .foregroundColor(.white)
-                }
-            }
         }
         .trailing()
         .padding(.bottom, 5)
@@ -235,39 +227,5 @@ extension View {
         return self
             .frame(width: width, height: width)
             .clipShape(Circle())
-    }
-}
-
-extension CustomTextEditor {
-    func overlayDoneButtonAndLimit(
-        editing: Binding<Bool>,
-        textCount: Int,
-        limit: Int,
-        buttonFontSize: CGFloat) -> some View {
-        let textValid = textCount <= limit
-        return VStack {
-            self
-            HStack(alignment: .bottom) {
-                if !textValid { HStack(spacing: 0) {
-                    Text("\(textCount)")
-                        .font(.footnote)
-                        .foregroundColor(.red)
-                    Text(" / \(limit)")
-                        .font(.footnote)
-                }}
-                
-                if editing.wrappedValue {
-                    MyButton(action: { editing.wrappedValue = false }) {
-                        Text("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON")
-                            .font(.system(size: buttonFontSize, weight: .bold))
-                            .foregroundColor(.white)
-                    }
-                }
-            }
-            .bottom()
-            .trailing()
-            .padding(.bottom, 5)
-            .fixedSize(horizontal: false, vertical: true)
-        }
     }
 }

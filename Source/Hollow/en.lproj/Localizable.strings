@@ -318,7 +318,7 @@
 "REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_TITLE" = "Are you sure to set the selected tag?";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE" = "Are you sure to report with the selected tag?";
+"REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE%@" = "Are you sure to report with tag \"%@\"?";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "Are you sure to delete?";

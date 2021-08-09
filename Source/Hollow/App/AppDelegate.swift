@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Fetch the lastest config
         fetchConfig()
+        
+        UITextView.appearance().backgroundColor = nil
         return true
     }
     

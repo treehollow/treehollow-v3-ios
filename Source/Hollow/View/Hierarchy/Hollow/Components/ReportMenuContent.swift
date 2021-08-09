@@ -47,7 +47,7 @@ struct ReportMenuContent: View {
                             showConfirm(
                                 type: .fold,
                                 reason: tag,
-                                title: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE", comment: "")
+                                title: String(format: NSLocalizedString("REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE%@", comment: ""), tag)
                             )
                         }
                     }
@@ -181,7 +181,7 @@ struct ReportMenuContent: View {
             }),
             .cancel(action: { self.reason = "" })
         ], accessoryView: {
-            CustomTextEditor(text: $reason, editing: .constant(true), modifiers: { $0 })
+            TextEditor(text: $reason)
                 .multilineTextAlignment(.leading)
                 .frame(maxHeight: 100)
                 .padding(7)

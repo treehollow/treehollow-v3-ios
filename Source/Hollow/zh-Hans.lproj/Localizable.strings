@@ -309,7 +309,7 @@
 "REPORT_MENU_ALERT_CONFIRM_ADMIN_SET_TAG_TITLE" = "确定要设置所选标签？";
 
 /* No comment provided by engineer. */
-"REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE" = "确定要用所选的标签举报？";
+"REPORT_MENU_ALERT_CONFIRM_FOLD_TITLE%@" = "确定要举报“%@”标签？";
 
 /* No comment provided by engineer. */
 "REPORT_MENU_ALERT_CONFIRM_REPORT_DELETE_TITLE" = "确定要删除？";
