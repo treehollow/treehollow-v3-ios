@@ -59,14 +59,10 @@ struct AboutView: View {
 
             }
             
-            Section {
-                ImageTitledStack(systemImageName: "point.topleft.down.curvedto.point.bottomright.up") {
-                    Text("ABOUTVIEW_OPENSOURCE_NOTICE")
-                        .accentColor(.hollowContentVoteGradient1)
-                        .frame(maxHeight: .infinity)
-                }
-                .padding(.vertical)
-
+            ListSection(header: "ABOUTVIEW_OPENSOURCE_TITLE") {
+                Text("ABOUTVIEW_OPENSOURCE_NOTICE")
+                    .accentColor(.hollowContentVoteGradient1)
+                    .padding(.vertical, 3)
                 NavigationLink(
                     NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
                     destination: DependenciesView()
@@ -86,28 +82,17 @@ struct AboutView: View {
                     })
             }
             
-            Section {
-                NavigationLink(
-                    "ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE",
-                    destination: List {
-                        let contributors = ["@Cris", "@Elio", "@liang2kl", "@pkuhollow"]
-                        ImageTitledStack(spacing: 5, systemImageName: "person.3") {
-                            Text("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE")
-                                .fontWeight(.bold)
-                                .foregroundColor(.tint)
-                                .padding(.bottom, 5)
-                            ForEach(contributors, id: \.self) { name in
-                                Text(verbatim: name)
-                                    .dynamicFont(size: 16, design: .monospaced)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .padding(.vertical)
+            ListSection(header: "ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE") {
+                let contributors = ["@Cris", "@Elio", "@liang2kl", "@pkuhollow"]
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(contributors, id: \.self) { name in
+                        Text(verbatim: name)
+                            .dynamicFont(size: 16, weight: .semibold, design: .monospaced)
+                            .foregroundColor(.secondary)
                     }
-                    .navigationBarTitleDisplayMode(.inline)
-                    .defaultListStyle()
-                    .navigationTitle("ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE")
-                )
+                }
+                .padding(.vertical, 4)
+
             }
             
         }
@@ -133,14 +118,13 @@ extension AboutView {
                                     .horizontalCenter()
                                     .lineSpacing(3)
                             }
-                            .edgesIgnoringSafeArea(.bottom)
                             .background(Color.uiColor(.secondarySystemBackground).ignoresSafeArea())
                             .navigationBarItems(
                                 trailing:
                                     Button(action: {
-                                        openURL(URL(string: dependency.url)!)
+                                        openURL(URL(string: "Hollow://url-" + dependency.url)!)
                                     }) {
-                                        Image(systemName: "arrow.turn.up.right")
+                                        Image(systemName: "link")
                                     }
                             )
                             .navigationBarTitle(dependency.module)

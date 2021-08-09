@@ -52,7 +52,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
     }
     
     // MARK: - Load Posts
-    func requestPosts(at page: Int, completion: (() -> Void)? = nil) {
+    func requestPosts(at page: Int, successCompletion: (() -> Void)? = nil, failureCompletion: (() -> Void)? = nil) {
         guard !self.noMorePosts else { return }
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else {
@@ -87,7 +87,6 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
             .sinkOnMainThread(
                 receiveCompletion: { _completion in
                     withAnimation { self.isLoading = false }
-                    completion?()
                     switch _completion {
                     case .finished: break
                     // We handle the completion on receiving value. The only output
@@ -95,6 +94,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                     // so if we want to deal with the result asynchronously, we should
                     // fetch other components when the asynchronous work is done.
                     case .failure(let error):
+                        failureCompletion?()
                         self.defaultErrorHandler(errorMessage: &self.errorMessage, error: error)
                     }
                 }, receiveValue: { postWrappers in
@@ -104,6 +104,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
                         self.page = 1
                         return
                     }
+                    successCompletion?()
 
                     self.integratePosts(postWrappers)
                 }
@@ -115,7 +116,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
         guard !isLoading && allowLoadMorePosts else { return }
         allowLoadMorePosts = false
         self.page += 1
-        requestPosts(at: page, completion: {
+        requestPosts(at: page, successCompletion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.allowLoadMorePosts = true
             }
@@ -128,7 +129,12 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
             noMorePosts = false
             allowLoadMorePosts = false
         }
-        requestPosts(at: 1, completion: finishHandler)
+        requestPosts(at: 1) {
+            self.posts.removeAll()
+            finishHandler()
+        } failureCompletion: {
+            finishHandler()
+        }
     }
     
     private func integratePosts(_ newPosts: [PostDataWrapper]) {

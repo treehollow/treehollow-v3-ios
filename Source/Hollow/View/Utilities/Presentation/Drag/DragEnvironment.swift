@@ -37,11 +37,11 @@ extension View {
         self.environment(\.dragging, dragging)
     }
     
-    @ViewBuilder func proposedIgnoringSafeArea(edges: Edge.Set = .all) -> some View {
+    @ViewBuilder func proposedIgnoringSafeArea(regions: SafeAreaRegions = .container, edges: Edge.Set = .all) -> some View {
         if !UIDevice.isPad {
-            self.modifier(ProposedIgnoringSafeArea(edges: edges))
+            self.modifier(ProposedIgnoringSafeArea(regions: regions, edges: edges))
         } else {
-            self.ignoresSafeArea(.container, edges: edges)
+            self.ignoresSafeArea(regions, edges: edges)
         }
     }
 }
@@ -58,6 +58,7 @@ extension EnvironmentValues {
 }
 
 fileprivate struct ProposedIgnoringSafeArea: ViewModifier {
+    let regions: SafeAreaRegions
     let edges: Edge.Set
     @State private var internalIsDragging = false
     @Environment(\.dragging) var dragging
@@ -65,7 +66,7 @@ fileprivate struct ProposedIgnoringSafeArea: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onChange(of: dragging) { dragging in withAnimation { internalIsDragging = dragging  } }
-            .ignoresSafeArea(.container, edges: internalIsDragging ? [] : edges)
+            .ignoresSafeArea(regions, edges: internalIsDragging ? [] : edges)
     }
 }
 

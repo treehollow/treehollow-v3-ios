@@ -392,9 +392,9 @@ struct OtherSettingsView: View {
             OpenURLSettingsView()
             #endif
             
-            Section {
-                NavigationLink("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", destination: ExperimentalFeaturesView())
-            }
+//            Section {
+//                NavigationLink("SETTINGSVIEW_OTHER_EXP_FEAT_NAV_TITLE", destination: ExperimentalFeaturesView())
+//            }
         }
         .defaultListStyle()
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_OTHER_NAV_TITLE", comment: ""))

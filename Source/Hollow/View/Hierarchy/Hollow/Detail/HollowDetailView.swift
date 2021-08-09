@@ -199,7 +199,7 @@ struct HollowDetailView: View {
         .background(
             Color.hollowCardBackground
                 .proposedCornerRadius()
-                .proposedIgnoringSafeArea()
+                .proposedIgnoringSafeArea(regions: .all)
         )
 
         .overlay(Group { if store.replyToId < -1 && !store.noSuchPost && !searchBarPresented {
@@ -246,7 +246,7 @@ struct HollowDetailView: View {
                 .blurBackground()
             }
             .accentColor(.tint)
-            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity))
+            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity.combined(with: .move(edge: .bottom))))
         }}
 
         .overlay(Group { if store.replyToId >= -1 {

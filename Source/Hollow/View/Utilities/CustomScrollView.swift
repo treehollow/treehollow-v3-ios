@@ -32,13 +32,6 @@ struct CustomScrollView<Content: View>: View {
                 scrollView.refreshControl = refreshControl
             }
         }
-        .refreshable {
-            if let refresh = refresh {
-                await withCheckedContinuation { continuation in
-                    refresh { continuation.resume() }
-                }
-            }
-        }
         .onChange(of: scrollViewModel.scrolledToBottom) {
             if $0 { didScrollToBottom?() }
         }

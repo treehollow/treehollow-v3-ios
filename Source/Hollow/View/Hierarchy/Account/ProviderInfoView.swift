@@ -16,16 +16,12 @@ struct ProviderInfoView: View {
     var body: some View {
         List {
             if let announcement = Defaults[.hollowConfig]?.announcement {
-                Section {
-                    VStack(alignment: .leading) {
-                        Text("TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE")
-                            .bold()
-                            .padding(.bottom, 5)
-                        Text(announcement)
-                            .foregroundColor(.secondary)
-                    }
-                    .dynamicFont(size: 14)
-                    .padding(.vertical, 5)
+                ListSection(header: "TIMELINEVIEW_ANNOUCEMENT_CARD_TITLE", headerImage: "megaphone") {
+                    Text(announcement)
+                        .foregroundColor(.secondary)
+                        .dynamicFont(size: 14)
+                        .padding(.vertical, 5)
+                    
                     if announcement == hiddenAnnouncement {
                         Button("PROVIDER_VIEW_RESTORE_ANNOUNCEMENT") {
                             withAnimation {
