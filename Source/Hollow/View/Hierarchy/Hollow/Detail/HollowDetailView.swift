@@ -23,6 +23,9 @@ struct HollowDetailView: View {
     @State var searchString = ""
     @State var searchBarPresented = false
     
+    // For iPad
+    @Binding var searchBarPresented_iPad: Bool
+    
     let scrollAnimation = Animation.spring(response: 0.3)
     
     @ScaledMetric(wrappedValue: 8) var headerVerticalPadding: CGFloat
@@ -225,7 +228,7 @@ struct HollowDetailView: View {
         .proposedIgnoringSafeArea(edges: .bottom)
 
         // FIXME: Safe Area bug in beta versions
-        .safeAreaInset(edge: .bottom, spacing: 0) { if searchBarPresented {
+        .safeAreaInset(edge: .bottom, spacing: 0) { if searchBarPresented || (UIDevice.isPad && searchBarPresented_iPad) {
             VStack(spacing: 0) {
                 Divider()
                 HStack {
@@ -236,6 +239,7 @@ struct HollowDetailView: View {
                     Button(action: {
                         withAnimation {
                             searchBarPresented = false
+                            searchBarPresented_iPad = false
                             searchString = ""
                         }
                         hideKeyboard()
@@ -290,7 +294,7 @@ extension HollowDetailView {
         if push {
             HollowDetailView_iPad(store: store)
         } else {
-            HollowDetailView(store: store)
+            HollowDetailView(store: store, searchBarPresented_iPad: .constant(false))
         }
     }
 }

@@ -67,7 +67,7 @@ struct HollowCommentInputView: View {
                 .accentColor(.tint)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
-                .frame(height: editorFontSize * (UIDevice.isPad ? 20 : 10))
+                .frame(maxHeight: editorFontSize * (UIDevice.isPad ? 20 : 10))
         }
         .padding()
         .conditionalMatchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace, isSource: false)

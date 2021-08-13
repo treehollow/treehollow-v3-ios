@@ -67,7 +67,7 @@ struct HollowDetailViewWrapper: View {
     
     var body: some View {
         if isRoot {
-            HollowDetailView(store: wrapper.store)
+            HollowDetailView(store: wrapper.store, searchBarPresented_iPad: .constant(false))
                 .swipeToDismiss(
                     presented: .init(
                         get: { true },
@@ -75,7 +75,7 @@ struct HollowDetailViewWrapper: View {
                     )
                 )
         } else {
-            HollowDetailView(store: wrapper.store)
+            HollowDetailView(store: wrapper.store, searchBarPresented_iPad: .constant(false))
                 // Provide handler to pop back
                 .environment(\.popHandler, wrapper.popHandler)
         }

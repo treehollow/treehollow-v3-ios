@@ -15,7 +15,6 @@ extension MainView_iPad {
         case .timeline:
             TimelineView(isSearching: .constant(false), viewModel: sharedModel.timelineViewModel)
                 .background(Color.background.ignoresSafeArea())
-                .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_TIMELINE", displayMode: .inline)
                 .overlay(overlayFloatButton)
                 .refreshNavigationItem(refreshAction: { sharedModel.timelineViewModel.refresh(finishHandler: {}) })
@@ -27,7 +26,6 @@ extension MainView_iPad {
         case .wander:
             WanderView(showCreatePost: .constant(false), viewModel: sharedModel.wanderViewModel)
                 .background(Color.background.ignoresSafeArea())
-                .edgesIgnoringSafeArea(.bottom)
                 .navigationBarTitle("GLOBAL_WANDER", displayMode: .inline)
                 .overlay(overlayFloatButton)
                 .refreshNavigationItem(refreshAction: { sharedModel.wanderViewModel.refresh(finishHandler: {}) })
@@ -53,7 +51,6 @@ extension MainView_iPad {
             MessageView.SystemMessageView(messageStore: sharedModel.messageStore)
                 .navigationBarTitle("IPAD_SIDEBAR_MESSAGES", displayMode: .inline)
                 .padding(.leading)
-                .edgesIgnoringSafeArea(.bottom)
                 .background(Color.background.ignoresSafeArea())
                 .refreshNavigationItem(refreshAction: { sharedModel.messageStore.requestMessages() })
                 .onAppear {
@@ -63,17 +60,14 @@ extension MainView_iPad {
                 }
         case .account:
             AccountInfoView()
-                .edgesIgnoringSafeArea(.bottom)
                 .navigationViewStyle(StackNavigationViewStyle())
                 .noNavigationItems()
         case .settings:
             SettingsView(presented: .constant(true))
-                .edgesIgnoringSafeArea(.bottom)
                 .navigationViewStyle(StackNavigationViewStyle())
                 .noNavigationItems()
         case .about:
             AboutView()
-                .edgesIgnoringSafeArea(.bottom)
                 .navigationViewStyle(StackNavigationViewStyle())
                 .noNavigationItems()
         }

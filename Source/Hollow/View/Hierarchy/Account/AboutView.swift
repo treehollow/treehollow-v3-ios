@@ -59,17 +59,6 @@ struct AboutView: View {
 
             }
             
-            ListSection(header: "ABOUTVIEW_OPENSOURCE_TITLE") {
-                Text("ABOUTVIEW_OPENSOURCE_NOTICE")
-                    .accentColor(.hollowContentVoteGradient1)
-                    .padding(.vertical, 3)
-                    .font(.system(.body, design: .monospaced))
-                NavigationLink(
-                    NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
-                    destination: DependenciesView()
-                )
-            }
-            
             if UIDevice.isPad {
                 NavigationLink(
                     destination: ProviderInfoView(),
@@ -81,6 +70,17 @@ struct AboutView: View {
                                 .foregroundColor(.secondary)
                         }
                     })
+            }
+            
+            ListSection(header: "ABOUTVIEW_OPENSOURCE_TITLE") {
+                Text("ABOUTVIEW_OPENSOURCE_NOTICE")
+                    .accentColor(.hollowContentVoteGradient1)
+                    .padding(.vertical, 3)
+                    .font(.system(.body, design: .monospaced))
+                NavigationLink(
+                    NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
+                    destination: DependenciesView()
+                )
             }
             
             ListSection(header: "ABOUTVIEW_CONTRIBUTORS_FOOTER_TITLE") {

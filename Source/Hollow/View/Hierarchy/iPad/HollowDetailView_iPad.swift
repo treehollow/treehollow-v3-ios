@@ -11,11 +11,13 @@ import SwiftUI
 struct HollowDetailView_iPad: View {
     @ObservedObject var store: HollowDetailStore
     
+    @State var searchBarPresented = false
+    
     @ScaledMetric(wrappedValue: 33, relativeTo: .body) var avatarWidth: CGFloat
     @ScaledMetric(wrappedValue: 17, relativeTo: .body) var body17: CGFloat
     
     var body: some View {
-        HollowDetailView(store: store, showHeader: false)
+        HollowDetailView(store: store, showHeader: false, searchBarPresented_iPad: $searchBarPresented)
             .navigationTitle(Text(store.postDataWrapper.post.text.removeLineBreak()))
             .navigationBarItems(
                 leading:
@@ -74,6 +76,11 @@ struct HollowDetailView_iPad: View {
                             Label("DETAIL_MENU_REFRESH_LABEL", systemImage: "arrow.clockwise")
                         }
                         .disabled(store.isLoading)
+                        
+                        Button(action: { withAnimation { searchBarPresented = true }}) {
+                            Label("DETAILVIEW_SEARCH_MENU_TITLE", systemImage: "magnifyingglass")
+                        }
+                        .disabled(store.postDataWrapper.post.comments.isEmpty)
                         
                         Divider()
                         
