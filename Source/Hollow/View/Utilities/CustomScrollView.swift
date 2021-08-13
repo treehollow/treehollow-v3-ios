@@ -25,6 +25,7 @@ struct CustomScrollView<Content: View>: View {
         }
         .introspectScrollView { scrollView in
             scrollView.delegate = scrollViewModel
+            scrollView.contentInsetAdjustmentBehavior = .never
             if let refresh = refresh {
                 let refreshControl = UIRefreshControl()
                 coordinator = Coordinator(refresh: refresh, refreshControl: refreshControl)

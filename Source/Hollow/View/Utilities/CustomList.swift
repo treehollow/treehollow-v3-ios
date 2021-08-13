@@ -29,6 +29,7 @@ struct CustomList<Content: View>: View {
         // UIScrollView as our scroll view.
         .introspectTableView { tableView in
             (tableView as UIScrollView).delegate = scrollViewModel
+            tableView.contentInsetAdjustmentBehavior = .never
         }
         // Refresh control on top.
         .refreshable {

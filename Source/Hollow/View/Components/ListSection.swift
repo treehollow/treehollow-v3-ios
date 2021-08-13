@@ -31,6 +31,7 @@ struct ListSection<Content: View>: View {
                 .dynamicFont(size: 16, weight: .semibold)
                 .foregroundColor(.hollowContentText)
                 .listRowBackground(Color.listHeaderRowBackground)
+                .listRowSeparator(.hidden)
 
             }
             

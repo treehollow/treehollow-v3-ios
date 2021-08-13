@@ -256,7 +256,6 @@ struct HollowDetailView: View {
             let name = store.replyToId == -1 ?
                 NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
                 post.comments.first(where: { $0.commentId == store.replyToId })?.name ?? ""
-            let placeholder = NSLocalizedString("COMMENT_INPUT_REPLY_TO_PREFIX", comment: "") + name
             HollowCommentInputView(
                 store: store,
                 buttonAnimationNamespace: UIDevice.isPad ? nil : buttonAnimationNamespace,

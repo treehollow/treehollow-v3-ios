@@ -63,6 +63,7 @@ struct AboutView: View {
                 Text("ABOUTVIEW_OPENSOURCE_NOTICE")
                     .accentColor(.hollowContentVoteGradient1)
                     .padding(.vertical, 3)
+                    .font(.system(.body, design: .monospaced))
                 NavigationLink(
                     NSLocalizedString("ABOUTVIEW_LICENSE_NAV_TITLE", comment: ""),
                     destination: DependenciesView()
@@ -87,7 +88,7 @@ struct AboutView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(contributors, id: \.self) { name in
                         Text(verbatim: name)
-                            .dynamicFont(size: 16, weight: .semibold, design: .monospaced)
+                            .dynamicFont(size: 16, design: .monospaced)
                             .foregroundColor(.secondary)
                     }
                 }
