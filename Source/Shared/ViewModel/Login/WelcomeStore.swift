@@ -22,7 +22,7 @@ class WelcomeStore: ObservableObject {
     
     var cancellables = Set<AnyCancellable>()
     
-    func requestConfig(hollowType: HollowType, customConfigURL: String? = nil) {
+    func requestConfig(hollowType: HollowType, customConfigURL: String? = nil, predifined: Bool = false) {
         
         // Validate the parameters
         if hollowType == .other {
@@ -57,7 +57,11 @@ class WelcomeStore: ObservableObject {
                     Defaults[.customConfigURL] = customConfigURL
                 }
                 withAnimation {
-                    self.hollowSelection = hollowType.rawValue
+                    if predifined {
+                        self.hollowSelection = 100
+                    } else {
+                        self.hollowSelection = hollowType.rawValue
+                    }
                 }
                 #if os(macOS) && !targetEnvironment(macCatalyst)
                 self.showLogin = true

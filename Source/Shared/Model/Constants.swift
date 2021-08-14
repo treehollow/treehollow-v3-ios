@@ -29,6 +29,9 @@ struct Constants {
     struct HollowConfig {
         static let thuConfigURL = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/main.txt"
         static let pkuConfigURL = "https://cdn.jsdelivr.net/gh/pkuhollow/pkuhollow-config@main/config.txt"
+        static let otherConfigs: [String : String] = [
+            "北化树洞" : "https://cdn.jsdelivr.net/gh/bucthole/bucthole-config@master/config.txt"
+        ]
     }
 
     struct Net {
