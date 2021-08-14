@@ -44,7 +44,7 @@ struct WanderView: View {
                             IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
                         }
                 }}
-                .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: nil)
+                .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: .defaultSpring)
                 .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : 15)
                 .padding(.bottom, 70)
                 .background(Color.background)

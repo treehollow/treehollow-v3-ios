@@ -120,7 +120,6 @@ struct IntegrationUtilities {
             detailVC.view.backgroundColor = nil
             let navVC = UINavigationController(rootViewController: detailVC)
             navVC.modalPresentationStyle = .overFullScreen
-            navVC.view.backgroundColor = nil
             topViewController()?.present(navVC, animated: true)
         }
     }

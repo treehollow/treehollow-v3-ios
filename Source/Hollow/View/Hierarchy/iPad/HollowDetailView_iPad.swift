@@ -112,8 +112,10 @@ struct HollowDetailView_iPad: View {
                     })
                     .disabled(store.noSuchPost)
                 }
+                .imageScale(.medium)
                 .padding(.leading)
             )
             .keyboardShortcut("r", action: store.requestDetail)
+            .background(Color.hollowCardBackground.ignoresSafeArea())
     }
 }

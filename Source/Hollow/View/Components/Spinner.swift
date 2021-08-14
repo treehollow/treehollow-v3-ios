@@ -24,8 +24,8 @@ struct Spinner: View {
             .frame(width: desiredWidth * (1 + strokeScaleFactor), height: desiredWidth * (1 + strokeScaleFactor))
             .onAppear {
                 guard timer == nil else { return }
-                withAnimation(.spring()) {
-                    timer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: true) { _ in
+                timer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: true) { _ in
+                    withAnimation(.spring()) {
                         switch progress {
                         case 0.3: progress = 0.6
                         case 0.6: progress = close ? 1.0 : 0.3

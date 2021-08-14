@@ -54,7 +54,6 @@ struct HollowDetailView: View {
                         _HollowHeaderView(
                             postData: store.postDataWrapper.post,
                             compact: false,
-                            // Show text on header when the text is not visible
                             showContent: true,
                             starAction: store.star,
                             isLoading: store.isLoading,
@@ -142,7 +141,7 @@ struct HollowDetailView: View {
                 // FIXME: Corner Radius
 
                 .listStyle(PlainListStyle())
-                .background(Color.hollowCardBackground)
+//                .background(Color.hollowCardBackground)
                 .buttonStyle(BorderlessButtonStyle())
                 .refreshable {
                     guard !store.isLoading else { return }
@@ -189,88 +188,85 @@ struct HollowDetailView: View {
                         }
                     }
                 }
-
+                
                 .onChange(of: searchString) {
                     if !$0.isEmpty { withAnimation { proxy.scrollTo(-3, anchor: .top) }}
                 }
-
+                
             }
-
+            
         }
         
         .disabled(store.noSuchPost)
-        .background(
-            Color.hollowCardBackground
-                .proposedCornerRadius()
-                .proposedIgnoringSafeArea(regions: .all)
-        )
-
+        
         .keyboardBar()
-
-        .overlay(Group { if store.replyToId < -1 && !store.noSuchPost && !searchBarPresented {
-            FloatButton(
-                action: {
-                    withAnimation(scrollAnimation) { store.replyToId = -1 }
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                },
-                systemImageName: "text.bubble.fill",
-                imageScaleFactor: 0.8,
-                buttonAnimationNamespace: buttonAnimationNamespace
-            )
-            .proposedIgnoringSafeArea(edges: .bottom)
-            .bottom()
-            .trailing()
-            .padding()
-            .padding(7)
-            .disabled(store.isSendingComment || store.isLoading)
-        }})
         
         .proposedIgnoringSafeArea(edges: .bottom)
-
+        
         // FIXME: Safe Area bug in beta versions
-        .safeAreaInset(edge: .bottom, spacing: 0) { if searchBarPresented || (UIDevice.isPad && searchBarPresented_iPad) {
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             VStack(spacing: 0) {
-                Divider()
-                HStack {
-                    UIKitSearchBar(text: $searchString, prompt: NSLocalizedString("DETAILVIEW_SEARCH_BAR_PROMPT", comment: ""))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.vertical)
-
-                    Button(action: {
-                        withAnimation {
-                            searchBarPresented = false
-                            searchBarPresented_iPad = false
-                            searchString = ""
-                        }
-                        hideKeyboard()
-                    }) {
-                        Text("VERSION_UPDATE_VIEW_CLOSE")
-                            .padding(.vertical)
-                    }
+                if store.replyToId < -1 && !store.noSuchPost && !searchBarPresented {
+                    FloatButton(
+                        action: {
+                            withAnimation(scrollAnimation) { store.replyToId = -1 }
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                        },
+                        systemImageName: "text.bubble.fill",
+                        imageScaleFactor: 0.8,
+                        buttonAnimationNamespace: buttonAnimationNamespace
+                    )
+                        .trailing()
+                        .padding(.horizontal)
+                        .padding(7)
+                        .disabled(store.isSendingComment || store.isLoading)
                 }
-                .padding(.horizontal)
-                .blurBackground()
+                
+                if store.replyToId >= -1 {
+                    let post = store.postDataWrapper.post
+                    let name = store.replyToId == -1 ?
+                    NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
+                    post.comments.first(where: { $0.commentId == store.replyToId })?.name ?? ""
+                    HollowCommentInputView(
+                        store: store,
+                        buttonAnimationNamespace: UIDevice.isPad ? nil : buttonAnimationNamespace,
+                        transitionAnimation: scrollAnimation,
+                        replyToName: name
+                    )
+                        .edgesIgnoringSafeArea([])
+                        .transition(UIDevice.isPad ? .move(edge: .bottom) : .floatButton)
+                    
+                }
+                
+                if searchBarPresented || (UIDevice.isPad && searchBarPresented_iPad) {
+                    VStack(spacing: 0) {
+                        Divider()
+                        HStack {
+                            UIKitSearchBar(text: $searchString, prompt: NSLocalizedString("DETAILVIEW_SEARCH_BAR_PROMPT", comment: ""))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.vertical)
+                            
+                            Button(action: {
+                                withAnimation {
+                                    searchBarPresented = false
+                                    searchBarPresented_iPad = false
+                                    searchString = ""
+                                }
+                                hideKeyboard()
+                            }) {
+                                Text("VERSION_UPDATE_VIEW_CLOSE")
+                                    .padding(.vertical)
+                            }
+                        }
+                        .padding(.horizontal)
+                        .blurBackground()
+                    }
+                    .accentColor(.tint)
+                    .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity.combined(with: .move(edge: .bottom))))
+                }
             }
-            .accentColor(.tint)
-            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity.combined(with: .move(edge: .bottom))))
-        }}
-
-        .overlay(Group { if store.replyToId >= -1 {
-            let post = store.postDataWrapper.post
-            let name = store.replyToId == -1 ?
-                NSLocalizedString("COMMENT_INPUT_REPLY_POST_SUFFIX", comment: "") :
-                post.comments.first(where: { $0.commentId == store.replyToId })?.name ?? ""
-            HollowCommentInputView(
-                store: store,
-                buttonAnimationNamespace: UIDevice.isPad ? nil : buttonAnimationNamespace,
-                transitionAnimation: scrollAnimation,
-                replyToName: name
-            )
-            .edgesIgnoringSafeArea([])
-            .bottom()
-            .transition(UIDevice.isPad ? .move(edge: .bottom) : .floatButton)
-
-        }})
+            
+        }
 
         .onChange(of: store.replyToId) { id in
             if id >= -1 {

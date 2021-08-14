@@ -33,14 +33,6 @@ fileprivate struct SwipeToDismiss: ViewModifier {
             .scaleEffect(scale)
             .offset(x: offset.x, y: offset.y)
             .allowsHitTesting(!isPressed)
-            .onChange(of: isPressed, perform: { pressed in
-                if !pressed {
-                    withAnimation(.spring(response: 0.35, dampingFraction: 1)) {
-                        offset = (0, 0)
-                        scale = 1
-                    }
-                }
-            })
         
             // Add the gesture on an overlay to avoid conflict
             .overlay(
@@ -68,9 +60,12 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                                 if offsetExceeded(with: value) {
                                     withAnimation {
                                         presented = false
+                                        content.hideKeyboard()
+                                    }
+                                } else {
+                                    withAnimation {
                                         offset = (0, 0)
                                         scale = 1
-                                        content.hideKeyboard()
                                     }
                                 }
                             }
@@ -88,7 +83,7 @@ fileprivate struct SwipeToDismiss: ViewModifier {
     private func offset(for value: CGFloat) -> CGFloat {
         // y = sqrt(a*(x+a/4)) - a/2, where a > 0
         // y'(0) = 1 && y(0) = 0
-        let a: CGFloat = 200
+        let a: CGFloat = 100
         let offset = sqrt(a * (abs(value) + a / 4)) - a / 2
         return value > 0 ? offset : -offset
     }

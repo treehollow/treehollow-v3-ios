@@ -68,6 +68,8 @@ struct HollowCommentInputView: View {
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .frame(maxHeight: editorFontSize * (UIDevice.isPad ? 20 : 10))
+            
+            imageButton.trailing()
         }
         .padding()
         .conditionalMatchedGeometryEffect(id: "float.button", in: buttonAnimationNamespace, isSource: false)

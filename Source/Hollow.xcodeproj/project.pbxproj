@@ -112,6 +112,7 @@
 		0E7795D52657E727002F70C2 /* HollowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453626340311001AFC4B /* HollowImage.swift */; };
 		0E7796172657EB30002F70C2 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796162657EB30002F70C2 /* Defaults */; };
 		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
+		0E78D6DF26C78B7300B0E420 /* UIScreen+ScreenCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78D6DE26C78B7300B0E420 /* UIScreen+ScreenCorners.swift */; };
 		0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */; };
 		0E79AF51265E45B600BFDABD /* withAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF50265E45B600BFDABD /* withAnimation.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
@@ -344,6 +345,7 @@
 		0E7795BF2657E6FE002F70C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HollowWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0E779624265800DD002F70C2 /* WidgetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetColors.swift; sourceTree = "<group>"; };
+		0E78D6DE26C78B7300B0E420 /* UIScreen+ScreenCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+ScreenCorners.swift"; sourceTree = "<group>"; };
 		0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalMatchedGeometryEffect.swift"; sourceTree = "<group>"; };
 		0E79AF50265E45B600BFDABD /* withAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withAnimation.swift; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 				0E37528326B79E86000A3DC5 /* CustomList.swift */,
 				0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */,
 				0E3FB2FE26C12905009BEBD4 /* View+keyboardBar.swift */,
+				0E78D6DE26C78B7300B0E420 /* UIScreen+ScreenCorners.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1160,6 +1163,7 @@
 				0ECA796E26652C4200736096 /* HollowErrorHandler.swift in Sources */,
 				0E415B6625CD772200351672 /* HollowVoteContentView.swift in Sources */,
 				0EC245C526340312001AFC4B /* ReportPostRequest.swift in Sources */,
+				0E78D6DF26C78B7300B0E420 /* UIScreen+ScreenCorners.swift in Sources */,
 				0E40F74825D7C997003A2342 /* HollowInputSubViews.swift in Sources */,
 				0E415B5725CD772200351672 /* Spinner.swift in Sources */,
 				0EC245C726340312001AFC4B /* ReportCommentRequest.swift in Sources */,
