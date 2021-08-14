@@ -104,7 +104,7 @@ extension HollowDetailView {
             commentData: bindingComment,
             compact: false,
             contentVerticalPadding: UIDevice.isMac ? 13 : 10,
-            hideLabel: hideLabel,
+            hideLabel: searchString.isEmpty ? hideLabel : false,
             postColorIndex: store.postDataWrapper.post.colorIndex,
             postHash: store.postDataWrapper.post.hash,
             imageReloadHandler: { store.reloadImage($0, commentId: comment.commentId) },
