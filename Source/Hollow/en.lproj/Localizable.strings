@@ -673,4 +673,6 @@
 
 "WIDGET_EMPTY_MSG" = "Internet connection or login status has failed.";
 
-"DETAILVIEW_SEARCH_BAR_PROMPT" = "Search";
+"DETAILVIEW_SEARCH_BAR_PROMPT" = "Search in Comments...";
+
+"DETAILVIEW_SEARCH_MENU_TITLE" = "Search";

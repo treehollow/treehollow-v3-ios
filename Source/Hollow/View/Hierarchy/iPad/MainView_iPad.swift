@@ -10,8 +10,6 @@ import SwiftUI
 import Defaults
 
 struct MainView_iPad: View {
-    @State var page: Page = .timeline
-    
     @ObservedObject var sharedModel = SharedModel()
     
     @ScaledMetric(wrappedValue: 40) var rowHeight: CGFloat
@@ -36,7 +34,7 @@ struct MainView_iPad: View {
                             NavigationLink(
                                 destination: EmptyView(),
                                 tag: page.rawValue,
-                                selection: Binding(get: { page.rawValue }, set: {
+                                selection: Binding(get: { sharedModel.page.rawValue }, set: {
                                     if let rawValue = $0,
                                        let page = Page(rawValue: rawValue) {
                                         sharedModel.page = page
@@ -96,7 +94,7 @@ struct MainView_iPad: View {
 
         .overlay(Group { if sharedModel.showCreatePost {
             HollowInputView(inputStore: HollowInputStore(presented: $sharedModel.showCreatePost, refreshHandler: {
-                page = .timeline
+                sharedModel.page = .timeline
                 sharedModel.timelineViewModel.refresh(finshHandler: {})
             }), buttonAnimationNamespace: buttonAnimationNamespace)
 //            .transition(.move(edge: .bottom))

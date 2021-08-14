@@ -56,6 +56,7 @@ extension DefaultRequest {
         .validate()
         .responseJSON { response in
             DispatchQueue.global(qos: .background).async {
+                print("HERE")
                 switch response.result {
                 case .success:
                     let jsonDecoder = JSONDecoder()
@@ -69,6 +70,7 @@ extension DefaultRequest {
                         if result.code >= 0 {
                             // result code >= 0 valid!
                             if let resultData = transformer(result) {
+                                print(resultData)
                                 completion(resultData, nil)
                                 // The current request has finished successfully
                                 completion(nil, .loadingCompleted)

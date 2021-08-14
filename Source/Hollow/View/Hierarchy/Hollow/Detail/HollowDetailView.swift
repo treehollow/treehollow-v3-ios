@@ -22,6 +22,9 @@ struct HollowDetailView: View {
     @State var searchString = ""
     @State var searchBarPresented = false
     
+    // For iPad
+    @Binding var searchBarPresented_iPad: Bool
+
     let scrollAnimation = Animation.spring(response: 0.3)
     
     @ScaledMetric(wrappedValue: 8) var headerVerticalPadding: CGFloat
@@ -213,7 +216,7 @@ struct HollowDetailView: View {
         }})
         .proposedIgnoringSafeArea(edges: .bottom)
         
-        .overlay(Group { if searchBarPresented {
+        .overlay(Group { if searchBarPresented || (UIDevice.isPad && searchBarPresented_iPad) {
             VStack(spacing: 0) {
                 Divider()
                 HStack {
@@ -222,7 +225,11 @@ struct HollowDetailView: View {
                         .padding(.vertical)
                     
                     Button(action: {
-                        withAnimation { searchBarPresented = false }
+                        withAnimation {
+                            searchBarPresented = false
+                            searchBarPresented_iPad = false
+                            searchString = ""
+                        }
                         hideKeyboard()
                     }) {
                         Text("VERSION_UPDATE_VIEW_CLOSE")
@@ -233,6 +240,7 @@ struct HollowDetailView: View {
                 .blurBackground()
             }
             .accentColor(.tint)
+            .bottom()
             .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity))
         }})
         
@@ -275,7 +283,7 @@ extension HollowDetailView {
         if push {
             HollowDetailView_iPad(store: store)
         } else {
-            HollowDetailView(store: store)
+            HollowDetailView(store: store, searchBarPresented_iPad: .constant(false))
         }
     }
 }
