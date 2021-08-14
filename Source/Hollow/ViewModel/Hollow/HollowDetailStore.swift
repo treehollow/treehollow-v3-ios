@@ -62,6 +62,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
     
     // MARK: - Load Post Detail
     func requestDetail(_completion: @escaping () -> Void) {
+        guard !isLoading else { return }
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
         let configuration = PostDetailRequest.Configuration(apiRoot: config.apiRootUrls.first!, token: token, postId: postDataWrapper.post.postId, includeComments: true)
@@ -179,6 +180,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
                 case .noSuchPost: description = error.localizedDescription
                 default: description = NSLocalizedString("CITED_POST_LOADING_ERROR", comment: "")
                 }
+                self.postDataWrapper.citedPost = PostDataWrapper.templatePost(for: citedPid).post
                 self.postDataWrapper.citedPost?.loadingError = description
             }, receiveValue: { postData in
                 withAnimation { self.postDataWrapper.citedPost = postData }
