@@ -19,6 +19,8 @@ struct HollowDetailView: View {
     @State var jumpedFromCommentId: Int?
     @State var reverseComments = false
     @State var showOnlyName: String?
+    @State var searchString = ""
+    @State var searchBarPresented = false
     
     let scrollAnimation = Animation.spring(response: 0.3)
     
@@ -61,6 +63,11 @@ struct HollowDetailView: View {
                                 }
                                 .disabled(store.isLoading)
                                 
+                                Button(action: { withAnimation { searchBarPresented = true }}) {
+                                    Label("DETAILVIEW_SEARCH_MENU_TITLE", systemImage: "magnifyingglass")
+                                }
+                                .disabled(store.postDataWrapper.post.comments.isEmpty)
+
                                 Divider()
                                 
                                 Button(action: {
@@ -170,6 +177,10 @@ struct HollowDetailView: View {
                     }
                 }
                 
+                .onChange(of: searchString) {
+                    if !$0.isEmpty { withAnimation { proxy.scrollTo(-3, anchor: .top) }}
+                }
+
             }
             .proposedCornerRadius()
 
@@ -182,7 +193,7 @@ struct HollowDetailView: View {
                 .proposedIgnoringSafeArea()
         )
         
-        .overlay(Group { if store.replyToId < -1 && !store.noSuchPost {
+        .overlay(Group { if store.replyToId < -1 && !store.noSuchPost && !searchBarPresented {
             FloatButton(
                 action: {
                     withAnimation(scrollAnimation) { store.replyToId = -1 }
@@ -201,6 +212,29 @@ struct HollowDetailView: View {
             .disabled(store.isSendingComment || store.isLoading)
         }})
         .proposedIgnoringSafeArea(edges: .bottom)
+        
+        .overlay(Group { if searchBarPresented {
+            VStack(spacing: 0) {
+                Divider()
+                HStack {
+                    UIKitSearchBar(text: $searchString, prompt: NSLocalizedString("DETAILVIEW_SEARCH_BAR_PROMPT", comment: ""))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.vertical)
+                    
+                    Button(action: {
+                        withAnimation { searchBarPresented = false }
+                        hideKeyboard()
+                    }) {
+                        Text("VERSION_UPDATE_VIEW_CLOSE")
+                            .padding(.vertical)
+                    }
+                }
+                .padding(.horizontal)
+                .blurBackground()
+            }
+            .accentColor(.tint)
+            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .opacity))
+        }})
         
         .overlay(Group { if store.replyToId >= -1 {
             let post = store.postDataWrapper.post

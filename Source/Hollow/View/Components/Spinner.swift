@@ -12,6 +12,7 @@ struct Spinner: View {
     
     @State private var progress: Double = 0.6
     @State private var isLoading = false
+    @State private var timer: Timer?
     var color: Color
     var desiredWidth: CGFloat
     var close: Bool = false
@@ -22,8 +23,9 @@ struct Spinner: View {
             .padding(.all, desiredWidth * strokeScaleFactor)
             .frame(width: desiredWidth * (1 + strokeScaleFactor), height: desiredWidth * (1 + strokeScaleFactor))
             .onAppear {
+                guard timer == nil else { return }
                 withAnimation(.spring()) {
-                    let _ = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: true) { _ in
+                    timer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: true) { _ in
                         switch progress {
                         case 0.3: progress = 0.6
                         case 0.6: progress = close ? 1.0 : 0.3
@@ -36,6 +38,7 @@ struct Spinner: View {
                     isLoading.toggle()
                 }
             }
+            .onDisappear { timer?.invalidate() }
     }
     
     struct CircularPathProgressView: View {
@@ -47,7 +50,7 @@ struct Spinner: View {
                 .trim(from: 0, to: CGFloat(progress))
                 .rotation(.init(degrees: -90), anchor: .center)
                 .stroke(color, style: .init(lineWidth: lineWidth, lineCap: .round))
-                .animation(.linear)
+                .animation(.linear, value: progress)
         }
     }
     

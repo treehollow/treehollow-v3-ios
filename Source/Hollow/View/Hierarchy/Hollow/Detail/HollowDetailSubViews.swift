@@ -13,10 +13,17 @@ extension HollowDetailView {
     @ViewBuilder var commentView: some View {
         let postData = store.postDataWrapper.post
         let originalComments = reverseComments ? postData.comments.reversed() : postData.comments
-        let comments = showOnlyName == nil ? originalComments : originalComments.filter({ $0.name == showOnlyName })
-        
+
+        let filteredCommentsByName = showOnlyName == nil ?
+        originalComments :
+        originalComments.filter({ $0.name == showOnlyName })
+
+        let comments = searchString.isEmpty ?
+        filteredCommentsByName :
+        filteredCommentsByName.filter { $0.text.uppercased().contains(searchString.uppercased()) }
+
         HStack {
-            (Text("\(postData.replyNumber) ") + Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))
+            Text("\(showOnlyName != nil || !searchString.isEmpty ? String(comments.count) + " / " : "")\(postData.replyNumber) \(Text("HOLLOWDETAIL_COMMENTS_COUNT_LABEL_SUFFIX"))")
                 .fontWeight(.heavy)
                 .padding(.top)
                 .padding(.bottom, 5)
@@ -54,6 +61,7 @@ extension HollowDetailView {
         .padding(.horizontal)
         .background(Color.hollowCardBackground)
         .lineLimit(1)
+        .id(-3)
         
         ForEach(comments, id: \.commentId) { comment in
             commentView(for: comment)

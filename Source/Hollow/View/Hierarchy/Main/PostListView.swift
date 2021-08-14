@@ -61,32 +61,7 @@ struct PostListView: View {
                 // Check if comments exist to avoid additional spacing
                 
                 if post.replyNumber > 0, !hideComments {
-                    VStack(spacing: 0) {
-                        ForEach(post.comments.prefix(3)) { commentData in
-                            HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0, postHash: 0)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        if post.replyNumber > shownReplyNumber {
-                            if post.comments.count == 0 {
-                                Divider()
-                                    .padding(.horizontal)
-                            }
-
-                            let text1 = shownReplyNumber == 0 ?
-                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_PREFIX_TOTAL", comment: "") :
-                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_PREFIX", comment: "")
-                            let text2 = shownReplyNumber == 0 ?
-                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_SUFFIX_TOTAL", comment: "") :
-                                NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_SUFFIX", comment: "")
-                            Text(text1 + "\(post.replyNumber - shownReplyNumber)" + text2)
-                                .dynamicFont(size: 15)
-                                .lineSpacing(post.comments.count == 0 ? 0 : 3)
-                                
-                                .foregroundColor(.hollowCardStarUnselected)
-                                .padding(.top, 12)
-                                .padding(.vertical, UIDevice.isMac ? 5 : 0)
-                        }
-                    }
+                    commentView(post: post, shownReplyNumber: shownReplyNumber)
                 }
             }
             .padding(.bottom, post.replyNumber > shownReplyNumber && !hideComments ? 12 : cardPadding)
@@ -101,5 +76,34 @@ struct PostListView: View {
             }
         }
 
+    }
+    
+    func commentView(post: PostData, shownReplyNumber: Int) -> some View {
+        VStack(spacing: 0) {
+            ForEach(post.comments.prefix(3)) { commentData in
+                HollowCommentContentView(commentData: .constant(commentData), compact: true, contentVerticalPadding: 10, postColorIndex: 0, postHash: 0)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            if post.replyNumber > shownReplyNumber {
+                if post.comments.count == 0 {
+                    Divider()
+                        .padding(.horizontal)
+                }
+
+                let text1 = shownReplyNumber == 0 ?
+                    NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_PREFIX_TOTAL", comment: "") :
+                    NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_PREFIX", comment: "")
+                let text2 = shownReplyNumber == 0 ?
+                    NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_SUFFIX_TOTAL", comment: "") :
+                    NSLocalizedString("TIMELINE_CARD_COMMENTS_COUNT_SUFFIX", comment: "")
+                Text(text1 + "\(post.replyNumber - shownReplyNumber)" + text2)
+                    .dynamicFont(size: 15)
+                    .lineSpacing(post.comments.count == 0 ? 0 : 3)
+                    
+                    .foregroundColor(.hollowCardStarUnselected)
+                    .padding(.top, 12)
+                    .padding(.vertical, UIDevice.isMac ? 5 : 0)
+            }
+        }
     }
 }

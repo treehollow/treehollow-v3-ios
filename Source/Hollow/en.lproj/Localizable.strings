@@ -672,3 +672,5 @@
 "WIDGET_EMPTY_LABEL" = "No Content";
 
 "WIDGET_EMPTY_MSG" = "Internet connection or login status has failed.";
+
+"DETAILVIEW_SEARCH_BAR_PROMPT" = "Search";

@@ -151,6 +151,7 @@
 		0E77961B2657EB90002F70C2 /* LineSwitchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2457626340311001AFC4B /* LineSwitchManager.swift */; };
 		0E77961F2657EC4A002F70C2 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415AE925CD772200351672 /* ViewConstants.swift */; };
 		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
+		0E78D6DD26C76CC300B0E420 /* UIKitSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78D6DC26C76CC300B0E420 /* UIKitSearchBar.swift */; };
 		0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */; };
 		0E79AF51265E45B600BFDABD /* withAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF50265E45B600BFDABD /* withAnimation.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
@@ -498,6 +499,7 @@
 		0E7795BF2657E6FE002F70C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E7795C32657E6FE002F70C2 /* HollowWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HollowWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0E779624265800DD002F70C2 /* WidgetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetColors.swift; sourceTree = "<group>"; };
+		0E78D6DC26C76CC300B0E420 /* UIKitSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitSearchBar.swift; sourceTree = "<group>"; };
 		0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalMatchedGeometryEffect.swift"; sourceTree = "<group>"; };
 		0E79AF50265E45B600BFDABD /* withAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withAnimation.swift; sourceTree = "<group>"; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
@@ -803,6 +805,7 @@
 				0EC4B67E25D670070065BB82 /* ImagePicker.swift */,
 				0E3E695F260E3676005E8DA2 /* SplitView.swift */,
 				0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */,
+				0E78D6DC26C76CC300B0E420 /* UIKitSearchBar.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -1605,6 +1608,7 @@
 				0EC2452426340301001AFC4B /* ConnectivityStatus+isConnected.swift in Sources */,
 				0EC245D526340312001AFC4B /* RequestPublisher.swift in Sources */,
 				0E415B7025CD772200351672 /* SettingsSubViews.swift in Sources */,
+				0E78D6DD26C76CC300B0E420 /* UIKitSearchBar.swift in Sources */,
 				0E415B5425CD772200351672 /* ImageButtonModifier.swift in Sources */,
 				0E00D79B26628B43009E4B44 /* DragEnvironment.swift in Sources */,
 				0E6721DD25DE326400A84311 /* View+conditionalPadding.swift in Sources */,
