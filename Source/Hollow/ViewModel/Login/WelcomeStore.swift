@@ -19,8 +19,7 @@ class WelcomeStore: ObservableObject {
     
     var cancellables = Set<AnyCancellable>()
     
-    func requestConfig(hollowType: HollowType, customConfigURL: String? = nil) {
-        
+    func requestConfig(hollowType: HollowType, customConfigURL: String? = nil, predifined: Bool = false) {
         // Validate the parameters
         if hollowType == .other {
             if customConfigURL == Constants.HollowConfig.thuConfigURL {
@@ -62,8 +61,11 @@ class WelcomeStore: ObservableObject {
                     Defaults[.customConfigURL] = customConfigURL
                 }
                 withAnimation {
-                    self.hollowSelection = hollowType.rawValue
-                }
+                    if predifined {
+                        self.hollowSelection = 100
+                    } else {
+                        self.hollowSelection = hollowType.rawValue
+                    }                }
             })
             .store(in: &cancellables)
         

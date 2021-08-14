@@ -65,16 +65,46 @@ struct WelcomeView: View {
                             selectHollowButton(text: "未名树洞")
                         }}
                     
-                    NavigationLink(
-                        destination: CustomConfigConfigurationView(),
-                        tag: HollowType.other.rawValue,
-                        selection: $viewModel.hollowSelection) {
-                        MyButton(action: {
+                    Menu {
+                        let configs = Constants.HollowConfig.otherConfigs
+                        ForEach(Array(configs.keys), id: \.self) { key in
+                            Button(key) {
+                                Defaults[.hollowType] = .other
+                                Defaults[.hollowConfig] = nil
+                                viewModel.requestConfig(hollowType: .other, customConfigURL: configs[key]!, predifined: true)
+                            }
+                        }
+                        Divider()
+
+                        Button(action: {
                             Defaults[.hollowType] = .other
+                            Defaults[.hollowConfig] = nil
                             viewModel.hollowSelection = HollowType.other.rawValue
-                        }, gradient: buttonGradient) {
-                            selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: ""))
-                        }}
+                        }) {
+                            selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_CUSTOM_CONFIGURATION_SECTION_HEADER", comment: ""))
+                        }
+
+                    } label: {
+                        // NavigationLink in label to push new view.
+                        NavigationLink(
+                            destination: CustomConfigConfigurationView(),
+                            tag: HollowType.other.rawValue,
+                            selection: $viewModel.hollowSelection) {
+                            MyButton(action: {}, gradient: buttonGradient) {
+                                selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: ""))
+                            }
+                        }
+                        .overlay(
+                            NavigationLink(
+                                destination: LoginView(),
+                                tag: 100,
+                                selection: $viewModel.hollowSelection) {
+                                MyButton(action: {}, gradient: buttonGradient) {
+                                    selectHollowButton(text: NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: ""))
+                                }
+                            }
+                        )
+                    }
                 }
                 .padding(.bottom)
                 .padding(.bottom)
