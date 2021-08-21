@@ -129,8 +129,14 @@ struct HollowCommentContentView: View {
                             }
                             Group {
                                 if commentData.text != "" {
-                                    Text(commentData.attributedString)
-                                        .accentColor(.hollowContentVoteGradient1)
+                                    if #available(iOS 15.0, *) {
+                                        Text(commentData.attributedString)
+                                            .accentColor(.hollowContentVoteGradient1)
+                                    } else {
+                                        // FIXME: Highlight
+                                        Text(commentData.text)
+                                            .accentColor(.hollowContentVoteGradient1)
+                                    }
 
                                 } else if commentData.image != nil && compact {
                                     (Text(verbatim: "[") + Text("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT") + Text(verbatim: "]"))

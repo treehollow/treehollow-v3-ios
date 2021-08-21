@@ -36,24 +36,40 @@ struct WanderView: View {
             },
             refresh: viewModel.refresh,
             content: {
-                WaterfallGrid($viewModel.posts) { $postDataWrapper in Group {
-                    let postData = postDataWrapper.post
-                    cardView(for: postData)
-                        .onClickGesture {
-                            let detailStore = HollowDetailStore(bindingPostWrapper: $postDataWrapper)
-                            IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
-                        }
-                }}
-                .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: .defaultSpring)
-                .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : 15)
-                .padding(.bottom, 70)
-                .background(Color.background)
+                gridView()
+                    .gridStyle(columns: 2, spacing: UIDevice.isMac ? 18 : 10, animation: .defaultSpring)
+                    .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : 15)
+                    .padding(.bottom, 70)
+                    .background(Color.background)
             })
             .ignoresSafeArea(edges: .bottom)
             // Show loading indicator when no posts are loaded or refresh on top
             .modifier(LoadingIndicator(isLoading: viewModel.isLoading))
             
             .modifier(ErrorAlert(errorMessage: $viewModel.errorMessage))
+    }
+    
+    @ViewBuilder func gridView() -> some View {
+        if #available(iOS 15, *) {
+            WaterfallGrid($viewModel.posts) { $postDataWrapper in Group {
+                let postData = postDataWrapper.post
+                cardView(for: postData)
+                    .onClickGesture {
+                        let detailStore = HollowDetailStore(bindingPostWrapper: $postDataWrapper)
+                        IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
+                    }
+            }}
+        } else {
+            WaterfallGrid(viewModel.posts) { postDataWrapper in Group {
+                let postData = postDataWrapper.post
+                cardView(for: postData)
+                    .onClickGesture {
+                        guard let index = viewModel.posts.firstIndex(where: { $0.post.postId == postData.postId }) else { return }
+                        let detailStore = HollowDetailStore(bindingPostWrapper: $viewModel.posts[index])
+                        IntegrationUtilities.conditionallyPresentDetail(store: detailStore)
+                    }
+            }}
+        }
     }
     
     func cardView(for postData: PostData) -> some View {

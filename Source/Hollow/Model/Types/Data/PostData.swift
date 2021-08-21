@@ -35,10 +35,15 @@ struct PostData: Identifiable, Codable {
     // Pre fetched cited post id
     var citedPostId: Int?
     
-    var attributedString: AttributedString
-//    var url: [String]
-//    var citedNumbers: [Int]
-//    var renderHighlight: Bool { !url.isEmpty || !citedNumbers.isEmpty }
+#if !WIDGET
+    @available (iOS 15.0, *)
+    var attributedString: AttributedString {
+        return text.attributedForCitationAndLink(citationsRanges: rangesForCitation, linkRanges: rangesForLink)
+    }
+#endif
+
+    var rangesForLink: [NSRange]
+    var rangesForCitation: [NSRange]
 
     // Color data used in avatar
     var hash: Int
@@ -94,9 +99,8 @@ extension PostDataWrapper {
             vote: nil,
             comments: [],
             loadingError: nil,
-            attributedString: .init(),
-//            url: [],
-//            citedNumbers: [],
+            rangesForLink: [],
+            rangesForCitation: [],
             hash: hash,
             colorIndex: colorIndex
         )
@@ -132,12 +136,14 @@ extension Post {
         }
         
 #if !WIDGET
-        let attributedString = text.attributedForCitationAndLink()
+        let linkRanges = text.rangeForLink()
+        let citationRanges = text.rangeForCitation()
         let hash = AvatarGenerator.hash(postId: pid, name: "")
         let colorIndex = AvatarGenerator.colorIndex(hash: hash)
         let citedPostId = text.findCitedPostID()
 #else
-        let attributedString = AttributedString()
+        let linkRanges = [NSRange]()
+        let citationRanges = [NSRange]()
         let hash = 0
         let colorIndex = 0
         let citedPostId: Int? = nil
@@ -157,9 +163,8 @@ extension Post {
             vote: vote?.toVoteData(),
             comments: comments,
             citedPostId: citedPostId,
-            attributedString: attributedString,
-//            url: text.links(),
-//            citedNumbers: text.citationNumbers(),
+            rangesForLink: linkRanges,
+            rangesForCitation: citationRanges,
             hash: hash,
             colorIndex: colorIndex
         )

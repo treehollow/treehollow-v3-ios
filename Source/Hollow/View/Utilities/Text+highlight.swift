@@ -26,7 +26,8 @@ extension Text {
     }
     
     static func highlightLinksAndCitation(_ string: String, modifiers: @escaping (Text) -> Text) -> Text {
-        let range = string.rangeForLink() + string.rangeForCitation()
-        return highlight(string, matchedRange: range, modifiers: modifiers)
+        let nsRanges = string.rangeForLink() + string.rangeForCitation()
+        let ranges = nsRanges.compactMap { Range($0, in: string) }
+        return highlight(string, matchedRange: ranges, modifiers: modifiers)
     }
 }

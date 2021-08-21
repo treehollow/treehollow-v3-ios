@@ -113,8 +113,7 @@ extension SearchView {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(showPost ? .primary : foregroundColor)
-                TextField("", text: $store.searchString, prompt: Text("SEARCHVIEW_TEXTFIELD_PLACEHOLDER"))
-                    .onSubmit(performSearch)
+                TextField(text: $store.searchString, prompt: "SEARCHVIEW_TEXTFIELD_PLACEHOLDER", onCommit: performSearch)
                     .accentColor(.tint)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
@@ -376,7 +375,7 @@ extension SearchView {
                 ScrollView(showsIndicators: false) { VStack(spacing: historySpcing) {
                     ForEach(searchHistory, id: \.self) { history in
                         Text(history)
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                             .leading()
                             .dynamicFont(size: 16)
                             .onClickGesture {

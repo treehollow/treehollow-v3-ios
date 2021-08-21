@@ -13,8 +13,8 @@ extension View {
         self
             .listRowBackground(backgroundColor)
             .listRowInsets(EdgeInsets())
-            .listRowSeparator(.hidden)
-            .listSectionSeparator(.hidden)
+            .listRowSeparator(hidden: true)
+            .listSectionSeparator(hidden: true)
             .buttonStyle(.borderless)
             .environment(\.defaultMinListRowHeight, 0)
     }

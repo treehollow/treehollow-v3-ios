@@ -69,7 +69,7 @@ struct LoginView: View {
             }
             .disabled(disableInteraction)
         }
-        .safeAreaInset(edge: .bottom) {
+        .bottomSafeAreaInset {
             ExpandedButton(
                 action: {
                 hideKeyboard()

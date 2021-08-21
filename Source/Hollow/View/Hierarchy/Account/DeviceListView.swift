@@ -67,22 +67,41 @@ extension DeviceListView {
                     // We won't allow the user to terminate the current
                     // device in device list.
                     if !isCurrentDevice {
-                        Button(action: {
+                        let action: () -> Void = {
                             // Not presenting alert as there're bugs with this.
                             if UIDevice.isMac { logoutAction(device.deviceUUID) }
                             else { alertPresented = true }
-                        }) {
-                            if isLoggingout {
-                                let processingText = NSLocalizedString("DEVICELIST_CARD_BUTTON_PROCESSING", comment: "")
-                                Text(processingText + "...")
-                            } else {
-                                Text("DEVICELIST_CARD_BUTTON_LOGOUT")
+                        }
+                        if #available(iOS 15.0, *) {
+                            Button(action: action) {
+                                if isLoggingout {
+                                    let processingText = NSLocalizedString("DEVICELIST_CARD_BUTTON_PROCESSING", comment: "")
+                                    Text(processingText + "...")
+                                } else {
+                                    Text("DEVICELIST_CARD_BUTTON_LOGOUT")
+                                }
+                            }
+                            .dynamicFont(size: 15)
+                            .buttonStyle(.bordered)
+                            .buttonBorderShape(.capsule)
+                            .tint(.hollowContentVoteGradient1)
+                        } else {
+                            MyButton(
+                                action: action,
+                                gradient: .vertical(gradient: .button),
+                                transitionAnimation: .default) {
+                                Group {
+                                    if isLoggingout {
+                                        let processingText = NSLocalizedString("DEVICELIST_CARD_BUTTON_PROCESSING", comment: "")
+                                        Text(processingText + "...")
+                                    } else {
+                                        Text("DEVICELIST_CARD_BUTTON_LOGOUT")
+                                    }
+                                }
+                                .font(.system(size: buttonFontSize, weight: .bold))
+                                .foregroundColor(.white)
                             }
                         }
-                        .dynamicFont(size: 15)
-                        .buttonStyle(.bordered)
-                        .buttonBorderShape(.capsule)
-                        .tint(.hollowContentVoteGradient1)
                     }
                 }
             }
