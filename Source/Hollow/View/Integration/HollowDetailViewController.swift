@@ -68,20 +68,21 @@ struct HollowDetailViewWrapper: View {
     var body: some View {
         if isRoot {
             GeometryReader { proxy in
-                HollowDetailView(store: wrapper.store, searchBarPresented_iPad: .constant(false))
-                    .background(alignment: .top) {
-                        Color.hollowCardBackground
-                            .frame(width: proxy.size.width, height: proxy.size.height + proxy.safeAreaInsets.top + proxy.safeAreaInsets.bottom)
-                            .roundedCorner(UIScreen.main.displayCornerRadius)
-                            .offset(y: -proxy.safeAreaInsets.top)
-                    }
-                
-                    .swipeToDismiss(
-                        presented: .init(
-                            get: { true },
-                            set: { if !$0 { dismissSelf() }}
-                        )
+                ZStack(alignment: .top) {
+                    Color.hollowCardBackground
+                        .frame(width: proxy.size.width, height: proxy.size.height + proxy.safeAreaInsets.top + proxy.safeAreaInsets.bottom)
+                        .roundedCorner(UIScreen.main.displayCornerRadius)
+                        .offset(y: -proxy.safeAreaInsets.top)
+                    
+                    HollowDetailView(store: wrapper.store, searchBarPresented_iPad: .constant(false))
+
+                }
+                .swipeToDismiss(
+                    presented: .init(
+                        get: { true },
+                        set: { if !$0 { dismissSelf() }}
                     )
+                )
             }
 
         } else {

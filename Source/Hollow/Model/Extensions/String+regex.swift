@@ -22,13 +22,12 @@ extension String {
         }
     }
     
-    private func range(matches regexString: String) -> [Range<String.Index>] {
+    private func range(matches regexString: String) -> [NSRange] {
         do {
             let regex = try NSRegularExpression(pattern: regexString)
-            let results = regex.matches(in: self, range: NSRange(self.startIndex..., in: self))
-            return results.compactMap {
-                Range($0.range, in: self)
-            }
+            let str = self.str()
+            let results = regex.matches(in: str, range: NSRange(self.startIndex..., in: str))
+            return results.map { $0.range }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
             return []
@@ -40,54 +39,42 @@ extension String {
         return matches(range: range)
     }
     
-    private func matches(range: [Range<String.Index>]) -> [String] {
-        return range.map({ String(self[$0]) })
+    private func matches(range: [NSRange]) -> [String] {
+        let str = self.str()
+        return range
+            .compactMap { Range($0, in: str) }
+            .map({ String(str[$0]) })
     }
     
-    func links() -> [String] {
-        return self.matches(range: rangeForLink())
-    }
-    
-    func citations() -> [String] {
-        return self.matches(range: rangeForCitation())
-    }
-    
-    func citationNumbers() -> [Int] {
+    func rangeForLink() -> [NSRange] {
         // Won't scan for long long long long string
         if self.count > 4000 { return [] }
-
-        return self.citations()
-            .compactMap({ Int(String($0.dropFirst())) })
-            .dropDuplicates()
-            .sorted(by: { $0 < $1 })
-    }
-    
-    func rangeForLink() -> [Range<String.Index>] {
-        // Won't scan for long long long long string
-        if self.count > 4000 { return [] }
+        let str = self.str()
         let types: NSTextCheckingResult.CheckingType = [.link]
         let detector = try! NSDataDetector(types: types.rawValue)
-        let matches = detector.matches(in: self, range: NSRange(self.startIndex..., in: self))
-        return matches.compactMap {
-            Range($0.range, in: self)
-        }
+        let matches = detector.matches(in: str, range: NSRange(str.startIndex..., in: str))
+        return matches.map { $0.range }
     }
     
-    func rangeForCitation() -> [Range<String.Index>] {
+    func rangeForCitation() -> [NSRange] {
         return self.range(matches: #"#\d{1,7}"#)
     }
     
-    func attributedForCitationAndLink() -> AttributedString {
+    @available (iOS 15.0, *)
+    func attributedForCitationAndLink(citationsRanges: [NSRange], linkRanges: [NSRange]) -> AttributedString {
         // Directly generating attributed string from `self` will result
         // in incorrect ranges, and the reason is a mystery.
-        let data = self.data(using: .utf8)!
-        let str = String(data: data, encoding: .utf8)!
+        let str = str()
         var attrStr = AttributedString(str)
-        let links = str.rangeForLink().map { range in
+        
+        let rangeForLink = linkRanges.compactMap { Range($0, in: str) }
+        let rangeForCitation = citationsRanges.compactMap { Range($0, in: str) }
+        
+        let links = rangeForLink.map { range in
             // Handle the url on our own based on the open-url settings
             (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: String("Hollow://url-" + str[range])))
         }
-        let citations = str.rangeForCitation().map({ range in
+        let citations = rangeForCitation.map({ range in
             (AttributedString.Index(range.lowerBound, within: attrStr)!..<AttributedString.Index(range.upperBound, within: attrStr)!, URL(string: "Hollow://post-\(String(str[range]))"))
         })
         
@@ -98,5 +85,20 @@ extension String {
             attrStr[range.0].link = range.1
         }
         return attrStr
+    }
+    
+    @available (iOS 15.0, *)
+    func attributedForCitationAndLink() -> AttributedString {
+        let str = self.str()
+
+        let citationRanges = str.rangeForCitation()
+        let linkRanges = str.rangeForLink()
+        
+        return attributedForCitationAndLink(citationsRanges: citationRanges, linkRanges: linkRanges)
+    }
+
+    private func str() -> String {
+        let data = self.data(using: .utf8)!
+        return String(data: data, encoding: .utf8)!
     }
 }

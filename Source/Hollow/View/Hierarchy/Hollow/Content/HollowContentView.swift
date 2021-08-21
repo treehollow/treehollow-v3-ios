@@ -41,15 +41,6 @@ struct HollowContentView: View {
         return false
     }
     
-    
-    private var links: [URL] {
-        postDataWrapper.post.text.links().compactMap({ URL(string: $0) })
-    }
-    
-    private var citedPosts: [Int] {
-        postDataWrapper.post.text.citationNumbers()
-    }
-    
     @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
     @ScaledMetric(wrappedValue: 6, relativeTo: .body) var body6: CGFloat
     
@@ -95,7 +86,12 @@ struct HollowContentView: View {
         }
         
         if postDataWrapper.post.text != "" && !hideContent {
-            textView()
+            if #available(iOS 15, *) {
+                textView_15()
+            } else {
+                textView_14()
+            }
+
         }
         
         if showVote {
@@ -104,7 +100,8 @@ struct HollowContentView: View {
         
     }
     
-    private func textView() -> some View {
+    @available(iOS 15, *)
+    private func textView_15() -> some View {
         var attributedString = postDataWrapper.post.attributedString
         
         if postDataWrapper.post.text == "" &&
@@ -113,7 +110,7 @@ struct HollowContentView: View {
             let text = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
             attributedString = AttributedString(text)
         }
-        let view = HollowTextView(attributedString: attributedString, highlight: true)
+        let view = HollowTextView_15(attributedString: attributedString, highlight: true)
             .lineLimit(options.contains(.compactText) ? lineLimit : nil)
             .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
             .accentColor(.hollowContentVoteGradient1)
@@ -124,6 +121,28 @@ struct HollowContentView: View {
         return view
     }
     
+    @available(iOS 14, *)
+    private func textView_14() -> some View {
+        var text = postDataWrapper.post.text
+        
+        if postDataWrapper.post.text == "" &&
+            postDataWrapper.post.hollowImage != nil &&
+            options.contains(.replaceForImageOnly) {
+            let finalText = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
+            text = finalText
+        }
+        // TODO: Attributes
+        let view = HollowTextView_14(text: Text(text))
+            .lineLimit(options.contains(.compactText) ? lineLimit : nil)
+            .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
+            .accentColor(.hollowContentVoteGradient1)
+#if targetEnvironment(macCatalyst)
+            .textSelection(.enabled)
+#endif
+
+        return view
+    }
+
     private func tagView(text: String, deleted: Bool) -> some View {
         Text(text)
             .dynamicFont(size: 14, weight: .semibold)

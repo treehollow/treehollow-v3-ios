@@ -105,7 +105,6 @@ struct TimelineView: View {
             AnnouncementView(announcement: hollowConfig?.announcement ?? "")
         }
     }
-    
 }
 
 extension TimelineView {

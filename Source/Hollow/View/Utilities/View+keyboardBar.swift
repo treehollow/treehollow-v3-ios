@@ -9,9 +9,18 @@
 import SwiftUI
 
 extension View {
-    func keyboardBar() -> some View {
-        self.toolbar {
-            ToolbarItem(placement: .keyboard) {
+    @ViewBuilder func keyboardBar() -> some View {
+        if #available(iOS 15.0, *) {
+            self.toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    Button("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON", action: hideKeyboard)
+                        .trailing()
+                        .accentColor(.tint)
+                }
+            }
+        } else {
+            // FIXME
+            self.toolbar {
                 Button("INPUTVIEW_TEXT_EDITOR_DONE_BUTTON", action: hideKeyboard)
                     .trailing()
                     .accentColor(.tint)

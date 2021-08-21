@@ -1,41 +1,41 @@
 //
-//  CustomScrollView.swift
-//  CustomScrollView
+//  View+refreshable.swift
+//  View+refreshable
 //
-//  Created by liang2kl on 2021/8/8.
+//  Created by liang2kl on 2021/8/21.
 //  Copyright © 2021 treehollow. All rights reserved.
 //
 
 import SwiftUI
 import Introspect
 
-struct CustomScrollView<Content: View>: View {
-    
-    @StateObject private var scrollViewModel = ScrollViewModel()
-    @State private var coordinator: Coordinator?
-    
-    var didScrollToBottom: (() -> Void)?
-    var refresh: ((@escaping () -> Void) -> Void)?
-    
-    @ViewBuilder var content: () -> Content
-
-    var body: some View {
-        ScrollView {
-            content()
+extension View {
+    @ViewBuilder func refreshable(action: @escaping (@escaping () -> Void) -> Void) -> some View {
+        if #available(iOS 15, *) {
+            self.refreshable {
+                await withCheckedContinuation { continuation in
+                    action { continuation.resume() }
+                }
+            }
+        } else {
+            self.modifier(Refreshable(action: action))
         }
-        .introspectScrollView { scrollView in
-            scrollView.delegate = scrollViewModel
-            scrollView.contentInsetAdjustmentBehavior = .never
-            if let refresh = refresh {
+    }
+}
+
+fileprivate struct Refreshable: ViewModifier {
+    var action: (@escaping () -> Void) -> Void
+    @State private var coordinator: Coordinator?
+
+    func body(content: Content) -> some View {
+        content
+            .introspectScrollView { scrollView in
+                scrollView.contentInsetAdjustmentBehavior = .never
                 let refreshControl = UIRefreshControl()
-                coordinator = Coordinator(refresh: refresh, refreshControl: refreshControl)
+                coordinator = Coordinator(refresh: action, refreshControl: refreshControl)
                 refreshControl.addTarget(coordinator!, action: #selector(coordinator!.refreshAction), for: .valueChanged)
                 scrollView.refreshControl = refreshControl
             }
-        }
-        .onChange(of: scrollViewModel.scrolledToBottom) {
-            if $0 { didScrollToBottom?() }
-        }
     }
     
     private class Coordinator: NSObject {
@@ -53,4 +53,5 @@ struct CustomScrollView<Content: View>: View {
             }
         }
     }
+
 }

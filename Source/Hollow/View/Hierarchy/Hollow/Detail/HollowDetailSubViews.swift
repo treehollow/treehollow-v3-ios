@@ -145,7 +145,6 @@ extension HollowDetailView {
                 commentId: comment.commentId
             )
         }
-        .containerShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
     
     func jumpToComment(commentId: Int) {
