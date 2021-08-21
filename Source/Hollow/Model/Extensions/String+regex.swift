@@ -60,6 +60,23 @@ extension String {
         return self.range(matches: #"#\d{1,7}"#)
     }
     
+    func links(in ranges: [NSRange]) -> [String] {
+        ranges.compactMap {
+            guard let range = Range($0, in: self) else { return nil }
+            return String(self[range])
+        }
+    }
+    
+    func citationNumbers(in ranges: [NSRange]) -> [Int] {
+        ranges.compactMap {
+            guard let range = Range($0, in: self) else { return nil }
+            var string = String(self[range])
+            string.removeFirst()
+            return Int(string)
+        }
+
+    }
+    
     @available (iOS 15.0, *)
     func attributedForCitationAndLink(citationsRanges: [NSRange], linkRanges: [NSRange]) -> AttributedString {
         // Directly generating attributed string from `self` will result

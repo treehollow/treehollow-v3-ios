@@ -133,8 +133,7 @@ struct HollowCommentContentView: View {
                                         Text(commentData.attributedString)
                                             .accentColor(.hollowContentVoteGradient1)
                                     } else {
-                                        // FIXME: Highlight
-                                        Text(commentData.text)
+                                        Text(highlighting: commentData.text)
                                             .accentColor(.hollowContentVoteGradient1)
                                     }
 

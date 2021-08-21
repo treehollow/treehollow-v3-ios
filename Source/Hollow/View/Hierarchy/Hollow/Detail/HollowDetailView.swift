@@ -143,7 +143,7 @@ struct HollowDetailView: View {
                 .listStyle(PlainListStyle())
 //                .background(Color.hollowCardBackground)
                 .buttonStyle(BorderlessButtonStyle())
-//                .refreshable(store.requestDetail)
+                .refreshable(action: store.requestDetail)
 
                 .onChange(of: store.replyToId) { id in
                     guard id != -2 else { return }

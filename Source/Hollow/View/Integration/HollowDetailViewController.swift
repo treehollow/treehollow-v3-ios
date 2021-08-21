@@ -75,6 +75,7 @@ struct HollowDetailViewWrapper: View {
                         .offset(y: -proxy.safeAreaInsets.top)
                     
                     HollowDetailView(store: wrapper.store, searchBarPresented_iPad: .constant(false))
+                        .frame(width: proxy.size.width, height: proxy.size.height)
 
                 }
                 .swipeToDismiss(

@@ -18,7 +18,9 @@ struct PostListView: View {
     var revealFoldedTags = false
     var contentViewDisplayOptions: HollowContentView.DisplayOptions {
         var options: HollowContentView.DisplayOptions = [
-            .compactText, .displayCitedPost, .displayImage, .displayVote
+            .compactText, .displayCitedPost,
+            .displayImage, .displayVote,
+            .hideHyperlinks_14
         ]
         if revealFoldedTags { options.insert(.revealFoldTags) }
         return options

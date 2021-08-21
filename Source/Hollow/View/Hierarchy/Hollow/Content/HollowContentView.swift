@@ -86,18 +86,41 @@ struct HollowContentView: View {
         }
         
         if postDataWrapper.post.text != "" && !hideContent {
-            if #available(iOS 15, *) {
-                textView_15()
-            } else {
-                textView_14()
+            textView()
+                .lineLimit(options.contains(.compactText) ? lineLimit : nil)
+                .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
+                .accentColor(.hollowContentVoteGradient1)
+        }
+        
+        if !options.contains(.hideHyperlinks_14) &&
+            !hideContent {
+            if #available(iOS 15.0, *) {} else {
+                HStack {
+                    let text = postDataWrapper.post.text
+                    
+                    let links = text.links(in: postDataWrapper.post.rangesForLink)
+                    let citations = text.citationNumbers(in: postDataWrapper.post.rangesForCitation)
+                    
+                    HyperlinkMenuContent(links: links, citations: citations, genericLabel: false)
+                    Spacer()
+                }
+                .padding(.top, 1)
+                .padding(.bottom, showVote ? 10 : 0)
             }
-
         }
         
         if showVote {
             HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler, allowVote: !options.contains(.disableVote))
         }
         
+    }
+    
+    @ViewBuilder private func textView() -> some View {
+        if #available(iOS 15, *) {
+            textView_15()
+        } else {
+            textView_14()
+        }
     }
     
     @available(iOS 15, *)
@@ -131,15 +154,12 @@ struct HollowContentView: View {
             let finalText = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
             text = finalText
         }
-        // TODO: Attributes
-        let view = HollowTextView_14(text: Text(text))
+
+        let view = HollowTextView_14(text: Text(highlighting: text))
             .lineLimit(options.contains(.compactText) ? lineLimit : nil)
             .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
             .accentColor(.hollowContentVoteGradient1)
-#if targetEnvironment(macCatalyst)
-            .textSelection(.enabled)
-#endif
-
+        
         return view
     }
 
@@ -164,7 +184,7 @@ extension HollowContentView {
         static let replaceForImageOnly = DisplayOptions(rawValue: 1 << 5)
         static let disableVote = DisplayOptions(rawValue: 1 << 7)
         static let revealFoldTags = DisplayOptions(rawValue: 1 << 8)
-//        static let showHyperlinks = DisplayOptions(rawValue: 1 << 9)
+        static let hideHyperlinks_14 = DisplayOptions(rawValue: 1 << 9)
         static let lowerImageAspectRatio = DisplayOptions(rawValue: 1 << 10)
     }
 }

@@ -105,6 +105,7 @@ struct WanderView: View {
         .padding()
         .background(Color.hollowCardBackground)
         .roundedCorner(20)
+        .transition(.scale)
     }
     
     private func numberLabel(count: Int, systemImage: String) -> some View {

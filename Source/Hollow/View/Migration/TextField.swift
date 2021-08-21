@@ -28,8 +28,9 @@ struct TextField: View {
     var body: some View {
         if #available(iOS 15.0, *) {
             SwiftUI.TextField("", text: $text, prompt: prompt.isNil ? nil : Text(prompt!))
+                .onSubmit { onCommit?() }
         } else {
-            SwiftUI.TextField(prompt ?? "", text: $text)
+            SwiftUI.TextField(prompt ?? "", text: $text, onCommit: { onCommit?() })
         }
     }
 }
@@ -54,8 +55,9 @@ struct SecureField: View {
     var body: some View {
         if #available(iOS 15.0, *) {
             SwiftUI.SecureField("", text: $text, prompt: prompt.isNil ? nil : Text(prompt!))
+                .onSubmit { onCommit?() }
         } else {
-            SwiftUI.SecureField(prompt ?? "", text: $text)
+            SwiftUI.SecureField(prompt ?? "", text: $text, onCommit: { onCommit?() })
         }
     }
 }
