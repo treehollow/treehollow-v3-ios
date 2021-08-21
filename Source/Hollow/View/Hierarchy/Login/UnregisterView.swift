@@ -62,7 +62,7 @@ struct UnregisterView: View {
                 }
             }
         }
-        .safeAreaInset(edge: .bottom) {
+        .bottomSafeAreaInset {
             ExpandedButton(
                 action: {
                 hideKeyboard()

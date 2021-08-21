@@ -13,7 +13,7 @@ struct CustomList<Content: View>: View {
     
     @ObservedObject private var scrollViewModel = ScrollViewModel()
     var didScrollToBottom: (() -> Void)?
-    var refresh: ((@escaping () -> Void) -> Void)?
+    var refresh: (@escaping () -> Void) -> Void
     
     @ViewBuilder var content: () -> Content
     
@@ -32,13 +32,8 @@ struct CustomList<Content: View>: View {
             tableView.contentInsetAdjustmentBehavior = .never
         }
         // Refresh control on top.
-        .refreshable {
-            if let refresh = refresh {
-                await withCheckedContinuation { continuation in
-                    refresh { continuation.resume() }
-                }
-            }
-        }
+        .refreshable(action: refresh)
+
         .onChange(of: scrollViewModel.scrolledToBottom) {
             if $0 { didScrollToBottom?() }
         }

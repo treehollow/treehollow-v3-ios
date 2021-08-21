@@ -65,6 +65,7 @@ extension RequestAdaptor {
     }
 }
 
+@available(iOS 15.0.0, *)
 extension RequestAdaptor {
     func result() async throws -> FinalResult {
         return try await withCheckedThrowingContinuation { continuation in

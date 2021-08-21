@@ -79,24 +79,24 @@ extension AccountInfoView {
         var body: some View {
             List {
                 Section {
-                    TextField("", text: $email, prompt: Text("CHANGEPASSWORDVIEW_ENTER_EMAIL_PLACEHOLDER"))
+                    TextField(text: $email, prompt: "CHANGEPASSWORDVIEW_ENTER_EMAIL_PLACEHOLDER")
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .keyboardType(.emailAddress)
                 }
                 
-                SecureField("", text: $originalPassword, prompt: Text("CHANGEPASSWORDVIEW_ENTER_ORI_PASSWORD_PLACEHOLDER"))
+                SecureField(text: $originalPassword, prompt: "CHANGEPASSWORDVIEW_ENTER_ORI_PASSWORD_PLACEHOLDER")
 
                 Section(footer: Text("LOGINVIEW_PASSWORD_TEXTFIELD_REQUIREMENT_FOOTER")) {
                     HStack {
-                        SecureField("", text: $newPassword, prompt: Text("CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER"))
+                        SecureField(text: $newPassword, prompt: "CHANGEPASSWORDVIEW_ENTER_NEW_PASSWORD_PLACEHOLDER")
                         if (newPassword.count < 8 && !newPassword.isEmpty) || newPassword.contains(" ") {
                             Image(systemName: "xmark")
                                 .foregroundColor(.red)
                         }
                     }
                     HStack {
-                        SecureField("", text: $confirmedPassword, prompt: Text("CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER"))
+                        SecureField(text: $confirmedPassword, prompt: "CHANGEPASSWORDVIEW_CONFIRM_PASSWORD_PLACEHOLDER")
                         if confirmedPassword != newPassword && confirmedPassword != "" {
                             Image(systemName: "xmark")
                                 .foregroundColor(.red)

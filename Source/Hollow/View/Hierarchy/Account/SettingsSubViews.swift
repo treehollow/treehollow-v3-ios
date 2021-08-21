@@ -166,22 +166,21 @@ struct ContentSettingsView: View {
                 
                 if showTextField {
                     HStack {
-                        TextField("", text: $newTag, prompt: Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER"))
-                            .onSubmit {
-                                if newTag == "" {
+                        TextField(text: $newTag, prompt: "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER") {
+                            if newTag == "" {
+                                showAlert = true
+                                return
+                            }
+                            for tag in blockedTags {
+                                if tag == newTag {
                                     showAlert = true
                                     return
                                 }
-                                for tag in blockedTags {
-                                    if tag == newTag {
-                                        showAlert = true
-                                        return
-                                    }
-                                }
-                                blockedTags.append(newTag)
-                                newTag = ""
-                                showTextField = false
                             }
+                            blockedTags.append(newTag)
+                            newTag = ""
+                            showTextField = false
+                        }
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                         Spacer()

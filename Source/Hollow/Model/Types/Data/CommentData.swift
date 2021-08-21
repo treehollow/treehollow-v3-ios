@@ -26,7 +26,15 @@ struct CommentData: Identifiable, Codable {
     var replyTo: Int
     var image: HollowImage?
     
-    var attributedString: AttributedString
+#if !WIDGET
+    @available (iOS 15.0, *)
+    var attributedString: AttributedString {
+        return text.attributedForCitationAndLink(citationsRanges: rangesForCitation, linkRanges: rangesForLink)
+    }
+#endif
+    
+    var rangesForLink: [NSRange]
+    var rangesForCitation: [NSRange]
     
     // Data used in avatar
     var showAvatar: Bool
@@ -94,10 +102,12 @@ extension Comment {
         }
         
 #if !WIDGET
-        let attributedString = text.attributedForCitationAndLink()
+        let linkRanges = text.rangeForLink()
+        let citationRanges = text.rangeForCitation()
         let colorIndex = AvatarGenerator.colorIndex(hash: hash)
 #else
-        let attributedString = AttributedString()
+        let linkRanges = [NSRange]()
+        let citationRanges = [NSRange]()
         let colorIndex = 0
 #endif
 
@@ -113,7 +123,8 @@ extension Comment {
             isDz: isDz,
             replyTo: replyTo,
             image: image,
-            attributedString: attributedString,
+            rangesForLink: linkRanges,
+            rangesForCitation: citationRanges,
             showAvatar: showAvatar,
             showAvatarWhenReversed: showAvatarWhenReversed,
             hash: hash,

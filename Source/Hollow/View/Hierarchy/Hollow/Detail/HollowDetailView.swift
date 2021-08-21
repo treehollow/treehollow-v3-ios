@@ -125,16 +125,16 @@ struct HollowDetailView: View {
                     .padding(.top)
                     .listRowBackground(Color.hollowCardBackground)
                     .listRowInsets(EdgeInsets())
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
+                    .listRowSeparator(hidden: true)
+                    .listSectionSeparator(hidden: true)
                     .id(-1)
                     
                     if !store.noSuchPost {
                         commentView
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(.hidden)
+                            .listRowSeparator(hidden: true)
+                            .listSectionSeparator(hidden: true)
                     }
                     
                 }
@@ -143,12 +143,7 @@ struct HollowDetailView: View {
                 .listStyle(PlainListStyle())
 //                .background(Color.hollowCardBackground)
                 .buttonStyle(BorderlessButtonStyle())
-                .refreshable {
-                    guard !store.isLoading else { return }
-                    await withCheckedContinuation { continuation in
-                        store.requestDetail { continuation.resume() }
-                    }
-                }
+//                .refreshable(store.requestDetail)
 
                 .onChange(of: store.replyToId) { id in
                     guard id != -2 else { return }
@@ -203,8 +198,7 @@ struct HollowDetailView: View {
         
         .proposedIgnoringSafeArea(edges: .bottom)
         
-        // FIXME: Safe Area bug in beta versions
-        .safeAreaInset(edge: .bottom, spacing: 0) {
+        .bottomSafeAreaInset {
             VStack(spacing: 0) {
                 if store.replyToId < -1 && !store.noSuchPost && !searchBarPresented {
                     FloatButton(

@@ -52,10 +52,10 @@ extension MainView_iPad {
                 .navigationBarTitle("IPAD_SIDEBAR_MESSAGES", displayMode: .inline)
                 .padding(.leading)
                 .background(Color.background.ignoresSafeArea())
-                .refreshNavigationItem(refreshAction: { sharedModel.messageStore.requestMessages() })
+                .refreshNavigationItem(refreshAction: { sharedModel.messageStore.requestMessages {} })
                 .onAppear {
                     if sharedModel.messageStore.messages.isEmpty {
-                        sharedModel.messageStore.requestMessages()
+                        sharedModel.messageStore.requestMessages {}
                     }
                 }
         case .account:

@@ -20,11 +20,11 @@ class MessageStore: ObservableObject, HollowErrorHandler {
     
     init(lazyLoad: Bool = false) {
         if !lazyLoad {
-            requestMessages()
+            requestMessages {}
         }
     }
     
-    func requestMessages(completion: (() -> Void)? = nil) {
+    func requestMessages(completion: @escaping () -> Void) {
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
         let request = SystemMessageRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token))
@@ -32,11 +32,11 @@ class MessageStore: ObservableObject, HollowErrorHandler {
         withAnimation { isLoading = true }
         request.publisher
             .sinkOnMainThread(receiveError: {
-                completion?()
+                completion()
                 withAnimation { self.isLoading = false }
                 self.defaultErrorHandler(errorMessage: &self.errorMessage, error: $0)
             }, receiveValue: { result in
-                completion?()
+                completion()
                 withAnimation { self.isLoading = false }
 
                 self.messages = result
