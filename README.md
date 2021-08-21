@@ -1,7 +1,5 @@
 # treehollow-v3-ios
 
-[![Build status](https://build.appcenter.ms/v0.1/apps/ecb32276-29a0-4925-a8aa-f46d00effd10/branches/main/badge)](https://appcenter.ms)
-
 树洞 iOS / macOS 客户端，使用 SwiftUI 开发，支持 [T大树洞](https://thuhole.com)、[未名树洞](https://www.pkuhollow.com)。
 
 与树洞 HTTP API 相关的实现使用独立的依赖库 [HollowCore](https://github.com/liang2kl/HollowCore)。
@@ -19,9 +17,7 @@
 
 ### 环境要求
 
-树洞客户端使用 iOS 15 SDK，需要 `macOS 11.3+`、`Xcode 13+`。
-
-> 因 SwiftUI API 变动较大，`v3.2.1` 之后的新版本不再支持 iOS 14。若需编译适配 iOS 14 的版本，请从 [`3c11bd7`](https://github.com/treehollow/treehollow-v3-ios/commit/3c11bd733659530e76ea9fa53080eefe20215ac0) 创建分支。
+树洞客户端使用 iOS 15 SDK，需要 `macOS 11.3+`、`Xcode 13+`，适用于 `iOS 14.0+`，`macOS 11.0+`。
 
 ### 编译安装
 
