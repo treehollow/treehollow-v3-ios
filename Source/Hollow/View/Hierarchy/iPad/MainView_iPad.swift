@@ -34,7 +34,7 @@ struct MainView_iPad: View {
                             NavigationLink(
                                 destination: EmptyView(),
                                 tag: page.rawValue,
-                                selection: Binding(get: { sharedModel.page.rawValue }, set: {
+                                selection: Binding(get: { page.rawValue }, set: {
                                     if let rawValue = $0,
                                        let page = Page(rawValue: rawValue) {
                                         sharedModel.page = page
