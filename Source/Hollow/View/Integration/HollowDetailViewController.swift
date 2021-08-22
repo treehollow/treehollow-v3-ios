@@ -71,7 +71,7 @@ struct HollowDetailViewWrapper: View {
                 ZStack(alignment: .top) {
                     Color.hollowCardBackground
                         .frame(width: proxy.size.width, height: proxy.size.height + proxy.safeAreaInsets.top + proxy.safeAreaInsets.bottom)
-                        .roundedCorner(UIScreen.main.displayCornerRadius)
+                        .proposedCornerRadius(UIScreen.main.displayCornerRadius)
                         .offset(y: -proxy.safeAreaInsets.top)
                     
                     HollowDetailView(store: wrapper.store, searchBarPresented_iPad: .constant(false))

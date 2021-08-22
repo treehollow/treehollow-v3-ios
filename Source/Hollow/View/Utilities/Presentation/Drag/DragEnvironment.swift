@@ -10,9 +10,9 @@ import SwiftUI
 
 // MARK: -  Corner Radius
 extension View {
-    @ViewBuilder func proposedCornerRadius() -> some View {
+    @ViewBuilder func proposedCornerRadius(_ value: CGFloat = 25) -> some View {
         if !UIDevice.isPad {
-            self.modifier(ProposedCornerRadius())
+            self.modifier(ProposedCornerRadius(value: value))
         } else {
             self
         }
@@ -20,13 +20,14 @@ extension View {
 }
 
 fileprivate struct ProposedCornerRadius: ViewModifier {
+    var value: CGFloat
     @State private var internalIsDragging = false
     @Environment(\.dragging) var dragging
     
     func body(content: Content) -> some View {
         content
             .onChange(of: dragging) { dragging in withAnimation { internalIsDragging = dragging  } }
-            .roundedCorner(internalIsDragging ? 25 : 0)
+            .roundedCorner(internalIsDragging ? value : 0)
     }
 }
 

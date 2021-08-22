@@ -78,6 +78,7 @@ extension HollowDetailView {
                     .padding(.horizontal)
                     .padding(.top, postData.comments.isEmpty ? 0 : 15)
                     .padding(.bottom, postData.comments.isEmpty ? 15 : 0)
+                    .listRowBackground(Color.hollowCardBackground)
             }
         }
         
