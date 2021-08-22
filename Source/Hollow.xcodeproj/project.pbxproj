@@ -116,6 +116,7 @@
 		0E78D6DF26C78B7300B0E420 /* UIScreen+ScreenCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78D6DE26C78B7300B0E420 /* UIScreen+ScreenCorners.swift */; };
 		0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */; };
 		0E79AF51265E45B600BFDABD /* withAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF50265E45B600BFDABD /* withAnimation.swift */; };
+		0E7D7E3A26D2043C000C86BA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7D7E3926D2043B000C86BA /* CoreTelephony.framework */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
 		0E8BCFE325E095A90056D809 /* StyledAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8BCFE225E095A90056D809 /* StyledAlert.swift */; };
@@ -355,6 +356,7 @@
 		0E78D6DE26C78B7300B0E420 /* UIScreen+ScreenCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+ScreenCorners.swift"; sourceTree = "<group>"; };
 		0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+conditionalMatchedGeometryEffect.swift"; sourceTree = "<group>"; };
 		0E79AF50265E45B600BFDABD /* withAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withAnimation.swift; sourceTree = "<group>"; };
+		0E7D7E3926D2043B000C86BA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
 		0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorOverlay.swift; sourceTree = "<group>"; };
 		0E8BCFE225E095A90056D809 /* StyledAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledAlert.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7D7E3A26D2043C000C86BA /* CoreTelephony.framework in Frameworks */,
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E97D0B826B45F960031BC75 /* Introspect in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
@@ -517,6 +520,7 @@
 				0E415A7225CD769B00351672 /* Hollow */,
 				0E7795BA2657E6FC002F70C2 /* HollowWidget */,
 				0E59CD6826ADCDC500574F34 /* Products */,
+				0E7D7E3826D2043B000C86BA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -749,6 +753,14 @@
 				0E7795BF2657E6FE002F70C2 /* Info.plist */,
 			);
 			path = HollowWidget;
+			sourceTree = "<group>";
+		};
+		0E7D7E3826D2043B000C86BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E7D7E3926D2043B000C86BA /* CoreTelephony.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0E8BCFE525E0A45F0056D809 /* Utilities */ = {
