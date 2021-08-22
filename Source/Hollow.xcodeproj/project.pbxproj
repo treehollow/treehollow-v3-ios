@@ -224,7 +224,7 @@
 		0EDA263125D2465100B67292 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA263025D2465100B67292 /* LoadingIndicator.swift */; };
 		0EDEC0E52650E5A6003112BA /* View+makeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDEC0E42650E5A6003112BA /* View+makeButton.swift */; };
 		0EDF0AAC26BFDF5C0047933C /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */; };
-		0EE4E24926D211D8005ED2DD /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE4E24826D211D8005ED2DD /* CustomTabView.swift */; };
+		0EE4E24B26D21922005ED2DD /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE4E24A26D21922005ED2DD /* CustomTabView.swift */; };
 		0EE60EFD25FCCCD700D97E7A /* CheckmarkButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */; };
 		0EF10F6626330F29004D6538 /* HollowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */; };
 		0EFA3DDE25D3A03D0003C76B /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */; };
@@ -462,7 +462,7 @@
 		0EDA263025D2465100B67292 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		0EDEC0E42650E5A6003112BA /* View+makeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+makeButton.swift"; sourceTree = "<group>"; };
 		0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
-		0EE4E24826D211D8005ED2DD /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTabView.swift; path = ../../../../../../Downloads/CustomTabView.swift; sourceTree = "<group>"; };
+		0EE4E24A26D21922005ED2DD /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		0EE60EFC25FCCCD700D97E7A /* CheckmarkButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButtonImage.swift; sourceTree = "<group>"; };
 		0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HollowDetailViewController.swift; sourceTree = "<group>"; };
 		0EFA3DDD25D3A03D0003C76B /* LoadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingLabel.swift; sourceTree = "<group>"; };
@@ -599,7 +599,7 @@
 				0EF10F6526330F29004D6538 /* HollowDetailViewController.swift */,
 				0E3B7C1526BF783C00956AEC /* UIKitSearchBar.swift */,
 				0EDF0AAB26BFDF5C0047933C /* CustomScrollView.swift */,
-				0EE4E24826D211D8005ED2DD /* CustomTabView.swift */,
+				0EE4E24A26D21922005ED2DD /* CustomTabView.swift */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -1241,7 +1241,7 @@
 				0E6EF31825F9C3D2001293FE /* FloatButton.swift in Sources */,
 				0EC2459F26340311001AFC4B /* AttentionListRequest.swift in Sources */,
 				0E294E9C25F2405C001E4C08 /* View+roundedCorner.swift in Sources */,
-				0EE4E24926D211D8005ED2DD /* CustomTabView.swift in Sources */,
+				0EE4E24B26D21922005ED2DD /* CustomTabView.swift in Sources */,
 				0E415B6325CD772200351672 /* HollowCommentContentView.swift in Sources */,
 				0E6BE3B4260ED1EC00B529F7 /* View+noNavigationItems.swift in Sources */,
 				0E3DA2A825FF379000ECEFAC /* ProviderInfoView.swift in Sources */,
