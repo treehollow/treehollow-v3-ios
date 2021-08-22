@@ -154,8 +154,13 @@ struct HollowContentView: View {
             let finalText = "[" + NSLocalizedString("TEXTVIEW_PHOTO_PLACEHOLDER_TEXT", comment: "") + "]"
             text = finalText
         }
-
-        let view = HollowTextView_14(text: Text(highlighting: text))
+        
+        let textView: Text = postDataWrapper.post.text.isEmpty ?
+        Text(text) : Text(highlighting: postDataWrapper.post.text,
+                          links: postDataWrapper.post.rangesForLink,
+                          citations: postDataWrapper.post.rangesForCitation)
+        
+        let view = HollowTextView_14(text: textView)
             .lineLimit(options.contains(.compactText) ? lineLimit : nil)
             .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
             .accentColor(.hollowContentVoteGradient1)

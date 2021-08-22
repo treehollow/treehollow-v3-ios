@@ -18,24 +18,34 @@ struct CustomList<Content: View>: View {
     @ViewBuilder var content: () -> Content
     
     var body: some View {
-        List {
-            content()
-                .defaultListRow()
-        }
-        .listStyle(.plain)
-        
-        // Introspect UITableView rather than UIScrollView to
-        // avoid unexpectedly discovering TabView's underlying
-        // UIScrollView as our scroll view.
-        .introspectTableView { tableView in
-            (tableView as UIScrollView).delegate = scrollViewModel
-            tableView.contentInsetAdjustmentBehavior = .never
-        }
-        // Refresh control on top.
-        .refreshable(action: refresh)
+        if #available(iOS 15, *) {
+            List {
+                content()
+                    .defaultListRow()
+            }
+            .listStyle(.plain)
+            
+            // Introspect UITableView rather than UIScrollView to
+            // avoid unexpectedly discovering TabView's underlying
+            // UIScrollView as our scroll view.
+            .introspectTableView { tableView in
+                (tableView as UIScrollView).delegate = scrollViewModel
+                tableView.contentInsetAdjustmentBehavior = .never
+            }
+            // Refresh control on top.
+            .refreshable(action: refresh)
 
-        .onChange(of: scrollViewModel.scrolledToBottom) {
-            if $0 { didScrollToBottom?() }
+            .onChange(of: scrollViewModel.scrolledToBottom) {
+                if $0 { didScrollToBottom?() }
+            }
+        } else {
+            CustomScrollView(
+                didScrollToBottom: didScrollToBottom,
+                refresh: refresh) {
+                    LazyVStack(spacing: 0) {
+                        content()
+                    }
+                }
         }
     }
 }

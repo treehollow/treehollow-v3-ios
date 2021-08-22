@@ -133,7 +133,9 @@ struct HollowCommentContentView: View {
                                         Text(commentData.attributedString)
                                             .accentColor(.hollowContentVoteGradient1)
                                     } else {
-                                        Text(highlighting: commentData.text)
+                                        Text(highlighting: commentData.text,
+                                             links: commentData.rangesForLink,
+                                             citations: commentData.rangesForCitation)
                                             .accentColor(.hollowContentVoteGradient1)
                                     }
 

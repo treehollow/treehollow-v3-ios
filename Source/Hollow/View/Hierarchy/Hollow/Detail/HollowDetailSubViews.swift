@@ -81,7 +81,12 @@ extension HollowDetailView {
             }
         }
         
-        Spacer(minLength: commentViewBottomPadding)
+        if #available(iOS 15, *) {
+            Spacer(minLength: commentViewBottomPadding)
+        } else {
+            Color.hollowCardBackground
+                .frame(height: commentViewBottomPadding)
+        }
     }
     
     func commentView(for comment: CommentData) -> some View {

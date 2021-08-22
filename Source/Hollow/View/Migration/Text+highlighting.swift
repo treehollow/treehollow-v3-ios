@@ -12,7 +12,11 @@ extension Text {
     init(highlighting string: String) {
         let rangesForLink = string.rangeForLink()
         let rangesForCitation = string.rangeForCitation()
-        let ranges = (rangesForLink + rangesForCitation)
+        self.init(highlighting: string, links: rangesForLink, citations: rangesForCitation)
+    }
+    
+    init(highlighting string: String, links: [NSRange], citations: [NSRange]) {
+        let ranges = (links + citations)
             .compactMap { Range($0, in: string) }
         if string == "" || ranges.isEmpty {
             self.init(string)
