@@ -157,6 +157,18 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
             if !self.options.contains(.unordered) {
                 posts.sort(by: { $0.post.postId > $1.post.postId })
             }
+            
+            // Remove blocked posts
+            if self.type == .postList || self.type == .wander {
+                let words = Defaults[.blockedKeywords]
+                posts.removeAll(where: { post in
+                    for word in words {
+                        if post.post.text.contains(word) { return true }
+                    }
+                    return false
+                })
+            }
+            
             DispatchQueue.main.async {
                 withAnimation { self.posts = posts }
                 // Fetch other components after we assign the posts.

@@ -60,6 +60,8 @@ extension Defaults.Keys {
     static let foldPredefinedTags = Key<Bool>("user.settings.fold.predifined.tags", default: true)
     /// Additional tags to be blocked
     static let blockedTags = Key<[String]>("user.settings.blocked.tags", default: [])
+    /// Blocked keywords
+    static let blockedKeywords = Key<[String]>("user.settings.blocked.keywords", default: [])
     #if !WIDGET
     /// Color scheme that user selects (default: same as system)
     static let colorScheme = Key<CustomColorScheme>("user.settings.color.scheme", default: .system)

@@ -493,7 +493,7 @@
 
 "SETTINGSVIEW_CONTENT_NAV_TITLE" = "Content";
 
-"SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER" = "Refresh to apply the changes.";
+"SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER" = "Posts with one of the tags will be folded in Timeline, Wander and Trending.";
 
 "SETTINGSVIEW_CONTENT_FOLD_CELL" = "Fold Predefined Tags";
 
@@ -501,7 +501,7 @@
 
 "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON" = "Add More";
 
-"SETTINGSVIEW_CONTENT_CUSTOM_FOLD_INVALID_ALERT_TITLE" = "The tag cannot be empty or match existed tags.";
+"SETTINGSVIEW_CONTENT_CUSTOM_FOLD_INVALID_ALERT_TITLE" = "The tag / word cannot be empty or match existed tags / blocked words.";
 
 "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER" = "Enter a Tag";
 
@@ -680,3 +680,11 @@
 "DETAILVIEW_SEARCH_MENU_TITLE" = "Search";
 
 "ABOUTVIEW_OPENSOURCE_TITLE" = "Open Source";
+
+"SETTINGSVIEW_CONTENT_BLOCK_WORDS_SECTION_HEADER" = "Blocked Keywords";
+
+"SETTINGSVIEW_CONTENT_BLOCK_WORDS_TEXTFIELD_PLACEHOLDER" = "Enter a keyword";
+
+"SETTINGSVIEW_CONTENT_BLOCK_WORDS_SECTION_FOOTER" = "Post that contains at least one of the keywords will not appear in Timeline and Wandear.";
+
+"SETTINGSVIEW_CONTENT_FOOTER" = "Refresh to apply the changes.";

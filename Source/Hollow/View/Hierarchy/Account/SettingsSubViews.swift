@@ -128,8 +128,11 @@ struct AppearanceSettingsView: View {
 struct ContentSettingsView: View {
     @Default(.foldPredefinedTags) var fold
     @Default(.blockedTags) var blockedTags
-    @State private var showTextField = false
+    @Default(.blockedKeywords) var blockedKeywords
+    @State private var showTagTextField = false
+    @State private var showWordTextField = false
     @State private var newTag = ""
+    @State private var newBlockedWord = ""
     @State private var showAlert = false
     var body: some View {
         List {
@@ -147,60 +150,51 @@ struct ContentSettingsView: View {
                         .foregroundColor(.secondary)
                 }
             }
+            
             ListSection(
                 header: "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_HEADER",
                 headerImage: "tag",
                 footer: "SETTINGSVIEW_CONTENT_FOLD_SECTION_FOOTER"
             ) {
-                ForEach(blockedTags, id: \.self) { tag in
-                    HStack {
-                        Text(tag)
-                        Spacer()
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.tint)
-                            .onClickGesture { if let index = blockedTags.firstIndex(where: { $0 == tag }) {
-                                _ = withAnimation { blockedTags.remove(at: index) }
-                            }}
-                    }
-                }
-                
-                if showTextField {
-                    HStack {
-                        TextField(text: $newTag, prompt: "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER") {
-                            if newTag == "" {
-                                showAlert = true
-                                return
-                            }
-                            for tag in blockedTags {
-                                if tag == newTag {
-                                    showAlert = true
-                                    return
-                                }
-                            }
-                            blockedTags.append(newTag)
-                            newTag = ""
-                            showTextField = false
-                        }
-                            .autocapitalization(.none)
-                            .disableAutocorrection(true)
-                        Spacer()
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.uiColor(.systemFill))
-                            .onClickGesture { withAnimation {
-                                newTag = ""
-                                showTextField = false
-                            }}
-                    }
-                }
-                
-                Button(action: { withAnimation { showTextField = true } }) {
+                Self.blockedContent(
+                    text: $newTag,
+                    prompt: "SETTINGSVIEW_CONTENT_CUSTOM_FOLD_TEXTFIELD_PLACEHOLDER",
+                    showInvalidAlert: $showAlert,
+                    showTextField: $showTagTextField,
+                    words: $blockedTags
+                )
+
+                Button(action: { withAnimation { showTagTextField = true } }) {
                     Text(Image(systemName: "plus")) + Text("  ") +
                         Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON")
                         
                 }
-                .disabled(showTextField)
+                .disabled(showTagTextField)
                 
             }
+
+            ListSection(
+                header: "SETTINGSVIEW_CONTENT_BLOCK_WORDS_SECTION_HEADER",
+                headerImage: "xmark.circle",
+                footer: "SETTINGSVIEW_CONTENT_BLOCK_WORDS_SECTION_FOOTER"
+            ) {
+                Self.blockedContent(
+                    text: $newBlockedWord,
+                    prompt: "SETTINGSVIEW_CONTENT_BLOCK_WORDS_TEXTFIELD_PLACEHOLDER",
+                    showInvalidAlert: $showAlert,
+                    showTextField: $showWordTextField,
+                    words: $blockedKeywords
+                )
+                
+                Button(action: { withAnimation { showWordTextField = true } }) {
+                    Text(Image(systemName: "plus")) + Text("  ") +
+                        Text("SETTINGSVIEW_CONTENT_CUSTOM_FOLD_SECTION_ADD_MORE_BUTTON")
+                        
+                }
+                .disabled(showWordTextField)
+            }
+            
+            Section(footer: Text("SETTINGSVIEW_CONTENT_FOOTER").padding(.top)) {}
         }
         .styledAlert(
             presented: $showAlert,
@@ -211,6 +205,55 @@ struct ContentSettingsView: View {
         .defaultListStyle()
         .accentColor(.tint)
         .navigationBarTitle(NSLocalizedString("SETTINGSVIEW_CONTENT_NAV_TITLE", comment: ""), displayMode: .inline)
+    }
+    
+   @ViewBuilder static func blockedContent(
+        text: Binding<String>,
+        prompt: LocalizedStringKey,
+        showInvalidAlert: Binding<Bool>,
+        showTextField: Binding<Bool>,
+        words: Binding<[String]>
+    ) -> some View {
+        ForEach(words.wrappedValue, id: \.self) { word in
+            HStack {
+                Text(word)
+                Spacer()
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.tint)
+                    .onClickGesture { if let index = words.wrappedValue.firstIndex(where: { $0 == word }) {
+                        _ = withAnimation { words.wrappedValue.remove(at: index) }
+                    }}
+            }
+        }
+        
+        if showTextField.wrappedValue {
+            HStack {
+                TextField(text: text, prompt: prompt) {
+                    if text.wrappedValue == "" {
+                        showInvalidAlert.wrappedValue = true
+                        return
+                    }
+                    for word in words.wrappedValue {
+                        if word == text.wrappedValue {
+                            showInvalidAlert.wrappedValue = true
+                            return
+                        }
+                    }
+                    words.wrappedValue.append(text.wrappedValue)
+                    text.wrappedValue = ""
+                    showTextField.wrappedValue = false
+                }
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                Spacer()
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.uiColor(.systemFill))
+                    .onClickGesture { withAnimation {
+                        text.wrappedValue = ""
+                        showTextField.wrappedValue = false
+                    }}
+            }
+        }
     }
 }
 
