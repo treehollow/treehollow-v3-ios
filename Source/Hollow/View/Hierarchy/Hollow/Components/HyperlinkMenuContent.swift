@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct HyperlinkMenuContent: View {
     let links: [String]
@@ -26,7 +27,7 @@ struct HyperlinkMenuContent: View {
                 ForEach(links, id: \.self) { link in
                     Button(link, action: {
                         guard let url = URL(string: link) else { return }
-                        openURL(url)
+                        try? OpenURLHelper(openURL: openURL).tryOpen(url, method: Defaults[.openURLMethod])
                     })
                 }
             } , label: {

@@ -146,14 +146,14 @@ extension HollowDetailView {
                 Divider()
             }
             
-//            if #available(iOS 15.0, *) {} else {
+            if #available(iOS 15.0, *) {} else {
                 let text = comment.text
                 
                 let links = text.links(in: comment.rangesForLink)
                 let citations = text.citationNumbers(in: comment.rangesForCitation)
                 
                 HyperlinkMenuContent(links: links, citations: citations)
-//            }
+            }
             
             ReportMenuContent(
                 store: store,
