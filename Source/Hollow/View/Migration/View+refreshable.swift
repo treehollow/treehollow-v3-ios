@@ -11,6 +11,9 @@ import Introspect
 
 extension View {
     @ViewBuilder func refreshable(action: @escaping (@escaping () -> Void) -> Void) -> some View {
+#if targetEnvironment(macCatalyst)
+        self
+#else
         if #available(iOS 15, *) {
             self.refreshable {
                 await withCheckedContinuation { continuation in
@@ -20,6 +23,7 @@ extension View {
         } else {
             self.modifier(Refreshable(action: action))
         }
+#endif
     }
 }
 

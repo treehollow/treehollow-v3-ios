@@ -74,7 +74,7 @@ struct TimelineView: View {
                         announcementSheetPresented = true
                     }
                 }
-                .padding(.horizontal, UIDevice.isMac ? 0 : nil)
+                .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : nil)
                 .defaultPadding(.bottom)
                 .defaultListRow(backgroundColor: .background)
             }
@@ -86,7 +86,7 @@ struct TimelineView: View {
                 starHandler: viewModel.star,
                 imageReloadHandler: { _ in viewModel.fetchImages() }
             )
-                .padding(.horizontal, UIDevice.isMac ? 0 : nil)
+                .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : nil)
                 .defaultListRow(backgroundColor: .background)
             
         }

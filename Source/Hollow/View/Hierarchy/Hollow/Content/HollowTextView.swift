@@ -28,6 +28,7 @@ struct HollowTextView_15: View {
         Text(attributedString)
             .dynamicFont(size: 16)
             .lineSpacing(3)
+            .textSelection(.enabled)
             .leading()
     }
 }
