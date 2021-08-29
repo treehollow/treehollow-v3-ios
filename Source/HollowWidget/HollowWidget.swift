@@ -116,17 +116,9 @@ struct HollowWidgetEntryView : View {
     struct HollowView: View {
         var post: PostData
         var rank: Int
-                
-        private func tagView(text: String) -> some View {
-            Text(text)
-                .dynamicFont(size: 14, weight: .semibold)
-                .foregroundColor(.white)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 4)
-                .background(Color.gradient2)
-                .roundedCorner(6)
-        }
         
+        let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
+
         var body: some View {
             Link(destination: URL(string: "HollowWidget://\(post.postId.string)")!) {
                 HStack {
@@ -134,8 +126,15 @@ struct HollowWidgetEntryView : View {
                         .fontWeight(.heavy)
                         .foregroundColor(.gradient1)
                         .frame(minWidth: 20)
-                    if post.tag != nil && Defaults[.hollowConfig]?.foldTags.contains(post.tag!) ?? false {
-                        tagView(text: post.tag!)
+                    if let tag = post.tag, foldTags.contains(tag) {
+                        // Tag
+                        Text(tag)
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 2)
+                            .background(Color.gradient2)
+                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                     } else {
                         if post.text != "" {
                             Text("\(post.text.removeLineBreak())")
@@ -155,6 +154,7 @@ struct HollowWidgetEntryView : View {
             .foregroundColor(.contentText)
             .font(.system(size: 14, design: .monospaced))
         }
+        
     }
 }
 
