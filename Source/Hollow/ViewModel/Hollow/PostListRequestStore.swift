@@ -159,7 +159,7 @@ class PostListRequestStore: ObservableObject, HollowErrorHandler {
             }
             
             // Remove blocked posts
-            if self.type == .postList || self.type == .wander {
+            if self.type == .postList || self.type == .wander || self.type == .searchTrending {
                 let words = Defaults[.blockedKeywords]
                 posts.removeAll(where: { post in
                     for word in words {
