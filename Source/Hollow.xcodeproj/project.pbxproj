@@ -237,6 +237,9 @@
 		0EFD8B4A26BAB72C00A3ACFA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0EFD8B4926BAB72C00A3ACFA /* Kingfisher */; };
 		0EFE13F4262876FE007B0045 /* View+imageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE13F3262876FE007B0045 /* View+imageSaver.swift */; };
 		0EFE1405262AF768007B0045 /* View+makeDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE1404262AF768007B0045 /* View+makeDivider.swift */; };
+		A65E9A8626D9521100A14470 /* HollowWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E59CD6726ADCB6100574F34 /* HollowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A6BE513426DB62AB00B0C14D /* View+dynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EF31A25F9DFDE001293FE /* View+dynamicFont.swift */; };
+		A6BE513526DB62C100B0C14D /* View+roundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294E9B25F2405C001E4C08 /* View+roundedCorner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +259,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				A65E9A8626D9521100A14470 /* HollowWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1386,6 +1390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6BE513526DB62C100B0C14D /* View+roundedCorner.swift in Sources */,
+				A6BE513426DB62AB00B0C14D /* View+dynamicFont.swift in Sources */,
 				0E6D12AD26581FEB00D5C813 /* SearchRequest.swift in Sources */,
 				0E2CAA4026BC49DD00A129A7 /* UIImageWrapper.swift in Sources */,
 				0E7795CB2657E727002F70C2 /* CommentData.swift in Sources */,
