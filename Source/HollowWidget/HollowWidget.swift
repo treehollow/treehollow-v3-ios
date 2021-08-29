@@ -116,18 +116,15 @@ struct HollowWidgetEntryView : View {
     struct HollowView: View {
         var post: PostData
         var rank: Int
-        
-        @ScaledMetric(wrappedValue: 4, relativeTo: .body) var body4: CGFloat
-        @ScaledMetric(wrappedValue: 6, relativeTo: .body) var body6: CGFloat
-        
-        private func tagView(text: String, deleted: Bool) -> some View {
+                
+        private func tagView(text: String) -> some View {
             Text(text)
                 .dynamicFont(size: 14, weight: .semibold)
                 .foregroundColor(.white)
-                .padding(.horizontal, body6)
-                .padding(.vertical, body4)
-                .background(deleted ? Color.red : Color.gradient2)
-                .roundedCorner(body6)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 4)
+                .background(Color.gradient2)
+                .roundedCorner(6)
         }
         
         var body: some View {
@@ -137,8 +134,8 @@ struct HollowWidgetEntryView : View {
                         .fontWeight(.heavy)
                         .foregroundColor(.gradient1)
                         .frame(minWidth: 20)
-                    if post.tag != nil || post.deleted {
-                        tagView(text: post.tag!, deleted: post.deleted)
+                    if post.tag != nil && Defaults[.hollowConfig]?.foldTags.contains(post.tag!) ?? false {
+                        tagView(text: post.tag!)
                     } else {
                         if post.text != "" {
                             Text("\(post.text.removeLineBreak())")
