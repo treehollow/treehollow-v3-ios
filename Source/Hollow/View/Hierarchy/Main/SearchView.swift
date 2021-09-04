@@ -53,10 +53,7 @@ struct SearchView: View {
                         .verticalCenter()
                         .horizontalCenter()
                 } else {
-                    CustomList(
-                        didScrollToBottom: store.loadMorePosts,
-                        refresh: store.refresh
-                    ) {
+                    let listView = {
                         PostListView(
                             postDataWrappers: $store.posts,
                             detailStore: $detailStore,
@@ -67,7 +64,25 @@ struct SearchView: View {
                         )
                             .defaultPadding(.horizontal)
                     }
-//                    .defaultPadding(.horizontal)
+                    Group {
+                        if store.type == .search {
+                            // FIXME: List
+                            // Use ScrollView rather than List for search
+                            // because when row height changes (by the loading
+                            // of extra comments), List will not update the
+                            // height correspondingly
+                            CustomScrollView(
+                                didScrollToBottom: store.loadMorePosts,
+                                refresh: store.refresh) {
+                                    LazyVStack(spacing: 0) { listView() }
+                                }
+                        } else {
+                            CustomList(
+                                didScrollToBottom: store.loadMorePosts,
+                                refresh: store.refresh,
+                                content: listView)
+                        }
+                    }
                     .proposedIgnoringSafeArea(edges: .bottom)
                     .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }

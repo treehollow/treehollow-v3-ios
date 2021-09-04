@@ -36,6 +36,6 @@ struct AccountCreationRequest: DefaultResultRequestAdaptor {
     var configuration: AccountCreationRequest.Configuration
     
     func transformConfiguration(_ configuration: Configuration) -> R.Configuration {
-        return .init(apiRoot: configuration.apiRoot, email: configuration.email, password: configuration.password, deviceInfo: configuration.deviceInfo, deviceToken: configuration.deviceToken)
+        return .init(apiRoot: configuration.apiRoot, email: configuration.email, password: configuration.password, deviceInfo: configuration.deviceInfo, validCode: configuration.validCode, deviceToken: configuration.deviceToken)
     }
 }
