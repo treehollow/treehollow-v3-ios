@@ -70,9 +70,7 @@ struct TimelineView: View {
                 .background(Color.hollowCardBackground)
                 .roundedCorner(cardCornerRadius)
                 .onTapGesture {
-                    if !UIDevice.isPad {
-                        announcementSheetPresented = true
-                    }
+                    announcementSheetPresented = true
                 }
                 .padding(.horizontal, UIDevice.isMac ? ViewConstants.macAdditionalPadding : nil)
                 .defaultPadding(.bottom)
