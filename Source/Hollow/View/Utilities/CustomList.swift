@@ -18,7 +18,7 @@ struct CustomList<Content: View>: View {
     @ViewBuilder var content: () -> Content
     
     var body: some View {
-        if #available(iOS 15, *) {
+        if #available(iOS 15, *), !UIDevice.isPad {
             List {
                 content()
                     .defaultListRow()

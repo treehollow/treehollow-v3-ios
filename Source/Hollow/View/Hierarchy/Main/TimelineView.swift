@@ -62,7 +62,7 @@ struct TimelineView: View {
                     HollowTextView(text: announcement, highlight: true)
                         .foregroundColor(.hollowContentText)
                         .accentColor(.hollowContentVoteGradient1)
-                        .lineLimit(UIDevice.isPad ? nil : 10)
+                        .lineLimit(10)
                         .fixedSize(horizontal: false, vertical: true)
                     
                 }

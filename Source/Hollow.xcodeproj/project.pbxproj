@@ -78,7 +78,6 @@
 		0E415B7A25CD772200351672 /* LoginSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3025CD772200351672 /* LoginSubViews.swift */; };
 		0E415B7B25CD772200351672 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E415B3125CD772200351672 /* WelcomeView.swift */; };
 		0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42905B263A742D008DA046 /* WaterfallGrid */; };
-		0E42905F263A7447008DA046 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42905E263A7447008DA046 /* Defaults */; };
 		0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429064263A84CA008DA046 /* AppCenterCrashes */; };
 		0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0E429066263A84CA008DA046 /* AppCenterAnalytics */; };
 		0E429070263A8557008DA046 /* ImageScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 0E42906F263A8557008DA046 /* ImageScrollView */; };
@@ -96,6 +95,9 @@
 		0E6D12AB26581FBB00D5C813 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2452A26340311001AFC4B /* Constants.swift */; };
 		0E6D500F2638414000C8FB68 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D500E2638414000C8FB68 /* VersionUpdateView.swift */; };
 		0E6D501326384B3100C8FB68 /* VersionUpdateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D501226384B3100C8FB68 /* VersionUpdateUtilities.swift */; };
+		0E6D950D26F1F16F00BC5ADF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6D950C26F1F16F00BC5ADF /* Kingfisher */; };
+		0E6D951026F1F26F00BC5ADF /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6D950F26F1F26F00BC5ADF /* Defaults */; };
+		0E6D951226F1F2AD00BC5ADF /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6D951126F1F2AD00BC5ADF /* Defaults */; };
 		0E6E4E26263EF14E007BBCFC /* UnregisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E4E25263EF14E007BBCFC /* UnregisterView.swift */; };
 		0E6E4E28263EF1CB007BBCFC /* UnregisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6E4E27263EF1CB007BBCFC /* UnregisterStore.swift */; };
 		0E6EF31825F9C3D2001293FE /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EF31725F9C3D2001293FE /* FloatButton.swift */; };
@@ -108,12 +110,10 @@
 		0E7795D12657E727002F70C2 /* HollowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453926340311001AFC4B /* HollowType.swift */; };
 		0E7795D32657E727002F70C2 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453826340311001AFC4B /* PostData.swift */; };
 		0E7795D52657E727002F70C2 /* HollowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453626340311001AFC4B /* HollowImage.swift */; };
-		0E7796172657EB30002F70C2 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7796162657EB30002F70C2 /* Defaults */; };
 		0E779625265800DD002F70C2 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E779624265800DD002F70C2 /* WidgetColors.swift */; };
 		0E78D6DF26C78B7300B0E420 /* UIScreen+ScreenCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78D6DE26C78B7300B0E420 /* UIScreen+ScreenCorners.swift */; };
 		0E79AF4F265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF4E265E3C6F00BFDABD /* View+conditionalMatchedGeometryEffect.swift */; };
 		0E79AF51265E45B600BFDABD /* withAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79AF50265E45B600BFDABD /* withAnimation.swift */; };
-		0E7D7E3A26D2043C000C86BA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7D7E3926D2043B000C86BA /* CoreTelephony.framework */; };
 		0E7D7E3C26D21093000C86BA /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7D7E3B26D21093000C86BA /* TabView.swift */; };
 		0E85DFBE25DAE578003D134B /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFBD25DAE578003D134B /* View+hideKeyboard.swift */; };
 		0E85DFC525DB71F2003D134B /* IndicatorOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85DFC425DB71F2003D134B /* IndicatorOverlay.swift */; };
@@ -211,7 +211,6 @@
 		0EFB54E525E8D9FD001BC98A /* View+modalPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54E425E8D9FD001BC98A /* View+modalPresent.swift */; };
 		0EFB54FA25E92CB0001BC98A /* SearchSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB54F925E92CB0001BC98A /* SearchSubViews.swift */; };
 		0EFB550525E93E24001BC98A /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB550425E93E24001BC98A /* PostListView.swift */; };
-		0EFD8B4A26BAB72C00A3ACFA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0EFD8B4926BAB72C00A3ACFA /* Kingfisher */; };
 		0EFE13F4262876FE007B0045 /* View+imageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE13F3262876FE007B0045 /* View+imageSaver.swift */; };
 		0EFE1405262AF768007B0045 /* View+makeDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE1404262AF768007B0045 /* View+makeDivider.swift */; };
 		A65E9A8626D9521100A14470 /* HollowWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E59CD6726ADCB6100574F34 /* HollowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -439,15 +438,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7D7E3A26D2043C000C86BA /* CoreTelephony.framework in Frameworks */,
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E97D0B826B45F960031BC75 /* Introspect in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
-				0E42905F263A7447008DA046 /* Defaults in Frameworks */,
+				0E6D950D26F1F16F00BC5ADF /* Kingfisher in Frameworks */,
+				0E6D951026F1F26F00BC5ADF /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
 				0E429070263A8557008DA046 /* ImageScrollView in Frameworks */,
 				0E429067263A84CA008DA046 /* AppCenterAnalytics in Frameworks */,
-				0EFD8B4A26BAB72C00A3ACFA /* Kingfisher in Frameworks */,
 				0E429065263A84CA008DA046 /* AppCenterCrashes in Frameworks */,
 				0E514D2A26819CD4008D4301 /* HollowCore in Frameworks */,
 			);
@@ -457,8 +455,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6D951226F1F2AD00BC5ADF /* Defaults in Frameworks */,
 				0E514D2726819BCD008D4301 /* HollowCore in Frameworks */,
-				0E7796172657EB30002F70C2 /* Defaults in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,7 +966,6 @@
 			name = Hollow;
 			packageProductDependencies = (
 				0E42905B263A742D008DA046 /* WaterfallGrid */,
-				0E42905E263A7447008DA046 /* Defaults */,
 				0E429064263A84CA008DA046 /* AppCenterCrashes */,
 				0E429066263A84CA008DA046 /* AppCenterAnalytics */,
 				0E42906F263A8557008DA046 /* ImageScrollView */,
@@ -976,7 +973,8 @@
 				0E514D2426819BCA008D4301 /* HollowCore */,
 				0E514D2926819CD4008D4301 /* HollowCore */,
 				0E97D0B726B45F960031BC75 /* Introspect */,
-				0EFD8B4926BAB72C00A3ACFA /* Kingfisher */,
+				0E6D950C26F1F16F00BC5ADF /* Kingfisher */,
+				0E6D950F26F1F26F00BC5ADF /* Defaults */,
 			);
 			productName = Hollow;
 			productReference = 0E59CD6626ADCB6100574F34 /* Hollow.app */;
@@ -996,8 +994,8 @@
 			);
 			name = HollowWidgetExtension;
 			packageProductDependencies = (
-				0E7796162657EB30002F70C2 /* Defaults */,
 				0E514D2626819BCD008D4301 /* HollowCore */,
+				0E6D951126F1F2AD00BC5ADF /* Defaults */,
 			);
 			productName = HollowWidgetExtension;
 			productReference = 0E59CD6726ADCB6100574F34 /* HollowWidgetExtension.appex */;
@@ -1033,13 +1031,13 @@
 			mainGroup = 0E415A6725CD769B00351672;
 			packageReferences = (
 				0E42905A263A742D008DA046 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
-				0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
-				0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */,
 				0E429071263A8572008DA046 /* XCRemoteSwiftPackageReference "Cache" */,
 				0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */,
 				0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				0E6D950B26F1F16F00BC5ADF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0E6D950E26F1F26F00BC5ADF /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
 			productRefGroup = 0E59CD6826ADCDC500574F34 /* Products */;
 			projectDirPath = "";
@@ -1435,7 +1433,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1461,7 +1459,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Hollow/Hollow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hollow/Info.plist;
@@ -1486,7 +1484,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1513,7 +1511,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1574,28 +1572,12 @@
 				minimumVersion = 1.0.1;
 			};
 		};
-		0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/Defaults.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.2;
-			};
-		};
 		0E429063263A84CA008DA046 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.1.1;
-			};
-		};
-		0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.3.0;
 			};
 		};
 		0E42906E263A8557008DA046 /* XCRemoteSwiftPackageReference "ImageScrollView" */ = {
@@ -1619,7 +1601,23 @@
 			repositoryURL = "https://github.com/liang2kl/HollowCore.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
+				minimumVersion = 1.0.0;
+			};
+		};
+		0E6D950B26F1F16F00BC5ADF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = revision;
+				revision = 79f8d2a611ee6b77b2d07dc2033e85b6e6a4438f;
+			};
+		};
+		0E6D950E26F1F26F00BC5ADF /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/liang2kl/Defaults";
+			requirement = {
+				kind = revision;
+				revision = b100ba9387dea2232639c5763799897e9290827f;
 			};
 		};
 		0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
@@ -1637,11 +1635,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E42905A263A742D008DA046 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
 			productName = WaterfallGrid;
-		};
-		0E42905E263A7447008DA046 /* Defaults */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
-			productName = Defaults;
 		};
 		0E429064263A84CA008DA046 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1676,20 +1669,25 @@
 			package = 0E514D2826819CD4008D4301 /* XCRemoteSwiftPackageReference "HollowCore" */;
 			productName = HollowCore;
 		};
-		0E7796162657EB30002F70C2 /* Defaults */ = {
+		0E6D950C26F1F16F00BC5ADF /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E42905D263A7447008DA046 /* XCRemoteSwiftPackageReference "Defaults" */;
+			package = 0E6D950B26F1F16F00BC5ADF /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		0E6D950F26F1F26F00BC5ADF /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E6D950E26F1F26F00BC5ADF /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+		0E6D951126F1F2AD00BC5ADF /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E6D950E26F1F26F00BC5ADF /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
 		};
 		0E97D0B726B45F960031BC75 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E97D0B626B45F960031BC75 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		0EFD8B4926BAB72C00A3ACFA /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E429068263A8524008DA046 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

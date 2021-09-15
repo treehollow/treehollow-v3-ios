@@ -64,20 +64,3 @@ extension RequestAdaptor {
             .eraseToAnyPublisher()
     }
 }
-
-@available(iOS 15.0.0, *)
-extension RequestAdaptor {
-    func result() async throws -> FinalResult {
-        return try await withCheckedThrowingContinuation { continuation in
-            performRequest(completion: { data, error in
-                if let data = data {
-                    continuation.resume(returning: data)
-                } else if let error = error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume(throwing: DefaultRequestError.unknown)
-                }
-            })
-        }
-    }
-}

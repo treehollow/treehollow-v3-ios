@@ -50,7 +50,6 @@ extension MainView_iPad {
         case .notifications:
             MessageView.SystemMessageView(messageStore: sharedModel.messageStore)
                 .navigationBarTitle("IPAD_SIDEBAR_MESSAGES", displayMode: .inline)
-                .padding(.leading)
                 .background(Color.background.ignoresSafeArea())
                 .refreshNavigationItem(refreshAction: { sharedModel.messageStore.requestMessages {} })
                 .onAppear {
@@ -100,7 +99,6 @@ extension MainView_iPad {
         var body: some View {
             MessageView.AttentionListView(postListStore: favouriteStore, isSearching: $isSearching)
                 .navigationBarTitle("IPAD_SIDEBAR_FAVOURITES", displayMode: .inline)
-                .padding(.leading)
                 .edgesIgnoringSafeArea(.bottom)
                 .background(Color.background.ignoresSafeArea())
                 .onChange(of: isSearching) { searching in

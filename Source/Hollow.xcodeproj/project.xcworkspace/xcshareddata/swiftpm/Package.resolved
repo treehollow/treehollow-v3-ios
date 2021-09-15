@@ -30,11 +30,11 @@
       },
       {
         "package": "Defaults",
-        "repositoryURL": "https://github.com/sindresorhus/Defaults.git",
+        "repositoryURL": "https://github.com/liang2kl/Defaults",
         "state": {
           "branch": null,
-          "revision": "229dea452fee8d2205f56a12e5c21dfec00948f2",
-          "version": "4.2.2"
+          "revision": "b100ba9387dea2232639c5763799897e9290827f",
+          "version": null
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/liang2kl/HollowCore.git",
         "state": {
           "branch": null,
-          "revision": "6abb58550588e37990d0ff8ad7cd136c86b99d1c",
-          "version": "0.2.0"
+          "revision": "70f389fde4a1175d6547825c518127c92b49b139",
+          "version": "1.0.0"
         }
       },
       {
@@ -57,11 +57,11 @@
       },
       {
         "package": "Kingfisher",
-        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
           "branch": null,
-          "revision": "44450a8f564d7c0165f736ba2250649ff8d3e556",
-          "version": "6.3.0"
+          "revision": "79f8d2a611ee6b77b2d07dc2033e85b6e6a4438f",
+          "version": null
         }
       },
       {

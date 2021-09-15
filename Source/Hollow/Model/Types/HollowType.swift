@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Defaults
 
-enum HollowType: Int, Hashable, Identifiable, Codable, CaseIterable {
+enum HollowType: Int, Hashable, Identifiable, Codable, CaseIterable, DefaultsSerializable {
     var id: Int { rawValue }
     
     case thu = 1

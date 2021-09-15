@@ -90,3 +90,15 @@ extension Defaults.Keys {
     static let lastLoadDate = Key<Date?>("widget.last.load.date")
 }
 #endif
+
+// MARK: - DefaultsSerializable...
+
+#if !WIDGET
+extension HollowCore.DeviceListRequest.ResultData: DefaultsSerializable {}
+extension PushNotificationType: DefaultsSerializable {}
+extension _UpdateAvailabilityRequest.Result._Result: DefaultsSerializable {}
+extension CustomColorScheme: DefaultsSerializable {}
+extension OpenURLHelper.OpenMethod: DefaultsSerializable {}
+#endif
+
+extension HollowConfig: DefaultsSerializable {}
