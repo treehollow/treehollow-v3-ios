@@ -50,28 +50,16 @@ struct _FetchImageRequest: Request {
             return
         }
         
-        URLSession(configuration: .default).dataTask(with: url, completionHandler: { data, _, error in
-            if let error = error {
-                completion(.failure(.failed(description: error.localizedDescription)))
-            } else if let data = data, let image = UIImage(data: data) {
-                completion(.success(image))
-            } else {
-                completion(.failure(.invalidURL))
-            }
-        })
-        
         let resource = ImageResource(downloadURL: url, cacheKey: urlString)
-
-        DispatchQueue.global(qos: .background).async {
-            KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
-                switch result {
-                case .success(let value):
-                    completion(.success(value.image))
-                case .failure(let error):
-                    completion(.failure(.failed(description: error.errorDescription ?? "")))
-                }
+        
+        KingfisherManager.shared.retrieveImage(with: resource, options: [.memoryCacheExpiration(.never)]) { result in
+            switch result {
+            case .success(let value):
+                completion(.success(value.image))
+            case .failure(let error):
+                completion(.failure(.failed(description: error.errorDescription ?? "")))
             }
         }
-
+        
     }
 }
