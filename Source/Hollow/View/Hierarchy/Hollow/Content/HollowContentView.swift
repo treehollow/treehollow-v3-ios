@@ -92,23 +92,6 @@ struct HollowContentView: View {
                 .accentColor(.hollowContentVoteGradient1)
         }
         
-        if !options.contains(.hideHyperlinks_14) &&
-            !hideContent {
-            if #available(iOS 15.0, *) {} else {
-                HStack {
-                    let text = postDataWrapper.post.text
-                    
-                    let links = text.links(in: postDataWrapper.post.rangesForLink)
-                    let citations = text.citationNumbers(in: postDataWrapper.post.rangesForCitation)
-                    
-                    HyperlinkMenuContent(links: links, citations: citations, genericLabel: false)
-                    Spacer()
-                }
-                .padding(.top, 1)
-                .padding(.bottom, showVote ? 10 : 0)
-            }
-        }
-        
         if showVote {
             HollowVoteContentView(vote: postDataWrapper.post.vote!, voteHandler: voteHandler, allowVote: !options.contains(.disableVote))
         }
@@ -148,6 +131,9 @@ struct HollowContentView: View {
     private func textView_14() -> some View {
         var text = postDataWrapper.post.text
         
+        let links = text.links(in: postDataWrapper.post.rangesForLink)
+        let citations = text.citationNumbers(in: postDataWrapper.post.rangesForCitation)
+
         if postDataWrapper.post.text == "" &&
             postDataWrapper.post.hollowImage != nil &&
             options.contains(.replaceForImageOnly) {
@@ -159,13 +145,21 @@ struct HollowContentView: View {
         Text(text) : Text(highlighting: postDataWrapper.post.text,
                           links: postDataWrapper.post.rangesForLink,
                           citations: postDataWrapper.post.rangesForCitation)
-        
+
         let view = HollowTextView_14(text: textView)
             .lineLimit(options.contains(.compactText) ? lineLimit : nil)
             .foregroundColor(options.contains(.compactText) ? .hollowContentText : .primary)
             .accentColor(.hollowContentVoteGradient1)
         
-        return view
+        return Group {
+            if options.contains(.hideHyperlinks_14) {
+                view
+            } else {
+                Menu {
+                    HyperlinkMenuContent(links: links, citations: citations)
+                } label: { view }
+            }
+        }
     }
 
     private func tagView(text: String, deleted: Bool) -> some View {

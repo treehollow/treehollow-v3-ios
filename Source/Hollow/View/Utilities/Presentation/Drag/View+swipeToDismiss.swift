@@ -61,6 +61,8 @@ fileprivate struct SwipeToDismiss: ViewModifier {
                                     withAnimation {
                                         presented = false
                                         content.hideKeyboard()
+                                        offset = (0, 0)
+                                        scale = 1
                                     }
                                 } else {
                                     withAnimation {

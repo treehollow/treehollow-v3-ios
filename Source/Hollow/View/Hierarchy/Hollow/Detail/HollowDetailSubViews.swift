@@ -146,20 +146,22 @@ extension HollowDetailView {
                 Divider()
             }
             
+            ReportMenuContent(
+                store: store,
+                permissions: comment.permissions,
+                commentId: comment.commentId
+            )
+            
             if #available(iOS 15.0, *) {} else {
                 let text = comment.text
                 
                 let links = text.links(in: comment.rangesForLink)
                 let citations = text.citationNumbers(in: comment.rangesForCitation)
                 
+                Divider()
                 HyperlinkMenuContent(links: links, citations: citations)
             }
-            
-            ReportMenuContent(
-                store: store,
-                permissions: comment.permissions,
-                commentId: comment.commentId
-            )
+
         }
     }
     
