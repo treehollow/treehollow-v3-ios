@@ -1484,7 +1484,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 77;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1493,7 +1493,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 4.0.1;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1511,7 +1511,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = HollowWidget/HollowWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 77;
 				DEVELOPMENT_TEAM = C5UH93T368;
 				INFOPLIST_FILE = HollowWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1520,7 +1520,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 4.0.1;
 				OTHER_SWIFT_FLAGS = "-DWIDGET";
 				PRODUCT_BUNDLE_IDENTIFIER = treehollow.Hollow.HollowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1608,8 +1608,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
-				kind = revision;
-				revision = 79f8d2a611ee6b77b2d07dc2033e85b6e6a4438f;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
 			};
 		};
 		0E6D950E26F1F26F00BC5ADF /* XCRemoteSwiftPackageReference "Defaults" */ = {
