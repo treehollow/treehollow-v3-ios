@@ -53,38 +53,21 @@ struct SearchView: View {
                         .verticalCenter()
                         .horizontalCenter()
                 } else {
-                    let listView = {
-                        PostListView(
-                            postDataWrappers: $store.posts,
-                            detailStore: $detailStore,
-                            revealFoldedTags: store.type != .searchTrending,
-                            voteHandler: store.vote,
-                            starHandler: store.star,
-                            imageReloadHandler: { _ in store.fetchImages() }
-                        )
-                            .defaultPadding(.horizontal)
-                    }
-                    Group {
-                        if store.type == .search {
-                            // FIXME: List
-                            // Use ScrollView rather than List for search
-                            // because when row height changes (by the loading
-                            // of extra comments), List will not update the
-                            // height correspondingly
-                            CustomScrollView(
-                                didScrollToBottom: store.loadMorePosts,
-                                refresh: store.refresh) {
-                                    LazyVStack(spacing: 0) { listView() }
-                                }
-                        } else {
-                            CustomList(
-                                didScrollToBottom: store.loadMorePosts,
-                                refresh: store.refresh,
-                                content: listView)
+                    CustomList(
+                        didScrollToBottom: store.loadMorePosts,
+                        refresh: store.refresh) {
+                            PostListView(
+                                postDataWrappers: $store.posts,
+                                detailStore: $detailStore,
+                                revealFoldedTags: store.type != .searchTrending,
+                                voteHandler: store.vote,
+                                starHandler: store.star,
+                                imageReloadHandler: { _ in store.fetchImages() }
+                            )
+                                .defaultPadding(.horizontal)
                         }
-                    }
-                    .proposedIgnoringSafeArea(edges: .bottom)
-                    .modifier(LoadingIndicator(isLoading: store.isLoading))
+                        .proposedIgnoringSafeArea(edges: .bottom)
+                        .modifier(LoadingIndicator(isLoading: store.isLoading))
                 }
             } else {
                 Spacer()

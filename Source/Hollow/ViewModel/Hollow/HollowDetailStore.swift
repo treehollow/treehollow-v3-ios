@@ -53,7 +53,14 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
         // source of truth when the detail view exists.
         bindingCancellable = $postDataWrapper
             .receive(on: DispatchQueue.main)
-            .assign(to: \.bindingPostWrapper.wrappedValue, on: self)
+            .sink { post in
+                var post = post
+                // FIXME: Updating Comments
+                // Use original comments, as comments change will cause
+                // the post card to be misplaced in List.
+                post.post.comments = bindingPostWrapper.post.comments.wrappedValue
+                bindingPostWrapper.wrappedValue = post
+            }
     }
     
     func cancelAll() {
