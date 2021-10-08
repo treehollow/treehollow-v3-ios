@@ -344,7 +344,7 @@ class HollowDetailStore: ObservableObject, ImageCompressStore, HollowErrorHandle
 
         request.publisher
             .sinkOnMainThread(receiveCompletion: { completion in
-                withAnimation { self.isLoading = true }
+                withAnimation { self.isLoading = false }
 
                 switch completion {
                 case .finished:
