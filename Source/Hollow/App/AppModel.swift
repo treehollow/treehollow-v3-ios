@@ -27,7 +27,7 @@ class AppModel: ObservableObject {
     
     func handleURL(_ url: URL, with openURL: OpenURLAction) {
         var urlString = url.absoluteString
-        if urlString.prefix(15) == "HollowWidget://" || urlString.prefix(15) == "Hollow://post-#" {
+        if urlString.prefix(15) == "Hollow://post-#" {
             urlString.removeSubrange(urlString.range(of: urlString.prefix(15))!)
             if let postId = Int(urlString) {
                 IntegrationUtilities.openTemplateDetailView(postId: postId)

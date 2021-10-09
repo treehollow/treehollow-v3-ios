@@ -120,7 +120,7 @@ struct HollowWidgetEntryView : View {
         let foldTags = Defaults[.hollowConfig]?.foldTags ?? []
 
         var body: some View {
-            Link(destination: URL(string: "HollowWidget://\(post.postId.string)")!) {
+            Link(destination: URL(string: "Hollow://post-#\(post.postId.string)")!) {
                 HStack {
                     Text(rank.string)
                         .fontWeight(.heavy)
