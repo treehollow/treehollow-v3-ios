@@ -195,6 +195,7 @@
 		0ED14F6526F0972700CCC4EF /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC2453E26340311001AFC4B /* SearchRequest.swift */; };
 		0ED1A16726346CB1001453A7 /* ReCAPTCHAPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1A16626346CB1001453A7 /* ReCAPTCHAPageView.swift */; };
 		0ED1BF58264E664C005483C1 /* View+keyboardShortCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1BF57264E664C005483C1 /* View+keyboardShortCut.swift */; };
+		0ED318C12724F4E900597FE5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7D7E3926D2043B000C86BA /* CoreTelephony.framework */; };
 		0ED81A25263D4C2300939B82 /* View+defaultToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED81A24263D4C2300939B82 /* View+defaultToggleStyle.swift */; };
 		0ED82F0026103FB600A799C0 /* View+defaultPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED82EFF26103FB600A799C0 /* View+defaultPadding.swift */; };
 		0EDA262725D22C8600B67292 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA262625D22C8600B67292 /* DeviceListView.swift */; };
@@ -441,6 +442,7 @@
 				0E429073263A8572008DA046 /* Cache in Frameworks */,
 				0E97D0B826B45F960031BC75 /* Introspect in Frameworks */,
 				0E514D2526819BCA008D4301 /* HollowCore in Frameworks */,
+				0ED318C12724F4E900597FE5 /* CoreTelephony.framework in Frameworks */,
 				0E6D950D26F1F16F00BC5ADF /* Kingfisher in Frameworks */,
 				0E6D951026F1F26F00BC5ADF /* Defaults in Frameworks */,
 				0E42905C263A742D008DA046 /* WaterfallGrid in Frameworks */,
