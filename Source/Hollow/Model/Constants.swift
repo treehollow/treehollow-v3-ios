@@ -12,9 +12,9 @@ import UIKit
 
 /// Shared constants.
 ///
-/// The purpose of the nested structs is to provide namespaces.
-struct Constants {
-    struct Application {
+/// The purpose of the nested enums is to provide namespaces.
+enum Constants {
+    enum Application {
         static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         static let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
         static let appLocalizedName =
@@ -23,15 +23,16 @@ struct Constants {
         static let requestedNotificationOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
     }
     
-    struct HollowConfig {
+    enum HollowConfig {
         static let thuConfigURL = "https://cdn.jsdelivr.net/gh/treehollow/thuhole-config@master/main.txt"
         static let pkuConfigURL = "https://cdn.jsdelivr.net/gh/pkuhollow/pkuhollow-config@main/config.txt"
         static let otherConfigs: [String : String] = [
-            "北化树洞" : "https://cdn.jsdelivr.net/gh/bucthole/bucthole-config@master/config.txt"
+            "北化树洞" : "https://cdn.jsdelivr.net/gh/bucthole/bucthole-config@master/config.txt",
+            "JLU树洞" : "https://cdn.jsdelivr.net/gh/i-Yirannn/jluhole-config/main.txt"
         ]
     }
 
-    struct Net {
+    enum Net {
         static let urlSuffix = "?v=v\(Constants.Application.appVersion)&device=2"
         static let apiTestPath = "generate_204"
     }
@@ -43,7 +44,6 @@ extension Constants.Application {
         " (\(UIDevice.isMac ? "Mac Catalyst" : UIDevice.current.systemName) " +
         UIDevice.current.systemVersion + ")"
     #else
-    // FIXME
     static let deviceInfo = ""
     #endif
 }

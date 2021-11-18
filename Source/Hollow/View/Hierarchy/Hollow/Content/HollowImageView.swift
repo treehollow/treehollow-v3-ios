@@ -47,7 +47,9 @@ struct HollowImageView: View {
                                 .resizable()
                                 .interpolation(.low)
                                 .aspectRatio(contentMode: .fit)
+#if targetEnvironment(macCatalyst)
                                 .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
+#endif
                         } else {
                             ZStack {
                                 Color.hollowCommentQuoteText.opacity(0.09).ignoresSafeArea()
@@ -55,7 +57,9 @@ struct HollowImageView: View {
                                     .resizable()
                                     .interpolation(.low)
                                     .aspectRatio(contentMode: .fit)
+#if targetEnvironment(macCatalyst)
                                     .imageSaver(image: image, showSavePhotoAlert: $showSavePhotoAlert, savePhotoError: $savePhotoError)
+#endif
                             }
                             .compositingGroup()
                             .aspectRatio(aspectRatio, contentMode: .fill)

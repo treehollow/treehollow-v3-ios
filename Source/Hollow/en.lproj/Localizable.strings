@@ -481,10 +481,14 @@
 "WELCOMEVIEW_NAV_TITLE" = "Welcome";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_OTHER_BUTTON" = "Other";
+"WELCOMEVIEW_OTHER" = "Other";
+
+"WELCOMVIEW_SELECT_BUTTON" = "Select Hollow";
+
+"WELCOMEVIEW_CUSTOM_BUTTON" = "Custom";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "Select Hollow";
+"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "Hollow";
 
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "The access token has expired. Please login again.";

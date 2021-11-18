@@ -38,7 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        didRegisterForRemoteNotifications(with: deviceToken)
+        // Temporarily save the token in defaults. We are not using this
+        // default except registering or logging in for the first time.
+        Defaults[.deviceToken] = deviceToken
+        
+        // Try to send the token to the server, if we have a user token.
+        if let accessToken = Defaults[.accessToken] {
+            sendDeviceToken(deviceToken, withAccessToken: accessToken)
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -57,17 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
-    
-    private func didRegisterForRemoteNotifications(with deviceToken: Data) {
-        // Temporarily save the token in defaults. We are not using this
-        // default except registering or logging in for the first time.
-        Defaults[.deviceToken] = deviceToken
-        
-        // Try to send the token to the server, if we have a user token.
-        if let accessToken = Defaults[.accessToken] {
-            sendDeviceToken(deviceToken, withAccessToken: accessToken)
-        }
-    }
     
     private func sendDeviceToken(_ deviceToken: Data, withAccessToken accessToken: String) {
         guard let config = Defaults[.hollowConfig] else { return }

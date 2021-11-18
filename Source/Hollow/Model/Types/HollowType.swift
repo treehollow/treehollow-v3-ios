@@ -27,7 +27,7 @@ enum HollowType: Int, Hashable, Identifiable, Codable, CaseIterable, DefaultsSer
         switch self {
         case .thu: return "THU"
         case .pku: return "PKU"
-        case .other: return NSLocalizedString("WELCOMEVIEW_OTHER_BUTTON", comment: "")
+        case .other: return NSLocalizedString("WELCOMEVIEW_OTHER", comment: "")
         }
     }
 

@@ -17,7 +17,7 @@ struct MainView_iPad: View {
     @Namespace var buttonAnimationNamespace
     
     var body: some View {
-        SplitView(sharedModel: sharedModel, primaryView: { _ in
+        SplitView(sharedModel: sharedModel) { _ in
             List {
                 ForEach(Page.Section.allCases) { section in
                     if let title = section.title {
@@ -58,8 +58,8 @@ struct MainView_iPad: View {
             .conditionalRowHeight(rowHeight)
             .listStyle(SidebarListStyle())
             .navigationTitle(Defaults[.hollowConfig]?.name ?? Constants.Application.appLocalizedName)
-        },
-        secondaryView: { _ in secondaryView },
+        }
+        secondaryView: { _ in secondaryView }
         modifiers: { splitVC in
             IntegrationUtilities.topSplitVC = splitVC
             // Temperarily set to oneBesideSecondary first to ensure that we can
@@ -69,12 +69,12 @@ struct MainView_iPad: View {
             // Apply blur background in mac
             splitVC.primaryBackgroundStyle = .sidebar
             splitVC.primaryController.view.backgroundColor = nil
-            splitVC.primaryController.navigationController?.navigationBar.prefersLargeTitles = true
+            splitVC.primaryController.navigationController?.navigationBar.prefersLargeTitles = !UIDevice.isMac
             splitVC.secondaryController.navigationController?.navigationBar.isTranslucent = true
             splitVC.primaryController.navigationController?.navigationBar.tintColor = UIColor(.hollowContentVoteGradient1)
             splitVC.secondaryController.navigationController?.navigationBar.tintColor = UIColor(.tint)
             splitVC.primaryController.navigationController?.delegate = sharedModel
-        })
+        }
         .ignoresSafeArea()
         
         .onChange(of: sharedModel.page) { _ in

@@ -457,10 +457,14 @@
 "WELCOMEVIEW_NAV_TITLE" = "欢迎";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_OTHER_BUTTON" = "其他";
+"WELCOMEVIEW_OTHER" = "其他";
+
+"WELCOMVIEW_SELECT_BUTTON" = "选择树洞";
+
+"WELCOMEVIEW_CUSTOM_BUTTON" = "自定义配置";
 
 /* No comment provided by engineer. */
-"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "选择树洞";
+"WELCOMEVIEW_SELECT_HOLLOW_TITLE" = "树洞";
 
 /* No comment provided by engineer. */
 "WELCOMVIEW_TOKEN_EXPIRED_LABEL" = "用户认证过期，请重新登录";
