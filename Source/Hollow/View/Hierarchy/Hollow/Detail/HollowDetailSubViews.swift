@@ -51,7 +51,7 @@ extension HollowDetailView {
                 .padding(.trailing, 6)
             }
             
-            Button(action: { withAnimation { reverseComments.toggle() }}) {
+            Button(action: { reverseComments.toggle() }) {
                 HStack(spacing: 5) {
                     Text(reverseComments ? "HOLLOWDETAIL_COMMENTS_ORDER_NEW_TO_OLD" : "HOLLOWDETAIL_COMMENTS_ORDER_OLD_TO_NEW")
                     Image(systemName: "arrow.up")
@@ -59,6 +59,7 @@ extension HollowDetailView {
                 }
                 .dynamicFont(size: 15, weight: .medium)
                 .foregroundColor(.hollowCardStarUnselected)
+                .animation(.defaultSpring, value: reverseComments)
             }
         }
         .padding(.horizontal)
@@ -72,8 +73,9 @@ extension HollowDetailView {
                 .id(comment.commentId)
         }
         
-        if store.isLoading, postData.replyNumber > postData.comments.count {
-            ForEach(0..<postData.replyNumber - postData.comments.count, id: \.self) { _ in
+        let remainingCommentsCount = postData.replyNumber - postData.comments.count
+        if store.isLoading, remainingCommentsCount > 0 {
+            ForEach(0..<min(5, remainingCommentsCount), id: \.self) { _ in
                 PlaceholderComment()
                     .padding(.horizontal)
                     .padding(.top, postData.comments.isEmpty ? 0 : 15)

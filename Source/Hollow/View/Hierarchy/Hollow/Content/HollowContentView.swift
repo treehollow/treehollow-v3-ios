@@ -156,6 +156,12 @@ struct HollowContentView: View {
                 view
             } else {
                 Menu {
+                    Button {
+                        UIPasteboard.general.string = postDataWrapper.post.text
+                    } label: {
+                        Label("COMMENT_VIEW_COPY_TEXT_LABEL", systemImage: "doc.on.doc")
+                    }
+                    
                     HyperlinkMenuContent(links: links, citations: citations)
                 } label: { view }
             }
