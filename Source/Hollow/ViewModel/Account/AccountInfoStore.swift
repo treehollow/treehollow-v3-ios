@@ -16,10 +16,15 @@ class AccountInfoStore: ObservableObject, HollowErrorHandler {
     
     var cancellables = Set<AnyCancellable>()
     
-    func logout() {
+    func logout(force: Bool = false) {
+        if force {
+            withAnimation { self.tokenExpiredHandler() }
+            return
+        }
+
         guard let config = Defaults[.hollowConfig],
               let token = Defaults[.accessToken] else { return }
-
+        
         withAnimation { isLoading = true }
         LogoutRequest(configuration: .init(apiRoot: config.apiRootUrls.first!, token: token)).publisher
             .sinkOnMainThread(receiveError: { error in

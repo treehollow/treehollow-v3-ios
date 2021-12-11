@@ -39,6 +39,7 @@ struct AccountInfoView: View {
                 })
                     .foregroundColor(.red)
             }
+            
         }
         .navigationBarTitle(NSLocalizedString("ACCOUNTVIEW_ACCOUNT_CELL", comment: ""))
         .defaultListStyle()
@@ -48,12 +49,17 @@ struct AccountInfoView: View {
         .styledAlert(
             presented: $logoutAlertPresented,
             title: NSLocalizedString("ACCOUNTVIEW_LOGOUT_ALERT_TITLE", comment: ""),
-            message: nil,
+            message: NSLocalizedString("ACCOUNTVIEW_FORCE_LOGOUT_MSG", comment: ""),
             buttons: [
                 .init(
                     text: NSLocalizedString("ACCOUNTVIEW_LOGOUT_BUTTON", comment: ""),
                     style: .destructive,
-                    action: viewModel.logout
+                    action: { viewModel.logout() }
+                ),
+                .init(
+                    text: NSLocalizedString("ACCOUNTVIEW_FORCE_LOGOUT_BUTTON", comment: ""),
+                    style: .destructive,
+                    action: { viewModel.logout(force: true) }
                 ),
                 .cancel
             ]

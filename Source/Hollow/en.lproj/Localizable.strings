@@ -692,3 +692,7 @@
 "SETTINGSVIEW_CONTENT_BLOCK_WORDS_SECTION_FOOTER" = "Post that contains at least one of the keywords will not appear in Timeline, Wander and Trending.";
 
 "SETTINGSVIEW_CONTENT_FOOTER" = "Refresh to apply the changes.";
+
+"ACCOUNTVIEW_FORCE_LOGOUT_BUTTON" = "Force Logout";
+
+"ACCOUNTVIEW_FORCE_LOGOUT_MSG" = "If the server fails, select 'Force Logout'.";
